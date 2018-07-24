@@ -1,5 +1,7 @@
 # moebinv-gui
 
+This application provides a GUI for the moebinv package.
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -8,9 +10,14 @@
 
 ## Introduction
 
-This application provides a GUI for the moebinv package. 
+The moebinv library allows for manipulations in non euclidean geometry. This application is a gui for use with the moebinv library.
 
 ## Installation
+
+Prerequisites:
+- CLN
+- GiNaC
+- moebinv
 
 ## Usage
 
