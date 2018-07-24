@@ -6,6 +6,7 @@ This application provides a GUI for the moebinv package.
 
 - [Introduction](#introduction)
 - [Installation](#installation)
+- [Documentation](#documentation)
 - [Usage](#usage)
 
 ## Introduction
