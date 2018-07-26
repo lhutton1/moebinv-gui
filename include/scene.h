@@ -3,6 +3,7 @@
 
 #include <QFrame>
 #include <QGraphicsScene>
+#include "cycle.h"
 
 class scene : public QFrame
 {

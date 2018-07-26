@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "zoom.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -12,8 +13,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // initialize new scene
     sc = new scene();
-
+    zoom* z = new zoom(ui->graphicsView);
+    z->set_modifiers(Qt::NoModifier);
     ui->graphicsView->setScene(sc->get());
     ui->graphicsView->show();
 }

@@ -29,12 +29,14 @@ SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
         src/scene.cpp \
-    src/cycle.cpp
+        src/cycle.cpp \
+    src/zoom.cpp
 
 HEADERS += \
         include/mainwindow.h \
         include/scene.h \
-    include/cycle.h
+        include/cycle.h \
+    include/zoom.h
 
 FORMS += \
         forms/mainwindow.ui

@@ -1,11 +1,11 @@
-#ifndef CIRCLE_H
-#define CIRCLE_H
+#ifndef CYCLE_H
+#define CYCLE_H
 
 
-class circle
+class cycle
 {
 public:
-    circle();
+    cycle();
 };
 
-#endif // CIRCLE_H
+#endif // CYCLE_H

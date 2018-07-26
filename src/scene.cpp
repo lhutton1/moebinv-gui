@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "cycle.h"
 #include <QtWidgets>
 
 /*!
@@ -27,5 +28,11 @@ scene::scene(QWidget *parent)
 QGraphicsScene *scene::get() const
 {
     return static_cast<QGraphicsScene *>(sc);
+}
+
+
+void scene::addCycle(cycle newCycle)
+{
+
 }
 
