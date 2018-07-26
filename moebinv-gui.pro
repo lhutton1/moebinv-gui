@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,10 +27,14 @@ INCLUDEPATH += $$PWD/include
 
 SOURCES += \
         src/main.cpp \
-        src/mainwindow.cpp
+        src/mainwindow.cpp \
+        src/scene.cpp \
+    src/cycle.cpp
 
 HEADERS += \
-        include/mainwindow.h
+        include/mainwindow.h \
+        include/scene.h \
+    include/cycle.h
 
 FORMS += \
         forms/mainwindow.ui

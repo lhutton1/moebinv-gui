@@ -14,6 +14,12 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="leftMargin">
      <number>0</number>
@@ -28,12 +34,12 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QWidget" name="graphicView" native="true">
-      <property name="autoFillBackground">
-       <bool>false</bool>
+     <widget class="QGraphicsView" name="graphicsView">
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
       </property>
-      <property name="styleSheet">
-       <string notr="true">background: white</string>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
       </property>
      </widget>
     </item>
@@ -91,6 +97,9 @@
    <addaction name="actionCreate_Cycle"/>
    <addaction name="actionInfinity"/>
    <addaction name="actionReal_Line"/>
+   <addaction name="actionMove_Graphics_View"/>
+   <addaction name="actionZoom_In"/>
+   <addaction name="actionZoom_Out"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
@@ -208,6 +217,27 @@
    </property>
    <property name="toolTip">
     <string>Real Line</string>
+   </property>
+  </action>
+  <action name="actionMove_Graphics_View">
+   <property name="text">
+    <string>Move Graphics View</string>
+   </property>
+  </action>
+  <action name="actionZoom_In">
+   <property name="text">
+    <string>Zoom In</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom In</string>
+   </property>
+  </action>
+  <action name="actionZoom_Out">
+   <property name="text">
+    <string>Zoom Out</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom Out</string>
    </property>
   </action>
  </widget>
