@@ -1,22 +1,27 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <QFrame>
+#include <QObject>
 #include <QGraphicsScene>
-#include "cycle.h"
+#include <QGraphicsSceneMouseEvent>
 
-class scene : public QFrame
+
+
+class graphicsScene : public QGraphicsScene
 {
     Q_OBJECT
 
 public:
-    explicit scene(QWidget *parent = 0);
+    explicit graphicsScene(QObject *parent = 0);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
 
-    QGraphicsScene *get() const;
-    void addCycle(cycle newCycle);
+signals:
+    void newMousePress(QPointF point);
+
+public slots:
 
 private:
-    QGraphicsScene *sc;
+
 };
 
 #endif // SCENE_H

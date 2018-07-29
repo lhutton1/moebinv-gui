@@ -1,38 +1,27 @@
+#include <QDebug>
 #include "scene.h"
-#include "cycle.h"
-#include <QtWidgets>
 
 /*!
  * \brief Scene Constructor.
- * \param parent The parent to this current widget.
+ * \param parent The parent widget to the current widget.
  *
  * continued description....
  */
-scene::scene(QWidget *parent)
-    : QFrame(parent)
+graphicsScene::graphicsScene(QObject *parent)
+    : QGraphicsScene(parent)
 {
-    // create new scene
-    sc = new QGraphicsScene;
 
-    //adding objects to the scene
-    sc->addRect(QRectF(0, 0, 100, 100));
-    sc->addRect(QRectF(-1000, -1000, 100, 100));
-    sc->addRect(QRectF(1000, 1000, 100, 100));
-    sc->addLine(QLineF(0, -3000, 0, 2000));
 }
 
 /*!
- * \brief Scene getter.
- * \return Scene object.
+ * \brief graphicsScene::mousePressEvent Mouse pressed on scene
+ * \param mouseEvent Provides information about the mouse event such as the position the click occured on the scene.
+ *
+ * Called when the mouse is clicked on the scene in the graphics view.
  */
-QGraphicsScene *scene::get() const
+void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
-    return static_cast<QGraphicsScene *>(sc);
-}
-
-
-void scene::addCycle(cycle newCycle)
-{
-
+    QPointF point = mouseEvent->scenePos();
+    emit newMousePress(point);
 }
 

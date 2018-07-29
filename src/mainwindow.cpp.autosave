@@ -106,16 +106,11 @@ void MainWindow::initFigure()
  */
 void MainWindow::drawPoint(double x, double y)
 {
-    QPen pen(Qt::black);
-    QBrush brush(Qt::black);
     double rad = 2;
-
 
     switch(metric) {
         case drawingMetric::ELLIPTIC: {
             scene->addEllipse(x - rad / 2, y - rad / 2, rad, rad, pen, brush);
-            QGraphicsTextItem *text = scene->addText("A");
-            text->setPos(x + rad, y + rad);
             break;
 
         } case drawingMetric::PARABOLIC: {
