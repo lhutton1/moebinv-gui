@@ -31,12 +31,14 @@ SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
         src/scene.cpp \
-        src/zoom.cpp
+        src/zoom.cpp \
+        src/labels.cpp
 
 HEADERS += \
         include/mainwindow.h \
         include/scene.h \
-        include/zoom.h
+        include/zoom.h \
+        include/labels.h
 
 FORMS += \
         forms/mainwindow.ui

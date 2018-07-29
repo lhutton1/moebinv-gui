@@ -7,6 +7,7 @@
 #include <figure.h>
 
 #include "scene.h"
+#include "labels.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,10 +36,13 @@ public:
     void initFigure();
     void addCycle(QPointF mousePos);
     void removeCycle();
-    void drawPoint(double x, double y);
+    void drawPoint(double x, double y, QString labels);
     void drawLine();
     void drawCycle();
     void setDrawingMetric();
+    void addPointToTree(QString itemName);
+    void addLineToTree(QString itemName);
+    void addCycleToTree(QString itemName);
     ~MainWindow();
 
     bool toolAddCycle;
@@ -46,13 +50,13 @@ public:
     int metric;
 
 private slots:
-    void on_actionMove_Graphics_View_triggered(bool checked);
-    void on_actionCreate_Cycle_toggled(bool arg1);
+    void on_actionCreate_Cycle_toggled(bool toggled);
     void onMouseScenePress(QPointF point);
 
 private:
     Ui::MainWindow *ui;
     graphicsScene *scene;
+    labels *lblGen;
 
     MoebInv::figure f;
 };

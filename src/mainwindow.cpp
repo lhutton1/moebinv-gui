@@ -1,3 +1,4 @@
+#include <QTreeWidgetItem>
 #include <QGraphicsTextItem>
 #include <QDebug>
 
@@ -31,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //set drawing metric
     metric = drawingMetric::ELLIPTIC;
+
+    //
+    lblGen = new labels();
 }
 
 /*!
@@ -41,19 +45,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::on_actionMove_Graphics_View_triggered(bool checked)
+/*!
+ * \brief MainWindow::on_actionCreate_Cycle_toggled Cycle tool toggled
+ * \param toggled
+ *
+ * Called when the cycle tool is toggled on or off. Sets the
+ */
+void MainWindow::on_actionCreate_Cycle_toggled(bool toggled)
 {
-    if (checked)
-        ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
-    else
-        ui->graphicsView->setDragMode(QGraphicsView::NoDrag);
-}
-
-
-void MainWindow::on_actionCreate_Cycle_toggled(bool arg1)
-{
-    if (arg1) {
+    if (toggled) {
         ui->graphicsView->setCursor(Qt::CrossCursor);
         toolAddCycle = true;
     } else {
@@ -73,22 +73,24 @@ void MainWindow::onMouseScenePress(QPointF point)
 }
 
 /*!
- * \brief graphicsScene::addCycle Add a cycle to the scene.
+ * \brief MainWindow::addCycle Add a cycle to the figure.
  * \param mousePos Coordinates of mouse on the scene.
+ *
+ * Adds a cycle to the figure then draws it on the scene.
  */
 void MainWindow::addCycle(QPointF mousePos) {
+    // gen new label
+    QString label = lblGen->genNextLabel();
     // add cycle to the figure
     f.add_point(lst{mousePos.x(),mousePos.y()},"A");
     // now draw the point
-    drawPoint(mousePos.x(), mousePos.y());
-}
-
-void MainWindow::removeCycle() {
-
+    drawPoint(mousePos.x(), mousePos.y(), label);
+    // now add to tree
+    addPointToTree(label);
 }
 
 /*!
- * \brief graphicsScene::initFigure Initialize figure
+ * \brief MainWindow::initFigure Initialize figure
  *
  * Create a new figure and apply any additional settings.
  */
@@ -102,19 +104,18 @@ void MainWindow::initFigure()
 }
 
 /*!
- * \brief graphicsScene::drawPoint
+ * \brief MainWindow::drawPoint
  */
-void MainWindow::drawPoint(double x, double y)
+void MainWindow::drawPoint(double x, double y, QString label)
 {
     QPen pen(Qt::black);
     QBrush brush(Qt::black);
     double rad = 2;
 
-
     switch(metric) {
         case drawingMetric::ELLIPTIC: {
             scene->addEllipse(x - rad / 2, y - rad / 2, rad, rad, pen, brush);
-            QGraphicsTextItem *text = scene->addText("A");
+            QGraphicsTextItem *text = scene->addText(label);
             text->setPos(x + rad, y + rad);
             break;
 
@@ -130,7 +131,7 @@ void MainWindow::drawPoint(double x, double y)
 }
 
 /*!
- * \brief graphicsScene::drawLine
+ * \brief MainWindow::drawLine
  */
 void MainWindow::drawLine()
 {
@@ -147,7 +148,7 @@ void MainWindow::drawLine()
 }
 
 /*!
- * \brief graphicsScene::drawCycle
+ * \brief MainWindow::drawCycle
  */
 void MainWindow::drawCycle()
 {
@@ -161,5 +162,12 @@ void MainWindow::drawCycle()
             // reserved for future use
             break;
     }
+}
+
+void MainWindow::addPointToTree(QString itemName)
+{
+    QTreeWidgetItem *item = new QTreeWidgetItem();
+    item->setText(0, itemName);
+    ui->treeWidget->addTopLevelItem(item);
 }
 
