@@ -1,25 +1,33 @@
 #include <QDebug>
 #include "labels.h"
 
+/*!
+ * \brief labels::labels Labels constructor.
+ */
 labels::labels()
 {
-    currentLetter = 1000;
+    currentLetter = 1;
 }
 
+/*!
+ * \brief labels::genNextLabel Generate next label.
+ * \return New label.
+ *
+ * Generate the next label in the sequence i.e. A, B, C, ..., Z, AA, AB, ...
+ */
 QString labels::genNextLabel()
 {
     QString lblString = "";
     int letterNumber = currentLetter;
 
     while (letterNumber > 0) {
-        int x = (letterNumber - 1) % 26;
-        char z = static_cast<char>(x + 65);
-        lblString = z + lblString;
-        letterNumber = (letterNumber - (x + 1)) / 26;
+        int current = (letterNumber - 1) % 26;
+        char letter = static_cast<char>(current + 65);
+        lblString = letter + lblString;
+        letterNumber = (letterNumber - (current + 1)) / 26;
     }
 
     currentLetter += 1;
 
     return lblString;
-
 }

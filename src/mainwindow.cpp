@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 /*!
- * \brief MainWindow::~MainWindow
+ * \brief MainWindow::~MainWindow MainWindow destructor.
  */
 MainWindow::~MainWindow()
 {
@@ -62,6 +62,10 @@ void MainWindow::on_actionCreate_Cycle_toggled(bool toggled)
     }
 }
 
+/*!
+ * \brief MainWindow::onMouseScenePress Mouse press on scene.
+ * \param point Point at which the mouse was pressed, given in x and y corrdinates.
+ */
 void MainWindow::onMouseScenePress(QPointF point)
 {
     if (toolAddCycle)
@@ -82,7 +86,7 @@ void MainWindow::addCycle(QPointF mousePos) {
     // gen new label
     QString label = lblGen->genNextLabel();
     // add cycle to the figure
-    f.add_point(lst{mousePos.x(),mousePos.y()},"A");
+    f.add_point(lst{mousePos.x(),mousePos.y()},qPrintable(label));
     // now draw the point
     drawPoint(mousePos.x(), mousePos.y(), label);
     // now add to tree
@@ -164,6 +168,10 @@ void MainWindow::drawCycle()
     }
 }
 
+/*!
+ * \brief MainWindow::addPointToTree Add new point to the tree
+ * \param itemName point label value.
+ */
 void MainWindow::addPointToTree(QString itemName)
 {
     QTreeWidgetItem *item = new QTreeWidgetItem();
