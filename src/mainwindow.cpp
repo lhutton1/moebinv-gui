@@ -3,6 +3,7 @@
 #include <QDebug>
 
 #include "scene.h"
+#include "point.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -66,10 +67,13 @@ void MainWindow::on_actionCreate_Cycle_toggled(bool toggled)
  * \brief MainWindow::onMouseScenePress Mouse press on scene.
  * \param point Point at which the mouse was pressed, given in x and y corrdinates.
  */
-void MainWindow::onMouseScenePress(QPointF point)
+void MainWindow::onMouseScenePress(QPointF location)
 {
-    if (toolAddCycle)
-        addCycle(point);
+    if (toolAddCycle) {
+        //addCycle(point);
+     } else {
+        addPoint(location);
+     }
 
     // future tools here..
     //
@@ -82,13 +86,15 @@ void MainWindow::onMouseScenePress(QPointF point)
  *
  * Adds a cycle to the figure then draws it on the scene.
  */
-void MainWindow::addCycle(QPointF mousePos) {
+void MainWindow::addPoint(QPointF mousePos) {
+    //for point.......
     // gen new label
     QString label = lblGen->genNextLabel();
     // add cycle to the figure
-    f.add_point(lst{mousePos.x(),mousePos.y()},qPrintable(label));
+    ex cycle = f.add_point(lst{mousePos.x(),mousePos.y()},qPrintable(label));
     // now draw the point
-    drawPoint(mousePos.x(), mousePos.y(), label);
+    point *p = new point(&f, cycle, label);
+    scene->addItem(p);
     // now add to tree
     addPointToTree(label);
 }
@@ -105,67 +111,6 @@ void MainWindow::initFigure()
     // Add any additional settings here
     //
     //
-}
-
-/*!
- * \brief MainWindow::drawPoint
- */
-void MainWindow::drawPoint(double x, double y, QString label)
-{
-    QPen pen(Qt::black);
-    QBrush brush(Qt::black);
-    double rad = 2;
-
-    switch(metric) {
-        case drawingMetric::ELLIPTIC: {
-            scene->addEllipse(x - rad / 2, y - rad / 2, rad, rad, pen, brush);
-            QGraphicsTextItem *text = scene->addText(label);
-            text->setPos(x + rad, y + rad);
-            break;
-
-        } case drawingMetric::PARABOLIC: {
-            // reserved for future use
-            break;
-
-        } case drawingMetric::HYPERBOLIC: {
-            // reserved for future use
-            break;
-        }
-    }
-}
-
-/*!
- * \brief MainWindow::drawLine
- */
-void MainWindow::drawLine()
-{
-    switch(metric) {
-        case drawingMetric::ELLIPTIC:
-            break;
-        case drawingMetric::PARABOLIC:
-            // reserved for future use
-            break;
-        case drawingMetric::HYPERBOLIC:
-            // reserved for future use
-            break;
-    }
-}
-
-/*!
- * \brief MainWindow::drawCycle
- */
-void MainWindow::drawCycle()
-{
-    switch(metric) {
-        case drawingMetric::ELLIPTIC:
-            break;
-        case drawingMetric::PARABOLIC:
-            // reserved for future use
-            break;
-        case drawingMetric::HYPERBOLIC:
-            // reserved for future use
-            break;
-    }
 }
 
 /*!

@@ -34,9 +34,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     void initFigure();
-    void addCycle(QPointF mousePos);
+    void addPoint(QPointF location);
     void removeCycle();
-    void drawPoint(double x, double y, QString labels);
+    void drawPoint(GiNaC::ex *cycle);
     void drawLine();
     void drawCycle();
     void setDrawingMetric();
