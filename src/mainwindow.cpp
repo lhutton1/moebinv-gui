@@ -31,9 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //initialize figure
     initFigure();
 
-    //set drawing metric
-    metric = drawingMetric::ELLIPTIC;
-
     //
     lblGen = new labels();
 }

@@ -13,20 +13,6 @@ namespace Ui {
 class MainWindow;
 }
 
-/*!
- * \brief drawingMetric enum
- *
- * 3-types of drawing metric:
- *      elliptic - ...
- *      parabolic - ...
- *      hyperbolic - ...
- */
-enum drawingMetric {
-    ELLIPTIC,
-    PARABOLIC,
-    HYPERBOLIC
-};
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -46,8 +32,7 @@ public:
     ~MainWindow();
 
     bool toolAddCycle;
-    const double EPSILLION = 0.000000001;
-    int metric;
+    //const double EPSILLION = 0.000000001;
 
 private slots:
     void on_actionCreate_Cycle_toggled(bool toggled);

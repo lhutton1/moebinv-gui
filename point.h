@@ -4,6 +4,7 @@
 #include <QGraphicsItem>
 #include <QPainter>
 #include <figure.h>
+#include "drawingmetric.h"
 
 class point : public QGraphicsItem
 {

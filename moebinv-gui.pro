@@ -40,7 +40,8 @@ HEADERS += \
         include/scene.h \
         include/zoom.h \
         include/labels.h \
-    point.h
+    point.h \
+    drawingmetric.h
 
 FORMS += \
         forms/mainwindow.ui

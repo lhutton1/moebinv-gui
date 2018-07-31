@@ -36,6 +36,10 @@ void point::hoverEnterEvent(QGraphicsSceneHoverEvent *) {
     brush = Qt::red;
     pen.setColor(Qt::red);
     update();
+
+    //set tool tip when hover
+    QString toolTipString = "X:" + QString::number(x) + " Y:" + QString::number(y);
+    setToolTip(toolTipString);
 }
 
 /*!
@@ -46,6 +50,7 @@ void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
     pen.setColor(Qt::black);
     update();
 }
+
 
 /*!
  * \brief point::boundingRect
@@ -66,18 +71,32 @@ QRectF point::boundingRect() const{
  */
 void point::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
     getParameters();
-
     p->setPen(pen);
     p->setBrush(brush);
 
-    p->drawEllipse(
-        x - radius / 2,
-        y - radius / 2,
-        radius,
-        radius
-    );
+    switch (metric) {
+        case drawingMetric::ELLIPTIC: {
+            // draw point
+            p->drawEllipse(
+                x - radius / 2,
+                y - radius / 2,
+                radius,
+                radius
+            );
 
-    p->drawText(x + radius + 3, y + 12, label);
+            // add label to side
+            p->drawText(x + radius + 3, y + 12, label);
+
+            break;
+        } case drawingMetric::PARABOLIC: {
+            // Reserved for future use
+            break;
+
+        } case drawingMetric::HYPERBOLIC: {
+            // Reserved for future use
+            break;
+        }
+    }
 }
 
 /*!
