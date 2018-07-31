@@ -21,7 +21,9 @@ graphicsScene::graphicsScene(QObject *parent)
  */
 void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
-    QPointF point = mouseEvent->scenePos();
-    emit newMousePress(point);
+    if (mouseEvent->button() == Qt::LeftButton) {
+        QPointF point = mouseEvent->scenePos();
+        emit newMousePress(point);
+    }
 }
 

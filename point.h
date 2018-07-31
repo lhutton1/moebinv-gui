@@ -3,6 +3,10 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QMenu>
+#include <QPointer>
+#include <QAction>
+#include <QGraphicsSceneContextMenuEvent>
 #include <figure.h>
 #include "drawingmetric.h"
 
@@ -17,6 +21,7 @@ public:
     QRectF boundingRect() const;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     void getParameters();
 
 private:
@@ -27,6 +32,11 @@ private:
     double y;
     double radius;
     QString label;
+
+    QPointer<QAction> isOrthagonal = nullptr;
+    QPointer<QAction> isfOrthagonal = nullptr;
+    QPointer<QAction> isDifferent = nullptr;
+    QPointer<QAction> isTangent = nullptr;
 };
 
 #endif // POINT_H

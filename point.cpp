@@ -51,6 +51,42 @@ void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
     update();
 }
 
+void point::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    QMenu *menu = new QMenu;
+
+    isOrthagonal = new QAction("Orthagonal");
+    isOrthagonal->setCheckable(true);
+    isOrthagonal->setChecked(true);
+    menu->addAction(isOrthagonal);
+    //CONNECT....
+
+    isfOrthagonal = new QAction("F-Orthagonal");
+    isfOrthagonal->setCheckable(true);
+    isfOrthagonal->setChecked(true);
+    menu->addAction(isfOrthagonal);
+    //CONNECT....
+
+    isDifferent = new QAction("Different");
+    isDifferent->setCheckable(true);
+    isDifferent->setChecked(true);
+    menu->addAction(isDifferent);
+    //CONNECT....
+
+    isTangent = new QAction("Tangent");
+    isTangent->setCheckable(true);
+    isTangent->setChecked(true);
+    menu->addAction(isTangent);
+    //CONNECT....
+
+    menu->addSeparator();
+
+    menu->addAction("Delete");
+    //CONNECT....
+
+    menu->popup(event->screenPos());
+}
+
 
 /*!
  * \brief point::boundingRect
