@@ -6,25 +6,35 @@
 #include <QMenu>
 #include <QPointer>
 #include <QAction>
+#include <QObject>
 #include <QGraphicsSceneContextMenuEvent>
 #include <figure.h>
 #include "drawingmetric.h"
 
-class point : public QGraphicsItem
+class point : public QObject, public QGraphicsItem
 {
+    Q_OBJECT
     QBrush brush;
     QPen pen;
 
 public:
-    explicit point(MoebInv::figure *f, GiNaC::ex p, QString l, QGraphicsItem *parent = 0);
+    explicit point(MoebInv::figure *f, GiNaC::ex p, QString l);
     void paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *);
     QRectF boundingRect() const;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     void getParameters();
+    //~point();
+
+public slots:
+    void removePoint();
+
+signals:
+    void removeFromTree(QString label);
 
 private:
+
     GiNaC::ex cycle;
     MoebInv::figure *fig;
 
@@ -37,6 +47,7 @@ private:
     QPointer<QAction> isfOrthagonal = nullptr;
     QPointer<QAction> isDifferent = nullptr;
     QPointer<QAction> isTangent = nullptr;
+    QPointer<QAction> deletePoint = nullptr;
 };
 
 #endif // POINT_H

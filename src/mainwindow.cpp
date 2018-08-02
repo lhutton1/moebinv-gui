@@ -3,6 +3,7 @@
 #include <QDebug>
 
 #include "scene.h"
+#include "test.h"
 #include "point.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -27,12 +28,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //set up new event
     connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
+    //connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
 
     //initialize figure
     initFigure();
 
     //
     lblGen = new labels();
+
 }
 
 /*!
@@ -77,6 +80,14 @@ void MainWindow::onMouseScenePress(QPointF location)
     //
 }
 
+//void MainWindow::onMouseSceneHover(QPointF location)
+//{
+//    QString x = QString::number(location.x());
+//    QString y = QString::number(location.y());
+//
+//    statusBar()->showMessage("X:" + x + " Y:" + y);
+//}
+
 /*!
  * \brief MainWindow::addCycle Add a cycle to the figure.
  * \param mousePos Coordinates of mouse on the scene.
@@ -91,6 +102,7 @@ void MainWindow::addPoint(QPointF mousePos) {
     ex cycle = f.add_point(lst{mousePos.x(),mousePos.y()},qPrintable(label));
     // now draw the point
     point *p = new point(&f, cycle, label);
+    connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
     scene->addItem(p);
     // now add to tree
     addPointToTree(label);
@@ -119,5 +131,10 @@ void MainWindow::addPointToTree(QString itemName)
     QTreeWidgetItem *item = new QTreeWidgetItem();
     item->setText(0, itemName);
     ui->treeWidget->addTopLevelItem(item);
+}
+
+void MainWindow::removeFromTree(QString label)
+{
+    //ui->treeWidget->takeTopLevelItem(//needs index);
 }
 

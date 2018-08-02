@@ -33,15 +33,17 @@ SOURCES += \
         src/scene.cpp \
         src/zoom.cpp \
         src/labels.cpp \
-    point.cpp
+        src/point.cpp \
+    test.cpp
 
 HEADERS += \
         include/mainwindow.h \
         include/scene.h \
         include/zoom.h \
         include/labels.h \
-    point.h \
-    drawingmetric.h
+        include/point.h \
+        include/drawingmetric.h \
+    test.h
 
 FORMS += \
         forms/mainwindow.ui

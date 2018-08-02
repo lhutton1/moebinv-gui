@@ -1,10 +1,20 @@
 #include <QDebug>
-#include <iostream>
 #include <string>
+#include <iostream>
 #include "point.h"
 
 using namespace GiNaC;
 using namespace MoebInv;
+
+void ex_to_string(const ex & E)
+{
+    std::ostringstream drawing;
+    drawing << E;
+    string dr = drawing.str().c_str();
+
+    QString drw = QString::fromStdString(dr);
+    qDebug() << drw;
+}
 
 /*!
  * \brief point::point Point constructor.
@@ -15,8 +25,7 @@ using namespace MoebInv;
  *
  * Constructs a point on the scene by implementing a QGraphicsItem.
  */
-point::point(figure *f, ex p, QString l, QGraphicsItem *parent) :
-    QGraphicsItem(parent),
+point::point(MoebInv::figure *f, GiNaC::ex p, QString l) :
     brush(Qt::black),
     pen(Qt::black)
 {
@@ -30,20 +39,26 @@ point::point(figure *f, ex p, QString l, QGraphicsItem *parent) :
 }
 
 /*!
- * \brief point::hoverEnterEvent
+ * \brief point::hoverEnterEvent Mouse enters binding rect of point
+ *
+ * This event is triggered when the mouse enters the bounding rectangle of the point.
+ * The colour of the point is changed to red and a tool tip is set giving information about the point.
  */
 void point::hoverEnterEvent(QGraphicsSceneHoverEvent *) {
     brush = Qt::red;
     pen.setColor(Qt::red);
     update();
 
-    //set tool tip when hover
+    //set tool tip on hover showing coordinates
     QString toolTipString = "X:" + QString::number(x) + " Y:" + QString::number(y);
     setToolTip(toolTipString);
 }
 
 /*!
- * \brief point::hoverLeaveEvent
+ * \brief point::hoverLeaveEvent Mouse leaves binding rect of point
+ *
+ * This event is triggered when the mouse leaves the bounding rectangle of the point.
+ * The colour of the point is set back to black, as it is no longer being hovered.
  */
 void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
     brush = Qt::black;
@@ -51,38 +66,46 @@ void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
     update();
 }
 
+/*!
+ * \brief point::contextMenuEvent Menu popup for point
+ * \param event
+ *
+ * Detects when a menu is being requested (i.e. right click) on a point.
+ * This gives the use the option to delete the point and see whether it is orthagonal, fOrthagonal, different or tangent.
+ */
 void point::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu *menu = new QMenu;
 
     isOrthagonal = new QAction("Orthagonal");
     isOrthagonal->setCheckable(true);
-    isOrthagonal->setChecked(true);
+    isOrthagonal->setChecked(false);
     menu->addAction(isOrthagonal);
     //CONNECT....
 
     isfOrthagonal = new QAction("F-Orthagonal");
     isfOrthagonal->setCheckable(true);
-    isfOrthagonal->setChecked(true);
+    isfOrthagonal->setChecked(false);
     menu->addAction(isfOrthagonal);
     //CONNECT....
 
     isDifferent = new QAction("Different");
     isDifferent->setCheckable(true);
-    isDifferent->setChecked(true);
+    isDifferent->setChecked(false);
     menu->addAction(isDifferent);
     //CONNECT....
 
     isTangent = new QAction("Tangent");
     isTangent->setCheckable(true);
-    isTangent->setChecked(true);
+    isTangent->setChecked(false);
     menu->addAction(isTangent);
     //CONNECT....
 
     menu->addSeparator();
 
-    menu->addAction("Delete");
-    //CONNECT....
+    deletePoint = new QAction("Delete");
+    menu->addAction(deletePoint);
+    connect(deletePoint, &QAction::triggered, this, &point::removePoint);
 
     menu->popup(event->screenPos());
 }
@@ -102,13 +125,17 @@ QRectF point::boundingRect() const{
 }
 
 /*!
- * \brief point::paint
+ * \brief point::paint Paint the point on the scene.
  * \param p
+ *
+ * This function paints the point on the scene given various parameters
+ * (such as x, y, radius and label). The point is drawn differently dependent
+ * on the drawing metric in use.
  */
 void point::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
     getParameters();
-    p->setPen(pen);
     p->setBrush(brush);
+    p->setPen(pen);
 
     switch (metric) {
         case drawingMetric::ELLIPTIC: {
@@ -136,7 +163,9 @@ void point::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
 }
 
 /*!
- * \brief point::getParameters
+ * \brief point::getParameters get x and y coordinates
+ *
+ * Get the x and y coordinates of the point from the cycle in the figure.
  */
 void point::getParameters() {
     // get cycle that has just been added
@@ -147,15 +176,21 @@ void point::getParameters() {
     y = ex_to<numeric>(c.center()[1]).to_double();
 }
 
-//void ex_to_string(const ex & E)
-//{
-//    std::ostringstream drawing;
-//    drawing << E;
-//    string dr = drawing.str().c_str();
+/*!
+ * \brief point::removePoint Remove a point from the scene.
+ *
+ * Removes a point from the MoebInv figure and then deletes the object removing it from the scene.
+ */
+void point::removePoint()
+{
+    // remove cycle from moebInv figure
+    fig->remove_cycle_node(cycle);
+    // emit signal to get cycle removed from the tree
+    emit removeFromTree(label);
+    // delete object, clearing it from the scene
+    delete this;
+}
 
-//    QString drw = QString::fromStdString(dr);
-//    qDebug() << drw;
-//}
 
 
 

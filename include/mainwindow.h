@@ -21,10 +21,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void initFigure();
     void addPoint(QPointF location);
-    void removeCycle();
-    void drawPoint(GiNaC::ex *cycle);
-    void drawLine();
-    void drawCycle();
     void setDrawingMetric();
     void addPointToTree(QString itemName);
     void addLineToTree(QString itemName);
@@ -37,6 +33,8 @@ public:
 private slots:
     void on_actionCreate_Cycle_toggled(bool toggled);
     void onMouseScenePress(QPointF point);
+    //void onMouseSceneHover(QPointF point);
+    void removeFromTree(QString label);
 
 private:
     Ui::MainWindow *ui;

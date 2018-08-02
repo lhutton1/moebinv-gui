@@ -17,7 +17,7 @@ graphicsScene::graphicsScene(QObject *parent)
  * \brief graphicsScene::mousePressEvent Mouse pressed on scene
  * \param mouseEvent Provides information about the mouse event such as the position the click occured on the scene.
  *
- * Called when the mouse is clicked on the scene in the graphics view.
+ * Called when the left mouse button is clicked on the scene in the graphics view.
  */
 void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
@@ -26,4 +26,11 @@ void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         emit newMousePress(point);
     }
 }
+
+// Implementation of coords on status bar eats up QEvent
+//void graphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
+//{
+//    QPointF point = mouseEvent->scenePos();
+//    emit newMouseHover(point);
+//}
 
