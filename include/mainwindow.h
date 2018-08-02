@@ -4,15 +4,26 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QPointer>
+#include <QTreeWidgetItem>
+#include <QGraphicsTextItem>
+
 #include <figure.h>
 
 #include "scene.h"
 #include "labels.h"
+#include "point.h"
+#include "circle.h"
 
 namespace Ui {
 class MainWindow;
 }
 
+/*!
+ * \brief The MainWindow class
+ *
+ * MainWindow, the main application. This encompasses the scene, menu and tree view.
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -28,13 +39,13 @@ public:
     ~MainWindow();
 
     bool toolAddCycle;
-    //const double EPSILLION = 0.000000001;
 
 private slots:
-    void on_actionCreate_Cycle_toggled(bool toggled);
     void onMouseScenePress(QPointF point);
-    //void onMouseSceneHover(QPointF point);
     void removeFromTree(QString label);
+    void addOrthagonalToList(GiNaC::ex cycle);
+    void removeOrthagonalFromList(GiNaC::ex cycle);
+    void on_actionCreate_Cycle_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -42,6 +53,8 @@ private:
     labels *lblGen;
 
     MoebInv::figure f;
+
+    GiNaC::lst orthagonalList;
 };
 
 #endif // MAINWINDOW_H

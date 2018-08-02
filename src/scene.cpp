@@ -27,10 +27,3 @@ void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     }
 }
 
-// Implementation of coords on status bar eats up QEvent
-//void graphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
-//{
-//    QPointF point = mouseEvent->scenePos();
-//    emit newMouseHover(point);
-//}
-

@@ -15,6 +15,11 @@ enum drawingMetric {
     HYPERBOLIC
 };
 
+/*!
+ * \brief metric
+ *
+ * Sets the drawing metric. By default this is Elliptic.
+ */
 const int metric = drawingMetric::ELLIPTIC;
 
 #endif // DRAWINGMETRIC_H

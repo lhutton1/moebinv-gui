@@ -1,31 +1,33 @@
-#ifndef POINT_H
-#define POINT_H
+#ifndef CIRCLE_H
+#define CIRCLE_H
 
-#include <QGraphicsItem>
-#include <QPainter>
-#include <QMenu>
-#include <QPointer>
-#include <QAction>
 #include <QObject>
+#include <QGraphicsItem>
+#include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
+#include <QPainter>
+#include <QAction>
+#include <QPointer>
+#include <QtMath>
 #include <figure.h>
+
 #include "drawingmetric.h"
 
 /*!
- * \brief The point class
+ * \brief The circle class
  *
- * Inherits from QGraphicsItem. When created and added to the scene a point is
- * displayed, given the x coordinate, y coordinates.
+ * Inherits from QGraphicsItem. When created and added to the scene a circle is
+ * displayed, given the x coordinate, y coordinate and radius.
  */
-class point : public QObject, public QGraphicsItem
+class circle : public QObject, public QGraphicsItem
 {
     Q_OBJECT
     QBrush brush;
     QPen pen;
 
 public:
-    explicit point(MoebInv::figure *f, GiNaC::ex p, QString l);
-    void paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *);
+    circle(MoebInv::figure *f, GiNaC::ex c, QString l);
+    void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
@@ -60,4 +62,4 @@ private:
     QPointer<QAction> deletePoint = nullptr;
 };
 
-#endif // POINT_H
+#endif // CIRCLE_H

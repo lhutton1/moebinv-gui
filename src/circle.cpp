@@ -1,29 +1,18 @@
 #include <QDebug>
-#include "point.h"
+#include "circle.h"
 
-using namespace GiNaC;
 using namespace MoebInv;
+using namespace GiNaC;
 
-/*!
- * \brief point::point Point constructor.
- * \param f MoebInv figure.
- * \param p MoebInv point to be drawn on the scene.
- * \param l label of the point.
- * \param parent
- *
- * Constructs a point on the scene by implementing a QGraphicsItem.
- */
-point::point(MoebInv::figure *f, GiNaC::ex p, QString l) :
+circle::circle(MoebInv::figure *f, GiNaC::ex c, QString l) :
     brush(Qt::black),
     pen(Qt::black)
 {
-    radius = 2.5;
-    cycle = p;
+    cycle = c;
     fig = f;
     label = l;
 
     getParameters();
-    createPointMenu();
     setAcceptHoverEvents(true);
 }
 
@@ -33,13 +22,16 @@ point::point(MoebInv::figure *f, GiNaC::ex p, QString l) :
  * This event is triggered when the mouse enters the bounding rectangle of the point.
  * The colour of the point is changed to red and a tool tip is set giving information about the point.
  */
-void point::hoverEnterEvent(QGraphicsSceneHoverEvent *) {
-    brush = Qt::red;
+void circle::hoverEnterEvent(QGraphicsSceneHoverEvent *) {
     pen.setColor(Qt::red);
     update();
 
     //set tool tip on hover showing coordinates
-    QString toolTipString = "X:" + QString::number(x) + " Y:" + QString::number(y);
+    QString toolTipString =
+        "X:" + QString::number(x) +
+        " Y:" + QString::number(y) +
+        " Radius:" + QString::number(radius);
+
     setToolTip(toolTipString);
 }
 
@@ -49,8 +41,7 @@ void point::hoverEnterEvent(QGraphicsSceneHoverEvent *) {
  * This event is triggered when the mouse leaves the bounding rectangle of the point.
  * The colour of the point is set back to black, as it is no longer being hovered.
  */
-void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
-    brush = Qt::black;
+void circle::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
     pen.setColor(Qt::black);
     update();
 }
@@ -59,12 +50,12 @@ void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
  * \brief point::boundingRect
  * \return
  */
-QRectF point::boundingRect() const{
+QRectF circle::boundingRect() const{
     return QRectF(
         x - radius,
         y - radius,
-        30,
-        30
+        radius * 2,
+        radius * 2
     );
 }
 
@@ -76,17 +67,15 @@ QRectF point::boundingRect() const{
  * (such as x, y, radius and label). The point is drawn differently dependent
  * on the drawing metric in use.
  */
-void point::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
+void circle::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
     getParameters();
-    p->setBrush(brush);
     p->setPen(pen);
 
     switch (metric) {
         case drawingMetric::ELLIPTIC: {
-            // draw point
+            // draw circle
             p->drawEllipse(
-                x - radius / 2,
-                y - radius / 2,
+                QPointF(x, y),
                 radius,
                 radius
             );
@@ -111,13 +100,14 @@ void point::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
  *
  * Get the x and y coordinates of the point from the cycle in the figure.
  */
-void point::getParameters() {
+void circle::getParameters() {
     // get cycle that has just been added
     cycle2D c = ex_to<cycle2D>(fig->get_cycle(cycle)[0]);
 
     // now break into components
     x = ex_to<numeric>(c.center()[0]).to_double();
     y = ex_to<numeric>(c.center()[1]).to_double();
+    radius = qSqrt(ex_to<numeric>(c.radius_sq()).to_double());
 }
 
 /*!
@@ -125,7 +115,7 @@ void point::getParameters() {
  *
  * Removes a point from the MoebInv figure and then deletes the object removing it from the scene.
  */
-void point::removePoint()
+void circle::removePoint()
 {
     // remove cycle from moebInv figure
     fig->remove_cycle_node(cycle);
@@ -140,7 +130,7 @@ void point::removePoint()
  *
  * Create a menu that appears when a point is right clicked.
  */
-void point::createPointMenu()
+void circle::createPointMenu()
 {
     menu = new QMenu;
 
@@ -148,7 +138,7 @@ void point::createPointMenu()
     isOrthagonal->setCheckable(true);
     isOrthagonal->setChecked(false);
     menu->addAction(isOrthagonal);
-    connect(isOrthagonal, &QAction::triggered, this, &point::isOrthagonalChecked);
+    //connect(isOrthagonal, &QAction::triggered, this, &point::isOrthagonalChecked);
 
     isfOrthagonal = new QAction("F-Orthagonal", this);
     isfOrthagonal->setCheckable(true);
@@ -172,7 +162,7 @@ void point::createPointMenu()
 
     deletePoint = new QAction("Delete");
     menu->addAction(deletePoint);
-    connect(deletePoint, &QAction::triggered, this, &point::removePoint);
+    //connect(deletePoint, &QAction::triggered, this, &point::removePoint);
 }
 
 /*!
@@ -182,12 +172,12 @@ void point::createPointMenu()
  * Detects when a menu is being requested (i.e. right click) on a point.
  * This gives the use the option to delete the point and see whether it is orthagonal, fOrthagonal, different or tangent.
  */
-void point::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void circle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     menu->popup(event->screenPos());
 }
 
-void point::isOrthagonalChecked()
+void circle::isOrthagonalChecked()
 {
     if (isOrthagonal->isChecked()) {
         emit addOrthagonalToList(cycle);
@@ -195,7 +185,3 @@ void point::isOrthagonalChecked()
         emit removeOrthagonalFromList(cycle);
     }
 }
-
-
-
-

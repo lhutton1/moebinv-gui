@@ -97,6 +97,7 @@
    <addaction name="actionCreate_Cycle"/>
    <addaction name="actionInfinity"/>
    <addaction name="actionReal_Line"/>
+   <addaction name="actionThis"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
@@ -201,9 +202,6 @@
    </property>
   </action>
   <action name="actionCreate_Cycle">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="text">
     <string>Create Cycle</string>
    </property>
@@ -225,6 +223,11 @@
    </property>
    <property name="toolTip">
     <string>Real Line</string>
+   </property>
+  </action>
+  <action name="actionThis">
+   <property name="text">
+    <string>This</string>
    </property>
   </action>
  </widget>

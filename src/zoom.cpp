@@ -1,8 +1,4 @@
 #include "zoom.h"
-#include <QMouseEvent>
-#include <QApplication>
-#include <QScrollBar>
-#include <qmath.h>
 
 zoom::zoom(QGraphicsView* view)
   : QObject(view), _view(view)

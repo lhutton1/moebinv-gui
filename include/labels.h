@@ -3,6 +3,13 @@
 
 #include <QString>
 
+
+/*!
+ * \brief The labels class
+ *
+ * The labels class is a small class which generates a unique
+ * label incrementing as such: A, B, C, ..., Z, AA, AB, ... ZZ, AAA, ect...
+ */
 class labels
 {
 
