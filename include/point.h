@@ -25,7 +25,7 @@ public:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     void getParameters();
-    //~point();
+    void createPointMenu();
 
 public slots:
     void removePoint();
@@ -34,7 +34,6 @@ signals:
     void removeFromTree(QString label);
 
 private:
-
     GiNaC::ex cycle;
     MoebInv::figure *fig;
 
@@ -42,6 +41,8 @@ private:
     double y;
     double radius;
     QString label;
+
+    QMenu *menu;
 
     QPointer<QAction> isOrthagonal = nullptr;
     QPointer<QAction> isfOrthagonal = nullptr;

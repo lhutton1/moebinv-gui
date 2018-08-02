@@ -35,6 +35,7 @@ point::point(MoebInv::figure *f, GiNaC::ex p, QString l) :
     label = l;
 
     getParameters();
+    createPointMenu();
     setAcceptHoverEvents(true);
 }
 
@@ -65,51 +66,6 @@ void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
     pen.setColor(Qt::black);
     update();
 }
-
-/*!
- * \brief point::contextMenuEvent Menu popup for point
- * \param event
- *
- * Detects when a menu is being requested (i.e. right click) on a point.
- * This gives the use the option to delete the point and see whether it is orthagonal, fOrthagonal, different or tangent.
- */
-void point::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    QMenu *menu = new QMenu;
-
-    isOrthagonal = new QAction("Orthagonal");
-    isOrthagonal->setCheckable(true);
-    isOrthagonal->setChecked(false);
-    menu->addAction(isOrthagonal);
-    //CONNECT....
-
-    isfOrthagonal = new QAction("F-Orthagonal");
-    isfOrthagonal->setCheckable(true);
-    isfOrthagonal->setChecked(false);
-    menu->addAction(isfOrthagonal);
-    //CONNECT....
-
-    isDifferent = new QAction("Different");
-    isDifferent->setCheckable(true);
-    isDifferent->setChecked(false);
-    menu->addAction(isDifferent);
-    //CONNECT....
-
-    isTangent = new QAction("Tangent");
-    isTangent->setCheckable(true);
-    isTangent->setChecked(false);
-    menu->addAction(isTangent);
-    //CONNECT....
-
-    menu->addSeparator();
-
-    deletePoint = new QAction("Delete");
-    menu->addAction(deletePoint);
-    connect(deletePoint, &QAction::triggered, this, &point::removePoint);
-
-    menu->popup(event->screenPos());
-}
-
 
 /*!
  * \brief point::boundingRect
@@ -189,6 +145,58 @@ void point::removePoint()
     emit removeFromTree(label);
     // delete object, clearing it from the scene
     delete this;
+}
+
+/*!
+ * \brief createPointMenu Create context menu
+ *
+ * Create a menu that appears when a point is right clicked.
+ */
+void point::createPointMenu()
+{
+    menu = new QMenu;
+
+    isOrthagonal = new QAction("Orthagonal", this);
+    isOrthagonal->setCheckable(true);
+    isOrthagonal->setChecked(false);
+    menu->addAction(isOrthagonal);
+    //connect(isOrthagonal, &QAction::triggered, this, &point::changeToChecked);
+
+    isfOrthagonal = new QAction("F-Orthagonal", this);
+    isfOrthagonal->setCheckable(true);
+    isfOrthagonal->setChecked(false);
+    menu->addAction(isfOrthagonal);
+    //connect(isfOrthagonal, &QAction::triggered, this, &point::changeToChecked);
+
+    isDifferent = new QAction("Different", this);
+    isDifferent->setCheckable(true);
+    isDifferent->setChecked(false);
+    menu->addAction(isDifferent);
+    //connect(isDifferent, &QAction::triggered, this, &point::changeToChecked);
+
+    isTangent = new QAction("Tangent", this);
+    isTangent->setCheckable(true);
+    isTangent->setChecked(false);
+    menu->addAction(isTangent);
+    //connect(isTangent, &QAction::triggered, this, &point::changeToChecked);
+
+    menu->addSeparator();
+
+    deletePoint = new QAction("Delete");
+    menu->addAction(deletePoint);
+    connect(deletePoint, &QAction::triggered, this, &point::removePoint);
+}
+
+/*!
+ * \brief point::contextMenuEvent Menu popup for point
+ * \param event
+ *
+ * Detects when a menu is being requested (i.e. right click) on a point.
+ * This gives the use the option to delete the point and see whether it is orthagonal, fOrthagonal, different or tangent.
+ */
+void point::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    menu->popup(event->screenPos());
 }
 
 

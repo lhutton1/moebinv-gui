@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += /usr/local/include $$PWD/include
 DEPENDPATH += /usr/local/include $$PWD/include
 
-unix: LIBS += -L/usr/local/lib/ -lginac -lcycle -lfigure
+LIBS += -L/usr/local/lib/ -lginac -lcycle -lfigure
 
 SOURCES += \
         src/main.cpp \
@@ -34,7 +34,7 @@ SOURCES += \
         src/zoom.cpp \
         src/labels.cpp \
         src/point.cpp \
-    test.cpp
+        src/cycle.cpp
 
 HEADERS += \
         include/mainwindow.h \
@@ -43,7 +43,7 @@ HEADERS += \
         include/labels.h \
         include/point.h \
         include/drawingmetric.h \
-    test.h
+        include/cycle.h
 
 FORMS += \
         forms/mainwindow.ui
