@@ -98,6 +98,7 @@ void MainWindow::addPoint(QPointF mousePos)
     connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
     connect(p, &point::addOrthogonalToList, this, &MainWindow::addOrthogonalToList);
     connect(p, &point::removeOrthogonalFromList, this, &MainWindow::removeOrthogonalFromList);
+    connect(this, &MainWindow::resetRelationalList, p, &point::resetRelationalList);
 
     scene->addItem(p);
     lblGen->advanceLabel();
@@ -152,6 +153,10 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     scene->addItem(circ);
     lblGen->advanceLabel();
     addPointToTree(label);
+
+    // reset relation list
+    resetList(&orthogonalList);
+    emit resetRelationalList();
 }
 
 /*!
@@ -195,6 +200,6 @@ void MainWindow::removeOrthogonalFromList(ex cycle) {
     qDebug() << "rm orth";
 }
 
-void resetList(lst list) {
-
+void MainWindow::resetList(GiNaC::lst *list) {
+    list->remove_all();
 }

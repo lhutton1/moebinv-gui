@@ -36,6 +36,7 @@ public:
 public slots:
     void removePoint();
     void isOrthogonalChecked();
+    void resetRelationalList();
 
 signals:
     void removeFromTree(QString label);

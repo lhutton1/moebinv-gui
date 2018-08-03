@@ -37,6 +37,7 @@ public:
     void addPointToTree(QString itemName);
     void addLineToTree(QString itemName);
     void addCycleToTree(QString itemName);
+    void resetList(GiNaC::lst *list);
     ~MainWindow();
 
     bool toolAddCycle;
@@ -47,6 +48,9 @@ private slots:
     void addOrthogonalToList(GiNaC::ex cycle);
     void removeOrthogonalFromList(GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
+
+signals:
+    void resetRelationalList();
 
 private:
     Ui::MainWindow *ui;

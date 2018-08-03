@@ -81,7 +81,7 @@ void circle::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
             );
 
             // add label to side
-            p->drawText(x + radius + 3, y + 12, label);
+            p->drawText(x, y + radius - 5, label);
 
             break;
         } case drawingMetric::PARABOLIC: {

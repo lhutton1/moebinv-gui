@@ -196,6 +196,14 @@ void point::isOrthogonalChecked()
     }
 }
 
+void point::resetRelationalList()
+{
+    isOrthogonal->setChecked(false);
+    isfOrthogonal->setChecked(false);
+    isTangent->setChecked(false);
+    isDifferent->setChecked(false);
+}
+
 
 
 
