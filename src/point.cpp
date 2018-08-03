@@ -144,17 +144,17 @@ void point::createPointMenu()
 {
     menu = new QMenu;
 
-    isOrthagonal = new QAction("Orthagonal", this);
-    isOrthagonal->setCheckable(true);
-    isOrthagonal->setChecked(false);
-    menu->addAction(isOrthagonal);
-    connect(isOrthagonal, &QAction::triggered, this, &point::isOrthagonalChecked);
+    isOrthogonal = new QAction("Orthogonal", this);
+    isOrthogonal->setCheckable(true);
+    isOrthogonal->setChecked(false);
+    menu->addAction(isOrthogonal);
+    connect(isOrthogonal, &QAction::triggered, this, &point::isOrthogonalChecked);
 
-    isfOrthagonal = new QAction("F-Orthagonal", this);
-    isfOrthagonal->setCheckable(true);
-    isfOrthagonal->setChecked(false);
-    menu->addAction(isfOrthagonal);
-    //connect(isfOrthagonal, &QAction::triggered, this, &point::changeToChecked);
+    isfOrthogonal = new QAction("F-Orthogonal", this);
+    isfOrthogonal->setCheckable(true);
+    isfOrthogonal->setChecked(false);
+    menu->addAction(isfOrthogonal);
+    //connect(isfOrthogonal, &QAction::triggered, this, &point::changeToChecked);
 
     isDifferent = new QAction("Different", this);
     isDifferent->setCheckable(true);
@@ -180,19 +180,19 @@ void point::createPointMenu()
  * \param event
  *
  * Detects when a menu is being requested (i.e. right click) on a point.
- * This gives the use the option to delete the point and see whether it is orthagonal, fOrthagonal, different or tangent.
+ * This gives the use the option to delete the point and see whether it is orthogonal, fOrthogonal, different or tangent.
  */
 void point::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     menu->popup(event->screenPos());
 }
 
-void point::isOrthagonalChecked()
+void point::isOrthogonalChecked()
 {
-    if (isOrthagonal->isChecked()) {
-        emit addOrthagonalToList(cycle);
+    if (isOrthogonal->isChecked()) {
+        emit addOrthogonalToList(cycle);
     } else {
-        emit removeOrthagonalFromList(cycle);
+        emit removeOrthogonalFromList(cycle);
     }
 }
 

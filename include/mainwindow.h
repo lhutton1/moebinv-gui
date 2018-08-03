@@ -7,6 +7,7 @@
 #include <QPointer>
 #include <QTreeWidgetItem>
 #include <QGraphicsTextItem>
+#include <QMessageBox>
 
 #include <figure.h>
 
@@ -43,8 +44,8 @@ public:
 private slots:
     void onMouseScenePress(QPointF point);
     void removeFromTree(QString label);
-    void addOrthagonalToList(GiNaC::ex cycle);
-    void removeOrthagonalFromList(GiNaC::ex cycle);
+    void addOrthogonalToList(GiNaC::ex cycle);
+    void removeOrthogonalFromList(GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
 
 private:
@@ -54,7 +55,13 @@ private:
 
     MoebInv::figure f;
 
-    GiNaC::lst orthagonalList;
+    GiNaC::lst orthogonalList;
+
+    QTreeWidgetItem *gen1;
+    QTreeWidgetItem *gen2;
+    QTreeWidgetItem *gen3;
+
+    QMessageBox *msgBox;
 };
 
 #endif // MAINWINDOW_H

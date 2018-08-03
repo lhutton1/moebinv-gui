@@ -16,6 +16,7 @@ class labels
 public:
     labels();
     QString genNextLabel();
+    void advanceLabel();
 
 private:
     int currentLetter;

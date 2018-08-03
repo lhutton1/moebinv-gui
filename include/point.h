@@ -35,12 +35,12 @@ public:
 
 public slots:
     void removePoint();
-    void isOrthagonalChecked();
+    void isOrthogonalChecked();
 
 signals:
     void removeFromTree(QString label);
-    void addOrthagonalToList(GiNaC::ex c);
-    void removeOrthagonalFromList(GiNaC::ex c);
+    void addOrthogonalToList(GiNaC::ex c);
+    void removeOrthogonalFromList(GiNaC::ex c);
 
 private:
     GiNaC::ex cycle;
@@ -53,8 +53,8 @@ private:
 
     QMenu *menu;
 
-    QPointer<QAction> isOrthagonal = nullptr;
-    QPointer<QAction> isfOrthagonal = nullptr;
+    QPointer<QAction> isOrthogonal = nullptr;
+    QPointer<QAction> isfOrthogonal = nullptr;
     QPointer<QAction> isDifferent = nullptr;
     QPointer<QAction> isTangent = nullptr;
     QPointer<QAction> deletePoint = nullptr;

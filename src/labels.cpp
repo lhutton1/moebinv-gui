@@ -27,7 +27,9 @@ QString labels::genNextLabel()
         letterNumber = (letterNumber - (current + 1)) / 26;
     }
 
-    currentLetter += 1;
-
     return lblString;
+}
+
+void labels::advanceLabel() {
+    currentLetter += 1;
 }

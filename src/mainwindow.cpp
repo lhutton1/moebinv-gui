@@ -43,6 +43,18 @@ MainWindow::MainWindow(QWidget *parent) :
     // create new labels object to create unique labels
     lblGen = new labels();
 
+    gen1 = new QTreeWidgetItem();
+    gen1->setText(0, "1st Generation");
+    ui->treeWidget->addTopLevelItem(gen1);
+    gen2 = new QTreeWidgetItem();
+    gen2->setText(0, "2nd Generation");
+    ui->treeWidget->addTopLevelItem(gen2);
+    gen3 = new QTreeWidgetItem();
+    gen3->setText(0, "3rd Generation");
+    ui->treeWidget->addTopLevelItem(gen3);
+
+    msgBox = new QMessageBox();
+
 }
 
 /*!
@@ -74,25 +86,22 @@ void MainWindow::onMouseScenePress(QPointF location)
  */
 void MainWindow::addPoint(QPointF mousePos)
 {
-//    QString label = lblGen->genNextLabel();
-//    ex cycle = f.add_point(lst{mousePos.x(), mousePos.y()}, qPrintable(label));
-//    circle *c = new circle(&f, cycle, label);
-//    scene->addItem(c);
     // gen new label
     QString label = lblGen->genNextLabel();
 
     // add cycle to the figure
     ex cycle = f.add_point(lst{mousePos.x(), mousePos.y()}, qPrintable(label));
-    //ex cycle2 = f.add_cycle_rel(lst(is_orthogonal(cycle)), "B");
 
     // now draw the point
     point *p = new point(&f, cycle, label);
 
     connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
-    connect(p, &point::addOrthagonalToList, this, &MainWindow::addOrthagonalToList);
-    connect(p, &point::removeOrthagonalFromList, this, &MainWindow::removeOrthagonalFromList);
+    connect(p, &point::addOrthogonalToList, this, &MainWindow::addOrthogonalToList);
+    connect(p, &point::removeOrthogonalFromList, this, &MainWindow::removeOrthogonalFromList);
 
     scene->addItem(p);
+    lblGen->advanceLabel();
+
     // now add to tree
     addPointToTree(label);
 }
@@ -104,10 +113,45 @@ void MainWindow::addPoint(QPointF mousePos)
  */
 void MainWindow::on_actionCreate_Cycle_triggered()
 {
+    double radius = 0;
+
+    // make sure that the list isn't empty before adding cycle
+    if (orthogonalList.nops() <= 0) {
+        msgBox->warning(0, "No cycles in relation", "For a cycle to be created there must be cycles in the relation.");
+        return;
+    }
+
+    // create cycle
     QString label = lblGen->genNextLabel();
-    ex cycle = f.add_cycle_rel(orthagonalList, qPrintable(label));
-    circle *c = new circle(&f, cycle, label);
-    scene->addItem(c);
+    ex cycle = f.add_cycle_rel(orthogonalList, qPrintable(label));
+    cycle2D c = ex_to<cycle2D>(f.get_cycle(cycle)[0]);
+
+    //
+    // Find better check..................
+    //
+    //
+    // check to make sure cycle is not infinite
+    try {
+        radius = qSqrt(ex_to<numeric>(c.radius_sq()).to_double());
+    }
+    catch (...) {
+        msgBox->warning(0, "Infinite cycles", "The number of possible cycles for this relation is infinite, therefore it cannot be displayed");
+        f.remove_cycle_node(cycle);
+        return;
+    }
+
+    // check that cycle exists
+    if (radius == 0) {
+        msgBox->warning(0, "Cycle non-existant", "Cycle for this relation does not exist.");
+        f.remove_cycle_node(cycle);
+        return;
+    }
+
+    // draw the new circle
+    circle *circ = new circle(&f, cycle, label);
+    scene->addItem(circ);
+    lblGen->advanceLabel();
+    addPointToTree(label);
 }
 
 /*!
@@ -132,7 +176,10 @@ void MainWindow::addPointToTree(QString itemName)
 {
     QTreeWidgetItem *item = new QTreeWidgetItem();
     item->setText(0, itemName);
-    ui->treeWidget->addTopLevelItem(item);
+    gen1->addChild(item);
+
+    if (gen1->childCount() == 1)
+        gen1->setExpanded(true);
 }
 
 void MainWindow::removeFromTree(QString label)
@@ -140,10 +187,14 @@ void MainWindow::removeFromTree(QString label)
     //ui->treeWidget->takeTopLevelItem(//needs index);
 }
 
-void MainWindow::addOrthagonalToList(GiNaC::ex cycle) {
-    orthagonalList.append(is_orthogonal(cycle));
+void MainWindow::addOrthogonalToList(ex cycle) {
+    orthogonalList.append(is_orthogonal(cycle));
 }
 
-void MainWindow::removeOrthagonalFromList(GiNaC::ex cycle) {
+void MainWindow::removeOrthogonalFromList(ex cycle) {
     qDebug() << "rm orth";
+}
+
+void resetList(lst list) {
+
 }
