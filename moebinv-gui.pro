@@ -43,7 +43,7 @@ HEADERS += \
         include/labels.h \
         include/circle.h \
         include/point.h \
-        include/drawingmetric.h \
+        include/drawingmetric.h
 
 FORMS += \
         forms/mainwindow.ui

@@ -5,7 +5,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QPointer>
-#include <QTreeWidgetItem>
+#include <QStandardItemModel>
+#include <QStandardItem>
 #include <QGraphicsTextItem>
 #include <QMessageBox>
 
@@ -34,17 +35,18 @@ public:
     void initFigure();
     void addPoint(QPointF location);
     void setDrawingMetric();
-    void addPointToTree(QString itemName);
+    void addPointToTree(point *p);
     void addLineToTree(QString itemName);
     void addCycleToTree(QString itemName);
     void resetList(GiNaC::lst *list);
+    void initTreeModel();
     ~MainWindow();
 
     bool toolAddCycle;
 
 private slots:
     void onMouseScenePress(QPointF point);
-    void removeFromTree(QString label, int index);
+    void removeFromTree(QString label);
     void addOrthogonalToList(GiNaC::ex cycle);
     void removeOrthogonalFromList(GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
@@ -61,13 +63,9 @@ private:
 
     GiNaC::lst orthogonalList;
 
-    QTreeWidgetItem *gen1;
-    QTreeWidgetItem *gen2;
-    QTreeWidgetItem *gen3;
-
     QMessageBox *msgBox;
 
-    int currentTreeIndex;
+    QStandardItemModel *model;
 };
 
 #endif // MAINWINDOW_H

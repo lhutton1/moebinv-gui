@@ -43,19 +43,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // create new labels object to create unique labels
     lblGen = new labels();
 
-    gen1 = new QTreeWidgetItem();
-    gen1->setText(0, "1st Generation");
-    ui->treeWidget->addTopLevelItem(gen1);
-    gen2 = new QTreeWidgetItem();
-    gen2->setText(0, "2nd Generation");
-    ui->treeWidget->addTopLevelItem(gen2);
-    gen3 = new QTreeWidgetItem();
-    gen3->setText(0, "3rd Generation");
-    ui->treeWidget->addTopLevelItem(gen3);
-
+    // create new msgbox
     msgBox = new QMessageBox();
 
-    currentTreeIndex = 0;
+    initTreeModel();
 
 }
 
@@ -95,7 +86,10 @@ void MainWindow::addPoint(QPointF mousePos)
     ex cycle = f.add_point(lst{mousePos.x(), mousePos.y()}, qPrintable(label));
 
     // now draw the point
-    point *p = new point(&f, cycle, label, currentTreeIndex);
+    point *p = new point(&f, cycle, label);
+
+    //set generation
+    //p->setGeneration(1);
 
     connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
     connect(p, &point::addOrthogonalToList, this, &MainWindow::addOrthogonalToList);
@@ -106,8 +100,7 @@ void MainWindow::addPoint(QPointF mousePos)
     lblGen->advanceLabel();
 
     // now add to tree
-    addPointToTree(label);
-    currentTreeIndex++;
+    addPointToTree(p);
 }
 
 /*!
@@ -155,7 +148,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     circle *circ = new circle(&f, cycle, label);
     scene->addItem(circ);
     lblGen->advanceLabel();
-    addPointToTree(label);
+    //addToTree(circ);
 
     // reset relation list
     resetList(&orthogonalList);
@@ -176,34 +169,55 @@ void MainWindow::initFigure()
     //
 }
 
-/*!
- * \brief MainWindow::addPointToTree Add new point to the tree
- * \param itemName point label value.
- */
-void MainWindow::addPointToTree(QString itemName)
-{
-    QTreeWidgetItem *item = new QTreeWidgetItem();
-    item->setText(0, itemName);
-    gen1->addChild(item);
-
-    if (gen1->childCount() == 1)
-        gen1->setExpanded(true);
-}
-
-void MainWindow::removeFromTree(QString label, int index)
-{
-    //ui->treeWidget->removeItemWidget();
-    //ui->treeWidget->setRowHidden(index, ui->treeWidget->, true);
-}
-
 void MainWindow::addOrthogonalToList(ex cycle) {
     orthogonalList.append(is_orthogonal(cycle));
 }
 
 void MainWindow::removeOrthogonalFromList(ex cycle) {
-    qDebug() << "rm orth";
+
 }
 
 void MainWindow::resetList(GiNaC::lst *list) {
     list->remove_all();
+}
+
+void MainWindow::initTreeModel()
+{
+        model = new QStandardItemModel();
+        QStandardItem *rootNode = model->invisibleRootItem();
+
+        //defining generations
+        QStandardItem *gen1Item = new QStandardItem("1st Generation");
+        QStandardItem *gen2Item = new QStandardItem("2nd Generation");
+        QStandardItem *gen3Item = new QStandardItem("3rd Generation");
+
+        //building up the hierarchy
+        rootNode->appendRow(gen1Item);
+        rootNode->appendRow(gen2Item);
+        rootNode->appendRow(gen3Item);
+
+        //register the model
+        ui->treeView->setModel(model);
+
+
+}
+
+void MainWindow::addPointToTree(point *p)
+{
+    QStandardItem *newItem = new QStandardItem(p->getLabel());
+    model->item(0)->appendRow(newItem);
+}
+
+void MainWindow::removeFromTree(QString label)
+{
+    QList<QStandardItem *> itemList = model->findItems(
+                label,
+                Qt::MatchExactly | Qt::MatchRecursive,
+                0
+    );
+
+    for (const auto &item : itemList) {
+        QStandardItem *parent = item->parent();
+        parent->removeRow(item->row());
+    }
 }

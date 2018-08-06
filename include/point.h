@@ -24,7 +24,7 @@ class point : public QObject, public QGraphicsItem
     QPen pen;
 
 public:
-    explicit point(MoebInv::figure *f, GiNaC::ex p, QString l, int i);
+    explicit point(MoebInv::figure *f, GiNaC::ex p, QString l);
     void paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *);
     QRectF boundingRect() const;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *);
@@ -32,6 +32,7 @@ public:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     void getParameters();
     void createPointMenu();
+    QString getLabel();
 
 public slots:
     void removePoint();
@@ -39,7 +40,7 @@ public slots:
     void resetRelationalList();
 
 signals:
-    void removeFromTree(QString label, int index);
+    void removeFromTree(QString label);
     void addOrthogonalToList(GiNaC::ex c);
     void removeOrthogonalFromList(GiNaC::ex c);
 
@@ -51,7 +52,6 @@ private:
     double y;
     double radius;
     QString label;
-    int index;
 
     QMenu *menu;
 

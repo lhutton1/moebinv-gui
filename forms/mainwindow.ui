@@ -136,24 +136,16 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QTreeWidget" name="treeWidget">
+        <widget class="QTreeView" name="treeView">
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
          </property>
-         <property name="autoScrollMargin">
-          <number>16</number>
-         </property>
-         <property name="columnCount">
-          <number>1</number>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <attribute name="headerVisible">
           <bool>false</bool>
          </attribute>
-         <column>
-          <property name="text">
-           <string>Name</string>
-          </property>
-         </column>
         </widget>
        </item>
       </layout>
