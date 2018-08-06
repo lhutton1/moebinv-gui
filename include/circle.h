@@ -34,6 +34,7 @@ public:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     void getParameters();
     void createPointMenu();
+    QString getLabel();
 
 public slots:
     void removePoint();

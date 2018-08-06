@@ -154,19 +154,19 @@ void point::createPointMenu()
     isfOrthogonal->setCheckable(true);
     isfOrthogonal->setChecked(false);
     menu->addAction(isfOrthogonal);
-    //connect(isfOrthogonal, &QAction::triggered, this, &point::changeToChecked);
+    connect(isfOrthogonal, &QAction::triggered, this, &point::isfOrthogonalChecked);
 
     isDifferent = new QAction("Different", this);
     isDifferent->setCheckable(true);
     isDifferent->setChecked(false);
     menu->addAction(isDifferent);
-    //connect(isDifferent, &QAction::triggered, this, &point::changeToChecked);
+    connect(isDifferent, &QAction::triggered, this, &point::isDifferentChecked);
 
     isTangent = new QAction("Tangent", this);
     isTangent->setCheckable(true);
     isTangent->setChecked(false);
     menu->addAction(isTangent);
-    //connect(isTangent, &QAction::triggered, this, &point::changeToChecked);
+    connect(isTangent, &QAction::triggered, this, &point::isTangentChecked);
 
     menu->addSeparator();
 
@@ -190,7 +190,34 @@ void point::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void point::isOrthogonalChecked()
 {
     if (isOrthogonal->isChecked()) {
-        emit addOrthogonalToList(cycle);
+        emit addOrthogonalToList(ORTHOGONAL, cycle);
+    } else {
+        emit removeOrthogonalFromList(cycle);
+    }
+}
+
+void point::isfOrthogonalChecked()
+{
+    if (isfOrthogonal->isChecked()) {
+        emit addOrthogonalToList(FORTHOGONAL, cycle);
+    } else {
+        emit removeOrthogonalFromList(cycle);
+    }
+}
+
+void point::isDifferentChecked()
+{
+    if (isDifferent->isChecked()) {
+        emit addOrthogonalToList(DIFFERENT, cycle);
+    } else {
+        emit removeOrthogonalFromList(cycle);
+    }
+}
+
+void point::isTangentChecked()
+{
+    if (isTangent->isChecked()) {
+        emit addOrthogonalToList(TANGENT, cycle);
     } else {
         emit removeOrthogonalFromList(cycle);
     }

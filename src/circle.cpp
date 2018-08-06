@@ -69,30 +69,34 @@ QRectF circle::boundingRect() const{
  * on the drawing metric in use.
  */
 void circle::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
-    getParameters();
-    p->setPen(pen);
+    try {
+        getParameters();
+        p->setPen(pen);
 
-    switch (metric) {
-        case drawingMetric::ELLIPTIC: {
-            // draw circle
-            p->drawEllipse(
-                QPointF(x, y),
-                radius,
-                radius
-            );
+        switch (metric) {
+            case drawingMetric::ELLIPTIC: {
+                // draw circle
+                p->drawEllipse(
+                    QPointF(x, y),
+                    radius,
+                    radius
+                );
 
-            // add label to side
-            p->drawText(x, y + radius - 5, label);
+                // add label to side
+                p->drawText(x, y + radius - 5, label);
 
-            break;
-        } case drawingMetric::PARABOLIC: {
-            // Reserved for future use
-            break;
+                break;
+            } case drawingMetric::PARABOLIC: {
+                // Reserved for future use
+                break;
 
-        } case drawingMetric::HYPERBOLIC: {
-            // Reserved for future use
-            break;
+            } case drawingMetric::HYPERBOLIC: {
+                // Reserved for future use
+                break;
+            }
         }
+    } catch(...) {
+        qDebug() << "unexpected error occured and cycle could not be drawn";
     }
 }
 
@@ -185,4 +189,9 @@ void circle::isOrthagonalChecked()
     } else {
         emit removeOrthagonalFromList(cycle);
     }
+}
+
+QString circle::getLabel()
+{
+    return label;
 }

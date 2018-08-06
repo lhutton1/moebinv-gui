@@ -16,6 +16,7 @@
 #include "labels.h"
 #include "point.h"
 #include "circle.h"
+#include "drawingmetric.h"
 
 namespace Ui {
 class MainWindow;
@@ -37,7 +38,7 @@ public:
     void setDrawingMetric();
     void addPointToTree(point *p);
     void addLineToTree(QString itemName);
-    void addCycleToTree(QString itemName);
+    void addCycleToTree(circle *c);
     void resetList(GiNaC::lst *list);
     void initTreeModel();
     ~MainWindow();
@@ -47,7 +48,7 @@ public:
 private slots:
     void onMouseScenePress(QPointF point);
     void removeFromTree(QString label);
-    void addOrthogonalToList(GiNaC::ex cycle);
+    void addOrthogonalToList(int relType, GiNaC::ex cycle);
     void removeOrthogonalFromList(GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
 

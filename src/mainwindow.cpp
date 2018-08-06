@@ -148,7 +148,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     circle *circ = new circle(&f, cycle, label);
     scene->addItem(circ);
     lblGen->advanceLabel();
-    //addToTree(circ);
+    addCycleToTree(circ);
 
     // reset relation list
     resetList(&orthogonalList);
@@ -169,8 +169,21 @@ void MainWindow::initFigure()
     //
 }
 
-void MainWindow::addOrthogonalToList(ex cycle) {
-    orthogonalList.append(is_orthogonal(cycle));
+void MainWindow::addOrthogonalToList(int relType, ex cycle) {
+    switch (relType) {
+        case ORTHOGONAL:
+            orthogonalList.append(is_orthogonal(cycle));
+            break;
+        case FORTHOGONAL:
+            orthogonalList.append(is_f_orthogonal(cycle));
+            break;
+        case TANGENT:
+            orthogonalList.append(is_tangent(cycle));
+            break;
+        case DIFFERENT:
+            orthogonalList.append(is_different(cycle));
+            break;
+    }
 }
 
 void MainWindow::removeOrthogonalFromList(ex cycle) {
@@ -198,13 +211,18 @@ void MainWindow::initTreeModel()
 
         //register the model
         ui->treeView->setModel(model);
-
-
+        ui->treeView->expandAll();
 }
 
 void MainWindow::addPointToTree(point *p)
 {
     QStandardItem *newItem = new QStandardItem(p->getLabel());
+    model->item(0)->appendRow(newItem);
+}
+
+void MainWindow::addCycleToTree(circle *c)
+{
+    QStandardItem *newItem = new QStandardItem(c->getLabel());
     model->item(0)->appendRow(newItem);
 }
 

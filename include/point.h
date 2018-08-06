@@ -37,11 +37,14 @@ public:
 public slots:
     void removePoint();
     void isOrthogonalChecked();
+    void isfOrthogonalChecked();
+    void isTangentChecked();
+    void isDifferentChecked();
     void resetRelationalList();
 
 signals:
     void removeFromTree(QString label);
-    void addOrthogonalToList(GiNaC::ex c);
+    void addOrthogonalToList(int relType, GiNaC::ex c);
     void removeOrthogonalFromList(GiNaC::ex c);
 
 private:

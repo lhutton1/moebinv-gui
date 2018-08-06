@@ -22,4 +22,11 @@ enum drawingMetric {
  */
 const int metric = drawingMetric::ELLIPTIC;
 
+enum relationType {
+    ORTHOGONAL,
+    FORTHOGONAL,
+    TANGENT,
+    DIFFERENT
+};
+
 #endif // DRAWINGMETRIC_H
