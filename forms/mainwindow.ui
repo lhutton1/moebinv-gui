@@ -202,9 +202,6 @@
    </property>
   </action>
   <action name="actionCreate_Cycle">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="text">
     <string>Create Cycle</string>
    </property>

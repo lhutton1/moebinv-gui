@@ -55,6 +55,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     msgBox = new QMessageBox();
 
+    currentTreeIndex = 0;
+
 }
 
 /*!
@@ -93,7 +95,7 @@ void MainWindow::addPoint(QPointF mousePos)
     ex cycle = f.add_point(lst{mousePos.x(), mousePos.y()}, qPrintable(label));
 
     // now draw the point
-    point *p = new point(&f, cycle, label);
+    point *p = new point(&f, cycle, label, currentTreeIndex);
 
     connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
     connect(p, &point::addOrthogonalToList, this, &MainWindow::addOrthogonalToList);
@@ -105,6 +107,7 @@ void MainWindow::addPoint(QPointF mousePos)
 
     // now add to tree
     addPointToTree(label);
+    currentTreeIndex++;
 }
 
 /*!
@@ -187,9 +190,10 @@ void MainWindow::addPointToTree(QString itemName)
         gen1->setExpanded(true);
 }
 
-void MainWindow::removeFromTree(QString label)
+void MainWindow::removeFromTree(QString label, int index)
 {
-    //ui->treeWidget->takeTopLevelItem(//needs index);
+    //ui->treeWidget->removeItemWidget();
+    //ui->treeWidget->setRowHidden(index, ui->treeWidget->, true);
 }
 
 void MainWindow::addOrthogonalToList(ex cycle) {

@@ -44,7 +44,7 @@ public:
 
 private slots:
     void onMouseScenePress(QPointF point);
-    void removeFromTree(QString label);
+    void removeFromTree(QString label, int index);
     void addOrthogonalToList(GiNaC::ex cycle);
     void removeOrthogonalFromList(GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
@@ -66,6 +66,8 @@ private:
     QTreeWidgetItem *gen3;
 
     QMessageBox *msgBox;
+
+    int currentTreeIndex;
 };
 
 #endif // MAINWINDOW_H

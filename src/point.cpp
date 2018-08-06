@@ -13,14 +13,15 @@ using namespace MoebInv;
  *
  * Constructs a point on the scene by implementing a QGraphicsItem.
  */
-point::point(MoebInv::figure *f, GiNaC::ex p, QString l) :
+point::point(MoebInv::figure *f, GiNaC::ex p, QString l, int i) :
     brush(Qt::black),
     pen(Qt::black)
 {
-    radius = 2.5;
+    radius = 4;
     cycle = p;
     fig = f;
     label = l;
+    index = i;
 
     getParameters();
     createPointMenu();
@@ -130,7 +131,7 @@ void point::removePoint()
     // remove cycle from moebInv figure
     fig->remove_cycle_node(cycle);
     // emit signal to get cycle removed from the tree
-    emit removeFromTree(label);
+    emit removeFromTree(label, index);
     // delete object, clearing it from the scene
     delete this;
 }

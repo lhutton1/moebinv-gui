@@ -14,6 +14,7 @@ circle::circle(MoebInv::figure *f, GiNaC::ex c, QString l) :
 
     getParameters();
     setAcceptHoverEvents(true);
+    createPointMenu();
 }
 
 /*!
