@@ -137,37 +137,13 @@ void circle::removePoint()
  */
 void circle::createPointMenu()
 {
-    menu = new QMenu;
+    menu = new cycleContextMenu;
 
-    isOrthagonal = new QAction("Orthagonal", this);
-    isOrthagonal->setCheckable(true);
-    isOrthagonal->setChecked(false);
-    menu->addAction(isOrthagonal);
-    //connect(isOrthagonal, &QAction::triggered, this, &point::isOrthagonalChecked);
-
-    isfOrthagonal = new QAction("F-Orthagonal", this);
-    isfOrthagonal->setCheckable(true);
-    isfOrthagonal->setChecked(false);
-    menu->addAction(isfOrthagonal);
-    //connect(isfOrthagonal, &QAction::triggered, this, &point::changeToChecked);
-
-    isDifferent = new QAction("Different", this);
-    isDifferent->setCheckable(true);
-    isDifferent->setChecked(false);
-    menu->addAction(isDifferent);
-    //connect(isDifferent, &QAction::triggered, this, &point::changeToChecked);
-
-    isTangent = new QAction("Tangent", this);
-    isTangent->setCheckable(true);
-    isTangent->setChecked(false);
-    menu->addAction(isTangent);
-    //connect(isTangent, &QAction::triggered, this, &point::changeToChecked);
-
-    menu->addSeparator();
-
-    deletePoint = new QAction("Delete");
-    menu->addAction(deletePoint);
-    //connect(deletePoint, &QAction::triggered, this, &point::removePoint);
+    connect(menu->isOrthogonal, &QAction::triggered, this, &circle::isOrthogonalChecked);
+    connect(menu->isfOrthogonal, &QAction::triggered, this, &circle::isfOrthogonalChecked);
+    connect(menu->isDifferent, &QAction::triggered, this, &circle::isDifferentChecked);
+    connect(menu->isTangent, &QAction::triggered, this, &circle::isTangentChecked);
+    connect(menu->deletePoint, &QAction::triggered, this, &circle::removePoint);
 }
 
 /*!
@@ -182,10 +158,37 @@ void circle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     menu->popup(event->screenPos());
 }
 
-void circle::isOrthagonalChecked()
+void circle::isOrthogonalChecked()
 {
-    if (isOrthagonal->isChecked()) {
-        emit addOrthagonalToList(cycle);
+    if (menu->isOrthogonal->isChecked()) {
+        emit addRelationToList(ORTHOGONAL, cycle);
+    } else {
+        emit removeOrthagonalFromList(cycle);
+    }
+}
+
+void circle::isfOrthogonalChecked()
+{
+    if (menu->isfOrthogonal->isChecked()) {
+        emit addRelationToList(FORTHOGONAL, cycle);
+    } else {
+        emit removeOrthagonalFromList(cycle);
+    }
+}
+
+void circle::isDifferentChecked()
+{
+    if (menu->isDifferent->isChecked()) {
+        emit addRelationToList(DIFFERENT, cycle);
+    } else {
+        emit removeOrthagonalFromList(cycle);
+    }
+}
+
+void circle::isTangentChecked()
+{
+    if (menu->isTangent->isChecked()) {
+        emit addRelationToList(TANGENT, cycle);
     } else {
         emit removeOrthagonalFromList(cycle);
     }

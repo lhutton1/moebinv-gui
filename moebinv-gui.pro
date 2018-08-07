@@ -34,7 +34,8 @@ SOURCES += \
         src/zoom.cpp \
         src/labels.cpp \
         src/point.cpp \
-        src/circle.cpp
+        src/circle.cpp \
+        src/cyclecontextmenu.cpp
 
 HEADERS += \
         include/mainwindow.h \
@@ -43,7 +44,8 @@ HEADERS += \
         include/labels.h \
         include/circle.h \
         include/point.h \
-        include/drawingmetric.h
+        include/drawingmetric.h \
+        include/cyclecontextmenu.h
 
 FORMS += \
         forms/mainwindow.ui

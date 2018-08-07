@@ -12,6 +12,7 @@
 #include <figure.h>
 
 #include "drawingmetric.h"
+#include "cyclecontextmenu.h"
 
 /*!
  * \brief The circle class
@@ -38,11 +39,14 @@ public:
 
 public slots:
     void removePoint();
-    void isOrthagonalChecked();
+    void isOrthogonalChecked();
+    void isfOrthogonalChecked();
+    void isDifferentChecked();
+    void isTangentChecked();
 
 signals:
     void removeFromTree(QString label);
-    void addOrthagonalToList(GiNaC::ex c);
+    void addRelationToList(int relType, GiNaC::ex c);
     void removeOrthagonalFromList(GiNaC::ex c);
 
 private:
@@ -54,13 +58,7 @@ private:
     double radius;
     QString label;
 
-    QMenu *menu;
-
-    QPointer<QAction> isOrthagonal = nullptr;
-    QPointer<QAction> isfOrthagonal = nullptr;
-    QPointer<QAction> isDifferent = nullptr;
-    QPointer<QAction> isTangent = nullptr;
-    QPointer<QAction> deletePoint = nullptr;
+    cycleContextMenu *menu;
 };
 
 #endif // CIRCLE_H

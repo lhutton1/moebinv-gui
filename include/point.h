@@ -4,12 +4,11 @@
 #include <QGraphicsItem>
 #include <QPainter>
 #include <QMenu>
-#include <QPointer>
-#include <QAction>
 #include <QObject>
 #include <QGraphicsSceneContextMenuEvent>
 #include <figure.h>
 #include "drawingmetric.h"
+#include "cyclecontextmenu.h"
 
 /*!
  * \brief The point class
@@ -44,25 +43,19 @@ public slots:
 
 signals:
     void removeFromTree(QString label);
-    void addOrthogonalToList(int relType, GiNaC::ex c);
+    void addRelationToList(int relType, GiNaC::ex c);
     void removeOrthogonalFromList(GiNaC::ex c);
 
 private:
     GiNaC::ex cycle;
     MoebInv::figure *fig;
 
+    cycleContextMenu *menu;
+
     double x;
     double y;
     double radius;
     QString label;
-
-    QMenu *menu;
-
-    QPointer<QAction> isOrthogonal = nullptr;
-    QPointer<QAction> isfOrthogonal = nullptr;
-    QPointer<QAction> isDifferent = nullptr;
-    QPointer<QAction> isTangent = nullptr;
-    QPointer<QAction> deletePoint = nullptr;
 };
 
 #endif // POINT_H

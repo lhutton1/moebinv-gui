@@ -9,6 +9,7 @@
 #include <QStandardItem>
 #include <QGraphicsTextItem>
 #include <QMessageBox>
+#include <QToolButton>
 
 #include <figure.h>
 
@@ -41,6 +42,7 @@ public:
     void addCycleToTree(circle *c);
     void resetList(GiNaC::lst *list);
     void initTreeModel();
+    void initMainMenu();
     ~MainWindow();
 
     bool toolAddCycle;

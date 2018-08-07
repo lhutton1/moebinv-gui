@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     msgBox = new QMessageBox();
 
     initTreeModel();
-
+    initMainMenu();
 }
 
 /*!
@@ -92,7 +92,7 @@ void MainWindow::addPoint(QPointF mousePos)
     //p->setGeneration(1);
 
     connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
-    connect(p, &point::addOrthogonalToList, this, &MainWindow::addOrthogonalToList);
+    connect(p, &point::addRelationToList, this, &MainWindow::addOrthogonalToList);
     connect(p, &point::removeOrthogonalFromList, this, &MainWindow::removeOrthogonalFromList);
     connect(this, &MainWindow::resetRelationalList, p, &point::resetRelationalList);
 
@@ -149,6 +149,10 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     scene->addItem(circ);
     lblGen->advanceLabel();
     addCycleToTree(circ);
+
+    connect(circ, &circle::removeFromTree, this, &MainWindow::removeFromTree);
+    connect(circ, &circle::addRelationToList, this, &MainWindow::addOrthogonalToList);
+    connect(circ, &circle::removeOrthagonalFromList, this, &MainWindow::removeOrthogonalFromList);
 
     // reset relation list
     resetList(&orthogonalList);
@@ -238,4 +242,27 @@ void MainWindow::removeFromTree(QString label)
         QStandardItem *parent = item->parent();
         parent->removeRow(item->row());
     }
+}
+
+void MainWindow::initMainMenu() {
+    // this is the base menu we will be using for each of the menu items
+    cycleContextMenu *menu = new cycleContextMenu;
+
+    QToolButton *infinity = new QToolButton();
+    infinity->setMenu(menu);
+    infinity->setText("Infinity");
+    infinity->setPopupMode(QToolButton::InstantPopup);
+    ui->mainToolBar->addWidget(infinity);
+
+    QToolButton *real = new QToolButton();
+    real->setMenu(menu);
+    real->setText("Real Line");
+    real->setPopupMode(QToolButton::InstantPopup);
+    ui->mainToolBar->addWidget(real);
+
+    QToolButton *thisItem = new QToolButton();
+    thisItem->setMenu(menu);
+    thisItem->setText("This");
+    thisItem->setPopupMode(QToolButton::InstantPopup);
+    ui->mainToolBar->addWidget(thisItem);
 }
