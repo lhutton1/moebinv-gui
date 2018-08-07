@@ -14,46 +14,17 @@ using namespace MoebInv;
  * Constructs a point on the scene by implementing a QGraphicsItem.
  */
 point::point(MoebInv::figure *f, GiNaC::ex p, QString l) :
-    brush(Qt::black),
-    pen(Qt::black)
+    graphicCycle(f, p, l)
 {
     radius = 4;
     cycle = p;
     fig = f;
     label = l;
-
     getParameters();
-    createPointMenu();
-    setAcceptHoverEvents(true);
+
+
 }
 
-/*!
- * \brief point::hoverEnterEvent Mouse enters binding rect of point
- *
- * This event is triggered when the mouse enters the bounding rectangle of the point.
- * The colour of the point is changed to red and a tool tip is set giving information about the point.
- */
-void point::hoverEnterEvent(QGraphicsSceneHoverEvent *) {
-    brush = Qt::red;
-    pen.setColor(Qt::red);
-    update();
-
-    //set tool tip on hover showing coordinates
-    QString toolTipString = "X:" + QString::number(x) + " Y:" + QString::number(y);
-    setToolTip(toolTipString);
-}
-
-/*!
- * \brief point::hoverLeaveEvent Mouse leaves binding rect of point
- *
- * This event is triggered when the mouse leaves the bounding rectangle of the point.
- * The colour of the point is set back to black, as it is no longer being hovered.
- */
-void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
-    brush = Qt::black;
-    pen.setColor(Qt::black);
-    update();
-}
 
 /*!
  * \brief point::boundingRect
@@ -119,99 +90,6 @@ void point::getParameters() {
     x = ex_to<numeric>(c.center()[0]).to_double();
     y = ex_to<numeric>(c.center()[1]).to_double();
 }
-
-/*!
- * \brief point::removePoint Remove a point from the scene.
- *
- * Removes a point from the MoebInv figure and then deletes the object removing it from the scene.
- */
-void point::removePoint()
-{
-    // remove cycle from moebInv figure
-    fig->remove_cycle_node(cycle);
-    // emit signal to get cycle removed from the tree
-    emit removeFromTree(label);
-    // delete object, clearing it from the scene
-    delete this;
-}
-
-/*!
- * \brief createPointMenu Create context menu
- *
- * Create a menu that appears when a point is right clicked.
- */
-void point::createPointMenu()
-{
-    menu = new cycleContextMenu;
-
-    connect(menu->isOrthogonal, &QAction::triggered, this, &point::isOrthogonalChecked);
-    connect(menu->isfOrthogonal, &QAction::triggered, this, &point::isfOrthogonalChecked);
-    connect(menu->isDifferent, &QAction::triggered, this, &point::isDifferentChecked);
-    connect(menu->isTangent, &QAction::triggered, this, &point::isTangentChecked);
-    connect(menu->deletePoint, &QAction::triggered, this, &point::removePoint);
-}
-
-/*!
- * \brief point::contextMenuEvent Menu popup for point
- * \param event
- *
- * Detects when a menu is being requested (i.e. right click) on a point.
- * This gives the use the option to delete the point and see whether it is orthogonal, fOrthogonal, different or tangent.
- */
-void point::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    menu->popup(event->screenPos());
-}
-
-void point::isOrthogonalChecked()
-{
-    if (menu->isOrthogonal->isChecked()) {
-        emit addRelationToList(ORTHOGONAL, cycle);
-    } else {
-        emit removeOrthogonalFromList(cycle);
-    }
-}
-
-void point::isfOrthogonalChecked()
-{
-    if (menu->isfOrthogonal->isChecked()) {
-        emit addRelationToList(FORTHOGONAL, cycle);
-    } else {
-        emit removeOrthogonalFromList(cycle);
-    }
-}
-
-void point::isDifferentChecked()
-{
-    if (menu->isDifferent->isChecked()) {
-        emit addRelationToList(DIFFERENT, cycle);
-    } else {
-        emit removeOrthogonalFromList(cycle);
-    }
-}
-
-void point::isTangentChecked()
-{
-    if (menu->isTangent->isChecked()) {
-        emit addRelationToList(TANGENT, cycle);
-    } else {
-        emit removeOrthogonalFromList(cycle);
-    }
-}
-
-void point::resetRelationalList()
-{
-    menu->isOrthogonal->setChecked(false);
-    menu->isfOrthogonal->setChecked(false);
-    menu->isTangent->setChecked(false);
-    menu->isDifferent->setChecked(false);
-}
-
-QString point::getLabel()
-{
-    return label;
-}
-
 
 
 
