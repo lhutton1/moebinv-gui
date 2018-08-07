@@ -1,0 +1,24 @@
+#ifndef GRAPHICCYCLE_H
+#define GRAPHICCYCLE_H
+
+#include <QObject>
+#include <QGraphicsItem>
+
+
+class graphicCycle : public QObject, public QGraphicsItem
+{
+    Q_OBJECT
+    QBrush brush;
+    QPen pen;
+    
+public:
+    graphicCycle();
+    
+public slots:
+    
+signals:
+    
+private:
+};
+
+#endif // GRAPHICCYCLE_H
