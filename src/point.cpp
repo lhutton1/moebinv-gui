@@ -1,4 +1,3 @@
-#include <QDebug>
 #include "point.h"
 
 using namespace GiNaC;
@@ -11,29 +10,28 @@ using namespace MoebInv;
  * \param l label of the point.
  * \param parent
  *
- * Constructs a point on the scene by implementing a QGraphicsItem.
+ * Constructs a point on the scene.
+ *
+ * Inherits 'graphicCycle'.
  */
 point::point(MoebInv::figure *f, GiNaC::ex p, QString l) :
-    graphicCycle(f, p, l)
+    graphicCycle(f, p, l),
+    DRAWING_RADIUS(4)
 {
-    radius = 4;
-    cycle = p;
-    fig = f;
-    label = l;
-    getParameters();
-
 
 }
 
-
 /*!
- * \brief point::boundingRect
- * \return
+ * \brief point::boundingRect Define the bounding rectangle
+ * \return QRectF
+ *
+ * Defines the area on the scene that the object can draw on.
  */
-QRectF point::boundingRect() const{
+QRectF point::boundingRect() const
+{
     return QRectF(
-        x - radius,
-        y - radius,
+        x - DRAWING_RADIUS,
+        y - DRAWING_RADIUS,
         30,
         30
     );
@@ -41,54 +39,49 @@ QRectF point::boundingRect() const{
 
 /*!
  * \brief point::paint Paint the point on the scene.
- * \param p
+ * \param p QPainter object.
  *
  * This function paints the point on the scene given various parameters
  * (such as x, y, radius and label). The point is drawn differently dependent
  * on the drawing metric in use.
  */
-void point::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
+void point::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *)
+{
+    // check for changes to coordinates
     getParameters();
-    p->setBrush(brush);
-    p->setPen(pen);
 
+    // assign brush and pen
+    p->setBrush(*brush);
+    p->setPen(*pen);
+
+    // draw shape
     switch (metric) {
         case drawingMetric::ELLIPTIC: {
             // draw point
             p->drawEllipse(
-                x - radius / 2,
-                y - radius / 2,
-                radius,
-                radius
+                x - DRAWING_RADIUS / 2,
+                y - DRAWING_RADIUS / 2,
+                DRAWING_RADIUS,
+                DRAWING_RADIUS
             );
 
             // add label to side
-            p->drawText(x + radius + 3, y + 12, label);
+            p->drawText(x + DRAWING_RADIUS + 3, y + 12, label);
 
             break;
-        } case drawingMetric::PARABOLIC: {
+        }
+
+        case drawingMetric::PARABOLIC: {
             // Reserved for future use
             break;
 
-        } case drawingMetric::HYPERBOLIC: {
+        }
+
+        case drawingMetric::HYPERBOLIC: {
             // Reserved for future use
             break;
         }
     }
-}
-
-/*!
- * \brief point::getParameters get x and y coordinates
- *
- * Get the x and y coordinates of the point from the cycle in the figure.
- */
-void point::getParameters() {
-    // get cycle that has just been added
-    cycle2D c = ex_to<cycle2D>(fig->get_cycle(cycle)[0]);
-
-    // now break into components
-    x = ex_to<numeric>(c.center()[0]).to_double();
-    y = ex_to<numeric>(c.center()[1]).to_double();
 }
 
 

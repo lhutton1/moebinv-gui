@@ -4,19 +4,20 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "line.h"
 
 using namespace GiNaC;
 using namespace MoebInv;
 
-//void ex_to_string(const ex & E)
-//{
-//    std::ostringstream drawing;
-//    drawing << E;
-//    string dr = drawing.str().c_str();
+void ex_to_string(const ex & E)
+{
+    std::ostringstream drawing;
+    drawing << E;
+    string dr = drawing.str().c_str();
 
-//    QString drw = QString::fromStdString(dr);
-//    qDebug() << drw;
-//}
+    QString drw = QString::fromStdString(dr);
+    qDebug() << drw;
+}
 
 
 /*!
@@ -48,6 +49,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     initTreeModel();
     initMainMenu();
+
+    ex ln = f.get_real_line();
+
+    QString label = "R";
+    line *ln2 = new line(&f, ln, label);
+    scene->addItem(ln2);
 }
 
 /*!
@@ -93,7 +100,7 @@ void MainWindow::addPoint(QPointF mousePos)
 
     connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
     connect(p, &point::addRelationToList, this, &MainWindow::addOrthogonalToList);
-    connect(p, &point::removeOrthogonalFromList, this, &MainWindow::removeOrthogonalFromList);
+    connect(p, &point::removeRelationFromList, this, &MainWindow::removeOrthogonalFromList);
     connect(this, &MainWindow::resetRelationalList, p, &point::resetRelationalList);
 
     scene->addItem(p);
@@ -152,7 +159,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
 
     connect(circ, &circle::removeFromTree, this, &MainWindow::removeFromTree);
     connect(circ, &circle::addRelationToList, this, &MainWindow::addOrthogonalToList);
-    connect(circ, &circle::removeOrthagonalFromList, this, &MainWindow::removeOrthogonalFromList);
+    connect(circ, &circle::removeRelationFromList, this, &MainWindow::removeOrthogonalFromList);
 
     // reset relation list
     resetList(&orthogonalList);
