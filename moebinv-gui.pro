@@ -35,7 +35,8 @@ SOURCES += \
         src/labels.cpp \
         src/point.cpp \
         src/circle.cpp \
-        src/cyclecontextmenu.cpp
+        src/cyclecontextmenu.cpp \
+    graphiccycle.cpp
 
 HEADERS += \
         include/mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
         include/circle.h \
         include/point.h \
         include/drawingmetric.h \
-        include/cyclecontextmenu.h
+        include/cyclecontextmenu.h \
+    graphiccycle.h
 
 FORMS += \
         forms/mainwindow.ui
