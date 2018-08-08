@@ -10,7 +10,13 @@
 graphicsScene::graphicsScene(QObject *parent)
     : QGraphicsScene(parent)
 {
-
+    // set the size of the scene
+    this->setSceneRect(
+        -(SCENE_SIZE / 2),
+        -(SCENE_SIZE / 2),
+        SCENE_SIZE,
+        SCENE_SIZE
+    );
 }
 
 /*!
@@ -27,3 +33,25 @@ void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     }
 }
 
+/*!
+ * \brief graphicsScene::assignMaxZIndex assign max Z Index to item.
+ * \return int Z Index.
+ *
+ * Returns the minimum Z Index an item needs to stay ontop of the scene.
+ */
+int graphicsScene::assignMaxZIndex()
+{
+    return maxZValue++;
+}
+
+/*!
+ * \brief graphicsScene::assignMinZIndex assign min Z Index to item.
+ * \return int Z Index.
+ *
+ * Returns the maximum Z Index an item needs to stay underneath all other
+ * items in the scene.
+ */
+int graphicsScene::assignMinZIndex()
+{
+    return minZValue--;
+}

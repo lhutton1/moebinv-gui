@@ -9,14 +9,15 @@ using namespace GiNaC;
  * \param f MoebInv figure.
  * \param p MoebInv cycle to be drawn on the scene.
  * \param l label of the cycle.
+ * \param z index in which to draw the object.
  * \param parent
  *
  * Constructs a circle on the scene.
  *
  * Inherits 'graphicCycle'.
  */
-circle::circle(MoebInv::figure *f, GiNaC::ex c, QString l) :
-    graphicCycle(f, c, l)
+circle::circle(MoebInv::figure *f, GiNaC::ex c, QString l, int z) :
+    graphicCycle(f, c, l, z)
 {
 
 }
@@ -29,11 +30,36 @@ circle::circle(MoebInv::figure *f, GiNaC::ex c, QString l) :
  */
 QRectF circle::boundingRect() const{
     return QRectF(
-        x - radius,
-        y - radius,
-        radius * 2,
-        radius * 2
+        x - radius - LINE_HOVER_PADDING,
+        y - radius - LINE_HOVER_PADDING,
+        radius * 2 + LINE_HOVER_PADDING * 2,
+        radius * 2 + LINE_HOVER_PADDING * 2
     );
+}
+
+/*!
+ * \brief circle::shape Define the clipping mask of the object
+ * \return QPainterPath
+ *
+ * Defines the area in which hover events take place.
+ */
+QPainterPath circle::shape() const {
+    QPainterPath path;
+    QPainterPath subPath;
+
+    path.addEllipse(
+        QPointF(x - LINE_HOVER_PADDING, y - LINE_HOVER_PADDING),
+        radius + LINE_HOVER_PADDING * 2,
+        radius + LINE_HOVER_PADDING * 2
+    );
+
+    subPath.addEllipse(
+        QPointF(x + LINE_HOVER_PADDING, y + LINE_HOVER_PADDING),
+        radius - LINE_HOVER_PADDING * 2,
+        radius - LINE_HOVER_PADDING * 2
+    );
+
+    return path.subtracted(subPath);
 }
 
 /*!
@@ -52,7 +78,7 @@ void circle::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
     // assign brush and pen
     p->setPen(*pen);
 
-    switch (metric) {
+    switch (METRIC) {
         case drawingMetric::ELLIPTIC: {
             // draw circle
             p->drawEllipse(

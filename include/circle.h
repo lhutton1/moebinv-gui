@@ -15,9 +15,10 @@ class circle : public graphicCycle
 {
 
 public:
-    circle(MoebInv::figure *f, GiNaC::ex c, QString l);
+    circle(MoebInv::figure *f, GiNaC::ex c, QString l, int z);
     void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
+    QPainterPath shape() const;
 
 private:
 

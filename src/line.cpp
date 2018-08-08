@@ -9,14 +9,15 @@ using namespace MoebInv;
  * \param f MoebInv figure.
  * \param p MoebInv line to be drawn on the scene.
  * \param l label of the line.
+ * \param z index in which to draw the object.
  * \param parent
  *
  * Constructs a line on the scene.
  *
  * Inherits 'graphicCycle'.
  */
-line::line(MoebInv::figure *f, GiNaC::ex p, QString l) :
-    graphicCycle(f, p, l)
+line::line(MoebInv::figure *f, GiNaC::ex p, QString l, int z) :
+    graphicCycle(f, p, l, z)
 {
     getParameters();
 }
@@ -29,12 +30,37 @@ line::line(MoebInv::figure *f, GiNaC::ex p, QString l) :
  */
 QRectF line::boundingRect() const
 {
+    int padding;
+
+    LINE_HOVER_PADDING < 15 ?
+        padding = 15 :
+        padding = LINE_HOVER_PADDING;
+
     return QRectF(
-        x,
-        y,
-        30,
-        30
+        x1 - padding,
+        y1 - padding,
+        abs(x1 - x2) + padding * 2,
+        abs(y1 - y2) + padding * 2
     );
+}
+
+/*!
+ * \brief circle::shape Define the clipping mask of the object
+ * \return QPainterPath
+ *
+ * Defines the area in which hover events take place.
+ */
+QPainterPath line::shape() const {
+    QPainterPath path;
+
+    path.addRect(
+        x1 - LINE_HOVER_PADDING,
+        y1 - LINE_HOVER_PADDING,
+        abs(x1 - x2) + LINE_HOVER_PADDING * 2,
+        abs(y1 - y2) + LINE_HOVER_PADDING * 2
+    );
+
+    return path;
 }
 
 /*!
@@ -55,7 +81,7 @@ void line::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *)
     p->setPen(*pen);
 
     // draw shape
-    switch (metric) {
+    switch (METRIC) {
         case drawingMetric::ELLIPTIC: {
             // draw line
             p->drawLine(x1, y1, x2, y2);
@@ -93,29 +119,23 @@ void line::getParameters() {
     y = ex_to<numeric>(c.get_l(1).evalf()).to_double();
     double a = ex_to<numeric>((c.get_m()/2).evalf()).to_double();
 
-    qDebug() << x << y;
-
-    x1 = (y * -520);
+    x1 = (y * -(SCENE_SIZE));
 
     if (x != 0)
         x1 /= x;
 
-    x2 = (y * 520);
+    x2 = (y * SCENE_SIZE);
 
     if (x != 0)
          x2 /= x;
 
-    y1 = (x * -520);
+    y1 = (x * -(SCENE_SIZE));
 
     if (y != 0)
         y1 /= y;
 
-    y2 = (x * 520);
+    y2 = (x * SCENE_SIZE);
 
     if (y != 0)
         y2 /= y;
-
-    qDebug() << x1 << x2 << y1 << y2;
-
-
 }

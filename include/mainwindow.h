@@ -17,7 +17,7 @@
 #include "labels.h"
 #include "point.h"
 #include "circle.h"
-#include "drawingmetric.h"
+#include "conf.h"
 
 namespace Ui {
 class MainWindow;

@@ -1,6 +1,7 @@
 #ifndef POINT_H
 #define POINT_H
 
+#include "conf.h"
 #include "graphiccycle.h"
 
 /*!
@@ -15,12 +16,9 @@ class point : public graphicCycle
 {
 
 public:
-    explicit point(MoebInv::figure *f, GiNaC::ex p, QString l);
+    explicit point(MoebInv::figure *f, GiNaC::ex p, QString l, int z);
     void paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *);
     QRectF boundingRect() const;
-
-private:
-    const double DRAWING_RADIUS;
 };
 
 #endif // POINT_H

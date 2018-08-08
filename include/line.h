@@ -15,9 +15,10 @@ class line : public graphicCycle
 {
 
 public:
-    explicit line(MoebInv::figure *f, GiNaC::ex p, QString l);
-    void paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *);
-    QRectF boundingRect() const;
+    explicit line(MoebInv::figure *f, GiNaC::ex p, QString l, int z);
+    void paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) override;
+    QRectF boundingRect() const override;
+    QPainterPath shape() const override;
     void getParameters() override;
 
 private:

@@ -33,7 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // generate graphics view
     scene = new graphicsScene();
     ui->graphicsView->setScene(scene);
-    scene->setSceneRect(0,0,ui->graphicsView->frameSize().width(),ui->graphicsView->frameSize().height());
 
     // set up new event
     connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
@@ -50,10 +49,10 @@ MainWindow::MainWindow(QWidget *parent) :
     initTreeModel();
     initMainMenu();
 
+    //real line
     ex ln = f.get_real_line();
-
-    QString label = "R";
-    line *ln2 = new line(&f, ln, label);
+    QString label = "Re";
+    line *ln2 = new line(&f, ln, label, scene->assignMinZIndex());
     scene->addItem(ln2);
 }
 
@@ -93,7 +92,7 @@ void MainWindow::addPoint(QPointF mousePos)
     ex cycle = f.add_point(lst{mousePos.x(), mousePos.y()}, qPrintable(label));
 
     // now draw the point
-    point *p = new point(&f, cycle, label);
+    point *p = new point(&f, cycle, label, scene->assignMaxZIndex());
 
     //set generation
     //p->setGeneration(1);
@@ -132,7 +131,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
 
     //
     // Find better check..................
-    //
+    // if radius_sq is negative..
     //
     // check to make sure cycle is not infinite
     try {
@@ -152,7 +151,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     }
 
     // draw the new circle
-    circle *circ = new circle(&f, cycle, label);
+    circle *circ = new circle(&f, cycle, label, scene->assignMinZIndex());
     scene->addItem(circ);
     lblGen->advanceLabel();
     addCycleToTree(circ);
@@ -240,9 +239,9 @@ void MainWindow::addCycleToTree(circle *c)
 void MainWindow::removeFromTree(QString label)
 {
     QList<QStandardItem *> itemList = model->findItems(
-                label,
-                Qt::MatchExactly | Qt::MatchRecursive,
-                0
+        label,
+        Qt::MatchExactly | Qt::MatchRecursive,
+        0
     );
 
     for (const auto &item : itemList) {

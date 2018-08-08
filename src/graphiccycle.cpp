@@ -10,12 +10,16 @@ using namespace MoebInv;
  * \param c The cycle that has just been created and added to the figure.
  * \param l The label used by the cycle as a unique identifier.
  */
-graphicCycle::graphicCycle(figure *f, ex c, QString l)
+graphicCycle::graphicCycle(figure *f, ex c, QString l, int z)
 {
     // assign parameters
     fig = f;
     cycle = c;
     label = l;
+    zIndex = z;
+
+    // set zIndex to draw item
+    this->setZValue(zIndex);
 
     // create the brush and pen and assign a base colour
     brush = new QBrush(Qt::black);

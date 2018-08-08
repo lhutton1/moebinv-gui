@@ -12,7 +12,7 @@
 #include "figure.h"
 
 #include "cyclecontextmenu.h"
-#include "drawingmetric.h"
+#include "conf.h"
 
 /*!
  * \brief The graphicCycle class
@@ -33,7 +33,7 @@ class graphicCycle : public QObject, public QGraphicsItem
     Q_OBJECT
 
 public:
-    graphicCycle(MoebInv::figure *f, GiNaC::ex c, QString l);
+    graphicCycle(MoebInv::figure *f, GiNaC::ex c, QString l, int zIndex);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) = 0;
     virtual QRectF boundingRect() const = 0;
     virtual void getParameters();
@@ -62,6 +62,7 @@ protected:
     double x;
     double y;
     double radius;
+    int zIndex;
 
     QBrush *brush;
     QPen *pen;
