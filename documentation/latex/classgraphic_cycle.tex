@@ -1,0 +1,226 @@
+\hypertarget{classgraphic_cycle}{}\section{graphic\+Cycle Class Reference}
+\label{classgraphic_cycle}\index{graphic\+Cycle@{graphic\+Cycle}}
+
+
+The \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} class.  
+
+
+
+
+{\ttfamily \#include $<$graphiccycle.\+h$>$}
+
+Inheritance diagram for graphic\+Cycle\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classgraphic_cycle}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classgraphic_cycle_aba3c23f4bce3028b9f4582dc2e145e1e}{remove\+Cycle}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphic_cycle_aba3c23f4bce3028b9f4582dc2e145e1e}{graphic\+Cycle\+::remove\+Cycle}} Remove a cycle from the scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgraphic_cycle_afd9910a819e64c8e3efafe91717a0a20}{is\+Checked}} (int rel\+Type)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphic_cycle_afd9910a819e64c8e3efafe91717a0a20}{graphic\+Cycle\+::is\+Checked}} Check if relation needs adding to list. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgraphic_cycle_a6d3281af145eb7d9edcd3eae6b229b9d}\label{classgraphic_cycle_a6d3281af145eb7d9edcd3eae6b229b9d}} 
+void \mbox{\hyperlink{classgraphic_cycle_a6d3281af145eb7d9edcd3eae6b229b9d}{reset\+Relational\+List}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphic_cycle_a6d3281af145eb7d9edcd3eae6b229b9d}{graphic\+Cycle\+::reset\+Relational\+List}} Uncheck all relations from menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_a6d2dcfcc8cebd335554acde542ddc39e}\label{classgraphic_cycle_a6d2dcfcc8cebd335554acde542ddc39e}} 
+void {\bfseries remove\+From\+Tree} (Q\+String label)
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_a6231889023dfe5d4dae8575ed28e8208}\label{classgraphic_cycle_a6231889023dfe5d4dae8575ed28e8208}} 
+void {\bfseries add\+Relation\+To\+List} (int rel\+Type, Gi\+Na\+C\+::ex c)
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_a2a8df8cc7ffa73b622ac076c8fe3daf8}\label{classgraphic_cycle_a2a8df8cc7ffa73b622ac076c8fe3daf8}} 
+void {\bfseries remove\+Relation\+From\+List} (Gi\+Na\+C\+::ex c)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgraphic_cycle_a3997b985511911703829cd0009917585}{graphic\+Cycle}} (Moeb\+Inv\+::figure $\ast$f, Gi\+Na\+C\+::ex c, Q\+String l, int z\+Index)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphic_cycle_a3997b985511911703829cd0009917585}{graphic\+Cycle\+::graphic\+Cycle}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgraphic_cycle_a5ee6c7cc7408b1b6bfb8185b58d2f863}\label{classgraphic_cycle_a5ee6c7cc7408b1b6bfb8185b58d2f863}} 
+virtual void {\bfseries paint} (Q\+Painter $\ast$painter, const Q\+Style\+Option\+Graphics\+Item $\ast$option, Q\+Widget $\ast$widget)=0
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_ac082cbadcf281a5356b40eff26b006f0}\label{classgraphic_cycle_ac082cbadcf281a5356b40eff26b006f0}} 
+virtual Q\+RectF {\bfseries bounding\+Rect} () const =0
+\item 
+virtual void \mbox{\hyperlink{classgraphic_cycle_ac589011ca82a6c2ab648ed4b9fb1632f}{get\+Parameters}} ()
+\begin{DoxyCompactList}\small\item\em graphics\+Cycle\+::get\+Parameters get x and y coordinates. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgraphic_cycle_a8ca1f30ff1886a901041d890ba7a97fc}{hover\+Enter\+Event}} (Q\+Graphics\+Scene\+Hover\+Event $\ast$)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphic_cycle_a8ca1f30ff1886a901041d890ba7a97fc}{graphic\+Cycle\+::hover\+Enter\+Event}} Mouse enters clipping mask of point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgraphic_cycle_aa9aee0ce2a2448da8fd54766c086ec9a}{hover\+Leave\+Event}} (Q\+Graphics\+Scene\+Hover\+Event $\ast$)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphic_cycle_aa9aee0ce2a2448da8fd54766c086ec9a}{graphic\+Cycle\+::hover\+Leave\+Event}} Mouse leaves clipping mask of point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgraphic_cycle_a1a58dbc3675f315985fabe57d5f42940}{context\+Menu\+Event}} (Q\+Graphics\+Scene\+Context\+Menu\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphic_cycle_a1a58dbc3675f315985fabe57d5f42940}{graphic\+Cycle\+::context\+Menu\+Event}} Menu popup for cycle. \end{DoxyCompactList}\item 
+Q\+String \mbox{\hyperlink{classgraphic_cycle_a52f423bc245a9a89a7353d1a6736dfb7}{get\+Label}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphic_cycle_a52f423bc245a9a89a7353d1a6736dfb7}{graphic\+Cycle\+::get\+Label}} Getter function for label. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_a4ac62f5c603c746ade147515c933b721}\label{classgraphic_cycle_a4ac62f5c603c746ade147515c933b721}} 
+Gi\+Na\+C\+::ex {\bfseries cycle}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_af7f11bfbb4c2430929cced5e4155a0a7}\label{classgraphic_cycle_af7f11bfbb4c2430929cced5e4155a0a7}} 
+Moeb\+Inv\+::figure $\ast$ {\bfseries fig}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_af21c2a80c6888dd755886bb0a70f6f93}\label{classgraphic_cycle_af21c2a80c6888dd755886bb0a70f6f93}} 
+\mbox{\hyperlink{classcycle_context_menu}{cycle\+Context\+Menu}} $\ast$ {\bfseries menu}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_a725399b2d4ea76cb3a6db6ceb06aafc4}\label{classgraphic_cycle_a725399b2d4ea76cb3a6db6ceb06aafc4}} 
+Q\+String {\bfseries label}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_a55735deeb2167aeb4e100b7ba9af1f6e}\label{classgraphic_cycle_a55735deeb2167aeb4e100b7ba9af1f6e}} 
+double {\bfseries x}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_af618bc0dbf6b4eaa258ac4e3a94f5372}\label{classgraphic_cycle_af618bc0dbf6b4eaa258ac4e3a94f5372}} 
+double {\bfseries y}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_ac69347cceb9271774768d2fd125a9b17}\label{classgraphic_cycle_ac69347cceb9271774768d2fd125a9b17}} 
+double {\bfseries radius}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_a429ba4157e69eef01c1937132c9e94b1}\label{classgraphic_cycle_a429ba4157e69eef01c1937132c9e94b1}} 
+int {\bfseries z\+Index}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_aab0bc9d962360047ab356439bd19efe4}\label{classgraphic_cycle_aab0bc9d962360047ab356439bd19efe4}} 
+Q\+Brush $\ast$ {\bfseries brush}
+\item 
+\mbox{\Hypertarget{classgraphic_cycle_a70ec5162ff9af5ecf542b7aaaf13a9c2}\label{classgraphic_cycle_a70ec5162ff9af5ecf542b7aaaf13a9c2}} 
+Q\+Pen $\ast$ {\bfseries pen}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} class. 
+
+This class is the base class for all objects drawn on the scene. It contains common fucntions used by a point, circle and line drawing methods.
+
+Inherits both Q\+Object and Q\+Graphics\+Item.
+
+To create a new implementation of \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}}\+:
+\begin{DoxyEnumerate}
+\item Create a new class
+\item Inherit \textquotesingle{}\mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} as the base class\textquotesingle{}
+\item Invoke the base class constructor
+\item Make sure all pure abstract functions have an implementation 
+\end{DoxyEnumerate}
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgraphic_cycle_a3997b985511911703829cd0009917585}\label{classgraphic_cycle_a3997b985511911703829cd0009917585}} 
+\index{graphic\+Cycle@{graphic\+Cycle}!graphic\+Cycle@{graphic\+Cycle}}
+\index{graphic\+Cycle@{graphic\+Cycle}!graphic\+Cycle@{graphic\+Cycle}}
+\subsubsection{\texorpdfstring{graphic\+Cycle()}{graphicCycle()}}
+{\footnotesize\ttfamily graphic\+Cycle\+::graphic\+Cycle (\begin{DoxyParamCaption}\item[{Moeb\+Inv\+::figure $\ast$}]{f,  }\item[{Gi\+Na\+C\+::ex}]{c,  }\item[{Q\+String}]{l,  }\item[{int}]{z\+Index }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classgraphic_cycle_a3997b985511911703829cd0009917585}{graphic\+Cycle\+::graphic\+Cycle}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & Moebinv figure provides access to the cycle data stored in the library. \\
+\hline
+{\em c} & The cycle that has just been created and added to the figure. \\
+\hline
+{\em l} & The label used by the cycle as a unique identifier. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classgraphic_cycle_a1a58dbc3675f315985fabe57d5f42940}\label{classgraphic_cycle_a1a58dbc3675f315985fabe57d5f42940}} 
+\index{graphic\+Cycle@{graphic\+Cycle}!context\+Menu\+Event@{context\+Menu\+Event}}
+\index{context\+Menu\+Event@{context\+Menu\+Event}!graphic\+Cycle@{graphic\+Cycle}}
+\subsubsection{\texorpdfstring{context\+Menu\+Event()}{contextMenuEvent()}}
+{\footnotesize\ttfamily void graphic\+Cycle\+::context\+Menu\+Event (\begin{DoxyParamCaption}\item[{Q\+Graphics\+Scene\+Context\+Menu\+Event $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classgraphic_cycle_a1a58dbc3675f315985fabe57d5f42940}{graphic\+Cycle\+::context\+Menu\+Event}} Menu popup for cycle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & new mouse event.\\
+\hline
+\end{DoxyParams}
+Detects when a menu is being requested (i.\+e. right click) on a cycle. This gives the user the option to delete the point and set relevent relations. \mbox{\Hypertarget{classgraphic_cycle_a52f423bc245a9a89a7353d1a6736dfb7}\label{classgraphic_cycle_a52f423bc245a9a89a7353d1a6736dfb7}} 
+\index{graphic\+Cycle@{graphic\+Cycle}!get\+Label@{get\+Label}}
+\index{get\+Label@{get\+Label}!graphic\+Cycle@{graphic\+Cycle}}
+\subsubsection{\texorpdfstring{get\+Label()}{getLabel()}}
+{\footnotesize\ttfamily Q\+String graphic\+Cycle\+::get\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classgraphic_cycle_a52f423bc245a9a89a7353d1a6736dfb7}{graphic\+Cycle\+::get\+Label}} Getter function for label. 
+
+\begin{DoxyReturn}{Returns}
+Label. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgraphic_cycle_ac589011ca82a6c2ab648ed4b9fb1632f}\label{classgraphic_cycle_ac589011ca82a6c2ab648ed4b9fb1632f}} 
+\index{graphic\+Cycle@{graphic\+Cycle}!get\+Parameters@{get\+Parameters}}
+\index{get\+Parameters@{get\+Parameters}!graphic\+Cycle@{graphic\+Cycle}}
+\subsubsection{\texorpdfstring{get\+Parameters()}{getParameters()}}
+{\footnotesize\ttfamily void graphic\+Cycle\+::get\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+graphics\+Cycle\+::get\+Parameters get x and y coordinates. 
+
+Get the x and y coordinates of the point from the cycle in the figure. 
+
+Reimplemented in \mbox{\hyperlink{classline_a6453a1483e1cf2ae4f565fd7f80516fc}{line}}.
+
+\mbox{\Hypertarget{classgraphic_cycle_a8ca1f30ff1886a901041d890ba7a97fc}\label{classgraphic_cycle_a8ca1f30ff1886a901041d890ba7a97fc}} 
+\index{graphic\+Cycle@{graphic\+Cycle}!hover\+Enter\+Event@{hover\+Enter\+Event}}
+\index{hover\+Enter\+Event@{hover\+Enter\+Event}!graphic\+Cycle@{graphic\+Cycle}}
+\subsubsection{\texorpdfstring{hover\+Enter\+Event()}{hoverEnterEvent()}}
+{\footnotesize\ttfamily void graphic\+Cycle\+::hover\+Enter\+Event (\begin{DoxyParamCaption}\item[{Q\+Graphics\+Scene\+Hover\+Event $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classgraphic_cycle_a8ca1f30ff1886a901041d890ba7a97fc}{graphic\+Cycle\+::hover\+Enter\+Event}} Mouse enters clipping mask of point. 
+
+This event is triggered when the mouse enters the clipping mask of the point. The colour of the point is changed to red and a tool tip is set giving information about the point. \mbox{\Hypertarget{classgraphic_cycle_aa9aee0ce2a2448da8fd54766c086ec9a}\label{classgraphic_cycle_aa9aee0ce2a2448da8fd54766c086ec9a}} 
+\index{graphic\+Cycle@{graphic\+Cycle}!hover\+Leave\+Event@{hover\+Leave\+Event}}
+\index{hover\+Leave\+Event@{hover\+Leave\+Event}!graphic\+Cycle@{graphic\+Cycle}}
+\subsubsection{\texorpdfstring{hover\+Leave\+Event()}{hoverLeaveEvent()}}
+{\footnotesize\ttfamily void graphic\+Cycle\+::hover\+Leave\+Event (\begin{DoxyParamCaption}\item[{Q\+Graphics\+Scene\+Hover\+Event $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classgraphic_cycle_aa9aee0ce2a2448da8fd54766c086ec9a}{graphic\+Cycle\+::hover\+Leave\+Event}} Mouse leaves clipping mask of point. 
+
+This event is triggered when the mouse leaves the clipping mask of the point. The colour of the point is set back to black, as it is no longer being hovered. \mbox{\Hypertarget{classgraphic_cycle_afd9910a819e64c8e3efafe91717a0a20}\label{classgraphic_cycle_afd9910a819e64c8e3efafe91717a0a20}} 
+\index{graphic\+Cycle@{graphic\+Cycle}!is\+Checked@{is\+Checked}}
+\index{is\+Checked@{is\+Checked}!graphic\+Cycle@{graphic\+Cycle}}
+\subsubsection{\texorpdfstring{is\+Checked}{isChecked}}
+{\footnotesize\ttfamily void graphic\+Cycle\+::is\+Checked (\begin{DoxyParamCaption}\item[{int}]{rel\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\mbox{\hyperlink{classgraphic_cycle_afd9910a819e64c8e3efafe91717a0a20}{graphic\+Cycle\+::is\+Checked}} Check if relation needs adding to list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rel\+Type} & The relation type e.\+g. orthogonal, forthogonal, different or tangent.\\
+\hline
+\end{DoxyParams}
+Checks whether the specific relation is checked. If it is it adds it to the list. If not it removes it from the list. \mbox{\Hypertarget{classgraphic_cycle_aba3c23f4bce3028b9f4582dc2e145e1e}\label{classgraphic_cycle_aba3c23f4bce3028b9f4582dc2e145e1e}} 
+\index{graphic\+Cycle@{graphic\+Cycle}!remove\+Cycle@{remove\+Cycle}}
+\index{remove\+Cycle@{remove\+Cycle}!graphic\+Cycle@{graphic\+Cycle}}
+\subsubsection{\texorpdfstring{remove\+Cycle}{removeCycle}}
+{\footnotesize\ttfamily void graphic\+Cycle\+::remove\+Cycle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\mbox{\hyperlink{classgraphic_cycle_aba3c23f4bce3028b9f4582dc2e145e1e}{graphic\+Cycle\+::remove\+Cycle}} Remove a cycle from the scene. 
+
+Removes a cycle from the Moeb\+Inv figure and then deletes the object removing it from the scene. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/include/graphiccycle.\+h\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/src/graphiccycle.\+cpp\end{DoxyCompactItemize}

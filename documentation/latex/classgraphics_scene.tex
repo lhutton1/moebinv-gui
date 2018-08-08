@@ -1,0 +1,110 @@
+\hypertarget{classgraphics_scene}{}\section{graphics\+Scene Class Reference}
+\label{classgraphics_scene}\index{graphics\+Scene@{graphics\+Scene}}
+
+
+The \mbox{\hyperlink{classgraphics_scene}{graphics\+Scene}} class.  
+
+
+
+
+{\ttfamily \#include $<$scene.\+h$>$}
+
+Inheritance diagram for graphics\+Scene\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classgraphics_scene}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgraphics_scene_a24e9f3635a8d655eb907d31599b13378}\label{classgraphics_scene_a24e9f3635a8d655eb907d31599b13378}} 
+void {\bfseries new\+Mouse\+Press} (Q\+PointF \mbox{\hyperlink{classpoint}{point}})
+\item 
+\mbox{\Hypertarget{classgraphics_scene_ad79f731b826d93f3c84d55f8d411666c}\label{classgraphics_scene_ad79f731b826d93f3c84d55f8d411666c}} 
+void {\bfseries new\+Mouse\+Hover} (Q\+PointF \mbox{\hyperlink{classpoint}{point}})
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgraphics_scene_a630f565d827637e6f46f5ae2e786cd06}{graphics\+Scene}} (Q\+Object $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em Scene Constructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classgraphics_scene_a45ca641319ec6accb1574f52539e7517}{mouse\+Press\+Event}} (Q\+Graphics\+Scene\+Mouse\+Event $\ast$mouse\+Event)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphics_scene_a45ca641319ec6accb1574f52539e7517}{graphics\+Scene\+::mouse\+Press\+Event}} Mouse pressed on scene \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classgraphics_scene_a91aee253bbbf22a698685ad509945960}{assign\+Max\+Z\+Index}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphics_scene_a91aee253bbbf22a698685ad509945960}{graphics\+Scene\+::assign\+Max\+Z\+Index}} assign max Z Index to item. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classgraphics_scene_aeb9feecebc1be01a976b14d6b20382d6}{assign\+Min\+Z\+Index}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgraphics_scene_aeb9feecebc1be01a976b14d6b20382d6}{graphics\+Scene\+::assign\+Min\+Z\+Index}} assign min Z Index to item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classgraphics_scene}{graphics\+Scene}} class. 
+
+Scene displayed in the main part of the G\+UI. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgraphics_scene_a630f565d827637e6f46f5ae2e786cd06}\label{classgraphics_scene_a630f565d827637e6f46f5ae2e786cd06}} 
+\index{graphics\+Scene@{graphics\+Scene}!graphics\+Scene@{graphics\+Scene}}
+\index{graphics\+Scene@{graphics\+Scene}!graphics\+Scene@{graphics\+Scene}}
+\subsubsection{\texorpdfstring{graphics\+Scene()}{graphicsScene()}}
+{\footnotesize\ttfamily graphics\+Scene\+::graphics\+Scene (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Scene Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent widget to the current widget.\\
+\hline
+\end{DoxyParams}
+continued description.... 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classgraphics_scene_a91aee253bbbf22a698685ad509945960}\label{classgraphics_scene_a91aee253bbbf22a698685ad509945960}} 
+\index{graphics\+Scene@{graphics\+Scene}!assign\+Max\+Z\+Index@{assign\+Max\+Z\+Index}}
+\index{assign\+Max\+Z\+Index@{assign\+Max\+Z\+Index}!graphics\+Scene@{graphics\+Scene}}
+\subsubsection{\texorpdfstring{assign\+Max\+Z\+Index()}{assignMaxZIndex()}}
+{\footnotesize\ttfamily int graphics\+Scene\+::assign\+Max\+Z\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classgraphics_scene_a91aee253bbbf22a698685ad509945960}{graphics\+Scene\+::assign\+Max\+Z\+Index}} assign max Z Index to item. 
+
+\begin{DoxyReturn}{Returns}
+int Z Index.
+\end{DoxyReturn}
+Returns the minimum Z Index an item needs to stay ontop of the scene. \mbox{\Hypertarget{classgraphics_scene_aeb9feecebc1be01a976b14d6b20382d6}\label{classgraphics_scene_aeb9feecebc1be01a976b14d6b20382d6}} 
+\index{graphics\+Scene@{graphics\+Scene}!assign\+Min\+Z\+Index@{assign\+Min\+Z\+Index}}
+\index{assign\+Min\+Z\+Index@{assign\+Min\+Z\+Index}!graphics\+Scene@{graphics\+Scene}}
+\subsubsection{\texorpdfstring{assign\+Min\+Z\+Index()}{assignMinZIndex()}}
+{\footnotesize\ttfamily int graphics\+Scene\+::assign\+Min\+Z\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classgraphics_scene_aeb9feecebc1be01a976b14d6b20382d6}{graphics\+Scene\+::assign\+Min\+Z\+Index}} assign min Z Index to item. 
+
+\begin{DoxyReturn}{Returns}
+int Z Index.
+\end{DoxyReturn}
+Returns the maximum Z Index an item needs to stay underneath all other items in the scene. \mbox{\Hypertarget{classgraphics_scene_a45ca641319ec6accb1574f52539e7517}\label{classgraphics_scene_a45ca641319ec6accb1574f52539e7517}} 
+\index{graphics\+Scene@{graphics\+Scene}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!graphics\+Scene@{graphics\+Scene}}
+\subsubsection{\texorpdfstring{mouse\+Press\+Event()}{mousePressEvent()}}
+{\footnotesize\ttfamily void graphics\+Scene\+::mouse\+Press\+Event (\begin{DoxyParamCaption}\item[{Q\+Graphics\+Scene\+Mouse\+Event $\ast$}]{mouse\+Event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classgraphics_scene_a45ca641319ec6accb1574f52539e7517}{graphics\+Scene\+::mouse\+Press\+Event}} Mouse pressed on scene 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Event} & Provides information about the mouse event such as the position the click occured on the scene.\\
+\hline
+\end{DoxyParams}
+Called when the left mouse button is clicked on the scene in the graphics view. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/include/scene.\+h\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/src/scene.\+cpp\end{DoxyCompactItemize}

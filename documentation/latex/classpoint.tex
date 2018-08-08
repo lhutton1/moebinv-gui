@@ -1,0 +1,105 @@
+\hypertarget{classpoint}{}\section{point Class Reference}
+\label{classpoint}\index{point@{point}}
+
+
+The point class.  
+
+
+
+
+{\ttfamily \#include $<$point.\+h$>$}
+
+Inheritance diagram for point\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classpoint}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpoint_aabf8c59fffa6fb48ac1d9bcec101c3aa}{point}} (Moeb\+Inv\+::figure $\ast$f, Gi\+Na\+C\+::ex p, Q\+String l, int z)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpoint_aabf8c59fffa6fb48ac1d9bcec101c3aa}{point\+::point}} Point constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpoint_a5e75bab386500018e5d068c920ed0e66}{paint}} (Q\+Painter $\ast$p, const Q\+Style\+Option\+Graphics\+Item $\ast$, Q\+Widget $\ast$)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpoint_a5e75bab386500018e5d068c920ed0e66}{point\+::paint}} Paint the point on the scene. \end{DoxyCompactList}\item 
+Q\+RectF \mbox{\hyperlink{classpoint_a91a81fc826052833e19e9d39ef3849d9}{bounding\+Rect}} () const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpoint_a91a81fc826052833e19e9d39ef3849d9}{point\+::bounding\+Rect}} Define the bounding rectangle \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The point class. 
+
+When created and added to the scene a point is displayed, given the x coordinate and y coordinates.
+
+Inherits \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classpoint_aabf8c59fffa6fb48ac1d9bcec101c3aa}\label{classpoint_aabf8c59fffa6fb48ac1d9bcec101c3aa}} 
+\index{point@{point}!point@{point}}
+\index{point@{point}!point@{point}}
+\subsubsection{\texorpdfstring{point()}{point()}}
+{\footnotesize\ttfamily point\+::point (\begin{DoxyParamCaption}\item[{Moeb\+Inv\+::figure $\ast$}]{f,  }\item[{Gi\+Na\+C\+::ex}]{p,  }\item[{Q\+String}]{l,  }\item[{int}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{classpoint_aabf8c59fffa6fb48ac1d9bcec101c3aa}{point\+::point}} Point constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & Moeb\+Inv figure. \\
+\hline
+{\em p} & Moeb\+Inv point to be drawn on the scene. \\
+\hline
+{\em l} & label of the point. \\
+\hline
+{\em z} & index in which to draw the object. \\
+\hline
+{\em parent} & Constructs a point on the scene.\\
+\hline
+\end{DoxyParams}
+Inherits \textquotesingle{}\mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}}\textquotesingle{}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classpoint_a91a81fc826052833e19e9d39ef3849d9}\label{classpoint_a91a81fc826052833e19e9d39ef3849d9}} 
+\index{point@{point}!bounding\+Rect@{bounding\+Rect}}
+\index{bounding\+Rect@{bounding\+Rect}!point@{point}}
+\subsubsection{\texorpdfstring{bounding\+Rect()}{boundingRect()}}
+{\footnotesize\ttfamily Q\+RectF point\+::bounding\+Rect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classpoint_a91a81fc826052833e19e9d39ef3849d9}{point\+::bounding\+Rect}} Define the bounding rectangle 
+
+\begin{DoxyReturn}{Returns}
+Q\+RectF
+\end{DoxyReturn}
+Defines the area on the scene that the object can draw on. 
+
+Implements \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}}.
+
+\mbox{\Hypertarget{classpoint_a5e75bab386500018e5d068c920ed0e66}\label{classpoint_a5e75bab386500018e5d068c920ed0e66}} 
+\index{point@{point}!paint@{paint}}
+\index{paint@{paint}!point@{point}}
+\subsubsection{\texorpdfstring{paint()}{paint()}}
+{\footnotesize\ttfamily void point\+::paint (\begin{DoxyParamCaption}\item[{Q\+Painter $\ast$}]{p,  }\item[{const Q\+Style\+Option\+Graphics\+Item $\ast$}]{,  }\item[{Q\+Widget $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classpoint_a5e75bab386500018e5d068c920ed0e66}{point\+::paint}} Paint the point on the scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Q\+Painter object.\\
+\hline
+\end{DoxyParams}
+This function paints the point on the scene given various parameters (such as x, y, radius and label). The point is drawn differently dependent on the drawing metric in use. 
+
+Implements \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/include/point.\+h\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/src/point.\+cpp\end{DoxyCompactItemize}
