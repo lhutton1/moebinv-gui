@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // generate graphics view
     scene = new graphicsScene();
     ui->graphicsView->setScene(scene);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
     // set up new event
     connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
@@ -81,8 +82,8 @@ void MainWindow::onMouseScenePress(QPointF location)
 void MainWindow::onMouseSceneHover(QPointF point)
 {
     QString coordinates = QString("%1, %2")
-                        .arg(point.x())
-                        .arg(point.y());
+      .arg(point.x())
+      .arg(point.y());
 
     ui->statusBar->showMessage(coordinates);
 }

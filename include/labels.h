@@ -2,6 +2,7 @@
 #define LABELS_H
 
 #include <QString>
+#include "figure.h"
 
 
 /*!
@@ -19,6 +20,7 @@ public:
     void advanceLabel();
 
 private:
+    MoebInv::figure *fig;
     int currentLetter;
 };
 

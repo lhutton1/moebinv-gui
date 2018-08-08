@@ -33,6 +33,12 @@ void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     }
 }
 
+/*!
+ * \brief graphicsScene::mouseMoveEvent Mouse moved on scene.
+ * \param mouseEvent Provides information about the mouse event such as the position the click occured on the scene.
+ *
+ * Called when the mouse moves over the scene. Signal is emitted to update coordinates on the status bar.
+ */
 void graphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     // Whilst we need to reimplement the mouse move event,
