@@ -19,6 +19,7 @@ class graphicsScene : public QGraphicsScene
 public:
     explicit graphicsScene(QObject *parent = 0);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     int assignMaxZIndex();
     int assignMinZIndex();
 

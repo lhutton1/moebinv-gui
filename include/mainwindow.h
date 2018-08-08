@@ -49,6 +49,7 @@ public:
 
 private slots:
     void onMouseScenePress(QPointF point);
+    void onMouseSceneHover(QPointF point);
     void removeFromTree(QString label);
     void addOrthogonalToList(int relType, GiNaC::ex cycle);
     void removeOrthogonalFromList(GiNaC::ex cycle);

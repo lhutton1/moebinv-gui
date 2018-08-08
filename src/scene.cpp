@@ -33,6 +33,17 @@ void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     }
 }
 
+void graphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    // Whilst we need to reimplement the mouse move event,
+    // we still need everything that the base function does
+    QGraphicsScene::mouseMoveEvent(mouseEvent);
+
+    // Now send signal to update status bar
+    QPointF point = mouseEvent->scenePos();
+    emit newMouseHover(point);
+}
+
 /*!
  * \brief graphicsScene::assignMaxZIndex assign max Z Index to item.
  * \return int Z Index.

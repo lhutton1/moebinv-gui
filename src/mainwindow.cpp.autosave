@@ -81,8 +81,8 @@ void MainWindow::onMouseScenePress(QPointF location)
 void MainWindow::onMouseSceneHover(QPointF point)
 {
     QString coordinates = QString("%1, %2")
-                        .arg(point.x())
-                        .arg(point.y());
+      .arg(point.x())
+      .arg(point.y());
 
     ui->statusBar->showMessage(coordinates);
 }
