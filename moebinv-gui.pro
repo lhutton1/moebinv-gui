@@ -49,7 +49,7 @@ HEADERS += \
         include/cyclecontextmenu.h \
         include/graphiccycle.h \
         include/line.h \
-    include/conf.h
+        include/conf.h
 
 FORMS += \
         forms/mainwindow.ui

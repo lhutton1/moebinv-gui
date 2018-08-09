@@ -32,6 +32,7 @@ QRectF line::boundingRect() const
 {
     int padding;
 
+    // if padding is less than 15 the label won't be visible
     LINE_HOVER_PADDING < 15 ?
         padding = 15 :
         padding = LINE_HOVER_PADDING;
@@ -119,22 +120,23 @@ void line::getParameters() {
     y = ex_to<numeric>(c.get_l(1).evalf()).to_double();
     double a = ex_to<numeric>((c.get_m()/2).evalf()).to_double();
 
-    x1 = (y * -(SCENE_SIZE));
+    // break line equation into 2 distinct points, given by x1, x2, y1, and y2.
+    x1 = (y * -(SCENE_SIZE)) + a;
 
     if (x != 0)
         x1 /= x;
 
-    x2 = (y * SCENE_SIZE);
+    x2 = (y * SCENE_SIZE) + a;
 
     if (x != 0)
          x2 /= x;
 
-    y1 = (x * -(SCENE_SIZE));
+    y1 = (x * -(SCENE_SIZE)) + a;
 
     if (y != 0)
         y1 /= y;
 
-    y2 = (x * SCENE_SIZE);
+    y2 = (x * SCENE_SIZE) + a;
 
     if (y != 0)
         y2 /= y;

@@ -1,5 +1,10 @@
 #include "cyclecontextmenu.h"
 
+/*!
+ * \brief cycleContextMenu::cycleContextMenu Context menu constructor
+ *
+ * Create a new context menu.
+ */
 cycleContextMenu::cycleContextMenu()
 {
     isOrthogonal = new QAction("Orthogonal", this);

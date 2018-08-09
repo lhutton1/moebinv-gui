@@ -32,7 +32,12 @@ QString labels::genNextLabel()
             letterNumber = (letterNumber - (current + 1)) / 26;
         }
 
-        //if (fig->get_cycle_label())
+        //MoebInv::ex list = fig->get_all_keys();
+
+//        if (fig->get_all_keys().nops())
+//            qDebug() << "yes";
+//        else
+//            qDebug() << "no";
 
     //}
 

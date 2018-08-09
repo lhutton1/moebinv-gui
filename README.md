@@ -20,6 +20,52 @@ Prerequisites:
 - GiNaC
 - moebinv
 
+Installation on Mac:
+
+1. Install Homebrew.
+
+Paste this into a terminal:
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+
+You may need to agree to the installation of Xcode.
+
+2. Make sure that your mac has a GCC version greater than 4.4.
+
+You can do this by typing `gcc --version`
+
+If not excecute:
+`brew install https://raw.github.com/Homebrew/homebrew-dupes/master/gcc.rb
+rm -v /usr/bin/{cc,gcc,c++,g++}
+ln -sv /usr/local/bin/gcc-4.x /usr/bin/cc
+ln -sv /usr/local/bin/gcc-4.x /usr/bin/gcc
+ln -sv /usr/local/bin/c++-4.x /usr/bin/c++
+ln -sv /usr/local/bin/g++-4.x /usr/bin/g++`
+
+3. Install GiNaC and Cmake using homebrew:
+`brew install ginac
+brew install cmake`
+
+4. Install MoebInv
+
+  - Download the latest version of MoebInv here: https://sourceforge.net/p/moebinv/
+  - Navigate to the src file in a terminal
+  - Type `make`
+
+  - Make sure MoebInv-gui can find the library files by either:
+    - Placing `figure.h` and `cycle.h` in `/usr/local/include` and placing `libfigure.so` and `libcycle.so` in `/usr/local/lib`
+    - Or by placing the files in the lib folder in the downloaded moebinv-gui (not yet working).
+
+5. Install Qt using home brew:
+`brew install qt`
+
+6. Install MoebInv-gui
+  - clone the moebInv-gui repository from: https://github.com/lhutton1/moebinv-gui by executing:
+    `git clone https://github.com/lhutton1/moebinv-gui`
+  - open a terminal in this directory or directly after executing the clone command execute `cd moebinv-gui`
+  - build the make file by executing `qmake`
+  - compile the application by executing `make`
+  - run the application by execting `./moebinv-gui`
+
 ## Documentation
 
 Documentation is available here: ??
