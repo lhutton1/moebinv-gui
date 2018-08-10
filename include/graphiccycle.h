@@ -50,7 +50,7 @@ public slots:
     void removeFromList();
 
 signals:
-    void removeFromTree(QString label);
+    void removeFromTree(graphicCycle *c);
     void addRelationToList(int relType, GiNaC::ex c);
     void removeRelationFromList(GiNaC::ex c);
 

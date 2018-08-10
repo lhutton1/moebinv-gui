@@ -56,4 +56,9 @@ const int SCENE_SIZE = 300000;
  */
 const int LINE_HOVER_PADDING = 8;
 
+/*!
+ * \brief ZOOM_FACTOR Zoom factor for zooming in and out of the scene
+ */
+const int ZOOM_FACTOR = 1.0015;
+
 #endif // DRAWINGMETRIC_H

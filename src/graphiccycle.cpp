@@ -78,11 +78,11 @@ void graphicCycle::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
  */
 void graphicCycle::removeCycle()
 {
+    // emit signal to get cycle removed from the tree
+    emit removeFromTree(this);
+
     // remove cycle from moebInv figure
     fig->remove_cycle_node(cycle);
-
-    // emit signal to get cycle removed from the tree
-    emit removeFromTree(label);
 
     // delete object, clearing it from the scene
     delete this;
@@ -144,11 +144,24 @@ void graphicCycle::getParameters() {
     radius = qSqrt(ex_to<numeric>(c.radius_sq()).to_double());
 }
 
+/*!
+ * \brief graphicCycle::addToList
+ * \param relType
+ *
+ * Slot to add a certain cycle to the list. Emmits a signal to call slot
+ * in MainWindow to add the cycle to the list.
+ */
 void graphicCycle::addToList(int relType)
 {
     emit addRelationToList(relType, cycle);
 }
 
+/*!
+ * \brief graphicCycle::removeFromList
+ *
+ * Slot to remove cycle from list. Emmits a signal to call slot in
+ * MainWindow to remove the cycle from the list.
+ */
 void graphicCycle::removeFromList()
 {
     emit removeRelationFromList(cycle);

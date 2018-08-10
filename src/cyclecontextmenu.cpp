@@ -60,6 +60,14 @@ cycleContextMenu::cycleContextMenu(bool deleteAction)
 
 }
 
+/*!
+ * \brief cycleContextMenu::isChecked
+ * \param relType the type of relation that has been checked
+ *
+ * This functions checks whether the menu item of the 'relType' relation
+ * has been checked or unchecked. If it has been checked the cycle is added to the list,
+ * if it has been unchecked the cycle is removed from the list.
+ */
 void cycleContextMenu::isChecked(int relType) {
     // store a pointer to the relevent menu item
     QPointer<QAction> currentRelation;

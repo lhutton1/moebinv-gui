@@ -9,16 +9,14 @@
 using namespace GiNaC;
 using namespace MoebInv;
 
-void ex_to_string(const ex & E)
+QString ex_to_string(const ex & E)
 {
     std::ostringstream drawing;
     drawing << E;
     string dr = drawing.str().c_str();
 
-    QString drw = QString::fromStdString(dr);
-    qDebug() << drw;
+    return QString::fromStdString(dr);
 }
-
 
 /*!
  * \brief MainWindow::MainWindow
@@ -33,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // generate graphics view
     scene = new graphicsScene();
     ui->graphicsView->setScene(scene);
-    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+
 
     // set up new event
     connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
@@ -119,7 +117,7 @@ void MainWindow::addPoint(QPointF mousePos)
     lblGen->advanceLabel();
 
     // now add to tree
-    addPointToTree(p);
+    addToTree(p);
 }
 
 /*!
@@ -162,7 +160,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     circle *circ = new circle(&f, cycle, label, scene->assignMinZIndex());
     scene->addItem(circ);
     lblGen->advanceLabel();
-    addCycleToTree(circ);
+    addToTree(circ);
 
     connect(circ, &circle::removeFromTree, this, &MainWindow::removeFromTree);
     connect(circ, &circle::addRelationToList, this, &MainWindow::addOrthogonalToList);
@@ -232,29 +230,22 @@ void MainWindow::initTreeModel()
         ui->treeView->expandAll();
 }
 
-void MainWindow::addPointToTree(point *p)
+void MainWindow::addToTree(graphicCycle *p)
 {
-    QString treeLabel;
+    // Add label and output to tree
+    QString treeLabel = p->getLabel() + " - " + ex_to_string(f.get_cycle_node(p->getCycle()));
 
-//    // Add label and output to tree
-//    treeLabel << p->getLabel()
-//              << "-"
-//              << f.
-
-    QStandardItem *newItem = new QStandardItem(p->getLabel());
+    QStandardItem *newItem = new QStandardItem(treeLabel);
+    newItem->setToolTip(treeLabel);
     model->item(0)->appendRow(newItem);
 }
 
-void MainWindow::addCycleToTree(circle *c)
+void MainWindow::removeFromTree(graphicCycle *c)
 {
-    QStandardItem *newItem = new QStandardItem(c->getLabel());
-    model->item(0)->appendRow(newItem);
-}
+    QString treeLabel = c->getLabel() + " - " + ex_to_string(f.get_cycle_node(c->getCycle()));
 
-void MainWindow::removeFromTree(QString label)
-{
     QList<QStandardItem *> itemList = model->findItems(
-        label,
+        treeLabel,
         Qt::MatchExactly | Qt::MatchRecursive,
         0
     );

@@ -37,9 +37,8 @@ public:
     void initFigure();
     void addPoint(QPointF location);
     void setDrawingMetric();
-    void addPointToTree(point *p);
+    void addToTree(graphicCycle *p);
     void addLineToTree(QString itemName);
-    void addCycleToTree(circle *c);
     void resetList(GiNaC::lst *list);
     void initTreeModel();
     void initMainMenu();
@@ -50,7 +49,7 @@ public:
 private slots:
     void onMouseScenePress(QPointF point);
     void onMouseSceneHover(QPointF point);
-    void removeFromTree(QString label);
+    void removeFromTree(graphicCycle *c);
     void addOrthogonalToList(int relType, GiNaC::ex cycle);
     void removeOrthogonalFromList(GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
