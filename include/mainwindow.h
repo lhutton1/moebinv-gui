@@ -57,7 +57,6 @@ private slots:
     void addRealToList(int relType);
     void removeInfinityFromList();
     void removeRealFromList();
-    //void isChecked(int relType);
 
 signals:
     void resetRelationalList();
