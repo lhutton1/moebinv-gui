@@ -6,7 +6,6 @@
 #include <QPainter>
 #include <QObject>
 #include <QGraphicsItem>
-#include <QSignalMapper>
 #include <QGraphicsSceneContextMenuEvent>
 
 #include "figure.h"
@@ -41,11 +40,14 @@ public:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     QString getLabel();
+    GiNaC::ex getCycle();
 
 public slots:
     void removeCycle();
-    void isChecked(int relType);
+    //void isChecked(int relType);
     void resetRelationalList();
+    void addToList(int relType);
+    void removeFromList();
 
 signals:
     void removeFromTree(QString label);

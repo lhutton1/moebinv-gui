@@ -33,9 +33,9 @@ SOURCES += \
         src/scene.cpp \
         src/zoom.cpp \
         src/labels.cpp \
+        src/cyclecontextmenu.cpp \
         src/point.cpp \
         src/circle.cpp \
-        src/cyclecontextmenu.cpp \
         src/graphiccycle.cpp \
         src/line.cpp
 

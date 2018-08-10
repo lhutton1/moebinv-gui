@@ -54,6 +54,11 @@ private slots:
     void addOrthogonalToList(int relType, GiNaC::ex cycle);
     void removeOrthogonalFromList(GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
+    void addInfinityToList(int relType);
+    void addRealToList(int relType);
+    void removeInfinityFromList();
+    void removeRealFromList();
+    //void isChecked(int relType);
 
 signals:
     void resetRelationalList();
@@ -70,6 +75,9 @@ private:
     QMessageBox *msgBox;
 
     QStandardItemModel *model;
+
+    static const int MENU_SIZE = 3;
+    cycleContextMenu *menus[MENU_SIZE];
 };
 
 #endif // MAINWINDOW_H

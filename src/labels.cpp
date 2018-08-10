@@ -19,27 +19,16 @@ QString labels::genNextLabel()
 {
     QString lblString;
     int letterNumber;
-    bool unusedLabelFound = false;
 
-    //while(!unusedLabelFound) {
-        letterNumber = currentLetter;
-        lblString = "";
+    letterNumber = currentLetter;
+    lblString = "";
 
-        while (letterNumber > 0) {
-            int current = (letterNumber - 1) % 26;
-            char letter = static_cast<char>(current + 65);
-            lblString = letter + lblString;
-            letterNumber = (letterNumber - (current + 1)) / 26;
-        }
-
-        //MoebInv::ex list = fig->get_all_keys();
-
-//        if (fig->get_all_keys().nops())
-//            qDebug() << "yes";
-//        else
-//            qDebug() << "no";
-
-    //}
+    while (letterNumber > 0) {
+        int current = (letterNumber - 1) % 26;
+        char letter = static_cast<char>(current + 65);
+        lblString = letter + lblString;
+        letterNumber = (letterNumber - (current + 1)) / 26;
+    }
 
     return lblString;
 }

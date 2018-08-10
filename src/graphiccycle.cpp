@@ -28,22 +28,9 @@ graphicCycle::graphicCycle(figure *f, ex c, QString l, int z)
     // create a new menu to be used when the user right clicks on the object
     menu = new cycleContextMenu;
 
-    // to pass arguments to a slot we need to set up a signal mapper
-    QSignalMapper *signalMapper = new QSignalMapper;
-    connect(menu->isOrthogonal, SIGNAL(triggered()), signalMapper, SLOT(map()));
-    connect(menu->isfOrthogonal, SIGNAL(triggered()), signalMapper, SLOT(map()));
-    connect(menu->isDifferent, SIGNAL(triggered()), signalMapper, SLOT(map()));
-    connect(menu->isTangent, SIGNAL(triggered()), signalMapper, SLOT(map()));
-
-    signalMapper->setMapping(menu->isOrthogonal, ORTHOGONAL);
-    signalMapper->setMapping(menu->isfOrthogonal, FORTHOGONAL);
-    signalMapper->setMapping(menu->isDifferent, DIFFERENT);
-    signalMapper->setMapping(menu->isTangent, TANGENT);
-
-    // now connect the signal mapper to the function
-    connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(isChecked(int)));
-
-    // add deletepoint connection
+    // connect signals
+    connect(menu, &cycleContextMenu::addRelationToList, this, &graphicCycle::addToList);
+    connect(menu, &cycleContextMenu::removeRelationFromList, this, &graphicCycle::removeFromList);
     connect(menu->deletePoint, &QAction::triggered, this, &graphicCycle::removeCycle);
 
     // allow hover events to take place, used to highlight
@@ -114,44 +101,6 @@ void graphicCycle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 /*!
- * \brief graphicCycle::isChecked Check if relation needs adding to list.
- * \param relType The relation type e.g. orthogonal, forthogonal, different or tangent.
- *
- * Checks whether the specific relation is checked. If it is it adds it to the list.
- * If not it removes it from the list.
- */
-void graphicCycle::isChecked(int relType)
-{
-    // store a pointer to the relevent menu item
-    QPointer<QAction> currentRelation;
-
-    switch (relType) {
-        case ORTHOGONAL:
-            currentRelation = menu->isOrthogonal;
-            break;
-
-        case FORTHOGONAL:
-            currentRelation = menu->isfOrthogonal;
-            break;
-
-        case DIFFERENT:
-            currentRelation = menu->isDifferent;
-            break;
-
-        case TANGENT:
-            currentRelation = menu->isTangent;
-            break;
-    }
-
-    // now check whether it needs adding or removing from the list
-    if(currentRelation->isChecked())
-        emit addRelationToList(relType, cycle);
-    else
-        emit removeRelationFromList(cycle);
-
-}
-
-/*!
  * \brief graphicCycle::resetRelationalList Uncheck all relations from menu.
  */
 void graphicCycle::resetRelationalList()
@@ -164,11 +113,20 @@ void graphicCycle::resetRelationalList()
 
 /*!
  * \brief graphicCycle::getLabel Getter function for label.
- * \return Label.
+ * \return QString.
  */
 QString graphicCycle::getLabel()
 {
     return label;
+}
+
+/*!
+ * \brief graphicCycle::getCycle Getter function for cycle.
+ * \return ex.
+ */
+ex graphicCycle::getCycle()
+{
+    return cycle;
 }
 
 /*!
@@ -181,8 +139,18 @@ void graphicCycle::getParameters() {
     cycle2D c = ex_to<cycle2D>(fig->get_cycle(cycle)[0]);
 
     // now break into components
-    x = ex_to<numeric>(c.center()[0]).to_double();
-    y = ex_to<numeric>(c.center()[1]).to_double();
+    x = ex_to<numeric>(c.center().op(0)).to_double();
+    y = ex_to<numeric>(c.center().op(1)).to_double();
     radius = qSqrt(ex_to<numeric>(c.radius_sq()).to_double());
+}
+
+void graphicCycle::addToList(int relType)
+{
+    emit addRelationToList(relType, cycle);
+}
+
+void graphicCycle::removeFromList()
+{
+    emit removeRelationFromList(cycle);
 }
 

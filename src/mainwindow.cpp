@@ -56,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QString label = "Re";
     line *ln2 = new line(&f, ln, label, scene->assignMinZIndex());
     scene->addItem(ln2);
+
+    setContextMenuPolicy(Qt::NoContextMenu);
 }
 
 /*!
@@ -140,19 +142,14 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     ex cycle = f.add_cycle_rel(orthogonalList, qPrintable(label));
     cycle2D c = ex_to<cycle2D>(f.get_cycle(cycle)[0]);
 
-    //
-    // Find better check..................
-    // if radius_sq is negative..
-    //
     // check to make sure cycle is not infinite
-    try {
-        radius = qSqrt(ex_to<numeric>(c.radius_sq()).to_double());
-    }
-    catch (...) {
+    if (ex_to<numeric>(c.radius_sq()) < 0) {
         msgBox->warning(0, "Infinite cycles", "The number of possible cycles for this relation is infinite, therefore it cannot be displayed");
         f.remove_cycle_node(cycle);
         return;
     }
+
+    radius = sqrt(ex_to<numeric>(c.radius_sq()).to_double());
 
     // check that cycle exists
     if (radius == 0) {
@@ -221,14 +218,14 @@ void MainWindow::initTreeModel()
         QStandardItem *rootNode = model->invisibleRootItem();
 
         //defining generations
-        QStandardItem *gen1Item = new QStandardItem("1st Generation");
-        QStandardItem *gen2Item = new QStandardItem("2nd Generation");
-        QStandardItem *gen3Item = new QStandardItem("3rd Generation");
+        QStandardItem *gen0Item = new QStandardItem("Generation 0");
+        QStandardItem *gen1Item = new QStandardItem("Generation 1");
+        QStandardItem *gen2Item = new QStandardItem("Generation 2");
 
         //building up the hierarchy
+        rootNode->appendRow(gen0Item);
         rootNode->appendRow(gen1Item);
         rootNode->appendRow(gen2Item);
-        rootNode->appendRow(gen3Item);
 
         //register the model
         ui->treeView->setModel(model);
@@ -237,6 +234,13 @@ void MainWindow::initTreeModel()
 
 void MainWindow::addPointToTree(point *p)
 {
+    QString treeLabel;
+
+//    // Add label and output to tree
+//    treeLabel << p->getLabel()
+//              << "-"
+//              << f.
+
     QStandardItem *newItem = new QStandardItem(p->getLabel());
     model->item(0)->appendRow(newItem);
 }
@@ -262,24 +266,51 @@ void MainWindow::removeFromTree(QString label)
 }
 
 void MainWindow::initMainMenu() {
-    // this is the base menu we will be using for each of the menu items
-    cycleContextMenu *menu = new cycleContextMenu;
+    for (int x = 0; x < MENU_SIZE; x++)
+        menus[x] = new cycleContextMenu(false);
 
     QToolButton *infinity = new QToolButton();
-    infinity->setMenu(menu);
+    infinity->setMenu(menus[0]);
     infinity->setText("Infinity");
     infinity->setPopupMode(QToolButton::InstantPopup);
     ui->mainToolBar->addWidget(infinity);
 
     QToolButton *real = new QToolButton();
-    real->setMenu(menu);
+    real->setMenu(menus[1]);
     real->setText("Real Line");
     real->setPopupMode(QToolButton::InstantPopup);
     ui->mainToolBar->addWidget(real);
 
     QToolButton *thisItem = new QToolButton();
-    thisItem->setMenu(menu);
+    thisItem->setMenu(menus[2]);
     thisItem->setText("This");
     thisItem->setPopupMode(QToolButton::InstantPopup);
     ui->mainToolBar->addWidget(thisItem);
+
+    connect(menus[0], &cycleContextMenu::addRelationToList, this, &MainWindow::addInfinityToList);
+    connect(menus[0], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeInfinityFromList);
+    connect(menus[1], &cycleContextMenu::addRelationToList, this, &MainWindow::addRealToList);
+    connect(menus[1], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeRealFromList);
+    //connect(menus[2], &cycleContextMenu::addRelationToList, this, &MainWindow::addThisToList);
+    //connect(menus[2], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeThisFromList);
+}
+
+void MainWindow::addInfinityToList(int relType)
+{
+    addOrthogonalToList(relType, f.get_infinity());
+}
+
+void MainWindow::addRealToList(int relType)
+{
+    addOrthogonalToList(relType, f.get_real_line());
+}
+
+void MainWindow::removeInfinityFromList()
+{
+    //removeOrthogonalFromList(relType, )
+}
+
+void MainWindow::removeRealFromList()
+{
+    //removeOrthogonalFromList(relType, )
 }
