@@ -41,13 +41,14 @@ public:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     QString getLabel();
     GiNaC::ex getCycle();
+    QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
 
 public slots:
     void removeCycle();
-    //void isChecked(int relType);
     void resetRelationalList();
     void addToList(int relType);
     void removeFromList();
+    void setScaleFactor(double sf);
 
 signals:
     void removeFromTree(graphicCycle *c);
@@ -64,6 +65,7 @@ protected:
     double x;
     double y;
     double radius;
+    double scaleFactor;
     int zIndex;
 
     QBrush *brush;

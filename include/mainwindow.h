@@ -57,6 +57,7 @@ private slots:
     void addRealToList(int relType);
     void removeInfinityFromList();
     void removeRealFromList();
+    void on_actionPan_toggled(bool pan);
 
 signals:
     void resetRelationalList();
@@ -76,6 +77,8 @@ private:
 
     static const int MENU_SIZE = 3;
     cycleContextMenu *menus[MENU_SIZE];
+
+    bool isAddPoint;
 };
 
 #endif // MAINWINDOW_H

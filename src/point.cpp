@@ -18,7 +18,7 @@ using namespace MoebInv;
 point::point(MoebInv::figure *f, GiNaC::ex p, QString l, int z) :
     graphicCycle(f, p, l, z)
 {
-
+    scaleFactor = 1;
 }
 
 /*!
@@ -32,8 +32,8 @@ QRectF point::boundingRect() const
     return QRectF(
         x - POINT_SIZE,
         y - POINT_SIZE,
-        30,
-        30
+        30 / scaleFactor,
+        30 / scaleFactor
     );
 }
 
@@ -57,6 +57,9 @@ void point::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *)
     // draw shape
     switch (METRIC) {
         case drawingMetric::ELLIPTIC: {
+            QPointF point(x, y);
+            p->setMatrix(stableMatrix(p->worldMatrix(), point));
+
             // draw point
             p->drawEllipse(
                 x - POINT_SIZE / 2,

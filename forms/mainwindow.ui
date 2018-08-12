@@ -50,6 +50,9 @@
       <property name="renderHints">
        <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::TextAntialiasing</set>
       </property>
+      <property name="dragMode">
+       <enum>QGraphicsView::NoDrag</enum>
+      </property>
      </widget>
     </item>
    </layout>
@@ -104,6 +107,8 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionCreate_Cycle"/>
+   <addaction name="actionPan"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
@@ -205,6 +210,17 @@
    </property>
    <property name="toolTip">
     <string>Create Cycle</string>
+   </property>
+  </action>
+  <action name="actionPan">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Pan</string>
+   </property>
+   <property name="toolTip">
+    <string>Pan</string>
    </property>
   </action>
  </widget>

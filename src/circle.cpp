@@ -76,6 +76,8 @@ void circle::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
     getParameters();
 
     // assign brush and pen
+    pen->setCosmetic(true);
+    pen->setWidth(LINE_WIDTH);
     p->setPen(*pen);
 
     switch (METRIC) {
@@ -87,8 +89,11 @@ void circle::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
                 radius
             );
 
+            QPointF point(x, y);
+            p->setMatrix(stableMatrix(p->worldMatrix(), point));
+
             // add label to side
-            p->drawText(x, y + radius - 5, label);
+            p->drawText(x, y + radius * scaleFactor - 4, label);
 
             break;
         }

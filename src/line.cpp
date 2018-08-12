@@ -81,11 +81,17 @@ void line::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *)
     p->setBrush(*brush);
     p->setPen(*pen);
 
+    pen->setCosmetic(true);
+    pen->setWidth(LINE_WIDTH);
+
     // draw shape
     switch (METRIC) {
         case drawingMetric::ELLIPTIC: {
             // draw line
             p->drawLine(x1, y1, x2, y2);
+
+            QPointF point(x, y);
+            p->setMatrix(stableMatrix(p->worldMatrix(), point));
 
             // add label to side
             p->drawText(x, y - 5, label);

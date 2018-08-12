@@ -56,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent) :
     scene->addItem(ln2);
 
     setContextMenuPolicy(Qt::NoContextMenu);
+
+    isAddPoint = true;
 }
 
 /*!
@@ -96,28 +98,31 @@ void MainWindow::onMouseSceneHover(QPointF point)
  */
 void MainWindow::addPoint(QPointF mousePos)
 {
-    // gen new label
-    QString label = lblGen->genNextLabel();
+    if (isAddPoint) {
+        // gen new label
+        QString label = lblGen->genNextLabel();
 
-    // add cycle to the figure
-    ex cycle = f.add_point(lst{mousePos.x(), mousePos.y()}, qPrintable(label));
+        // add cycle to the figure
+        ex cycle = f.add_point(lst{mousePos.x(), mousePos.y()}, qPrintable(label));
 
-    // now draw the point
-    point *p = new point(&f, cycle, label, scene->assignMaxZIndex());
+        // now draw the point
+        point *p = new point(&f, cycle, label, scene->assignMaxZIndex());
 
-    //set generation
-    //p->setGeneration(1);
+        //set generation
+        //p->setGeneration(1);
 
-    connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
-    connect(p, &point::addRelationToList, this, &MainWindow::addOrthogonalToList);
-    connect(p, &point::removeRelationFromList, this, &MainWindow::removeOrthogonalFromList);
-    connect(this, &MainWindow::resetRelationalList, p, &point::resetRelationalList);
+        connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
+        connect(p, &point::addRelationToList, this, &MainWindow::addOrthogonalToList);
+        connect(p, &point::removeRelationFromList, this, &MainWindow::removeOrthogonalFromList);
+        connect(this, &MainWindow::resetRelationalList, p, &point::resetRelationalList);
+        connect(ui->graphicsView, &view::scaleFactorChanged, p, &graphicCycle::setScaleFactor);
 
-    scene->addItem(p);
-    lblGen->advanceLabel();
+        scene->addItem(p);
+        lblGen->advanceLabel();
 
-    // now add to tree
-    addToTree(p);
+        // now add to tree
+        addToTree(p);
+    }
 }
 
 /*!
@@ -165,6 +170,8 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     connect(circ, &circle::removeFromTree, this, &MainWindow::removeFromTree);
     connect(circ, &circle::addRelationToList, this, &MainWindow::addOrthogonalToList);
     connect(circ, &circle::removeRelationFromList, this, &MainWindow::removeOrthogonalFromList);
+    connect(ui->graphicsView, &view::scaleFactorChanged, circ, &graphicCycle::setScaleFactor);
+    emit ui->graphicsView->scaleFactorChanged(ui->graphicsView->relativeScaleFactor);
 
     // reset relation list
     resetList(&orthogonalList);
@@ -304,4 +311,15 @@ void MainWindow::removeInfinityFromList()
 void MainWindow::removeRealFromList()
 {
     //removeOrthogonalFromList(relType, )
+}
+
+void MainWindow::on_actionPan_toggled(bool pan)
+{
+    if (pan) {
+        ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
+        isAddPoint = false;
+    } else {
+        ui->graphicsView->setDragMode(QGraphicsView::NoDrag);
+        isAddPoint = true;
+    }
 }

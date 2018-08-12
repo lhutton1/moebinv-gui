@@ -47,6 +47,11 @@ const int METRIC = drawingMetric::ELLIPTIC;
 const double POINT_SIZE = 3;
 
 /*!
+ * \brief LINE_WIDTH Sets the thickness of lines drawn in the scene.
+ */
+const double LINE_WIDTH = 2;
+
+/*!
  * \brief SCENE_SIZE Sets the size of the scene before it expands.
  */
 const int SCENE_SIZE = 300000;
@@ -55,10 +60,5 @@ const int SCENE_SIZE = 300000;
  * \brief LINE_HOVER_PADDING Sets the extra space to add to a line for hovers.
  */
 const int LINE_HOVER_PADDING = 8;
-
-/*!
- * \brief ZOOM_FACTOR Zoom factor for zooming in and out of the scene
- */
-const int ZOOM_FACTOR = 1.0015;
 
 #endif // DRAWINGMETRIC_H

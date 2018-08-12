@@ -167,3 +167,25 @@ void graphicCycle::removeFromList()
     emit removeRelationFromList(cycle);
 }
 
+QMatrix graphicCycle::stableMatrix(const QMatrix &matrix, const QPointF &p)
+{
+    QMatrix newMatrix = matrix;
+
+    qreal scaleX, scaleY;
+    scaleX = newMatrix.m11();
+    scaleY = newMatrix.m22();
+    newMatrix.scale(1.0/scaleX, 1.0/scaleY);
+
+    qreal offsetX, offsetY;
+    offsetX = p.x()*(scaleX-1.0);
+    offsetY = p.y()*(scaleY-1.0);
+    newMatrix.translate(offsetX, offsetY);
+
+    return newMatrix;
+}
+
+void graphicCycle::setScaleFactor(double sf)
+{
+    scaleFactor = sf;
+}
+
