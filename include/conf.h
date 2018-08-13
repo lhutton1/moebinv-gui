@@ -61,4 +61,14 @@ const int SCENE_SIZE = 300000;
  */
 const int LINE_HOVER_PADDING = 8;
 
+/*!
+ * \brief FLOATING_POINT_ACCURACY Adjust the accuracy which coordinates are displayed to.
+ */
+const int FLOAT_PRECISION = 3;
+
+/*!
+ * \brief EPSILON
+ */
+const double EPSILON = 0.00000001;
+
 #endif // DRAWINGMETRIC_H

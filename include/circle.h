@@ -1,27 +1,36 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
-#include "graphiccycle.h"
+#include <QGraphicsItem>
+#include <QPainter>
 
-/*!
- * \brief The circle class
- *
- * When created and added to the scene a circle is
- * displayed, given the x coordinate, y coordinate and radius.
- *
- * Inherits graphicCycle.
- */
-class circle : public graphicCycle
+#include "figure.h"
+
+#include "conf.h"
+
+class circle : public QGraphicsItem
 {
-
 public:
-    circle(MoebInv::figure *f, GiNaC::ex c, QString l, int z);
-    void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    circle(MoebInv::figure *f, double x, double y, double radius, QString label, QGraphicsItem *parent);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
     QPainterPath shape() const;
+    QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
+
+public slots:
+
 
 private:
+    double x;
+    double y;
+    double radius;
+    QString label;
+    MoebInv::figure *fig;
 
+    double scaleFactor;
+
+    QBrush *brush;
+    QPen *pen;
 };
 
 #endif // CIRCLE_H

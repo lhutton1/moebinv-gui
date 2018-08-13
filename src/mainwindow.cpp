@@ -4,19 +4,9 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "line.h"
 
 using namespace GiNaC;
 using namespace MoebInv;
-
-QString ex_to_string(const ex & E)
-{
-    std::ostringstream drawing;
-    drawing << E;
-    string dr = drawing.str().c_str();
-
-    return QString::fromStdString(dr);
-}
 
 /*!
  * \brief MainWindow::MainWindow
@@ -49,15 +39,24 @@ MainWindow::MainWindow(QWidget *parent) :
     initTreeModel();
     initMainMenu();
 
-    //real line
-    ex ln = f.get_real_line();
-    QString label = "Re";
-    line *ln2 = new line(&f, ln, label, scene->assignMinZIndex());
-    scene->addItem(ln2);
-
+    // remove menu from toolbars
     setContextMenuPolicy(Qt::NoContextMenu);
 
+    // whether to add
     isAddPoint = true;
+
+    update();
+}
+
+QString MainWindow::node_compact_string(GiNaC::ex name)
+{
+    std::ostringstream drawing;
+    drawing << std::setprecision(FLOAT_PRECISION);
+    ex_to<cycle_node>(f.get_cycle_node(name))
+        .do_print_double(GiNaC::print_dflt(drawing,0), 0);
+    string dr = drawing.str().c_str();
+
+    return QString::fromStdString(dr);
 }
 
 /*!
@@ -75,10 +74,6 @@ MainWindow::~MainWindow()
 void MainWindow::onMouseScenePress(QPointF location)
 {
     addPoint(location);
-
-    // future tools here..
-    //
-    //
 }
 
 void MainWindow::onMouseSceneHover(QPointF point)
@@ -88,94 +83,6 @@ void MainWindow::onMouseSceneHover(QPointF point)
       .arg(point.y());
 
     ui->statusBar->showMessage(coordinates);
-}
-
-/*!
- * \brief MainWindow::addCycle Add a cycle to the figure.
- * \param mousePos Coordinates of mouse on the scene.
- *
- * Adds a cycle to the figure then draws it on the scene.
- */
-void MainWindow::addPoint(QPointF mousePos)
-{
-    if (isAddPoint) {
-        // gen new label
-        QString label = lblGen->genNextLabel();
-
-        // add cycle to the figure
-        ex cycle = f.add_point(lst{mousePos.x(), mousePos.y()}, qPrintable(label));
-
-        // now draw the point
-        point *p = new point(&f, cycle, label, scene->assignMaxZIndex());
-
-        //set generation
-        //p->setGeneration(1);
-
-        connect(p, &point::removeFromTree, this, &MainWindow::removeFromTree);
-        connect(p, &point::addRelationToList, this, &MainWindow::addOrthogonalToList);
-        connect(p, &point::removeRelationFromList, this, &MainWindow::removeOrthogonalFromList);
-        connect(this, &MainWindow::resetRelationalList, p, &point::resetRelationalList);
-        connect(ui->graphicsView, &view::scaleFactorChanged, p, &graphicCycle::setScaleFactor);
-
-        scene->addItem(p);
-        lblGen->advanceLabel();
-
-        // now add to tree
-        addToTree(p);
-    }
-}
-
-/*!
- * \brief MainWindow::on_actionCreate_Cycle_triggered
- *
- * Function to create cycle based on relations that have been added.
- */
-void MainWindow::on_actionCreate_Cycle_triggered()
-{
-    double radius = 0;
-
-    // make sure that the list isn't empty before adding cycle
-    if (orthogonalList.nops() <= 0) {
-        msgBox->warning(0, "No cycles in relation", "For a cycle to be created there must be cycles in the relation.");
-        return;
-    }
-
-    // create cycle
-    QString label = lblGen->genNextLabel();
-    ex cycle = f.add_cycle_rel(orthogonalList, qPrintable(label));
-    cycle2D c = ex_to<cycle2D>(f.get_cycle(cycle)[0]);
-
-    // check to make sure cycle is not infinite
-    if (ex_to<numeric>(c.radius_sq()) < 0) {
-        msgBox->warning(0, "Infinite cycles", "The number of possible cycles for this relation is infinite, therefore it cannot be displayed");
-        f.remove_cycle_node(cycle);
-        return;
-    }
-
-    radius = sqrt(ex_to<numeric>(c.radius_sq()).to_double());
-
-    // check that cycle exists
-    if (radius == 0) {
-        msgBox->warning(0, "Cycle non-existant", "Cycle for this relation does not exist.");
-        f.remove_cycle_node(cycle);
-        return;
-    }
-
-    // draw the new circle
-    circle *circ = new circle(&f, cycle, label, scene->assignMinZIndex());
-    scene->addItem(circ);
-    lblGen->advanceLabel();
-    addToTree(circ);
-
-    connect(circ, &circle::removeFromTree, this, &MainWindow::removeFromTree);
-    connect(circ, &circle::addRelationToList, this, &MainWindow::addOrthogonalToList);
-    connect(circ, &circle::removeRelationFromList, this, &MainWindow::removeOrthogonalFromList);
-    connect(ui->graphicsView, &view::scaleFactorChanged, circ, &graphicCycle::setScaleFactor);
-    emit ui->graphicsView->scaleFactorChanged(ui->graphicsView->relativeScaleFactor);
-
-    // reset relation list
-    resetList(&orthogonalList);
-    emit resetRelationalList();
 }
 
 /*!
@@ -195,16 +102,16 @@ void MainWindow::initFigure()
 void MainWindow::addOrthogonalToList(int relType, ex cycle) {
     switch (relType) {
         case ORTHOGONAL:
-            orthogonalList.append(is_orthogonal(cycle));
+            relationList.append(is_orthogonal(cycle));
             break;
         case FORTHOGONAL:
-            orthogonalList.append(is_f_orthogonal(cycle));
+            relationList.append(is_f_orthogonal(cycle));
             break;
         case TANGENT:
-            orthogonalList.append(is_tangent(cycle));
+            relationList.append(is_tangent(cycle));
             break;
         case DIFFERENT:
-            orthogonalList.append(is_different(cycle));
+            relationList.append(is_different(cycle));
             break;
     }
 }
@@ -237,10 +144,10 @@ void MainWindow::initTreeModel()
         ui->treeView->expandAll();
 }
 
-void MainWindow::addToTree(graphicCycle *p)
+void MainWindow::addToTree(ex cycle)
 {
     // Add label and output to tree
-    QString treeLabel = p->getLabel() + " - " + ex_to_string(f.get_cycle_node(p->getCycle()));
+    QString treeLabel = node_compact_string(cycle);
 
     QStandardItem *newItem = new QStandardItem(treeLabel);
     newItem->setToolTip(treeLabel);
@@ -249,18 +156,18 @@ void MainWindow::addToTree(graphicCycle *p)
 
 void MainWindow::removeFromTree(graphicCycle *c)
 {
-    QString treeLabel = c->getLabel() + " - " + ex_to_string(f.get_cycle_node(c->getCycle()));
+//    QString treeLabel = c->getLabel() + " - " + ex_to_string(f.get_cycle_node(c->getCycle()));
 
-    QList<QStandardItem *> itemList = model->findItems(
-        treeLabel,
-        Qt::MatchExactly | Qt::MatchRecursive,
-        0
-    );
+//    QList<QStandardItem *> itemList = model->findItems(
+//        treeLabel,
+//        Qt::MatchExactly | Qt::MatchRecursive,
+//        0
+//    );
 
-    for (const auto &item : itemList) {
-        QStandardItem *parent = item->parent();
-        parent->removeRow(item->row());
-    }
+//    for (const auto &item : itemList) {
+//        QStandardItem *parent = item->parent();
+//        parent->removeRow(item->row());
+//    }
 }
 
 void MainWindow::initMainMenu() {
@@ -322,4 +229,84 @@ void MainWindow::on_actionPan_toggled(bool pan)
         ui->graphicsView->setDragMode(QGraphicsView::NoDrag);
         isAddPoint = true;
     }
+}
+
+void MainWindow::update()
+{
+    // remove data
+    scene->clear();
+    initTreeModel();
+
+    ex keys = f.get_all_keys();
+
+    // for all items in the figure
+    for (int x = 0; x < keys.nops(); x++) {
+        // get cycle
+        ex cycle = keys[x];
+
+        // add cycles to scene
+        graphicCycle *c = new graphicCycle(&f, cycle);
+        scene->addItem(c);
+
+        // connect events
+        connect(c, &graphicCycle::removeFromTree, this, &MainWindow::removeFromTree);
+        connect(c, &graphicCycle::addRelationToList, this, &MainWindow::addOrthogonalToList);
+        connect(c, &graphicCycle::removeRelationFromList, this, &MainWindow::removeOrthogonalFromList);
+        connect(this, &MainWindow::resetRelationalList, c, &graphicCycle::resetRelationalList);
+        connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
+
+        // add cycle to the tree
+        addToTree(cycle);
+    }
+}
+
+/*!
+ * \brief MainWindow::addCycle Add a cycle to the figure.
+ * \param mousePos Coordinates of mouse on the scene.
+ *
+ * Adds a cycle to the figure then draws it on the scene.
+ */
+void MainWindow::addPoint(QPointF mousePos)
+{
+    if (isAddPoint) {
+        double x = mousePos.x();
+        double y = mousePos.y();
+
+        // gen new label
+        QString label = lblGen->genNextLabel();
+
+        // add cycle to the figure
+        ex cycle = f.add_point(lst{x, y}, qPrintable(label));
+
+        lblGen->advanceLabel();
+
+        // refresh
+        update();
+    }
+}
+
+/*!
+ * \brief MainWindow::on_actionCreate_Cycle_triggered
+ *
+ * Function to create cycle based on relations that have been added.
+ */
+void MainWindow::on_actionCreate_Cycle_triggered()
+{
+    // make sure that the list isn't empty before adding cycle
+    if (relationList.nops() <= 0) {
+        msgBox->warning(0, "No cycles in relation", "For a cycle to be created there must be cycles in the relation.");
+        return;
+    }
+
+    QString label = lblGen->genNextLabel();
+    ex cycle = f.add_cycle_rel(relationList, qPrintable(label));
+    lblGen->advanceLabel();
+    update();
+    emit resetRelationalList();
+    resetList(&relationList);
+}
+
+void MainWindow::sceneInvalid()
+{
+    update();
 }

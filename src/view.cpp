@@ -1,12 +1,24 @@
 #include <QDebug>
 #include "view.h"
 
+/*!
+ * \brief view::view Construct a new view.
+ * \param parent parent object to the view.
+ *
+ * Construct a new view applying any settings.
+ */
 view::view(QObject *parent)
 {
     this->setRenderHint(QPainter::Antialiasing);
     relativeScaleFactor = 1;
 }
 
+/*!
+ * \brief view::wheelEvent Implements zooming on scroll wheel.
+ * \param event Mouse wheel event.
+ *
+ * When the scroll wheel is used the view will either zoom in or out depending on the scroll wheel direction.
+ */
 void view::wheelEvent(QWheelEvent * event)
 {
     const ViewportAnchor anchor = transformationAnchor();
@@ -24,6 +36,5 @@ void view::wheelEvent(QWheelEvent * event)
 
     scale(factor, factor);
     setTransformationAnchor(anchor);
-    qDebug() << relativeScaleFactor;
     emit scaleFactorChanged(relativeScaleFactor);
 }

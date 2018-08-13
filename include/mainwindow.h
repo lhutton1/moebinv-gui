@@ -10,13 +10,13 @@
 #include <QGraphicsTextItem>
 #include <QMessageBox>
 #include <QToolButton>
+#include <QMap>
 
-#include <figure.h>
+#include "figure.h"
 
 #include "scene.h"
 #include "labels.h"
-#include "point.h"
-#include "circle.h"
+#include "graphiccycle.h"
 #include "conf.h"
 
 namespace Ui {
@@ -37,11 +37,14 @@ public:
     void initFigure();
     void addPoint(QPointF location);
     void setDrawingMetric();
-    void addToTree(graphicCycle *p);
+    void addToTree(GiNaC::ex cycle);
     void addLineToTree(QString itemName);
     void resetList(GiNaC::lst *list);
     void initTreeModel();
     void initMainMenu();
+    void addCycle(GiNaC::ex cycle, QString label);
+    void update();
+    QString node_compact_string(GiNaC::ex name);
     ~MainWindow();
 
     bool toolAddCycle;
@@ -58,6 +61,7 @@ private slots:
     void removeInfinityFromList();
     void removeRealFromList();
     void on_actionPan_toggled(bool pan);
+    void sceneInvalid();
 
 signals:
     void resetRelationalList();
@@ -69,7 +73,7 @@ private:
 
     MoebInv::figure f;
 
-    GiNaC::lst orthogonalList;
+    GiNaC::lst relationList;
 
     QMessageBox *msgBox;
 
@@ -77,6 +81,8 @@ private:
 
     static const int MENU_SIZE = 3;
     cycleContextMenu *menus[MENU_SIZE];
+
+    QMap<GiNaC::ex, QPointer<graphicCycle>> cycles;
 
     bool isAddPoint;
 };

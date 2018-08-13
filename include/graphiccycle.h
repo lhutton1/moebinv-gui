@@ -7,11 +7,15 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QGraphicsSceneContextMenuEvent>
+#include <QtMath>
 
 #include "figure.h"
 
 #include "cyclecontextmenu.h"
 #include "conf.h"
+#include "point.h"
+#include "circle.h"
+#include "line.h"
 
 /*!
  * \brief The graphicCycle class
@@ -21,39 +25,37 @@
  *
  * Inherits both QObject and QGraphicsItem.
  *
- * To create a new implementation of graphicCycle:
- * 1. Create a new class
- * 2. Inherit 'graphicCycle as the base class'
- * 3. Invoke the base class constructor
- * 4. Make sure all pure abstract functions have an implementation
  */
 class graphicCycle : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 
 public:
-    graphicCycle(MoebInv::figure *f, GiNaC::ex c, QString l, int zIndex);
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) = 0;
-    virtual QRectF boundingRect() const = 0;
-    virtual void getParameters();
+    graphicCycle(MoebInv::figure *f, GiNaC::ex c);
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    virtual QRectF boundingRect() const;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *);
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     QString getLabel();
     GiNaC::ex getCycle();
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
+    void addPoint(double x, double y);
+    void addCircle(double x, double y, double radius);
+    void addLine(double x, double y, double c);
+    void buildShape();
 
 public slots:
-    void removeCycle();
     void resetRelationalList();
     void addToList(int relType);
     void removeFromList();
-    void setScaleFactor(double sf);
+    void removeCycle();
 
 signals:
     void removeFromTree(graphicCycle *c);
     void addRelationToList(int relType, GiNaC::ex c);
     void removeRelationFromList(GiNaC::ex c);
+    void sceneInvalid();
+
 
 protected:
     GiNaC::ex cycle;
@@ -61,12 +63,6 @@ protected:
     cycleContextMenu *menu;
 
     QString label;
-
-    double x;
-    double y;
-    double radius;
-    double scaleFactor;
-    int zIndex;
 
     QBrush *brush;
     QPen *pen;

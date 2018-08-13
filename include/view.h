@@ -9,6 +9,7 @@
 #include <QScrollBar>
 #include <qmath.h>
 
+#include "graphiccycle.h"
 #include "conf.h"
 
 class view : public QGraphicsView

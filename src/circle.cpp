@@ -1,34 +1,63 @@
 #include <QDebug>
 #include "circle.h"
 
-using namespace MoebInv;
-using namespace GiNaC;
-
-/*!
- * \brief circle::circle Circle constructor.
- * \param f MoebInv figure.
- * \param p MoebInv cycle to be drawn on the scene.
- * \param l label of the cycle.
- * \param z index in which to draw the object.
- * \param parent
- *
- * Constructs a circle on the scene.
- *
- * Inherits 'graphicCycle'.
- */
-circle::circle(MoebInv::figure *f, GiNaC::ex c, QString l, int z) :
-    graphicCycle(f, c, l, z)
+circle::circle(MoebInv::figure *f, double x, double y, double radius, QString label, QGraphicsItem *parent)
 {
+   fig = f;
+   this->x = x;
+   this->y = y;
+   this->radius = radius;
+   this->label = label;
 
+   this->setParentItem(parent);
+
+   // create the brush and pen and assign a base colour
+   brush = new QBrush(Qt::black);
+   pen = new QPen(Qt::black);
+
+   scaleFactor = 1;
 }
 
-/*!
- * \brief circle::boundingRect Define the bounding rectangle
- * \return QRectF
- *
- * Defines the area on the scene that the object can draw on.
- */
-QRectF circle::boundingRect() const{
+void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    // assign brush and pen
+    pen->setCosmetic(true);
+    pen->setWidth(LINE_WIDTH);
+    painter->setPen(*pen);
+
+    switch (METRIC) {
+        case drawingMetric::ELLIPTIC: {
+            // draw circle
+            painter->drawEllipse(
+                QPointF(x, y),
+                radius,
+                radius
+            );
+
+            QPointF point(x, y);
+            painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
+
+            // add label to side
+            painter->drawText(x, y + radius * scaleFactor - 4, label);
+
+            break;
+        }
+
+        case drawingMetric::PARABOLIC: {
+            // Reserved for future use
+            break;
+
+        }
+
+        case drawingMetric::HYPERBOLIC: {
+            // Reserved for future use
+            break;
+        }
+    }
+}
+
+QRectF circle::boundingRect() const
+{
     return QRectF(
         x - radius - LINE_HOVER_PADDING,
         y - radius - LINE_HOVER_PADDING,
@@ -43,7 +72,8 @@ QRectF circle::boundingRect() const{
  *
  * Defines the area in which hover events take place.
  */
-QPainterPath circle::shape() const {
+QPainterPath circle::shape() const
+{
     QPainterPath path;
     QPainterPath subPath;
 
@@ -63,50 +93,26 @@ QPainterPath circle::shape() const {
 }
 
 /*!
- * \brief circle::paint Paint the circle on the scene.
- * \param p QPainter object.
+ * \brief graphicCycle::stableMatrix create new transformation matrix
+ * \param matrix the current transformation matrix
+ * \param p point at which the transformation is centered
+ * \return QMatrix - the new transformation matrix
  *
- * This function paints the circle on the scene given various parameters
- * (such as x, y, radius and label). The circle is drawn differently dependent
- * on the drawing metric in use.
+ * Create a new matrix which will keep items the same size when the zoom transformation is applied to it.
  */
-void circle::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) {
+QMatrix circle::stableMatrix(const QMatrix &matrix, const QPointF &p)
+{
+    QMatrix newMatrix = matrix;
 
-    // check for changes to coordinates
-    getParameters();
+    qreal scaleX, scaleY;
+    scaleX = newMatrix.m11();
+    scaleY = newMatrix.m22();
+    newMatrix.scale(1.0/scaleX, 1.0/scaleY);
 
-    // assign brush and pen
-    pen->setCosmetic(true);
-    pen->setWidth(LINE_WIDTH);
-    p->setPen(*pen);
+    qreal offsetX, offsetY;
+    offsetX = p.x() * (scaleX - 1.0);
+    offsetY = p.y() * (scaleY - 1.0);
+    newMatrix.translate(offsetX, offsetY);
 
-    switch (METRIC) {
-        case drawingMetric::ELLIPTIC: {
-            // draw circle
-            p->drawEllipse(
-                QPointF(x, y),
-                radius,
-                radius
-            );
-
-            QPointF point(x, y);
-            p->setMatrix(stableMatrix(p->worldMatrix(), point));
-
-            // add label to side
-            p->drawText(x, y + radius * scaleFactor - 4, label);
-
-            break;
-        }
-
-        case drawingMetric::PARABOLIC: {
-            // Reserved for future use
-            break;
-
-        }
-
-        case drawingMetric::HYPERBOLIC: {
-            // Reserved for future use
-            break;
-        }
-    }
+    return newMatrix;
 }

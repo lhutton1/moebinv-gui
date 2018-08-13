@@ -10,16 +10,12 @@ using namespace MoebInv;
  * \param c The cycle that has just been created and added to the figure.
  * \param l The label used by the cycle as a unique identifier.
  */
-graphicCycle::graphicCycle(figure *f, ex c, QString l, int z)
+graphicCycle::graphicCycle(figure *f, ex c)
 {
     // assign parameters
     fig = f;
     cycle = c;
-    label = l;
-    zIndex = z;
-
-    // set zIndex to draw item
-    this->setZValue(zIndex);
+    label = "A";
 
     // create the brush and pen and assign a base colour
     brush = new QBrush(Qt::black);
@@ -37,8 +33,7 @@ graphicCycle::graphicCycle(figure *f, ex c, QString l, int z)
     // currently hovered object on the scene
     setAcceptHoverEvents(true);
 
-    // get parameters to draw the cycle
-    getParameters();
+    buildShape();
 }
 
 /*!
@@ -48,44 +43,9 @@ graphicCycle::graphicCycle(figure *f, ex c, QString l, int z)
  * The colour of the point is changed to red and a tool tip is set giving information about the point.
  */
 void graphicCycle::hoverEnterEvent(QGraphicsSceneHoverEvent *) {
-    // set colour to red
-    brush->setColor(Qt::red);
-    pen->setColor(Qt::red);
-    update();
-
     //set tool tip on hover showing coordinates
-    QString toolTipString = "X:" + QString::number(x) + " Y:" + QString::number(y);
-    setToolTip(toolTipString);
-}
-
-/*!
- * \brief graphicCycle::hoverLeaveEvent Mouse leaves clipping mask of point.
- *
- * This event is triggered when the mouse leaves the clipping mask of the point.
- * The colour of the point is set back to black, as it is no longer being hovered.
- */
-void graphicCycle::hoverLeaveEvent(QGraphicsSceneHoverEvent *) {
-    // set colour to black
-    brush->setColor(Qt::black);
-    pen->setColor(Qt::black);
-    update();
-}
-
-/*!
- * \brief graphicCycle::removeCycle Remove a cycle from the scene.
- *
- * Removes a cycle from the MoebInv figure and then deletes the object removing it from the scene.
- */
-void graphicCycle::removeCycle()
-{
-    // emit signal to get cycle removed from the tree
-    emit removeFromTree(this);
-
-    // remove cycle from moebInv figure
-    fig->remove_cycle_node(cycle);
-
-    // delete object, clearing it from the scene
-    delete this;
+    //QString toolTipString = "X:" + QString::number(x) + " Y:" + QString::number(y);
+    //setToolTip(toolTipString);
 }
 
 /*!
@@ -112,39 +72,6 @@ void graphicCycle::resetRelationalList()
 }
 
 /*!
- * \brief graphicCycle::getLabel Getter function for label.
- * \return QString.
- */
-QString graphicCycle::getLabel()
-{
-    return label;
-}
-
-/*!
- * \brief graphicCycle::getCycle Getter function for cycle.
- * \return ex.
- */
-ex graphicCycle::getCycle()
-{
-    return cycle;
-}
-
-/*!
- * \brief graphicsCycle::getParameters get x and y coordinates.
- *
- * Get the x and y coordinates of the point from the cycle in the figure.
- */
-void graphicCycle::getParameters() {
-    // get cycle that has just been added
-    cycle2D c = ex_to<cycle2D>(fig->get_cycle(cycle)[0]);
-
-    // now break into components
-    x = ex_to<numeric>(c.center().op(0)).to_double();
-    y = ex_to<numeric>(c.center().op(1)).to_double();
-    radius = qSqrt(ex_to<numeric>(c.radius_sq()).to_double());
-}
-
-/*!
  * \brief graphicCycle::addToList
  * \param relType
  *
@@ -167,6 +94,14 @@ void graphicCycle::removeFromList()
     emit removeRelationFromList(cycle);
 }
 
+/*!
+ * \brief graphicCycle::stableMatrix create new transformation matrix
+ * \param matrix the current transformation matrix
+ * \param p point at which the transformation is centered
+ * \return QMatrix - the new transformation matrix
+ *
+ * Create a new matrix which will keep items the same size when the zoom transformation is applied to it.
+ */
 QMatrix graphicCycle::stableMatrix(const QMatrix &matrix, const QPointF &p)
 {
     QMatrix newMatrix = matrix;
@@ -177,15 +112,78 @@ QMatrix graphicCycle::stableMatrix(const QMatrix &matrix, const QPointF &p)
     newMatrix.scale(1.0/scaleX, 1.0/scaleY);
 
     qreal offsetX, offsetY;
-    offsetX = p.x()*(scaleX-1.0);
-    offsetY = p.y()*(scaleY-1.0);
+    offsetX = p.x() * (scaleX - 1.0);
+    offsetY = p.y() * (scaleY - 1.0);
     newMatrix.translate(offsetX, offsetY);
 
     return newMatrix;
 }
 
-void graphicCycle::setScaleFactor(double sf)
+void graphicCycle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    // set pen
+    painter->setBrush(*brush);
+    painter->setPen(*pen);
+}
+
+void graphicCycle::addPoint(double x, double y)
 {
-    scaleFactor = sf;
+    class point *p = new class point(fig, x, y, label, this);
+}
+
+void graphicCycle::addCircle(double x, double y, double radius)
+{
+    class circle *c = new class circle(fig, x, y, radius, label, this);
+}
+
+void graphicCycle::addLine(double x, double y, double c)
+{
+    class line *l = new class line(fig, x, y, c, label, this);
+}
+
+QRectF graphicCycle::boundingRect() const
+{
+    return this->childrenBoundingRect();
+}
+
+void graphicCycle::buildShape()
+{
+    ex L = fig->get_cycle(cycle);
+
+    // interate through cycle components
+    for (lst::const_iterator it =ex_to<lst>(L).begin(); it != ex_to<lst>(L).end(); ++it) {
+        cycle2D C = ex_to<cycle2D>(*it);
+
+        if (ex_to<numeric>(abs(C.radius_sq()).evalf()).to_double() < EPSILON) {
+            //point
+            double x = ex_to<numeric>(C.center().op(0)).to_double();
+            double y = ex_to<numeric>(C.center().op(1)).to_double();
+
+            addPoint(x, y);
+
+        } else if (ex_to<numeric>(abs(C.get_k()).evalf()).to_double() < EPSILON) {
+            //line
+            qDebug() << "drawing line";
+            double x = ex_to<numeric>(C.get_l(0).evalf()).to_double();
+            double y = ex_to<numeric>(C.get_l(1).evalf()).to_double();
+            double c = ex_to<numeric>((C.get_m()/2).evalf()).to_double();
+
+            addLine(x, y, c);
+        } else {
+            //circle
+            qDebug() << "drawing circle";
+            double x = ex_to<numeric>(C.center().op(0)).to_double();
+            double y = ex_to<numeric>(C.center().op(1)).to_double();
+            double radius = qSqrt(ex_to<numeric>(C.radius_sq()).to_double());
+
+            addCircle(x, y, radius);
+        }
+
+    }
+}
+
+void graphicCycle::removeCycle()
+{
+    fig->remove_cycle_node(cycle);
+    emit sceneInvalid();
 }
 

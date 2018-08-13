@@ -1,31 +1,42 @@
 #ifndef LINE_H
 #define LINE_H
 
-#include "graphiccycle.h"
+#include <QGraphicsItem>
+#include <QPainter>
+#include <QtMath>
 
-/*!
- * \brief The line class
- *
- * When created and added to the scene a line is
- * displayed, given the x coordinate and y coordinates.
- *
- * Inherits graphicCycle.
- */
-class line : public graphicCycle
+#include "figure.h"
+
+#include "conf.h"
+
+class line : public QGraphicsItem
 {
-
 public:
-    explicit line(MoebInv::figure *f, GiNaC::ex p, QString l, int z);
-    void paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *) override;
-    QRectF boundingRect() const override;
-    QPainterPath shape() const override;
-    void getParameters() override;
+    line(MoebInv::figure *f, double x, double y, double c, QString label, QGraphicsItem *parent);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QRectF boundingRect() const;
+    QPainterPath shape() const;
+    QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
+
+public slots:
+
 
 private:
+    double x;
+    double y;
+    double c;
+    QString label;
+    MoebInv::figure *fig;
+
     double x1;
     double x2;
     double y1;
     double y2;
+
+    double scaleFactor;
+
+    QBrush *brush;
+    QPen *pen;
 };
 
-#endif // LINE_H
+#endif // CIRCLE_H

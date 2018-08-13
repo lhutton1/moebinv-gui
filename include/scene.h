@@ -5,6 +5,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 
+#include <figure.h>
+
+#include "graphiccycle.h"
 #include "conf.h"
 
 /*!
@@ -22,6 +25,7 @@ public:
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     int assignMaxZIndex();
     int assignMinZIndex();
+    void addToTree(graphicCycle *p);
 
 signals:
     void newMousePress(QPointF point);
@@ -30,6 +34,8 @@ signals:
 private:
     int maxZValue = 1;
     int minZValue = 0;
+
+    QMap<GiNaC::ex, QPointer<graphicCycle>> *cycles;
 };
 
 #endif // SCENE_H

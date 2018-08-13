@@ -31,27 +31,25 @@ SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
         src/scene.cpp \
-        src/zoom.cpp \
         src/labels.cpp \
         src/cyclecontextmenu.cpp \
+        src/graphiccycle.cpp \
+        src/view.cpp \
         src/point.cpp \
         src/circle.cpp \
-        src/graphiccycle.cpp \
-        src/line.cpp \
-    view.cpp
+        src/line.cpp
 
 HEADERS += \
         include/mainwindow.h \
         include/scene.h \
-        include/zoom.h \
         include/labels.h \
-        include/circle.h \
-        include/point.h \
         include/cyclecontextmenu.h \
         include/graphiccycle.h \
-        include/line.h \
         include/conf.h \
-    view.h
+        include/view.h \
+        include/point.h \
+        include/circle.h \
+        include/line.h
 
 FORMS += \
         forms/mainwindow.ui

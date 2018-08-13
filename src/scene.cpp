@@ -1,6 +1,9 @@
 #include <QDebug>
 #include "scene.h"
 
+using namespace GiNaC;
+using namespace MoebInv;
+
 /*!
  * \brief Scene Constructor.
  * \param parent The parent widget to the current widget.
@@ -10,6 +13,7 @@
 graphicsScene::graphicsScene(QObject *parent)
     : QGraphicsScene(parent)
 {
+
     // set the size of the scene
     this->setSceneRect(
         -(SCENE_SIZE / 2),

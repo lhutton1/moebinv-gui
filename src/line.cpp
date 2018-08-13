@@ -1,33 +1,83 @@
 #include <QDebug>
 #include "line.h"
 
-using namespace GiNaC;
-using namespace MoebInv;
-
-/*!
- * \brief line::line Line constructor.
- * \param f MoebInv figure.
- * \param p MoebInv line to be drawn on the scene.
- * \param l label of the line.
- * \param z index in which to draw the object.
- * \param parent
- *
- * Constructs a line on the scene.
- *
- * Inherits 'graphicCycle'.
- */
-line::line(MoebInv::figure *f, GiNaC::ex p, QString l, int z) :
-    graphicCycle(f, p, l, z)
+line::line(MoebInv::figure *f, double x, double y, double c, QString label, QGraphicsItem *parent)
 {
-    getParameters();
+   fig = f;
+   this->x = x;
+   this->y = y;
+   this->label = label;
+
+   this->setParentItem(parent);
+
+   // create the brush and pen and assign a base colour
+   brush = new QBrush(Qt::black);
+   pen = new QPen(Qt::black);
+
+   scaleFactor = 1;
+
+   qDebug() << "line child created";
+
+   // break line equation into 2 distinct points, given by x1, x2, y1, and y2.
+   x1 = (y * -(SCENE_SIZE)) + c;
+
+   if (x != 0)
+       x1 /= x;
+
+   x2 = (y * SCENE_SIZE) + c;
+
+   if (x != 0)
+        x2 /= x;
+
+   y1 = (x * -(SCENE_SIZE)) + c;
+
+   if (y != 0)
+       y1 /= y;
+
+   y2 = (x * SCENE_SIZE) + c;
+
+   if (y != 0)
+       y2 /= y;
+
 }
 
-/*!
- * \brief line::boundingRect Define the bounding rectangle
- * \return QRectF
- *
- * Defines the area on the scene that the object can draw on.
- */
+void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    // assign brush and pen
+        painter->setBrush(*brush);
+        painter->setPen(*pen);
+
+        pen->setCosmetic(true);
+        pen->setWidth(LINE_WIDTH);
+
+        // draw shape
+        switch (METRIC) {
+            case drawingMetric::ELLIPTIC: {
+                // draw line
+                painter->drawLine(x1, y1, x2, y2);
+
+                QPointF point(x, y);
+                painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
+
+                // add label to side
+                painter->drawText(x, y - 5, label);
+
+                break;
+            }
+
+            case drawingMetric::PARABOLIC: {
+                // Reserved for future use
+                break;
+
+            }
+
+            case drawingMetric::HYPERBOLIC: {
+                // Reserved for future use
+                break;
+            }
+        }
+}
+
 QRectF line::boundingRect() const
 {
     int padding;
@@ -65,85 +115,27 @@ QPainterPath line::shape() const {
 }
 
 /*!
- * \brief line::paint Paint the line on the scene.
- * \param p QPainter object.
+ * \brief graphicCycle::stableMatrix create new transformation matrix
+ * \param matrix the current transformation matrix
+ * \param p point at which the transformation is centered
+ * \return QMatrix - the new transformation matrix
  *
- * This function paints the line on the scene given various parameters
- * (such as x, y, radius and label). The line is drawn differently dependent
- * on the drawing metric in use.
+ * Create a new matrix which will keep items the same size when the zoom transformation is applied to it.
  */
-void line::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidget *)
+QMatrix line::stableMatrix(const QMatrix &matrix, const QPointF &p)
 {
-    // check for changes to coordinates
-    getParameters();
+    QMatrix newMatrix = matrix;
 
-    // assign brush and pen
-    p->setBrush(*brush);
-    p->setPen(*pen);
+    qreal scaleX, scaleY;
+    scaleX = newMatrix.m11();
+    scaleY = newMatrix.m22();
+    newMatrix.scale(1.0/scaleX, 1.0/scaleY);
 
-    pen->setCosmetic(true);
-    pen->setWidth(LINE_WIDTH);
+    qreal offsetX, offsetY;
+    offsetX = p.x() * (scaleX - 1.0);
+    offsetY = p.y() * (scaleY - 1.0);
+    newMatrix.translate(offsetX, offsetY);
 
-    // draw shape
-    switch (METRIC) {
-        case drawingMetric::ELLIPTIC: {
-            // draw line
-            p->drawLine(x1, y1, x2, y2);
-
-            QPointF point(x, y);
-            p->setMatrix(stableMatrix(p->worldMatrix(), point));
-
-            // add label to side
-            p->drawText(x, y - 5, label);
-
-            break;
-        }
-
-        case drawingMetric::PARABOLIC: {
-            // Reserved for future use
-            break;
-
-        }
-
-        case drawingMetric::HYPERBOLIC: {
-            // Reserved for future use
-            break;
-        }
-    }
+    return newMatrix;
 }
 
-/*!
- * \brief graphicsCycle::getParameters get x and y coordinates.
- *
- * Get the x and y coordinates of the point from the line in the figure.
- */
-void line::getParameters() {
-    // get cycle that has just been added
-    cycle2D c = ex_to<cycle2D>(fig->get_cycle(cycle)[0]);
-
-    // now break into components
-    x = ex_to<numeric>(c.get_l(0).evalf()).to_double();
-    y = ex_to<numeric>(c.get_l(1).evalf()).to_double();
-    double a = ex_to<numeric>((c.get_m()/2).evalf()).to_double();
-
-    // break line equation into 2 distinct points, given by x1, x2, y1, and y2.
-    x1 = (y * -(SCENE_SIZE)) + a;
-
-    if (x != 0)
-        x1 /= x;
-
-    x2 = (y * SCENE_SIZE) + a;
-
-    if (x != 0)
-         x2 /= x;
-
-    y1 = (x * -(SCENE_SIZE)) + a;
-
-    if (y != 0)
-        y1 /= y;
-
-    y2 = (x * SCENE_SIZE) + a;
-
-    if (y != 0)
-        y2 /= y;
-}
