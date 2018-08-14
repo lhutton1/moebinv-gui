@@ -40,12 +40,12 @@ SOURCES += \
         src/line.cpp
 
 HEADERS += \
+        include/conf.h \
         include/mainwindow.h \
         include/scene.h \
         include/labels.h \
         include/cyclecontextmenu.h \
         include/graphiccycle.h \
-        include/conf.h \
         include/view.h \
         include/point.h \
         include/circle.h \

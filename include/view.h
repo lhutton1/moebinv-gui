@@ -23,7 +23,6 @@ public:
     double relativeScaleFactor;
 
 signals:
-    void scaleFactorChanged(double relativeScaleFactor);
 
 private:
     Qt::KeyboardModifier modifier;

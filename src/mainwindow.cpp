@@ -22,13 +22,12 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new graphicsScene();
     ui->graphicsView->setScene(scene);
 
-
     // set up new event
     connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
 
     // initialize figure
-    initFigure();
+    f = figure();
 
     // create new labels object to create unique labels
     lblGen = new labels();
@@ -54,6 +53,15 @@ QString MainWindow::node_compact_string(GiNaC::ex name)
     drawing << std::setprecision(FLOAT_PRECISION);
     ex_to<cycle_node>(f.get_cycle_node(name))
         .do_print_double(GiNaC::print_dflt(drawing,0), 0);
+    string dr = drawing.str().c_str();
+
+    return QString::fromStdString(dr);
+}
+
+QString MainWindow::node_label(GiNaC::ex name)
+{
+    std::ostringstream drawing;
+    drawing << name;
     string dr = drawing.str().c_str();
 
     return QString::fromStdString(dr);
@@ -85,21 +93,7 @@ void MainWindow::onMouseSceneHover(QPointF point)
     ui->statusBar->showMessage(coordinates);
 }
 
-/*!
- * \brief MainWindow::initFigure Initialize figure
- *
- * Create a new figure and apply any additional settings.
- */
-void MainWindow::initFigure()
-{
-    f = figure();
-
-    // Add any additional settings here
-    //
-    //
-}
-
-void MainWindow::addOrthogonalToList(int relType, ex cycle) {
+void MainWindow::addToList(int relType, ex cycle) {
     switch (relType) {
         case ORTHOGONAL:
             relationList.append(is_orthogonal(cycle));
@@ -116,7 +110,7 @@ void MainWindow::addOrthogonalToList(int relType, ex cycle) {
     }
 }
 
-void MainWindow::removeOrthogonalFromList(ex cycle) {
+void MainWindow::removeFromList(ex cycle) {
 
 }
 
@@ -147,27 +141,11 @@ void MainWindow::initTreeModel()
 void MainWindow::addToTree(ex cycle)
 {
     // Add label and output to tree
-    QString treeLabel = node_compact_string(cycle);
+    QString treeLabel = node_label(cycle) + " - " + node_compact_string(cycle);
 
     QStandardItem *newItem = new QStandardItem(treeLabel);
     newItem->setToolTip(treeLabel);
     model->item(0)->appendRow(newItem);
-}
-
-void MainWindow::removeFromTree(graphicCycle *c)
-{
-//    QString treeLabel = c->getLabel() + " - " + ex_to_string(f.get_cycle_node(c->getCycle()));
-
-//    QList<QStandardItem *> itemList = model->findItems(
-//        treeLabel,
-//        Qt::MatchExactly | Qt::MatchRecursive,
-//        0
-//    );
-
-//    for (const auto &item : itemList) {
-//        QStandardItem *parent = item->parent();
-//        parent->removeRow(item->row());
-//    }
 }
 
 void MainWindow::initMainMenu() {
@@ -202,17 +180,17 @@ void MainWindow::initMainMenu() {
 
 void MainWindow::addInfinityToList(int relType)
 {
-    addOrthogonalToList(relType, f.get_infinity());
+    addToList(relType, f.get_infinity());
 }
 
 void MainWindow::addRealToList(int relType)
 {
-    addOrthogonalToList(relType, f.get_real_line());
+    addToList(relType, f.get_real_line());
 }
 
 void MainWindow::removeInfinityFromList()
 {
-    //removeOrthogonalFromList(relType, )
+    //removeFromList(relType, )
 }
 
 void MainWindow::removeRealFromList()
@@ -245,13 +223,12 @@ void MainWindow::update()
         ex cycle = keys[x];
 
         // add cycles to scene
-        graphicCycle *c = new graphicCycle(&f, cycle);
+        graphicCycle *c = new graphicCycle(&f, cycle, &ui->graphicsView->relativeScaleFactor);
         scene->addItem(c);
 
         // connect events
-        connect(c, &graphicCycle::removeFromTree, this, &MainWindow::removeFromTree);
-        connect(c, &graphicCycle::addRelationToList, this, &MainWindow::addOrthogonalToList);
-        connect(c, &graphicCycle::removeRelationFromList, this, &MainWindow::removeOrthogonalFromList);
+        connect(c, &graphicCycle::addRelationToList, this, &MainWindow::addToList);
+        connect(c, &graphicCycle::removeRelationFromList, this, &MainWindow::removeFromList);
         connect(this, &MainWindow::resetRelationalList, c, &graphicCycle::resetRelationalList);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
 

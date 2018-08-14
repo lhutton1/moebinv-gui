@@ -11,7 +11,7 @@
 class point : public QGraphicsItem
 {
 public:
-    point(MoebInv::figure *f, double x, double y, QString label, QGraphicsItem *parent);
+    point(MoebInv::figure *f, double x, double y, QString label, QGraphicsItem *parent, double *relativeScaleFactor);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
     QRectF boundingRect() const;

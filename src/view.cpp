@@ -36,5 +36,4 @@ void view::wheelEvent(QWheelEvent * event)
 
     scale(factor, factor);
     setTransformationAnchor(anchor);
-    emit scaleFactorChanged(relativeScaleFactor);
 }

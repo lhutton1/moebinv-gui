@@ -1,7 +1,7 @@
 #include <QDebug>
 #include "line.h"
 
-line::line(MoebInv::figure *f, double x, double y, double c, QString label, QGraphicsItem *parent)
+line::line(MoebInv::figure *f, double x, double y, double c, QString label, QGraphicsItem *parent, double *relativeScaleFactor)
 {
    fig = f;
    this->x = x;
@@ -13,10 +13,6 @@ line::line(MoebInv::figure *f, double x, double y, double c, QString label, QGra
    // create the brush and pen and assign a base colour
    brush = new QBrush(Qt::black);
    pen = new QPen(Qt::black);
-
-   scaleFactor = 1;
-
-   qDebug() << "line child created";
 
    // break line equation into 2 distinct points, given by x1, x2, y1, and y2.
    x1 = (y * -(SCENE_SIZE)) + c;

@@ -28,13 +28,13 @@ class MainWindow;
  *
  * MainWindow, the main application. This encompasses the scene, menu and tree view.
  */
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    void initFigure();
     void addPoint(QPointF location);
     void setDrawingMetric();
     void addToTree(GiNaC::ex cycle);
@@ -45,6 +45,7 @@ public:
     void addCycle(GiNaC::ex cycle, QString label);
     void update();
     QString node_compact_string(GiNaC::ex name);
+    QString node_label(GiNaC::ex name);
     ~MainWindow();
 
     bool toolAddCycle;
@@ -52,9 +53,8 @@ public:
 private slots:
     void onMouseScenePress(QPointF point);
     void onMouseSceneHover(QPointF point);
-    void removeFromTree(graphicCycle *c);
-    void addOrthogonalToList(int relType, GiNaC::ex cycle);
-    void removeOrthogonalFromList(GiNaC::ex cycle);
+    void addToList(int relType, GiNaC::ex cycle);
+    void removeFromList(GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
     void addInfinityToList(int relType);
     void addRealToList(int relType);

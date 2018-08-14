@@ -12,7 +12,7 @@
 class line : public QGraphicsItem
 {
 public:
-    line(MoebInv::figure *f, double x, double y, double c, QString label, QGraphicsItem *parent);
+    line(MoebInv::figure *f, double x, double y, double c, QString label, QGraphicsItem *parent, double *relativeScaleFactor);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
     QPainterPath shape() const;

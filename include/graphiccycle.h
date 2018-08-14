@@ -26,12 +26,13 @@
  * Inherits both QObject and QGraphicsItem.
  *
  */
+
 class graphicCycle : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 
 public:
-    graphicCycle(MoebInv::figure *f, GiNaC::ex c);
+    graphicCycle(MoebInv::figure *f, GiNaC::ex c, double *relativeScaleFactor);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *);
@@ -39,10 +40,11 @@ public:
     QString getLabel();
     GiNaC::ex getCycle();
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
-    void addPoint(double x, double y);
-    void addCircle(double x, double y, double radius);
-    void addLine(double x, double y, double c);
+    void addPoint(double x, double y, double *relativeScaleFactor);
+    void addCircle(double x, double y, double radius, double *relativeScaleFactor);
+    void addLine(double x, double y, double c, double *relativeScaleFactor);
     void buildShape();
+    QString node_label(GiNaC::ex name);
 
 public slots:
     void resetRelationalList();
@@ -55,12 +57,15 @@ signals:
     void addRelationToList(int relType, GiNaC::ex c);
     void removeRelationFromList(GiNaC::ex c);
     void sceneInvalid();
+    void scaleFactorChanged();
 
 
-protected:
+private:
     GiNaC::ex cycle;
     MoebInv::figure *fig;
     cycleContextMenu *menu;
+
+    double *relativeScaleFactor;
 
     QString label;
 

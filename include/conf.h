@@ -71,4 +71,5 @@ const int FLOAT_PRECISION = 3;
  */
 const double EPSILON = 0.00000001;
 
+
 #endif // DRAWINGMETRIC_H

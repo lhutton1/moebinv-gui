@@ -1,21 +1,20 @@
 #include <QDebug>
 #include "circle.h"
 
-circle::circle(MoebInv::figure *f, double x, double y, double radius, QString label, QGraphicsItem *parent)
+circle::circle(MoebInv::figure *f, double x, double y, double radius, QString label, QGraphicsItem *parent, double *relativeScaleFactor)
 {
    fig = f;
    this->x = x;
    this->y = y;
    this->radius = radius;
    this->label = label;
+   this->relativeScaleFactor = relativeScaleFactor;
 
    this->setParentItem(parent);
 
    // create the brush and pen and assign a base colour
    brush = new QBrush(Qt::black);
    pen = new QPen(Qt::black);
-
-   scaleFactor = 1;
 }
 
 void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -38,7 +37,7 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
             painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
 
             // add label to side
-            painter->drawText(x, y + radius * scaleFactor - 4, label);
+            painter->drawText(x, y + (*relativeScaleFactor) * radius - 4, label);
 
             break;
         }

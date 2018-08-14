@@ -10,12 +10,14 @@ using namespace MoebInv;
  * \param c The cycle that has just been created and added to the figure.
  * \param l The label used by the cycle as a unique identifier.
  */
-graphicCycle::graphicCycle(figure *f, ex c)
+
+graphicCycle::graphicCycle(figure *f, ex c, double *relativeScaleFactor)
 {
     // assign parameters
-    fig = f;
-    cycle = c;
-    label = "A";
+    this->fig = f;
+    this->cycle = c;
+    this->label = node_label(c);
+    this->relativeScaleFactor = relativeScaleFactor;
 
     // create the brush and pen and assign a base colour
     brush = new QBrush(Qt::black);
@@ -125,19 +127,19 @@ void graphicCycle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->setPen(*pen);
 }
 
-void graphicCycle::addPoint(double x, double y)
+void graphicCycle::addPoint(double x, double y, double *relativeScaleFactor)
 {
-    class point *p = new class point(fig, x, y, label, this);
+    class point *p = new class point(fig, x, y, label, this, relativeScaleFactor);
 }
 
-void graphicCycle::addCircle(double x, double y, double radius)
+void graphicCycle::addCircle(double x, double y, double radius, double *relativeScaleFactor)
 {
-    class circle *c = new class circle(fig, x, y, radius, label, this);
+    class circle *c = new class circle(fig, x, y, radius, label, this, relativeScaleFactor);
 }
 
-void graphicCycle::addLine(double x, double y, double c)
+void graphicCycle::addLine(double x, double y, double c, double *relativeScaleFactor)
 {
-    class line *l = new class line(fig, x, y, c, label, this);
+    class line *l = new class line(fig, x, y, c, label, this, relativeScaleFactor);
 }
 
 QRectF graphicCycle::boundingRect() const
@@ -158,24 +160,22 @@ void graphicCycle::buildShape()
             double x = ex_to<numeric>(C.center().op(0)).to_double();
             double y = ex_to<numeric>(C.center().op(1)).to_double();
 
-            addPoint(x, y);
+            addPoint(x, y, relativeScaleFactor);
 
         } else if (ex_to<numeric>(abs(C.get_k()).evalf()).to_double() < EPSILON) {
             //line
-            qDebug() << "drawing line";
             double x = ex_to<numeric>(C.get_l(0).evalf()).to_double();
             double y = ex_to<numeric>(C.get_l(1).evalf()).to_double();
             double c = ex_to<numeric>((C.get_m()/2).evalf()).to_double();
 
-            addLine(x, y, c);
+            addLine(x, y, c, relativeScaleFactor);
         } else {
             //circle
-            qDebug() << "drawing circle";
             double x = ex_to<numeric>(C.center().op(0)).to_double();
             double y = ex_to<numeric>(C.center().op(1)).to_double();
             double radius = qSqrt(ex_to<numeric>(C.radius_sq()).to_double());
 
-            addCircle(x, y, radius);
+            addCircle(x, y, radius, relativeScaleFactor);
         }
 
     }
@@ -185,5 +185,14 @@ void graphicCycle::removeCycle()
 {
     fig->remove_cycle_node(cycle);
     emit sceneInvalid();
+}
+
+QString graphicCycle::node_label(GiNaC::ex name)
+{
+    std::ostringstream drawing;
+    drawing << name;
+    string dr = drawing.str().c_str();
+
+    return QString::fromStdString(dr);
 }
 

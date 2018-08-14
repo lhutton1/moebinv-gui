@@ -11,14 +11,13 @@
 class circle : public QGraphicsItem
 {
 public:
-    circle(MoebInv::figure *f, double x, double y, double radius, QString label, QGraphicsItem *parent);
+    circle(MoebInv::figure *f, double x, double y, double radius, QString label, QGraphicsItem *parent, double *relativeScaleFactor);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
     QPainterPath shape() const;
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
 
 public slots:
-
 
 private:
     double x;
@@ -27,7 +26,7 @@ private:
     QString label;
     MoebInv::figure *fig;
 
-    double scaleFactor;
+    double *relativeScaleFactor;
 
     QBrush *brush;
     QPen *pen;

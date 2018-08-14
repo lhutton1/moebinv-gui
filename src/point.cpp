@@ -1,7 +1,17 @@
 #include <QDebug>
 #include "point.h"
 
-point::point(MoebInv::figure *f, double x, double y, QString label, QGraphicsItem *parent)
+/*!
+ * \brief point::point Create a new point.
+ * \param f the figure.
+ * \param x the x coordinate the point needs to be placed at.
+ * \param y the y coordinate the point needs to be placed at.
+ * \param label the label to be displayed.
+ * \param parent the parent QGraphicsItem.
+ *
+ * Construct a new point on the scene and assign it to the parent graphicCycle.
+ */
+point::point(MoebInv::figure *f, double x, double y, QString label, QGraphicsItem *parent, double *relativeScaleFactor)
 {
    fig = f;
    this->x = x;
@@ -18,6 +28,14 @@ point::point(MoebInv::figure *f, double x, double y, QString label, QGraphicsIte
 
 }
 
+/*!
+ * \brief line::paint Paint the point on the scene.
+ * \param p QPainter object.
+ *
+ * This function paints the point on the scene given various parameters
+ * (such as x and y). The point is drawn differently dependent
+ * on the drawing metric in use.
+ */
 void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     // assign brush and pen
@@ -57,6 +75,12 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     }
 }
 
+/*!
+ * \brief point::boundingRect Define the bounding rect.
+ * \return QRectF
+ *
+ * Define the box the object is drawn within on the scene.
+ */
 QRectF point::boundingRect() const
 {
     return QRectF(
