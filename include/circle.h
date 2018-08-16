@@ -6,18 +6,25 @@
 
 #include "figure.h"
 
+#include "graphiccycle.h"
 #include "conf.h"
 
-class circle : public QGraphicsItem
+class circle : public QObject, public QGraphicsItem
 {
+    Q_OBJECT
+
 public:
-    circle(MoebInv::figure *f, double x, double y, double radius, QString label, QGraphicsItem *parent, double *relativeScaleFactor);
+    circle(struct cycleData data);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
     QRectF boundingRect() const;
     QPainterPath shape() const;
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
 
-public slots:
+signals:
+    void isHovered();
+    void isUnHovered();
 
 private:
     double x;

@@ -27,6 +27,20 @@
  *
  */
 
+struct cycleData {
+    double x;
+    double y;
+    double radius;
+    double c;
+    QString label;
+    QGraphicsItem *cycle;
+    MoebInv::figure *fig;
+    double *relativeScaleFactor;
+
+    QBrush *brush;
+    QPen *pen;
+};
+
 class graphicCycle : public QObject, public QGraphicsItem
 {
     Q_OBJECT
@@ -35,7 +49,6 @@ public:
     graphicCycle(MoebInv::figure *f, GiNaC::ex c, double *relativeScaleFactor);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *);
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     QString getLabel();
     GiNaC::ex getCycle();
@@ -51,6 +64,8 @@ public slots:
     void addToList(int relType);
     void removeFromList();
     void removeCycle();
+    void setHover();
+    void unsetHover();
 
 signals:
     void removeFromTree(graphicCycle *c);

@@ -39,18 +39,6 @@ graphicCycle::graphicCycle(figure *f, ex c, double *relativeScaleFactor)
 }
 
 /*!
- * \brief graphicCycle::hoverEnterEvent Mouse enters clipping mask of point.
- *
- * This event is triggered when the mouse enters the clipping mask of the point.
- * The colour of the point is changed to red and a tool tip is set giving information about the point.
- */
-void graphicCycle::hoverEnterEvent(QGraphicsSceneHoverEvent *) {
-    //set tool tip on hover showing coordinates
-    //QString toolTipString = "X:" + QString::number(x) + " Y:" + QString::number(y);
-    //setToolTip(toolTipString);
-}
-
-/*!
  * \brief graphicCycle::contextMenuEvent Menu popup for cycle.
  * \param event new mouse event.
  *
@@ -129,17 +117,62 @@ void graphicCycle::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 void graphicCycle::addPoint(double x, double y, double *relativeScaleFactor)
 {
-    class point *p = new class point(fig, x, y, label, this, relativeScaleFactor);
+    struct cycleData data;
+    data.x = x;
+    data.y = y;
+    data.radius = 0;
+    data.c = 0;
+    data.label = label;
+    data.cycle = this;
+    data.fig = fig;
+    data.relativeScaleFactor = relativeScaleFactor;
+    data.brush = brush;
+    data.pen = pen;
+
+    class point *p = new class point(data);
+
+    connect(p, &point::isHovered, this, &graphicCycle::setHover);
+    connect(p, &point::isUnHovered, this, &graphicCycle::unsetHover);
 }
 
 void graphicCycle::addCircle(double x, double y, double radius, double *relativeScaleFactor)
 {
-    class circle *c = new class circle(fig, x, y, radius, label, this, relativeScaleFactor);
+    struct cycleData data;
+    data.x = x;
+    data.y = y;
+    data.radius = radius;
+    data.c = 0;
+    data.label = label;
+    data.cycle = this;
+    data.fig = fig;
+    data.relativeScaleFactor = relativeScaleFactor;
+    data.brush = brush;
+    data.pen = pen;
+
+    class circle *c = new class circle(data);
+
+    connect(c, &circle::isHovered, this, &graphicCycle::setHover);
+    connect(c, &circle::isUnHovered, this, &graphicCycle::unsetHover);
 }
 
 void graphicCycle::addLine(double x, double y, double c, double *relativeScaleFactor)
 {
-    class line *l = new class line(fig, x, y, c, label, this, relativeScaleFactor);
+    struct cycleData data;
+    data.x = x;
+    data.y = y;
+    data.radius = 0;
+    data.c = c;
+    data.label = label;
+    data.cycle = this;
+    data.fig = fig;
+    data.relativeScaleFactor = relativeScaleFactor;
+    data.brush = brush;
+    data.pen = pen;
+
+    class line *l = new class line(data);
+
+    connect(l, &line::isHovered, this, &graphicCycle::setHover);
+    connect(l, &line::isUnHovered, this, &graphicCycle::unsetHover);
 }
 
 QRectF graphicCycle::boundingRect() const
@@ -194,5 +227,19 @@ QString graphicCycle::node_label(GiNaC::ex name)
     string dr = drawing.str().c_str();
 
     return QString::fromStdString(dr);
+}
+
+void graphicCycle::setHover()
+{
+    brush->setColor(Qt::red);
+    pen->setColor(Qt::red);
+    update();
+}
+
+void graphicCycle::unsetHover()
+{
+    brush->setColor(Qt::black);
+    pen->setColor(Qt::black);
+    update();
 }
 

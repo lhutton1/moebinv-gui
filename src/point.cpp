@@ -11,20 +11,22 @@
  *
  * Construct a new point on the scene and assign it to the parent graphicCycle.
  */
-point::point(MoebInv::figure *f, double x, double y, QString label, QGraphicsItem *parent, double *relativeScaleFactor)
+point::point(struct cycleData data)
 {
-   fig = f;
-   this->x = x;
-   this->y = y;
-   this->label = label;
+   fig = data.fig;
+   this->x = data.x;
+   this->y = data.y;
+   this->label = data.label;
 
-   this->setParentItem(parent);
+   this->setParentItem(data.cycle);
 
    // create the brush and pen and assign a base colour
-   brush = new QBrush(Qt::black);
-   pen = new QPen(Qt::black);
+   brush = data.brush;
+   pen = data.pen;
 
    scaleFactor = 1;
+
+   setAcceptHoverEvents(true);
 
 }
 
@@ -114,4 +116,14 @@ QMatrix point::stableMatrix(const QMatrix &matrix, const QPointF &p)
     newMatrix.translate(offsetX, offsetY);
 
     return newMatrix;
+}
+
+void point::hoverEnterEvent(QGraphicsSceneHoverEvent *)
+{
+    emit isHovered();
+}
+
+void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
+{
+    emit isUnHovered();
 }

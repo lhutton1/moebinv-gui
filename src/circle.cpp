@@ -1,20 +1,22 @@
 #include <QDebug>
 #include "circle.h"
 
-circle::circle(MoebInv::figure *f, double x, double y, double radius, QString label, QGraphicsItem *parent, double *relativeScaleFactor)
+circle::circle(struct cycleData data)
 {
-   fig = f;
-   this->x = x;
-   this->y = y;
-   this->radius = radius;
-   this->label = label;
-   this->relativeScaleFactor = relativeScaleFactor;
+   fig = data.fig;
+   this->x = data.x;
+   this->y = data.y;
+   this->radius = data.radius;
+   this->label = data.label;
+   this->relativeScaleFactor = data.relativeScaleFactor;
 
-   this->setParentItem(parent);
+   this->setParentItem(data.cycle);
 
    // create the brush and pen and assign a base colour
-   brush = new QBrush(Qt::black);
-   pen = new QPen(Qt::black);
+   brush = data.brush;
+   pen = data.pen;
+
+   setAcceptHoverEvents(true);
 }
 
 void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -114,4 +116,15 @@ QMatrix circle::stableMatrix(const QMatrix &matrix, const QPointF &p)
     newMatrix.translate(offsetX, offsetY);
 
     return newMatrix;
+}
+
+void circle::hoverEnterEvent(QGraphicsSceneHoverEvent *)
+{
+    qDebug() << "hovered";
+    emit isHovered();
+}
+
+void circle::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
+{
+    emit isUnHovered();
 }

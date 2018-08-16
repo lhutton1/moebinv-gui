@@ -1,18 +1,20 @@
 #include <QDebug>
 #include "line.h"
 
-line::line(MoebInv::figure *f, double x, double y, double c, QString label, QGraphicsItem *parent, double *relativeScaleFactor)
+line::line(struct cycleData data)
 {
-   fig = f;
-   this->x = x;
-   this->y = y;
-   this->label = label;
+   fig = data.fig;
+   this->x = data.x;
+   this->y = data.y;
+   this->label = data.label;
 
-   this->setParentItem(parent);
+   this->setParentItem(data.cycle);
 
    // create the brush and pen and assign a base colour
-   brush = new QBrush(Qt::black);
-   pen = new QPen(Qt::black);
+   brush = data.brush;
+   pen = data.pen;
+
+   setAcceptHoverEvents(true);
 
    // break line equation into 2 distinct points, given by x1, x2, y1, and y2.
    x1 = (y * -(SCENE_SIZE)) + c;
@@ -133,5 +135,15 @@ QMatrix line::stableMatrix(const QMatrix &matrix, const QPointF &p)
     newMatrix.translate(offsetX, offsetY);
 
     return newMatrix;
+}
+
+void line::hoverEnterEvent(QGraphicsSceneHoverEvent *)
+{
+    emit isHovered();
+}
+
+void line::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
+{
+    emit isUnHovered();
 }
 

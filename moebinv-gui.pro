@@ -48,8 +48,9 @@ HEADERS += \
         include/graphiccycle.h \
         include/view.h \
         include/point.h \
-        include/circle.h \
-        include/line.h
+        include/line.h \
+        include/circle.h
+
 
 FORMS += \
         forms/mainwindow.ui

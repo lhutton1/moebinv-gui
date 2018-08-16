@@ -6,15 +6,24 @@
 
 #include "figure.h"
 
+#include "graphiccycle.h"
 #include "conf.h"
 
-class point : public QGraphicsItem
+class point : public QObject, public QGraphicsItem
 {
+    Q_OBJECT
+
 public:
-    point(MoebInv::figure *f, double x, double y, QString label, QGraphicsItem *parent, double *relativeScaleFactor);
+    point(struct cycleData data);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
     QRectF boundingRect() const;
+
+signals:
+    void isHovered();
+    void isUnHovered();
 
 private:
     double x;
