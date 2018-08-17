@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QObject>
 #include <QGraphicsItem>
+#include <QGraphicsView>
 #include <QGraphicsSceneContextMenuEvent>
 #include <QtMath>
 
@@ -36,6 +37,7 @@ struct cycleData {
     QGraphicsItem *cycle;
     MoebInv::figure *fig;
     double *relativeScaleFactor;
+    QGraphicsView *view;
 
     QBrush *brush;
     QPen *pen;
@@ -46,7 +48,7 @@ class graphicCycle : public QObject, public QGraphicsItem
     Q_OBJECT
 
 public:
-    graphicCycle(MoebInv::figure *f, GiNaC::ex c, double *relativeScaleFactor);
+    graphicCycle(MoebInv::figure *f, GiNaC::ex c, QGraphicsView *view, double *relativeScaleFactor);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
@@ -73,6 +75,7 @@ signals:
     void removeRelationFromList(GiNaC::ex c);
     void sceneInvalid();
     void scaleFactorChanged();
+    void findCycleInTree(GiNaC::ex c);
 
 
 private:
@@ -81,6 +84,8 @@ private:
     cycleContextMenu *menu;
 
     double *relativeScaleFactor;
+
+    QGraphicsView *view;
 
     QString label;
 

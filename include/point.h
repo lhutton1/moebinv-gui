@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QGraphicsView>
 
 #include "figure.h"
 
@@ -18,7 +19,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void hoverEnterEvent(QGraphicsSceneHoverEvent *);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
-    QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
+    QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p) const;
     QRectF boundingRect() const;
 
 signals:
@@ -31,7 +32,9 @@ private:
     QString label;
     MoebInv::figure *fig;
 
-    double scaleFactor;
+    double *scaleFactor;
+
+    QGraphicsView *view;
 
     QBrush *brush;
     QPen *pen;

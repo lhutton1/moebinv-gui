@@ -6,6 +6,7 @@
 #include "ui_mainwindow.h"
 
 using namespace GiNaC;
+
 using namespace MoebInv;
 
 /*!
@@ -223,7 +224,7 @@ void MainWindow::update()
         ex cycle = keys[x];
 
         // add cycles to scene
-        graphicCycle *c = new graphicCycle(&f, cycle, &ui->graphicsView->relativeScaleFactor);
+        graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor);
         scene->addItem(c);
 
         // connect events
@@ -231,6 +232,7 @@ void MainWindow::update()
         connect(c, &graphicCycle::removeRelationFromList, this, &MainWindow::removeFromList);
         connect(this, &MainWindow::resetRelationalList, c, &graphicCycle::resetRelationalList);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
+        connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
 
         // add cycle to the tree
         addToTree(cycle);
@@ -286,4 +288,20 @@ void MainWindow::on_actionCreate_Cycle_triggered()
 void MainWindow::sceneInvalid()
 {
     update();
+}
+
+void MainWindow::findCycleInTree(GiNaC::ex c)
+{
+    QString cycleString = node_label(c) + " - " + node_compact_string(c);
+
+    QList<QStandardItem *> itemList = model->findItems(
+        cycleString,
+        Qt::MatchExactly | Qt::MatchRecursive,
+        0
+    );
+
+    for (const auto &item : itemList) {
+        QStandardItem *parent = item->parent();
+        ui->treeView->setCurrentIndex(item->index());
+    }
 }

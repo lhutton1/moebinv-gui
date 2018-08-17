@@ -11,13 +11,14 @@ using namespace MoebInv;
  * \param l The label used by the cycle as a unique identifier.
  */
 
-graphicCycle::graphicCycle(figure *f, ex c, double *relativeScaleFactor)
+graphicCycle::graphicCycle(figure *f, ex c, QGraphicsView *view, double *relativeScaleFactor)
 {
     // assign parameters
     this->fig = f;
     this->cycle = c;
     this->label = node_label(c);
     this->relativeScaleFactor = relativeScaleFactor;
+    this->view = view;
 
     // create the brush and pen and assign a base colour
     brush = new QBrush(Qt::black);
@@ -128,6 +129,7 @@ void graphicCycle::addPoint(double x, double y, double *relativeScaleFactor)
     data.relativeScaleFactor = relativeScaleFactor;
     data.brush = brush;
     data.pen = pen;
+    data.view = view;
 
     class point *p = new class point(data);
 
@@ -148,6 +150,7 @@ void graphicCycle::addCircle(double x, double y, double radius, double *relative
     data.relativeScaleFactor = relativeScaleFactor;
     data.brush = brush;
     data.pen = pen;
+    data.view = view;
 
     class circle *c = new class circle(data);
 
@@ -168,6 +171,7 @@ void graphicCycle::addLine(double x, double y, double c, double *relativeScaleFa
     data.relativeScaleFactor = relativeScaleFactor;
     data.brush = brush;
     data.pen = pen;
+    data.view = view;
 
     class line *l = new class line(data);
 
@@ -183,6 +187,7 @@ QRectF graphicCycle::boundingRect() const
 void graphicCycle::buildShape()
 {
     ex L = fig->get_cycle(cycle);
+    bool isOntop = false;
 
     // interate through cycle components
     for (lst::const_iterator it =ex_to<lst>(L).begin(); it != ex_to<lst>(L).end(); ++it) {
@@ -194,6 +199,7 @@ void graphicCycle::buildShape()
             double y = ex_to<numeric>(C.center().op(1)).to_double();
 
             addPoint(x, y, relativeScaleFactor);
+            isOntop = true;
 
         } else if (ex_to<numeric>(abs(C.get_k()).evalf()).to_double() < EPSILON) {
             //line
@@ -202,6 +208,7 @@ void graphicCycle::buildShape()
             double c = ex_to<numeric>((C.get_m()/2).evalf()).to_double();
 
             addLine(x, y, c, relativeScaleFactor);
+            qDebug() << "it is a line:" << x << "x +" << y << "y =" << c;
         } else {
             //circle
             double x = ex_to<numeric>(C.center().op(0)).to_double();
@@ -212,6 +219,11 @@ void graphicCycle::buildShape()
         }
 
     }
+
+    if (isOntop)
+        this->setZValue(1);
+    else
+        this->setZValue(-1);
 }
 
 void graphicCycle::removeCycle()
@@ -234,6 +246,9 @@ void graphicCycle::setHover()
     brush->setColor(Qt::red);
     pen->setColor(Qt::red);
     update();
+
+    // now emit signal to find in tree
+    emit findCycleInTree(cycle);
 }
 
 void graphicCycle::unsetHover()

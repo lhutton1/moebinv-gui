@@ -16,26 +16,31 @@ line::line(struct cycleData data)
 
    setAcceptHoverEvents(true);
 
+   //qDebug() << x << y << c;
+   // line equation given in the form ax + by = c
    // break line equation into 2 distinct points, given by x1, x2, y1, and y2.
    x1 = (y * -(SCENE_SIZE)) + c;
 
-   if (x != 0)
+   if (x)
        x1 /= x;
 
    x2 = (y * SCENE_SIZE) + c;
 
-   if (x != 0)
-        x2 /= x;
+   if (x)
+       x2 /= x;
 
    y1 = (x * -(SCENE_SIZE)) + c;
 
    if (y != 0)
        y1 /= y;
 
+
    y2 = (x * SCENE_SIZE) + c;
 
    if (y != 0)
        y2 /= y;
+
+   //qDebug() << x1 << x2 << y1 << y2;
 
 }
 

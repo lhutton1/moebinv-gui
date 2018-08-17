@@ -17,14 +17,14 @@ point::point(struct cycleData data)
    this->x = data.x;
    this->y = data.y;
    this->label = data.label;
+   this->scaleFactor = data.relativeScaleFactor;
+   this->view = data.view;
 
    this->setParentItem(data.cycle);
 
    // create the brush and pen and assign a base colour
    brush = data.brush;
    pen = data.pen;
-
-   scaleFactor = 1;
 
    setAcceptHoverEvents(true);
 
@@ -85,13 +85,35 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
  */
 QRectF point::boundingRect() const
 {
-    return QRectF(
-        x - POINT_SIZE,
-        y - POINT_SIZE,
-        30 / scaleFactor,
-        30 / scaleFactor
-    );
+    QRectF rect = QRectF(x - POINT_SIZE,
+            y - POINT_SIZE,
+            20,
+            20);
+
+    return rect;
 }
+
+///*!
+// * \brief point::shape Define the clipping mask of the object
+// * \return QPainterPath
+// *
+// * Defines the area in which hover events take place.
+// */
+//QPainterPath point::shape() const
+//{
+//    QPainterPath path;
+
+//    path.addRect(
+//        x - POINT_SIZE,
+//        y - POINT_SIZE,
+//        30,
+//        30
+//    );
+
+
+
+//    return path;
+//}
 
 /*!
  * \brief graphicCycle::stableMatrix create new transformation matrix
@@ -101,7 +123,7 @@ QRectF point::boundingRect() const
  *
  * Create a new matrix which will keep items the same size when the zoom transformation is applied to it.
  */
-QMatrix point::stableMatrix(const QMatrix &matrix, const QPointF &p)
+QMatrix point::stableMatrix(const QMatrix &matrix, const QPointF &p) const
 {
     QMatrix newMatrix = matrix;
 

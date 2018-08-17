@@ -120,7 +120,6 @@ QMatrix circle::stableMatrix(const QMatrix &matrix, const QPointF &p)
 
 void circle::hoverEnterEvent(QGraphicsSceneHoverEvent *)
 {
-    qDebug() << "hovered";
     emit isHovered();
 }
 

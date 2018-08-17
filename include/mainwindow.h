@@ -62,6 +62,7 @@ private slots:
     void removeRealFromList();
     void on_actionPan_toggled(bool pan);
     void sceneInvalid();
+    void findCycleInTree(GiNaC::ex c);
 
 signals:
     void resetRelationalList();
