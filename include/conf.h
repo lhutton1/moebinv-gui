@@ -71,5 +71,7 @@ const int FLOAT_PRECISION = 3;
  */
 const double EPSILON = 0.00000001;
 
+extern bool REAL_CYCLES;
+
 
 #endif // DRAWINGMETRIC_H

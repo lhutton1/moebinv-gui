@@ -45,6 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // whether to add
     isAddPoint = true;
 
+    REAL_CYCLES = true;
+
     update();
 }
 
@@ -215,6 +217,8 @@ void MainWindow::update()
     // remove data
     scene->clear();
     initTreeModel();
+    resetList(&relationList);
+    resetList(&realList);
 
     ex keys = f.get_all_keys();
 
@@ -236,6 +240,10 @@ void MainWindow::update()
 
         // add cycle to the tree
         addToTree(cycle);
+
+        // add cycle to the relation list stating only reals
+        if (REAL_CYCLES)
+            realList.append(only_reals(cycle));
     }
 }
 
@@ -277,10 +285,17 @@ void MainWindow::on_actionCreate_Cycle_triggered()
         return;
     }
 
+    //merge lists to add relations to cycle
+    for (size_t i = 0; i < realList.nops(); i++) {
+        relationList.append(realList.op(i));
+    }
+
     QString label = lblGen->genNextLabel();
     ex cycle = f.add_cycle_rel(relationList, qPrintable(label));
+
     lblGen->advanceLabel();
     update();
+
     emit resetRelationalList();
     resetList(&relationList);
 }

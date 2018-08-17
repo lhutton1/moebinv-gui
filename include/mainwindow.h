@@ -75,6 +75,7 @@ private:
     MoebInv::figure f;
 
     GiNaC::lst relationList;
+    GiNaC::lst realList;
 
     QMessageBox *msgBox;
 
@@ -86,6 +87,8 @@ private:
     QMap<GiNaC::ex, QPointer<graphicCycle>> cycles;
 
     bool isAddPoint;
+
+    bool REAL_CYCLES;
 };
 
 #endif // MAINWINDOW_H
