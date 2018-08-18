@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
 
     // initialize figure
-    f = figure();
+    f = figure().set_float_eval();
 
     // create new labels object to create unique labels
     lblGen = new labels();
@@ -173,6 +173,7 @@ void MainWindow::addToTree(ex cycle)
     QString treeLabel = node_label(cycle) + " - " + node_compact_string(cycle);
 
     QStandardItem *newItem = new QStandardItem(treeLabel);
+    newItem->setTextAlignment(Qt::AlignVCenter);
     newItem->setToolTip(treeLabel);
 
     // add to correct place in the tree
@@ -186,19 +187,19 @@ void MainWindow::initMainMenu() {
     for (int x = 0; x < MENU_SIZE; x++)
         menus[x] = new cycleContextMenu(false);
 
-    QToolButton *infinity = new QToolButton();
+    infinity = new QToolButton();
     infinity->setMenu(menus[0]);
     infinity->setText("Infinity");
     infinity->setPopupMode(QToolButton::InstantPopup);
     ui->mainToolBar->addWidget(infinity);
 
-    QToolButton *real = new QToolButton();
+    real = new QToolButton();
     real->setMenu(menus[1]);
     real->setText("Real Line");
     real->setPopupMode(QToolButton::InstantPopup);
     ui->mainToolBar->addWidget(real);
 
-    QToolButton *thisItem = new QToolButton();
+    thisItem = new QToolButton();
     thisItem->setMenu(menus[2]);
     thisItem->setText("This");
     thisItem->setPopupMode(QToolButton::InstantPopup);
@@ -281,6 +282,14 @@ void MainWindow::update()
         connect(this, &MainWindow::resetRelationalList, c, &graphicCycle::resetRelationalList);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
 
+        //reset infinity, real, this relations
+        for (int x = 0; x < MENU_SIZE; x++) {
+            menus[x]->isOrthogonal->setChecked(false);
+            menus[x]->isfOrthogonal->setChecked(false);
+            menus[x]->isDifferent->setChecked(false);
+            menus[x]->isTangent->setChecked(false);
+        }
+
         // add cycle to the tree
         addToTree(cycle);
         connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
@@ -333,9 +342,6 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     if (REAL_CYCLES) {
         relationList.append(only_reals(newName));
     }
-
-    // add this relations
-
 
     ex cycle = f.add_cycle_rel(relationList, newName);
 

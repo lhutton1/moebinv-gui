@@ -90,6 +90,10 @@ private:
     bool isAddPoint;
 
     bool REAL_CYCLES;
+
+    QToolButton *infinity;
+    QToolButton *real;
+    QToolButton *thisItem;
 };
 
 #endif // MAINWINDOW_H
