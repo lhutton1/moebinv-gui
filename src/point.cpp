@@ -18,15 +18,18 @@ point::point(struct cycleData data)
    this->y = data.y;
    this->label = data.label;
    this->scaleFactor = data.relativeScaleFactor;
-   this->view = data.view;
+   this->v = data.view;
 
    this->setParentItem(data.cycle);
+   this->setPos(x, y);
 
    // create the brush and pen and assign a base colour
    brush = data.brush;
    pen = data.pen;
 
    setAcceptHoverEvents(true);
+
+   BOUNDINGRECT_DEBUG = false;
 
 }
 
@@ -41,25 +44,30 @@ point::point(struct cycleData data)
 void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     // assign brush and pen
-    painter->setBrush(*brush);
+    pen->setCosmetic(true);
+    pen->setWidth(LINE_WIDTH);
     painter->setPen(*pen);
 
     // draw shape
     switch (METRIC) {
         case drawingMetric::ELLIPTIC: {
-            QPointF point(x, y);
-            painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
+            if (BOUNDINGRECT_DEBUG)
+                painter->drawRect(this->boundingRect());
 
+            painter->setBrush(*brush);
+
+            QPointF point(0, 0);
+            painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
             // draw point
             painter->drawEllipse(
-                x - POINT_SIZE / 2,
-                y - POINT_SIZE / 2,
+                0 - POINT_SIZE / 2,
+                0 - POINT_SIZE / 2,
                 POINT_SIZE,
                 POINT_SIZE
             );
 
             // add label to side
-            painter->drawText(x + POINT_SIZE + 3, y + 12, label);
+            painter->drawText(POINT_SIZE + 3, 12, label);
 
             break;
         }
@@ -85,35 +93,11 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
  */
 QRectF point::boundingRect() const
 {
-    QRectF rect = QRectF(x - POINT_SIZE,
-            y - POINT_SIZE,
-            20,
-            20);
-
-    return rect;
+    int labelWidth = (label.count() * 6 + 10);
+    QPointF topLeft = QPointF(0 / *scaleFactor, -15 / *scaleFactor);
+    QPointF bottomRight = QPointF(labelWidth / *scaleFactor, 0 / *scaleFactor);
+    return QRectF (topLeft, bottomRight);
 }
-
-///*!
-// * \brief point::shape Define the clipping mask of the object
-// * \return QPainterPath
-// *
-// * Defines the area in which hover events take place.
-// */
-//QPainterPath point::shape() const
-//{
-//    QPainterPath path;
-
-//    path.addRect(
-//        x - POINT_SIZE,
-//        y - POINT_SIZE,
-//        30,
-//        30
-//    );
-
-
-
-//    return path;
-//}
 
 /*!
  * \brief graphicCycle::stableMatrix create new transformation matrix

@@ -10,6 +10,10 @@
 view::view(QObject *parent)
 {
     this->setRenderHint(QPainter::Antialiasing);
+
+    // reflect the y-axis so coordinate system matches a standard graph
+    this->scale(1.0, -1.0);
+
     relativeScaleFactor = 1;
 }
 
@@ -33,7 +37,10 @@ void view::wheelEvent(QWheelEvent * event)
         factor = 0.9;
         relativeScaleFactor *= 0.9;
     }
+    offsetX = mapFromScene(QPointF(0,0)).x();
+    offsetY = mapFromScene(QPointF(0,0)).y();
 
     scale(factor, factor);
     setTransformationAnchor(anchor);
+    setViewportUpdateMode(FullViewportUpdate);
 }

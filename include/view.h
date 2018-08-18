@@ -21,6 +21,8 @@ public:
     void wheelEvent(QWheelEvent * event);
 
     double relativeScaleFactor;
+    double offsetX;
+    double offsetY;
 
 signals:
 

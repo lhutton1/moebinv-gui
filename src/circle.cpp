@@ -17,6 +17,9 @@ circle::circle(struct cycleData data)
    pen = data.pen;
 
    setAcceptHoverEvents(true);
+   setPos(x, y);
+
+   BOUNDINGRECT_DEBUG = false;
 }
 
 void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -28,18 +31,21 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
     switch (METRIC) {
         case drawingMetric::ELLIPTIC: {
+            if (BOUNDINGRECT_DEBUG)
+                painter->drawRect(this->boundingRect());
+
             // draw circle
             painter->drawEllipse(
-                QPointF(x, y),
+                QPointF(0, 0),
                 radius,
                 radius
             );
 
-            QPointF point(x, y);
+            QPointF point(0, 0);
             painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
 
             // add label to side
-            painter->drawText(x, y + (*relativeScaleFactor) * radius - 4, label);
+            painter->drawText(0, 0 + (*relativeScaleFactor) * radius - 4, label);
 
             break;
         }
@@ -60,8 +66,8 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 QRectF circle::boundingRect() const
 {
     return QRectF(
-        x - radius - LINE_HOVER_PADDING,
-        y - radius - LINE_HOVER_PADDING,
+        0 - radius - LINE_HOVER_PADDING,
+        0 - radius - LINE_HOVER_PADDING,
         radius * 2 + LINE_HOVER_PADDING * 2,
         radius * 2 + LINE_HOVER_PADDING * 2
     );
@@ -79,13 +85,13 @@ QPainterPath circle::shape() const
     QPainterPath subPath;
 
     path.addEllipse(
-        QPointF(x - LINE_HOVER_PADDING, y - LINE_HOVER_PADDING),
+        QPointF(0 - LINE_HOVER_PADDING, 0 - LINE_HOVER_PADDING),
         radius + LINE_HOVER_PADDING * 2,
         radius + LINE_HOVER_PADDING * 2
     );
 
     subPath.addEllipse(
-        QPointF(x + LINE_HOVER_PADDING, y + LINE_HOVER_PADDING),
+        QPointF(0 + LINE_HOVER_PADDING, 0 + LINE_HOVER_PADDING),
         radius - LINE_HOVER_PADDING * 2,
         radius - LINE_HOVER_PADDING * 2
     );

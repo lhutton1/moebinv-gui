@@ -21,6 +21,7 @@ public:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p) const;
     QRectF boundingRect() const;
+    //QPainterPath shape() const;
 
 signals:
     void isHovered();
@@ -34,7 +35,9 @@ private:
 
     double *scaleFactor;
 
-    QGraphicsView *view;
+    class view *v;
+
+    bool BOUNDINGRECT_DEBUG;
 
     QBrush *brush;
     QPen *pen;

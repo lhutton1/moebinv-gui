@@ -11,14 +11,14 @@ using namespace MoebInv;
  * \param l The label used by the cycle as a unique identifier.
  */
 
-graphicCycle::graphicCycle(figure *f, ex c, QGraphicsView *view, double *relativeScaleFactor)
+graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScaleFactor)
 {
     // assign parameters
     this->fig = f;
     this->cycle = c;
     this->label = node_label(c);
     this->relativeScaleFactor = relativeScaleFactor;
-    this->view = view;
+    this->view = v;
 
     // create the brush and pen and assign a base colour
     brush = new QBrush(Qt::black);
@@ -208,7 +208,6 @@ void graphicCycle::buildShape()
             double c = ex_to<numeric>((C.get_m()/2).evalf()).to_double();
 
             addLine(x, y, c, relativeScaleFactor);
-            qDebug() << "it is a line:" << x << "x +" << y << "y =" << c;
         } else {
             //circle
             double x = ex_to<numeric>(C.center().op(0)).to_double();

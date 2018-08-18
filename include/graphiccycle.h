@@ -13,6 +13,7 @@
 #include "figure.h"
 
 #include "cyclecontextmenu.h"
+#include "view.h"
 #include "conf.h"
 #include "point.h"
 #include "circle.h"
@@ -37,7 +38,7 @@ struct cycleData {
     QGraphicsItem *cycle;
     MoebInv::figure *fig;
     double *relativeScaleFactor;
-    QGraphicsView *view;
+    class view *view;
 
     QBrush *brush;
     QPen *pen;
@@ -48,7 +49,7 @@ class graphicCycle : public QObject, public QGraphicsItem
     Q_OBJECT
 
 public:
-    graphicCycle(MoebInv::figure *f, GiNaC::ex c, QGraphicsView *view, double *relativeScaleFactor);
+    graphicCycle(MoebInv::figure *f, GiNaC::ex c, class view *v, double *relativeScaleFactor);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
@@ -85,7 +86,7 @@ private:
 
     double *relativeScaleFactor;
 
-    QGraphicsView *view;
+    class view *view;
 
     QString label;
 

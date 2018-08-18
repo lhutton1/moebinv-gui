@@ -35,6 +35,8 @@ private:
 
     double *relativeScaleFactor;
 
+    bool BOUNDINGRECT_DEBUG;
+
     QBrush *brush;
     QPen *pen;
 };
