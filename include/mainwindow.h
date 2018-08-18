@@ -58,8 +58,10 @@ private slots:
     void on_actionCreate_Cycle_triggered();
     void addInfinityToList(int relType);
     void addRealToList(int relType);
-    void removeInfinityFromList();
-    void removeRealFromList();
+    void addThisToList(int relType);
+    void removeInfinityFromList(int relType);
+    void removeRealFromList(int relType);
+    void removeThisFromList(int relType);
     void on_actionPan_toggled(bool pan);
     void sceneInvalid();
     void findCycleInTree(GiNaC::ex c);

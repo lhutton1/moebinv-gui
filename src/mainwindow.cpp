@@ -208,8 +208,8 @@ void MainWindow::initMainMenu() {
     connect(menus[0], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeInfinityFromList);
     connect(menus[1], &cycleContextMenu::addRelationToList, this, &MainWindow::addRealToList);
     connect(menus[1], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeRealFromList);
-    //connect(menus[2], &cycleContextMenu::addRelationToList, this, &MainWindow::addThisToList);
-    //connect(menus[2], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeThisFromList);
+    connect(menus[2], &cycleContextMenu::addRelationToList, this, &MainWindow::addThisToList);
+    connect(menus[2], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeThisFromList);
 }
 
 void MainWindow::addInfinityToList(int relType)
@@ -222,14 +222,28 @@ void MainWindow::addRealToList(int relType)
     addToList(relType, f.get_real_line());
 }
 
-void MainWindow::removeInfinityFromList()
+void MainWindow::removeInfinityFromList(int relType)
 {
-    //removeFromList(relType, )
+    removeFromList(relType, f.get_infinity());
 }
 
-void MainWindow::removeRealFromList()
+void MainWindow::removeRealFromList(int relType)
 {
-    //removeOrthogonalFromList(relType, )
+    removeFromList(relType, f.get_real_line());
+}
+
+void MainWindow::addThisToList(int relType)
+{
+    // cycle doesn't exist yet so the next symbol needs to be fetched
+    ex newLabel = symbol(qPrintable(lblGen->genNextLabel()));
+    addToList(relType, newLabel);
+}
+
+void MainWindow::removeThisFromList(int relType)
+{
+    // cycle doesn't exist yet so the next symbol needs to be fetched
+    ex newLabel = symbol(qPrintable(lblGen->genNextLabel()));
+    removeFromList(relType, newLabel);
 }
 
 void MainWindow::on_actionPan_toggled(bool pan)
@@ -266,13 +280,12 @@ void MainWindow::update()
         connect(c, &graphicCycle::removeRelationFromList, this, &MainWindow::removeFromList);
         connect(this, &MainWindow::resetRelationalList, c, &graphicCycle::resetRelationalList);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
-        //connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
 
         // add cycle to the tree
-
         addToTree(cycle);
+        connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
     }
-    //addToTree(f.get_infinity());
+    addToTree(f.get_infinity());
 }
 
 /*!
@@ -320,6 +333,9 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     if (REAL_CYCLES) {
         relationList.append(only_reals(newName));
     }
+
+    // add this relations
+
 
     ex cycle = f.add_cycle_rel(relationList, newName);
 
