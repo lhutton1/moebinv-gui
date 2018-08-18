@@ -36,7 +36,7 @@ public slots:
 
 signals:
     void addRelationToList(int relType);
-    void removeRelationFromList();
+    void removeRelationFromList(int relType);
 
 };
 

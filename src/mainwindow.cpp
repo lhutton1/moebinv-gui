@@ -113,8 +113,35 @@ void MainWindow::addToList(int relType, ex cycle) {
     }
 }
 
-void MainWindow::removeFromList(ex cycle) {
+void MainWindow::removeFromList(int relType, ex cycle) {
+    lst newRelationList;
+    cycle_relation relationToRemove;
 
+    // build relation to remove
+    switch(relType) {
+        case ORTHOGONAL:
+            relationToRemove = is_orthogonal(cycle);
+            break;
+        case FORTHOGONAL:
+            relationToRemove = is_f_orthogonal(cycle);
+            break;
+        case TANGENT:
+            relationToRemove = is_tangent(cycle);
+            break;
+        case DIFFERENT:
+            relationToRemove = is_different(cycle);
+            break;
+    }
+
+
+    // now loop through current list and build new list
+    for (int x = 0; x < relationList.nops(); x++) {
+        if (node_label(relationList.op(x)) != node_label(relationToRemove)) {
+            newRelationList.append(relationList.op(x));
+        }
+    }
+
+    relationList = newRelationList;
 }
 
 void MainWindow::resetList(GiNaC::lst *list) {
@@ -153,9 +180,6 @@ void MainWindow::addToTree(ex cycle)
         model->appendRow(newItem);
     if (cycleGeneration >= 0)
         model->item(cycleGeneration)->appendRow(newItem);
-
-
-
 }
 
 void MainWindow::initMainMenu() {

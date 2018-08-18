@@ -80,9 +80,9 @@ void graphicCycle::addToList(int relType)
  * Slot to remove cycle from list. Emmits a signal to call slot in
  * MainWindow to remove the cycle from the list.
  */
-void graphicCycle::removeFromList()
+void graphicCycle::removeFromList(int relType)
 {
-    emit removeRelationFromList(cycle);
+    emit removeRelationFromList(relType, cycle);
 }
 
 /*!

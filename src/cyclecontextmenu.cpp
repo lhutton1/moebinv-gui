@@ -95,6 +95,6 @@ void cycleContextMenu::isChecked(int relType) {
         emit addRelationToList(relType);
     }
     else {
-        emit removeRelationFromList();
+        emit removeRelationFromList(relType);
     }
 }

@@ -54,7 +54,7 @@ private slots:
     void onMouseScenePress(QPointF point);
     void onMouseSceneHover(QPointF point);
     void addToList(int relType, GiNaC::ex cycle);
-    void removeFromList(GiNaC::ex cycle);
+    void removeFromList(int relType, GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
     void addInfinityToList(int relType);
     void addRealToList(int relType);
