@@ -123,32 +123,39 @@ void MainWindow::resetList(GiNaC::lst *list) {
 
 void MainWindow::initTreeModel()
 {
-        model = new QStandardItemModel();
-        QStandardItem *rootNode = model->invisibleRootItem();
+    model = new QStandardItemModel();
+    QStandardItem *rootNode = model->invisibleRootItem();
+    int genMax = f.get_max_generation() + 1;
 
-        //defining generations
-        QStandardItem *gen0Item = new QStandardItem("Generation 0");
-        QStandardItem *gen1Item = new QStandardItem("Generation 1");
-        QStandardItem *gen2Item = new QStandardItem("Generation 2");
+    for(int x = 0; x < genMax; x++) {
+        QStandardItem *genItem = new QStandardItem(QString::fromStdString("Generation " + std::to_string(x)));
+        rootNode->appendRow(genItem);
+    }
 
-        //building up the hierarchy
-        rootNode->appendRow(gen0Item);
-        rootNode->appendRow(gen1Item);
-        rootNode->appendRow(gen2Item);
-
-        //register the model
-        ui->treeView->setModel(model);
-        ui->treeView->expandAll();
+    //register the model
+    ui->treeView->setModel(model);
+    ui->treeView->expandAll();
 }
 
 void MainWindow::addToTree(ex cycle)
 {
-    // Add label and output to tree
+    // get the current generation of the cycle
+    int cycleGeneration = ex_to<numeric>(f.get_generation(cycle)).to_int();
+
+    // add label and output to tree
     QString treeLabel = node_label(cycle) + " - " + node_compact_string(cycle);
 
     QStandardItem *newItem = new QStandardItem(treeLabel);
     newItem->setToolTip(treeLabel);
-    model->item(0)->appendRow(newItem);
+
+    // add to correct place in the tree
+    if (cycleGeneration < 0)
+        model->appendRow(newItem);
+    if (cycleGeneration >= 0)
+        model->item(cycleGeneration)->appendRow(newItem);
+
+
+
 }
 
 void MainWindow::initMainMenu() {
@@ -218,9 +225,8 @@ void MainWindow::update()
     scene->clear();
     initTreeModel();
     resetList(&relationList);
-    resetList(&realList);
 
-    ex keys = f.get_all_keys();
+    ex keys = f.get_all_keys(REAL_LINE_GEN);
 
     // for all items in the figure
     for (int x = 0; x < keys.nops(); x++) {
@@ -236,15 +242,13 @@ void MainWindow::update()
         connect(c, &graphicCycle::removeRelationFromList, this, &MainWindow::removeFromList);
         connect(this, &MainWindow::resetRelationalList, c, &graphicCycle::resetRelationalList);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
-        connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
+        //connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
 
         // add cycle to the tree
-        addToTree(cycle);
 
-        // add cycle to the relation list stating only reals
-        if (REAL_CYCLES)
-            realList.append(only_reals(cycle));
+        addToTree(cycle);
     }
+    //addToTree(f.get_infinity());
 }
 
 /*!
@@ -285,13 +289,15 @@ void MainWindow::on_actionCreate_Cycle_triggered()
         return;
     }
 
-    //merge lists to add relations to cycle
-    for (size_t i = 0; i < realList.nops(); i++) {
-        relationList.append(realList.op(i));
+    QString label = lblGen->genNextLabel();
+    ex newName = symbol(qPrintable(label));
+
+    // only real cycles
+    if (REAL_CYCLES) {
+        relationList.append(only_reals(newName));
     }
 
-    QString label = lblGen->genNextLabel();
-    ex cycle = f.add_cycle_rel(relationList, qPrintable(label));
+    ex cycle = f.add_cycle_rel(relationList, newName);
 
     lblGen->advanceLabel();
     update();

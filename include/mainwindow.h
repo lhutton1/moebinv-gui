@@ -75,7 +75,6 @@ private:
     MoebInv::figure f;
 
     GiNaC::lst relationList;
-    GiNaC::lst realList;
 
     QMessageBox *msgBox;
 
