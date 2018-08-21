@@ -13,14 +13,13 @@ using namespace MoebInv;
 graphicsScene::graphicsScene(QObject *parent)
     : QGraphicsScene(parent)
 {
+    QPointF topLeft = QPointF(-SCENE_SIZE / 2, -SCENE_SIZE / 2);
+    QPointF bottomRight = QPointF(SCENE_SIZE / 2, SCENE_SIZE / 2);
+
+    QRectF rect = QRectF(topLeft, bottomRight);
 
     // set the size of the scene
-    this->setSceneRect(
-        -(SCENE_SIZE / 2),
-        -(SCENE_SIZE / 2),
-        SCENE_SIZE,
-        SCENE_SIZE
-    );
+    this->setSceneRect(rect);
 }
 
 /*!

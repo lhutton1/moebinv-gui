@@ -8,7 +8,6 @@
 #include <QStandardItemModel>
 #include <QStandardItem>
 #include <QGraphicsTextItem>
-#include <QMessageBox>
 #include <QToolButton>
 #include <QMap>
 
@@ -78,8 +77,6 @@ private:
 
     GiNaC::lst relationList;
 
-    QMessageBox *msgBox;
-
     QStandardItemModel *model;
 
     static const int MENU_SIZE = 3;
@@ -90,6 +87,8 @@ private:
     bool isAddPoint;
 
     bool REAL_CYCLES;
+
+    QMessageBox *msgBox;
 
     QToolButton *infinity;
     QToolButton *real;

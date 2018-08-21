@@ -6,7 +6,10 @@ line::line(struct cycleData data)
    fig = data.fig;
    this->x = data.x;
    this->y = data.y;
+   this->c = data.c;
    this->label = data.label;
+
+   //this->x =
 
    this->setParentItem(data.cycle);
 
@@ -16,33 +19,47 @@ line::line(struct cycleData data)
 
    setAcceptHoverEvents(true);
 
-   //qDebug() << x << y << c;
-   // line equation given in the form ax + by = c
-   // break line equation into 2 distinct points, given by x1, x2, y1, and y2.
-   x1 = (y * -(SCENE_SIZE)) + c;
+   int sceneSize = SCENE_SIZE / 2;
 
-   if (x)
-       x1 /= x;
+   x1 = -(sceneSize);
 
-   x2 = (y * SCENE_SIZE) + c;
-
-   if (x)
-       x2 /= x;
-
-   y1 = (x * -(SCENE_SIZE)) + c;
+   y2 = (x * (sceneSize)) + c;
 
    if (y != 0)
-       y1 /= y;
+       y2 = y2 / y;
 
+   x2 = sceneSize;
 
-   y2 = (x * SCENE_SIZE) + c;
+   y1 = (x * -(sceneSize)) + c;
 
    if (y != 0)
-       y2 /= y;
+       y1 = y1 / y;
 
-   //qDebug() << x1 << x2 << y1 << y2;
+   qDebug() << "x1:" << x1 << "y2:" << y2 << "x2:" << x2 << "y1:" << y1;
 
+   if (-(sceneSize) > y2 || (sceneSize) < y1 || (sceneSize) < y2 || (-(sceneSize)) > y1) {
+       qDebug() << "detected going outside..";
+       y2 = -(sceneSize);
+
+       x1 = (y * (sceneSize)) + c;
+
+       if (x != 0)
+           x1 = x1 / x;
+
+       y1 = (sceneSize);
+
+       x2 = (y * -(sceneSize)) + c;
+
+       if (x != 0)
+           x2 = x2 / x;
+   }
+
+
+
+   qDebug() << "x1:" << x1 << "y2:" << y2 << "x2:" << x2 << "y1:" << y1;
 }
+
+
 
 void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
@@ -56,8 +73,10 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         // draw shape
         switch (METRIC) {
             case drawingMetric::ELLIPTIC: {
+
                 // draw line
-                painter->drawLine(x1, y1, x2, y2);
+                QLineF line = QLineF(x1, y2, x2, y1);
+                painter->drawLine(line);
 
                 QPointF point(x, y);
                 painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
@@ -90,29 +109,32 @@ QRectF line::boundingRect() const
         padding = 15 :
         padding = LINE_HOVER_PADDING;
 
+    QPointF topLeft = QPointF(x1, y2);
+    QPointF bottomRight = QPointF(x2, y1);
+
     return QRectF(
-        x1 - padding,
-        y1 - padding,
-        abs(x1 - x2) + padding * 2,
-        abs(y1 - y2) + padding * 2
+        topLeft,
+        bottomRight
     );
 }
 
-/*!
- * \brief circle::shape Define the clipping mask of the object
- * \return QPainterPath
- *
- * Defines the area in which hover events take place.
- */
+///*!
+// * \brief circle::shape Define the clipping mask of the object
+// * \return QPainterPath
+// *
+// * Defines the area in which hover events take place.
+// */
 QPainterPath line::shape() const {
     QPainterPath path;
 
-    path.addRect(
-        x1 - LINE_HOVER_PADDING,
-        y1 - LINE_HOVER_PADDING,
-        abs(x1 - x2) + LINE_HOVER_PADDING * 2,
-        abs(y1 - y2) + LINE_HOVER_PADDING * 2
-    );
+    QPolygonF poly = QPolygonF();
+
+    poly << QPointF(x1 - 3, y2 - 3)
+         << QPointF(x1 + 3, y2 + 3)
+         << QPointF(x2 - 3, y1 - 3)
+         << QPointF(x2 + 3, y1 + 3);
+
+    path.addPolygon(poly);
 
     return path;
 }

@@ -274,13 +274,14 @@ void MainWindow::update()
 
         // add cycles to scene
         graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor);
-        scene->addItem(c);
 
         // connect events
         connect(c, &graphicCycle::addRelationToList, this, &MainWindow::addToList);
         connect(c, &graphicCycle::removeRelationFromList, this, &MainWindow::removeFromList);
-        connect(this, &MainWindow::resetRelationalList, c, &graphicCycle::resetRelationalList);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
+        connect(this, &MainWindow::resetRelationalList, c, &graphicCycle::resetRelationalList);
+
+        scene->addItem(c);
 
         //reset infinity, real, this relations
         for (int x = 0; x < MENU_SIZE; x++) {

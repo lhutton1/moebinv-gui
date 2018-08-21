@@ -8,6 +8,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsView>
 #include <QGraphicsSceneContextMenuEvent>
+#include <QMessageBox>
 #include <QtMath>
 
 #include "figure.h"
@@ -78,7 +79,6 @@ signals:
     void scaleFactorChanged();
     void findCycleInTree(GiNaC::ex c);
 
-
 private:
     GiNaC::ex cycle;
     MoebInv::figure *fig;
@@ -87,6 +87,8 @@ private:
     double *relativeScaleFactor;
 
     class view *view;
+
+    QMessageBox *msgBox;
 
     QString label;
 

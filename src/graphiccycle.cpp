@@ -36,6 +36,8 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
     // currently hovered object on the scene
     setAcceptHoverEvents(true);
 
+    msgBox = new QMessageBox();
+
     buildShape();
 }
 
@@ -189,34 +191,44 @@ void graphicCycle::buildShape()
     ex L = fig->get_cycle(cycle);
     bool isOntop = false;
 
-    // interate through cycle components
-    for (lst::const_iterator it =ex_to<lst>(L).begin(); it != ex_to<lst>(L).end(); ++it) {
-        cycle2D C = ex_to<cycle2D>(*it);
+    // try to draw new cycle, if not emit a signal to display error message.
+    try {
+        // interate through cycle components
+        for (lst::const_iterator it =ex_to<lst>(L).begin(); it != ex_to<lst>(L).end(); ++it) {
+            cycle2D C = ex_to<cycle2D>(*it);
 
-        if (ex_to<numeric>(abs(C.radius_sq()).evalf()).to_double() < EPSILON) {
-            //point
-            double x = ex_to<numeric>(C.center().op(0)).to_double();
-            double y = ex_to<numeric>(C.center().op(1)).to_double();
+            if (ex_to<numeric>(abs(C.radius_sq()).evalf()).to_double() < EPSILON) {
+                //point
+                double x = ex_to<numeric>(C.center().op(0)).to_double();
+                double y = ex_to<numeric>(C.center().op(1)).to_double();
 
-            addPoint(x, y, relativeScaleFactor);
-            isOntop = true;
+                qDebug() << x << y;
 
-        } else if (ex_to<numeric>(abs(C.get_k()).evalf()).to_double() < EPSILON) {
-            //line
-            double x = ex_to<numeric>(C.get_l(0).evalf()).to_double();
-            double y = ex_to<numeric>(C.get_l(1).evalf()).to_double();
-            double c = ex_to<numeric>((C.get_m()/2).evalf()).to_double();
+                addPoint(x, y, relativeScaleFactor);
+                isOntop = true;
 
-            addLine(x, y, c, relativeScaleFactor);
-        } else {
-            //circle
-            double x = ex_to<numeric>(C.center().op(0)).to_double();
-            double y = ex_to<numeric>(C.center().op(1)).to_double();
-            double radius = qSqrt(ex_to<numeric>(C.radius_sq()).to_double());
+            } else if (ex_to<numeric>(abs(C.get_k()).evalf()).to_double() < EPSILON) {
+                //line
+                double x = ex_to<numeric>(C.get_l(0).evalf()).to_double();
+                double y = ex_to<numeric>(C.get_l(1).evalf()).to_double();
+                double c = ex_to<numeric>((C.get_m()/2).evalf()).to_double();
 
-            addCircle(x, y, radius, relativeScaleFactor);
+                qDebug() << "(" << ex_to<numeric>(C.get_l(0).evalf()).to_double()
+                         << ")*x + ("
+                         << ex_to<numeric>(C.get_l(1).evalf()).to_double() << ")*y = "
+                         << ex_to<numeric>((C.get_m()/2).evalf()).to_double();
+
+                addLine(x, y, c, relativeScaleFactor);
+            } else {
+                //circle
+                double x = ex_to<numeric>(C.center().op(0)).to_double();
+                double y = ex_to<numeric>(C.center().op(1)).to_double();
+                double radius = qSqrt(ex_to<numeric>(C.radius_sq()).to_double());
+                addCircle(x, y, radius, relativeScaleFactor);
+            }
         }
-
+    } catch(...) {
+        qDebug() << "Too many or too little conditions are specified";
     }
 
     if (isOntop)
