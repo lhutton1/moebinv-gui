@@ -73,9 +73,9 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         // draw shape
         switch (METRIC) {
             case drawingMetric::ELLIPTIC: {
-
+                painter->drawRect(boundingRect());
                 // draw line
-                QLineF line = QLineF(x1, y2, x2, y1);
+                QLineF line = QLineF(x2, y1, x1, y2);
                 painter->drawLine(line);
 
                 QPointF point(x, y);

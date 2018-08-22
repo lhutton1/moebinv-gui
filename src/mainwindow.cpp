@@ -373,3 +373,14 @@ void MainWindow::findCycleInTree(GiNaC::ex c)
         ui->treeView->setCurrentIndex(item->index());
     }
 }
+
+void MainWindow::on_actionSave_triggered()
+{
+    f.save("test");
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+    f = figure("test");
+    update();
+}

@@ -65,6 +65,10 @@ private slots:
     void sceneInvalid();
     void findCycleInTree(GiNaC::ex c);
 
+    void on_actionSave_triggered();
+
+    void on_actionOpen_triggered();
+
 signals:
     void resetRelationalList();
 
