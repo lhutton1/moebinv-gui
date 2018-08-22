@@ -39,7 +39,9 @@ private:
     double y1;
     double y2;
 
-    double scaleFactor;
+    double *relativeScaleFactor;
+
+    bool FLIPPED;
 
     QBrush *brush;
     QPen *pen;

@@ -8,6 +8,7 @@ line::line(struct cycleData data)
    this->y = data.y;
    this->c = data.c;
    this->label = data.label;
+   this->relativeScaleFactor = data.relativeScaleFactor;
 
    //this->x =
 
@@ -19,40 +20,61 @@ line::line(struct cycleData data)
 
    setAcceptHoverEvents(true);
 
-   int sceneSize = SCENE_SIZE / 2;
+   int sceneSize = SCENE_SIZE;
+   if (y == 0) {
+       x1 = c / x;
 
-   x1 = -(sceneSize);
+       y2 = -(sceneSize);
 
-   y2 = (x * (sceneSize)) + c;
+       x2 = c / x;
 
-   if (y != 0)
-       y2 = y2 / y;
+       y1 = sceneSize;
+   } else if (x == 0){
+       x1 = -(sceneSize);
 
-   x2 = sceneSize;
+       y2 = c / y;
 
-   y1 = (x * -(sceneSize)) + c;
+       x2 = sceneSize;
 
-   if (y != 0)
-       y1 = y1 / y;
+       y1 = c / y;
+   } else {
+       x1 = -(sceneSize);
+
+       y2 = (x * (sceneSize)) + c;
+
+       if (y != 0)
+           y2 = y2 / y;
+
+       x2 = sceneSize;
+
+       y1 = (x * -(sceneSize)) + c;
+
+       if (y != 0)
+           y1 = y1 / y;
+   }
+
 
    qDebug() << "x1:" << x1 << "y2:" << y2 << "x2:" << x2 << "y1:" << y1;
 
-   if (-(sceneSize) > y2 || (sceneSize) < y1 || (sceneSize) < y2 || (-(sceneSize)) > y1) {
-       qDebug() << "detected going outside..";
-       y2 = -(sceneSize);
+//   if (-(sceneSize) > y2 || (sceneSize) < y1 || (sceneSize) < y2 || (-(sceneSize)) > y1) {
+//       FLIPPED = true;
+//       qDebug() << "detected going outside..";
+//       y2 = -(sceneSize);
 
-       x1 = (y * (sceneSize)) + c;
+//       x1 = (y * (sceneSize)) + c;
 
-       if (x != 0)
-           x1 = x1 / x;
+//       if (x != 0)
+//           x1 = x1 / x;
 
-       y1 = (sceneSize);
+//       y1 = (sceneSize);
 
-       x2 = (y * -(sceneSize)) + c;
+//       x2 = (y * -(sceneSize)) + c;
 
-       if (x != 0)
-           x2 = x2 / x;
-   }
+//       if (x != 0)
+//           x2 = x2 / x;
+//   }
+
+   setPos(x1, y2);
 
 
 
@@ -64,7 +86,7 @@ line::line(struct cycleData data)
 void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     // assign brush and pen
-        painter->setBrush(*brush);
+        //painter->setBrush(*brush);
         painter->setPen(*pen);
 
         pen->setCosmetic(true);
@@ -73,16 +95,40 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         // draw shape
         switch (METRIC) {
             case drawingMetric::ELLIPTIC: {
-                painter->drawRect(boundingRect());
+                QLineF line;
+                //painter->drawRect(this->boundingRect());
+                //painter->drawPath(this->shape());
                 // draw line
-                QLineF line = QLineF(x2, y1, x1, y2);
+                if (y == 0) {
+                    line = QLineF(0, 0, 0, abs(y2-y1));
+                } else if (((-x)/y) > 0) {
+                    line = QLineF(0, 0, abs(x2-x1), abs(y2-y1));
+                } else if (((-x)/y) < 0) {
+                    line = QLineF(0, 0, abs(x2-x1), -abs(y2-y1));
+                } else {
+                    line = QLineF(0, 0, abs(x2-x1), abs(y2-y1));
+                }
+
                 painter->drawLine(line);
 
                 QPointF point(x, y);
                 painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
 
                 // add label to side
-                painter->drawText(x, y - 5, label);
+                // calculate midpoint
+                double mx = abs(x2-x1) / 2;
+                double my = (abs(y2-y1) / 2);
+
+                if (y == 0) {
+                    painter->drawText(0, -my * (*relativeScaleFactor), label);
+                } else if (x == 0) {
+                    painter->drawText(mx * (*relativeScaleFactor), my * (*relativeScaleFactor) - 4, label);
+                } else if (((-x)/y) > 0) {
+                    painter->drawText(mx * (*relativeScaleFactor), -my * (*relativeScaleFactor) - 12, label);
+                } else if (((-x)/y) < 0) {
+                    painter->drawText(mx * (*relativeScaleFactor), my * (*relativeScaleFactor) + 5, label);
+                }
+
 
                 break;
             }
@@ -103,14 +149,27 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 QRectF line::boundingRect() const
 {
     int padding;
+    QPointF topLeft;
+    QPointF bottomRight;
 
     // if padding is less than 15 the label won't be visible
     LINE_HOVER_PADDING < 15 ?
         padding = 15 :
         padding = LINE_HOVER_PADDING;
 
-    QPointF topLeft = QPointF(x1, y2);
-    QPointF bottomRight = QPointF(x2, y1);
+    if (y == 0) {
+        topLeft = QPointF(-padding, 0);
+        bottomRight = QPointF(abs(x2-x1) + padding, abs(y2-y1));
+    } else if (x == 0) {
+        topLeft = QPointF(0, -padding);
+        bottomRight = QPointF(abs(x2-x1), abs(y2-y1) + padding);
+    } else if (((-x)/y) > 0) {
+        topLeft = QPointF(0, 0);
+        bottomRight = QPointF(abs(x2-x1), abs(y2-y1));
+    } else if (((-x)/y) < 0) {
+        topLeft = QPointF(0, -abs(y2-y1));
+        bottomRight = QPointF(abs(x2-x1), 0);
+    }
 
     return QRectF(
         topLeft,
@@ -118,21 +177,48 @@ QRectF line::boundingRect() const
     );
 }
 
-///*!
-// * \brief circle::shape Define the clipping mask of the object
-// * \return QPainterPath
-// *
-// * Defines the area in which hover events take place.
-// */
+/*!
+ * \brief circle::shape Define the clipping mask of the object
+ * \return QPainterPath
+ *
+ * Defines the area in which hover events take place.
+ */
 QPainterPath line::shape() const {
     QPainterPath path;
-
     QPolygonF poly = QPolygonF();
 
-    poly << QPointF(x1 - 3, y2 - 3)
-         << QPointF(x1 + 3, y2 + 3)
-         << QPointF(x2 - 3, y1 - 3)
-         << QPointF(x2 + 3, y1 + 3);
+    if (y == 0) {
+        poly << QPointF(2, 0)
+             << QPointF(abs(x2-x1) + 2, abs(y2-y1))
+             << QPointF(abs(x2-x1) - 2, abs(y2-y1))
+             << QPointF(-2, 0)
+             << QPointF(2, 0);
+    } else if (x == 0) {
+        poly << QPointF(0, -2)
+             << QPointF(abs(x2-x1), -2)
+             << QPointF(abs(x2-x1), 2)
+             << QPointF(0, 2)
+             << QPointF(0, -2);
+        ;
+    } else if (((-x)/y) > 0) {
+        poly << QPointF(2, -2)
+             << QPointF(abs(x2-x1) + 2, abs(y2-y1) - 2)
+             << QPointF(abs(x2-x1) - 2, abs(y2-y1) + 2)
+             << QPointF(-2, 2)
+             << QPointF(2, -2);
+    } else if (((-x)/y) < 0) {
+        poly << QPointF(-2, -2)
+             << QPointF(abs(x2-x1) - 2, -abs(y2-y1) - 2)
+             << QPointF(abs(x2-x1) + 2, -abs(y2-y1) + 2)
+             << QPointF(2, 2)
+             << QPointF(-2, -2);
+    } else {
+        poly << QPointF(0, y2 - 2)
+             << QPointF(abs(x2-x1), y1 - 2)
+             << QPointF(abs(x2-x1), y1 + 2)
+             << QPointF(0, y2 + 2)
+             << QPointF(0, y2 - 2);
+    }
 
     path.addPolygon(poly);
 

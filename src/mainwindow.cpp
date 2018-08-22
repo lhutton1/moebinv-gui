@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // create new msgbox
     msgBox = new QMessageBox();
+    saveDialog = new QFileDialog();
 
     initTreeModel();
     initMainMenu();
@@ -374,13 +375,30 @@ void MainWindow::findCycleInTree(GiNaC::ex c)
     }
 }
 
+/*!
+ * \brief MainWindow::on_actionSave_triggered
+ *
+ * Save figure in the current state. Called when the user selects 'save' from the application menu.
+ */
 void MainWindow::on_actionSave_triggered()
 {
-    f.save("test");
+    QString fileName;
+
+    fileName = saveDialog->getSaveFileName(this, tr("Save Figure"), QDir::homePath(), tr("*.gar"));
+    f.save(qPrintable(fileName));
 }
 
+
+/*!
+ * \brief MainWindow::on_actionOpen_triggered
+ *
+ * Open figure from a '.gar' file. Called when the user selects 'open' from the application menu.
+ */
 void MainWindow::on_actionOpen_triggered()
 {
-    f = figure("test");
+    QString fileName;
+
+    fileName = saveDialog->getOpenFileName(this, tr("Open Figure"), QDir::homePath(), tr("*.gar"));
+    f = figure(qPrintable(fileName));
     update();
 }

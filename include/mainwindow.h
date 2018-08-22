@@ -10,6 +10,8 @@
 #include <QGraphicsTextItem>
 #include <QToolButton>
 #include <QMap>
+#include <QFileDialog>
+#include <QStandardPaths>
 
 #include "figure.h"
 
@@ -97,6 +99,8 @@ private:
     QToolButton *infinity;
     QToolButton *real;
     QToolButton *thisItem;
+
+    QFileDialog *saveDialog;
 };
 
 #endif // MAINWINDOW_H
