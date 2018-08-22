@@ -48,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     REAL_CYCLES = true;
 
+    connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &MainWindow::onCustomContextMenu);
+
     update();
 }
 
@@ -160,28 +162,48 @@ void MainWindow::initTreeModel()
         rootNode->appendRow(genItem);
     }
 
+    //settings
+    model->setColumnCount(2);
+
     //register the model
     ui->treeView->setModel(model);
+    ui->treeView->setColumnWidth(0, 80);
     ui->treeView->expandAll();
+    ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    //get generation tags to span multiple columns
+    for (int x = 0; x < genMax; x++)
+        ui->treeView->setFirstColumnSpanned(x, rootNode->index(), true);
 }
 
 void MainWindow::addToTree(ex cycle)
 {
+    QList<QStandardItem *> items;
     // get the current generation of the cycle
     int cycleGeneration = ex_to<numeric>(f.get_generation(cycle)).to_int();
 
     // add label and output to tree
     QString treeLabel = node_label(cycle) + " - " + node_compact_string(cycle);
 
-    QStandardItem *newItem = new QStandardItem(treeLabel);
+    QStandardItem *newItem = new QStandardItem(node_label(cycle));
     newItem->setTextAlignment(Qt::AlignVCenter);
     newItem->setToolTip(treeLabel);
+    newItem->setEditable(false);
+
+    items.append(newItem);
+
+    QStandardItem *newItem2 = new QStandardItem(node_compact_string(cycle));
+    newItem->setTextAlignment(Qt::AlignVCenter);
+    newItem->setToolTip(treeLabel);
+    newItem->setEditable(false);
+
+    items.append(newItem2);
 
     // add to correct place in the tree
     if (cycleGeneration < 0)
-        model->appendRow(newItem);
+        model->appendRow(items);
     if (cycleGeneration >= 0)
-        model->item(cycleGeneration)->appendRow(newItem);
+        model->item(cycleGeneration)->appendRow(items);
 }
 
 void MainWindow::initMainMenu() {
@@ -273,8 +295,14 @@ void MainWindow::update()
         // get cycle
         ex cycle = keys[x];
 
+        //create new context menu
+        cycleContextMenu *menu = new cycleContextMenu();
+
         // add cycles to scene
-        graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor);
+        graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor, menu);
+
+        // add to map
+        cyclesMap[node_label(cycle)] = QPointer<graphicCycle>(c);
 
         // connect events
         connect(c, &graphicCycle::addRelationToList, this, &MainWindow::addToList);
@@ -294,6 +322,7 @@ void MainWindow::update()
 
         // add cycle to the tree
         addToTree(cycle);
+
         connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
     }
     addToTree(f.get_infinity());
@@ -361,7 +390,7 @@ void MainWindow::sceneInvalid()
 
 void MainWindow::findCycleInTree(GiNaC::ex c)
 {
-    QString cycleString = node_label(c) + " - " + node_compact_string(c);
+    QString cycleString = node_label(c);
 
     QList<QStandardItem *> itemList = model->findItems(
         cycleString,
@@ -413,4 +442,26 @@ void MainWindow::on_actionNew_triggered()
 {
     f = figure();
     update();
+}
+
+
+/*!
+ * \brief MainWindow::onCustomContextMenu
+ * \param point Point at which the right click occured.
+ *
+ * Displays the context menu for the relevent cycle in the tree view.
+ */
+void MainWindow::onCustomContextMenu(const QPoint &point)
+{
+    QModelIndex index = ui->treeView->indexAt(point);
+    QStandardItem *item = model->itemFromIndex(index);
+
+    if (item->parent() && item->parent()->hasChildren()) {
+        QString itemText = item->parent()->child(item->row())->text();
+
+        if (cyclesMap.contains(itemText)) {
+            QPointer<cycleContextMenu> cMenu = cyclesMap[itemText]->getContextMenu();
+            cMenu->exec(ui->treeView->viewport()->mapToGlobal(point));
+        }
+    }
 }

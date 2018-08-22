@@ -50,7 +50,7 @@ class graphicCycle : public QObject, public QGraphicsItem
     Q_OBJECT
 
 public:
-    graphicCycle(MoebInv::figure *f, GiNaC::ex c, class view *v, double *relativeScaleFactor);
+    graphicCycle(MoebInv::figure *f, GiNaC::ex c, class view *v, double *relativeScaleFactor, cycleContextMenu *menu);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
@@ -62,6 +62,7 @@ public:
     void addLine(double x, double y, double c, double *relativeScaleFactor);
     void buildShape();
     QString node_label(GiNaC::ex name);
+    QPointer<cycleContextMenu> getContextMenu();
 
 public slots:
     void resetRelationalList();

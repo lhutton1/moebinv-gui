@@ -12,6 +12,7 @@
 #include <QMap>
 #include <QFileDialog>
 #include <QStandardPaths>
+#include <QMap>
 
 #include "figure.h"
 
@@ -66,12 +67,11 @@ private slots:
     void on_actionPan_toggled(bool pan);
     void sceneInvalid();
     void findCycleInTree(GiNaC::ex c);
-
     void on_actionSave_triggered();
-
     void on_actionOpen_triggered();
-
     void on_actionNew_triggered();
+
+    void onCustomContextMenu(const QPoint &point);
 
 signals:
     void resetRelationalList();
@@ -90,7 +90,7 @@ private:
     static const int MENU_SIZE = 3;
     cycleContextMenu *menus[MENU_SIZE];
 
-    QMap<GiNaC::ex, QPointer<graphicCycle>> cycles;
+    QMap<QString, QPointer<graphicCycle>> cyclesMap;
 
     bool isAddPoint;
 

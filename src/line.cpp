@@ -54,7 +54,7 @@ line::line(struct cycleData data)
    }
 
 
-   qDebug() << "x1:" << x1 << "y2:" << y2 << "x2:" << x2 << "y1:" << y1;
+   //qDebug() << "x1:" << x1 << "y2:" << y2 << "x2:" << x2 << "y1:" << y1;
 
 //   if (-(sceneSize) > y2 || (sceneSize) < y1 || (sceneSize) < y2 || (-(sceneSize)) > y1) {
 //       FLIPPED = true;
@@ -78,7 +78,7 @@ line::line(struct cycleData data)
 
 
 
-   qDebug() << "x1:" << x1 << "y2:" << y2 << "x2:" << x2 << "y1:" << y1;
+   //qDebug() << "x1:" << x1 << "y2:" << y2 << "x2:" << x2 << "y1:" << y1;
 }
 
 

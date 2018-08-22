@@ -11,7 +11,7 @@ using namespace MoebInv;
  * \param l The label used by the cycle as a unique identifier.
  */
 
-graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScaleFactor)
+graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScaleFactor, cycleContextMenu *menu)
 {
     // assign parameters
     this->fig = f;
@@ -25,7 +25,7 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
     pen = new QPen(Qt::black);
 
     // create a new menu to be used when the user right clicks on the object
-    menu = new cycleContextMenu;
+    this->menu = menu;
 
     // connect signals
     connect(menu, &cycleContextMenu::addRelationToList, this, &graphicCycle::addToList);
@@ -202,7 +202,7 @@ void graphicCycle::buildShape()
                 double x = ex_to<numeric>(C.center().op(0)).to_double();
                 double y = ex_to<numeric>(C.center().op(1)).to_double();
 
-                qDebug() << x << y;
+                //qDebug() << x << y;
 
                 addPoint(x, y, relativeScaleFactor);
                 isOntop = true;
@@ -213,10 +213,10 @@ void graphicCycle::buildShape()
                 double y = ex_to<numeric>(C.get_l(1).evalf()).to_double();
                 double c = ex_to<numeric>((C.get_m()/2).evalf()).to_double();
 
-                qDebug() << "(" << ex_to<numeric>(C.get_l(0).evalf()).to_double()
-                         << ")*x + ("
-                         << ex_to<numeric>(C.get_l(1).evalf()).to_double() << ")*y = "
-                         << ex_to<numeric>((C.get_m()/2).evalf()).to_double();
+                //qDebug() << "(" << ex_to<numeric>(C.get_l(0).evalf()).to_double()
+                //         << ")*x + ("
+                //         << ex_to<numeric>(C.get_l(1).evalf()).to_double() << ")*y = "
+                //         << ex_to<numeric>((C.get_m()/2).evalf()).to_double();
 
                 addLine(x, y, c, relativeScaleFactor);
             } else {
@@ -267,5 +267,13 @@ void graphicCycle::unsetHover()
     brush->setColor(Qt::black);
     pen->setColor(Qt::black);
     update();
+}
+
+QPointer<cycleContextMenu> graphicCycle::getContextMenu()
+{
+    QPointer<cycleContextMenu> menuP = QPointer<cycleContextMenu>(menu);
+
+    if (!menuP.isNull())
+        return menuP;
 }
 
