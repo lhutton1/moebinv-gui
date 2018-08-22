@@ -402,3 +402,15 @@ void MainWindow::on_actionOpen_triggered()
     f = figure(qPrintable(fileName));
     update();
 }
+
+
+/*!
+ * \brief MainWindow::on_actionNew_triggered
+ *
+ * Create a new empty figure. Called when the user selects 'new' from the application menu.
+ */
+void MainWindow::on_actionNew_triggered()
+{
+    f = figure();
+    update();
+}
