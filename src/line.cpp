@@ -116,19 +116,20 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
                 // add label to side
                 // calculate midpoint
-                double mx = abs(x2-x1) / 2;
-                double my = (abs(y2-y1) / 2);
+                if (s.value("showLabels").toBool()) {
+                    double mx = abs(x2-x1) / 2;
+                    double my = (abs(y2-y1) / 2);
 
-                if (y == 0) {
-                    painter->drawText(0, -my * (*relativeScaleFactor), label);
-                } else if (x == 0) {
-                    painter->drawText(mx * (*relativeScaleFactor), my * (*relativeScaleFactor) - 4, label);
-                } else if (((-x)/y) > 0) {
-                    painter->drawText(mx * (*relativeScaleFactor), -my * (*relativeScaleFactor) - 12, label);
-                } else if (((-x)/y) < 0) {
-                    painter->drawText(mx * (*relativeScaleFactor), my * (*relativeScaleFactor) + 5, label);
+                    if (y == 0) {
+                        painter->drawText(0, -my * (*relativeScaleFactor), label);
+                    } else if (x == 0) {
+                        painter->drawText(mx * (*relativeScaleFactor), my * (*relativeScaleFactor) - 4, label);
+                    } else if (((-x)/y) > 0) {
+                        painter->drawText(mx * (*relativeScaleFactor), -my * (*relativeScaleFactor) - 12, label);
+                    } else if (((-x)/y) < 0) {
+                        painter->drawText(mx * (*relativeScaleFactor), my * (*relativeScaleFactor) + 5, label);
+                    }
                 }
-
 
                 break;
             }

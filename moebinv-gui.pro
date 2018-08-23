@@ -37,7 +37,7 @@ SOURCES += \
         src/view.cpp \
         src/point.cpp \
         src/circle.cpp \
-        src/line.cpp
+        src/line.cpp \
 
 HEADERS += \
         include/conf.h \
@@ -49,8 +49,7 @@ HEADERS += \
         include/view.h \
         include/point.h \
         include/line.h \
-        include/circle.h
-
+        include/circle.h \
 
 FORMS += \
         forms/mainwindow.ui

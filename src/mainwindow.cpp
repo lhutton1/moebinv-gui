@@ -46,6 +46,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // whether to add
     isAddPoint = true;
 
+    // update menu items
+    ui->actionLabels->setChecked(true);
+
     REAL_CYCLES = true;
 
     connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &MainWindow::onCustomContextMenu);
@@ -464,4 +467,21 @@ void MainWindow::onCustomContextMenu(const QPoint &point)
             cMenu->exec(ui->treeView->viewport()->mapToGlobal(point));
         }
     }
+}
+
+/*!
+ * \brief MainWindow::on_actionLabels_toggled
+ * \param labels
+ *
+ * Set labels as showing or hidden.
+ */
+void MainWindow::on_actionLabels_toggled(bool labels)
+{
+    if (labels)
+        s.setValue("showLabels", true);
+    else
+        s.setValue("showLabels", false);
+
+    s.sync();
+    update();
 }

@@ -4,6 +4,7 @@
 #include <QGraphicsItem>
 #include <QPainter>
 #include <QGraphicsView>
+#include <QSettings>
 
 #include "figure.h"
 
@@ -28,6 +29,8 @@ signals:
     void isUnHovered();
 
 private:
+    QSettings s;
+
     double x;
     double y;
     QString label;

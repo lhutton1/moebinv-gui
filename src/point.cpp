@@ -67,7 +67,8 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
             );
 
             // add label to side
-            painter->drawText(POINT_SIZE + 3, 12, label);
+            if (s.value("showLabels").toBool())
+                painter->drawText(POINT_SIZE + 3, 12, label);
 
             break;
         }

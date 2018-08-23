@@ -45,7 +45,8 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
             painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
 
             // add label to side
-            painter->drawText(0, 0 + (*relativeScaleFactor) * radius - 4, label);
+            if (s.value("showLabels").toBool())
+                painter->drawText(0, 0 + (*relativeScaleFactor) * radius - 4, label);
 
             break;
         }

@@ -9,6 +9,7 @@
 
 #include "graphiccycle.h"
 #include "conf.h"
+#include "settings.h"
 
 class line : public QObject, public QGraphicsItem
 {
@@ -28,6 +29,8 @@ signals:
     void isUnHovered();
 
 private:
+    QSettings s;
+
     double x;
     double y;
     double c;
@@ -40,8 +43,6 @@ private:
     double y2;
 
     double *relativeScaleFactor;
-
-    bool FLIPPED;
 
     QBrush *brush;
     QPen *pen;

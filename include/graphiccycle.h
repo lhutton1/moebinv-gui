@@ -19,6 +19,7 @@
 #include "point.h"
 #include "circle.h"
 #include "line.h"
+#include "settings.h"
 
 /*!
  * \brief The graphicCycle class

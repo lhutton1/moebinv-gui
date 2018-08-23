@@ -7,6 +7,7 @@
 #include <QWheelEvent>
 #include <QApplication>
 #include <QScrollBar>
+#include <QSettings>
 #include <qmath.h>
 
 #include "graphiccycle.h"

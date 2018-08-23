@@ -32,6 +32,8 @@ signals:
     void newMouseHover(QPointF point);
 
 private:
+    QSettings s;
+
     int maxZValue = 1;
     int minZValue = 0;
 

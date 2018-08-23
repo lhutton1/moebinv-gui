@@ -3,11 +3,13 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QSettings>
 
 #include "figure.h"
 
 #include "graphiccycle.h"
 #include "conf.h"
+#include "settings.h"
 
 class circle : public QObject, public QGraphicsItem
 {
@@ -27,6 +29,8 @@ signals:
     void isUnHovered();
 
 private:
+    QSettings s;
+
     double x;
     double y;
     double radius;

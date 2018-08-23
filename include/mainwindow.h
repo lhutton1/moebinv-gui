@@ -13,6 +13,7 @@
 #include <QFileDialog>
 #include <QStandardPaths>
 #include <QMap>
+#include <QSettings>
 
 #include "figure.h"
 
@@ -73,10 +74,13 @@ private slots:
 
     void onCustomContextMenu(const QPoint &point);
 
+    void on_actionLabels_toggled(bool labels);
+
 signals:
     void resetRelationalList();
 
 private:
+    QSettings s;
     Ui::MainWindow *ui;
     graphicsScene *scene;
     labels *lblGen;
