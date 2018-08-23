@@ -38,6 +38,7 @@ SOURCES += \
         src/point.cpp \
         src/circle.cpp \
         src/line.cpp \
+        src/dockwidget.cpp
 
 HEADERS += \
         include/conf.h \
@@ -50,6 +51,7 @@ HEADERS += \
         include/point.h \
         include/line.h \
         include/circle.h \
+        include/dockwidget.h
 
 FORMS += \
         forms/mainwindow.ui

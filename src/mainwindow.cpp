@@ -19,13 +19,20 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // fixes qt5.1 bug that causes dock to snap back to original size
+    // https://bugreports.qt.io/browse/QTBUG-65592
+    resizeDocks({ui->dockWidget}, {s.value("dockMinSize").toInt()}, Qt::Horizontal);
+
     // generate graphics view
     scene = new graphicsScene();
     ui->graphicsView->setScene(scene);
 
+    ui->graphicsView->recenterView();
+
     // set up new event
     connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
+    connect(ui->dockWidget, &dockWidget::recenterView, ui->graphicsView, &view::recenterView);
 
     // initialize figure
     f = figure().set_float_eval();
@@ -185,8 +192,9 @@ void MainWindow::addToTree(ex cycle)
     // get the current generation of the cycle
     int cycleGeneration = ex_to<numeric>(f.get_generation(cycle)).to_int();
 
-    // add label and output to tree
-    QString treeLabel = node_label(cycle) + " - " + node_compact_string(cycle);
+    // cycle info
+    QString treeLabel = node_compact_string(cycle);
+    treeLabel.chop(1);
 
     QStandardItem *newItem = new QStandardItem(node_label(cycle));
     newItem->setTextAlignment(Qt::AlignVCenter);
@@ -195,16 +203,21 @@ void MainWindow::addToTree(ex cycle)
 
     items.append(newItem);
 
-    QStandardItem *newItem2 = new QStandardItem(node_compact_string(cycle));
+    QStandardItem *newItem2 = new QStandardItem(treeLabel);
     newItem->setTextAlignment(Qt::AlignVCenter);
     newItem->setToolTip(treeLabel);
     newItem->setEditable(false);
 
     items.append(newItem2);
 
+    newItem->setData(QSize(20, 20), Qt::SizeHintRole);
+    newItem2->setData(QSize(20, 20), Qt::SizeHintRole);
+
     // add to correct place in the tree
     if (cycleGeneration < 0)
         model->insertRow(0, items);
+
+    // search for correct generation to add sub item to
     if (cycleGeneration >= 0) {
         QString genString = QStringLiteral("Generation %1").arg(cycleGeneration);
 
@@ -217,7 +230,6 @@ void MainWindow::addToTree(ex cycle)
         if (itemList.length() == 1)
             itemList[0]->appendRow(items);
     }
-
 }
 
 void MainWindow::initMainMenu() {
@@ -558,4 +570,13 @@ ex MainWindow::shortestDistance(QPointF point,
     // Returns the key for closest cycle and the distance
     // if there is no a cycle closer than dis, then zero is returned as the key
     return lst{selected_key,dis};
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    // keep initial event and extend
+    QMainWindow::resizeEvent(event);
+
+    resizeDocks({ui->dockWidget}, {this->width() / 3}, Qt::Horizontal);
+    ui->graphicsView->recenterView();
 }

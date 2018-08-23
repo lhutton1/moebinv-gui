@@ -44,3 +44,8 @@ void view::wheelEvent(QWheelEvent * event)
     setTransformationAnchor(anchor);
     setViewportUpdateMode(FullViewportUpdate);
 }
+
+void view::recenterView()
+{
+    this->centerOn(QPointF(0, 0));
+}

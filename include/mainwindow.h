@@ -21,6 +21,7 @@
 #include "labels.h"
 #include "graphiccycle.h"
 #include "conf.h"
+#include "view.h"
 
 namespace Ui {
 class MainWindow;
@@ -50,6 +51,7 @@ public:
     QString node_compact_string(GiNaC::ex name);
     QString node_label(GiNaC::ex name);
     GiNaC::ex shortestDistance(QPointF point, double dis);
+    void resizeEvent(QResizeEvent *event);
     ~MainWindow();
 
     bool toolAddCycle;

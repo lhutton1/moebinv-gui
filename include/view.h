@@ -25,7 +25,8 @@ public:
     double offsetX;
     double offsetY;
 
-signals:
+public slots:
+    void recenterView();
 
 private:
     Qt::KeyboardModifier modifier;

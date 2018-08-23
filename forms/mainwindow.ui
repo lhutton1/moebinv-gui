@@ -128,12 +128,18 @@
    <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QDockWidget" name="dockWidget">
+  <widget class="dockWidget" name="dockWidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>2</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
@@ -270,6 +276,12 @@
    <class>view</class>
    <extends>QGraphicsView</extends>
    <header>view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>dockWidget</class>
+   <extends>QDockWidget</extends>
+   <header>dockwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
