@@ -204,7 +204,7 @@ void MainWindow::addToTree(ex cycle)
 
     // add to correct place in the tree
     if (cycleGeneration < 0)
-        model->appendRow(items);
+        model->insertRow(0, items);
     if (cycleGeneration >= 0)
         model->item(cycleGeneration)->appendRow(items);
 }
@@ -329,6 +329,8 @@ void MainWindow::update()
         connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
     }
     addToTree(f.get_infinity());
+
+    //shortestDistance(QPointF(3, 3), 7);
 }
 
 /*!
@@ -459,6 +461,8 @@ void MainWindow::onCustomContextMenu(const QPoint &point)
     QModelIndex index = ui->treeView->indexAt(point);
     QStandardItem *item = model->itemFromIndex(index);
 
+
+
     if (item->parent() && item->parent()->hasChildren()) {
         QString itemText = item->parent()->child(item->row())->text();
 
@@ -466,6 +470,17 @@ void MainWindow::onCustomContextMenu(const QPoint &point)
             QPointer<cycleContextMenu> cMenu = cyclesMap[itemText]->getContextMenu();
             cMenu->exec(ui->treeView->viewport()->mapToGlobal(point));
         }
+
+    // special cases for ininity and real cycles
+    } else {
+        index = model->index(index.row(), 0, QModelIndex());
+        QString item = model->itemFromIndex(index)->text();
+
+        if (item == "infty")
+            menus[0]->exec(ui->treeView->viewport()->mapToGlobal(point));
+
+        if (item == "R")
+            menus[1]->exec(ui->treeView->viewport()->mapToGlobal(point));
     }
 }
 
@@ -484,4 +499,52 @@ void MainWindow::on_actionLabels_toggled(bool labels)
 
     s.sync();
     update();
+}
+
+ex MainWindow::shortestDistance(QPointF point,
+                 double dis // This is level of sensitivity, it shall set to some fraction (say 1/40)
+                 // of the current drawing width and thus depens on current zooming factor
+                 )
+{
+    const ex x = point.x();
+    const ex y = point.y();
+    const ex K = f.get_all_keys(REAL_LINE_GEN);
+    const ex E = f;
+    double current_dis;
+    double increment=.25*dis;
+    ex P = lst{ex(x),ex(y)};
+    ex selected_key;
+
+    // iterator over all keys
+    for (lst::const_iterator itk =ex_to<lst>(K).begin(); itk != ex_to<lst>(K).end(); ++itk) {
+        ex L=ex_to<figure>(E).get_cycle(*itk);
+
+        // This is a ginac list thus we need iteration through its components
+        for (lst::const_iterator it =ex_to<lst>(L).begin(); it != ex_to<lst>(L).end(); ++it) {
+            cycle2D C=ex_to<cycle2D>(*it);
+            double radius2=ex_to<numeric>(C.radius_sq().evalf()).to_double();
+
+            if (ex_to<numeric>(abs(C.get_k())).to_double() < EPSILON) {
+                if (radius2 < EPSILON)
+                    break; // Skipping the infinity
+                // To make a point on a line selectable we disadvantage lines by adding 1
+                current_dis = ex_to<numeric>(abs(C.normalize_det().val(P)).evalf()).to_double()/2.0+increment;
+            } else {
+                current_dis = abs(std::sqrt(ex_to<numeric>(C.normalize().val(P).evalf()).to_double()
+                                                      +radius2)-std::sqrt(radius2));
+                // To make a point on a circle selectable we disadvantage real circles
+                if (radius2  > EPSILON)
+                    current_dis+=increment;
+            }
+            if (current_dis < dis) {
+                dis = current_dis;
+                selected_key = *itk;
+            }
+
+            qDebug() << node_label(selected_key);
+        }
+    }
+    // Returns the key for closest cycle and the distance
+    // if there is no a cycle closer than dis, then zero is returned as the key
+    return lst{selected_key,dis};
 }
