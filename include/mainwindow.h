@@ -49,6 +49,7 @@ public:
     void update();
     QString node_compact_string(GiNaC::ex name);
     QString node_label(GiNaC::ex name);
+    GiNaC::ex shortestDistance(QPointF point, double dis);
     ~MainWindow();
 
     bool toolAddCycle;
