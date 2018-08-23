@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    // initiate settings
+    // initiate settings object
     QSettings::setDefaultFormat(QSettings::IniFormat);
     QCoreApplication::setOrganizationName("My Organization");
     QCoreApplication::setOrganizationDomain("myorganization.com");

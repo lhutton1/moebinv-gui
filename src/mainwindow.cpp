@@ -205,8 +205,19 @@ void MainWindow::addToTree(ex cycle)
     // add to correct place in the tree
     if (cycleGeneration < 0)
         model->insertRow(0, items);
-    if (cycleGeneration >= 0)
-        model->item(cycleGeneration)->appendRow(items);
+    if (cycleGeneration >= 0) {
+        QString genString = QStringLiteral("Generation %1").arg(cycleGeneration);
+
+        QList<QStandardItem *> itemList = model->findItems(
+            genString,
+            Qt::MatchExactly,
+            0
+        );
+
+        if (itemList.length() == 1)
+            itemList[0]->appendRow(items);
+    }
+
 }
 
 void MainWindow::initMainMenu() {
@@ -462,7 +473,7 @@ void MainWindow::onCustomContextMenu(const QPoint &point)
     QStandardItem *item = model->itemFromIndex(index);
 
 
-
+    // standard case for cycles being drawn graphically
     if (item->parent() && item->parent()->hasChildren()) {
         QString itemText = item->parent()->child(item->row())->text();
 
