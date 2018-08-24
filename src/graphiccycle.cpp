@@ -191,6 +191,8 @@ void graphicCycle::buildShape()
     ex L = fig->get_cycle(cycle);
     bool isOntop = false;
 
+    qDebug() << label;
+
     // try to draw new cycle, if not emit a signal to display error message.
     try {
         // interate through cycle components
@@ -201,8 +203,6 @@ void graphicCycle::buildShape()
                 //point
                 double x = ex_to<numeric>(C.center().op(0)).to_double();
                 double y = ex_to<numeric>(C.center().op(1)).to_double();
-
-                //qDebug() << x << y;
 
                 addPoint(x, y, relativeScaleFactor);
                 isOntop = true;

@@ -210,9 +210,6 @@ void MainWindow::addToTree(ex cycle)
 
     items.append(newItem2);
 
-    newItem->setData(QSize(20, 20), Qt::SizeHintRole);
-    newItem2->setData(QSize(20, 20), Qt::SizeHintRole);
-
     // add to correct place in the tree
     if (cycleGeneration < 0)
         model->insertRow(0, items);
