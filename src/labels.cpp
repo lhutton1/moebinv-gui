@@ -6,7 +6,8 @@
  */
 labels::labels()
 {
-    currentLetter = 1;
+    //this->fig = f;
+    this->currentLetter = 1;
 }
 
 /*!
@@ -37,5 +38,7 @@ QString labels::genNextLabel()
  * \brief labels::advanceLabel Advance to the next free label
  */
 void labels::advanceLabel() {
+    //QString lblString = genNextLabel();
+
     currentLetter += 1;
 }

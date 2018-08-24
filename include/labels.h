@@ -2,6 +2,7 @@
 #define LABELS_H
 
 #include <QString>
+#include <QPointer>
 #include "figure.h"
 
 

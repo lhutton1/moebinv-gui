@@ -35,7 +35,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->dockWidget, &dockWidget::recenterView, ui->graphicsView, &view::recenterView);
 
     // initialize figure
-    f = figure().set_float_eval();
+    if (SET_FLOAT_EVALUATION)
+        f = figure().set_float_eval();
+    else
+        f = figure();
 
     // create new labels object to create unique labels
     lblGen = new labels();
@@ -453,8 +456,17 @@ void MainWindow::on_actionOpen_triggered()
     QString fileName;
 
     fileName = saveDialog->getOpenFileName(this, tr("Open Figure"), QDir::homePath(), tr("*.gar"));
-    f = figure(qPrintable(fileName));
-    update();
+
+    if (!fileName.isEmpty() && !fileName.isNull()) {
+        if (SET_FLOAT_EVALUATION)
+            f = figure(qPrintable(fileName)).set_float_eval();
+        else
+            f = figure(qPrintable(fileName));
+
+        // Now update the scene
+        update();
+    }
+
 }
 
 
@@ -560,8 +572,6 @@ ex MainWindow::shortestDistance(QPointF point,
                 dis = current_dis;
                 selected_key = *itk;
             }
-
-            qDebug() << node_label(selected_key);
         }
     }
     // Returns the key for closest cycle and the distance

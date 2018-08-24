@@ -191,8 +191,6 @@ void graphicCycle::buildShape()
     ex L = fig->get_cycle(cycle);
     bool isOntop = false;
 
-    qDebug() << label;
-
     // try to draw new cycle, if not emit a signal to display error message.
     try {
         // interate through cycle components
@@ -201,8 +199,8 @@ void graphicCycle::buildShape()
 
             if (ex_to<numeric>(abs(C.radius_sq()).evalf()).to_double() < EPSILON) {
                 //point
-                double x = ex_to<numeric>(C.center().op(0)).to_double();
-                double y = ex_to<numeric>(C.center().op(1)).to_double();
+                double x = ex_to<numeric>(C.center().op(0).evalf()).to_double();
+                double y = ex_to<numeric>(C.center().op(1).evalf()).to_double();
 
                 addPoint(x, y, relativeScaleFactor);
                 isOntop = true;
@@ -212,11 +210,6 @@ void graphicCycle::buildShape()
                 double x = ex_to<numeric>(C.get_l(0).evalf()).to_double();
                 double y = ex_to<numeric>(C.get_l(1).evalf()).to_double();
                 double c = ex_to<numeric>((C.get_m()/2).evalf()).to_double();
-
-                //qDebug() << "(" << ex_to<numeric>(C.get_l(0).evalf()).to_double()
-                //         << ")*x + ("
-                //         << ex_to<numeric>(C.get_l(1).evalf()).to_double() << ")*y = "
-                //         << ex_to<numeric>((C.get_m()/2).evalf()).to_double();
 
                 addLine(x, y, c, relativeScaleFactor);
             } else {

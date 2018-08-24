@@ -67,6 +67,11 @@ const int LINE_HOVER_PADDING = 8;
 const int FLOAT_PRECISION = 3;
 
 /*!
+ * \brief SET_FLOAT_EVALUATION
+ */
+const bool SET_FLOAT_EVALUATION = true;
+
+/*!
  * \brief EPSILON
  */
 const double EPSILON = 0.00000001;
