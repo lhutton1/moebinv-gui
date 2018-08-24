@@ -128,7 +128,7 @@
    <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="dockWidget" name="dockWidget">
+  <widget class="dockWidget" name="dockWidgetRight">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>2</horstretch>
@@ -137,8 +137,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>0</width>
-     <height>0</height>
+     <width>200</width>
+     <height>95</height>
     </size>
    </property>
    <property name="layoutDirection">

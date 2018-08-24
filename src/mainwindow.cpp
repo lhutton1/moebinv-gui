@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // fixes qt5.1 bug that causes dock to snap back to original size
     // https://bugreports.qt.io/browse/QTBUG-65592
-    resizeDocks({ui->dockWidget}, {s.value("dockMinSize").toInt()}, Qt::Horizontal);
+    resizeDocks({ui->dockWidgetRight}, {s.value("dockMinSize").toInt()}, Qt::Horizontal);
 
     // generate graphics view
     scene = new graphicsScene();
@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // set up new event
     connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
-    connect(ui->dockWidget, &dockWidget::recenterView, ui->graphicsView, &view::recenterView);
+    connect(ui->dockWidgetRight, &dockWidget::recenterView, ui->graphicsView, &view::recenterView);
 
     // initialize figure
     if (SET_FLOAT_EVALUATION)
@@ -584,6 +584,6 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     // keep initial event and extend
     QMainWindow::resizeEvent(event);
 
-    resizeDocks({ui->dockWidget}, {this->width() / 3}, Qt::Horizontal);
+    resizeDocks({ui->dockWidgetRight}, {this->width() / 3}, Qt::Horizontal);
     ui->graphicsView->recenterView();
 }
