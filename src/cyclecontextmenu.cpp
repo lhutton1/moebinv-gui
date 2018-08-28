@@ -11,29 +11,93 @@
  *      -----------
  *      delete
  */
+
+
 cycleContextMenu::cycleContextMenu(bool deleteAction)
 {
+    // Orthogonal
     isOrthogonal = new QAction("Orthogonal", this);
     isOrthogonal->setCheckable(true);
     isOrthogonal->setChecked(false);
     this->addAction(isOrthogonal);
 
+    // F-Orthogonal
     isfOrthogonal = new QAction("F-Orthogonal", this);
     isfOrthogonal->setCheckable(true);
     isfOrthogonal->setChecked(false);
     this->addAction(isfOrthogonal);
 
-
+    // Different
     isDifferent = new QAction("Different", this);
     isDifferent->setCheckable(true);
     isDifferent->setChecked(false);
     this->addAction(isDifferent);
 
+    // A-Different
+    isADifferent = new QAction("A Different", this);
+    isADifferent->setCheckable(true);
+    isADifferent->setChecked(false);
+    this->addAction(isADifferent);
 
-    isTangent = new QAction("Tangent", this);
+    this->addSeparator();
+
+    // Tangent
+    isTangent = new QAction("Tangent (radio)", this);
     isTangent->setCheckable(true);
     isTangent->setChecked(false);
     this->addAction(isTangent);
+
+    // Tangent I
+    isTangent_i = new QAction("Tangent I (radio)", this);
+    isTangent_i->setCheckable(true);
+    isTangent_i->setChecked(false);
+    this->addAction(isTangent_i);
+
+    // Tangent O
+    isTangent_o = new QAction("Tangent O (radio)", this);
+    isTangent_o->setCheckable(true);
+    isTangent_o->setChecked(false);
+    this->addAction(isTangent_o);
+
+    this->addSeparator();
+
+    // Steiner Power
+    steinerPower = new QAction("Steiner Power...", this);
+    steinerPower->setCheckable(true);
+    steinerPower->setChecked(false);
+    this->addAction(steinerPower);
+
+    // Cycle Angle
+    cycleAngle = new QAction("Cycle Angle...", this);
+    cycleAngle->setCheckable(true);
+    cycleAngle->setChecked(false);
+    this->addAction(cycleAngle);
+
+    // Cycle Cross T Distance
+    cycleCrossTDistance = new QAction("Cycle Cross T Distance...", this);
+    cycleCrossTDistance->setCheckable(true);
+    cycleCrossTDistance->setChecked(false);
+    this->addAction(cycleCrossTDistance);
+
+    // Product Sign
+    productSign = new QAction("Product Sign...", this);
+    productSign->setCheckable(true);
+    productSign->setChecked(false);
+    this->addAction(productSign);
+
+    // Cycle Mobius
+    cycleMobius = new QAction("Cycle Mobius...", this);
+    cycleMobius->setCheckable(true);
+    cycleMobius->setChecked(false);
+    this->addAction(cycleMobius);
+
+    // Cycle Sl2
+    cycleSl2 = new QAction("Cycle Sl2...", this);
+    cycleSl2->setCheckable(true);
+    cycleSl2->setChecked(false);
+    this->addAction(cycleSl2);
+
+    // Loop through items that have been added
 
     if (deleteAction) {
         this->addSeparator();

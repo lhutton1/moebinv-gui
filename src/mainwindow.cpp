@@ -47,6 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     msgBox = new QMessageBox();
     saveDialog = new QFileDialog();
 
+    // gen first symbol
+    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
+
     initTreeModel();
     initMainMenu();
 
@@ -284,16 +287,12 @@ void MainWindow::removeRealFromList(int relType)
 
 void MainWindow::addThisToList(int relType)
 {
-    // cycle doesn't exist yet so the next symbol needs to be fetched
-    ex newLabel = symbol(qPrintable(lblGen->genNextLabel()));
-    addToList(relType, newLabel);
+    addToList(relType, nextSymbol);
 }
 
 void MainWindow::removeThisFromList(int relType)
 {
-    // cycle doesn't exist yet so the next symbol needs to be fetched
-    ex newLabel = symbol(qPrintable(lblGen->genNextLabel()));
-    removeFromList(relType, newLabel);
+    removeFromList(relType, nextSymbol);
 }
 
 void MainWindow::on_actionPan_toggled(bool pan)
@@ -368,16 +367,15 @@ void MainWindow::addPoint(QPointF mousePos)
         double x = mousePos.x();
         double y = mousePos.y();
 
-        // gen new label
-        QString label = lblGen->genNextLabel();
-
         // add cycle to the figure
-        ex cycle = f.add_point(lst{x, y}, qPrintable(label));
-
-        lblGen->advanceLabel();
+        ex cycle = f.add_point(lst{x, y}, nextSymbol);
 
         // refresh
         update();
+
+        // generate next symbol
+        lblGen->advanceLabel();
+        nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
     }
 }
 
@@ -394,21 +392,22 @@ void MainWindow::on_actionCreate_Cycle_triggered()
         return;
     }
 
-    QString label = lblGen->genNextLabel();
-    ex newName = symbol(qPrintable(label));
-
     // only real cycles
     if (REAL_CYCLES) {
-        relationList.append(only_reals(newName));
+        relationList.append(only_reals(nextSymbol));
     }
 
-    ex cycle = f.add_cycle_rel(relationList, newName);
+    ex cycle = f.add_cycle_rel(relationList, nextSymbol);
 
-    lblGen->advanceLabel();
+
     update();
 
     emit resetRelationalList();
     resetList(&relationList);
+
+    // generate next symbol
+    lblGen->advanceLabel();
+    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 }
 
 void MainWindow::sceneInvalid()
@@ -533,10 +532,7 @@ void MainWindow::on_actionLabels_toggled(bool labels)
     update();
 }
 
-ex MainWindow::shortestDistance(QPointF point,
-                 double dis // This is level of sensitivity, it shall set to some fraction (say 1/40)
-                 // of the current drawing width and thus depens on current zooming factor
-                 )
+ex MainWindow::shortestDistance(QPointF point, double dis)
 {
     const ex x = point.x();
     const ex y = point.y();
@@ -562,8 +558,7 @@ ex MainWindow::shortestDistance(QPointF point,
                 // To make a point on a line selectable we disadvantage lines by adding 1
                 current_dis = ex_to<numeric>(abs(C.normalize_det().val(P)).evalf()).to_double()/2.0+increment;
             } else {
-                current_dis = abs(std::sqrt(ex_to<numeric>(C.normalize().val(P).evalf()).to_double()
-                                                      +radius2)-std::sqrt(radius2));
+                current_dis = abs(std::sqrt(ex_to<numeric>(C.normalize().val(P).evalf()).to_double()+radius2)-std::sqrt(radius2));
                 // To make a point on a circle selectable we disadvantage real circles
                 if (radius2  > EPSILON)
                     current_dis+=increment;

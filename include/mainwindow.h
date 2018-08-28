@@ -109,6 +109,8 @@ private:
     QToolButton *real;
     QToolButton *thisItem;
 
+    GiNaC::ex nextSymbol;
+
     QFileDialog *saveDialog;
 };
 

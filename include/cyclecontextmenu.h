@@ -11,6 +11,25 @@
 
 #include "conf.h"
 
+//struct relationPairings {
+//    GiNaC::lst ORTHAGONAL = is_orthogonal(cycle);
+//    GiNaC::lst FORTHAGONAL = is_f_orthogonal(cycle);
+//    GiNaC::lst DIFFERENT = is_different(cycle);
+//    GiNaC::lst ADIFFERENT = is_adifferent(cycle);
+//    GiNaC::lst REALS = only_reals(cycle);
+
+//    GiNaC::lst TANGENT = is_tangent(cycle);
+//    GiNaC::lst TANGENT_I = is_tangent_i(cycle);
+//    GiNaC::lst TANGENT_O = is_tangent_o(cycle);
+
+//    GiNaC::lst STEINER_POWER = steiner_power();
+//    GiNaC::lst CYCLE_ANGLE = cycle_angle();
+//    GiNaC::lst STEINER_POWER = cycle_cross_t_distance();
+//    GiNaC::lst STEINER_POWER = product_sign();
+//    GiNaC::lst STEINER_POWER = cycle_mobius();
+//    GiNaC::lst STEINER_POWER = cycle_sl2();
+//};
+
 /*!
  * \brief The cycleContextMenu class
  *
@@ -25,10 +44,26 @@ class cycleContextMenu : public QMenu
 public:
     cycleContextMenu(bool deleteAction = true);
 
+    // Mutually compatible relations
     QPointer<QAction> isOrthogonal = nullptr;
     QPointer<QAction> isfOrthogonal = nullptr;
     QPointer<QAction> isDifferent = nullptr;
+    QPointer<QAction> isADifferent = nullptr;
+    QPointer<QAction> onlyReals = nullptr;
+
+    // Mutually excluding relations
     QPointer<QAction> isTangent = nullptr;
+    QPointer<QAction> isTangent_i = nullptr;
+    QPointer<QAction> isTangent_o = nullptr;
+
+    // Relations with a value
+    QPointer<QAction> steinerPower = nullptr;
+    QPointer<QAction> cycleAngle = nullptr;
+    QPointer<QAction> cycleCrossTDistance = nullptr;
+    QPointer<QAction> productSign = nullptr;
+    QPointer<QAction> cycleMobius = nullptr;
+    QPointer<QAction> cycleSl2 = nullptr;
+
     QPointer<QAction> deletePoint = nullptr;
 
 public slots:
