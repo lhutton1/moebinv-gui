@@ -18,6 +18,8 @@ graphicsScene::graphicsScene(QObject *parent)
 
     QRectF rect = QRectF(topLeft, bottomRight);
 
+    this->startTimer(3000);
+
     // set the size of the scene
     this->setSceneRect(rect);
 }
@@ -50,6 +52,7 @@ void graphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
     // Now send signal to update status bar
     QPointF point = mouseEvent->scenePos();
+
     emit newMouseHover(point);
 }
 

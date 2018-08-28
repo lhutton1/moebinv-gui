@@ -7,7 +7,7 @@ void setDefaultSettings()
     QSettings s;
 
     s.setValue("showLabels", true);
-    s.setValue("dockMinSize", 100);
+    s.setValue("dockInitialSizeRatio", 0.3);
 }
 
 int main(int argc, char *argv[])

@@ -14,6 +14,7 @@
 #include <QStandardPaths>
 #include <QMap>
 #include <QSettings>
+#include <QTimer>
 
 #include "figure.h"
 
@@ -74,6 +75,7 @@ private slots:
     void on_actionSave_triggered();
     void on_actionOpen_triggered();
     void on_actionNew_triggered();
+    void onCalculateDockRatio();
 
     void onCustomContextMenu(const QPoint &point);
 
@@ -112,6 +114,8 @@ private:
     GiNaC::ex nextSymbol;
 
     QFileDialog *saveDialog;
+
+    QTimer *timer;
 };
 
 #endif // MAINWINDOW_H

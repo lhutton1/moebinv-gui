@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // fixes qt5.1 bug that causes dock to snap back to original size
     // https://bugreports.qt.io/browse/QTBUG-65592
-    resizeDocks({ui->dockWidgetRight}, {s.value("dockMinSize").toInt()}, Qt::Horizontal);
+    resizeDocks({ui->dockWidgetRight}, {200}, Qt::Horizontal);
 
     // generate graphics view
     scene = new graphicsScene();
@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
     connect(ui->dockWidgetRight, &dockWidget::recenterView, ui->graphicsView, &view::recenterView);
+    connect(ui->dockWidgetRight, &dockWidget::calculateDockToWindowPercentage, this, &MainWindow::onCalculateDockRatio);
 
     // initialize figure
     if (SET_FLOAT_EVALUATION)
@@ -113,6 +114,8 @@ void MainWindow::onMouseSceneHover(QPointF point)
       .arg(point.y());
 
     ui->statusBar->showMessage(coordinates);
+
+
 }
 
 void MainWindow::addToList(int relType, ex cycle) {
@@ -352,7 +355,7 @@ void MainWindow::update()
     }
     addToTree(f.get_infinity());
 
-    //shortestDistance(QPointF(3, 3), 7);
+    shortestDistance(QPointF(3, 3), 7);
 }
 
 /*!
@@ -571,6 +574,9 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
     }
     // Returns the key for closest cycle and the distance
     // if there is no a cycle closer than dis, then zero is returned as the key
+
+    qDebug() << node_label(selected_key);
+    qDebug() << dis;
     return lst{selected_key,dis};
 }
 
@@ -579,6 +585,14 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     // keep initial event and extend
     QMainWindow::resizeEvent(event);
 
-    resizeDocks({ui->dockWidgetRight}, {this->width() / 3}, Qt::Horizontal);
+    // calculate new dock size
+    int newDockSize = ui->dockWidgetRight->getSizeRatio() * this->width();
+    resizeDocks({ui->dockWidgetRight}, {newDockSize}, Qt::Horizontal);
     ui->graphicsView->recenterView();
+}
+
+void MainWindow::onCalculateDockRatio()
+{
+    double sizeRatio = ui->dockWidgetRight->width() / (double)this->width();
+    ui->dockWidgetRight->setSizeRatio(sizeRatio);
 }

@@ -247,19 +247,19 @@ QString graphicCycle::node_label(GiNaC::ex name)
 
 void graphicCycle::setHover()
 {
-    brush->setColor(Qt::red);
-    pen->setColor(Qt::red);
-    update();
+//    brush->setColor(Qt::red);
+//    pen->setColor(Qt::red);
+//    update();
 
-    // now emit signal to find in tree
-    emit findCycleInTree(cycle);
+//    // now emit signal to find in tree
+//    emit findCycleInTree(cycle);
 }
 
 void graphicCycle::unsetHover()
 {
-    brush->setColor(Qt::black);
-    pen->setColor(Qt::black);
-    update();
+//    brush->setColor(Qt::black);
+//    pen->setColor(Qt::black);
+//    update();
 }
 
 QPointer<cycleContextMenu> graphicCycle::getContextMenu()
