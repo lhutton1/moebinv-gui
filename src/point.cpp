@@ -27,8 +27,6 @@ point::point(struct cycleData data)
    brush = data.brush;
    pen = data.pen;
 
-   setAcceptHoverEvents(true);
-
    BOUNDINGRECT_DEBUG = false;
 
 }
@@ -43,13 +41,15 @@ point::point(struct cycleData data)
  */
 void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    const double POINT_SIZE = s.value("pointSize").toDouble();
+
     // assign brush and pen
     pen->setCosmetic(true);
-    pen->setWidth(LINE_WIDTH);
+    pen->setWidth(0);
     painter->setPen(*pen);
 
     // draw shape
-    switch (METRIC) {
+    switch (s.value("drawingMetric").toInt()) {
         case drawingMetric::ELLIPTIC: {
             if (BOUNDINGRECT_DEBUG)
                 painter->drawRect(this->boundingRect());
@@ -123,14 +123,4 @@ QMatrix point::stableMatrix(const QMatrix &matrix, const QPointF &p) const
     newMatrix.translate(offsetX, offsetY);
 
     return newMatrix;
-}
-
-void point::hoverEnterEvent(QGraphicsSceneHoverEvent *)
-{
-    emit isHovered();
-}
-
-void point::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
-{
-    emit isUnHovered();
 }

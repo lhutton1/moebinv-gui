@@ -76,6 +76,7 @@ private slots:
     void on_actionOpen_triggered();
     void on_actionNew_triggered();
     void onCalculateDockRatio();
+    void highlightClosestCycle(QPointF point);
 
     void onCustomContextMenu(const QPoint &point);
 
@@ -116,6 +117,8 @@ private:
     QFileDialog *saveDialog;
 
     QTimer *timer;
+
+    QPointer<graphicCycle> prevHoveredCycle;
 };
 
 #endif // MAINWINDOW_H

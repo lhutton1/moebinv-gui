@@ -134,9 +134,6 @@ void graphicCycle::addPoint(double x, double y, double *relativeScaleFactor)
     data.view = view;
 
     class point *p = new class point(data);
-
-    connect(p, &point::isHovered, this, &graphicCycle::setHover);
-    connect(p, &point::isUnHovered, this, &graphicCycle::unsetHover);
 }
 
 void graphicCycle::addCircle(double x, double y, double radius, double *relativeScaleFactor)
@@ -155,9 +152,6 @@ void graphicCycle::addCircle(double x, double y, double radius, double *relative
     data.view = view;
 
     class circle *c = new class circle(data);
-
-    connect(c, &circle::isHovered, this, &graphicCycle::setHover);
-    connect(c, &circle::isUnHovered, this, &graphicCycle::unsetHover);
 }
 
 void graphicCycle::addLine(double x, double y, double c, double *relativeScaleFactor)
@@ -176,9 +170,6 @@ void graphicCycle::addLine(double x, double y, double c, double *relativeScaleFa
     data.view = view;
 
     class line *l = new class line(data);
-
-    connect(l, &line::isHovered, this, &graphicCycle::setHover);
-    connect(l, &line::isUnHovered, this, &graphicCycle::unsetHover);
 }
 
 QRectF graphicCycle::boundingRect() const
@@ -247,19 +238,19 @@ QString graphicCycle::node_label(GiNaC::ex name)
 
 void graphicCycle::setHover()
 {
-//    brush->setColor(Qt::red);
-//    pen->setColor(Qt::red);
-//    update();
+    brush->setColor(Qt::red);
+    pen->setColor(Qt::red);
+    update();
 
-//    // now emit signal to find in tree
-//    emit findCycleInTree(cycle);
+    // now emit signal to find in tree
+    emit findCycleInTree(cycle);
 }
 
 void graphicCycle::unsetHover()
 {
-//    brush->setColor(Qt::black);
-//    pen->setColor(Qt::black);
-//    update();
+    brush->setColor(Qt::black);
+    pen->setColor(Qt::black);
+    update();
 }
 
 QPointer<cycleContextMenu> graphicCycle::getContextMenu()

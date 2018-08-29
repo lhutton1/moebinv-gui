@@ -15,6 +15,11 @@ view::view(QObject *parent)
     this->scale(1.0, -1.0);
 
     relativeScaleFactor = 1;
+
+    // set timer to detect when mouse stops
+    mouseTimeOut = new QTimer(this);
+    connect(mouseTimeOut, &QTimer::timeout, this, &view::mouseStopped);
+    mouseTimeOut->start(1000);
 }
 
 /*!
@@ -48,4 +53,27 @@ void view::wheelEvent(QWheelEvent * event)
 void view::recenterView()
 {
     this->centerOn(QPointF(0, 0));
+}
+
+void view::mouseMoveEvent(QMouseEvent *event)
+{
+    QGraphicsView::mouseMoveEvent(event);
+
+    if (!mouseTimeOut->isActive())
+        mouseTimeOut->start();
+
+    mouseTimeOut->setInterval(500);
+}
+
+void view::mouseStopped()
+{
+    mouseTimeOut->stop();
+    qDebug() << "finished" << count++;
+
+    QPoint point = this->mapFromGlobal(QCursor::pos());
+    QPointF relPoint = this->mapToScene(point);
+    qDebug() << relPoint.x();
+    qDebug() << relPoint.y();
+
+    emit highlightClosestCycle(relPoint);
 }

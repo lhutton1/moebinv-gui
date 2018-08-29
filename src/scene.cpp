@@ -13,12 +13,12 @@ using namespace MoebInv;
 graphicsScene::graphicsScene(QObject *parent)
     : QGraphicsScene(parent)
 {
+    const int SCENE_SIZE = s.value("sceneSize").toInt();
+
     QPointF topLeft = QPointF(-SCENE_SIZE / 2, -SCENE_SIZE / 2);
     QPointF bottomRight = QPointF(SCENE_SIZE / 2, SCENE_SIZE / 2);
 
     QRectF rect = QRectF(topLeft, bottomRight);
-
-    this->startTimer(3000);
 
     // set the size of the scene
     this->setSceneRect(rect);

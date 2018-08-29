@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <QScrollBar>
 #include <QSettings>
+#include <QTimer>
 #include <qmath.h>
 
 #include "graphiccycle.h"
@@ -19,18 +20,29 @@ class view : public QGraphicsView
 
 public:
     explicit view(QObject *parent = 0);
-    void wheelEvent(QWheelEvent * event);
+    void wheelEvent(QWheelEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
 
     double relativeScaleFactor;
     double offsetX;
     double offsetY;
 
+signals:
+    void highlightClosestCycle(QPointF point);
+
 public slots:
     void recenterView();
+    void mouseStopped();
 
 private:
+    QSettings s;
+
     Qt::KeyboardModifier modifier;
     QPointF target_scene_pos, target_viewport_pos;
+
+    QTimer *mouseTimeOut;
+
+    int count = 0;
 };
 
 #endif // VIEW_H

@@ -3,6 +3,8 @@
 
 line::line(struct cycleData data)
 {
+   const int SCENE_SIZE = s.value("sceneSize").toInt();
+
    fig = data.fig;
    this->x = data.x;
    this->y = data.y;
@@ -10,15 +12,11 @@ line::line(struct cycleData data)
    this->label = data.label;
    this->relativeScaleFactor = data.relativeScaleFactor;
 
-   //this->x =
-
    this->setParentItem(data.cycle);
 
    // create the brush and pen and assign a base colour
    brush = data.brush;
    pen = data.pen;
-
-   setAcceptHoverEvents(true);
 
    int sceneSize = SCENE_SIZE;
    if (y == 0) {
@@ -53,32 +51,7 @@ line::line(struct cycleData data)
            y1 = y1 / y;
    }
 
-
-   //qDebug() << "x1:" << x1 << "y2:" << y2 << "x2:" << x2 << "y1:" << y1;
-
-//   if (-(sceneSize) > y2 || (sceneSize) < y1 || (sceneSize) < y2 || (-(sceneSize)) > y1) {
-//       FLIPPED = true;
-//       qDebug() << "detected going outside..";
-//       y2 = -(sceneSize);
-
-//       x1 = (y * (sceneSize)) + c;
-
-//       if (x != 0)
-//           x1 = x1 / x;
-
-//       y1 = (sceneSize);
-
-//       x2 = (y * -(sceneSize)) + c;
-
-//       if (x != 0)
-//           x2 = x2 / x;
-//   }
-
    setPos(x1, y2);
-
-
-
-   //qDebug() << "x1:" << x1 << "y2:" << y2 << "x2:" << x2 << "y1:" << y1;
 }
 
 
@@ -90,10 +63,10 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         painter->setPen(*pen);
 
         pen->setCosmetic(true);
-        pen->setWidth(LINE_WIDTH);
+        pen->setWidth(s.value("lineWidth").toInt());
 
         // draw shape
-        switch (METRIC) {
+        switch (s.value("drawingMetric").toInt()) {
             case drawingMetric::ELLIPTIC: {
                 QLineF line;
                 //painter->drawRect(this->boundingRect());
@@ -154,9 +127,7 @@ QRectF line::boundingRect() const
     QPointF bottomRight;
 
     // if padding is less than 15 the label won't be visible
-    LINE_HOVER_PADDING < 15 ?
-        padding = 15 :
-        padding = LINE_HOVER_PADDING;
+    padding = 15;
 
     if (y == 0) {
         topLeft = QPointF(-padding, 0);
@@ -249,15 +220,5 @@ QMatrix line::stableMatrix(const QMatrix &matrix, const QPointF &p)
     newMatrix.translate(offsetX, offsetY);
 
     return newMatrix;
-}
-
-void line::hoverEnterEvent(QGraphicsSceneHoverEvent *)
-{
-    emit isHovered();
-}
-
-void line::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
-{
-    emit isUnHovered();
 }
 

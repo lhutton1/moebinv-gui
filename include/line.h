@@ -18,15 +18,9 @@ class line : public QObject, public QGraphicsItem
 public:
     line(struct cycleData data);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *);
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
     QRectF boundingRect() const;
     QPainterPath shape() const;
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
-
-signals:
-    void isHovered();
-    void isUnHovered();
 
 private:
     QSettings s;

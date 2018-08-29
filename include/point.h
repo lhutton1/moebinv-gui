@@ -18,15 +18,8 @@ class point : public QObject, public QGraphicsItem
 public:
     point(struct cycleData data);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *);
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p) const;
     QRectF boundingRect() const;
-    //QPainterPath shape() const;
-
-signals:
-    void isHovered();
-    void isUnHovered();
 
 private:
     QSettings s;

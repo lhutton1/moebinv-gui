@@ -16,7 +16,6 @@ circle::circle(struct cycleData data)
    brush = data.brush;
    pen = data.pen;
 
-   setAcceptHoverEvents(true);
    setPos(x, y);
 
    BOUNDINGRECT_DEBUG = false;
@@ -26,10 +25,10 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 {
     // assign brush and pen
     pen->setCosmetic(true);
-    pen->setWidth(LINE_WIDTH);
+    pen->setWidth(s.value("lineWidth").toInt());
     painter->setPen(*pen);
 
-    switch (METRIC) {
+    switch (s.value("drawingMetric").toInt()) {
         case drawingMetric::ELLIPTIC: {
             if (BOUNDINGRECT_DEBUG)
                 painter->drawRect(this->boundingRect());
@@ -67,10 +66,10 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 QRectF circle::boundingRect() const
 {
     return QRectF(
-        0 - radius - LINE_HOVER_PADDING,
-        0 - radius - LINE_HOVER_PADDING,
-        radius * 2 + LINE_HOVER_PADDING * 2,
-        radius * 2 + LINE_HOVER_PADDING * 2
+        0 - radius,
+        0 - radius,
+        radius * 2,
+        radius * 2
     );
 }
 
@@ -86,15 +85,15 @@ QPainterPath circle::shape() const
     QPainterPath subPath;
 
     path.addEllipse(
-        QPointF(0 - LINE_HOVER_PADDING, 0 - LINE_HOVER_PADDING),
-        radius + LINE_HOVER_PADDING * 2,
-        radius + LINE_HOVER_PADDING * 2
+        QPointF(0, 0),
+        radius,
+        radius
     );
 
     subPath.addEllipse(
-        QPointF(0 + LINE_HOVER_PADDING, 0 + LINE_HOVER_PADDING),
-        radius - LINE_HOVER_PADDING * 2,
-        radius - LINE_HOVER_PADDING * 2
+        QPointF(0, 0),
+        radius,
+        radius
     );
 
     return path.subtracted(subPath);
@@ -123,14 +122,4 @@ QMatrix circle::stableMatrix(const QMatrix &matrix, const QPointF &p)
     newMatrix.translate(offsetX, offsetY);
 
     return newMatrix;
-}
-
-void circle::hoverEnterEvent(QGraphicsSceneHoverEvent *)
-{
-    emit isHovered();
-}
-
-void circle::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
-{
-    emit isUnHovered();
 }

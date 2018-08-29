@@ -34,9 +34,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
     connect(ui->dockWidgetRight, &dockWidget::recenterView, ui->graphicsView, &view::recenterView);
     connect(ui->dockWidgetRight, &dockWidget::calculateDockToWindowPercentage, this, &MainWindow::onCalculateDockRatio);
+    connect(ui->graphicsView, &view::highlightClosestCycle, this, &MainWindow::highlightClosestCycle);
 
     // initialize figure
-    if (SET_FLOAT_EVALUATION)
+    if (s.value("setFloatEvaluation").toBool())
         f = figure().set_float_eval();
     else
         f = figure();
@@ -73,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
 QString MainWindow::node_compact_string(GiNaC::ex name)
 {
     std::ostringstream drawing;
-    drawing << std::setprecision(FLOAT_PRECISION);
+    drawing << std::setprecision(s.value("floatPrecision").toInt());
     ex_to<cycle_node>(f.get_cycle_node(name))
         .do_print_double(GiNaC::print_dflt(drawing,0), 0);
     string dr = drawing.str().c_str();
@@ -354,8 +355,6 @@ void MainWindow::update()
         connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
     }
     addToTree(f.get_infinity());
-
-    shortestDistance(QPointF(3, 3), 7);
 }
 
 /*!
@@ -460,7 +459,7 @@ void MainWindow::on_actionOpen_triggered()
     fileName = saveDialog->getOpenFileName(this, tr("Open Figure"), QDir::homePath(), tr("*.gar"));
 
     if (!fileName.isEmpty() && !fileName.isNull()) {
-        if (SET_FLOAT_EVALUATION)
+        if (s.value("setFloatEvaluation").toBool())
             f = figure(qPrintable(fileName)).set_float_eval();
         else
             f = figure(qPrintable(fileName));
@@ -577,7 +576,7 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
 
     qDebug() << node_label(selected_key);
     qDebug() << dis;
-    return lst{selected_key,dis};
+    return selected_key;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -595,4 +594,22 @@ void MainWindow::onCalculateDockRatio()
 {
     double sizeRatio = ui->dockWidgetRight->width() / (double)this->width();
     ui->dockWidgetRight->setSizeRatio(sizeRatio);
+}
+
+void MainWindow::highlightClosestCycle(QPointF point)
+{
+    if (!prevHoveredCycle.isNull())
+        prevHoveredCycle->unsetHover();
+
+    qDebug() << "finding cycle";
+    GiNaC::ex closest = shortestDistance(point, 20);
+
+    QPointer<graphicCycle> cycle = cyclesMap.value(node_label(closest));
+
+    if (!cycle.isNull())
+        cycle->setHover();
+
+    prevHoveredCycle = cycle;
+
+
 }
