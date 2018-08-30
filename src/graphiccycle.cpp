@@ -20,13 +20,13 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
     this->relativeScaleFactor = relativeScaleFactor;
     this->view = v;
 
-    if (fig->get_asy_style(cycle).length() != 0) {
-        QString s = QString::fromStdString(fig->get_asy_style(cycle));
-        QColor c = s;
-        this->defaultColour = c;
-    } else {
-        this->defaultColour = s.value("defaultGraphicsColour").value<QColor>();
-    }
+//    if (fig->get_asy_style(cycle).length() != 0) {
+//        QString s = QString::fromStdString(fig->get_asy_style(cycle));
+//        QColor c = s;
+//        this->defaultColour = c;
+//    } else {
+//        this->defaultColour = s.value("defaultGraphicsColour").value<QColor>();
+//    }
 
 
     colourDialog = new QColorDialog();
@@ -290,6 +290,5 @@ QPointer<cycleContextMenu> graphicCycle::getContextMenu()
 void graphicCycle::showColourDialog()
 {
     colourDialog->open();
-
 }
 

@@ -38,7 +38,8 @@ SOURCES += \
         src/point.cpp \
         src/circle.cpp \
         src/line.cpp \
-        src/dockwidget.cpp
+        src/dockwidget.cpp \
+    menurelationhandler.cpp
 
 HEADERS += \
         include/conf.h \
@@ -51,7 +52,8 @@ HEADERS += \
         include/point.h \
         include/line.h \
         include/circle.h \
-        include/dockwidget.h
+        include/dockwidget.h \
+    menurelationhandler.h
 
 FORMS += \
         forms/mainwindow.ui
