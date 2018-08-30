@@ -41,8 +41,6 @@ private:
     QPointF target_scene_pos, target_viewport_pos;
 
     QTimer *mouseTimeOut;
-
-    int count = 0;
 };
 
 #endif // VIEW_H

@@ -10,6 +10,8 @@
 #include <QGraphicsSceneContextMenuEvent>
 #include <QMessageBox>
 #include <QtMath>
+#include <QSettings>
+#include <QColorDialog>
 
 #include "figure.h"
 
@@ -19,7 +21,6 @@
 #include "point.h"
 #include "circle.h"
 #include "line.h"
-#include "settings.h"
 
 /*!
  * \brief The graphicCycle class
@@ -64,6 +65,7 @@ public:
     void buildShape();
     QString node_label(GiNaC::ex name);
     QPointer<cycleContextMenu> getContextMenu();
+    void showColourDialog();
 
 public slots:
     void resetRelationalList();
@@ -72,6 +74,7 @@ public slots:
     void removeCycle();
     void setHover();
     void unsetHover();
+    void setColour(QColor colour);
 
 signals:
     void removeFromTree(graphicCycle *c);
@@ -82,6 +85,8 @@ signals:
     void findCycleInTree(GiNaC::ex c);
 
 private:
+    QSettings s;
+
     GiNaC::ex cycle;
     MoebInv::figure *fig;
     cycleContextMenu *menu;
@@ -91,11 +96,14 @@ private:
     class view *view;
 
     QMessageBox *msgBox;
+    QColorDialog *colourDialog;
 
     QString label;
 
     QBrush *brush;
     QPen *pen;
+
+    QColor defaultColour;
 };
 
 #endif // GRAPHICCYCLE_H

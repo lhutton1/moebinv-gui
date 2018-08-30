@@ -47,6 +47,16 @@ void setDefaultSettings()
      * Sets whether the application should use float evaluation or not.
      */
     s.setValue("floatEvaluation", true);
+
+    /*!
+     * Set the hover colour of the graphics on the scene.
+     */
+    s.setValue("graphicsHoverColour", QColor(255, 0, 0));
+
+    /*!
+     * Set the default colour of the graphics in the scene.
+     */
+    s.setValue("defaultGraphicsColour", QColor(0, 0, 0));
 }
 
 int main(int argc, char *argv[])

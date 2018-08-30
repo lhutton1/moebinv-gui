@@ -20,6 +20,17 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
     this->relativeScaleFactor = relativeScaleFactor;
     this->view = v;
 
+    if (fig->get_asy_style(cycle).length() != 0) {
+        QString s = QString::fromStdString(fig->get_asy_style(cycle));
+        QColor c = s;
+        this->defaultColour = c;
+    } else {
+        this->defaultColour = s.value("defaultGraphicsColour").value<QColor>();
+    }
+
+
+    colourDialog = new QColorDialog();
+
     // create the brush and pen and assign a base colour
     brush = new QBrush(Qt::black);
     pen = new QPen(Qt::black);
@@ -31,6 +42,8 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
     connect(menu, &cycleContextMenu::addRelationToList, this, &graphicCycle::addToList);
     connect(menu, &cycleContextMenu::removeRelationFromList, this, &graphicCycle::removeFromList);
     connect(menu->deletePoint, &QAction::triggered, this, &graphicCycle::removeCycle);
+    connect(menu->changeColour, &QAction::triggered, this, &graphicCycle::showColourDialog);
+    connect(colourDialog, &QColorDialog::colorSelected, this, &graphicCycle::setColour);
 
     // allow hover events to take place, used to highlight
     // currently hovered object on the scene
@@ -238,12 +251,25 @@ QString graphicCycle::node_label(GiNaC::ex name)
 
 void graphicCycle::setHover()
 {
-    brush->setColor(Qt::red);
-    pen->setColor(Qt::red);
+    brush->setColor(s.value("graphicsHoverColour").value<QColor>());
+    pen->setColor(s.value("graphicsHoverColour").value<QColor>());
     update();
 
     // now emit signal to find in tree
     emit findCycleInTree(cycle);
+}
+
+void graphicCycle::setColour(QColor color)
+{
+    QString asyStyle = "rgb(" + QString::number(color.redF())
+            + "," + QString::number(color.greenF())
+            + "," + QString::number(color.blueF());
+
+    fig->set_asy_style(cycle, qPrintable(asyStyle));
+    defaultColour = color;
+    brush->setColor(color);
+    pen->setColor(color);
+    update();
 }
 
 void graphicCycle::unsetHover()
@@ -259,5 +285,11 @@ QPointer<cycleContextMenu> graphicCycle::getContextMenu()
 
     if (!menuP.isNull())
         return menuP;
+}
+
+void graphicCycle::showColourDialog()
+{
+    colourDialog->open();
+
 }
 

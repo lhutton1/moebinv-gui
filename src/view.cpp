@@ -50,30 +50,47 @@ void view::wheelEvent(QWheelEvent * event)
     setViewportUpdateMode(FullViewportUpdate);
 }
 
+/*!
+ * \brief view::recenterView Recenter the view
+ *
+ * Recenter the view to the default point (0, 0).
+ */
 void view::recenterView()
 {
     this->centerOn(QPointF(0, 0));
 }
 
+/*!
+ * \brief view::mouseMoveEvent
+ * \param event
+ *
+ * Reimplemented event that is triggered when the mouse moves on the view.
+ */
 void view::mouseMoveEvent(QMouseEvent *event)
 {
+    // Implement old mouse move event and then add to it
     QGraphicsView::mouseMoveEvent(event);
 
+    // Start a timer to be used to detect when the mouse has stopped moving
     if (!mouseTimeOut->isActive())
         mouseTimeOut->start();
 
     mouseTimeOut->setInterval(500);
 }
 
+/*!
+ * \brief view::mouseStopped
+ *
+ * Slot that is triggered when the mouse has stopped moving.
+ * This slot then emits a signal to find the closest cycle to
+ * the current mouse position.
+ */
 void view::mouseStopped()
 {
     mouseTimeOut->stop();
-    qDebug() << "finished" << count++;
 
     QPoint point = this->mapFromGlobal(QCursor::pos());
     QPointF relPoint = this->mapToScene(point);
-    qDebug() << relPoint.x();
-    qDebug() << relPoint.y();
 
     emit highlightClosestCycle(relPoint);
 }

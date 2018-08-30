@@ -42,7 +42,7 @@ class cycleContextMenu : public QMenu
     Q_OBJECT
 
 public:
-    cycleContextMenu(bool deleteAction = true);
+    cycleContextMenu(bool deleteAction = true, QObject *parent = 0);
 
     // Mutually compatible relations
     QPointer<QAction> isOrthogonal = nullptr;
@@ -64,6 +64,7 @@ public:
     QPointer<QAction> cycleMobius = nullptr;
     QPointer<QAction> cycleSl2 = nullptr;
 
+    QPointer<QAction> changeColour = nullptr;
     QPointer<QAction> deletePoint = nullptr;
 
 public slots:

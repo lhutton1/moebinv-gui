@@ -13,7 +13,7 @@
  */
 
 
-cycleContextMenu::cycleContextMenu(bool deleteAction)
+cycleContextMenu::cycleContextMenu(bool deleteAction, QObject *parent)
 {
     // Orthogonal
     isOrthogonal = new QAction("Orthogonal", this);
@@ -96,6 +96,12 @@ cycleContextMenu::cycleContextMenu(bool deleteAction)
     cycleSl2->setCheckable(true);
     cycleSl2->setChecked(false);
     this->addAction(cycleSl2);
+
+    this->addSeparator();
+
+    // Change colour option
+    changeColour = new QAction("Change Colour...", this);
+    this->addAction(changeColour);
 
     // Loop through items that have been added
 
