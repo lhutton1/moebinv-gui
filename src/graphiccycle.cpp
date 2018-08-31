@@ -71,10 +71,7 @@ void graphicCycle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void graphicCycle::resetRelationalList()
 {
-    menu->isOrthogonal->setChecked(false);
-    menu->isfOrthogonal->setChecked(false);
-    menu->isTangent->setChecked(false);
-    menu->isDifferent->setChecked(false);
+
 }
 
 /*!

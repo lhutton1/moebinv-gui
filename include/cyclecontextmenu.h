@@ -8,27 +8,9 @@
 #include <QSignalMapper>
 
 #include "figure.h"
-
 #include "conf.h"
 
-//struct relationPairings {
-//    GiNaC::lst ORTHAGONAL = is_orthogonal(cycle);
-//    GiNaC::lst FORTHAGONAL = is_f_orthogonal(cycle);
-//    GiNaC::lst DIFFERENT = is_different(cycle);
-//    GiNaC::lst ADIFFERENT = is_adifferent(cycle);
-//    GiNaC::lst REALS = only_reals(cycle);
-
-//    GiNaC::lst TANGENT = is_tangent(cycle);
-//    GiNaC::lst TANGENT_I = is_tangent_i(cycle);
-//    GiNaC::lst TANGENT_O = is_tangent_o(cycle);
-
-//    GiNaC::lst STEINER_POWER = steiner_power();
-//    GiNaC::lst CYCLE_ANGLE = cycle_angle();
-//    GiNaC::lst STEINER_POWER = cycle_cross_t_distance();
-//    GiNaC::lst STEINER_POWER = product_sign();
-//    GiNaC::lst STEINER_POWER = cycle_mobius();
-//    GiNaC::lst STEINER_POWER = cycle_sl2();
-//};
+#include "menurelationhandler.h"
 
 /*!
  * \brief The cycleContextMenu class
@@ -42,27 +24,7 @@ class cycleContextMenu : public QMenu
     Q_OBJECT
 
 public:
-    cycleContextMenu(bool deleteAction = true, QObject *parent = 0);
-
-    // Mutually compatible relations
-    QPointer<QAction> isOrthogonal = nullptr;
-    QPointer<QAction> isfOrthogonal = nullptr;
-    QPointer<QAction> isDifferent = nullptr;
-    QPointer<QAction> isADifferent = nullptr;
-    QPointer<QAction> onlyReals = nullptr;
-
-    // Mutually excluding relations
-    QPointer<QAction> isTangent = nullptr;
-    QPointer<QAction> isTangent_i = nullptr;
-    QPointer<QAction> isTangent_o = nullptr;
-
-    // Relations with a value
-    QPointer<QAction> steinerPower = nullptr;
-    QPointer<QAction> cycleAngle = nullptr;
-    QPointer<QAction> cycleCrossTDistance = nullptr;
-    QPointer<QAction> productSign = nullptr;
-    QPointer<QAction> cycleMobius = nullptr;
-    QPointer<QAction> cycleSl2 = nullptr;
+    cycleContextMenu(MoebInv::ex cycle, GiNaC::lst *relationList, bool isDelete = true);
 
     QPointer<QAction> changeColour = nullptr;
     QPointer<QAction> deletePoint = nullptr;
@@ -74,6 +36,27 @@ signals:
     void addRelationToList(int relType);
     void removeRelationFromList(int relType);
 
+private:
+    GiNaC::ex cycle;
+    GiNaC::lst *relationList;
+
+    QList<menuRelationHandler *> actions;
+
+    // relation functions
+    MoebInv::cycle_relation (*ORTHOGONAL) (const GiNaC::ex &, bool) = &MoebInv::is_orthogonal;
+    MoebInv::cycle_relation (*FORTHOGONAL) (const GiNaC::ex &, bool) = &MoebInv::is_f_orthogonal;
+    MoebInv::cycle_relation (*DIFFERENT) (const GiNaC::ex &, bool) = &MoebInv::is_different;
+    MoebInv::cycle_relation (*ADIFFERENT) (const GiNaC::ex &, bool) = &MoebInv::is_adifferent;
+    //MoebInv::cycle_relation (*REALS) (const GiNaC::ex &, bool) = &MoebInv::is_real_cycle;
+    MoebInv::cycle_relation (*TANGENT) (const GiNaC::ex &, bool) = &MoebInv::is_tangent;
+    MoebInv::cycle_relation (*TANGENT_I) (const GiNaC::ex &, bool) = &MoebInv::is_tangent_i;
+    MoebInv::cycle_relation (*TANGENT_O) (const GiNaC::ex &, bool) = &MoebInv::is_tangent_o;
+    //STEINER_POWER;
+    //CYCLE_ANGLE;
+    //CYCLE_CROSS_T_DISTANCE;
+    //PRODUCT_SIGN;
+    //CYCLE_MOBIUS;
+    //CYCLE_SL2;
 };
 
 #endif // CYCLECONTEXTMENU_H

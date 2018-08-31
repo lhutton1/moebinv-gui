@@ -120,20 +120,20 @@ void MainWindow::onMouseSceneHover(QPointF point)
 }
 
 void MainWindow::addToList(int relType, ex cycle) {
-    switch (relType) {
-        case ORTHOGONAL:
-            relationList.append(is_orthogonal(cycle));
-            break;
-        case FORTHOGONAL:
-            relationList.append(is_f_orthogonal(cycle));
-            break;
-        case TANGENT:
-            relationList.append(is_tangent(cycle));
-            break;
-        case DIFFERENT:
-            relationList.append(is_different(cycle));
-            break;
-    }
+//    switch (relType) {
+//        case ORTHOGONAL:
+//            relationList.append(is_orthogonal(cycle));
+//            break;
+//        case FORTHOGONAL:
+//            relationList.append(is_f_orthogonal(cycle));
+//            break;
+//        case TANGENT:
+//            relationList.append(is_tangent(cycle));
+//            break;
+//        case DIFFERENT:
+//            relationList.append(is_different(cycle));
+//            break;
+//    }
 }
 
 void MainWindow::removeFromList(int relType, ex cycle) {
@@ -141,20 +141,20 @@ void MainWindow::removeFromList(int relType, ex cycle) {
     cycle_relation relationToRemove;
 
     // build relation to remove
-    switch(relType) {
-        case ORTHOGONAL:
-            relationToRemove = is_orthogonal(cycle);
-            break;
-        case FORTHOGONAL:
-            relationToRemove = is_f_orthogonal(cycle);
-            break;
-        case TANGENT:
-            relationToRemove = is_tangent(cycle);
-            break;
-        case DIFFERENT:
-            relationToRemove = is_different(cycle);
-            break;
-    }
+//    switch(relType) {
+//        case ORTHOGONAL:
+//            relationToRemove = is_orthogonal(cycle);
+//            break;
+//        case FORTHOGONAL:
+//            relationToRemove = is_f_orthogonal(cycle);
+//            break;
+//        case TANGENT:
+//            relationToRemove = is_tangent(cycle);
+//            break;
+//        case DIFFERENT:
+//            relationToRemove = is_different(cycle);
+//            break;
+//    }
 
 
     // now loop through current list and build new list
@@ -240,33 +240,33 @@ void MainWindow::addToTree(ex cycle)
 }
 
 void MainWindow::initMainMenu() {
-    for (int x = 0; x < MENU_SIZE; x++)
-        menus[x] = new cycleContextMenu(false);
+//    for (int x = 0; x < MENU_SIZE; x++)
+//        menus[x] = new cycleContextMenu(false);
 
-    infinity = new QToolButton();
-    infinity->setMenu(menus[0]);
-    infinity->setText("Infinity");
-    infinity->setPopupMode(QToolButton::InstantPopup);
-    ui->mainToolBar->addWidget(infinity);
+//    infinity = new QToolButton();
+//    infinity->setMenu(menus[0]);
+//    infinity->setText("Infinity");
+//    infinity->setPopupMode(QToolButton::InstantPopup);
+//    ui->mainToolBar->addWidget(infinity);
 
-    real = new QToolButton();
-    real->setMenu(menus[1]);
-    real->setText("Real Line");
-    real->setPopupMode(QToolButton::InstantPopup);
-    ui->mainToolBar->addWidget(real);
+//    real = new QToolButton();
+//    real->setMenu(menus[1]);
+//    real->setText("Real Line");
+//    real->setPopupMode(QToolButton::InstantPopup);
+//    ui->mainToolBar->addWidget(real);
 
-    thisItem = new QToolButton();
-    thisItem->setMenu(menus[2]);
-    thisItem->setText("This");
-    thisItem->setPopupMode(QToolButton::InstantPopup);
-    ui->mainToolBar->addWidget(thisItem);
+//    thisItem = new QToolButton();
+//    thisItem->setMenu(menus[2]);
+//    thisItem->setText("This");
+//    thisItem->setPopupMode(QToolButton::InstantPopup);
+//    ui->mainToolBar->addWidget(thisItem);
 
-    connect(menus[0], &cycleContextMenu::addRelationToList, this, &MainWindow::addInfinityToList);
-    connect(menus[0], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeInfinityFromList);
-    connect(menus[1], &cycleContextMenu::addRelationToList, this, &MainWindow::addRealToList);
-    connect(menus[1], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeRealFromList);
-    connect(menus[2], &cycleContextMenu::addRelationToList, this, &MainWindow::addThisToList);
-    connect(menus[2], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeThisFromList);
+//    connect(menus[0], &cycleContextMenu::addRelationToList, this, &MainWindow::addInfinityToList);
+//    connect(menus[0], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeInfinityFromList);
+//    connect(menus[1], &cycleContextMenu::addRelationToList, this, &MainWindow::addRealToList);
+//    connect(menus[1], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeRealFromList);
+//    connect(menus[2], &cycleContextMenu::addRelationToList, this, &MainWindow::addThisToList);
+//    connect(menus[2], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeThisFromList);
 }
 
 void MainWindow::addInfinityToList(int relType)
@@ -325,7 +325,7 @@ void MainWindow::update()
         ex cycle = keys[x];
 
         //create new context menu
-        cycleContextMenu *menu = new cycleContextMenu();
+        cycleContextMenu *menu = new cycleContextMenu(cycle, &relationList);
 
         // add cycles to scene
         graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor, menu);
@@ -343,10 +343,7 @@ void MainWindow::update()
 
         //reset infinity, real, this relations
         for (int x = 0; x < MENU_SIZE; x++) {
-            menus[x]->isOrthogonal->setChecked(false);
-            menus[x]->isfOrthogonal->setChecked(false);
-            menus[x]->isDifferent->setChecked(false);
-            menus[x]->isTangent->setChecked(false);
+
         }
 
         // add cycle to the tree
@@ -573,9 +570,6 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
     }
     // Returns the key for closest cycle and the distance
     // if there is no a cycle closer than dis, then zero is returned as the key
-
-    qDebug() << node_label(selected_key);
-    qDebug() << dis;
     return selected_key;
 }
 
@@ -601,7 +595,6 @@ void MainWindow::highlightClosestCycle(QPointF point)
     if (!prevHoveredCycle.isNull())
         prevHoveredCycle->unsetHover();
 
-    qDebug() << "finding cycle";
     GiNaC::ex closest = shortestDistance(point, 20);
 
     QPointer<graphicCycle> cycle = cyclesMap.value(node_label(closest));
