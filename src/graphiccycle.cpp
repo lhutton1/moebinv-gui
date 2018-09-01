@@ -39,8 +39,6 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
     this->menu = menu;
 
     // connect signals
-    connect(menu, &cycleContextMenu::addRelationToList, this, &graphicCycle::addToList);
-    connect(menu, &cycleContextMenu::removeRelationFromList, this, &graphicCycle::removeFromList);
     connect(menu->deletePoint, &QAction::triggered, this, &graphicCycle::removeCycle);
     connect(menu->changeColour, &QAction::triggered, this, &graphicCycle::showColourDialog);
     connect(colourDialog, &QColorDialog::colorSelected, this, &graphicCycle::setColour);
@@ -72,29 +70,6 @@ void graphicCycle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void graphicCycle::resetRelationalList()
 {
 
-}
-
-/*!
- * \brief graphicCycle::addToList
- * \param relType
- *
- * Slot to add a certain cycle to the list. Emmits a signal to call slot
- * in MainWindow to add the cycle to the list.
- */
-void graphicCycle::addToList(int relType)
-{
-    emit addRelationToList(relType, cycle);
-}
-
-/*!
- * \brief graphicCycle::removeFromList
- *
- * Slot to remove cycle from list. Emmits a signal to call slot in
- * MainWindow to remove the cycle from the list.
- */
-void graphicCycle::removeFromList(int relType)
-{
-    emit removeRelationFromList(relType, cycle);
 }
 
 /*!

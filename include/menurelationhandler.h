@@ -18,7 +18,10 @@ public:
     QAction checkMenuEntry();
     void actionHandler();
     bool checkActionHandler();
-    void getRelationFunction();
+    void addRelationToList();
+    void removeRelationFromList();
+
+    QString node_label(GiNaC::ex name);
 
 private:
     QSettings s;

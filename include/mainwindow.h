@@ -15,6 +15,7 @@
 #include <QMap>
 #include <QSettings>
 #include <QTimer>
+#include <QLabel>
 
 #include "figure.h"
 
@@ -60,15 +61,7 @@ public:
 private slots:
     void onMouseScenePress(QPointF point);
     void onMouseSceneHover(QPointF point);
-    void addToList(int relType, GiNaC::ex cycle);
-    void removeFromList(int relType, GiNaC::ex cycle);
     void on_actionCreate_Cycle_triggered();
-    void addInfinityToList(int relType);
-    void addRealToList(int relType);
-    void addThisToList(int relType);
-    void removeInfinityFromList(int relType);
-    void removeRealFromList(int relType);
-    void removeThisFromList(int relType);
     void on_actionPan_toggled(bool pan);
     void sceneInvalid();
     void findCycleInTree(GiNaC::ex c);
@@ -77,6 +70,7 @@ private slots:
     void on_actionNew_triggered();
     void onCalculateDockRatio();
     void highlightClosestCycle(QPointF point);
+    void buildRelationStatus();
 
     void onCustomContextMenu(const QPoint &point);
 
@@ -119,6 +113,9 @@ private:
     QTimer *timer;
 
     QPointer<graphicCycle> prevHoveredCycle;
+
+    QLabel *statusCoordinates;
+    QLabel *statusRelations;
 };
 
 #endif // MAINWINDOW_H

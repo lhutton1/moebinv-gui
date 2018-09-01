@@ -33,8 +33,7 @@ public slots:
     void isChecked(int relType);
 
 signals:
-    void addRelationToList(int relType);
-    void removeRelationFromList(int relType);
+    void relationsHaveChanged();
 
 private:
     GiNaC::ex cycle;

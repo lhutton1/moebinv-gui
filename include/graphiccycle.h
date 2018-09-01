@@ -69,8 +69,6 @@ public:
 
 public slots:
     void resetRelationalList();
-    void addToList(int relType);
-    void removeFromList(int relType);
     void removeCycle();
     void setHover();
     void unsetHover();
@@ -78,8 +76,6 @@ public slots:
 
 signals:
     void removeFromTree(graphicCycle *c);
-    void addRelationToList(int relType, GiNaC::ex c);
-    void removeRelationFromList(int relType, GiNaC::ex c);
     void sceneInvalid();
     void scaleFactorChanged();
     void findCycleInTree(GiNaC::ex c);

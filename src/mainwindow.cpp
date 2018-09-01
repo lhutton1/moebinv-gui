@@ -29,6 +29,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphicsView->recenterView();
 
+    //status bar
+    statusCoordinates = new QLabel();
+    statusRelations = new QLabel();
+    ui->statusBar->addWidget(statusCoordinates);
+    ui->statusBar->addPermanentWidget(statusRelations);
+
     // set up new event
     connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
@@ -114,57 +120,7 @@ void MainWindow::onMouseSceneHover(QPointF point)
       .arg(point.x())
       .arg(point.y());
 
-    ui->statusBar->showMessage(coordinates);
-
-
-}
-
-void MainWindow::addToList(int relType, ex cycle) {
-//    switch (relType) {
-//        case ORTHOGONAL:
-//            relationList.append(is_orthogonal(cycle));
-//            break;
-//        case FORTHOGONAL:
-//            relationList.append(is_f_orthogonal(cycle));
-//            break;
-//        case TANGENT:
-//            relationList.append(is_tangent(cycle));
-//            break;
-//        case DIFFERENT:
-//            relationList.append(is_different(cycle));
-//            break;
-//    }
-}
-
-void MainWindow::removeFromList(int relType, ex cycle) {
-    lst newRelationList;
-    cycle_relation relationToRemove;
-
-    // build relation to remove
-//    switch(relType) {
-//        case ORTHOGONAL:
-//            relationToRemove = is_orthogonal(cycle);
-//            break;
-//        case FORTHOGONAL:
-//            relationToRemove = is_f_orthogonal(cycle);
-//            break;
-//        case TANGENT:
-//            relationToRemove = is_tangent(cycle);
-//            break;
-//        case DIFFERENT:
-//            relationToRemove = is_different(cycle);
-//            break;
-//    }
-
-
-    // now loop through current list and build new list
-    for (int x = 0; x < relationList.nops(); x++) {
-        if (node_label(relationList.op(x)) != node_label(relationToRemove)) {
-            newRelationList.append(relationList.op(x));
-        }
-    }
-
-    relationList = newRelationList;
+    statusCoordinates->setText(coordinates);
 }
 
 void MainWindow::resetList(GiNaC::lst *list) {
@@ -269,36 +225,6 @@ void MainWindow::initMainMenu() {
 //    connect(menus[2], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeThisFromList);
 }
 
-void MainWindow::addInfinityToList(int relType)
-{
-    addToList(relType, f.get_infinity());
-}
-
-void MainWindow::addRealToList(int relType)
-{
-    addToList(relType, f.get_real_line());
-}
-
-void MainWindow::removeInfinityFromList(int relType)
-{
-    removeFromList(relType, f.get_infinity());
-}
-
-void MainWindow::removeRealFromList(int relType)
-{
-    removeFromList(relType, f.get_real_line());
-}
-
-void MainWindow::addThisToList(int relType)
-{
-    addToList(relType, nextSymbol);
-}
-
-void MainWindow::removeThisFromList(int relType)
-{
-    removeFromList(relType, nextSymbol);
-}
-
 void MainWindow::on_actionPan_toggled(bool pan)
 {
     if (pan) {
@@ -326,6 +252,7 @@ void MainWindow::update()
 
         //create new context menu
         cycleContextMenu *menu = new cycleContextMenu(cycle, &relationList);
+        connect(menu, &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
         // add cycles to scene
         graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor, menu);
@@ -334,22 +261,16 @@ void MainWindow::update()
         cyclesMap[node_label(cycle)] = QPointer<graphicCycle>(c);
 
         // connect events
-        connect(c, &graphicCycle::addRelationToList, this, &MainWindow::addToList);
-        connect(c, &graphicCycle::removeRelationFromList, this, &MainWindow::removeFromList);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
-        connect(this, &MainWindow::resetRelationalList, c, &graphicCycle::resetRelationalList);
 
         scene->addItem(c);
-
-        //reset infinity, real, this relations
-        for (int x = 0; x < MENU_SIZE; x++) {
-
-        }
 
         // add cycle to the tree
         addToTree(cycle);
 
         connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
+
+        buildRelationStatus();
     }
     addToTree(f.get_infinity());
 }
@@ -603,6 +524,37 @@ void MainWindow::highlightClosestCycle(QPointF point)
         cycle->setHover();
 
     prevHoveredCycle = cycle;
+}
 
+void MainWindow::buildRelationStatus()
+{
+    QString relationString;
+    relationString = "Current selected relations: [";
 
+    if (relationList.nops() == 0) {
+        relationString += "]";
+        statusRelations->setText(relationString);
+        return;
+    }
+
+    if (relationList.nops() != 1) {
+        for (int x = 0; x < relationList.nops() - 1; x++) {
+            qDebug() << x;
+            try {
+                cycle_relation cycleRelation = ex_to<cycle_relation>(relationList.op(x));
+                relationString += node_label(cycleRelation);
+                relationString += ", ";
+
+            } catch (...) {
+                // catch invalid relation in relationList and move onto the next item
+                continue;
+            }
+        }
+    }
+
+    // add final item in list
+    relationString += node_label(relationList.op(relationList.nops() - 1));
+
+    relationString += "]";
+    statusRelations->setText(relationString);
 }

@@ -29,6 +29,11 @@ cycleContextMenu::cycleContextMenu(MoebInv::ex cycle, GiNaC::lst *relationList, 
     actions.append(new menuRelationHandler(cycle, relationList, TANGENT_I, "Tangent I", 0, true));
     actions.append(new menuRelationHandler(cycle, relationList, TANGENT_O, "Tangent O", 0, true));
 
+    //loop through and connect signals to keep relation status string updated
+    for (int x = 0; x < actions.length(); x++)
+        connect(actions[x], &menuRelationHandler::triggered, this, &cycleContextMenu::relationsHaveChanged);
+
+
     for (int x = 0; x < 4; x++) {
         this->addAction(actions[x]);
     }
