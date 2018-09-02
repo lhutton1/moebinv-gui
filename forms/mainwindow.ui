@@ -124,6 +124,9 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionCreate_Cycle"/>
+   <addaction name="separator"/>
+   <addaction name="actionzoomIn"/>
+   <addaction name="actionzoomOut"/>
    <addaction name="actionPan"/>
    <addaction name="separator"/>
   </widget>
@@ -137,8 +140,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>30</width>
-     <height>95</height>
+     <width>200</width>
+     <height>98</height>
     </size>
    </property>
    <property name="layoutDirection">
@@ -267,6 +270,16 @@
    </property>
    <property name="text">
     <string>Labels</string>
+   </property>
+  </action>
+  <action name="actionzoomIn">
+   <property name="text">
+    <string>Zoom In</string>
+   </property>
+  </action>
+  <action name="actionzoomOut">
+   <property name="text">
+    <string>Zoom Out</string>
    </property>
   </action>
  </widget>

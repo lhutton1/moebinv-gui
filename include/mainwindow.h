@@ -76,6 +76,10 @@ private slots:
 
     void on_actionLabels_toggled(bool labels);
 
+    void on_actionzoomIn_triggered();
+
+    void on_actionzoomOut_triggered();
+
 signals:
     void resetRelationalList();
 

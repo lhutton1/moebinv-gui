@@ -6,6 +6,7 @@
 #include <QAction>
 #include <QObject>
 #include <QSignalMapper>
+#include <QMessageBox>
 
 #include "figure.h"
 #include "conf.h"
@@ -24,13 +25,15 @@ class cycleContextMenu : public QMenu
     Q_OBJECT
 
 public:
-    cycleContextMenu(MoebInv::ex cycle, GiNaC::lst *relationList, bool isDelete = true);
+    cycleContextMenu(GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete = true);
+    QString node_label(GiNaC::ex name);
 
     QPointer<QAction> changeColour = nullptr;
     QPointer<QAction> deletePoint = nullptr;
 
 public slots:
     void isChecked(int relType);
+    void confirmDeleteCycle();
 
 signals:
     void relationsHaveChanged();
@@ -40,6 +43,7 @@ private:
     GiNaC::lst *relationList;
 
     QList<menuRelationHandler *> actions;
+    QMessageBox::StandardButton confirmationMessageBox;
 
     // relation functions
     MoebInv::cycle_relation (*ORTHOGONAL) (const GiNaC::ex &, bool) = &MoebInv::is_orthogonal;

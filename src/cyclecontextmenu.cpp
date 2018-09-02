@@ -1,4 +1,5 @@
 #include "cyclecontextmenu.h"
+#include <QDebug>
 
 using namespace GiNaC;
 using namespace MoebInv;
@@ -16,7 +17,7 @@ using namespace MoebInv;
  */
 
 
-cycleContextMenu::cycleContextMenu(MoebInv::ex cycle, GiNaC::lst *relationList, bool isDelete)
+cycleContextMenu::cycleContextMenu(GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete)
 {
     this->cycle = cycle;
     this->relationList = relationList;
@@ -73,3 +74,26 @@ cycleContextMenu::cycleContextMenu(MoebInv::ex cycle, GiNaC::lst *relationList, 
 void cycleContextMenu::isChecked(int relType) {
 
 }
+
+void cycleContextMenu::confirmDeleteCycle()
+{
+    QString confirmMsg = QString("Are you sure you would like to delete cycle '%1'")
+            .arg(node_label(cycle));
+    confirmationMessageBox = QMessageBox::question(this, "Delete cycle", confirmMsg,
+                                                   QMessageBox::Yes|QMessageBox::No);
+
+    if (confirmationMessageBox == QMessageBox::Yes)
+        qDebug() << "delete item";
+    else
+        qDebug() << "don't delete item";
+}
+
+QString cycleContextMenu::node_label(ex name)
+{
+    std::ostringstream drawing;
+    drawing << name;
+    string dr = drawing.str().c_str();
+
+    return QString::fromStdString(dr);
+}
+

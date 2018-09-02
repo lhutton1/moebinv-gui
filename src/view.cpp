@@ -42,8 +42,6 @@ void view::wheelEvent(QWheelEvent * event)
         factor = 0.9;
         relativeScaleFactor *= 0.9;
     }
-    offsetX = mapFromScene(QPointF(0,0)).x();
-    offsetY = mapFromScene(QPointF(0,0)).y();
 
     scale(factor, factor);
     setTransformationAnchor(anchor);
@@ -93,4 +91,20 @@ void view::mouseStopped()
     QPointF relPoint = this->mapToScene(point);
 
     emit highlightClosestCycle(relPoint);
+}
+
+void view::zoomIn()
+{
+    qreal factor = 1.1;
+
+    relativeScaleFactor *= factor;
+    scale(factor, factor);
+}
+
+void view::zoomOut()
+{
+    qreal factor = 0.9;
+
+    relativeScaleFactor *= factor;
+    scale(factor, factor);
 }

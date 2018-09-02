@@ -116,7 +116,7 @@ void MainWindow::onMouseScenePress(QPointF location)
 
 void MainWindow::onMouseSceneHover(QPointF point)
 {
-    QString coordinates = QString("%1, %2")
+    QString coordinates = QString("Coordinates: %1, %2")
       .arg(point.x())
       .arg(point.y());
 
@@ -196,26 +196,20 @@ void MainWindow::addToTree(ex cycle)
 }
 
 void MainWindow::initMainMenu() {
-//    for (int x = 0; x < MENU_SIZE; x++)
-//        menus[x] = new cycleContextMenu(false);
+    menus[0] = new cycleContextMenu(f.get_infinity(), &relationList, false);
+    connect(menus[0], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
-//    infinity = new QToolButton();
-//    infinity->setMenu(menus[0]);
-//    infinity->setText("Infinity");
-//    infinity->setPopupMode(QToolButton::InstantPopup);
-//    ui->mainToolBar->addWidget(infinity);
+    menus[1] = new cycleContextMenu(f.get_real_line(), &relationList, false);
+    connect(menus[1], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
-//    real = new QToolButton();
-//    real->setMenu(menus[1]);
-//    real->setText("Real Line");
-//    real->setPopupMode(QToolButton::InstantPopup);
-//    ui->mainToolBar->addWidget(real);
+    menus[2] = new cycleContextMenu(nextSymbol, &relationList, false);
+    connect(menus[2], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
-//    thisItem = new QToolButton();
-//    thisItem->setMenu(menus[2]);
-//    thisItem->setText("This");
-//    thisItem->setPopupMode(QToolButton::InstantPopup);
-//    ui->mainToolBar->addWidget(thisItem);
+    thisItem = new QToolButton();
+    thisItem->setMenu(menus[2]);
+    thisItem->setText("This");
+    thisItem->setPopupMode(QToolButton::InstantPopup);
+    ui->mainToolBar->addWidget(thisItem);
 
 //    connect(menus[0], &cycleContextMenu::addRelationToList, this, &MainWindow::addInfinityToList);
 //    connect(menus[0], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeInfinityFromList);
@@ -238,6 +232,8 @@ void MainWindow::on_actionPan_toggled(bool pan)
 
 void MainWindow::update()
 {
+    cycleContextMenu *menu;
+
     // remove data
     scene->clear();
     initTreeModel();
@@ -250,8 +246,11 @@ void MainWindow::update()
         // get cycle
         ex cycle = keys[x];
 
-        //create new context menu
-        cycleContextMenu *menu = new cycleContextMenu(cycle, &relationList);
+//        if (cycle.is_equal(f.get_real_line()))
+//            menu = &menu[1];
+//        else
+            menu = new cycleContextMenu(cycle, &relationList);
+
         connect(menu, &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
         // add cycles to scene
@@ -557,4 +556,16 @@ void MainWindow::buildRelationStatus()
 
     relationString += "]";
     statusRelations->setText(relationString);
+}
+
+void MainWindow::on_actionzoomIn_triggered()
+{
+    ui->graphicsView->zoomIn();
+}
+
+
+
+void MainWindow::on_actionzoomOut_triggered()
+{
+    ui->graphicsView->zoomOut();
 }

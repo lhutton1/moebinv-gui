@@ -22,10 +22,10 @@ public:
     explicit view(QObject *parent = 0);
     void wheelEvent(QWheelEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
+    void zoomIn();
+    void zoomOut();
 
     double relativeScaleFactor;
-    double offsetX;
-    double offsetY;
 
 signals:
     void highlightClosestCycle(QPointF point);
