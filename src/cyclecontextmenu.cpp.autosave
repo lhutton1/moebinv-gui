@@ -131,7 +131,7 @@ void cycleContextMenu::buildContextMenu()
     }
 }
 
-void cycleContextMenu::buildRelationActions()
+void cycleContextMenu::buildActions()
 {
     actions.append(new menuRelAction(&this->cycle, relationList, "Orthogonal", 0, false, ORTHOGONAL));
     actions.append(new menuRelAction(&this->cycle, relationList, "F-Orthogonal", 0, false, FORTHOGONAL));

@@ -19,7 +19,7 @@ class menuRelAction : public QAction
 public:
     menuRelAction(MoebInv::ex *cycle, GiNaC::lst *relationList,
         QString actionTitle, int params, bool checked,
-        MoebInv::cycle_relation (*relFunction) (const GiNaC::ex &, bool) = nullptr,
+        MoebInv::cycle_relation (*relFunction) (const GiNaC::ex &, bool),
         menuRelActionGroup *group = nullptr);
 
     QAction menuEntry();
@@ -31,6 +31,9 @@ public:
     GiNaC::ex getCycle();
     QString node_label(GiNaC::ex name);
     menuRelActionGroup* getGroup();
+
+signals:
+    void handleRelation();
 
 private:
     QSettings s;

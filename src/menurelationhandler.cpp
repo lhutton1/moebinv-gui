@@ -51,7 +51,7 @@ void menuRelAction::actionHandler()
 {
     switch (params) {
         case 0: // case where there are no additional parameters
-
+            emit handleRelation();
             break;
     }
 }
@@ -69,8 +69,6 @@ QString menuRelAction::node_label(ex name)
 
     return QString::fromStdString(dr);
 }
-
-//////////////////////////////////
 
 menuRelActionGroup::menuRelActionGroup(QObject *parent) : QActionGroup(parent)
 {

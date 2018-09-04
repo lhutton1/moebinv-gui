@@ -412,6 +412,8 @@ void MainWindow::onCustomContextMenu(const QPoint &point)
     QModelIndex index = ui->treeView->indexAt(point);
     QStandardItem *item = model->itemFromIndex(index);
 
+    if (item == nullptr)
+        return;
 
     // standard case for cycles being drawn graphically
     if (item->parent() && item->parent()->hasChildren()) {
