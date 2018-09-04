@@ -40,7 +40,7 @@ public:
     void removeRelationFromList(MoebInv::cycle_relation relation);
     void buildCycleRelationList();
     void buildContextMenu();
-    void buildRelationActions();
+    void buildActions();
 
     QString node_label(GiNaC::ex name);
 

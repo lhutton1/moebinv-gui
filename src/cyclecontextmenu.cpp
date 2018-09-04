@@ -16,7 +16,7 @@ cycleContextMenu::cycleContextMenu(figure *f, ex cycle, lst *relationList, bool 
 
     tangentExclusive = new menuRelActionGroup(this);
 
-    this->buildRelationActions();
+    this->buildActions();
     this->buildContextMenu();
 }
 
@@ -131,7 +131,7 @@ void cycleContextMenu::buildContextMenu()
     }
 }
 
-void cycleContextMenu::buildRelationActions()
+void cycleContextMenu::buildActions()
 {
     actions.append(new menuRelAction(&this->cycle, relationList, "Orthogonal", 0, false, ORTHOGONAL));
     actions.append(new menuRelAction(&this->cycle, relationList, "F-Orthogonal", 0, false, FORTHOGONAL));
