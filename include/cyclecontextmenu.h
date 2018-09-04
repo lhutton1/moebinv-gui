@@ -25,25 +25,31 @@ class cycleContextMenu : public QMenu
     Q_OBJECT
 
 public:
-    cycleContextMenu(GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete = true);
+    cycleContextMenu(MoebInv::figure *f, GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete = true);
     QString node_label(GiNaC::ex name);
+    GiNaC::lst getCycleRelationList();
+    void buildCycleRelationList();
+    void setCycle(GiNaC::ex cycle);
+    void removeRelationFromList(MoebInv::cycle_relation relation);
 
     QPointer<QAction> changeColour = nullptr;
     QPointer<QAction> deletePoint = nullptr;
 
 public slots:
-    void isChecked(int relType);
     void confirmDeleteCycle();
 
 signals:
     void relationsHaveChanged();
+    void sceneInvalid();
 
 private:
+    MoebInv::figure *f;
     GiNaC::ex cycle;
     GiNaC::lst *relationList;
 
-    QList<menuRelationHandler *> actions;
+    QList<menuRelAction *> actions;
     QMessageBox::StandardButton confirmationMessageBox;
+    menuRelActionGroup *tangentExclusive;
 
     // relation functions
     MoebInv::cycle_relation (*ORTHOGONAL) (const GiNaC::ex &, bool) = &MoebInv::is_orthogonal;

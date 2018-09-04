@@ -39,7 +39,7 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
     this->menu = menu;
 
     // connect signals
-    connect(menu->deletePoint, &QAction::triggered, this, &graphicCycle::removeCycle);
+    //connect(menu->deletePoint, &QAction::triggered, this, &graphicCycle::removeCycle);
     connect(menu->changeColour, &QAction::triggered, this, &graphicCycle::showColourDialog);
     connect(colourDialog, &QColorDialog::colorSelected, this, &graphicCycle::setColour);
 
@@ -190,9 +190,9 @@ void graphicCycle::buildShape()
                 addLine(x, y, c, relativeScaleFactor);
             } else {
                 //circle
-                double x = ex_to<numeric>(C.center().op(0)).to_double();
-                double y = ex_to<numeric>(C.center().op(1)).to_double();
-                double radius = qSqrt(ex_to<numeric>(C.radius_sq()).to_double());
+                double x = ex_to<numeric>(C.center().op(0).evalf()).to_double();
+                double y = ex_to<numeric>(C.center().op(1).evalf()).to_double();
+                double radius = qSqrt(ex_to<numeric>(C.radius_sq().evalf()).to_double());
                 addCircle(x, y, radius, relativeScaleFactor);
             }
         }

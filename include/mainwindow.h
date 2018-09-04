@@ -71,6 +71,7 @@ private slots:
     void onCalculateDockRatio();
     void highlightClosestCycle(QPointF point);
     void buildRelationStatus();
+    void thisContextMenuUpdate();
 
     void onCustomContextMenu(const QPoint &point);
 

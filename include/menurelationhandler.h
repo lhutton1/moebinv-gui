@@ -3,35 +3,59 @@
 
 #include <QSettings>
 #include <QAction>
+#include <QActionGroup>
+#include <stdexcept>
 
 #include "figure.h"
 
 #include "conf.h"
 
-class menuRelationHandler : public QAction
+class menuRelActionGroup;
+
+class menuRelAction : public QAction
 {
     Q_OBJECT
 
 public:
-    menuRelationHandler(MoebInv::ex cycle, GiNaC::lst *relationList, MoebInv::cycle_relation (*relFunction) (const GiNaC::ex &, bool), QString actionTitle, int params, bool checked);
+    menuRelAction(MoebInv::ex *cycle, GiNaC::lst *relationList,
+        QString actionTitle, int params, bool checked,
+        MoebInv::cycle_relation (*relFunction) (const GiNaC::ex &, bool) = nullptr,
+        menuRelActionGroup *group = nullptr);
+
     QAction menuEntry();
     QAction checkMenuEntry();
+    bool hasRelation();
+    MoebInv::cycle_relation getRelation();
     void actionHandler();
     bool checkActionHandler();
-    void addRelationToList();
-    void removeRelationFromList();
-
+    GiNaC::ex getCycle();
     QString node_label(GiNaC::ex name);
+    menuRelActionGroup* getGroup();
 
 private:
     QSettings s;
 
-    MoebInv::ex cycle;
+    GiNaC::ex *cycle;
     GiNaC::lst *relationList;
     MoebInv::cycle_relation (*relFunction) (const GiNaC::ex &, bool);
     QString actionTitle;
+    menuRelActionGroup *group;
     int params;
 
+};
+
+class menuRelActionGroup : public QActionGroup {
+    Q_OBJECT
+
+public:
+    menuRelActionGroup(QObject *parent = nullptr);
+    void addRelAction(menuRelAction *action);
+    QList<menuRelAction *> getRelActions();
+
+private:
+    QSettings s;
+
+    QList<menuRelAction *> actions;
 };
 
 #endif // MENURELATIONHANDLER_H

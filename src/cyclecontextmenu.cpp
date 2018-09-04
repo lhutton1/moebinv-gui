@@ -17,22 +17,26 @@ using namespace MoebInv;
  */
 
 
-cycleContextMenu::cycleContextMenu(GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete)
+cycleContextMenu::cycleContextMenu(figure *f, ex cycle, lst *relationList, bool isDelete)
 {
+    this->f = f;
     this->cycle = cycle;
     this->relationList = relationList;
 
-    actions.append(new menuRelationHandler(cycle, relationList, ORTHOGONAL, "Orthogonal", 0, true));
-    actions.append(new menuRelationHandler(cycle, relationList, FORTHOGONAL, "F-Orthogonal", 0, true));
-    actions.append(new menuRelationHandler(cycle, relationList, DIFFERENT, "Different", 0, true));
-    actions.append(new menuRelationHandler(cycle, relationList, ADIFFERENT, "A-Different", 0, true));
-    actions.append(new menuRelationHandler(cycle, relationList, TANGENT, "Tangent", 0, true));
-    actions.append(new menuRelationHandler(cycle, relationList, TANGENT_I, "Tangent I", 0, true));
-    actions.append(new menuRelationHandler(cycle, relationList, TANGENT_O, "Tangent O", 0, true));
+    tangentExclusive = new menuRelActionGroup(this);
+
+    actions.append(new menuRelAction(&this->cycle, relationList, "Orthogonal", 0, false, ORTHOGONAL));
+    actions.append(new menuRelAction(&this->cycle, relationList, "F-Orthogonal", 0, false, FORTHOGONAL));
+    actions.append(new menuRelAction(&this->cycle, relationList, "Different", 0, false, DIFFERENT));
+    actions.append(new menuRelAction(&this->cycle, relationList, "A-Different", 0, false, ADIFFERENT));
+    actions.append(new menuRelAction(&this->cycle, relationList, "No Tangent", 0, true, nullptr, tangentExclusive));
+    actions.append(new menuRelAction(&this->cycle, relationList, "Tangent Both", 0, false, TANGENT, tangentExclusive));
+    actions.append(new menuRelAction(&this->cycle, relationList, "Tangent Inner", 0, false, TANGENT_I, tangentExclusive));
+    actions.append(new menuRelAction(&this->cycle, relationList, "Tangent Outer", 0, false, TANGENT_O, tangentExclusive));
 
     //loop through and connect signals to keep relation status string updated
     for (int x = 0; x < actions.length(); x++)
-        connect(actions[x], &menuRelationHandler::triggered, this, &cycleContextMenu::relationsHaveChanged);
+        connect(actions[x], &menuRelAction::triggered, this, &cycleContextMenu::buildCycleRelationList);
 
 
     for (int x = 0; x < 4; x++) {
@@ -41,10 +45,9 @@ cycleContextMenu::cycleContextMenu(GiNaC::ex cycle, GiNaC::lst *relationList, bo
 
     this->addSeparator();
 
-    QActionGroup *ag1 = new QActionGroup(this);
-    for (int x = 4; x < 7; x++) {
+    for (int x = 4; x < 8; x++) {
         this->addAction(actions[x]);
-        ag1->addAction(actions[x]);
+        tangentExclusive->addRelAction(actions[x]);
     }
 
     this->addSeparator();
@@ -54,38 +57,72 @@ cycleContextMenu::cycleContextMenu(GiNaC::ex cycle, GiNaC::lst *relationList, bo
     this->addAction(changeColour);
 
     // Loop through items that have been added
-
     if (isDelete) {
         this->addSeparator();
 
         deletePoint = new QAction("Delete");
         this->addAction(deletePoint);
+
+        connect(deletePoint, &QAction::triggered, this, &cycleContextMenu::confirmDeleteCycle);
     }
 }
 
-/*!
- * \brief cycleContextMenu::isChecked
- * \param relType the type of relation that has been checked
- *
- * This functions checks whether the menu item of the 'relType' relation
- * has been checked or unchecked. If it has been checked the cycle is added to the list,
- * if it has been unchecked the cycle is removed from the list.
- */
-void cycleContextMenu::isChecked(int relType) {
-
+void cycleContextMenu::setCycle(ex cycle)
+{
+    this->cycle = cycle;
 }
 
 void cycleContextMenu::confirmDeleteCycle()
 {
     QString confirmMsg = QString("Are you sure you would like to delete cycle '%1'")
             .arg(node_label(cycle));
-    confirmationMessageBox = QMessageBox::question(this, "Delete cycle", confirmMsg,
-                                                   QMessageBox::Yes|QMessageBox::No);
 
-    if (confirmationMessageBox == QMessageBox::Yes)
-        qDebug() << "delete item";
-    else
-        qDebug() << "don't delete item";
+    confirmationMessageBox = QMessageBox::question(nullptr, "Delete cycle", confirmMsg,
+            QMessageBox::Yes|QMessageBox::No);
+
+    if (confirmationMessageBox == QMessageBox::Yes) {
+        f->remove_cycle_node(cycle);
+        emit sceneInvalid();
+    }
+}
+
+void cycleContextMenu::buildCycleRelationList()
+{
+    menuRelAction *actionTriggered = qobject_cast<menuRelAction *>(sender());
+
+    // remove all relations in the triggered cycles group, if it is in one and it is exclusive.
+    if (actionTriggered->getGroup() != nullptr && actionTriggered->getGroup()->isExclusive()) {
+        for (auto action : actionTriggered->getGroup()->getRelActions()) {
+            if (!action->isChecked() && action->hasRelation()) {
+                this->removeRelationFromList(action->getRelation());
+            }
+        }
+    }
+
+    // check whether the cycle triggered needs adding or removing
+    if (actionTriggered->hasRelation()) {
+        if (actionTriggered->isChecked()) {
+            relationList->append(actionTriggered->getRelation());
+        } else {
+            this->removeRelationFromList(actionTriggered->getRelation());
+        }
+    }
+
+    emit relationsHaveChanged();
+}
+
+void cycleContextMenu::removeRelationFromList(cycle_relation relation)
+{
+    GiNaC::lst newRelationList;
+
+    // linear search through list to find item to remove
+    for (int x = 0; x < relationList->nops(); x++) {
+        if (node_label(relationList->op(x)) != node_label(relation)) {
+            newRelationList.append(relationList->op(x));
+        }
+    }
+
+    *relationList = newRelationList;
 }
 
 QString cycleContextMenu::node_label(ex name)

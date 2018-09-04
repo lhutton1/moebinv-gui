@@ -55,11 +55,15 @@ MainWindow::MainWindow(QWidget *parent) :
     msgBox = new QMessageBox();
     saveDialog = new QFileDialog();
 
+    thisItem = new QToolButton();
+    thisItem->setText("This");
+    thisItem->setPopupMode(QToolButton::InstantPopup);
+    ui->mainToolBar->addWidget(thisItem);
+
     // gen first symbol
     nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 
     initTreeModel();
-    initMainMenu();
 
     // remove menu from toolbars
     setContextMenuPolicy(Qt::NoContextMenu);
@@ -196,27 +200,22 @@ void MainWindow::addToTree(ex cycle)
 }
 
 void MainWindow::initMainMenu() {
-    menus[0] = new cycleContextMenu(f.get_infinity(), &relationList, false);
+    menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
     connect(menus[0], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
-    menus[1] = new cycleContextMenu(f.get_real_line(), &relationList, false);
+    menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
     connect(menus[1], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
-    menus[2] = new cycleContextMenu(nextSymbol, &relationList, false);
+    menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false);
     connect(menus[2], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
-    thisItem = new QToolButton();
     thisItem->setMenu(menus[2]);
-    thisItem->setText("This");
-    thisItem->setPopupMode(QToolButton::InstantPopup);
-    ui->mainToolBar->addWidget(thisItem);
+    connect(menus[2], &QMenu::aboutToShow, this, &MainWindow::thisContextMenuUpdate);
+}
 
-//    connect(menus[0], &cycleContextMenu::addRelationToList, this, &MainWindow::addInfinityToList);
-//    connect(menus[0], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeInfinityFromList);
-//    connect(menus[1], &cycleContextMenu::addRelationToList, this, &MainWindow::addRealToList);
-//    connect(menus[1], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeRealFromList);
-//    connect(menus[2], &cycleContextMenu::addRelationToList, this, &MainWindow::addThisToList);
-//    connect(menus[2], &cycleContextMenu::removeRelationFromList, this, &MainWindow::removeThisFromList);
+void MainWindow::thisContextMenuUpdate()
+{
+    menus[2]->setCycle(nextSymbol);
 }
 
 void MainWindow::on_actionPan_toggled(bool pan)
@@ -238,6 +237,7 @@ void MainWindow::update()
     scene->clear();
     initTreeModel();
     resetList(&relationList);
+    initMainMenu();
 
     ex keys = f.get_all_keys(REAL_LINE_GEN);
 
@@ -246,21 +246,19 @@ void MainWindow::update()
         // get cycle
         ex cycle = keys[x];
 
-//        if (cycle.is_equal(f.get_real_line()))
-//            menu = &menu[1];
-//        else
-            menu = new cycleContextMenu(cycle, &relationList);
+        if (cycle.is_equal(f.get_real_line()))
+            menu = menus[1];
+        else
+            menu = new cycleContextMenu(&f, cycle, &relationList);
 
         connect(menu, &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
+        connect(menu, &cycleContextMenu::sceneInvalid, this, &MainWindow::sceneInvalid);
 
         // add cycles to scene
         graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor, menu);
 
         // add to map
         cyclesMap[node_label(cycle)] = QPointer<graphicCycle>(c);
-
-        // connect events
-        connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
 
         scene->addItem(c);
 
@@ -271,6 +269,7 @@ void MainWindow::update()
 
         buildRelationStatus();
     }
+
     addToTree(f.get_infinity());
 }
 
@@ -396,6 +395,8 @@ void MainWindow::on_actionOpen_triggered()
 void MainWindow::on_actionNew_triggered()
 {
     f = figure();
+    lblGen = new labels();
+    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
     update();
 }
 
@@ -538,7 +539,6 @@ void MainWindow::buildRelationStatus()
 
     if (relationList.nops() != 1) {
         for (int x = 0; x < relationList.nops() - 1; x++) {
-            qDebug() << x;
             try {
                 cycle_relation cycleRelation = ex_to<cycle_relation>(relationList.op(x));
                 relationString += node_label(cycleRelation);
