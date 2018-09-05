@@ -19,6 +19,7 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
     this->label = node_label(c);
     this->relativeScaleFactor = relativeScaleFactor;
     this->view = v;
+    this->colour = getColourFromFigure();
 
 //    if (fig->get_asy_style(cycle).length() != 0) {
 //        QString s = QString::fromStdString(fig->get_asy_style(cycle));
@@ -27,9 +28,6 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
 //    } else {
 //        this->defaultColour = s.value("defaultGraphicsColour").value<QColor>();
 //    }
-
-
-    colourDialog = new QColorDialog();
 
     // create the brush and pen and assign a base colour
     brush = new QBrush(Qt::black);
@@ -40,14 +38,12 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
 
     // connect signals
     //connect(menu->deletePoint, &QAction::triggered, this, &graphicCycle::removeCycle);
-    connect(menu->changeColour, &QAction::triggered, this, &graphicCycle::showColourDialog);
-    connect(colourDialog, &QColorDialog::colorSelected, this, &graphicCycle::setColour);
+    //connect(menu->changeColour, &QAction::triggered, this, &graphicCycle::showColourDialog);
+    //connect(colourDialog, &QColorDialog::colorSelected, this, &graphicCycle::setColour);
 
     // allow hover events to take place, used to highlight
     // currently hovered object on the scene
     setAcceptHoverEvents(true);
-
-    msgBox = new QMessageBox();
 
     buildShape();
 }
@@ -59,18 +55,10 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
  * Detects when a menu is being requested (i.e. right click) on a cycle.
  * This gives the user the option to delete the point and set relevent relations.
  */
-void graphicCycle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    menu->popup(event->screenPos());
-}
-
-/*!
- * \brief graphicCycle::resetRelationalList Uncheck all relations from menu.
- */
-void graphicCycle::resetRelationalList()
-{
-
-}
+//void graphicCycle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+//{
+//    menu->popup(event->screenPos());
+//}
 
 /*!
  * \brief graphicCycle::stableMatrix create new transformation matrix
@@ -206,12 +194,6 @@ void graphicCycle::buildShape()
         this->setZValue(-1);
 }
 
-void graphicCycle::removeCycle()
-{
-    fig->remove_cycle_node(cycle);
-    emit sceneInvalid();
-}
-
 QString graphicCycle::node_label(GiNaC::ex name)
 {
     std::ostringstream drawing;
@@ -231,24 +213,29 @@ void graphicCycle::setHover()
     emit findCycleInTree(cycle);
 }
 
-void graphicCycle::setColour(QColor color)
-{
-    QString asyStyle = "rgb(" + QString::number(color.redF())
-            + "," + QString::number(color.greenF())
-            + "," + QString::number(color.blueF());
-
-    fig->set_asy_style(cycle, qPrintable(asyStyle));
-    defaultColour = color;
-    brush->setColor(color);
-    pen->setColor(color);
-    update();
-}
-
 void graphicCycle::unsetHover()
 {
     brush->setColor(Qt::black);
     pen->setColor(Qt::black);
     update();
+}
+
+QColor graphicCycle::getColourFromFigure()
+{
+    return QColor(Qt::blue);
+}
+
+void graphicCycle::setColour(QColor color)
+{
+//    QString asyStyle = "rgb(" + QString::number(color.redF())
+//            + "," + QString::number(color.greenF())
+//            + "," + QString::number(color.blueF());
+
+//    fig->set_asy_style(cycle, qPrintable(asyStyle));
+//    defaultColour = color;
+//    brush->setColor(color);
+//    pen->setColor(color);
+//    update();
 }
 
 QPointer<cycleContextMenu> graphicCycle::getContextMenu()
@@ -257,10 +244,5 @@ QPointer<cycleContextMenu> graphicCycle::getContextMenu()
 
     if (!menuP.isNull())
         return menuP;
-}
-
-void graphicCycle::showColourDialog()
-{
-    colourDialog->open();
 }
 

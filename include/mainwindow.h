@@ -59,26 +59,24 @@ public:
     bool toolAddCycle;
 
 private slots:
-    void onMouseScenePress(QPointF point);
+    void onMouseSceneLeftPress(QPointF point);
+    void onMouseSceneRightPress(QPointF point);
     void onMouseSceneHover(QPointF point);
-    void on_actionCreate_Cycle_triggered();
-    void on_actionPan_toggled(bool pan);
     void sceneInvalid();
     void findCycleInTree(GiNaC::ex c);
-    void on_actionSave_triggered();
-    void on_actionOpen_triggered();
-    void on_actionNew_triggered();
     void onCalculateDockRatio();
     void highlightClosestCycle(QPointF point);
     void buildRelationStatus();
     void thisContextMenuUpdate();
-
     void onCustomContextMenu(const QPoint &point);
 
+    void on_actionSave_triggered();
+    void on_actionOpen_triggered();
+    void on_actionNew_triggered();
+    void on_actionCreate_Cycle_triggered();
+    void on_actionPan_toggled(bool pan);
     void on_actionLabels_toggled(bool labels);
-
     void on_actionzoomIn_triggered();
-
     void on_actionzoomOut_triggered();
 
 signals:

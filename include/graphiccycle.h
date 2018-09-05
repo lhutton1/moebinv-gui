@@ -8,10 +8,8 @@
 #include <QGraphicsItem>
 #include <QGraphicsView>
 #include <QGraphicsSceneContextMenuEvent>
-#include <QMessageBox>
 #include <QtMath>
 #include <QSettings>
-#include <QColorDialog>
 
 #include "figure.h"
 
@@ -55,7 +53,7 @@ public:
     graphicCycle(MoebInv::figure *f, GiNaC::ex c, class view *v, double *relativeScaleFactor, cycleContextMenu *menu);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
-    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
+    //void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     QString getLabel();
     GiNaC::ex getCycle();
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
@@ -65,11 +63,9 @@ public:
     void buildShape();
     QString node_label(GiNaC::ex name);
     QPointer<cycleContextMenu> getContextMenu();
-    void showColourDialog();
+    QColor getColourFromFigure();
 
 public slots:
-    void resetRelationalList();
-    void removeCycle();
     void setHover();
     void unsetHover();
     void setColour(QColor colour);
@@ -86,20 +82,16 @@ private:
     GiNaC::ex cycle;
     MoebInv::figure *fig;
     cycleContextMenu *menu;
-
-    double *relativeScaleFactor;
-
     class view *view;
-
-    QMessageBox *msgBox;
-    QColorDialog *colourDialog;
+    double *relativeScaleFactor;
 
     QString label;
 
+    QColor colour;
     QBrush *brush;
     QPen *pen;
 
-    QColor defaultColour;
+
 };
 
 #endif // GRAPHICCYCLE_H

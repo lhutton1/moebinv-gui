@@ -32,9 +32,13 @@ graphicsScene::graphicsScene(QObject *parent)
  */
 void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
+    QPointF point = mouseEvent->scenePos();
+
     if (mouseEvent->button() == Qt::LeftButton) {
-        QPointF point = mouseEvent->scenePos();
-        emit newMousePress(point);
+        emit newMouseLeftPress(point);
+    } else if (mouseEvent->button() == Qt::RightButton) {
+        // display highlighted cycles context menu
+        emit newMouseRightPress(point);
     }
 }
 

@@ -7,58 +7,165 @@
 using namespace GiNaC;
 using namespace MoebInv;
 
-menuRelAction::menuRelAction(MoebInv::ex *cycle, GiNaC::lst *relationList,
+menuRelAction::menuRelAction(MoebInv::ex cycle, GiNaC::lst *relationList,
     QString actionTitle, int params, bool checked,
-    MoebInv::cycle_relation (*relFunction) (const GiNaC::ex &, bool),
-    menuRelActionGroup *group)
+    int relType, menuRelActionGroup *group)
 {
     this->cycle = cycle;
     this->relationList = relationList;
-    this->relFunction = relFunction;
-    this->params = params;
+    this->relType = relType;
+    this->inputType = params;
     this->group = group;
+
+    this->relation = cycle_relation();
 
     this->setIconText(actionTitle);
     this->setCheckable(true);
     this->setChecked(checked);
 
     connect(this, &QAction::triggered, this, &menuRelAction::actionHandler);
+
+    this->inputDialog = new QInputDialog();
 }
 
+
+/*!
+ * \brief menuRelAction::hasRelation Check whether the action has a
+ * relation that has been assigned to it.
+ *
+ * \return bool
+ */
 bool menuRelAction::hasRelation()
 {
-    if (relFunction == nullptr)
+    if (node_label(this->relation) == "0|o")
         return false;
     else
         return true;
 }
 
+
+/*!
+ * \brief menuRelAction::getRelation Get the relation that has been assigned
+ * to the action.
+ *
+ * \return cycle_relation
+ */
 cycle_relation menuRelAction::getRelation()
 {
-    if (relFunction == nullptr) {
-        throw std::invalid_argument("relFunction has no function assigned");
+    if (node_label(this->relation) == "0|o") {
+        throw std::invalid_argument("A relation has not been constructed. Maybe arguments were missing?");
     } else {
-        return relFunction(*cycle, true);
+        return relation;
     }
 }
 
+
+/*!
+ * \brief menuRelAction::getGroup Get the group the relation has been assigned to.
+ * \return  menuRelActionGroup*
+ */
 menuRelActionGroup* menuRelAction::getGroup()
 {
     return this->group;
 }
 
+
+/*!
+ * \brief menuRelAction::actionHandler
+ */
 void menuRelAction::actionHandler()
 {
-    switch (params) {
-        case 0: // case where there are no additional parameters
-            emit handleRelation();
+    lst params;
+
+    params = getInputList();
+    createCycleRelation(params);
+    emit handleRelation();
+}
+
+void menuRelAction::createCycleRelation(lst params)
+{
+
+    switch (relType) {
+        case ORTHOGONAL:
+            this->relation = is_orthogonal(cycle, true);
+            break;
+        case FORTHOGONAL:
+            this->relation = is_f_orthogonal(cycle, true);
+            break;
+        case DIFFERENT:
+            this->relation = is_different(cycle, true);
+            break;
+        case ADIFFERENT:
+            this->relation = is_adifferent(cycle, true);
+            break;
+        case REALS:
+            this->relation = only_reals(cycle, true);
+            break;
+        case TANGENT:
+            this->relation = is_tangent(cycle, true);
+            break;
+        case TANGENT_I:
+            this->relation = is_tangent_i(cycle, true);
+            break;
+        case TANGENT_O:
+            this->relation = is_tangent_o(cycle, true);
+            break;
+        case STEINER_POWER:
+            this->relation = cycle_power(cycle, true, params.op(0));
+            break;
+        case CYCLE_ANGLE:
+            this->relation = make_angle(cycle, true, params.op(0));
+            break;
+        case CYCLE_CROSS_T_DISTANCE:
+            this->relation = cross_t_distance(cycle, true, params.op(0));
+            break;
+        case PRODUCT_SIGN:
+            this->relation = product_nonpositive(cycle, true, params.op(0));
+            break;
+        case CYCLE_MOBIUS:
+            this->relation = moebius_transform(cycle, true, params);
+            break;
+        case CYCLE_SL2:
+            this->relation = sl2_transform(cycle, true, params);
             break;
     }
 }
 
-bool menuRelAction::checkActionHandler()
+lst menuRelAction::getInputList()
 {
+    bool isInput;
+    lst input;
+    QString inputDialogTitle;
 
+    inputDialogTitle = this->actionTitle;
+
+    // get the inputs needed for the relation
+    if (this->inputType == NO_PARAMS) {
+        isInput = true;
+        input = lst();
+
+    } else if (this->inputType == SINGLE_PARAM) {
+        double inputDialogValue = QInputDialog::getDouble(nullptr, inputDialogTitle,
+                                        "Value:", 0, -10000, 10000, 2, &isInput);
+
+        input = lst(inputDialogValue);
+
+    } else if (this->inputType == MATRIX_4) {
+        double inputDialogValues[4];
+
+        // insert 4 input value matrix.
+
+    } else if (this->inputType == MATRIX_8) {
+        double inputDialogValues[8];
+
+        // insert 8 input value matrix.
+    }
+
+    // check if the input was successful, if not set the relation to unchecked.
+    if (isInput)
+        return input;
+    else
+        this->setChecked(false);
 }
 
 QString menuRelAction::node_label(ex name)
@@ -69,6 +176,12 @@ QString menuRelAction::node_label(ex name)
 
     return QString::fromStdString(dr);
 }
+
+
+
+//////////////////
+// Action Group //
+//////////////////
 
 menuRelActionGroup::menuRelActionGroup(QObject *parent) : QActionGroup(parent)
 {

@@ -36,7 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statusBar->addPermanentWidget(statusRelations);
 
     // set up new event
-    connect(scene, &graphicsScene::newMousePress, this, &MainWindow::onMouseScenePress);
+    connect(scene, &graphicsScene::newMouseLeftPress, this, &MainWindow::onMouseSceneLeftPress);
+    connect(scene, &graphicsScene::newMouseRightPress, this, &MainWindow::onMouseSceneRightPress);
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
     connect(ui->dockWidgetRight, &dockWidget::recenterView, ui->graphicsView, &view::recenterView);
     connect(ui->dockWidgetRight, &dockWidget::calculateDockToWindowPercentage, this, &MainWindow::onCalculateDockRatio);
@@ -113,9 +114,21 @@ MainWindow::~MainWindow()
  * \brief MainWindow::onMouseScenePress Mouse press on scene.
  * \param point Point at which the mouse was pressed, given in x and y corrdinates.
  */
-void MainWindow::onMouseScenePress(QPointF location)
+void MainWindow::onMouseSceneLeftPress(QPointF location)
 {
     addPoint(location);
+}
+
+void MainWindow::onMouseSceneRightPress(QPointF location)
+{
+    if (!prevHoveredCycle.isNull()) {
+        QPointer<cycleContextMenu> cMenu = prevHoveredCycle->getContextMenu();
+
+        QPoint sceneCoordinates = ui->graphicsView->mapFromScene(location);
+        QPoint globalCoordinates = ui->graphicsView->mapToGlobal(sceneCoordinates);
+
+        cMenu->exec(globalCoordinates);
+    }
 }
 
 void MainWindow::onMouseSceneHover(QPointF point)
@@ -564,8 +577,6 @@ void MainWindow::on_actionzoomIn_triggered()
 {
     ui->graphicsView->zoomIn();
 }
-
-
 
 void MainWindow::on_actionzoomOut_triggered()
 {

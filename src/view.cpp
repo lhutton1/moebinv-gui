@@ -73,7 +73,7 @@ void view::mouseMoveEvent(QMouseEvent *event)
     if (!mouseTimeOut->isActive())
         mouseTimeOut->start();
 
-    mouseTimeOut->setInterval(500);
+    mouseTimeOut->setInterval(200);
 }
 
 /*!

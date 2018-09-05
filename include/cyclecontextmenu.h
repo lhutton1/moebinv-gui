@@ -8,6 +8,7 @@
 #include <QSignalMapper>
 #include <QMessageBox>
 #include <QSettings>
+#include <QColorDialog>
 
 #include "figure.h"
 #include "conf.h"
@@ -28,17 +29,13 @@ class cycleContextMenu : public QMenu
 public:
     cycleContextMenu(MoebInv::figure *f, GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete = true);
 
-    // getters
     GiNaC::ex getCycle();
     QList<menuRelAction *> getActions();
     QAction* getTitleAction();
 
-    // setters
     void setCycle(GiNaC::ex cycle);
 
-    // functions
     void removeRelationFromList(MoebInv::cycle_relation relation);
-    void buildCycleRelationList();
     void buildContextMenu();
     void buildActions();
 
@@ -49,6 +46,8 @@ public:
 
 public slots:
     void confirmDeleteCycle();
+    void amendRelationList();
+    void displayColourDialog();
 
 signals:
     void relationsHaveChanged();
@@ -63,24 +62,11 @@ private:
     bool isDelete;
 
     QList<menuRelAction *> actions;
+    QList<menuRelActionGroup *> groups;
     QMessageBox::StandardButton confirmationMessageBox;
-    menuRelActionGroup *tangentExclusive;
-
-    // relation functions
-    MoebInv::cycle_relation (*ORTHOGONAL) (const GiNaC::ex &, bool) = &MoebInv::is_orthogonal;
-    MoebInv::cycle_relation (*FORTHOGONAL) (const GiNaC::ex &, bool) = &MoebInv::is_f_orthogonal;
-    MoebInv::cycle_relation (*DIFFERENT) (const GiNaC::ex &, bool) = &MoebInv::is_different;
-    MoebInv::cycle_relation (*ADIFFERENT) (const GiNaC::ex &, bool) = &MoebInv::is_adifferent;
-    //MoebInv::cycle_relation (*REALS) (const GiNaC::ex &, bool, const GiNaC::ex &) = &MoebInv::is_real_cycle;
-    MoebInv::cycle_relation (*TANGENT) (const GiNaC::ex &, bool) = &MoebInv::is_tangent;
-    MoebInv::cycle_relation (*TANGENT_I) (const GiNaC::ex &, bool) = &MoebInv::is_tangent_i;
-    MoebInv::cycle_relation (*TANGENT_O) (const GiNaC::ex &, bool) = &MoebInv::is_tangent_o;
-    //MoebInv::cycle_relation (*STEINER_POWER) () = &MoebInv::ste;
-    //CYCLE_ANGLE;
-    //CYCLE_CROSS_T_DISTANCE;
-    //PRODUCT_SIGN;
-    //MoebInv::cycle_relation (*CYCLE_MOBIUS) (const GiNaC::ex &, bool, const GiNaC::ex &) = &MoebInv::moebius_transform;
-    //CYCLE_SL2;
+    QColorDialog *colourDialog;
 };
+
+
 
 #endif // CYCLECONTEXTMENU_H

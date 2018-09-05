@@ -29,22 +29,30 @@ enum drawingMetric {
  *      tangent - ...
  *      different - ...
  */
-//enum relationType {
-//    ORTHOGONAL,
-//    FORTHOGONAL,
-//    DIFFERENT,
-//    ADIFFERENT,
-//    REALS,
-//    TANGENT,
-//    TANGENT_I,
-//    TANGENT_O,
-//    STEINER_POWER,
-//    CYCLE_ANGLE,
-//    CYCLE_CROSS_T_DISTANCE,
-//    PRODUCT_SIGN,
-//    CYCLE_MOBIUS,
-//    CYCLE_SL2
-//};
+enum relationType {
+    NORELATION,
+    ORTHOGONAL,
+    FORTHOGONAL,
+    DIFFERENT,
+    ADIFFERENT,
+    REALS,
+    TANGENT,
+    TANGENT_I,
+    TANGENT_O,
+    STEINER_POWER,
+    CYCLE_ANGLE,
+    CYCLE_CROSS_T_DISTANCE,
+    PRODUCT_SIGN,
+    CYCLE_MOBIUS,
+    CYCLE_SL2
+};
+
+enum params {
+    NO_PARAMS,
+    SINGLE_PARAM,
+    MATRIX_4,
+    MATRIX_8
+};
 
 /*!
  * \brief EPSILON Point at which a number is taken to be 0 due to rounding errors

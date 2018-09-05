@@ -4,10 +4,10 @@
 #include <QSettings>
 #include <QAction>
 #include <QActionGroup>
+#include <QInputDialog>
 #include <stdexcept>
 
 #include "figure.h"
-
 #include "conf.h"
 
 class menuRelActionGroup;
@@ -17,10 +17,9 @@ class menuRelAction : public QAction
     Q_OBJECT
 
 public:
-    menuRelAction(MoebInv::ex *cycle, GiNaC::lst *relationList,
+    menuRelAction(MoebInv::ex cycle, GiNaC::lst *relationList,
         QString actionTitle, int params, bool checked,
-        MoebInv::cycle_relation (*relFunction) (const GiNaC::ex &, bool),
-        menuRelActionGroup *group = nullptr);
+        int relType, menuRelActionGroup *group = nullptr);
 
     QAction menuEntry();
     QAction checkMenuEntry();
@@ -31,6 +30,9 @@ public:
     GiNaC::ex getCycle();
     QString node_label(GiNaC::ex name);
     menuRelActionGroup* getGroup();
+    void setRelation();
+    GiNaC::lst getInputList();
+    void createCycleRelation(GiNaC::lst params);
 
 signals:
     void handleRelation();
@@ -38,12 +40,15 @@ signals:
 private:
     QSettings s;
 
-    GiNaC::ex *cycle;
+    QInputDialog *inputDialog;
+
+    GiNaC::ex cycle;
     GiNaC::lst *relationList;
-    MoebInv::cycle_relation (*relFunction) (const GiNaC::ex &, bool);
     QString actionTitle;
     menuRelActionGroup *group;
-    int params;
+    int relType;
+    int inputType;
+    MoebInv::cycle_relation relation;
 
 };
 
@@ -54,6 +59,9 @@ public:
     menuRelActionGroup(QObject *parent = nullptr);
     void addRelAction(menuRelAction *action);
     QList<menuRelAction *> getRelActions();
+
+signals:
+    void handleRelation();
 
 private:
     QSettings s;

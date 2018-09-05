@@ -29,7 +29,8 @@ public:
     void addToTree(graphicCycle *p);
 
 signals:
-    void newMousePress(QPointF point);
+    void newMouseLeftPress(QPointF point);
+    void newMouseRightPress(QPointF point);
     void newMouseHover(QPointF point);
 
 private:
