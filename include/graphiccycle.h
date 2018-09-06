@@ -50,7 +50,7 @@ class graphicCycle : public QObject, public QGraphicsItem
     Q_OBJECT
 
 public:
-    graphicCycle(MoebInv::figure *f, GiNaC::ex c, class view *v, double *relativeScaleFactor, cycleContextMenu *menu);
+    graphicCycle(MoebInv::figure *f, GiNaC::ex c, class view *v, double *relativeScaleFactor, cycleContextMenu *menu, QColor colour);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
     //void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
@@ -63,12 +63,12 @@ public:
     void buildShape();
     QString node_label(GiNaC::ex name);
     QPointer<cycleContextMenu> getContextMenu();
-    QColor getColourFromFigure();
+    bool setCycleAsy(GiNaC::ex cycle, struct cycleStyleData data);
 
 public slots:
     void setHover();
     void unsetHover();
-    void setColour(QColor colour);
+    void setStyle(QColor colour);
 
 signals:
     void removeFromTree(graphicCycle *c);
@@ -88,6 +88,8 @@ private:
     QString label;
 
     QColor colour;
+    int lineStyle;
+    int lineWidth;
     QBrush *brush;
     QPen *pen;
 

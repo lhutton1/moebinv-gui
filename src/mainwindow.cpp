@@ -252,12 +252,12 @@ void MainWindow::update()
     resetList(&relationList);
     initMainMenu();
 
-    ex keys = f.get_all_keys(REAL_LINE_GEN);
+    ex keys = f.get_all_keys_sorted(REAL_LINE_GEN);
 
     // for all items in the figure
-    for (int x = 0; x < keys.nops(); x++) {
+    for (lst::const_iterator key =ex_to<lst>(keys).begin(); key != ex_to<lst>(keys).end(); ++key) {
         // get cycle
-        ex cycle = keys[x];
+        ex cycle = *key;
 
         if (cycle.is_equal(f.get_real_line()))
             menu = menus[1];
@@ -267,9 +267,12 @@ void MainWindow::update()
         connect(menu, &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
         connect(menu, &cycleContextMenu::sceneInvalid, this, &MainWindow::sceneInvalid);
 
-        // add cycles to scene
-        graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor, menu);
 
+        struct cycleStyleData d = getCycleData(cycle);
+
+        // add cycles to scene
+        graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor, menu, d.colour);
+        connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
         // add to map
         cyclesMap[node_label(cycle)] = QPointer<graphicCycle>(c);
 
@@ -301,12 +304,19 @@ void MainWindow::addPoint(QPointF mousePos)
         // add cycle to the figure
         ex cycle = f.add_point(lst{x, y}, nextSymbol);
 
-        // refresh
-        update();
+        struct cycleStyleData cycleData;
+        cycleData.colour = s.value("defaultGraphicsColour").value<QColor>();
+        cycleData.lineStyle = s.value("defaultLineStyle").toDouble();
+        cycleData.lineWidth = s.value("defaultLineWidth").toDouble();
+        setCycleAsy(cycle, cycleData);
 
         // generate next symbol
         lblGen->advanceLabel();
         nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
+
+        // refresh
+        update();
+
     }
 }
 
@@ -330,15 +340,20 @@ void MainWindow::on_actionCreate_Cycle_triggered()
 
     ex cycle = f.add_cycle_rel(relationList, nextSymbol);
 
+    struct cycleStyleData cycleData;
+    cycleData.colour = s.value("defaultGraphicsColour").value<QColor>();
+    cycleData.lineStyle = s.value("defaultLineStyle").toDouble();
+    cycleData.lineWidth = s.value("defaultLineWidth").toDouble();
+    setCycleAsy(cycle, cycleData);
+
+    // generate next symbol
+    lblGen->advanceLabel();
+    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 
     update();
 
     emit resetRelationalList();
     resetList(&relationList);
-
-    // generate next symbol
-    lblGen->advanceLabel();
-    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 }
 
 void MainWindow::sceneInvalid()
@@ -581,4 +596,92 @@ void MainWindow::on_actionzoomIn_triggered()
 void MainWindow::on_actionzoomOut_triggered()
 {
     ui->graphicsView->zoomOut();
+}
+
+struct cycleStyleData MainWindow::getCycleData(ex cycle)
+{
+    QString style;
+    QStringList styleList;
+    QString colour, lineWidth, lineStyle;
+    struct cycleStyleData data;
+
+    style = QString::fromStdString(ex_to<cycle_node>(f.get_cycle_node(cycle)).get_asy_opt());
+
+    // construct regular expressions to identify each element
+    QRegularExpression rgbRegex("^rgb\\((0|0\\.\\d+|1|1\\.0*|\\.\\d+),\\s*(0|0\\.\\d+|1|1\\.0*|\\.\\d+),\\s*(0|0\\.\\d+|1|1\\.0*|\\.\\d+)\\)$",
+        QRegularExpression::CaseInsensitiveOption);
+    QRegularExpression lineStyleRegex("^(solid|dotted|dashed)$",
+        QRegularExpression::CaseInsensitiveOption);
+    QRegularExpression lineWidthRegex("^(\\d+\\.?\\d*pt)$",
+        QRegularExpression::CaseInsensitiveOption);
+
+    styleList = style.split("+");
+
+    // assign strings
+    for (auto item : styleList) {
+        if (rgbRegex.match(item).hasMatch())
+            colour = item;
+        else if (lineStyleRegex.match(item).hasMatch())
+            lineStyle = item;
+        else if (lineWidthRegex.match(item).hasMatch())
+            lineWidth = item;
+    }
+
+    // check to make sure that each element string has been assigned
+    if (colour.isNull() || colour.isEmpty() ||
+        lineWidth.isNull() || lineWidth.isEmpty() ||
+        lineStyle.isNull() || lineStyle.isEmpty()) {
+        return data;
+    }
+
+    // assign line style to data
+    if (lineStyle == "solid")
+        data.lineStyle = SOLID;
+    else if (lineStyle == "dotted")
+        data.lineStyle = DOTTED;
+    else if (lineStyle == "dashed")
+        data.lineStyle = DASHED;
+
+    // assign line width to data
+    lineWidth.chop(2);
+    data.lineWidth = lineWidth.toDouble();
+
+    // assign colour to data
+    colour.chop(1);
+    colour.remove(0, 4);
+    QStringList rgbList = colour.split(",");
+    data.colour = QColor(rgbList[0].toDouble() * 255, rgbList[1].toDouble() * 255, rgbList[2].toDouble() * 255);
+}
+
+bool MainWindow::setCycleAsy(ex cycle, struct cycleStyleData data)
+{
+    QString asyString;
+    QColor colour = Qt::blue;
+    QString red, green, blue;
+    QString lineWidth;
+    QString lineStyle;
+
+    red = QString::number(data.colour.red() / 255.0);
+    green = QString::number(data.colour.green() / 255.0);
+    blue = QString::number(data.colour.blue() / 255.0);
+    lineWidth = QString::number(data.lineWidth) + "pt";
+
+    switch (data.lineStyle) {
+        case SOLID:
+            lineStyle = "solid";
+            break;
+        case DOTTED:
+            lineStyle = "dotted";
+            break;
+        case DASHED:
+            lineStyle = "dashed";
+            break;
+    }
+
+    asyString = "rgb(" + red + "," + green + "," + blue + ")" + "+" +
+                lineStyle + "+" +
+                lineWidth;
+
+    qDebug() << asyString;
+    f.set_asy_style(cycle, qPrintable(asyString));
 }

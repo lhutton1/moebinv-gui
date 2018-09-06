@@ -31,7 +31,7 @@ void setDefaultSettings()
     /*!
      * Sets the thickness of lines drawn in the scene.
      */
-    s.setValue("lineWidth", 2);
+    s.setValue("defaultLineWidth", 2);
 
     /*!
      * Sets the size of the scene before it expands.
@@ -57,6 +57,22 @@ void setDefaultSettings()
      * Set the default colour of the graphics in the scene.
      */
     s.setValue("defaultGraphicsColour", QColor(0, 0, 0));
+
+    /*!
+     * Set the default line style.
+     */
+    s.setValue("defaultLineStyle", SOLID);
+
+    /*!
+     * Set the zoom factor. Between (0 and 1).
+     */
+    s.setValue("zoomFactorAmount", 0.1);
+
+    /*!
+     * Set the amount of time to wait after the mouse stops to highlight the nearest cycle.
+     */
+    s.setValue("mouseStopWait", 200);
+
 }
 
 int main(int argc, char *argv[])

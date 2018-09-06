@@ -1,10 +1,9 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <QObject>
+#include <QSettings>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
-#include <QTimer>
 
 #include <figure.h>
 
@@ -24,8 +23,6 @@ public:
     explicit graphicsScene(QObject *parent = 0);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
-    int assignMaxZIndex();
-    int assignMinZIndex();
     void addToTree(graphicCycle *p);
 
 signals:

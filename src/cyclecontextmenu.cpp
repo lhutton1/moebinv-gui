@@ -243,6 +243,7 @@ void cycleContextMenu::buildActions()
     // change colour action
     changeColour = new QAction("Change Colour...", this);
     connect(changeColour, &QAction::triggered, this, &cycleContextMenu::displayColourDialog);
+    connect(colourDialog, &QColorDialog::colorSelected, this, &cycleContextMenu::colourSelected);
 
     // delete cycle action
     if (this->isDelete) {
@@ -257,9 +258,6 @@ void cycleContextMenu::buildActions()
  */
 void cycleContextMenu::displayColourDialog()
 {
-    QColor currentColour = QColor(Qt::blue);
-
-    colourDialog->setCurrentColor(currentColour);
     colourDialog->show();
 }
 

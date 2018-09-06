@@ -51,6 +51,7 @@ public slots:
 
 signals:
     void relationsHaveChanged();
+    void colourSelected(QColor colour);
     void sceneInvalid();
 
 private:

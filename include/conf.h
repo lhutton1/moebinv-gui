@@ -1,6 +1,8 @@
 #ifndef DRAWINGMETRIC_H
 #define DRAWINGMETRIC_H
 
+#include <QColor>
+
 /*
  * This file contains settings and configuration variables for the application.
  */
@@ -44,7 +46,8 @@ enum relationType {
     CYCLE_CROSS_T_DISTANCE,
     PRODUCT_SIGN,
     CYCLE_MOBIUS,
-    CYCLE_SL2
+    CYCLE_SL2,
+    ELSE
 };
 
 enum params {
@@ -58,6 +61,18 @@ enum params {
  * \brief EPSILON Point at which a number is taken to be 0 due to rounding errors
  */
 const double EPSILON = 0.00000001;
+
+enum asyLineStyle {
+    SOLID,
+    DASHED,
+    DOTTED
+};
+
+struct cycleStyleData {
+    QColor colour;
+    double lineWidth;
+    int lineStyle;
+};
 
 
 #endif // DRAWINGMETRIC_H

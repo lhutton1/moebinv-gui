@@ -1,13 +1,10 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include <QObject>
+#include <QSettings>
 #include <QGraphicsView>
 #include <QMouseEvent>
 #include <QWheelEvent>
-#include <QApplication>
-#include <QScrollBar>
-#include <QSettings>
 #include <QTimer>
 #include <qmath.h>
 
@@ -36,9 +33,6 @@ public slots:
 
 private:
     QSettings s;
-
-    Qt::KeyboardModifier modifier;
-    QPointF target_scene_pos, target_viewport_pos;
 
     QTimer *mouseTimeOut;
 };

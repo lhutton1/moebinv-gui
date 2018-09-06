@@ -6,7 +6,7 @@
 #include <QGraphicsView>
 #include <QSettings>
 
-#include "figure.h"
+#include <figure.h>
 
 #include "graphiccycle.h"
 #include "conf.h"
@@ -16,7 +16,7 @@ class point : public QObject, public QGraphicsItem
     Q_OBJECT
 
 public:
-    point(struct cycleData data);
+    point(double *relativeScaleFactor, struct cycleData data);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p) const;
     QRectF boundingRect() const;
@@ -24,19 +24,14 @@ public:
 private:
     QSettings s;
 
+    double *scaleFactor;
     double x;
     double y;
     QString label;
-    MoebInv::figure *fig;
-
-    double *scaleFactor;
-
-    class view *v;
-
-    bool BOUNDINGRECT_DEBUG;
-
     QBrush *brush;
     QPen *pen;
+
+    bool BOUNDINGRECT_DEBUG;
 };
 
 #endif // POINT_H

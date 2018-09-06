@@ -3,36 +3,29 @@
 
 /*!
  * \brief point::point Create a new point.
- * \param f the figure.
- * \param x the x coordinate the point needs to be placed at.
- * \param y the y coordinate the point needs to be placed at.
- * \param label the label to be displayed.
- * \param parent the parent QGraphicsItem.
+ * \param struct cycleData data Contains the data needed to draw the point.
  *
  * Construct a new point on the scene and assign it to the parent graphicCycle.
  */
-point::point(struct cycleData data)
+point::point(double *relativeScaleFactor, struct cycleData data)
 {
-   fig = data.fig;
+   this->scaleFactor = relativeScaleFactor;
+
    this->x = data.x;
    this->y = data.y;
    this->label = data.label;
-   this->scaleFactor = data.relativeScaleFactor;
-   this->v = data.view;
+   this->brush = data.brush;
+   this->pen = data.pen;
 
    this->setParentItem(data.cycle);
    this->setPos(x, y);
 
-   // create the brush and pen and assign a base colour
-   brush = data.brush;
-   pen = data.pen;
-
    BOUNDINGRECT_DEBUG = false;
-
 }
 
+
 /*!
- * \brief line::paint Paint the point on the scene.
+ * \brief point::paint Paint the point on the scene.
  * \param p QPainter object.
  *
  * This function paints the point on the scene given various parameters
@@ -43,10 +36,9 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 {
     const double POINT_SIZE = s.value("pointSize").toDouble();
 
-    // assign brush and pen
-    pen->setCosmetic(true);
-    pen->setWidth(0);
+    // assign brush and pen to the painter.
     painter->setPen(*pen);
+    painter->setBrush(*brush);
 
     // draw shape
     switch (s.value("drawingMetric").toInt()) {
@@ -54,10 +46,9 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
             if (BOUNDINGRECT_DEBUG)
                 painter->drawRect(this->boundingRect());
 
-            painter->setBrush(*brush);
+            // set the painter matrix to correct size for zoom
+            painter->setMatrix(stableMatrix(painter->worldMatrix(), QPointF(0, 0)));
 
-            QPointF point(0, 0);
-            painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
             // draw point
             painter->drawEllipse(
                 0 - POINT_SIZE / 2,
@@ -86,6 +77,7 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     }
 }
 
+
 /*!
  * \brief point::boundingRect Define the bounding rect.
  * \return QRectF
@@ -95,13 +87,16 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 QRectF point::boundingRect() const
 {
     int labelWidth = (label.count() * 6 + 10);
+
     QPointF topLeft = QPointF(0 / *scaleFactor, -15 / *scaleFactor);
     QPointF bottomRight = QPointF(labelWidth / *scaleFactor, 0 / *scaleFactor);
+
     return QRectF (topLeft, bottomRight);
 }
 
+
 /*!
- * \brief graphicCycle::stableMatrix create new transformation matrix
+ * \brief point::stableMatrix create new transformation matrix
  * \param matrix the current transformation matrix
  * \param p point at which the transformation is centered
  * \return QMatrix - the new transformation matrix

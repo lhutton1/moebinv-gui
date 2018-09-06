@@ -8,7 +8,7 @@ using namespace MoebInv;
  * \brief Scene Constructor.
  * \param parent The parent widget to the current widget.
  *
- * continued description....
+ * Create a new scene setting the scene size to the predetermined size.
  */
 graphicsScene::graphicsScene(QObject *parent)
     : QGraphicsScene(parent)
@@ -17,7 +17,6 @@ graphicsScene::graphicsScene(QObject *parent)
 
     QPointF topLeft = QPointF(-SCENE_SIZE / 2, -SCENE_SIZE / 2);
     QPointF bottomRight = QPointF(SCENE_SIZE / 2, SCENE_SIZE / 2);
-
     QRectF rect = QRectF(topLeft, bottomRight);
 
     // set the size of the scene
@@ -35,6 +34,7 @@ void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     QPointF point = mouseEvent->scenePos();
 
     if (mouseEvent->button() == Qt::LeftButton) {
+        // add new point
         emit newMouseLeftPress(point);
     } else if (mouseEvent->button() == Qt::RightButton) {
         // display highlighted cycles context menu
@@ -58,27 +58,4 @@ void graphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
     QPointF point = mouseEvent->scenePos();
 
     emit newMouseHover(point);
-}
-
-/*!
- * \brief graphicsScene::assignMaxZIndex assign max Z Index to item.
- * \return int Z Index.
- *
- * Returns the minimum Z Index an item needs to stay ontop of the scene.
- */
-int graphicsScene::assignMaxZIndex()
-{
-    return maxZValue++;
-}
-
-/*!
- * \brief graphicsScene::assignMinZIndex assign min Z Index to item.
- * \return int Z Index.
- *
- * Returns the maximum Z Index an item needs to stay underneath all other
- * items in the scene.
- */
-int graphicsScene::assignMinZIndex()
-{
-    return minZValue--;
 }

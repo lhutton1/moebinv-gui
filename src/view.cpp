@@ -9,18 +9,17 @@
  */
 view::view(QObject *parent)
 {
+    this->scale(1.0, -1.0); // reflect the y-axis so coordinate system matches a standard graph
     this->setRenderHint(QPainter::Antialiasing);
 
-    // reflect the y-axis so coordinate system matches a standard graph
-    this->scale(1.0, -1.0);
-
-    relativeScaleFactor = 1;
+    this->relativeScaleFactor = 1;
 
     // set timer to detect when mouse stops
-    mouseTimeOut = new QTimer(this);
+    this->mouseTimeOut = new QTimer(this);
     connect(mouseTimeOut, &QTimer::timeout, this, &view::mouseStopped);
-    mouseTimeOut->start(1000);
+    this->mouseTimeOut->start(s.value("mouseStopWait").toInt());
 }
+
 
 /*!
  * \brief view::wheelEvent Implements zooming on scroll wheel.
@@ -48,6 +47,7 @@ void view::wheelEvent(QWheelEvent * event)
     setViewportUpdateMode(FullViewportUpdate);
 }
 
+
 /*!
  * \brief view::recenterView Recenter the view
  *
@@ -57,6 +57,7 @@ void view::recenterView()
 {
     this->centerOn(QPointF(0, 0));
 }
+
 
 /*!
  * \brief view::mouseMoveEvent
@@ -73,8 +74,9 @@ void view::mouseMoveEvent(QMouseEvent *event)
     if (!mouseTimeOut->isActive())
         mouseTimeOut->start();
 
-    mouseTimeOut->setInterval(200);
+    mouseTimeOut->setInterval(s.value("mouseStopWait").toInt());
 }
+
 
 /*!
  * \brief view::mouseStopped
@@ -93,17 +95,29 @@ void view::mouseStopped()
     emit highlightClosestCycle(relPoint);
 }
 
+
+/*!
+ * \brief view::zoomIn
+ *
+ * Zoom in by a constant factor.
+ */
 void view::zoomIn()
 {
-    qreal factor = 1.1;
+    qreal factor = 1 + s.value("zoomFactorAmount").toDouble();
 
     relativeScaleFactor *= factor;
     scale(factor, factor);
 }
 
+
+/*!
+ * \brief view::zoomOut
+ *
+ * Zoom out by a constant factor.
+ */
 void view::zoomOut()
 {
-    qreal factor = 0.9;
+    qreal factor = 1 - s.value("zoomFactorAmount").toDouble();
 
     relativeScaleFactor *= factor;
     scale(factor, factor);

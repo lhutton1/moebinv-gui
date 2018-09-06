@@ -11,7 +11,7 @@ using namespace MoebInv;
  * \param l The label used by the cycle as a unique identifier.
  */
 
-graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScaleFactor, cycleContextMenu *menu)
+graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScaleFactor, cycleContextMenu *menu, QColor colour)
 {
     // assign parameters
     this->fig = f;
@@ -19,7 +19,9 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
     this->label = node_label(c);
     this->relativeScaleFactor = relativeScaleFactor;
     this->view = v;
-    this->colour = getColourFromFigure();
+    this->colour = colour;
+    this->lineStyle = 0;
+    this->lineWidth = 1;
 
 //    if (fig->get_asy_style(cycle).length() != 0) {
 //        QString s = QString::fromStdString(fig->get_asy_style(cycle));
@@ -30,11 +32,13 @@ graphicCycle::graphicCycle(figure *f, ex c, class view *v, double *relativeScale
 //    }
 
     // create the brush and pen and assign a base colour
-    brush = new QBrush(Qt::black);
-    pen = new QPen(Qt::black);
+    brush = new QBrush(colour);
+    pen = new QPen(colour);
+    pen->setCosmetic(true);
 
     // create a new menu to be used when the user right clicks on the object
     this->menu = menu;
+    connect(menu, &cycleContextMenu::colourSelected, this, &graphicCycle::setStyle);
 
     // connect signals
     //connect(menu->deletePoint, &QAction::triggered, this, &graphicCycle::removeCycle);
@@ -106,7 +110,7 @@ void graphicCycle::addPoint(double x, double y, double *relativeScaleFactor)
     data.pen = pen;
     data.view = view;
 
-    class point *p = new class point(data);
+    class point *p = new class point(relativeScaleFactor, data);
 }
 
 void graphicCycle::addCircle(double x, double y, double radius, double *relativeScaleFactor)
@@ -142,7 +146,7 @@ void graphicCycle::addLine(double x, double y, double c, double *relativeScaleFa
     data.pen = pen;
     data.view = view;
 
-    class line *l = new class line(data);
+    class line *l = new class line(relativeScaleFactor, data);
 }
 
 QRectF graphicCycle::boundingRect() const
@@ -207,7 +211,7 @@ void graphicCycle::setHover()
 {
     brush->setColor(s.value("graphicsHoverColour").value<QColor>());
     pen->setColor(s.value("graphicsHoverColour").value<QColor>());
-    update();
+    this->update();
 
     // now emit signal to find in tree
     emit findCycleInTree(cycle);
@@ -215,27 +219,21 @@ void graphicCycle::setHover()
 
 void graphicCycle::unsetHover()
 {
-    brush->setColor(Qt::black);
-    pen->setColor(Qt::black);
-    update();
+    brush->setColor(this->colour);
+    pen->setColor(this->colour);
+    this->update();
 }
 
-QColor graphicCycle::getColourFromFigure()
+void graphicCycle::setStyle(QColor colour)
 {
-    return QColor(Qt::blue);
-}
+    this->colour = colour;
 
-void graphicCycle::setColour(QColor color)
-{
-//    QString asyStyle = "rgb(" + QString::number(color.redF())
-//            + "," + QString::number(color.greenF())
-//            + "," + QString::number(color.blueF());
-
-//    fig->set_asy_style(cycle, qPrintable(asyStyle));
-//    defaultColour = color;
-//    brush->setColor(color);
-//    pen->setColor(color);
-//    update();
+    struct cycleStyleData data;
+    data.colour = colour;
+    data.lineStyle = this->lineStyle;
+    data.lineWidth = this->lineWidth;
+    setCycleAsy(this->cycle, data);
+    emit sceneInvalid();
 }
 
 QPointer<cycleContextMenu> graphicCycle::getContextMenu()
@@ -244,5 +242,38 @@ QPointer<cycleContextMenu> graphicCycle::getContextMenu()
 
     if (!menuP.isNull())
         return menuP;
+}
+
+bool graphicCycle::setCycleAsy(ex cycle, struct cycleStyleData data)
+{
+    QString asyString;
+    QColor colour = Qt::blue;
+    QString red, green, blue;
+    QString lineWidth;
+    QString lineStyle;
+
+    red = QString::number(data.colour.red() / 255.0);
+    green = QString::number(data.colour.green() / 255.0);
+    blue = QString::number(data.colour.blue() / 255.0);
+    lineWidth = QString::number(data.lineWidth) + "pt";
+
+    switch (data.lineStyle) {
+        case SOLID:
+            lineStyle = "solid";
+            break;
+        case DOTTED:
+            lineStyle = "dotted";
+            break;
+        case DASHED:
+            lineStyle = "dashed";
+            break;
+    }
+
+    asyString = "rgb(" + red + "," + green + "," + blue + ")" + "+" +
+                lineStyle + "+" +
+                lineWidth;
+
+    qDebug() << asyString;
+    fig->set_asy_style(cycle, qPrintable(asyString));
 }
 

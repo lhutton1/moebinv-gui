@@ -16,6 +16,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QLabel>
+#include <QRegularExpression>
 
 #include "figure.h"
 
@@ -54,6 +55,8 @@ public:
     QString node_label(GiNaC::ex name);
     GiNaC::ex shortestDistance(QPointF point, double dis);
     void resizeEvent(QResizeEvent *event);
+    struct cycleStyleData getCycleData(GiNaC::ex cycle);
+    bool setCycleAsy(GiNaC::ex cycle, struct cycleStyleData data);
     ~MainWindow();
 
     bool toolAddCycle;
