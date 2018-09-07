@@ -146,7 +146,8 @@ void MainWindow::resetList(GiNaC::lst *list) {
 
 void MainWindow::initTreeModel()
 {
-    model = new QStandardItemModel();
+    model = new treeModel();
+
     QStandardItem *rootNode = model->invisibleRootItem();
     int genMax = f.get_max_generation() + 1;
 
@@ -169,7 +170,7 @@ void MainWindow::initTreeModel()
         ui->treeView->setFirstColumnSpanned(x, rootNode->index(), true);
 }
 
-void MainWindow::addToTree(ex cycle)
+void MainWindow::addToTree(ex cycle, QColor colour)
 {
     QList<QStandardItem *> items;
     // get the current generation of the cycle
@@ -179,18 +180,18 @@ void MainWindow::addToTree(ex cycle)
     QString treeLabel = node_compact_string(cycle);
     treeLabel.chop(1);
 
-    QStandardItem *newItem = new QStandardItem(node_label(cycle));
-    newItem->setTextAlignment(Qt::AlignVCenter);
-    newItem->setToolTip(treeLabel);
-    newItem->setEditable(false);
-
-    items.append(newItem);
+    QStandardItem *newItem1 = new QStandardItem(node_label(cycle));
+    newItem1->setTextAlignment(Qt::AlignVCenter);
+    newItem1->setData(QVariant(colour), Qt::DecorationRole);
+    newItem1->setToolTip(treeLabel);
+    newItem1->setEditable(false);
 
     QStandardItem *newItem2 = new QStandardItem(treeLabel);
-    newItem->setTextAlignment(Qt::AlignVCenter);
-    newItem->setToolTip(treeLabel);
-    newItem->setEditable(false);
+    newItem2->setTextAlignment(Qt::AlignVCenter);
+    newItem2->setToolTip(treeLabel);
+    newItem2->setEditable(false);
 
+    items.append(newItem1);
     items.append(newItem2);
 
     // add to correct place in the tree
@@ -279,14 +280,14 @@ void MainWindow::update()
         scene->addItem(c);
 
         // add cycle to the tree
-        addToTree(cycle);
+        addToTree(cycle, d.colour);
 
         connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
 
         buildRelationStatus();
     }
 
-    addToTree(f.get_infinity());
+    addToTree(f.get_infinity(), Qt::black);
 }
 
 /*!
@@ -605,7 +606,7 @@ struct cycleStyleData MainWindow::getCycleData(ex cycle)
     QString colour, lineWidth, lineStyle;
     struct cycleStyleData data;
 
-    style = QString::fromStdString(ex_to<cycle_node>(f.get_cycle_node(cycle)).get_asy_opt());
+    style = QString::fromStdString(f.get_asy_style(cycle));
 
     // construct regular expressions to identify each element
     QRegularExpression rgbRegex("^rgb\\((0|0\\.\\d+|1|1\\.0*|\\.\\d+),\\s*(0|0\\.\\d+|1|1\\.0*|\\.\\d+),\\s*(0|0\\.\\d+|1|1\\.0*|\\.\\d+)\\)$",
@@ -682,6 +683,5 @@ bool MainWindow::setCycleAsy(ex cycle, struct cycleStyleData data)
                 lineStyle + "+" +
                 lineWidth;
 
-    qDebug() << asyString;
     f.set_asy_style(cycle, qPrintable(asyString));
 }

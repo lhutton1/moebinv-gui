@@ -18,13 +18,14 @@
 #include <QLabel>
 #include <QRegularExpression>
 
-#include "figure.h"
+#include <figure.h>
 
 #include "scene.h"
 #include "labels.h"
 #include "graphiccycle.h"
 #include "conf.h"
 #include "view.h"
+#include "treemodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -44,7 +45,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void addPoint(QPointF location);
     void setDrawingMetric();
-    void addToTree(GiNaC::ex cycle);
+    void addToTree(GiNaC::ex cycle, QColor colour);
     void addLineToTree(QString itemName);
     void resetList(GiNaC::lst *list);
     void initTreeModel();
@@ -95,7 +96,7 @@ private:
 
     GiNaC::lst relationList;
 
-    QStandardItemModel *model;
+    treeModel *model;
 
     static const int MENU_SIZE = 3;
     cycleContextMenu *menus[MENU_SIZE];

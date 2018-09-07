@@ -39,7 +39,8 @@ SOURCES += \
         src/circle.cpp \
         src/line.cpp \
         src/dockwidget.cpp \
-        src/menurelationhandler.cpp
+        src/menurelationhandler.cpp \
+        src/treemodel.cpp
 
 HEADERS += \
         include/conf.h \
@@ -53,7 +54,8 @@ HEADERS += \
         include/line.h \
         include/circle.h \
         include/dockwidget.h \
-        include/menurelationhandler.h
+        include/menurelationhandler.h \
+        include/treemodel.h
 
 FORMS += \
         forms/mainwindow.ui

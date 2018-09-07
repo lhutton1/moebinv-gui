@@ -273,7 +273,6 @@ bool graphicCycle::setCycleAsy(ex cycle, struct cycleStyleData data)
                 lineStyle + "+" +
                 lineWidth;
 
-    qDebug() << asyString;
     fig->set_asy_style(cycle, qPrintable(asyString));
 }
 
