@@ -56,8 +56,8 @@ public:
     QString node_label(GiNaC::ex name);
     GiNaC::ex shortestDistance(QPointF point, double dis);
     void resizeEvent(QResizeEvent *event);
-    struct cycleStyleData getCycleData(GiNaC::ex cycle);
-    bool setCycleAsy(GiNaC::ex cycle, struct cycleStyleData data);
+    struct cycleStyleData getCycleData(const GiNaC::ex& cycle);
+    bool setCycleAsy(const GiNaC::ex& new_cycle, const struct cycleStyleData data);
     ~MainWindow();
 
     bool toolAddCycle;

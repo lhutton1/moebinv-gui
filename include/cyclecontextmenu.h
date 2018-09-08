@@ -65,6 +65,7 @@ private:
     QList<menuRelAction *> actions;
     QList<menuRelActionGroup *> groups;
     QMessageBox::StandardButton confirmationMessageBox;
+
     QColorDialog *colourDialog;
 };
 

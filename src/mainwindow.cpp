@@ -599,7 +599,7 @@ void MainWindow::on_actionzoomOut_triggered()
     ui->graphicsView->zoomOut();
 }
 
-struct cycleStyleData MainWindow::getCycleData(ex cycle)
+struct cycleStyleData MainWindow::getCycleData(const ex& cycle)
 {
     QString style;
     QStringList styleList;
@@ -652,12 +652,12 @@ struct cycleStyleData MainWindow::getCycleData(ex cycle)
     colour.remove(0, 4);
     QStringList rgbList = colour.split(",");
     data.colour = QColor(rgbList[0].toDouble() * 255, rgbList[1].toDouble() * 255, rgbList[2].toDouble() * 255);
+    return data;
 }
 
-bool MainWindow::setCycleAsy(ex cycle, struct cycleStyleData data)
+bool MainWindow::setCycleAsy(const ex& new_cycle, const struct cycleStyleData data)
 {
     QString asyString;
-    QColor colour = Qt::blue;
     QString red, green, blue;
     QString lineWidth;
     QString lineStyle;
@@ -683,5 +683,11 @@ bool MainWindow::setCycleAsy(ex cycle, struct cycleStyleData data)
                 lineStyle + "+" +
                 lineWidth;
 
-    f.set_asy_style(cycle, qPrintable(asyString));
+    try {
+        f.set_asy_style(new_cycle, qPrintable(asyString));
+    } catch (...) {
+        return false;
+    }
+
+    return true;
 }

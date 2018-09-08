@@ -7,8 +7,10 @@
 #include <QInputDialog>
 #include <stdexcept>
 
-#include "figure.h"
+#include <figure.h>
+
 #include "conf.h"
+#include "matrix4dialog.h"
 
 class menuRelActionGroup;
 
@@ -41,6 +43,7 @@ private:
     QSettings s;
 
     QInputDialog *inputDialog;
+    matrix4dialog *matrix4;
 
     GiNaC::ex cycle;
     GiNaC::lst *relationList;

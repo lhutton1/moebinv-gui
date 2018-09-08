@@ -134,7 +134,7 @@ void menuRelAction::createCycleRelation(lst params)
 lst menuRelAction::getInputList()
 {
     bool isInput;
-    lst input;
+    lst input = lst();
     QString inputDialogTitle;
 
     inputDialogTitle = this->actionTitle;
@@ -153,8 +153,6 @@ lst menuRelAction::getInputList()
     } else if (this->inputType == MATRIX_4) {
         double inputDialogValues[4];
 
-        // insert 4 input value matrix.
-
     } else if (this->inputType == MATRIX_8) {
         double inputDialogValues[8];
 
@@ -162,10 +160,10 @@ lst menuRelAction::getInputList()
     }
 
     // check if the input was successful, if not set the relation to unchecked.
-    if (isInput)
-        return input;
-    else
+    if (!isInput)
         this->setChecked(false);
+
+    return input;
 }
 
 QString menuRelAction::node_label(ex name)
