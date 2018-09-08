@@ -1,6 +1,9 @@
 #include <QDebug>
 #include "labels.h"
 
+#include <string>
+#include <iostream>
+
 /*!
  * \brief labels::labels Labels constructor.
  */
@@ -38,7 +41,23 @@ QString labels::genNextLabel()
  * \brief labels::advanceLabel Advance to the next free label
  */
 void labels::advanceLabel() {
-    //QString lblString = genNextLabel();
-
     currentLetter += 1;
+
+//    try {
+//       f->get_cycle_label(qPrintable(this->genNextLabel()));
+//    } catch (...) {
+//        return;
+//    }
+
+//    currentLetter += 1;
+//    this->advanceLabel();
+}
+
+QString labels::node_label(GiNaC::ex name)
+{
+    std::ostringstream drawing;
+    drawing << name;
+    std::string dr = drawing.str().c_str();
+
+    return QString::fromStdString(dr);
 }

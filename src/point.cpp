@@ -7,29 +7,35 @@
  *
  * Construct a new point on the scene and assign it to the parent graphicCycle.
  */
-point::point(double *relativeScaleFactor, struct cycleData data)
+point::point(graphicCycle *parent, struct cycleData data)
 {
-   this->scaleFactor = relativeScaleFactor;
+    this->parent = parent;
+    this->scaleFactor = parent->getRelativeScaleFactor();
+    this->label = parent->getCycleLabel();
 
-   this->x = data.x;
-   this->y = data.y;
-   this->label = data.label;
-   this->brush = data.brush;
-   this->pen = data.pen;
+    this->x = data.x;
+    this->y = data.y;
+    this->brush = data.brush;
+    this->pen = data.pen;
 
-   this->setParentItem(data.cycle);
-   this->setPos(x, y);
+    this->setParentItem(parent);
+    this->setPos(x, y);
 
-   BOUNDINGRECT_DEBUG = false;
+    // override normal pen width
+    this->pen->setWidth(1);
+
+    BOUNDINGRECT_DEBUG = false;
 }
 
 
 /*!
  * \brief point::paint Paint the point on the scene.
- * \param p QPainter object.
+ * \param painter QPainter object.
+ * \param option
+ * \param widget
  *
- * This function paints the point on the scene given various parameters
- * (such as x and y). The point is drawn differently dependent
+ * This function paints the circle on the scene given various parameters
+ * (such as x and y). The circle is drawn differently dependent
  * on the drawing metric in use.
  */
 void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -47,7 +53,7 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
                 painter->drawRect(this->boundingRect());
 
             // set the painter matrix to correct size for zoom
-            painter->setMatrix(stableMatrix(painter->worldMatrix(), QPointF(0, 0)));
+            painter->setMatrix(parent->stableMatrix(painter->worldMatrix(), QPointF(0, 0)));
 
             // draw point
             painter->drawEllipse(
@@ -92,30 +98,4 @@ QRectF point::boundingRect() const
     QPointF bottomRight = QPointF(labelWidth / *scaleFactor, 0 / *scaleFactor);
 
     return QRectF (topLeft, bottomRight);
-}
-
-
-/*!
- * \brief point::stableMatrix create new transformation matrix
- * \param matrix the current transformation matrix
- * \param p point at which the transformation is centered
- * \return QMatrix - the new transformation matrix
- *
- * Create a new matrix which will keep items the same size when the zoom transformation is applied to it.
- */
-QMatrix point::stableMatrix(const QMatrix &matrix, const QPointF &p) const
-{
-    QMatrix newMatrix = matrix;
-
-    qreal scaleX, scaleY;
-    scaleX = newMatrix.m11();
-    scaleY = newMatrix.m22();
-    newMatrix.scale(1.0/scaleX, 1.0/scaleY);
-
-    qreal offsetX, offsetY;
-    offsetX = p.x() * (scaleX - 1.0);
-    offsetY = p.y() * (scaleY - 1.0);
-    newMatrix.translate(offsetX, offsetY);
-
-    return newMatrix;
 }

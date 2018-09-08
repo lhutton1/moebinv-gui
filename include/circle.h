@@ -1,42 +1,39 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
+#include <QSettings>
 #include <QGraphicsItem>
 #include <QPainter>
-#include <QSettings>
 
-#include "figure.h"
+#include <figure.h>
 
 #include "graphiccycle.h"
 #include "conf.h"
-#include "settings.h"
+
+class graphicCycle;
 
 class circle : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 
 public:
-    circle(struct cycleData data);
+    circle(graphicCycle *parent, struct cycleData data);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
     QPainterPath shape() const;
-    QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
 
 private:
     QSettings s;
 
+    graphicCycle *parent;
+    double *scaleFactor;
     double x;
     double y;
     double radius;
     QString label;
-    MoebInv::figure *fig;
-
-    double *relativeScaleFactor;
+    QPen *pen;
 
     bool BOUNDINGRECT_DEBUG;
-
-    QBrush *brush;
-    QPen *pen;
 };
 
 #endif // CIRCLE_H

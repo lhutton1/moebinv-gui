@@ -1,51 +1,62 @@
 #include <QDebug>
 #include "circle.h"
 
-circle::circle(struct cycleData data)
+/*!
+ * \brief circle::line Create a new circle.
+ * \param struct cycleData data Contains the data needed to draw the circle.
+ *
+ * Construct a new line on the scene and assign it to the parent graphicCycle.
+ */
+circle::circle(graphicCycle *parent, struct cycleData data)
 {
-   fig = data.fig;
-   this->x = data.x;
-   this->y = data.y;
-   this->radius = data.radius;
-   this->label = data.label;
-   this->relativeScaleFactor = data.relativeScaleFactor;
+    this->parent = parent;
+    this->scaleFactor = parent->getRelativeScaleFactor();
+    this->label = parent->getCycleLabel();
 
-   this->setParentItem(data.cycle);
+    this->x = data.x;
+    this->y = data.y;
+    this->radius = data.radius;
+    this->pen = data.pen;
 
-   // create the brush and pen and assign a base colour
-   brush = data.brush;
-   pen = data.pen;
+    this->setParentItem(parent);
+    this->setPos(x, y);
 
-   setPos(x, y);
-
-   BOUNDINGRECT_DEBUG = false;
+    BOUNDINGRECT_DEBUG = false;
 }
 
+
+/*!
+ * \brief circle::paint Paint the circle on the scene.
+ * \param painter QPainter object.
+ * \param option
+ * \param widget
+ *
+ * This function paints the point on the scene given various parameters
+ * (such as x and y). The point is drawn differently dependent
+ * on the drawing metric in use.
+ */
 void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    // assign brush and pen
-    pen->setCosmetic(true);
-    pen->setWidth(s.value("lineWidth").toInt());
+    // assign pen
     painter->setPen(*pen);
 
+    // draw shape based on drawing metric
     switch (s.value("drawingMetric").toInt()) {
         case drawingMetric::ELLIPTIC: {
+            QPointF point(0, 0);
+
             if (BOUNDINGRECT_DEBUG)
                 painter->drawRect(this->boundingRect());
 
             // draw circle
-            painter->drawEllipse(
-                QPointF(0, 0),
-                radius,
-                radius
-            );
+            painter->drawEllipse(point, radius, radius);
 
-            QPointF point(0, 0);
-            painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
+            // set the painter matrix to correct size for zoom
+            painter->setMatrix(parent->stableMatrix(painter->worldMatrix(), point));
 
             // add label to side
             if (s.value("showLabels").toBool())
-                painter->drawText(0, 0 + (*relativeScaleFactor) * radius - 4, label);
+                painter->drawText(0, 0 + (*scaleFactor) * radius - 4, label);
 
             break;
         }
@@ -63,6 +74,13 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     }
 }
 
+
+/*!
+ * \brief circle::boundingRect Define the bounding rect.
+ * \return QRectF
+ *
+ * Define the box the object is drawn within on the scene.
+ */
 QRectF circle::boundingRect() const
 {
     return QRectF(
@@ -73,53 +91,21 @@ QRectF circle::boundingRect() const
     );
 }
 
+
 /*!
  * \brief circle::shape Define the clipping mask of the object
  * \return QPainterPath
  *
- * Defines the area in which hover events take place.
+ * Defines the area in which the shape actually exists.
  */
 QPainterPath circle::shape() const
 {
+    QPointF point(0, 0);
     QPainterPath path;
     QPainterPath subPath;
 
-    path.addEllipse(
-        QPointF(0, 0),
-        radius,
-        radius
-    );
-
-    subPath.addEllipse(
-        QPointF(0, 0),
-        radius,
-        radius
-    );
+    path.addEllipse(point, radius, radius);
+    subPath.addEllipse(point, radius, radius);
 
     return path.subtracted(subPath);
-}
-
-/*!
- * \brief graphicCycle::stableMatrix create new transformation matrix
- * \param matrix the current transformation matrix
- * \param p point at which the transformation is centered
- * \return QMatrix - the new transformation matrix
- *
- * Create a new matrix which will keep items the same size when the zoom transformation is applied to it.
- */
-QMatrix circle::stableMatrix(const QMatrix &matrix, const QPointF &p)
-{
-    QMatrix newMatrix = matrix;
-
-    qreal scaleX, scaleY;
-    scaleX = newMatrix.m11();
-    scaleY = newMatrix.m22();
-    newMatrix.scale(1.0/scaleX, 1.0/scaleY);
-
-    qreal offsetX, offsetY;
-    offsetX = p.x() * (scaleX - 1.0);
-    offsetY = p.y() * (scaleY - 1.0);
-    newMatrix.translate(offsetX, offsetY);
-
-    return newMatrix;
 }

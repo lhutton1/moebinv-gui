@@ -122,7 +122,7 @@ void MainWindow::onMouseSceneLeftPress(QPointF location)
 void MainWindow::onMouseSceneRightPress(QPointF location)
 {
     if (!prevHoveredCycle.isNull()) {
-        QPointer<cycleContextMenu> cMenu = prevHoveredCycle->getContextMenu();
+        cycleContextMenu *cMenu = prevHoveredCycle->getContextMenu();
 
         QPoint sceneCoordinates = ui->graphicsView->mapFromScene(location);
         QPoint globalCoordinates = ui->graphicsView->mapToGlobal(sceneCoordinates);
@@ -272,7 +272,7 @@ void MainWindow::update()
         struct cycleStyleData d = getCycleData(cycle);
 
         // add cycles to scene
-        graphicCycle *c = new graphicCycle(&f, cycle, ui->graphicsView, &ui->graphicsView->relativeScaleFactor, menu, d.colour);
+        graphicCycle *c = new graphicCycle(&f, cycle, &ui->graphicsView->relativeScaleFactor, menu, d);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
         // add to map
         cyclesMap[node_label(cycle)] = QPointer<graphicCycle>(c);
@@ -328,6 +328,7 @@ void MainWindow::addPoint(QPointF mousePos)
  */
 void MainWindow::on_actionCreate_Cycle_triggered()
 {
+    ex cycle;
     // make sure that the list isn't empty before adding cycle
     if (relationList.nops() <= 0) {
         msgBox->warning(0, "No cycles in relation", "For a cycle to be created there must be cycles in the relation.");
@@ -339,7 +340,13 @@ void MainWindow::on_actionCreate_Cycle_triggered()
         relationList.append(only_reals(nextSymbol));
     }
 
-    ex cycle = f.add_cycle_rel(relationList, nextSymbol);
+    try {
+        cycle = f.add_cycle_rel(relationList, nextSymbol);
+    } catch (...) {
+        msgBox->warning(0, "Cycle relation(s) invalid", "The cycle couldn't be created. Double check your relations and try again");
+        return;
+    }
+
 
     struct cycleStyleData cycleData;
     cycleData.colour = s.value("defaultGraphicsColour").value<QColor>();
@@ -449,7 +456,7 @@ void MainWindow::onCustomContextMenu(const QPoint &point)
         QString itemText = item->parent()->child(item->row())->text();
 
         if (cyclesMap.contains(itemText)) {
-            QPointer<cycleContextMenu> cMenu = cyclesMap[itemText]->getContextMenu();
+            cycleContextMenu *cMenu = cyclesMap[itemText]->getContextMenu();
             cMenu->exec(ui->treeView->viewport()->mapToGlobal(point));
         }
 
@@ -501,22 +508,28 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
         // This is a ginac list thus we need iteration through its components
         for (lst::const_iterator it =ex_to<lst>(L).begin(); it != ex_to<lst>(L).end(); ++it) {
             cycle2D C=ex_to<cycle2D>(*it);
-            double radius2=ex_to<numeric>(C.radius_sq().evalf()).to_double();
 
-            if (ex_to<numeric>(abs(C.get_k())).to_double() < EPSILON) {
-                if (radius2 < EPSILON)
-                    break; // Skipping the infinity
-                // To make a point on a line selectable we disadvantage lines by adding 1
-                current_dis = ex_to<numeric>(abs(C.normalize_det().val(P)).evalf()).to_double()/2.0+increment;
-            } else {
-                current_dis = abs(std::sqrt(ex_to<numeric>(C.normalize().val(P).evalf()).to_double()+radius2)-std::sqrt(radius2));
-                // To make a point on a circle selectable we disadvantage real circles
-                if (radius2  > EPSILON)
-                    current_dis+=increment;
-            }
-            if (current_dis < dis) {
-                dis = current_dis;
-                selected_key = *itk;
+            //try to get circle coordinates
+            try {
+                double radius2=ex_to<numeric>(C.radius_sq().evalf()).to_double();
+
+                if (ex_to<numeric>(abs(C.get_k().evalf())).to_double() < EPSILON) {
+                    if (radius2 < EPSILON)
+                        break; // Skipping the infinity
+                    // To make a point on a line selectable we disadvantage lines by adding 1
+                    current_dis = ex_to<numeric>(abs(C.normalize_det().val(P)).evalf()).to_double()/2.0+increment;
+                } else {
+                    current_dis = abs(std::sqrt(ex_to<numeric>(C.normalize().val(P).evalf()).to_double()+radius2)-std::sqrt(radius2));
+                    // To make a point on a circle selectable we disadvantage real circles
+                    if (radius2  > EPSILON)
+                        current_dis+=increment;
+                }
+                if (current_dis < dis) {
+                    dis = current_dis;
+                    selected_key = *itk;
+                }
+            } catch (...) {
+                qDebug() << "Too many or too little conditions are specified";
             }
         }
     }

@@ -19,10 +19,13 @@ public:
     labels();
     QString genNextLabel();
     void advanceLabel();
+    QString node_label(GiNaC::ex name);
 
 private:
-    MoebInv::figure *fig;
+    MoebInv::figure *f;
     int currentLetter;
+
+
 };
 
 #endif // LABELS_H

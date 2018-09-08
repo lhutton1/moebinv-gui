@@ -8,26 +8,30 @@
  *
  * Construct a new line on the scene and assign it to the parent graphicCycle.
  */
-line::line(double *relativeScaleFactor, struct cycleData data)
+line::line(graphicCycle *parent, struct cycleData data)
 {
-   this->x = data.x;
-   this->y = data.y;
-   this->c = data.c;
-   this->label = data.label;
-   this->scaleFactor = relativeScaleFactor;
-   this->brush = data.brush;
-   this->pen = data.pen;
+    this->parent = parent;
+    this->scaleFactor = parent->getRelativeScaleFactor();
+    this->label = parent->getCycleLabel();
 
-   this->findLinePoints();
+    this->x = data.x;
+    this->y = data.y;
+    this->c = data.c;
+    this->brush = data.brush;
+    this->pen = data.pen;
 
-   this->setParentItem(data.cycle);
-   this->setPos(x1, y1);
+    this->findLinePoints();
+
+    this->setParentItem(parent);
+    this->setPos(x1, y1);
 }
 
 
 /*!
  * \brief line::paint Paint the point on the scene.
  * \param p QPainter object.
+ * \param option
+ * \param widget
  *
  * This function paints the line on the scene given various parameters
  * (such as x and y). The line is drawn differently dependent
@@ -41,9 +45,6 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     // assign brush and pen to the painter.
     painter->setBrush(*brush);
     painter->setPen(*pen);
-
-    // sert the pens with based on the settings value.
-    pen->setWidth(s.value("defaultLineWidth").toDouble());
 
     // draw shape
     switch (s.value("drawingMetric").toInt()) {
@@ -61,7 +62,7 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
             painter->drawLine(line);
 
             // set the painter matrix to correct size for zoom
-            painter->setMatrix(stableMatrix(painter->worldMatrix(), point));
+            painter->setMatrix(parent->stableMatrix(painter->worldMatrix(), point));
 
             // add label to side
             if (s.value("showLabels").toBool()) {
@@ -129,6 +130,7 @@ QRectF line::boundingRect() const
     );
 }
 
+
 /*!
  * \brief line::shape Define the clipping mask of the object
  * \return QPainterPath
@@ -163,42 +165,11 @@ QPainterPath line::shape() const {
              << QPointF(abs(x2-x1) + 2, -abs(y2-y1) + 2)
              << QPointF(2, 2)
              << QPointF(-2, -2);
-    } /*else {
-        poly << QPointF(0, y1 - 2)
-             << QPointF(abs(x2-x1), y2 - 2)
-             << QPointF(abs(x2-x1), y2 + 2)
-             << QPointF(0, y1 + 2)
-             << QPointF(0, y1 - 2);
-    }*/
+    }
 
     path.addPolygon(poly);
 
     return path;
-}
-
-/*!
- * \brief line::stableMatrix create new transformation matrix
- * \param matrix the current transformation matrix
- * \param p point at which the transformation is centered
- * \return QMatrix - the new transformation matrix
- *
- * Create a new matrix which will keep items the same size when the zoom transformation is applied to it.
- */
-QMatrix line::stableMatrix(const QMatrix &matrix, const QPointF &p)
-{
-    QMatrix newMatrix = matrix;
-
-    qreal scaleX, scaleY;
-    scaleX = newMatrix.m11();
-    scaleY = newMatrix.m22();
-    newMatrix.scale(1.0/scaleX, 1.0/scaleY);
-
-    qreal offsetX, offsetY;
-    offsetX = p.x() * (scaleX - 1.0);
-    offsetY = p.y() * (scaleY - 1.0);
-    newMatrix.translate(offsetX, offsetY);
-
-    return newMatrix;
 }
 
 

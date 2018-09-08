@@ -1,24 +1,49 @@
 #ifndef GRAPHICCYCLE_H
 #define GRAPHICCYCLE_H
 
-#include <QMenu>
+#include <QSettings>
 #include <QtMath>
 #include <QPainter>
-#include <QObject>
 #include <QGraphicsItem>
-#include <QGraphicsView>
 #include <QGraphicsSceneContextMenuEvent>
-#include <QtMath>
-#include <QSettings>
 
-#include "figure.h"
+#include <figure.h>
 
-#include "cyclecontextmenu.h"
-#include "view.h"
 #include "conf.h"
+#include "cyclecontextmenu.h"
 #include "point.h"
 #include "circle.h"
 #include "line.h"
+
+/*!
+ * \brief The graphicType enum
+ *
+ * Each of the different child drawing objects.
+ * Point - A point on the scene given x and y.
+ * Circle - A circle on the scene given x, y and radius.
+ * Line - A line on the scene given x, y and c.
+ */
+enum graphicType {
+    POINT,
+    CIRCLE,
+    LINE
+};
+
+
+/*!
+ * \brief The cycleData struct
+ *
+ * Cycle data that each child object needs.
+ */
+struct cycleData {
+    double x;
+    double y;
+    double c;
+    double radius;
+    QBrush *brush;
+    QPen *pen;
+};
+
 
 /*!
  * \brief The graphicCycle class
@@ -29,41 +54,22 @@
  * Inherits both QObject and QGraphicsItem.
  *
  */
-
-struct cycleData {
-    double x;
-    double y;
-    double radius;
-    double c;
-    QString label;
-    QGraphicsItem *cycle;
-    MoebInv::figure *fig;
-    double *relativeScaleFactor;
-    class view *view;
-
-    QBrush *brush;
-    QPen *pen;
-};
-
 class graphicCycle : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 
 public:
-    graphicCycle(MoebInv::figure *f, GiNaC::ex c, class view *v, double *relativeScaleFactor, cycleContextMenu *menu, QColor colour);
+    graphicCycle(MoebInv::figure *f, GiNaC::ex c, double *relativeScaleFactor, cycleContextMenu *menu, struct cycleStyleData styleData);
+    QString getCycleLabel();
+    double* getRelativeScaleFactor();
+    cycleContextMenu* getContextMenu();
+    void addChild(int childType, const double &x, const double &y, const double &c = 0, const double &radius = 0);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
-    //void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
-    QString getLabel();
-    GiNaC::ex getCycle();
-    QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
-    void addPoint(double x, double y, double *relativeScaleFactor);
-    void addCircle(double x, double y, double radius, double *relativeScaleFactor);
-    void addLine(double x, double y, double c, double *relativeScaleFactor);
     void buildShape();
-    QString node_label(GiNaC::ex name);
-    QPointer<cycleContextMenu> getContextMenu();
+    QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
     bool setCycleAsy(const GiNaC::ex &new_cycle, const struct cycleStyleData &data);
+    QString node_label(GiNaC::ex name);
 
 public slots:
     void setHover();
@@ -71,29 +77,20 @@ public slots:
     void setStyle(QColor colour);
 
 signals:
-    void removeFromTree(graphicCycle *c);
+    void findCycleInTree(GiNaC::ex cycle);
     void sceneInvalid();
-    void scaleFactorChanged();
-    void findCycleInTree(GiNaC::ex c);
 
 private:
     QSettings s;
 
     GiNaC::ex cycle;
-    MoebInv::figure *fig;
+    MoebInv::figure *f;
     cycleContextMenu *menu;
-    class view *view;
     double *relativeScaleFactor;
 
-    QString label;
-
-    QColor colour;
-    int lineStyle;
-    int lineWidth;
+    struct cycleStyleData styleData;
     QBrush *brush;
     QPen *pen;
-
-
 };
 
 #endif // GRAPHICCYCLE_H
