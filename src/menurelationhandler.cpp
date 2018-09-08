@@ -27,6 +27,7 @@ menuRelAction::menuRelAction(MoebInv::ex cycle, GiNaC::lst *relationList,
 
     this->inputDialog = new QInputDialog();
     this->matrix4 = new matrix4dialog();
+    this->matrix8 = new matrix8dialog();
 }
 
 
@@ -82,7 +83,8 @@ void menuRelAction::actionHandler()
 
     if (this->inputType == SINGLE_PARAM && params.nops() != 1 ||
             this->inputType == MATRIX_4 && params.nops() != 4 ||
-            this->inputType == MATRIX_8 && params.nops() != 8) {
+            this->inputType == MATRIX_8 && params.nops() != 8
+    ) {
         return;
     }
 
@@ -161,9 +163,10 @@ lst menuRelAction::getInputList()
         }
 
     } else if (this->inputType == MATRIX_8) {
-        double inputDialogValues[8];
-
-        // insert 8 input value matrix.
+        if (matrix8->exec() == QDialog::Accepted ) {
+            isInput = true;
+            matrix8->getValues(&input);
+        }
     }
 
     // check if the input was successful, if not set the relation to unchecked.

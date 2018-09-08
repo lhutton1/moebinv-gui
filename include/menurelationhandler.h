@@ -11,6 +11,7 @@
 
 #include "conf.h"
 #include "matrix4dialog.h"
+#include "matrix8dialog.h"
 
 class menuRelActionGroup;
 
@@ -44,6 +45,7 @@ private:
 
     QInputDialog *inputDialog;
     matrix4dialog *matrix4;
+    matrix8dialog *matrix8;
 
     GiNaC::ex cycle;
     GiNaC::lst *relationList;

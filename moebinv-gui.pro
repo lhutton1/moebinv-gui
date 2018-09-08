@@ -41,7 +41,8 @@ SOURCES += \
         src/dockwidget.cpp \
         src/menurelationhandler.cpp \
         src/treemodel.cpp \
-        src/matrix4dialog.cpp
+        src/matrix4dialog.cpp \
+    matrix8dialog.cpp
 
 HEADERS += \
         include/conf.h \
@@ -57,8 +58,10 @@ HEADERS += \
         include/dockwidget.h \
         include/menurelationhandler.h \
         include/treemodel.h \
-        include/matrix4dialog.h
+        include/matrix4dialog.h \
+    matrix8dialog.h
 
 FORMS += \
         forms/mainwindow.ui \
-        forms/matrix4dialog.ui
+        forms/matrix4dialog.ui \
+    matrix8dialog.ui
