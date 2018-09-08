@@ -63,7 +63,7 @@ public:
     void buildShape();
     QString node_label(GiNaC::ex name);
     QPointer<cycleContextMenu> getContextMenu();
-    bool setCycleAsy(GiNaC::ex cycle, struct cycleStyleData data);
+    bool setCycleAsy(const GiNaC::ex &new_cycle, const struct cycleStyleData &data);
 
 public slots:
     void setHover();

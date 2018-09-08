@@ -34,7 +34,7 @@ public:
     menuRelActionGroup* getGroup();
     void setRelation();
     GiNaC::lst getInputList();
-    void createCycleRelation(GiNaC::lst params);
+    void createCycleRelation(const GiNaC::lst &params);
 
 signals:
     void handleRelation();

@@ -599,7 +599,7 @@ void MainWindow::on_actionzoomOut_triggered()
     ui->graphicsView->zoomOut();
 }
 
-struct cycleStyleData MainWindow::getCycleData(const ex& cycle)
+struct cycleStyleData MainWindow::getCycleData(const ex &cycle)
 {
     QString style;
     QStringList styleList;
@@ -655,7 +655,7 @@ struct cycleStyleData MainWindow::getCycleData(const ex& cycle)
     return data;
 }
 
-bool MainWindow::setCycleAsy(const ex& new_cycle, const struct cycleStyleData data)
+bool MainWindow::setCycleAsy(const ex &new_cycle, const struct cycleStyleData &data)
 {
     QString asyString;
     QString red, green, blue;

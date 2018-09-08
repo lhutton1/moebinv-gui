@@ -57,7 +57,7 @@ public:
     GiNaC::ex shortestDistance(QPointF point, double dis);
     void resizeEvent(QResizeEvent *event);
     struct cycleStyleData getCycleData(const GiNaC::ex& cycle);
-    bool setCycleAsy(const GiNaC::ex& new_cycle, const struct cycleStyleData data);
+    bool setCycleAsy(const GiNaC::ex &new_cycle, const struct cycleStyleData &data);
     ~MainWindow();
 
     bool toolAddCycle;

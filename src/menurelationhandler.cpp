@@ -26,6 +26,7 @@ menuRelAction::menuRelAction(MoebInv::ex cycle, GiNaC::lst *relationList,
     connect(this, &QAction::triggered, this, &menuRelAction::actionHandler);
 
     this->inputDialog = new QInputDialog();
+    this->matrix4 = new matrix4dialog();
 }
 
 
@@ -78,13 +79,19 @@ void menuRelAction::actionHandler()
     lst params;
 
     params = getInputList();
+
+    if (this->inputType == SINGLE_PARAM && params.nops() != 1 ||
+            this->inputType == MATRIX_4 && params.nops() != 4 ||
+            this->inputType == MATRIX_8 && params.nops() != 8) {
+        return;
+    }
+
     createCycleRelation(params);
     emit handleRelation();
 }
 
-void menuRelAction::createCycleRelation(lst params)
+void menuRelAction::createCycleRelation(const lst &params)
 {
-
     switch (relType) {
         case ORTHOGONAL:
             this->relation = is_orthogonal(cycle, true);
@@ -133,16 +140,13 @@ void menuRelAction::createCycleRelation(lst params)
 
 lst menuRelAction::getInputList()
 {
-    bool isInput;
+    bool isInput = false;
     lst input = lst();
-    QString inputDialogTitle;
-
-    inputDialogTitle = this->actionTitle;
+    QString inputDialogTitle = this->actionTitle;
 
     // get the inputs needed for the relation
     if (this->inputType == NO_PARAMS) {
         isInput = true;
-        input = lst();
 
     } else if (this->inputType == SINGLE_PARAM) {
         double inputDialogValue = QInputDialog::getDouble(nullptr, inputDialogTitle,
@@ -151,7 +155,10 @@ lst menuRelAction::getInputList()
         input = lst(inputDialogValue);
 
     } else if (this->inputType == MATRIX_4) {
-        double inputDialogValues[4];
+        if (matrix4->exec() == QDialog::Accepted ) {
+            isInput = true;
+            matrix4->getValues(&input);
+        }
 
     } else if (this->inputType == MATRIX_8) {
         double inputDialogValues[8];

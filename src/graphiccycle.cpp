@@ -244,10 +244,9 @@ QPointer<cycleContextMenu> graphicCycle::getContextMenu()
         return menuP;
 }
 
-bool graphicCycle::setCycleAsy(ex cycle, struct cycleStyleData data)
+bool graphicCycle::setCycleAsy(const ex &new_cycle, const struct cycleStyleData &data)
 {
     QString asyString;
-    QColor colour = Qt::blue;
     QString red, green, blue;
     QString lineWidth;
     QString lineStyle;
@@ -273,6 +272,12 @@ bool graphicCycle::setCycleAsy(ex cycle, struct cycleStyleData data)
                 lineStyle + "+" +
                 lineWidth;
 
-    fig->set_asy_style(cycle, qPrintable(asyString));
+    try {
+        fig->set_asy_style(new_cycle, qPrintable(asyString));
+    } catch (...) {
+        return false;
+    }
+
+    return true;
 }
 
