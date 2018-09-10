@@ -6,7 +6,6 @@
 #include "ui_mainwindow.h"
 
 using namespace GiNaC;
-
 using namespace MoebInv;
 
 /*!
@@ -26,8 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // generate graphics view
     scene = new graphicsScene();
     ui->graphicsView->setScene(scene);
-
     ui->graphicsView->recenterView();
+
+
 
     //status bar
     statusCoordinates = new QLabel();
@@ -500,6 +500,7 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
     double increment=.25*dis;
     ex P = lst{ex(x),ex(y)};
     ex selected_key;
+    double reldis = dis * ui->graphicsView->relativeScaleFactor;
 
     // iterator over all keys
     for (lst::const_iterator itk =ex_to<lst>(K).begin(); itk != ex_to<lst>(K).end(); ++itk) {
@@ -557,11 +558,12 @@ void MainWindow::onCalculateDockRatio()
 
 void MainWindow::highlightClosestCycle(QPointF point)
 {
+    double highlightDistance = s.value("highlightDistance").toDouble();
+
     if (!prevHoveredCycle.isNull())
         prevHoveredCycle->unsetHover();
 
-    GiNaC::ex closest = shortestDistance(point, 20);
-
+    GiNaC::ex closest = shortestDistance(point, highlightDistance);
     QPointer<graphicCycle> cycle = cyclesMap.value(node_label(closest));
 
     if (!cycle.isNull())

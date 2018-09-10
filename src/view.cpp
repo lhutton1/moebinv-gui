@@ -9,9 +9,11 @@
  */
 view::view(QObject *parent)
 {
-    this->scale(1.0, -1.0); // reflect the y-axis so coordinate system matches a standard graph
-    this->setRenderHint(QPainter::Antialiasing);
+    const int initialZoomFactor = s.value("initialZoomFactor").toInt();
 
+    // reflect the y-axis so coordinate system matches a standard graph
+    this->scale(initialZoomFactor, -initialZoomFactor);
+    this->setRenderHint(QPainter::Antialiasing);
     this->relativeScaleFactor = 1;
 
     // set timer to detect when mouse stops

@@ -53,7 +53,7 @@ void labels::advanceLabel() {
 //    this->advanceLabel();
 }
 
-QString labels::node_label(GiNaC::ex name)
+QString labels::node_label(GiNaC::ex name) // REMOVE
 {
     std::ostringstream drawing;
     drawing << name;

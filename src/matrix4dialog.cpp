@@ -2,6 +2,12 @@
 #include "matrix4dialog.h"
 #include "ui_matrix4dialog.h"
 
+/*!
+ * \brief matrix4dialog::matrix4dialog
+ * \param parent
+ *
+ * Creates a new matrix4dialog. Allows the user to enter 4 double values.
+ */
 matrix4dialog::matrix4dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::matrix4dialog)
@@ -23,11 +29,24 @@ matrix4dialog::matrix4dialog(QWidget *parent) :
     }
 }
 
+
+/*!
+ * \brief matrix4dialog::~matrix4dialog
+ *
+ * Destructor for the matrix4dialog
+ */
 matrix4dialog::~matrix4dialog()
 {
     delete ui;
 }
 
+
+/*!
+ * \brief matrix4dialog::getValues
+ * \param inputList
+ *
+ * Gets the values input into the dialog and appends each value to a GiNaC::lst.
+ */
 void matrix4dialog::getValues(GiNaC::lst *inputList)
 {
     for (auto lineEdit : this->lineEditList) {

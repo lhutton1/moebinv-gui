@@ -73,6 +73,16 @@ void setDefaultSettings()
      */
     s.setValue("mouseStopWait", 200);
 
+    /*!
+     * Set the initial zoom factor of the graphics view.
+     */
+    s.setValue("initialZoomFactor", 45);
+
+    /*!
+     * Set the distance in which a cycle can be hovered.
+     */
+    s.setValue("highlightDistance", 0.25);
+
 }
 
 int main(int argc, char *argv[])

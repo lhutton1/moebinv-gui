@@ -24,8 +24,6 @@ public:
 private:
     MoebInv::figure *f;
     int currentLetter;
-
-
 };
 
 #endif // LABELS_H

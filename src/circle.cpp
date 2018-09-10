@@ -56,7 +56,7 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
             // add label to side
             if (s.value("showLabels").toBool())
-                painter->drawText(0, 0 + (*scaleFactor) * radius - 4, label);
+                painter->drawText(0, (radius * s.value("initialZoomFactor").toInt() * (*scaleFactor)) - 4, label);
 
             break;
         }

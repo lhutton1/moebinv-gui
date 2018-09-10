@@ -177,37 +177,43 @@ void cycleContextMenu::removeRelationFromList(cycle_relation relation)
  */
 void cycleContextMenu::buildContextMenu()
 {
+    QString relationSubMenuTitle = QString("Add relation to ") + this->getTitleAction()->text();
+    QMenu *relationSubMenu = new QMenu(relationSubMenuTitle);
+
     this->addAction(getTitleAction());
     this->addSeparator();
-
-    // first 5 relations are non-exclusive and don't require additional parameters.
-    for (int x = 0; x < 5; x++)
-        this->addAction(actions[x]);
-
-    this->addSeparator();
-
-    // the next 4 actions are exclusive, so they are added to a group.
-    for (int x = 5; x < 9; x++) {
-        this->addAction(actions[x]);
-        groups[0]->addRelAction(actions[x]);
-    }
-
-    this->addSeparator();
-
-    // the following relations need additional values.
-    for (int x = 9; x < actions.length(); x++)
-        this->addAction(actions[x]);
-
+    this->addMenu(relationSubMenu);
     this->addSeparator();
 
     // change colour preference
     this->addAction(changeColour);
+    this->addAction(changeStyle);
+    this->addAction(changeWeight);
 
     // add delete action if needed
     if (this->isDelete) {
         this->addSeparator();
         this->addAction(deletePoint);
     }
+
+    // build relation sub menu
+    // first 5 relations are non-exclusive and don't require additional parameters.
+    for (int x = 0; x < 5; x++)
+        relationSubMenu->addAction(actions[x]);
+
+    relationSubMenu->addSeparator();
+
+    // the next 4 actions are exclusive, so they are added to a group.
+    for (int x = 5; x < 9; x++) {
+        relationSubMenu->addAction(actions[x]);
+        groups[0]->addRelAction(actions[x]);
+    }
+
+    relationSubMenu->addSeparator();
+
+    // the following relations need additional values.
+    for (int x = 9; x < actions.length(); x++)
+        relationSubMenu->addAction(actions[x]);
 }
 
 
@@ -232,7 +238,7 @@ void cycleContextMenu::buildActions()
     actions.append(new menuRelAction(this->cycle, relationList, "Steiner Power...", SINGLE_PARAM, false, STEINER_POWER));
     actions.append(new menuRelAction(this->cycle, relationList, "Cycle Angle...", SINGLE_PARAM, false, CYCLE_ANGLE));
     actions.append(new menuRelAction(this->cycle, relationList, "Cycle Cross T Distance...", SINGLE_PARAM, false, CYCLE_CROSS_T_DISTANCE));
-    actions.append(new menuRelAction(this->cycle, relationList, "Product Sign...", SINGLE_PARAM, false, PRODUCT_SIGN));
+    actions.append(new menuRelAction(this->cycle, relationList, "Product Sign...", PRODUCT_COMBOBOX, false, PRODUCT_SIGN));
     actions.append(new menuRelAction(this->cycle, relationList, "Cycle Mobius...", MATRIX_8, false, CYCLE_MOBIUS));
     actions.append(new menuRelAction(this->cycle, relationList, "Cycle Sl2...", MATRIX_4, false, CYCLE_SL2));
 
@@ -242,6 +248,9 @@ void cycleContextMenu::buildActions()
 
     // change colour action
     changeColour = new QAction("Change Colour...", this);
+    changeStyle = new QAction("Change Style...", this);
+    changeWeight = new QAction("Change Width...", this);
+
     connect(changeColour, &QAction::triggered, this, &cycleContextMenu::displayColourDialog);
     connect(colourDialog, &QColorDialog::colorSelected, this, &cycleContextMenu::colourSelected);
 

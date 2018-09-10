@@ -23,6 +23,7 @@ graphicsScene::graphicsScene(QObject *parent)
     this->setSceneRect(rect);
 }
 
+
 /*!
  * \brief graphicsScene::mousePressEvent Mouse pressed on scene
  * \param mouseEvent Provides information about the mouse event such as the position the click occured on the scene.
@@ -41,6 +42,7 @@ void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         emit newMouseRightPress(point);
     }
 }
+
 
 /*!
  * \brief graphicsScene::mouseMoveEvent Mouse moved on scene.

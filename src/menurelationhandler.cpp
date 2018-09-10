@@ -167,6 +167,15 @@ lst menuRelAction::getInputList()
             isInput = true;
             matrix8->getValues(&input);
         }
+    } else if (this->inputType == PRODUCT_COMBOBOX) {
+        QStringList items;
+        items << "Product is non positive" << "Product is positive";
+        QString item = QInputDialog::getItem(nullptr, inputDialogTitle, "Value:", items, 0, false, &isInput);
+
+        if (item == "Product is non positive")
+            input = lst(true);
+        else if (item == "Product is positive")
+            input = lst(false);
     }
 
     // check if the input was successful, if not set the relation to unchecked.

@@ -46,15 +46,15 @@ enum relationType {
     CYCLE_CROSS_T_DISTANCE,
     PRODUCT_SIGN,
     CYCLE_MOBIUS,
-    CYCLE_SL2,
-    ELSE
+    CYCLE_SL2
 };
 
 enum params {
     NO_PARAMS,
     SINGLE_PARAM,
     MATRIX_4,
-    MATRIX_8
+    MATRIX_8,
+    PRODUCT_COMBOBOX
 };
 
 /*!

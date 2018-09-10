@@ -42,6 +42,8 @@ public:
     QString node_label(GiNaC::ex name);
 
     QPointer<QAction> changeColour = nullptr;
+    QPointer<QAction> changeStyle = nullptr;
+    QPointer<QAction> changeWeight = nullptr;
     QPointer<QAction> deletePoint = nullptr;
 
 public slots:
