@@ -21,6 +21,8 @@ class graphicsScene : public QGraphicsScene
 
 public:
     explicit graphicsScene(QObject *parent = 0);
+    bool getPointIsHighlighted();
+    void setPointIsHighlighted(const bool &value);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void addToTree(graphicCycle *p);
@@ -32,6 +34,8 @@ signals:
 
 private:
     QSettings s;
+
+    bool pointIsHighlighted;
 
     int maxZValue = 1;
     int minZValue = 0;

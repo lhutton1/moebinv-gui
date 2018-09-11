@@ -58,6 +58,7 @@ public:
     void resizeEvent(QResizeEvent *event);
     struct cycleStyleData getCycleData(const GiNaC::ex& cycle);
     bool setCycleAsy(const GiNaC::ex &new_cycle, const struct cycleStyleData &data);
+    void movePoint(const GiNaC::ex &key, const GiNaC::ex &x);
     ~MainWindow();
 
     bool toolAddCycle;

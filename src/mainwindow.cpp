@@ -235,11 +235,13 @@ void MainWindow::thisContextMenuUpdate()
 void MainWindow::on_actionPan_toggled(bool pan)
 {
     if (pan) {
-        ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
+        //ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
         isAddPoint = false;
+        ui->graphicsView->panningEnabled = true;
     } else {
-        ui->graphicsView->setDragMode(QGraphicsView::NoDrag);
+        //ui->graphicsView->setDragMode(QGraphicsView::NoDrag);
         isAddPoint = true;
+        ui->graphicsView->panningEnabled = false;
     }
 }
 
@@ -497,7 +499,7 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
     const ex K = f.get_all_keys(REAL_LINE_GEN);
     const ex E = f;
     double current_dis;
-    double increment=.25*dis;
+    double increment=.5*dis;
     ex P = lst{ex(x),ex(y)};
     ex selected_key;
     double reldis = dis * ui->graphicsView->relativeScaleFactor;
@@ -566,8 +568,12 @@ void MainWindow::highlightClosestCycle(QPointF point)
     GiNaC::ex closest = shortestDistance(point, highlightDistance);
     QPointer<graphicCycle> cycle = cyclesMap.value(node_label(closest));
 
-    if (!cycle.isNull())
+    if (!cycle.isNull()) {
         cycle->setHover();
+        scene->setPointIsHighlighted(true);
+    } else {
+        scene->setPointIsHighlighted(false);
+    }
 
     prevHoveredCycle = cycle;
 }
@@ -705,4 +711,9 @@ bool MainWindow::setCycleAsy(const ex &new_cycle, const struct cycleStyleData &d
     }
 
     return true;
+}
+
+void MainWindow::movePoint(const ex &key, const ex &x)
+{
+    //f.move_point();
 }

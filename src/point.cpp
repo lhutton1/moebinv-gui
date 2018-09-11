@@ -93,9 +93,10 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 QRectF point::boundingRect() const
 {
     int labelWidth = (label.count() * 6 + 10);
+    double sf = s.value("initialZoomFactor").toInt() * (*scaleFactor);
 
-    QPointF topLeft = QPointF(0 / *scaleFactor, -15 / *scaleFactor);
-    QPointF bottomRight = QPointF(labelWidth / *scaleFactor, 0 / *scaleFactor);
+    QPointF topLeft = QPointF(0 / sf, -15 / sf);
+    QPointF bottomRight = QPointF(labelWidth / sf, 0 / sf);
 
     return QRectF (topLeft, bottomRight);
 }

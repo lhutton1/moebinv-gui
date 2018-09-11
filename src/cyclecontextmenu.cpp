@@ -273,6 +273,10 @@ void cycleContextMenu::displayColourDialog()
 }
 
 
+/*!
+ * \brief cycleContextMenu::displayStyleDialog Display the style dialog so the
+ * user can select a style for the cycle.
+ */
 void cycleContextMenu::displayStyleDialog()
 {
     QStringList items;
@@ -291,13 +295,19 @@ void cycleContextMenu::displayStyleDialog()
     }
 }
 
+
+/*!
+ * \brief cycleContextMenu::displayWeightDialog Display the weight dialog so the
+ * user can select a weight for the cycle.
+ */
 void cycleContextMenu::displayWeightDialog()
 {
     double weight = QInputDialog::getDouble(nullptr, "Select line weight", "Weight (pt):", 0, 0, 20);
-
     emit weightSelected(weight);
 }
 
+
+//REMOVE.....
 QString cycleContextMenu::node_label(ex name)
 {
     std::ostringstream drawing;

@@ -66,6 +66,9 @@ public:
     void addChild(int childType, const double &x, const double &y, const double &c = 0, const double &radius = 0);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void buildShape();
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
     bool setCycleAsy(const GiNaC::ex &new_cycle, const struct cycleStyleData &data);
@@ -89,6 +92,11 @@ private:
     MoebInv::figure *f;
     cycleContextMenu *menu;
     double *relativeScaleFactor;
+
+    double sceneX;
+    double sceneY;
+
+    bool itemIsSelected;
 
     struct cycleStyleData styleData;
     QBrush *brush;

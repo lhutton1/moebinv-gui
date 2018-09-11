@@ -25,6 +25,26 @@ graphicsScene::graphicsScene(QObject *parent)
 
 
 /*!
+ * \brief graphicsScene::getPointIsHighlighted get the value stored in 'pointIsHighlighted'.
+ * \return bool
+ */
+bool graphicsScene::getPointIsHighlighted()
+{
+    return pointIsHighlighted;
+}
+
+
+/*!
+ * \brief graphicsScene::setPointIsHighlighted set 'pointIsHighlighted'.
+ * \param value
+ */
+void graphicsScene::setPointIsHighlighted(const bool &value)
+{
+    pointIsHighlighted = value;
+}
+
+
+/*!
  * \brief graphicsScene::mousePressEvent Mouse pressed on scene
  * \param mouseEvent Provides information about the mouse event such as the position the click occured on the scene.
  *
@@ -34,9 +54,13 @@ void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     QPointF point = mouseEvent->scenePos();
 
+    QGraphicsScene::mousePressEvent(mouseEvent);
+
     if (mouseEvent->button() == Qt::LeftButton) {
-        // add new point
-        emit newMouseLeftPress(point);
+        if (!pointIsHighlighted) {
+            // if a point is highlighted, get ready to move. Else add new point.
+            emit newMouseLeftPress(point);
+        }
     } else if (mouseEvent->button() == Qt::RightButton) {
         // display highlighted cycles context menu
         emit newMouseRightPress(point);

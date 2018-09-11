@@ -112,7 +112,6 @@ void graphicCycle::setLineWidth(double weight)
  */
 void graphicCycle::setLineStyle(int style)
 {
-    qDebug() << "runnning";
     this->styleData.lineStyle = style;
     setCycleAsy(this->cycle, this->styleData);
     emit sceneInvalid();
@@ -229,6 +228,10 @@ void graphicCycle::buildShape()
                 double y = ex_to<numeric>(C.center().op(1).evalf()).to_double();
                 addChild(POINT, x, y);
 
+                this->setZValue(200);
+                setFlag(ItemIsMovable);
+
+
             } else if (ex_to<numeric>(abs(C.get_k()).evalf()).to_double() < EPSILON) {
                 double x = ex_to<numeric>(C.get_l(0).evalf()).to_double();
                 double y = ex_to<numeric>(C.get_l(1).evalf()).to_double();
@@ -259,6 +262,7 @@ void graphicCycle::setHover()
     // set the colour of both the pen and brush, then update the item.
     brush->setColor(s.value("graphicsHoverColour").value<QColor>());
     pen->setColor(s.value("graphicsHoverColour").value<QColor>());
+    this->itemIsSelected = true;
     this->update();
 
     // now emit signal to find in tree
@@ -276,7 +280,47 @@ void graphicCycle::unsetHover()
     // set the colour of both the pen and brush, then update the item.
     brush->setColor(this->styleData.colour);
     pen->setColor(this->styleData.colour);
+    this->itemIsSelected = false;
     this->update();
+}
+
+void graphicCycle::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (itemIsSelected) {
+        QGraphicsItem::mousePressEvent(event);
+
+        //qDebug() << "Object pressed" << node_label(cycle);
+        //qDebug() << event->scenePos().x() << event->scenePos().y();
+
+        sceneX = event->scenePos().x();
+        sceneY = event->scenePos().y();
+    }
+}
+
+void graphicCycle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    //qDebug() << "Object moved" << node_label(cycle);
+    if (itemIsSelected)
+        QGraphicsItem::mouseMoveEvent(event);
+}
+
+void graphicCycle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (itemIsSelected) {
+        QGraphicsItem::mouseReleaseEvent(event);
+
+        //if (node_label(cycle) == "A") {
+            //qDebug() << "Object released" << node_label(cycle);
+            //qDebug() << event->scenePos().x() << event->scenePos().y();
+
+            if (sceneX != event->scenePos().x() || sceneY != event->scenePos().y())
+                f->move_point(cycle, lst(event->scenePos().x(), event->scenePos().y()));
+
+
+        //}
+
+        emit sceneInvalid();
+    }
 }
 
 
