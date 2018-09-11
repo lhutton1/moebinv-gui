@@ -25,9 +25,17 @@ graphicCycle::graphicCycle(figure *f, ex c, double *relativeScaleFactor, cycleCo
     pen = new QPen(styleData.colour);
     pen->setCosmetic(true);
     pen->setWidth(styleData.lineWidth);
-    pen->setStyle(Qt::SolidLine);
 
-    connect(menu, &cycleContextMenu::colourSelected, this, &graphicCycle::setStyle); // REMOVE
+    if (styleData.lineStyle == SOLID)
+        pen->setStyle(Qt::SolidLine);
+    else if (styleData.lineStyle == DOTTED)
+        pen->setStyle(Qt::DotLine);
+    else if (styleData.lineStyle == DASHED)
+        pen->setStyle(Qt::DashLine);
+
+    connect(menu, &cycleContextMenu::colourSelected, this, &graphicCycle::setColour); // REMOVE
+    connect(menu, &cycleContextMenu::weightSelected, this, &graphicCycle::setLineWidth);
+    connect(menu, &cycleContextMenu::styleSelected, this, &graphicCycle::setLineStyle);
 
     // create the shape and add the necessary child graphicsItems.
     buildShape();
@@ -69,15 +77,43 @@ cycleContextMenu* graphicCycle::getContextMenu()
 
 
 /*!
- * \brief graphicCycle::setStyle set the style of the graphic cycle.
+ * \brief graphicCycle::setColour set the colour of the graphic cycle.
  * \param colour
  *
- * Set the style of the graphic cycle. This could include the colour, line style
- * and line thickness of the object.
+ * Set the colour of the graphic cycle, by building the relevent styleData.
  */
-void graphicCycle::setStyle(QColor colour)
+void graphicCycle::setColour(QColor colour)
 {
     this->styleData.colour = colour;
+    setCycleAsy(this->cycle, this->styleData);
+    emit sceneInvalid();
+}
+
+
+/*!
+ * \brief graphicCycle::setLineWidth set the weight of the graphic cycle.
+ * \param weight
+ *
+ * Set the weight of the graphic cycle, by building the relevent styleData.
+ */
+void graphicCycle::setLineWidth(double weight)
+{
+    this->styleData.lineWidth = weight;
+    setCycleAsy(this->cycle, this->styleData);
+    emit sceneInvalid();
+}
+
+
+/*!
+ * \brief graphicCycle::setLineStyle set the style of the graphic cycle.
+ * \param style
+ *
+ * Set the style of the graphic cycle, by building the relevent styleData.
+ */
+void graphicCycle::setLineStyle(int style)
+{
+    qDebug() << "runnning";
+    this->styleData.lineStyle = style;
     setCycleAsy(this->cycle, this->styleData);
     emit sceneInvalid();
 }

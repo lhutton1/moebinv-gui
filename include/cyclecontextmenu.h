@@ -50,10 +50,14 @@ public slots:
     void confirmDeleteCycle();
     void amendRelationList();
     void displayColourDialog();
+    void displayStyleDialog();
+    void displayWeightDialog();
 
 signals:
     void relationsHaveChanged();
     void colourSelected(QColor colour);
+    void weightSelected(double weight);
+    void styleSelected(int style);
     void sceneInvalid();
 
 private:

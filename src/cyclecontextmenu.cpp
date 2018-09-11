@@ -253,6 +253,8 @@ void cycleContextMenu::buildActions()
 
     connect(changeColour, &QAction::triggered, this, &cycleContextMenu::displayColourDialog);
     connect(colourDialog, &QColorDialog::colorSelected, this, &cycleContextMenu::colourSelected);
+    connect(changeStyle, &QAction::triggered, this, &cycleContextMenu::displayStyleDialog);
+    connect(changeWeight, &QAction::triggered, this, &cycleContextMenu::displayWeightDialog);
 
     // delete cycle action
     if (this->isDelete) {
@@ -268,6 +270,32 @@ void cycleContextMenu::buildActions()
 void cycleContextMenu::displayColourDialog()
 {
     colourDialog->show();
+}
+
+
+void cycleContextMenu::displayStyleDialog()
+{
+    QStringList items;
+    items << "Solid" << "Dotted" << "Dashed";
+    QString item = QInputDialog::getItem(nullptr, "Select line style", "Style:", items, 0, false);
+
+    qDebug() << "runnning...";
+    qDebug() << item;
+
+    if (item == "Solid") {
+       emit styleSelected(SOLID);
+    } else if (item == "Dotted") {
+       emit styleSelected(DOTTED);
+    } else if (item == "Dashed") {
+       emit styleSelected(DASHED);
+    }
+}
+
+void cycleContextMenu::displayWeightDialog()
+{
+    double weight = QInputDialog::getDouble(nullptr, "Select line weight", "Weight (pt):", 0, 0, 20);
+
+    emit weightSelected(weight);
 }
 
 QString cycleContextMenu::node_label(ex name)

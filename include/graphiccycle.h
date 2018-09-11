@@ -74,7 +74,9 @@ public:
 public slots:
     void setHover();
     void unsetHover();
-    void setStyle(QColor colour);
+    void setColour(QColor colour);
+    void setLineWidth(double weight);
+    void setLineStyle(int style);
 
 signals:
     void findCycleInTree(GiNaC::ex cycle);
