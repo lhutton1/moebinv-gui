@@ -238,10 +238,12 @@ void MainWindow::on_actionPan_toggled(bool pan)
         //ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
         isAddPoint = false;
         ui->graphicsView->panningEnabled = true;
+        ui->graphicsView->setCursor(Qt::OpenHandCursor);
     } else {
         //ui->graphicsView->setDragMode(QGraphicsView::NoDrag);
         isAddPoint = true;
         ui->graphicsView->panningEnabled = false;
+        ui->graphicsView->setCursor(Qt::ArrowCursor);
     }
 }
 
@@ -562,7 +564,7 @@ void MainWindow::highlightClosestCycle(QPointF point)
 {
     double highlightDistance = s.value("highlightDistance").toDouble();
 
-    if (!prevHoveredCycle.isNull())
+    if (!prevHoveredCycle.isNull() && !prevHoveredCycle->getItemIsGrabbed())
         prevHoveredCycle->unsetHover();
 
     GiNaC::ex closest = shortestDistance(point, highlightDistance);

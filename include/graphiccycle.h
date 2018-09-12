@@ -63,6 +63,7 @@ public:
     QString getCycleLabel();
     double* getRelativeScaleFactor();
     cycleContextMenu* getContextMenu();
+    bool getItemIsGrabbed();
     void addChild(int childType, const double &x, const double &y, const double &c = 0, const double &radius = 0);
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
@@ -97,6 +98,7 @@ private:
     double sceneY;
 
     bool itemIsSelected;
+    bool itemIsGrabbed;
 
     struct cycleStyleData styleData;
     QBrush *brush;

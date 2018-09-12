@@ -49,6 +49,9 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
                 painter->drawRect(this->boundingRect());
 
             // draw circle
+            if (radius < 0)
+                return;
+
             painter->drawEllipse(point, radius, radius);
 
             // set the painter matrix to correct size for zoom

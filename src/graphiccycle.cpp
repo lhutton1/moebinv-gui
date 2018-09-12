@@ -286,7 +286,7 @@ void graphicCycle::unsetHover()
 
 void graphicCycle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (itemIsSelected) {
+    if (itemIsSelected && event->button() == Qt::LeftButton) {
         QGraphicsItem::mousePressEvent(event);
 
         //qDebug() << "Object pressed" << node_label(cycle);
@@ -294,6 +294,7 @@ void graphicCycle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
         sceneX = event->scenePos().x();
         sceneY = event->scenePos().y();
+        itemIsGrabbed = true;
     }
 }
 
@@ -306,7 +307,7 @@ void graphicCycle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void graphicCycle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (itemIsSelected) {
+    if (itemIsSelected && event->button() == Qt::LeftButton) {
         QGraphicsItem::mouseReleaseEvent(event);
 
         //if (node_label(cycle) == "A") {
@@ -318,9 +319,14 @@ void graphicCycle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 
         //}
-
+        itemIsGrabbed = false;
         emit sceneInvalid();
     }
+}
+
+bool graphicCycle::getItemIsGrabbed()
+{
+    return itemIsGrabbed;
 }
 
 

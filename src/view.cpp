@@ -65,8 +65,12 @@ void view::recenterView()
 
 void view::mousePressEvent(QMouseEvent *event)
 {
-    panningMouseDown = true;
-    panningPoint = event->pos();
+    if (event->button() == Qt::LeftButton && panningEnabled) {
+        panningMouseDown = true;
+        panningPoint = event->pos();
+        this->setCursor(Qt::ClosedHandCursor);
+    }
+
 
     QGraphicsView::mousePressEvent(event);
 }
@@ -84,12 +88,12 @@ void view::mouseMoveEvent(QMouseEvent *event)
     QGraphicsView::mouseMoveEvent(event);
 
     if (panningEnabled && panningMouseDown) {
-        QPoint newPos = - panningPoint + event->pos();
-        QPoint diff = newPos - dragPos;
-        dragPos = newPos;
-        this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value() - diff.x());
-        this->verticalScrollBar()->setValue(this->verticalScrollBar()->value() - diff.y());
-        event->accept();
+        if (!panningPoint.isNull()) {
+            this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value() - (event->x() - panningPoint.x()));
+            this->verticalScrollBar()->setValue(this->verticalScrollBar()->value() - (event->y() - panningPoint.y()));
+            panningPoint = QPoint(event->x(), event->y());
+            event->accept();
+        }
     }
     // Start a timer to be used to detect when the mouse has stopped moving
     if (!mouseTimeOut->isActive())
@@ -101,7 +105,12 @@ void view::mouseMoveEvent(QMouseEvent *event)
 
 void view::mouseReleaseEvent(QMouseEvent *event)
 {
-    panningMouseDown = false;
+    if (event->button() == Qt::LeftButton && panningEnabled) {
+        panningMouseDown = false;
+        panningPoint = event->pos();
+        QGraphicsView::mouseReleaseEvent(event);
+        setCursor(Qt::OpenHandCursor);
+    }
 
     QGraphicsView::mouseReleaseEvent(event);
 }
