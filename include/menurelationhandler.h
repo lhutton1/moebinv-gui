@@ -23,18 +23,17 @@ public:
     menuRelAction(MoebInv::ex cycle, GiNaC::lst *relationList,
         QString actionTitle, int params, bool checked,
         int relType, menuRelActionGroup *group = nullptr);
-
+    GiNaC::ex getCycle();
+    GiNaC::lst getInputList();
+    menuRelActionGroup* getGroup();
+    MoebInv::cycle_relation getRelation();
+    void setRelation();
+    bool hasRelation();
     QAction menuEntry();
     QAction checkMenuEntry();
-    bool hasRelation();
-    MoebInv::cycle_relation getRelation();
     void actionHandler();
     bool checkActionHandler();
-    GiNaC::ex getCycle();
     QString node_label(GiNaC::ex name);
-    menuRelActionGroup* getGroup();
-    void setRelation();
-    GiNaC::lst getInputList();
     void createCycleRelation(const GiNaC::lst &params);
 
 signals:
@@ -43,19 +42,20 @@ signals:
 private:
     QSettings s;
 
+    // input dialogs
     QInputDialog *inputDialog;
     matrix4dialog *matrix4;
     matrix8dialog *matrix8;
 
     GiNaC::ex cycle;
-    GiNaC::lst *relationList;
     QString actionTitle;
     menuRelActionGroup *group;
     int relType;
     int inputType;
     MoebInv::cycle_relation relation;
-
 };
+
+
 
 class menuRelActionGroup : public QActionGroup {
     Q_OBJECT

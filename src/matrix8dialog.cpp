@@ -1,6 +1,13 @@
 #include "matrix8dialog.h"
 #include "ui_matrix8dialog.h"
 
+
+/*!
+ * \brief matrix8dialog::matrix8dialog
+ * \param parent
+ *
+ * Creates a new matrix8dialog. Allows the user to enter 8 double values.
+ */
 matrix8dialog::matrix8dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::matrix8dialog)
@@ -26,11 +33,24 @@ matrix8dialog::matrix8dialog(QWidget *parent) :
     }
 }
 
+
+/*!
+ * \brief matrix8dialog::~matrix8dialog
+ *
+ * Destructor for the matrix8dialog
+ */
 matrix8dialog::~matrix8dialog()
 {
     delete ui;
 }
 
+
+/*!
+ * \brief matrix8dialog::getValues
+ * \param inputList
+ *
+ * Gets the values input into the dialog and appends each value to a GiNaC::lst.
+ */
 void matrix8dialog::getValues(GiNaC::lst *inputList)
 {
     for (auto lineEdit : this->lineEditList) {

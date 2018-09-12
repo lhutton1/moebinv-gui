@@ -7,16 +7,27 @@
 using namespace GiNaC;
 using namespace MoebInv;
 
+
+/*!
+ * \brief menuRelAction::menuRelAction
+ * \param cycle cycle the action is related to.
+ * \param relationList pointer to the relation list that stores curretly active relations
+ * \param actionTitle title of the action.
+ * \param params number of params the relation needs to take.
+ * \param checked whether or not the relation is checked when created.
+ * \param relType the type of relation the action represents.
+ * \param group the group the relation is included within.
+ *
+ * Create a new relation QAction to be added to the context menu.
+ */
 menuRelAction::menuRelAction(MoebInv::ex cycle, GiNaC::lst *relationList,
     QString actionTitle, int params, bool checked,
     int relType, menuRelActionGroup *group)
 {
     this->cycle = cycle;
-    this->relationList = relationList;
     this->relType = relType;
     this->inputType = params;
     this->group = group;
-
     this->relation = cycle_relation();
 
     this->setIconText(actionTitle);
@@ -73,21 +84,25 @@ menuRelActionGroup* menuRelAction::getGroup()
 
 
 /*!
- * \brief menuRelAction::actionHandler
+ * \brief menuRelAction::actionHandler Handles the action.
+ *
+ * Checks to make sure the correct number of parameters have been provided.
+ * If so the relevent relation is built.
  */
 void menuRelAction::actionHandler()
 {
-    lst params;
+    const lst params = getInputList();
 
-    params = getInputList();
-
-    if (this->inputType == SINGLE_PARAM && params.nops() != 1 ||
-            this->inputType == MATRIX_4 && params.nops() != 4 ||
-            this->inputType == MATRIX_8 && params.nops() != 8
+    // check the correct number of parameters have been provided
+    if ((this->inputType == SINGLE_PARAM && params.nops() != 1) ||
+            (this->inputType == MATRIX_4 && params.nops() != 4) ||
+            (this->inputType == MATRIX_8 && params.nops() != 8)
     ) {
         return;
     }
 
+    // build the required relation and emit a signal to add the
+    // relation to the relation list.
     createCycleRelation(params);
     emit handleRelation();
 }

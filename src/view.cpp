@@ -7,23 +7,43 @@
  *
  * Construct a new view applying any settings.
  */
-view::view(QObject *parent)
+view::view(QWidget *parent)
 {
     const int initialZoomFactor = s.value("initialZoomFactor").toInt();
 
-    // reflect the y-axis so coordinate system matches a standard graph
-    this->scale(initialZoomFactor, -initialZoomFactor);
+    this->scale(initialZoomFactor, -initialZoomFactor); // reflect the y-axis so coordinate system matches a standard graph
     this->setRenderHint(QPainter::Antialiasing);
+    this->setParent(parent);
+
     this->relativeScaleFactor = 1;
+    this->panningActive = false;
+    this->panningEnabled = false;
 
     // set timer to detect when mouse stops
     this->mouseTimeOut = new QTimer(this);
     connect(mouseTimeOut, &QTimer::timeout, this, &view::mouseStopped);
     this->mouseTimeOut->start(s.value("mouseStopWait").toInt());
-
-    panningMouseDown = false;
 }
 
+
+/*!
+ * \brief view::getPanningEnabled getter for panning enabled.
+ * \return bool
+ */
+bool view::getPanningEnabled()
+{
+    return this->panningEnabled;
+}
+
+
+/*!
+ * \brief view::setPanningEnabled setter for panning enabled.
+ * \param value
+ */
+void view::setPanningEnabled(const bool &value)
+{
+    this->panningEnabled = value;
+}
 
 /*!
  * \brief view::wheelEvent Implements zooming on scroll wheel.
@@ -34,10 +54,11 @@ view::view(QObject *parent)
 void view::wheelEvent(QWheelEvent * event)
 {
     const ViewportAnchor anchor = transformationAnchor();
-    setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     int angle = event->angleDelta().y();
     qreal factor;
 
+    // determine which direction the wheel is travelling
     if (angle > 0) {
         factor = 1.1;
         relativeScaleFactor *= 1.1;
@@ -46,9 +67,9 @@ void view::wheelEvent(QWheelEvent * event)
         relativeScaleFactor *= 0.9;
     }
 
-    scale(factor, factor);
-    setTransformationAnchor(anchor);
-    setViewportUpdateMode(FullViewportUpdate);
+    this->scale(factor, factor);
+    this->setTransformationAnchor(anchor);
+    this->setViewportUpdateMode(FullViewportUpdate);
 }
 
 
@@ -63,15 +84,21 @@ void view::recenterView()
 }
 
 
+/*!
+ * \brief view::mousePressEvent handle panning on mouse press.
+ * \param event mouse event.
+ *
+ * Checks to see if the view needs panning on a mouse press.
+ */
 void view::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && panningEnabled) {
-        panningMouseDown = true;
-        panningPoint = event->pos();
+        this->panningActive = true;
+        this->panningAnchor = event->pos();
         this->setCursor(Qt::ClosedHandCursor);
     }
 
-
+    // Reimplement standard mouse press event.
     QGraphicsView::mousePressEvent(event);
 }
 
@@ -81,20 +108,21 @@ void view::mousePressEvent(QMouseEvent *event)
  * \param event
  *
  * Reimplemented event that is triggered when the mouse moves on the view.
+ * This allows panning to take place along with detecting when the mouse has stopped.
  */
 void view::mouseMoveEvent(QMouseEvent *event)
 {
-    // Implement old mouse move event and then add to it
+    // Implement standard mouse move event and then add to it
     QGraphicsView::mouseMoveEvent(event);
 
-    if (panningEnabled && panningMouseDown) {
-        if (!panningPoint.isNull()) {
-            this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value() - (event->x() - panningPoint.x()));
-            this->verticalScrollBar()->setValue(this->verticalScrollBar()->value() - (event->y() - panningPoint.y()));
-            panningPoint = QPoint(event->x(), event->y());
-            event->accept();
-        }
+    // If panning is active, pan.
+    if (this->panningActive && !this->panningAnchor.isNull()) {
+        this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value() - (event->x() - panningAnchor.x()));
+        this->verticalScrollBar()->setValue(this->verticalScrollBar()->value() - (event->y() - panningAnchor.y()));
+        this->panningAnchor = QPoint(event->x(), event->y());
+        event->accept();
     }
+
     // Start a timer to be used to detect when the mouse has stopped moving
     if (!mouseTimeOut->isActive())
         mouseTimeOut->start();
@@ -103,11 +131,18 @@ void view::mouseMoveEvent(QMouseEvent *event)
 }
 
 
+/*!
+ * \brief view::mouseReleaseEvent mouse release event on view.
+ * \param event mouse event.
+ *
+ * Triggered when the mouse is released from the view. This function reimplements the
+ * existing function adding panning to it.
+ */
 void view::mouseReleaseEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && panningEnabled) {
-        panningMouseDown = false;
-        panningPoint = event->pos();
+        this->panningActive = false;
+        this->panningAnchor = event->pos();
         QGraphicsView::mouseReleaseEvent(event);
         setCursor(Qt::OpenHandCursor);
     }

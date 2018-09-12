@@ -283,9 +283,6 @@ void cycleContextMenu::displayStyleDialog()
     items << "Solid" << "Dotted" << "Dashed";
     QString item = QInputDialog::getItem(nullptr, "Select line style", "Style:", items, 0, false);
 
-    qDebug() << "runnning...";
-    qDebug() << item;
-
     if (item == "Solid") {
        emit styleSelected(SOLID);
     } else if (item == "Dotted") {

@@ -17,7 +17,9 @@ class view : public QGraphicsView
     Q_OBJECT
 
 public:
-    explicit view(QObject *parent = 0);
+    explicit view(QWidget *parent = nullptr);
+    bool getPanningEnabled();
+    void setPanningEnabled(const bool &value);
     void wheelEvent(QWheelEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
@@ -26,7 +28,6 @@ public:
     void zoomOut();
 
     double relativeScaleFactor;
-    bool panningEnabled;
 
 signals:
     void highlightClosestCycle(QPointF point);
@@ -40,10 +41,9 @@ private:
 
     QTimer *mouseTimeOut;
 
-    QPoint dragPos;
-    bool panningMouseDown;
-    QPoint panningPoint;
-
+    bool panningEnabled;
+    bool panningActive;
+    QPoint panningAnchor;
 };
 
 #endif // VIEW_H

@@ -237,12 +237,12 @@ void MainWindow::on_actionPan_toggled(bool pan)
     if (pan) {
         //ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
         isAddPoint = false;
-        ui->graphicsView->panningEnabled = true;
+        ui->graphicsView->setPanningEnabled(true);
         ui->graphicsView->setCursor(Qt::OpenHandCursor);
     } else {
         //ui->graphicsView->setDragMode(QGraphicsView::NoDrag);
         isAddPoint = true;
-        ui->graphicsView->panningEnabled = false;
+        ui->graphicsView->setPanningEnabled(false);
         ui->graphicsView->setCursor(Qt::ArrowCursor);
     }
 }

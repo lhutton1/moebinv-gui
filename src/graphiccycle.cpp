@@ -77,6 +77,15 @@ cycleContextMenu* graphicCycle::getContextMenu()
 
 
 /*!
+ * \brief graphicCycle::getItemIsGrabbed get whether the item is being moved.
+ */
+bool graphicCycle::getItemIsGrabbed()
+{
+    return itemIsGrabbed;
+}
+
+
+/*!
  * \brief graphicCycle::setColour set the colour of the graphic cycle.
  * \param colour
  *
@@ -262,7 +271,7 @@ void graphicCycle::setHover()
     // set the colour of both the pen and brush, then update the item.
     brush->setColor(s.value("graphicsHoverColour").value<QColor>());
     pen->setColor(s.value("graphicsHoverColour").value<QColor>());
-    this->itemIsSelected = true;
+    this->itemIsHighlighted = true;
     this->update();
 
     // now emit signal to find in tree
@@ -280,53 +289,47 @@ void graphicCycle::unsetHover()
     // set the colour of both the pen and brush, then update the item.
     brush->setColor(this->styleData.colour);
     pen->setColor(this->styleData.colour);
-    this->itemIsSelected = false;
+    this->itemIsHighlighted = false;
     this->update();
 }
 
+
+/*!
+ * \brief graphicCycle::mousePressEvent reimplements mouse press event.
+ * \param event mouse event.
+ *
+ * Reimplements mouse press event to allow movement of a point when it is highlighted.
+ */
 void graphicCycle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (itemIsSelected && event->button() == Qt::LeftButton) {
-        QGraphicsItem::mousePressEvent(event);
+    QGraphicsItem::mousePressEvent(event);
 
-        //qDebug() << "Object pressed" << node_label(cycle);
-        //qDebug() << event->scenePos().x() << event->scenePos().y();
-
-        sceneX = event->scenePos().x();
-        sceneY = event->scenePos().y();
-        itemIsGrabbed = true;
+    if (event->button() == Qt::LeftButton && this->itemIsHighlighted) {
+        this->sceneX = event->scenePos().x();
+        this->sceneY = event->scenePos().y();
+        this->itemIsGrabbed = true;
     }
 }
 
-void graphicCycle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    //qDebug() << "Object moved" << node_label(cycle);
-    if (itemIsSelected)
-        QGraphicsItem::mouseMoveEvent(event);
-}
 
+/*!
+ * \brief graphicCycle::mouseReleaseEvent reimplements the mouse release event.
+ * \param event mouse event.
+ *
+ * Reimplements the mouse release event to allow movement of a point when it is highlighted.
+ */
 void graphicCycle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (itemIsSelected && event->button() == Qt::LeftButton) {
-        QGraphicsItem::mouseReleaseEvent(event);
+    QGraphicsItem::mouseReleaseEvent(event);
 
-        //if (node_label(cycle) == "A") {
-            //qDebug() << "Object released" << node_label(cycle);
-            //qDebug() << event->scenePos().x() << event->scenePos().y();
-
-            if (sceneX != event->scenePos().x() || sceneY != event->scenePos().y())
-                f->move_point(cycle, lst(event->scenePos().x(), event->scenePos().y()));
-
-
-        //}
-        itemIsGrabbed = false;
+    if (event->button() == Qt::LeftButton && this->itemIsHighlighted) {
+        if (sceneX != event->scenePos().x() || sceneY != event->scenePos().y()) {
+            // move the point in the figure.
+            this->f->move_point(cycle, lst(event->scenePos().x(), event->scenePos().y()));
+        }
+        this->itemIsGrabbed = false;
         emit sceneInvalid();
     }
-}
-
-bool graphicCycle::getItemIsGrabbed()
-{
-    return itemIsGrabbed;
 }
 
 

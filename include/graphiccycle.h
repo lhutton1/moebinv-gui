@@ -68,7 +68,6 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void buildShape();
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
@@ -94,11 +93,10 @@ private:
     cycleContextMenu *menu;
     double *relativeScaleFactor;
 
+    bool itemIsHighlighted;
+    bool itemIsGrabbed;
     double sceneX;
     double sceneY;
-
-    bool itemIsSelected;
-    bool itemIsGrabbed;
 
     struct cycleStyleData styleData;
     QBrush *brush;

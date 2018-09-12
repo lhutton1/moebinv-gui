@@ -40,7 +40,8 @@ line::line(graphicCycle *parent, struct cycleData data)
 void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QLineF line;
-    QPointF point(x, y);
+    QPointF point(0, 0);
+    const double sf = s.value("initialZoomFactor").toInt() * (*scaleFactor);
 
     // assign brush and pen to the painter.
     painter->setBrush(*brush);
@@ -70,13 +71,13 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
                 double my = abs(y2-y1) / 2;
 
                 if (y == 0) // vertical line
-                    painter->drawText(0, -my * (*scaleFactor), label);
+                    painter->drawText(3, -(my * sf), label);
                 else if (((-x)/y) > 0) // line with positive gradient
-                    painter->drawText(mx * (*scaleFactor), -my * (*scaleFactor) - 12, label);
+                    painter->drawText(mx * sf, -(my * sf) - 7, label);
                 else if (((-x)/y) < 0) // line with negative gradient
-                    painter->drawText(mx * (*scaleFactor), my * (*scaleFactor) + 5, label);
+                    painter->drawText(mx * sf, (my * sf), label);
                 else if (x == 0) // horizontal line
-                    painter->drawText(mx * (*scaleFactor), my * (*scaleFactor) - 4, label);
+                    painter->drawText(mx * sf, -3, label);
             }
             break;
         }
@@ -103,12 +104,12 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
  */
 QRectF line::boundingRect() const
 {
-    int padding;
+    double padding;
     QPointF topLeft;
     QPointF bottomRight;
 
     // if padding is less than 15 the label won't be visible
-    padding = 15;
+    padding = (15 / s.value("initialZoomFactor").toDouble()) / (*scaleFactor);
 
     if (y == 0) { // vertical line
         topLeft = QPointF(-padding, 0);

@@ -25,7 +25,6 @@ public:
     void setPointIsHighlighted(const bool &value);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
-    void addToTree(graphicCycle *p);
 
 signals:
     void newMouseLeftPress(QPointF point);
@@ -36,10 +35,6 @@ private:
     QSettings s;
 
     bool pointIsHighlighted;
-
-    int maxZValue = 1;
-    int minZValue = 0;
-
     QMap<GiNaC::ex, QPointer<graphicCycle>> *cycles;
 };
 

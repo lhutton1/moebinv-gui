@@ -91,9 +91,9 @@ int main(int argc, char *argv[])
 
     // initiate settings object
     QSettings::setDefaultFormat(QSettings::IniFormat);
-    QCoreApplication::setOrganizationName("My Organization");
-    QCoreApplication::setOrganizationDomain("myorganization.com");
-    QCoreApplication::setApplicationName("My Application");
+    QCoreApplication::setOrganizationName("moebinv-gui");
+    QCoreApplication::setOrganizationDomain("moebinv-gui.com");
+    QCoreApplication::setApplicationName("moebinv-gui");
 
     setDefaultSettings();
 
