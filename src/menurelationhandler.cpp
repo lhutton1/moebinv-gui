@@ -96,7 +96,7 @@ void menuRelAction::actionHandler()
     // check the correct number of parameters have been provided
     if ((this->inputType == SINGLE_PARAM && params.nops() != 1) ||
             (this->inputType == MATRIX_4 && params.nops() != 4) ||
-            (this->inputType == MATRIX_8 && params.nops() != 8)
+            (this->inputType == MATRIX_8 && params.nops() != 4)
     ) {
         return;
     }
@@ -150,7 +150,7 @@ void menuRelAction::createCycleRelation(const lst &params)
             this->relation = moebius_transform(cycle, true, params);
             break;
         case CYCLE_SL2:
-            this->relation = sl2_transform(cycle, true, lst{0, 1, -1, 0});
+            this->relation = sl2_transform(cycle, true, params);
             break;
     }
 }
