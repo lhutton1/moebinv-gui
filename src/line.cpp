@@ -44,7 +44,7 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     const double sf = s.value("initialZoomFactor").toInt() * (*scaleFactor);
 
     // assign brush and pen to the painter.
-    painter->setBrush(*brush);
+    //painter->setBrush(*brush);
     painter->setPen(*pen);
 
     // draw shape
@@ -138,40 +138,41 @@ QRectF line::boundingRect() const
  *
  * Defines the area in which the shape actually exists.
  */
-QPainterPath line::shape() const {
-    QPainterPath path;
-    QPolygonF poly = QPolygonF();
+//QPainterPath line::shape() const {
+//    QPainterPath path;
+//    QPolygonF poly = QPolygonF();
+//    const double sf = s.value("initialZoomFactor").toInt() * (*scaleFactor);
 
-    if (y == 0) { // vertical line
-        poly << QPointF(2, 0)
-             << QPointF(abs(x2-x1) + 2, abs(y2-y1))
-             << QPointF(abs(x2-x1) - 2, abs(y2-y1))
-             << QPointF(-2, 0)
-             << QPointF(2, 0);
-    } else if (x == 0) { // horizontal line
-        poly << QPointF(0, -2)
-             << QPointF(abs(x2-x1), -2)
-             << QPointF(abs(x2-x1), 2)
-             << QPointF(0, 2)
-             << QPointF(0, -2);
-    } else if (((-x)/y) > 0) { // line with positive gradient
-        poly << QPointF(2, -2)
-             << QPointF(abs(x2-x1) + 2, abs(y2-y1) - 2)
-             << QPointF(abs(x2-x1) - 2, abs(y2-y1) + 2)
-             << QPointF(-2, 2)
-             << QPointF(2, -2);
-    } else if (((-x)/y) < 0) { // line with negative gradient
-        poly << QPointF(-2, -2)
-             << QPointF(abs(x2-x1) - 2, -abs(y2-y1) - 2)
-             << QPointF(abs(x2-x1) + 2, -abs(y2-y1) + 2)
-             << QPointF(2, 2)
-             << QPointF(-2, -2);
-    }
+//    if (y == 0) { // vertical line
+//        poly << QPointF(2 * sf, 0)
+//             << QPointF(abs(x2-x1) + 2 * sf, abs(y2-y1))
+//             << QPointF(abs(x2-x1) - 2 * sf, abs(y2-y1))
+//             << QPointF(-2 * sf, 0)
+//             << QPointF(2 * sf, 0);
+//    } else if (x == 0) { // horizontal line
+//        poly << QPointF(0, (-2 / sf))
+//             << QPointF(abs(x2-x1), (-2 / sf))
+//             << QPointF(abs(x2-x1), (2 / sf))
+//             << QPointF(0, (2 / sf))
+//             << QPointF(0, -2 / sf);
+//    } else if (((-x)/y) > 0) { // line with positive gradient
+//        poly << QPointF(2, -2)
+//             << QPointF(abs(x2-x1) + 2, abs(y2-y1) - 2)
+//             << QPointF(abs(x2-x1) - 2, abs(y2-y1) + 2)
+//             << QPointF(-2, 2)
+//             << QPointF(2, -2);
+//    } else if (((-x)/y) < 0) { // line with negative gradient
+//        poly << QPointF(-2, -2)
+//             << QPointF(abs(x2-x1) - 2, -abs(y2-y1) - 2)
+//             << QPointF(abs(x2-x1) + 2, -abs(y2-y1) + 2)
+//             << QPointF(2, 2)
+//             << QPointF(-2, -2);
+//    }
 
-    path.addPolygon(poly);
+//    path.addPolygon(poly);
 
-    return path;
-}
+//    return path;
+//}
 
 
 /*!

@@ -53,6 +53,6 @@ void matrix4dialog::getValues(GiNaC::lst *inputList)
         if (lineEdit->text().isEmpty())
             inputList->append(0);
         else
-            inputList->append(lineEdit->text().toDouble());
+            inputList->append(GiNaC::numeric(lineEdit->text().toDouble()));
     }
 }

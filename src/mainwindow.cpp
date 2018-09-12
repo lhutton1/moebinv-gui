@@ -20,14 +20,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // fixes qt5.1 bug that causes dock to snap back to original size
     // https://bugreports.qt.io/browse/QTBUG-65592
-    resizeDocks({ui->dockWidgetRight}, {200}, Qt::Horizontal);
+    this->resizeDocks({ui->dockWidgetRight}, {200}, Qt::Horizontal);
 
     // generate graphics view
     scene = new graphicsScene();
     ui->graphicsView->setScene(scene);
-    ui->graphicsView->recenterView();
-
-
 
     //status bar
     statusCoordinates = new QLabel();
@@ -340,9 +337,9 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     }
 
     // only real cycles
-    if (REAL_CYCLES) {
-        relationList.append(only_reals(nextSymbol));
-    }
+//    if (REAL_CYCLES) {
+//        relationList.append(only_reals(nextSymbol));
+//    }
 
     try {
         cycle = f.add_cycle_rel(relationList, nextSymbol);

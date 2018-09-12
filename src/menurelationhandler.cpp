@@ -150,7 +150,7 @@ void menuRelAction::createCycleRelation(const lst &params)
             this->relation = moebius_transform(cycle, true, params);
             break;
         case CYCLE_SL2:
-            this->relation = sl2_transform(cycle, true, params);
+            this->relation = sl2_transform(cycle, true, lst{0, 1, -1, 0});
             break;
     }
 }

@@ -35,8 +35,9 @@ void setDefaultSettings()
 
     /*!
      * Sets the size of the scene before it expands.
+     * NOTE: Increasing this by too large a factor could cause the application to run out of memory.
      */
-    s.setValue("sceneSize", 300000);
+    s.setValue("sceneSize", 30000);
 
     /*!
      * Adjust the accuracy which coordinates are displayed to.
@@ -76,7 +77,7 @@ void setDefaultSettings()
     /*!
      * Set the initial zoom factor of the graphics view.
      */
-    s.setValue("initialZoomFactor", 45);
+    s.setValue("initialZoomFactor", 40);
 
     /*!
      * Set the distance in which a cycle can be hovered.

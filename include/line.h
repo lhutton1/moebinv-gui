@@ -21,7 +21,7 @@ public:
     line(graphicCycle *parent, struct cycleData data);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
-    QPainterPath shape() const;
+    //QPainterPath shape() const;
     void findLinePoints();
 
 private:
