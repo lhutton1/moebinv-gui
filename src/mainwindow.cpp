@@ -53,11 +53,6 @@ MainWindow::MainWindow(QWidget *parent) :
     msgBox = new QMessageBox();
     saveDialog = new QFileDialog();
 
-    thisItem = new QToolButton();
-    thisItem->setText("This");
-    thisItem->setPopupMode(QToolButton::InstantPopup);
-    ui->mainToolBar->addWidget(thisItem);
-
     // gen first symbol
     nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 
@@ -75,6 +70,12 @@ MainWindow::MainWindow(QWidget *parent) :
     REAL_CYCLES = true;
 
     connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &MainWindow::onCustomContextMenu);
+
+    defineCycleMenu = new QMenu(this);
+    defineCycleMenu->addAction(ui->actionDefine_by_values);
+    defineCycleMenu->addAction(ui->actionDefine_by_center_and_radius_squared);
+
+    buildToolBar();
 
     update();
 }
@@ -220,7 +221,7 @@ void MainWindow::initMainMenu() {
     menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false);
     connect(menus[2], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
-    thisItem->setMenu(menus[2]);
+    //thisItem->setMenu(menus[2]);
     connect(menus[2], &QMenu::aboutToShow, this, &MainWindow::thisContextMenuUpdate);
 }
 
@@ -320,49 +321,6 @@ void MainWindow::addPoint(QPointF mousePos)
         update();
 
     }
-}
-
-/*!
- * \brief MainWindow::on_actionCreate_Cycle_triggered
- *
- * Function to create cycle based on relations that have been added.
- */
-void MainWindow::on_actionCreate_Cycle_triggered()
-{
-    ex cycle;
-    // make sure that the list isn't empty before adding cycle
-    if (relationList.nops() <= 0) {
-        msgBox->warning(0, "No cycles in relation", "For a cycle to be created there must be cycles in the relation.");
-        return;
-    }
-
-    try {
-        //unpack relation list
-        lst unpackedRelationList;
-        for (auto item : relationList) {
-            unpackedRelationList.append(item.op(2));
-        }
-
-        cycle = f.add_cycle_rel(unpackedRelationList, nextSymbol);
-    } catch (...) {
-        msgBox->warning(0, "Cycle relation(s) invalid", "The cycle couldn't be created. Double check your relations and try again");
-        return;
-    }
-
-    struct cycleStyleData cycleData;
-    cycleData.colour = s.value("defaultGraphicsColour").value<QColor>();
-    cycleData.lineStyle = s.value("defaultLineStyle").toDouble();
-    cycleData.lineWidth = s.value("defaultLineWidth").toDouble();
-    setCycleAsy(cycle, cycleData);
-
-    // generate next symbol
-    lblGen->advanceLabel();
-    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
-
-    update();
-
-    emit resetRelationalList();
-    resetList(&relationList);
 }
 
 void MainWindow::sceneInvalid()
@@ -505,7 +463,7 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
 
     // iterator over all keys
     for (lst::const_iterator itk =ex_to<lst>(K).begin(); itk != ex_to<lst>(K).end(); ++itk) {
-        ex L=ex_to<figure>(E).get_cycle(*itk);
+        ex L=ex_to<figure>(E).get_cycles(*itk);
 
         // This is a ginac list thus we need iteration through its components
         for (lst::const_iterator it =ex_to<lst>(L).begin(); it != ex_to<lst>(L).end(); ++it) {
@@ -712,11 +670,6 @@ bool MainWindow::setCycleAsy(const ex &new_cycle, const struct cycleStyleData &d
     return true;
 }
 
-void MainWindow::movePoint(const ex &key, const ex &x)
-{
-    //f.move_point();
-}
-
 void MainWindow::on_actionDebug_bounding_rect_triggered(bool checked)
 {
     if (checked) {
@@ -727,3 +680,123 @@ void MainWindow::on_actionDebug_bounding_rect_triggered(bool checked)
 
     update();
 }
+
+
+void MainWindow::buildToolBar()
+{
+    QToolBar *tb = this->ui->mainToolBar;
+
+    tb->addAction(ui->actionCreate_Cycle);
+    tb->addAction(ui->actionDefine_cycle);
+
+    tb->addSeparator();
+
+    tb->addAction(ui->actionzoomIn);
+    tb->addAction(ui->actionzoomOut);
+    tb->addAction(ui->actionPan);
+
+    tb->addSeparator();
+
+    this->thisItem = new QToolButton();
+    this->thisItem->setText("This");
+    this->thisItem->setPopupMode(QToolButton::InstantPopup);
+    this->thisItem->setMenu(menus[2]);
+    tb->addWidget(this->thisItem);
+}
+
+void MainWindow::on_actionDefine_by_center_and_radius_squared_triggered()
+{
+    this->on_actionDefine_cycle_triggered(1);
+}
+
+void MainWindow::on_actionDefine_by_values_triggered()
+{
+    this->on_actionDefine_cycle_triggered(0);
+}
+
+void MainWindow::on_actionDefine_cycle_triggered(int pageIndex)
+{
+    defineCycleDialog *defCycleDialog = new defineCycleDialog(this);
+    defCycleDialog->setTab(pageIndex);
+
+    if (defCycleDialog->exec() == QDialog::Accepted) {
+        GiNaC::lst inputList = defCycleDialog->getValues();
+        this->createCycle(inputList);
+    }
+
+    delete defCycleDialog;
+}
+
+/*!
+ * \brief MainWindow::on_actionCreate_Cycle_triggered
+ *
+ * Function to create cycle based on relations that have been added.
+ */
+void MainWindow::on_actionCreate_Cycle_triggered()
+{
+    ex cycle;
+
+    // make sure that the list isn't empty before adding cycle
+    if (relationList.nops() <= 0) {
+        msgBox->warning(0, "No cycles in relation", "For a cycle to be created there must be cycles in the relation.");
+        return;
+    }
+
+    // only real cycles
+    //if (REAL_CYCLES) {
+    //  relationList.append(only_reals(nextSymbol));
+    //}
+
+    createCycle();
+}
+
+void MainWindow::createCycle(lst inputList)
+{
+    ex cycle;
+
+    // add cycle by referencing relation list
+    if (inputList.nops() == 0) {
+        lst unpackedRelationList;
+
+        try {
+            //unpack relation list
+            for (auto item : relationList)
+                unpackedRelationList.append(item.op(2));
+            cycle = f.add_cycle_rel(unpackedRelationList, nextSymbol);
+        } catch (...) {
+            msgBox->warning(0, "Cycle relation(s) invalid", "The cycle couldn't be created. Double check your relations and try again");
+            return;
+        }
+    } else if (inputList.nops() == 3) {
+        try {
+            cycle = f.add_cycle(cycle2D(lst{inputList.op(0),inputList.op(1)},f.get_point_metric(),inputList.op(2)), nextSymbol);
+        } catch (...) {
+            msgBox->warning(0, "Cycle relation(s) invalid", "The cycle couldn't be created. Double check your relations and try again");
+            return;
+        }
+    } else if (inputList.nops() == 4) {
+        try {
+            cycle = f.add_cycle(cycle2D(inputList.op(0),lst{inputList.op(1),inputList.op(2)},inputList.op(3),f.get_point_metric()),nextSymbol);
+        } catch (...) {
+            msgBox->warning(0, "Cycle relation(s) invalid", "The cycle couldn't be created. Double check your relations and try again");
+            return;
+        }
+    }
+
+    // add default styling to the cycle
+    struct cycleStyleData cycleData;
+    cycleData.colour = s.value("defaultGraphicsColour").value<QColor>();
+    cycleData.lineStyle = s.value("defaultLineStyle").toDouble();
+    cycleData.lineWidth = s.value("defaultLineWidth").toDouble();
+    setCycleAsy(cycle, cycleData);
+
+    // creating cycle success
+    lblGen->advanceLabel();
+    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
+    update();
+
+    emit resetRelationalList();
+    resetList(&relationList);
+}
+
+

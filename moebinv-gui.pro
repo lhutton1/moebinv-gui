@@ -42,7 +42,8 @@ SOURCES += \
         src/menurelationhandler.cpp \
         src/treemodel.cpp \
         src/matrix4dialog.cpp \
-        src/matrix8dialog.cpp
+        src/matrix8dialog.cpp \
+        src/definecycledialog.cpp
 
 HEADERS += \
         include/conf.h \
@@ -59,9 +60,11 @@ HEADERS += \
         include/menurelationhandler.h \
         include/treemodel.h \
         include/matrix4dialog.h \
-        include/matrix8dialog.h
+        include/matrix8dialog.h \
+        include/definecycledialog.h
 
 FORMS += \
         forms/mainwindow.ui \
         forms/matrix4dialog.ui \
-        forms/matrix8dialog.ui
+        forms/matrix8dialog.ui \
+        forms/definecycledialog.ui

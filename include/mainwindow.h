@@ -26,6 +26,7 @@
 #include "conf.h"
 #include "view.h"
 #include "treemodel.h"
+#include "definecycledialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -58,7 +59,8 @@ public:
     void resizeEvent(QResizeEvent *event);
     struct cycleStyleData getCycleData(const GiNaC::ex& cycle);
     bool setCycleAsy(const GiNaC::ex &new_cycle, const struct cycleStyleData &data);
-    void movePoint(const GiNaC::ex &key, const GiNaC::ex &x);
+    void buildToolBar();
+    void createCycle(GiNaC::lst inputList = GiNaC::lst());
     ~MainWindow();
 
     bool toolAddCycle;
@@ -83,8 +85,10 @@ private slots:
     void on_actionLabels_toggled(bool labels);
     void on_actionzoomIn_triggered();
     void on_actionzoomOut_triggered();
-
     void on_actionDebug_bounding_rect_triggered(bool checked);
+    void on_actionDefine_by_center_and_radius_squared_triggered();
+    void on_actionDefine_by_values_triggered();
+    void on_actionDefine_cycle_triggered(int pageIndex = 0);
 
 signals:
     void resetRelationalList();
@@ -112,8 +116,7 @@ private:
 
     QMessageBox *msgBox;
 
-    QToolButton *infinity;
-    QToolButton *real;
+    QToolButton *defineCycle;
     QToolButton *thisItem;
 
     GiNaC::ex nextSymbol;
@@ -126,6 +129,8 @@ private:
 
     QLabel *statusCoordinates;
     QLabel *statusRelations;
+
+    QMenu *defineCycleMenu;
 };
 
 #endif // MAINWINDOW_H

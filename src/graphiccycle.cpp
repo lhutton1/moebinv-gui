@@ -229,7 +229,7 @@ void graphicCycle::addChild(int childType, const double &x, const double &y, con
  */
 void graphicCycle::buildShape()
 {
-    ex cycle = f->get_cycle(this->cycle);
+    ex cycle = f->get_cycles(this->cycle);
 
     // try to draw new cycle, if not display an error message
     try {

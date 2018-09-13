@@ -82,14 +82,23 @@
     <addaction name="actionNew"/>
     <addaction name="actionSave"/>
     <addaction name="actionOpen"/>
-    <addaction name="actionErase"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
      <string>Edit</string>
     </property>
+    <widget class="QMenu" name="menuDefine_Cycle_2">
+     <property name="title">
+      <string>Define Cycle</string>
+     </property>
+     <addaction name="actionDefine_by_values"/>
+     <addaction name="actionDefine_by_center_and_radius_squared"/>
+    </widget>
     <addaction name="actionDelete_Element"/>
-    <addaction name="actionConfiguration"/>
+    <addaction name="separator"/>
+    <addaction name="actionCreate_Cycle"/>
+    <addaction name="menuDefine_Cycle_2"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -105,6 +114,11 @@
     <addaction name="actionLabels"/>
     <addaction name="separator"/>
     <addaction name="actionDebug_bounding_rect"/>
+    <addaction name="separator"/>
+    <addaction name="actionzoomIn"/>
+    <addaction name="actionzoomOut"/>
+    <addaction name="actionPan"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -124,12 +138,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionCreate_Cycle"/>
-   <addaction name="separator"/>
-   <addaction name="actionzoomIn"/>
-   <addaction name="actionzoomOut"/>
-   <addaction name="actionPan"/>
-   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="dockWidget" name="dockWidgetRight">
@@ -221,11 +229,6 @@
     <string>Open</string>
    </property>
   </action>
-  <action name="actionErase">
-   <property name="text">
-    <string>Erase</string>
-   </property>
-  </action>
   <action name="actionDelete_Element">
    <property name="text">
     <string>Delete Element</string>
@@ -289,6 +292,21 @@
    </property>
    <property name="text">
     <string>Debug bounding rect</string>
+   </property>
+  </action>
+  <action name="actionDefine_by_center_and_radius_squared">
+   <property name="text">
+    <string>Define by center and radius squared...</string>
+   </property>
+  </action>
+  <action name="actionDefine_by_values">
+   <property name="text">
+    <string>Define by values...</string>
+   </property>
+  </action>
+  <action name="actionDefine_cycle">
+   <property name="text">
+    <string>Define Cycle</string>
    </property>
   </action>
  </widget>
