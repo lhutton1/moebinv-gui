@@ -336,18 +336,18 @@ void MainWindow::on_actionCreate_Cycle_triggered()
         return;
     }
 
-    // only real cycles
-//    if (REAL_CYCLES) {
-//        relationList.append(only_reals(nextSymbol));
-//    }
-
     try {
-        cycle = f.add_cycle_rel(relationList, nextSymbol);
+        //unpack relation list
+        lst unpackedRelationList;
+        for (auto item : relationList) {
+            unpackedRelationList.append(item.op(2));
+        }
+
+        cycle = f.add_cycle_rel(unpackedRelationList, nextSymbol);
     } catch (...) {
         msgBox->warning(0, "Cycle relation(s) invalid", "The cycle couldn't be created. Double check your relations and try again");
         return;
     }
-
 
     struct cycleStyleData cycleData;
     cycleData.colour = s.value("defaultGraphicsColour").value<QColor>();
@@ -591,7 +591,7 @@ void MainWindow::buildRelationStatus()
     if (relationList.nops() != 1) {
         for (int x = 0; x < relationList.nops() - 1; x++) {
             try {
-                cycle_relation cycleRelation = ex_to<cycle_relation>(relationList.op(x));
+                cycle_relation cycleRelation = ex_to<cycle_relation>(relationList.op(x).op(2));
                 relationString += node_label(cycleRelation);
                 relationString += ", ";
 
@@ -603,7 +603,7 @@ void MainWindow::buildRelationStatus()
     }
 
     // add final item in list
-    relationString += node_label(relationList.op(relationList.nops() - 1));
+    relationString += node_label(relationList.op(relationList.nops() - 1).op(2));
 
     relationString += "]";
     statusRelations->setText(relationString);
@@ -715,4 +715,15 @@ bool MainWindow::setCycleAsy(const ex &new_cycle, const struct cycleStyleData &d
 void MainWindow::movePoint(const ex &key, const ex &x)
 {
     //f.move_point();
+}
+
+void MainWindow::on_actionDebug_bounding_rect_triggered(bool checked)
+{
+    if (checked) {
+        s.setValue("debugBoundingRect", true);
+    } else {
+        s.setValue("debugBoundingRect", false);
+    }
+
+    update();
 }

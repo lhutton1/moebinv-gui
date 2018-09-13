@@ -126,7 +126,7 @@ void cycleContextMenu::amendRelationList()
     if (actionTriggered->getGroup() != nullptr && actionTriggered->getGroup()->isExclusive()) {
         for (auto action : actionTriggered->getGroup()->getRelActions()) {
             if (!action->isChecked() && action->hasRelation()) {
-                this->removeRelationFromList(action->getRelation());
+                this->removeRelationFromList(actionTriggered);
             }
         }
     }
@@ -134,9 +134,9 @@ void cycleContextMenu::amendRelationList()
     // check whether the cycle triggered needs adding or removing.
     if (actionTriggered->hasRelation()) {
         if (actionTriggered->isChecked()) {
-            relationList->append(actionTriggered->getRelation());
+            relationList->append(lst{actionTriggered->getCycle(), actionTriggered->getRelType(), actionTriggered->getRelation()});
         } else {
-            this->removeRelationFromList(actionTriggered->getRelation());
+            this->removeRelationFromList(actionTriggered);
         }
     }
 
@@ -153,13 +153,18 @@ void cycleContextMenu::amendRelationList()
  *
  * \param relation - the cycle_relation that is to be removed.
  */
-void cycleContextMenu::removeRelationFromList(cycle_relation relation)
+void cycleContextMenu::removeRelationFromList(menuRelAction *actionTriggered)
 {
     GiNaC::lst newRelationList;
 
+    qDebug() << "running..";
+
     // linear search through list to find item to remove
     for (int x = 0; x < relationList->nops(); x++) {
-        if (node_label(relationList->op(x)) != node_label(relation)) {
+        qDebug() << node_label(relationList->op(x).op(0)) << node_label(actionTriggered->getCycle()) << node_label(relationList->op(x).op(1)) << actionTriggered->getRelType();
+        if (node_label(relationList->op(x).op(0)) != node_label(actionTriggered->getCycle()) ||
+            relationList->op(x).op(1) != actionTriggered->getRelType())
+        {
             newRelationList.append(relationList->op(x));
         }
     }

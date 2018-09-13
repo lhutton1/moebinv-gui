@@ -21,7 +21,7 @@ circle::circle(graphicCycle *parent, struct cycleData data)
     this->setParentItem(parent);
     this->setPos(x, y);
 
-    BOUNDINGRECT_DEBUG = false;
+    BOUNDINGRECT_DEBUG = s.value("boundingRectDebug").toBool();
 }
 
 

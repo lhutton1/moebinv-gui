@@ -35,7 +35,7 @@ public:
 
     void setCycle(GiNaC::ex cycle);
 
-    void removeRelationFromList(MoebInv::cycle_relation relation);
+    void removeRelationFromList(menuRelAction *actionTriggered);
     void buildContextMenu();
     void buildActions();
 

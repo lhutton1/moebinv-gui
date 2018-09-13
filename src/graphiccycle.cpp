@@ -177,7 +177,12 @@ QRectF graphicCycle::boundingRect() const
  */
 void graphicCycle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->setPen(*this->pen);
-    painter->setBrush(*this->brush);
+
+    if (s.value("debugBoundingRect").toBool())
+        painter->drawRect(this->boundingRect());
+    else
+        painter->setBrush(*this->brush);
+
 }
 
 

@@ -84,6 +84,10 @@ void setDefaultSettings()
      */
     s.setValue("highlightDistance", 0.25);
 
+    /*!
+     * Show the bounding rect of items on the graphicsScene.
+     */
+    s.setValue("debugBoundingRect", false);
 }
 
 int main(int argc, char *argv[])

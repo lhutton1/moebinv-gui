@@ -55,13 +55,6 @@ matrix8dialog::~matrix8dialog()
  */
 void matrix8dialog::getValues(GiNaC::lst *inputList)
 {
-    //input 4 pairs of 2 values
-//    for (int x = 0; x < 7; x += 2) {
-//        inputList->append(GiNaC::ex(
-//             this->lineEditList[x]->text().toDouble()+
-//             GiNaC::I*this->lineEditList[x+1]->text().toDouble()
-//        ));
-//    }
     for (auto lineEdit : this->lineEditList) {
         if (lineEdit->text().isEmpty())
             inputList->append(0);

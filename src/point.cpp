@@ -24,7 +24,7 @@ point::point(graphicCycle *parent, struct cycleData data)
     // override normal pen width
     this->pen->setWidth(1);
 
-    BOUNDINGRECT_DEBUG = false;
+    BOUNDINGRECT_DEBUG = s.value("boundingRectDebug").toBool();
 }
 
 

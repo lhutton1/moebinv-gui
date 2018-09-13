@@ -24,6 +24,7 @@ public:
         QString actionTitle, int params, bool checked,
         int relType, menuRelActionGroup *group = nullptr);
     GiNaC::ex getCycle();
+    int getRelType();
     GiNaC::lst getInputList();
     menuRelActionGroup* getGroup();
     MoebInv::cycle_relation getRelation();

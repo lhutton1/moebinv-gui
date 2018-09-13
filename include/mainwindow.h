@@ -84,6 +84,8 @@ private slots:
     void on_actionzoomIn_triggered();
     void on_actionzoomOut_triggered();
 
+    void on_actionDebug_bounding_rect_triggered(bool checked);
+
 signals:
     void resetRelationalList();
 

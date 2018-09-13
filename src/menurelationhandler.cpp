@@ -74,6 +74,17 @@ cycle_relation menuRelAction::getRelation()
 }
 
 
+ex menuRelAction::getCycle()
+{
+    return this->cycle;
+}
+
+int menuRelAction::getRelType()
+{
+    return this->relType;
+}
+
+
 /*!
  * \brief menuRelAction::getGroup Get the group the relation has been assigned to.
  * \return  menuRelActionGroup*
@@ -99,11 +110,11 @@ void menuRelAction::actionHandler()
             (this->inputType == MATRIX_4 && params.nops() != 4) ||
             (this->inputType == MATRIX_8 && params.nops() != 4)
     ) {
+        emit handleRelation();
         return;
     }
 
-    // build the required relation and emit a signal to add the
-    // relation to the relation list.
+    // build the required relation.
     createCycleRelation(params);
     emit handleRelation();
 }

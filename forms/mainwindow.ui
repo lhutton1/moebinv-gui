@@ -104,6 +104,7 @@
     </property>
     <addaction name="actionLabels"/>
     <addaction name="separator"/>
+    <addaction name="actionDebug_bounding_rect"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -280,6 +281,14 @@
   <action name="actionzoomOut">
    <property name="text">
     <string>Zoom Out</string>
+   </property>
+  </action>
+  <action name="actionDebug_bounding_rect">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Debug bounding rect</string>
    </property>
   </action>
  </widget>
