@@ -226,21 +226,21 @@ void cycleContextMenu::buildActions()
     // tangent action group
     groups.append(new menuRelActionGroup(this));
 
-    actions.append(new menuRelAction(this->cycle, relationList, "Orthogonal", NO_PARAMS, false, ORTHOGONAL));
-    actions.append(new menuRelAction(this->cycle, relationList, "F-Orthogonal", NO_PARAMS, false, FORTHOGONAL));
-    actions.append(new menuRelAction(this->cycle, relationList, "Different", NO_PARAMS, false, DIFFERENT));
-    actions.append(new menuRelAction(this->cycle, relationList, "A-Different", NO_PARAMS, false, ADIFFERENT));
-    actions.append(new menuRelAction(this->cycle, relationList, "Only Reals", NO_PARAMS, false, REALS));
-    actions.append(new menuRelAction(this->cycle, relationList, "No Tangent", NO_PARAMS, true, NORELATION, groups[0]));
-    actions.append(new menuRelAction(this->cycle, relationList, "Tangent Both", NO_PARAMS, false, TANGENT, groups[0]));
-    actions.append(new menuRelAction(this->cycle, relationList, "Tangent Inner", NO_PARAMS, false, TANGENT_I, groups[0]));
-    actions.append(new menuRelAction(this->cycle, relationList, "Tangent Outer", NO_PARAMS, false, TANGENT_O, groups[0]));
-    actions.append(new menuRelAction(this->cycle, relationList, "Steiner Power...", SINGLE_PARAM, false, STEINER_POWER));
-    actions.append(new menuRelAction(this->cycle, relationList, "Cycle Angle...", SINGLE_PARAM, false, CYCLE_ANGLE));
-    actions.append(new menuRelAction(this->cycle, relationList, "Cycle Cross T Distance...", SINGLE_PARAM, false, CYCLE_CROSS_T_DISTANCE));
-    actions.append(new menuRelAction(this->cycle, relationList, "Product Sign...", PRODUCT_COMBOBOX, false, PRODUCT_SIGN));
-    actions.append(new menuRelAction(this->cycle, relationList, "Cycle Mobius...", MATRIX_8, false, CYCLE_MOBIUS));
-    actions.append(new menuRelAction(this->cycle, relationList, "Cycle Sl2...", MATRIX_4, false, CYCLE_SL2));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Orthogonal", NO_PARAMS, false, ORTHOGONAL));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "F-Orthogonal", NO_PARAMS, false, FORTHOGONAL));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Different", NO_PARAMS, false, DIFFERENT));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "A-Different", NO_PARAMS, false, ADIFFERENT));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Only Reals", NO_PARAMS, false, REALS));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "No Tangent", NO_PARAMS, true, NORELATION, groups[0]));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Tangent Both", NO_PARAMS, false, TANGENT, groups[0]));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Tangent Inner", NO_PARAMS, false, TANGENT_I, groups[0]));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Tangent Outer", NO_PARAMS, false, TANGENT_O, groups[0]));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Steiner Power...", SINGLE_PARAM, false, STEINER_POWER));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Cycle Angle...", SINGLE_PARAM, false, CYCLE_ANGLE));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Cycle Cross T Distance...", SINGLE_PARAM, false, CYCLE_CROSS_T_DISTANCE));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Product Sign...", PRODUCT_COMBOBOX, false, PRODUCT_SIGN));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Cycle Mobius...", MATRIX_8, false, CYCLE_MOBIUS));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Cycle Sl2...", MATRIX_4, false, CYCLE_SL2));
 
     // loop through and connect signals to keep relation status string updated
     for (int x = 0; x < actions.length(); x++)

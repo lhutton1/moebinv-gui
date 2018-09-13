@@ -20,10 +20,11 @@ using namespace MoebInv;
  *
  * Create a new relation QAction to be added to the context menu.
  */
-menuRelAction::menuRelAction(MoebInv::ex cycle, GiNaC::lst *relationList,
+menuRelAction::menuRelAction(MoebInv::figure *f, MoebInv::ex cycle, GiNaC::lst *relationList,
     QString actionTitle, int params, bool checked,
     int relType, menuRelActionGroup *group)
 {
+    this->f = f;
     this->cycle = cycle;
     this->relType = relType;
     this->inputType = params;
@@ -181,6 +182,18 @@ lst menuRelAction::getInputList()
         if (matrix8->exec() == QDialog::Accepted ) {
             isInput = true;
             matrix8->getValues(&input);
+
+            ex unit = f->get_point_metric(),
+               unit0 = unit.subs(unit.op(1)==0),
+               unit1 = unit.subs(unit.op(1)==1);
+
+            if (ex_to<idx>(unit.op(1)).get_dim() == 2) {
+                input = lst{dirac_ONE()*input.op(0)+unit1*unit0*input.op(1), unit0*input.op(2)+unit1*input.op(3),
+                        -unit0*input.op(4)+unit1*input.op(5), dirac_ONE()*input.op(6)+unit1*unit0*input.op(7)};
+            } else {
+                input = lst{unit0*input.op(0)+unit1*input.op(1), unit0*input.op(2)+unit1*input.op(3),
+                        unit0*input.op(4)+unit1*input.op(5), unit0*input.op(6)+unit1*input.op(7)};
+            }
         }
     } else if (this->inputType == PRODUCT_COMBOBOX) {
         QStringList items;

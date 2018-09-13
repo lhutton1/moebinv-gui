@@ -20,7 +20,7 @@ class menuRelAction : public QAction
     Q_OBJECT
 
 public:
-    menuRelAction(MoebInv::ex cycle, GiNaC::lst *relationList,
+    menuRelAction(MoebInv::figure *f, MoebInv::ex cycle, GiNaC::lst *relationList,
         QString actionTitle, int params, bool checked,
         int relType, menuRelActionGroup *group = nullptr);
     GiNaC::ex getCycle();
@@ -47,6 +47,7 @@ private:
     matrix4dialog *matrix4;
     matrix8dialog *matrix8;
 
+    MoebInv::figure *f;
     GiNaC::ex cycle;
     QString actionTitle;
     menuRelActionGroup *group;
