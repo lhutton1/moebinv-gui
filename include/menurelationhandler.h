@@ -5,6 +5,7 @@
 #include <QAction>
 #include <QActionGroup>
 #include <QInputDialog>
+#include <QMessageBox>
 #include <stdexcept>
 
 #include <figure.h>
@@ -15,7 +16,7 @@
 
 class menuRelActionGroup;
 
-class menuRelAction : public QAction
+class menuRelAction : public QObject
 {
     Q_OBJECT
 
@@ -33,9 +34,13 @@ public:
     QAction menuEntry();
     QAction checkMenuEntry();
     void actionHandler();
-    bool checkActionHandler();
+    void checkActionHandler();
     QString node_label(GiNaC::ex name);
     void createCycleRelation(const GiNaC::lst &params);
+    QString checkCycleRelation(const GiNaC::ex &thisCycle, const GiNaC::ex &otherCycle);
+
+    QAction *addRelation;
+    QAction *checkRelation;
 
 signals:
     void handleRelation();
@@ -55,6 +60,8 @@ private:
     int relType;
     int inputType;
     MoebInv::cycle_relation relation;
+
+    QMessageBox *msgBox;
 };
 
 

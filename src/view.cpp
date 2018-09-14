@@ -18,6 +18,7 @@ view::view(QWidget *parent)
     this->relativeScaleFactor = 1;
     this->panningActive = false;
     this->panningEnabled = false;
+    this->contextMenu = nullptr;
 
     // set timer to detect when mouse stops
     this->mouseTimeOut = new QTimer(this);
@@ -44,6 +45,7 @@ void view::setPanningEnabled(const bool &value)
 {
     this->panningEnabled = value;
 }
+
 
 /*!
  * \brief view::wheelEvent Implements zooming on scroll wheel.

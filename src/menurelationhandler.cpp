@@ -31,15 +31,19 @@ menuRelAction::menuRelAction(MoebInv::figure *f, MoebInv::ex cycle, GiNaC::lst *
     this->group = group;
     this->relation = cycle_relation();
 
-    this->setIconText(actionTitle);
-    this->setCheckable(true);
-    this->setChecked(checked);
-
-    connect(this, &QAction::triggered, this, &menuRelAction::actionHandler);
-
     this->inputDialog = new QInputDialog();
     this->matrix4 = new matrix4dialog();
     this->matrix8 = new matrix8dialog();
+
+    // create actions
+    this->addRelation = new QAction(actionTitle, this);
+    this->addRelation->setCheckable(true);
+    this->addRelation->setChecked(checked);
+    connect(this->addRelation, &QAction::triggered, this, &menuRelAction::actionHandler);
+
+    this->checkRelation = new QAction(actionTitle, this);
+    this->checkRelation->setCheckable(false);
+    connect(this->checkRelation, &QAction::triggered, this, &menuRelAction::checkActionHandler);
 }
 
 
@@ -103,6 +107,7 @@ menuRelActionGroup* menuRelAction::getGroup()
  */
 void menuRelAction::actionHandler()
 {
+    qDebug() << sender()->objectName();
     const lst params = getInputList();
 
     // check the correct number of parameters have been provided
@@ -117,6 +122,26 @@ void menuRelAction::actionHandler()
     // build the required relation.
     createCycleRelation(params);
     emit handleRelation();
+}
+
+void menuRelAction::checkActionHandler()
+{
+    QString inputDialogValue = QInputDialog::getText(nullptr, "Input cycle label", "Cycle key:");
+    ex checkCycle = f->get_cycle_key(qPrintable(inputDialogValue));
+
+    // check that key exists
+    if (node_label(checkCycle) == "0") {
+        this->msgBox->warning(0, "Key error", "The key entered does not exist.");
+        return;
+    }
+
+    // find the relvent relation
+    QString relationCheck = checkCycleRelation(this->cycle, checkCycle);
+
+    QMessageBox msgBoxInfo;
+    msgBoxInfo.setInformativeText("Relation check returned: " + relationCheck);
+    msgBoxInfo.setStyleSheet("QLabel{min-width: 400px;}");
+    msgBoxInfo.exec();
 }
 
 void menuRelAction::createCycleRelation(const lst &params)
@@ -165,6 +190,49 @@ void menuRelAction::createCycleRelation(const lst &params)
             this->relation = sl2_transform(cycle, true, params);
             break;
     }
+}
+
+QString menuRelAction::checkCycleRelation(const ex &thisCycle, const ex &otherCycle)
+{
+    QString output;
+
+    switch (relType) {
+        case ORTHOGONAL:
+            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_orthogonal).evalf());
+            break;
+        case FORTHOGONAL:
+            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_f_orthogonal).evalf());
+            break;
+        case DIFFERENT:
+            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_different).evalf());
+            break;
+        case ADIFFERENT:
+            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_adifferent).evalf());
+            break;
+        case REALS:
+            output = node_label(f->check_rel(thisCycle, otherCycle, coefficients_are_real).evalf());
+            break;
+        case TANGENT:
+            output = node_label(f->check_rel(thisCycle, otherCycle, check_tangent).evalf());
+            break;
+        case PRODUCT_SIGN:
+            output = node_label(f->check_rel(thisCycle, otherCycle, product_sign).evalf());
+            break;
+        case STEINER_POWER:
+            output = node_label(f->measure(thisCycle, otherCycle, power_is).evalf());
+            break;
+        case CYCLE_ANGLE:
+            output = node_label(f->measure(thisCycle, otherCycle, angle_is).evalf());
+            break;
+        case CYCLE_CROSS_T_DISTANCE:
+            output = node_label(f->measure(thisCycle, otherCycle, sq_cross_t_distance_is).evalf());
+            break;
+        default:
+            output = "The relation could not be found. Make sure the relation has been added to the menuRelAction::checkCycleRelation() function";
+            break;
+    }
+
+    return output;
 }
 
 lst menuRelAction::getInputList()
@@ -219,7 +287,7 @@ lst menuRelAction::getInputList()
 
     // check if the input was successful, if not set the relation to unchecked.
     if (!isInput)
-        this->setChecked(false);
+        this->addRelation->setChecked(false);
 
     return input;
 }
@@ -254,5 +322,5 @@ void menuRelActionGroup::addRelAction(menuRelAction *action)
     // add item to action list of types 'menuRelAction'
     this->actions.append(action);
     // now add to standard QActionGroup like normal
-    this->addAction(action);
+    this->addAction(action->addRelation);
 }
