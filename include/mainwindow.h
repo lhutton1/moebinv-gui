@@ -44,11 +44,9 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    void addPoint(QPointF location);
     void setDrawingMetric();
-    void addToTree(GiNaC::ex cycle, QColor colour);
+    void addToTree(const GiNaC::ex &cycle, const QColor &colour);
     void addLineToTree(QString itemName);
-    void resetList(GiNaC::lst *list);
     void initTreeModel();
     void initMainMenu();
     void addCycle(GiNaC::ex cycle, QString label);
@@ -66,9 +64,9 @@ public:
     bool toolAddCycle;
 
 private slots:
-    void onMouseSceneLeftPress(QPointF point);
-    void onMouseSceneRightPress(QPointF point);
-    void onMouseSceneHover(QPointF point);
+    void addPoint(QPointF location);
+    void onMouseSceneRightPress(const QPointF &point);
+    void onMouseSceneHover(const QPointF &point);
     void sceneInvalid();
     void findCycleInTree(GiNaC::ex c);
     void onCalculateDockRatio();
@@ -111,8 +109,6 @@ private:
     QMap<QString, QPointer<graphicCycle>> cyclesMap;
 
     bool isAddPoint;
-
-    bool REAL_CYCLES;
 
     QMessageBox *msgBox;
 

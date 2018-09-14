@@ -9,8 +9,10 @@ using namespace GiNaC;
 using namespace MoebInv;
 
 /*!
- * \brief MainWindow::MainWindow
- * \param parent
+ * \brief MainWindow::MainWindow Create the main window
+ * \param parent - parent widget.
+ *
+ * Creates the main window, providing the MoebInv gui.
  */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,8 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // https://bugreports.qt.io/browse/QTBUG-65592
     this->resizeDocks({ui->dockWidgetRight}, {200}, Qt::Horizontal);
 
-    // generate graphics view
-    scene = new graphicsScene();
+    this->scene = new graphicsScene();
     ui->graphicsView->setScene(scene);
 
     //status bar
@@ -33,12 +34,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statusBar->addPermanentWidget(statusRelations);
 
     // set up new event
-    connect(scene, &graphicsScene::newMouseLeftPress, this, &MainWindow::onMouseSceneLeftPress);
+    connect(scene, &graphicsScene::newMouseLeftPress, this, &MainWindow::addPoint);
     connect(scene, &graphicsScene::newMouseRightPress, this, &MainWindow::onMouseSceneRightPress);
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
     connect(ui->dockWidgetRight, &dockWidget::recenterView, ui->graphicsView, &view::recenterView);
     connect(ui->dockWidgetRight, &dockWidget::calculateDockToWindowPercentage, this, &MainWindow::onCalculateDockRatio);
     connect(ui->graphicsView, &view::highlightClosestCycle, this, &MainWindow::highlightClosestCycle);
+    connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &MainWindow::onCustomContextMenu);
 
     // initialize figure
     if (s.value("setFloatEvaluation").toBool())
@@ -52,14 +54,14 @@ MainWindow::MainWindow(QWidget *parent) :
     buildToolBar();
 
     // create new labels object to create unique labels
-    lblGen = new labels();
+    lblGen = new labels(&this->f);
+    // gen first symbol
+    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 
     // create new msgbox
     msgBox = new QMessageBox();
     saveDialog = new QFileDialog();
 
-    // gen first symbol
-    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 
     initTreeModel();
 
@@ -72,31 +74,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // update menu items
     ui->actionLabels->setChecked(true);
 
-    REAL_CYCLES = true;
-
-    connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &MainWindow::onCustomContextMenu);
     update();
 }
 
-QString MainWindow::node_compact_string(GiNaC::ex name)
-{
-    std::ostringstream drawing;
-    drawing << std::setprecision(s.value("floatPrecision").toInt());
-    ex_to<cycle_node>(f.get_cycle_node(name))
-        .do_print_double(GiNaC::print_dflt(drawing,0), 0);
-    string dr = drawing.str().c_str();
-
-    return QString::fromStdString(dr);
-}
-
-QString MainWindow::node_label(GiNaC::ex name)
-{
-    std::ostringstream drawing;
-    drawing << name;
-    string dr = drawing.str().c_str();
-
-    return QString::fromStdString(dr);
-}
 
 /*!
  * \brief MainWindow::~MainWindow MainWindow destructor.
@@ -106,28 +86,35 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-/*!
- * \brief MainWindow::onMouseScenePress Mouse press on scene.
- * \param point Point at which the mouse was pressed, given in x and y corrdinates.
- */
-void MainWindow::onMouseSceneLeftPress(QPointF location)
-{
-    addPoint(location);
-}
 
-void MainWindow::onMouseSceneRightPress(QPointF location)
+/*!
+ * \brief MainWindow::onMouseSceneRightPress Triggered on right click on scene.
+ * \param location
+ *
+ * Triggered on right click on scene. Checks whether a cycle is currently being hovered,
+ * if it is the cycles context menu is displayed.
+ */
+void MainWindow::onMouseSceneRightPress(const QPointF &point)
 {
     if (!prevHoveredCycle.isNull()) {
         cycleContextMenu *cMenu = prevHoveredCycle->getContextMenu();
 
-        QPoint sceneCoordinates = ui->graphicsView->mapFromScene(location);
+        // translate scene coordinates to global coordinates
+        QPoint sceneCoordinates = ui->graphicsView->mapFromScene(point);
         QPoint globalCoordinates = ui->graphicsView->mapToGlobal(sceneCoordinates);
 
         cMenu->exec(globalCoordinates);
     }
 }
 
-void MainWindow::onMouseSceneHover(QPointF point)
+
+/*!
+ * \brief MainWindow::onMouseSceneHover Triggered when the scene is hovered.
+ * \param point point at which the scene is being hovered.
+ *
+ * Once triggered, this slot updates the coordinates displayed in the status bar.
+ */
+void MainWindow::onMouseSceneHover(const QPointF &point)
 {
     QString coordinates = QString("Coordinates: %1, %2")
       .arg(point.x())
@@ -136,79 +123,93 @@ void MainWindow::onMouseSceneHover(QPointF point)
     statusCoordinates->setText(coordinates);
 }
 
-void MainWindow::resetList(GiNaC::lst *list) {
-    list->remove_all();
-}
 
+/*!
+ * \brief MainWindow::initTreeModel
+ *
+ * Create the tree model,
+ */
 void MainWindow::initTreeModel()
 {
-    model = new treeModel();
-
-    QStandardItem *rootNode = model->invisibleRootItem();
+    this->model = new treeModel();
+    QStandardItem *rootNode = this->model->invisibleRootItem();
     int genMax = f.get_max_generation() + 1;
 
+    // create a QStandardItem for each generation
     for(int x = 0; x < genMax; x++) {
         QStandardItem *genItem = new QStandardItem(QString::fromStdString("Generation " + std::to_string(x)));
         rootNode->appendRow(genItem);
     }
 
-    //settings
-    model->setColumnCount(2);
+    // create 2 columns: 1 for the label the other for the description
+    this->model->setColumnCount(2);
 
-    //register the model
+    // register the model
     ui->treeView->setModel(model);
     ui->treeView->setColumnWidth(0, 80);
     ui->treeView->expandAll();
     ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    //get generation tags to span multiple columns
+    // get generation items to span multiple columns
     for (int x = 0; x < genMax; x++)
         ui->treeView->setFirstColumnSpanned(x, rootNode->index(), true);
 }
 
-void MainWindow::addToTree(ex cycle, QColor colour)
+
+/*!
+ * \brief MainWindow::addToTree
+ * \param cycle cycle to add to the tree
+ * \param colour colour of the cycle, to be displayed in a colour square
+ *
+ * Adds a cycle to the tree. The first item in a row is displays the colour and the label,
+ * the second item in a row displays the cycle information.
+ */
+void MainWindow::addToTree(const ex &cycle, const QColor &colour)
 {
     QList<QStandardItem *> items;
+
     // get the current generation of the cycle
     int cycleGeneration = ex_to<numeric>(f.get_generation(cycle)).to_int();
 
-    // cycle info
-    QString treeLabel = node_compact_string(cycle);
-    treeLabel.chop(1);
+    // remove new line character
+    QString itemDesc = node_compact_string(cycle);
+    itemDesc.chop(1);
 
     QStandardItem *newItem1 = new QStandardItem(node_label(cycle));
     newItem1->setTextAlignment(Qt::AlignVCenter);
     newItem1->setData(QVariant(colour), Qt::DecorationRole);
-    newItem1->setToolTip(treeLabel);
+    newItem1->setToolTip(node_compact_string(cycle));
     newItem1->setEditable(false);
 
-    QStandardItem *newItem2 = new QStandardItem(treeLabel);
+    QStandardItem *newItem2 = new QStandardItem(itemDesc);
     newItem2->setTextAlignment(Qt::AlignVCenter);
-    newItem2->setToolTip(treeLabel);
+    newItem2->setToolTip(itemDesc);
     newItem2->setEditable(false);
 
     items.append(newItem1);
     items.append(newItem2);
 
     // add to correct place in the tree
+    // item doesn't belong to a generation
     if (cycleGeneration < 0)
         model->insertRow(0, items);
 
     // search for correct generation to add sub item to
     if (cycleGeneration >= 0) {
         QString genString = QStringLiteral("Generation %1").arg(cycleGeneration);
-
-        QList<QStandardItem *> itemList = model->findItems(
-            genString,
-            Qt::MatchExactly,
-            0
-        );
+        QList<QStandardItem *> itemList = model->findItems(genString, Qt::MatchExactly, 0);
 
         if (itemList.length() == 1)
             itemList[0]->appendRow(items);
     }
 }
 
+
+/*!
+ * \brief MainWindow::initMainMenu
+ *
+ * Create menus for 3 custom relations: infinity, real line and this.
+ */
 void MainWindow::initMainMenu() {
     menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
     menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
@@ -247,7 +248,7 @@ void MainWindow::update()
     // remove data
     scene->clear();
     initTreeModel();
-    resetList(&relationList);
+    relationList.remove_all();
     initMainMenu();
 
     ex keys = f.get_all_keys_sorted(REAL_LINE_GEN);
@@ -385,7 +386,7 @@ void MainWindow::on_actionOpen_triggered()
 void MainWindow::on_actionNew_triggered()
 {
     f = figure();
-    lblGen = new labels();
+    lblGen = new labels(&this->f);
     nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
     update();
 }
@@ -739,7 +740,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     }
 
     // only real cycles
-    //if (REAL_CYCLES) {
+    //if (s.value("realCycles", true).toBool()) {
     //  relationList.append(only_reals(nextSymbol));
     //}
 
@@ -792,7 +793,28 @@ void MainWindow::createCycle(lst inputList)
     update();
 
     emit resetRelationalList();
-    resetList(&relationList);
+    relationList.remove_all();
 }
 
+
+// REMOVE...
+QString MainWindow::node_compact_string(GiNaC::ex name)
+{
+    std::ostringstream drawing;
+    drawing << std::setprecision(s.value("floatPrecision").toInt());
+    ex_to<cycle_node>(f.get_cycle_node(name))
+        .do_print_double(GiNaC::print_dflt(drawing,0), 0);
+    string dr = drawing.str().c_str();
+
+    return QString::fromStdString(dr);
+}
+
+QString MainWindow::node_label(GiNaC::ex name)
+{
+    std::ostringstream drawing;
+    drawing << name;
+    string dr = drawing.str().c_str();
+
+    return QString::fromStdString(dr);
+}
 

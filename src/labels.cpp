@@ -7,11 +7,12 @@
 /*!
  * \brief labels::labels Labels constructor.
  */
-labels::labels()
+labels::labels(MoebInv::figure *f)
 {
-    //this->fig = f;
+    this->f = f;
     this->currentLetter = 1;
 }
+
 
 /*!
  * \brief labels::genNextLabel Generate next label.
@@ -37,21 +38,24 @@ QString labels::genNextLabel()
     return lblString;
 }
 
+
 /*!
  * \brief labels::advanceLabel Advance to the next free label
  */
 void labels::advanceLabel() {
+    GiNaC::ex currentKey;
     currentLetter += 1;
 
-//    try {
-//       f->get_cycle_label(qPrintable(this->genNextLabel()));
-//    } catch (...) {
-//        return;
-//    }
+    // test for duplicate labels. If there is a duplicate, run function recursively.
+    currentKey = f->get_cycle_key(qPrintable(this->genNextLabel()));
 
-//    currentLetter += 1;
-//    this->advanceLabel();
+    if (node_label(currentKey) == "0")
+        return;
+    else
+        this->advanceLabel();
 }
+
+
 
 QString labels::node_label(GiNaC::ex name) // REMOVE
 {

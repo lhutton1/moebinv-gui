@@ -3,7 +3,8 @@
 
 #include <QString>
 #include <QPointer>
-#include "figure.h"
+
+#include <figure.h>
 
 
 /*!
@@ -16,7 +17,7 @@ class labels
 {
 
 public:
-    labels();
+    labels(MoebInv::figure *f);
     QString genNextLabel();
     void advanceLabel();
     QString node_label(GiNaC::ex name);

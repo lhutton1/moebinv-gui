@@ -88,6 +88,11 @@ void setDefaultSettings()
      * Show the bounding rect of items on the graphicsScene.
      */
     s.setValue("debugBoundingRect", false);
+
+    /*!
+     * Set whether the gui displays only real cycles.
+     */
+    s.setValue("realCycles", true);
 }
 
 int main(int argc, char *argv[])
