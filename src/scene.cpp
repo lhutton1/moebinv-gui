@@ -49,7 +49,6 @@ void graphicsScene::setPointIsHighlighted(const bool &value)
 }
 
 
-
 /*!
  * \brief graphicsScene::mousePressEvent Mouse pressed on scene
  * \param mouseEvent Provides information about the mouse event such as the position the click occured on the scene.

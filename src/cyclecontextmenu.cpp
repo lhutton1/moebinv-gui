@@ -125,7 +125,7 @@ void cycleContextMenu::amendRelationList()
     // remove all relations in the triggered cycles group, if it is in one and it is exclusive.
     if (actionTriggered->getGroup() != nullptr && actionTriggered->getGroup()->isExclusive()) {
         for (auto action : actionTriggered->getGroup()->getRelActions()) {
-            if (!action->isChecked() && action->hasRelation()) {
+            if (!action->addRelation->isChecked() && action->hasRelation()) {
                 this->removeRelationFromList(actionTriggered);
             }
         }
@@ -133,7 +133,7 @@ void cycleContextMenu::amendRelationList()
 
     // check whether the cycle triggered needs adding or removing.
     if (actionTriggered->hasRelation()) {
-        if (actionTriggered->isChecked()) {
+        if (actionTriggered->addRelation->isChecked()) {
             relationList->append(lst{actionTriggered->getCycle(), actionTriggered->getRelType(), actionTriggered->getRelation()});
         } else {
             this->removeRelationFromList(actionTriggered);
@@ -182,12 +182,13 @@ void cycleContextMenu::removeRelationFromList(menuRelAction *actionTriggered)
  */
 void cycleContextMenu::buildContextMenu()
 {
-    QString relationSubMenuTitle = QString("Add relation to ") + this->getTitleAction()->text();
-    QMenu *relationSubMenu = new QMenu(relationSubMenuTitle);
+    QMenu *relationSubMenu = new QMenu(QString("Add relation to ") + this->getTitleAction()->text());
+    QMenu *checkRelationSubMenu = new QMenu(QString("Check relation on ") + this->getTitleAction()->text());
 
     this->addAction(getTitleAction());
     this->addSeparator();
     this->addMenu(relationSubMenu);
+    this->addMenu(checkRelationSubMenu);
     this->addSeparator();
 
     // change colour preference
@@ -201,16 +202,16 @@ void cycleContextMenu::buildContextMenu()
         this->addAction(deletePoint);
     }
 
-    // build relation sub menu
+    // build relation sub menu ------------------------------------------
     // first 5 relations are non-exclusive and don't require additional parameters.
     for (int x = 0; x < 5; x++)
-        relationSubMenu->addAction(actions[x]);
+        relationSubMenu->addAction(actions[x]->addRelation);
 
     relationSubMenu->addSeparator();
 
     // the next 4 actions are exclusive, so they are added to a group.
     for (int x = 5; x < 9; x++) {
-        relationSubMenu->addAction(actions[x]);
+        relationSubMenu->addAction(actions[x]->addRelation);
         groups[0]->addRelAction(actions[x]);
     }
 
@@ -218,7 +219,18 @@ void cycleContextMenu::buildContextMenu()
 
     // the following relations need additional values.
     for (int x = 9; x < actions.length(); x++)
-        relationSubMenu->addAction(actions[x]);
+        relationSubMenu->addAction(actions[x]->addRelation);
+
+    // build check relation sub menu ---------------------------------------
+    for (int x = 0; x < 5; x++)
+        checkRelationSubMenu->addAction(actions[x]->checkRelation);
+
+    checkRelationSubMenu->addAction(actions[6]->checkRelation);
+    checkRelationSubMenu->addSeparator();
+
+    for (int x = 9; x < 13; x++)
+        checkRelationSubMenu->addAction(actions[x]->checkRelation);
+
 }
 
 
@@ -231,6 +243,7 @@ void cycleContextMenu::buildActions()
     // tangent action group
     groups.append(new menuRelActionGroup(this));
 
+    // add relations
     actions.append(new menuRelAction(this->f, this->cycle, relationList, "Orthogonal", NO_PARAMS, false, ORTHOGONAL));
     actions.append(new menuRelAction(this->f, this->cycle, relationList, "F-Orthogonal", NO_PARAMS, false, FORTHOGONAL));
     actions.append(new menuRelAction(this->f, this->cycle, relationList, "Different", NO_PARAMS, false, DIFFERENT));

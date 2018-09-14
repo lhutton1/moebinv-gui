@@ -7,6 +7,7 @@
 #include <QWheelEvent>
 #include <QTimer>
 #include <QScrollBar>
+#include <QMenu>
 #include <qmath.h>
 
 #include "graphiccycle.h"
@@ -40,6 +41,7 @@ private:
     QSettings s;
 
     QTimer *mouseTimeOut;
+    QMenu *contextMenu;
 
     bool panningEnabled;
     bool panningActive;

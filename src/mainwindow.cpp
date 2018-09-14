@@ -46,6 +46,11 @@ MainWindow::MainWindow(QWidget *parent) :
     else
         f = figure();
 
+    menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
+    menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
+    menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false);
+    buildToolBar();
+
     // create new labels object to create unique labels
     lblGen = new labels();
 
@@ -70,13 +75,6 @@ MainWindow::MainWindow(QWidget *parent) :
     REAL_CYCLES = true;
 
     connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &MainWindow::onCustomContextMenu);
-
-    defineCycleMenu = new QMenu(this);
-    defineCycleMenu->addAction(ui->actionDefine_by_values);
-    defineCycleMenu->addAction(ui->actionDefine_by_center_and_radius_squared);
-
-    buildToolBar();
-
     update();
 }
 
@@ -213,32 +211,29 @@ void MainWindow::addToTree(ex cycle, QColor colour)
 
 void MainWindow::initMainMenu() {
     menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
-    connect(menus[0], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
-
     menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
-    connect(menus[1], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
-
     menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false);
-    connect(menus[2], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
 
-    //thisItem->setMenu(menus[2]);
+    connect(menus[0], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
+    connect(menus[1], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
+    connect(menus[2], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
+    this->thisItem->setMenu(menus[2]);
     connect(menus[2], &QMenu::aboutToShow, this, &MainWindow::thisContextMenuUpdate);
 }
 
 void MainWindow::thisContextMenuUpdate()
 {
+    qDebug() << "running";
     menus[2]->setCycle(nextSymbol);
 }
 
 void MainWindow::on_actionPan_toggled(bool pan)
 {
     if (pan) {
-        //ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
         isAddPoint = false;
         ui->graphicsView->setPanningEnabled(true);
         ui->graphicsView->setCursor(Qt::OpenHandCursor);
     } else {
-        //ui->graphicsView->setDragMode(QGraphicsView::NoDrag);
         isAddPoint = true;
         ui->graphicsView->setPanningEnabled(false);
         ui->graphicsView->setCursor(Qt::ArrowCursor);
@@ -703,6 +698,7 @@ void MainWindow::buildToolBar()
     this->thisItem->setMenu(menus[2]);
     tb->addWidget(this->thisItem);
 }
+
 
 void MainWindow::on_actionDefine_by_center_and_radius_squared_triggered()
 {
