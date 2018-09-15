@@ -255,8 +255,12 @@ void graphicCycle::buildShape()
             } else {
                 double x = ex_to<numeric>(C.center().op(0).evalf()).to_double();
                 double y = ex_to<numeric>(C.center().op(1).evalf()).to_double();
-                double radius = qSqrt(ex_to<numeric>(C.radius_sq().evalf()).to_double());
-                addChild(CIRCLE, x, y, 0, radius);
+                double radius_sq = ex_to<numeric>(C.radius_sq().evalf()).to_double();
+
+                if (radius_sq >= 0) {
+                    double radius = sqrt(radius_sq);
+                    addChild(CIRCLE, x, y, 0, radius);
+                }
             }
         }
     } catch(...) {

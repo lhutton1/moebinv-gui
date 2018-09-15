@@ -68,7 +68,7 @@ private slots:
     void onMouseSceneRightPress(const QPointF &point);
     void onMouseSceneHover(const QPointF &point);
     void sceneInvalid();
-    void findCycleInTree(GiNaC::ex c);
+    void findCycleInTree(const GiNaC::ex &cycle);
     void onCalculateDockRatio();
     void highlightClosestCycle(QPointF point);
     void buildRelationStatus();

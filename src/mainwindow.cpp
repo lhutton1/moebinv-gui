@@ -127,7 +127,8 @@ void MainWindow::onMouseSceneHover(const QPointF &point)
 /*!
  * \brief MainWindow::initTreeModel
  *
- * Create the tree model,
+ * Create the tree model, setting up the labels for each generation that
+ * currently exists in the figure.
  */
 void MainWindow::initTreeModel()
 {
@@ -203,8 +204,9 @@ void MainWindow::addToTree(const ex &cycle, const QColor &colour)
             itemList[0]->appendRow(items);
     }
 
-    // make sure contents of colum 0 is visible
+    // make sure contents of columns are visible
     ui->treeView->resizeColumnToContents(0);
+    ui->treeView->resizeColumnToContents(1);
 }
 
 
@@ -225,12 +227,26 @@ void MainWindow::initMainMenu() {
     connect(menus[2], &QMenu::aboutToShow, this, &MainWindow::thisContextMenuUpdate);
 }
 
+
+/*!
+ * \brief MainWindow::thisContextMenuUpdate
+ *
+ * Update the context menu displayed when 'this' is pressed to the most current symbol.
+ * This means that the context menu will always display the symbol of the next cycle to be added.
+ */
 void MainWindow::thisContextMenuUpdate()
 {
-    qDebug() << "running";
     menus[2]->setCycle(nextSymbol);
 }
 
+
+/*!
+ * \brief MainWindow::on_actionPan_toggled toggle panning
+ * \param pan
+ *
+ * When the pan button is clicked, enable it in the view and make sure
+ * that clicking on the view doesn't add a new point.
+ */
 void MainWindow::on_actionPan_toggled(bool pan)
 {
     if (pan) {
@@ -244,6 +260,12 @@ void MainWindow::on_actionPan_toggled(bool pan)
     }
 }
 
+
+/*!
+ * \brief MainWindow::update Update the scene.
+ *
+ * Updates the scene, displaying any changes that need to be made.
+ */
 void MainWindow::update()
 {
     cycleContextMenu *menu;
@@ -291,6 +313,7 @@ void MainWindow::update()
     addToTree(f.get_infinity(), Qt::black);
 }
 
+
 /*!
  * \brief MainWindow::addCycle Add a cycle to the figure.
  * \param mousePos Coordinates of mouse on the scene.
@@ -322,14 +345,26 @@ void MainWindow::addPoint(QPointF mousePos)
     }
 }
 
+
+/*!
+ * \brief MainWindow::sceneInvalid a slot that is called when
+ * the scene needs to be updated.
+ */
 void MainWindow::sceneInvalid()
 {
     update();
 }
 
-void MainWindow::findCycleInTree(GiNaC::ex c)
+
+/*!
+ * \brief MainWindow::findCycleInTree Find a cycle in the tree.
+ * \param c cycle to be found
+ *
+ * Use qt's recursive item search to find an item in the tree.
+ */
+void MainWindow::findCycleInTree(const GiNaC::ex &cycle)
 {
-    QString cycleString = node_label(c);
+    QString cycleString = node_label(cycle);
 
     QList<QStandardItem *> itemList = model->findItems(
         cycleString,
@@ -343,10 +378,12 @@ void MainWindow::findCycleInTree(GiNaC::ex c)
     }
 }
 
+
 /*!
  * \brief MainWindow::on_actionSave_triggered
  *
- * Save figure in the current state. Called when the user selects 'save' from the application menu.
+ * Save figure in the current state. Called when the user selects 'save'
+ * from the application menu.
  */
 void MainWindow::on_actionSave_triggered()
 {
@@ -377,7 +414,6 @@ void MainWindow::on_actionOpen_triggered()
         // Now update the scene
         update();
     }
-
 }
 
 
@@ -430,6 +466,7 @@ void MainWindow::onCustomContextMenu(const QPoint &point)
             menus[1]->exec(ui->treeView->viewport()->mapToGlobal(point));
     }
 }
+
 
 /*!
  * \brief MainWindow::on_actionLabels_toggled
