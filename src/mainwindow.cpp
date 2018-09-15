@@ -202,6 +202,9 @@ void MainWindow::addToTree(const ex &cycle, const QColor &colour)
         if (itemList.length() == 1)
             itemList[0]->appendRow(items);
     }
+
+    // make sure contents of colum 0 is visible
+    ui->treeView->resizeColumnToContents(0);
 }
 
 
@@ -740,9 +743,9 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     }
 
     // only real cycles
-    //if (s.value("realCycles", true).toBool()) {
-    //  relationList.append(only_reals(nextSymbol));
-    //}
+    if (s.value("realCycles").toBool()) {
+      relationList.append(lst{nextSymbol, REALS, only_reals(nextSymbol)});
+    }
 
     createCycle();
 }
