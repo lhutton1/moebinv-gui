@@ -277,6 +277,7 @@ void graphicCycle::buildShape()
  */
 void graphicCycle::setHover()
 {
+    //qDebug() << "hover set";
     // set the colour of both the pen and brush, then update the item.
     brush->setColor(s.value("graphicsHoverColour").value<QColor>());
     pen->setColor(s.value("graphicsHoverColour").value<QColor>());
@@ -295,6 +296,7 @@ void graphicCycle::setHover()
  */
 void graphicCycle::unsetHover()
 {
+    //qDebug() << "hover unset";
     // set the colour of both the pen and brush, then update the item.
     brush->setColor(this->styleData.colour);
     pen->setColor(this->styleData.colour);

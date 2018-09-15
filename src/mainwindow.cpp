@@ -411,6 +411,9 @@ void MainWindow::on_actionOpen_triggered()
         else
             f = figure(qPrintable(fileName));
 
+        // gen first symbol
+        nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
+
         // Now update the scene
         update();
     }
@@ -424,10 +427,14 @@ void MainWindow::on_actionOpen_triggered()
  */
 void MainWindow::on_actionNew_triggered()
 {
-    f = figure();
-    lblGen = new labels(&this->f);
-    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
-    update();
+    if (QMessageBox::Yes == QMessageBox(QMessageBox::Warning, "title",
+        "Are you sure you would like to create a new figure?", QMessageBox::Yes|QMessageBox::No).exec())
+    {
+        f = figure();
+        lblGen = new labels(&this->f);
+        nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
+        update();
+    }
 }
 
 
@@ -485,6 +492,16 @@ void MainWindow::on_actionLabels_toggled(bool labels)
     update();
 }
 
+
+/*!
+ * \brief MainWindow::shortestDistance find the shortest distance to a cycle.
+ * \param point point at which to check the distance from
+ * \param dis distance threshhold
+ * \return GiNaC::ex
+ *
+ * This function takes a point and finds the shortest distance to a cycle given
+ * that cycle being within a certain distance.
+ */
 ex MainWindow::shortestDistance(QPointF point, double dis)
 {
     const ex x = point.x();
@@ -534,6 +551,14 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
     return selected_key;
 }
 
+
+/*!
+ * \brief MainWindow::resizeEvent triggered when the window resizes.
+ * \param event
+ *
+ * Triggered when the window resizes and used to keep dock in proportion to
+ * the rest of the window when expanding.
+ */
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
     // keep initial event and extend
@@ -545,12 +570,25 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     ui->graphicsView->recenterView();
 }
 
+
+/*!
+ * \brief MainWindow::onCalculateDockRatio calculates the percentage
+ * ratio of the dock to the rest of the window.
+ */
 void MainWindow::onCalculateDockRatio()
 {
     double sizeRatio = ui->dockWidgetRight->width() / (double)this->width();
     ui->dockWidgetRight->setSizeRatio(sizeRatio);
 }
 
+
+/*!
+ * \brief MainWindow::highlightClosestCycle highlight the clostest cycle to the mouse.
+ * \param point current mouse position
+ *
+ * finds the clostest cycle to the mouse and highlights it based on the
+ * hover colour set in the settings.
+ */
 void MainWindow::highlightClosestCycle(QPointF point)
 {
     double highlightDistance = s.value("highlightDistance").toDouble();
@@ -571,6 +609,12 @@ void MainWindow::highlightClosestCycle(QPointF point)
     prevHoveredCycle = cycle;
 }
 
+
+/*!
+ * \brief MainWindow::buildRelationStatus
+ *
+ * Create the relation list displayed in the bottom right corner.
+ */
 void MainWindow::buildRelationStatus()
 {
     QString relationString;
@@ -603,16 +647,37 @@ void MainWindow::buildRelationStatus()
     statusRelations->setText(relationString);
 }
 
+
+/*!
+ * \brief MainWindow::on_actionzoomIn_triggered
+ *
+ * When zoom in buttom is pressed, zoom the view in.
+ */
 void MainWindow::on_actionzoomIn_triggered()
 {
     ui->graphicsView->zoomIn();
 }
 
+
+/*!
+ * \brief MainWindow::on_actionzoomOut_triggered
+ *
+ * When the zoom out button is pressed, zoom the view out.
+ */
 void MainWindow::on_actionzoomOut_triggered()
 {
     ui->graphicsView->zoomOut();
 }
 
+
+/*!
+ * \brief MainWindow::getCycleData get the cycles appearance data.
+ * \param cycle cycle to get data from
+ * \return struct cycleStyleData
+ *
+ * Get the cycle data stored as ASY. This function splits a string into 3 different
+ * components: colour, style and width.
+ */
 struct cycleStyleData MainWindow::getCycleData(const ex &cycle)
 {
     QString style;
@@ -669,6 +734,15 @@ struct cycleStyleData MainWindow::getCycleData(const ex &cycle)
     return data;
 }
 
+
+/*!
+ * \brief MainWindow::setCycleAsy sets the cycles appearance.
+ * \param new_cycle cycle the data is going to be set on.
+ * \param data the data the cycle will be set with.
+ * \return bool
+ *
+ * sets the cycles appearance given a cycleStyleData struct containing colour, style and width.
+ */
 bool MainWindow::setCycleAsy(const ex &new_cycle, const struct cycleStyleData &data)
 {
     QString asyString;
@@ -706,6 +780,14 @@ bool MainWindow::setCycleAsy(const ex &new_cycle, const struct cycleStyleData &d
     return true;
 }
 
+
+/*!
+ * \brief MainWindow::on_actionDebug_bounding_rect_triggered
+ * \param checked
+ *
+ * show the bounding rectangles of all the elements on the scene.
+ * This is used to debug items in the graphics view.
+ */
 void MainWindow::on_actionDebug_bounding_rect_triggered(bool checked)
 {
     if (checked) {
@@ -718,6 +800,11 @@ void MainWindow::on_actionDebug_bounding_rect_triggered(bool checked)
 }
 
 
+/*!
+ * \brief MainWindow::buildToolBar
+ *
+ * build the main tool bar adding elements: create cycle, define cycle, zoom in, zoom out, pan, 'this'.
+ */
 void MainWindow::buildToolBar()
 {
     QToolBar *tb = this->ui->mainToolBar;
@@ -741,16 +828,35 @@ void MainWindow::buildToolBar()
 }
 
 
+/*!
+ * \brief MainWindow::on_actionDefine_by_center_and_radius_squared_triggered
+ *
+ * define a cycle given the center and radius squared.
+ */
 void MainWindow::on_actionDefine_by_center_and_radius_squared_triggered()
 {
     this->on_actionDefine_cycle_triggered(1);
 }
 
+
+/*!
+ * \brief MainWindow::on_actionDefine_by_values_triggered
+ *
+ * define a cycle given the values k,l,n,m.
+ */
 void MainWindow::on_actionDefine_by_values_triggered()
 {
     this->on_actionDefine_cycle_triggered(0);
 }
 
+
+/*!
+ * \brief MainWindow::on_actionDefine_cycle_triggered
+ * \param pageIndex
+ *
+ * define a cycle to be added to the scene. This is useful when the cycle must have
+ * an exact location which would be difficult to create by hand on the scene.
+ */
 void MainWindow::on_actionDefine_cycle_triggered(int pageIndex)
 {
     defineCycleDialog *defCycleDialog = new defineCycleDialog(this);
@@ -764,10 +870,12 @@ void MainWindow::on_actionDefine_cycle_triggered(int pageIndex)
     delete defCycleDialog;
 }
 
+
 /*!
  * \brief MainWindow::on_actionCreate_Cycle_triggered
  *
- * Function to create cycle based on relations that have been added.
+ * Triggered when the create cycle button is presssed. Checks that there is actually
+ * a cycle to add to the scene, then adds it.
  */
 void MainWindow::on_actionCreate_Cycle_triggered()
 {
@@ -787,6 +895,13 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     createCycle();
 }
 
+
+/*!
+ * \brief MainWindow::createCycle
+ * \param inputList
+ *
+ * Creates a cycle to add to the figure.
+ */
 void MainWindow::createCycle(lst inputList)
 {
     ex cycle;

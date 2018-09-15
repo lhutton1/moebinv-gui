@@ -107,7 +107,6 @@ menuRelActionGroup* menuRelAction::getGroup()
  */
 void menuRelAction::actionHandler()
 {
-    qDebug() << sender()->objectName();
     const lst params = getInputList();
 
     // check the correct number of parameters have been provided

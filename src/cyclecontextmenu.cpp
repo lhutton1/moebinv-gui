@@ -157,11 +157,8 @@ void cycleContextMenu::removeRelationFromList(menuRelAction *actionTriggered)
 {
     GiNaC::lst newRelationList;
 
-    qDebug() << "running..";
-
     // linear search through list to find item to remove
     for (int x = 0; x < relationList->nops(); x++) {
-        qDebug() << node_label(relationList->op(x).op(0)) << node_label(actionTriggered->getCycle()) << node_label(relationList->op(x).op(1)) << actionTriggered->getRelType();
         if (node_label(relationList->op(x).op(0)) != node_label(actionTriggered->getCycle()) ||
             relationList->op(x).op(1) != actionTriggered->getRelType())
         {
