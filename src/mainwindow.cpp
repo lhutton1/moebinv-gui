@@ -412,6 +412,7 @@ void MainWindow::on_actionOpen_triggered()
             f = figure(qPrintable(fileName));
 
         // gen first symbol
+        lblGen->advanceLabel();
         nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 
         // Now update the scene
@@ -509,10 +510,9 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
     const ex K = f.get_all_keys(REAL_LINE_GEN);
     const ex E = f;
     double current_dis;
-    double increment=.5*dis;
+    double increment=(0.5 * dis) / ui->graphicsView->relativeScaleFactor;
     ex P = lst{ex(x),ex(y)};
     ex selected_key;
-    double reldis = dis * ui->graphicsView->relativeScaleFactor;
 
     // iterator over all keys
     for (lst::const_iterator itk =ex_to<lst>(K).begin(); itk != ex_to<lst>(K).end(); ++itk) {
