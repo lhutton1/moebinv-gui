@@ -19,6 +19,11 @@ graphicCycle::graphicCycle(figure *f, ex c, double *relativeScaleFactor, cycleCo
     this->menu = menu;
     this->relativeScaleFactor = relativeScaleFactor;
     this->styleData = styleData;
+    this->msgBox = new QMessageBox();
+    this->itemIsHighlighted = false;
+    this->itemIsGrabbed = false;
+    this->itemIsAbleToMove = false;
+    this->itemIsPoint = false;
 
     // create the brush and pen and assign settings
     brush = new QBrush(styleData.colour);
@@ -243,8 +248,13 @@ void graphicCycle::buildShape()
                 addChild(POINT, x, y);
 
                 this->setZValue(200);
-                setFlag(ItemIsMovable);
+                this->itemIsPoint = true;
 
+                qDebug() << node_label(f->get_generation(this->cycle));
+                if (f->get_generation(this->cycle) == 0) {
+                    this->itemIsAbleToMove = true;
+                    this->setFlag(ItemIsMovable);
+                }
 
             } else if (ex_to<numeric>(abs(C.get_k()).evalf()).to_double() < EPSILON) {
                 double x = ex_to<numeric>(C.get_l(0).evalf()).to_double();
@@ -296,7 +306,6 @@ void graphicCycle::setHover()
  */
 void graphicCycle::unsetHover()
 {
-    //qDebug() << "hover unset";
     // set the colour of both the pen and brush, then update the item.
     brush->setColor(this->styleData.colour);
     pen->setColor(this->styleData.colour);
@@ -315,13 +324,25 @@ void graphicCycle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mousePressEvent(event);
 
-    if (event->button() == Qt::LeftButton && this->itemIsHighlighted) {
+    if (event->button() == Qt::LeftButton && this->itemIsHighlighted && this->itemIsPoint && !this->itemIsAbleToMove) {
+        msgBox->warning(0, "Point cannot be moved", "This cycle is not of generation 0 so cannot be moved");
+        return;
+    }
+
+    if (event->button() == Qt::LeftButton && this->itemIsHighlighted && this->itemIsAbleToMove) {
         this->sceneX = event->scenePos().x();
         this->sceneY = event->scenePos().y();
         this->itemIsGrabbed = true;
     }
 }
 
+
+void graphicCycle::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
+    if (!this->itemIsAbleToMove)
+        return;
+    else
+        QGraphicsItem::mouseMoveEvent(event);
+}
 
 /*!
  * \brief graphicCycle::mouseReleaseEvent reimplements the mouse release event.
@@ -336,6 +357,7 @@ void graphicCycle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && this->itemIsHighlighted) {
         if (sceneX != event->scenePos().x() || sceneY != event->scenePos().y()) {
             // move the point in the figure.
+            //this->setFlag(ItemIsMovable, false);
             this->f->move_point(cycle, lst(event->scenePos().x(), event->scenePos().y()));
         }
         this->itemIsGrabbed = false;

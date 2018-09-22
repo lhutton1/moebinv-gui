@@ -41,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->dockWidgetRight, &dockWidget::calculateDockToWindowPercentage, this, &MainWindow::onCalculateDockRatio);
     connect(ui->graphicsView, &view::highlightClosestCycle, this, &MainWindow::highlightClosestCycle);
     connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &MainWindow::onCustomContextMenu);
+    connect(scene, &graphicsScene::unHighlightCycle, this, &MainWindow::unHighlightCycle);
 
     // initialize figure
     if (s.value("setFloatEvaluation").toBool())
@@ -274,6 +275,7 @@ void MainWindow::update()
     scene->clear();
     initTreeModel();
     relationList.remove_all();
+    cyclesMap.clear();
     initMainMenu();
 
     ex keys = f.get_all_keys_sorted(REAL_LINE_GEN);
@@ -322,6 +324,7 @@ void MainWindow::update()
  */
 void MainWindow::addPoint(QPointF mousePos)
 {
+    //qDebug() << scene->getPointIsHighlighted();
     if (isAddPoint) {
         double x = mousePos.x();
         double y = mousePos.y();
@@ -412,6 +415,7 @@ void MainWindow::on_actionOpen_triggered()
             f = figure(qPrintable(fileName));
 
         // gen first symbol
+        lblGen->advanceLabel();
         nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 
         // Now update the scene
@@ -509,10 +513,9 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
     const ex K = f.get_all_keys(REAL_LINE_GEN);
     const ex E = f;
     double current_dis;
-    double increment=.5*dis;
+    double increment=(0.5 * dis) / ui->graphicsView->relativeScaleFactor;
     ex P = lst{ex(x),ex(y)};
     ex selected_key;
-    double reldis = dis * ui->graphicsView->relativeScaleFactor;
 
     // iterator over all keys
     for (lst::const_iterator itk =ex_to<lst>(K).begin(); itk != ex_to<lst>(K).end(); ++itk) {
@@ -593,8 +596,7 @@ void MainWindow::highlightClosestCycle(QPointF point)
 {
     double highlightDistance = s.value("highlightDistance").toDouble();
 
-    if (!prevHoveredCycle.isNull() && !prevHoveredCycle->getItemIsGrabbed())
-        prevHoveredCycle->unsetHover();
+    unHighlightCycle();
 
     GiNaC::ex closest = shortestDistance(point, highlightDistance);
     QPointer<graphicCycle> cycle = cyclesMap.value(node_label(closest));
@@ -607,6 +609,18 @@ void MainWindow::highlightClosestCycle(QPointF point)
     }
 
     prevHoveredCycle = cycle;
+}
+
+
+/*!
+ * \brief MainWindow::unHighlightCycle
+ *
+ * Loop through all cycles and dissable their hovers.
+ */
+void MainWindow::unHighlightCycle() {
+    for (auto cycle : cyclesMap) {
+        cycle->unsetHover();
+    }
 }
 
 
@@ -711,6 +725,12 @@ struct cycleStyleData MainWindow::getCycleData(const ex &cycle)
     if (colour.isNull() || colour.isEmpty() ||
         lineWidth.isNull() || lineWidth.isEmpty() ||
         lineStyle.isNull() || lineStyle.isEmpty()) {
+
+        // set defaults
+        data.colour = s.value("defaultGraphicsColour").value<QColor>();
+        data.lineStyle = s.value("defaultLineStyle").toInt();
+        data.lineWidth = s.value("defaultLineWidth").toDouble();
+
         return data;
     }
 

@@ -30,6 +30,7 @@ signals:
     void newMouseLeftPress(QPointF point);
     void newMouseRightPress(QPointF point);
     void newMouseHover(QPointF point);
+    void unHighlightCycle();
 
 private:
     QSettings s;

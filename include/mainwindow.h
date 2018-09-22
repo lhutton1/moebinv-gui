@@ -74,6 +74,7 @@ private slots:
     void buildRelationStatus();
     void thisContextMenuUpdate();
     void onCustomContextMenu(const QPoint &point);
+    void unHighlightCycle();
 
     void on_actionSave_triggered();
     void on_actionOpen_triggered();

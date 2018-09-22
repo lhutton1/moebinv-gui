@@ -64,6 +64,9 @@ void graphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton && !this->pointIsHighlighted) {
         // if a point is highlighted, get ready to move. Else add new point.
         emit newMouseLeftPress(point);
+    //} else if (mouseEvent->button() == Qt::LeftButton) {
+        // if first condition is not met, unhighlight all cycles in the scene
+    //    emit unHighlightCycle();
     } else if (mouseEvent->button() == Qt::RightButton) {
         // display highlighted cycles context menu
         emit newMouseRightPress(point);

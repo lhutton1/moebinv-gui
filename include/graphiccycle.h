@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsSceneContextMenuEvent>
+#include <QMessageBox>
 
 #include <figure.h>
 
@@ -68,6 +69,7 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual QRectF boundingRect() const;
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void buildShape();
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
@@ -87,6 +89,7 @@ signals:
 
 private:
     QSettings s;
+    QMessageBox *msgBox;
 
     GiNaC::ex cycle;
     MoebInv::figure *f;
@@ -95,6 +98,8 @@ private:
 
     bool itemIsHighlighted;
     bool itemIsGrabbed;
+    bool itemIsAbleToMove;
+    bool itemIsPoint;
     double sceneX;
     double sceneY;
 
