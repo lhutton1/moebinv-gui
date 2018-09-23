@@ -19,6 +19,7 @@ view::view(QWidget *parent)
     this->panningActive = false;
     this->panningEnabled = false;
     this->contextMenu = nullptr;
+    this->currentHighlightedCycle = nullptr;
 
     // set timer to detect when mouse stops
     this->mouseTimeOut = new QTimer(this);
@@ -38,12 +39,32 @@ bool view::getPanningEnabled()
 
 
 /*!
+ * \brief view::getCurrentHighlightedCycle getter for currentHighlightedCycle.
+ * \return graphicCycle
+ */
+QPointer<graphicCycle> view::getCurrentHighlightedCycle()
+{
+    return this->currentHighlightedCycle;
+}
+
+
+/*!
  * \brief view::setPanningEnabled setter for panning enabled.
  * \param value
  */
 void view::setPanningEnabled(const bool &value)
 {
     this->panningEnabled = value;
+}
+
+
+/*!
+ * \brief view::setCurrentHighlightedCycle setter for currently highlighted cycle.
+ * \param cycle
+ */
+void view::setCurrentHighlightedCycle(const QPointer<graphicCycle> cycle)
+{
+    this->currentHighlightedCycle = cycle;
 }
 
 
@@ -167,7 +188,11 @@ void view::mouseStopped()
     QPoint point = this->mapFromGlobal(QCursor::pos());
     QPointF relPoint = this->mapToScene(point);
 
-    emit highlightClosestCycle(relPoint);
+    // if there is no cycle highlighted or a point isn't grabbed find clostest cycle.
+    if (currentHighlightedCycle.isNull() ||
+            (!currentHighlightedCycle.isNull() && !currentHighlightedCycle->getItemIsGrabbed())) {
+        emit highlightClosestCycle(relPoint);
+    }
 }
 
 

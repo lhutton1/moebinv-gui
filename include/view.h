@@ -21,6 +21,8 @@ public:
     explicit view(QWidget *parent = nullptr);
     bool getPanningEnabled();
     void setPanningEnabled(const bool &value);
+    QPointer<graphicCycle> getCurrentHighlightedCycle();
+    void setCurrentHighlightedCycle(const QPointer<graphicCycle> cycle);
     void wheelEvent(QWheelEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
@@ -46,6 +48,8 @@ private:
     bool panningEnabled;
     bool panningActive;
     QPoint panningAnchor;
+
+    QPointer<graphicCycle> currentHighlightedCycle;
 };
 
 #endif // VIEW_H

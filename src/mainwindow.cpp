@@ -49,6 +49,8 @@ MainWindow::MainWindow(QWidget *parent) :
     else
         f = figure();
 
+    f.info_write("Hello");
+
     menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
     menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
     menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false);
@@ -59,9 +61,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // gen first symbol
     nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
 
-    // create new msgbox
+    // create dialogs
     msgBox = new QMessageBox();
     saveDialog = new QFileDialog();
+    settingDialog = new settingsDialog();
 
 
     initTreeModel();
@@ -74,6 +77,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // update menu items
     ui->actionLabels->setChecked(true);
+
+    if (s.value("floatEvaluation").toBool())
+        ui->actionFloat_evaluation->setChecked(true);
 
     update();
 }
@@ -324,7 +330,6 @@ void MainWindow::update()
  */
 void MainWindow::addPoint(QPointF mousePos)
 {
-    //qDebug() << scene->getPointIsHighlighted();
     if (isAddPoint) {
         double x = mousePos.x();
         double y = mousePos.y();
@@ -596,7 +601,8 @@ void MainWindow::highlightClosestCycle(QPointF point)
 {
     double highlightDistance = s.value("highlightDistance").toDouble();
 
-    unHighlightCycle();
+    // unhighlight all previously highlighted cycles
+    this->unHighlightCycle();
 
     GiNaC::ex closest = shortestDistance(point, highlightDistance);
     QPointer<graphicCycle> cycle = cyclesMap.value(node_label(closest));
@@ -604,6 +610,7 @@ void MainWindow::highlightClosestCycle(QPointF point)
     if (!cycle.isNull()) {
         cycle->setHover();
         scene->setPointIsHighlighted(true);
+        ui->graphicsView->setCurrentHighlightedCycle(cycle);
     } else {
         scene->setPointIsHighlighted(false);
     }
@@ -971,6 +978,16 @@ void MainWindow::createCycle(lst inputList)
     relationList.remove_all();
 }
 
+/*!
+ * \brief MainWindow::on_actionSettings_triggered
+ *
+ * Opens the settings menu.
+ */
+void MainWindow::on_actionSettings_triggered()
+{
+    settingDialog->show();
+}
+
 
 // REMOVE...
 QString MainWindow::node_compact_string(GiNaC::ex name)
@@ -993,3 +1010,36 @@ QString MainWindow::node_label(GiNaC::ex name)
     return QString::fromStdString(dr);
 }
 
+
+void MainWindow::on_actionFloat_evaluation_toggled(bool checked)
+{
+    if (checked) {
+        ui->actionExact_evaluation->setChecked(false);
+        f.set_float_eval();
+    } else {
+        ui->actionExact_evaluation->setChecked(true);
+        f.set_exact_eval();
+    }
+}
+
+void MainWindow::on_actionExact_evaluation_toggled(bool checked)
+{
+    if (checked) {
+        ui->actionFloat_evaluation->setChecked(false);
+        f.set_exact_eval();
+    } else {
+        ui->actionFloat_evaluation->setChecked(true);
+        f.set_float_eval();
+    }
+}
+
+void MainWindow::on_actionFigure_Description_triggered()
+{
+    if (f.info_read() != "") {
+        msgBox->setText("Figure description");
+        msgBox->setInformativeText(QString::fromStdString(f.info_read()));
+        msgBox->exec();
+    } else {
+        msgBox->information(nullptr, "Figure description", "There is no description to display");
+    }
+}

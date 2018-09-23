@@ -250,7 +250,6 @@ void graphicCycle::buildShape()
                 this->setZValue(200);
                 this->itemIsPoint = true;
 
-                qDebug() << node_label(f->get_generation(this->cycle));
                 if (f->get_generation(this->cycle) == 0) {
                     this->itemIsAbleToMove = true;
                     this->setFlag(ItemIsMovable);
@@ -287,7 +286,6 @@ void graphicCycle::buildShape()
  */
 void graphicCycle::setHover()
 {
-    //qDebug() << "hover set";
     // set the colour of both the pen and brush, then update the item.
     brush->setColor(s.value("graphicsHoverColour").value<QColor>());
     pen->setColor(s.value("graphicsHoverColour").value<QColor>());

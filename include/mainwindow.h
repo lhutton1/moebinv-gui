@@ -27,6 +27,7 @@
 #include "view.h"
 #include "treemodel.h"
 #include "definecycledialog.h"
+#include "settingsdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -76,6 +77,7 @@ private slots:
     void onCustomContextMenu(const QPoint &point);
     void unHighlightCycle();
 
+    // ui slots
     void on_actionSave_triggered();
     void on_actionOpen_triggered();
     void on_actionNew_triggered();
@@ -88,6 +90,14 @@ private slots:
     void on_actionDefine_by_center_and_radius_squared_triggered();
     void on_actionDefine_by_values_triggered();
     void on_actionDefine_cycle_triggered(int pageIndex = 0);
+    void on_actionFloat_evaluation_toggled(bool checked);
+    void on_actionExact_evaluation_toggled(bool checked);
+    void on_actionSettings_triggered();
+
+
+
+
+    void on_actionFigure_Description_triggered();
 
 signals:
     void resetRelationalList();
@@ -112,13 +122,15 @@ private:
     bool isAddPoint;
 
     QMessageBox *msgBox;
+    QFileDialog *saveDialog;
+    settingsDialog *settingDialog;
 
     QToolButton *defineCycle;
     QToolButton *thisItem;
 
     GiNaC::ex nextSymbol;
 
-    QFileDialog *saveDialog;
+
 
     QTimer *timer;
 
