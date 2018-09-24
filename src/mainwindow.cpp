@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     else
         f = figure();
 
-    f.info_write("Hello");
+    f.info_write(qPrintable(s.value("figureDescription").toString()));
 
     menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
     menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);

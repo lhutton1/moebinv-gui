@@ -2,7 +2,10 @@
 #define SETTINGSDIALOG_H
 
 #include <QDialog>
+#include <QSettings>
 #include <QColorDialog>
+
+#include "conf.h"
 
 namespace Ui {
 class settingsDialog;
@@ -14,12 +17,20 @@ class settingsDialog : public QDialog
 
 public:
     explicit settingsDialog(QWidget *parent = 0);
+    void showEvent(QShowEvent* event);
     ~settingsDialog();
 
 private slots:
     void getColourSelection();
+    void update();
+
+
+    void on_floatingEval_clicked();
+
+    void on_exactEval_clicked();
 
 private:
+    QSettings s;
     Ui::settingsDialog *ui;
 
     QColorDialog *colourDialog;

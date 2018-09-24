@@ -57,6 +57,11 @@ enum params {
     PRODUCT_COMBOBOX
 };
 
+enum evalType {
+  FLOATING,
+  EXACT
+};
+
 /*!
  * \brief EPSILON Point at which a number is taken to be 0 due to rounding errors
  */

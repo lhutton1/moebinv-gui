@@ -15,9 +15,8 @@ settingsDialog::settingsDialog(QWidget *parent) :
     this->colourSelectionButtons.append(ui->pushButton_2);
     this->colourSelectionButtons.append(ui->pushButton_3);
 
-    for (auto button : this->colourSelectionButtons) {
+    for (auto button : this->colourSelectionButtons)
         connect(button, &QPushButton::pressed, this, &settingsDialog::getColourSelection);
-    }
 }
 
 settingsDialog::~settingsDialog()
@@ -28,4 +27,39 @@ settingsDialog::~settingsDialog()
 void settingsDialog::getColourSelection()
 {
     colourDialog->exec();
+}
+
+void settingsDialog::update()
+{
+    // get current figure description
+    ui->figureDescriptionText->setText(s.value("figureDescription").toString());
+    ui->figureDescriptionText->moveCursor(QTextCursor::End);
+
+    // get current eval type
+    switch(s.value("evaluationType").toInt()) {
+        case FLOATING:
+            ui->floatingEval->setChecked(true);
+            break;
+        case EXACT:
+            ui->exactEval->setChecked(true);
+            break;
+    }
+}
+
+void settingsDialog::showEvent(QShowEvent *event)
+{
+    QWidget::showEvent(event);
+
+    update();
+}
+
+
+void settingsDialog::on_floatingEval_clicked()
+{
+    s.setValue("evaluationType", FLOATING);
+}
+
+void settingsDialog::on_exactEval_clicked()
+{
+    s.setValue("evaluationType", EXACT);
 }

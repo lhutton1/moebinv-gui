@@ -14,6 +14,11 @@ void setDefaultSettings()
     s.setValue("drawingMetric", ELLIPTIC);
 
     /*!
+     *
+     */
+    s.setValue("evaluationType", FLOATING);
+
+    /*!
      * Labels visibility. True - show, False - hide.
      */
     s.setValue("showLabels", true);
@@ -93,6 +98,11 @@ void setDefaultSettings()
      * Set whether the gui displays only real cycles.
      */
     s.setValue("realCycles", true);
+
+    /*!
+     * Set the default figure description.
+     */
+    s.setValue("figureDescription", "Test");
 }
 
 int main(int argc, char *argv[])
