@@ -19,7 +19,7 @@ void setDefaultSettings()
     s.setValue("cycleMetric", PARABOLIC);
 
     /*!
-     *
+     * Sets the figure evaluation type.
      */
     s.setValue("evaluationType", FLOATING);
 
@@ -108,6 +108,16 @@ void setDefaultSettings()
      * Set the default figure description.
      */
     s.setValue("figureDescription", "Test");
+
+    /*!
+     * Set automatic assignment of labels i.e. A, B, C, ...
+     */
+    s.setValue("automaticLabels", true);
+
+    /*!
+     * Set the default background colour
+     */
+    s.setValue("backgroundColour", QColor(255, 255, 255));
 }
 
 int main(int argc, char *argv[])

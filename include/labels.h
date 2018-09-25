@@ -3,6 +3,8 @@
 
 #include <QString>
 #include <QPointer>
+#include <QInputDialog>
+#include <QSettings>
 
 #include <figure.h>
 
@@ -21,8 +23,10 @@ public:
     QString genNextLabel();
     void advanceLabel();
     QString node_label(GiNaC::ex name);
+    QString getManualName();
 
 private:
+    QSettings s;
     MoebInv::figure *f;
     int currentLetter;
 };

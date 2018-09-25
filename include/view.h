@@ -38,6 +38,7 @@ signals:
 public slots:
     void recenterView();
     void mouseStopped();
+    void setBackgroundColour(QColor colour);
 
 private:
     QSettings s;

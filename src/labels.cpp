@@ -25,16 +25,19 @@ QString labels::genNextLabel()
     QString lblString;
     int letterNumber;
 
-    letterNumber = currentLetter;
-    lblString = "";
+    if (s.value("automaticLabels").toBool()) {
+        letterNumber = currentLetter;
+        lblString = "";
 
-    while (letterNumber > 0) {
-        int current = (letterNumber - 1) % 26;
-        char letter = static_cast<char>(current + 65);
-        lblString = letter + lblString;
-        letterNumber = (letterNumber - (current + 1)) / 26;
+        while (letterNumber > 0) {
+            int current = (letterNumber - 1) % 26;
+            char letter = static_cast<char>(current + 65);
+            lblString = letter + lblString;
+            letterNumber = (letterNumber - (current + 1)) / 26;
+        }
+    } else {
+        lblString = "unnamed";
     }
-
     return lblString;
 }
 
@@ -44,18 +47,24 @@ QString labels::genNextLabel()
  */
 void labels::advanceLabel() {
     GiNaC::ex currentKey;
-    currentLetter += 1;
 
-    // test for duplicate labels. If there is a duplicate, run function recursively.
-    currentKey = f->get_cycle_key(qPrintable(this->genNextLabel()));
+    if (s.value("automaticLabels").toBool()) {
+        currentLetter += 1;
 
-    if (node_label(currentKey) == "0")
-        return;
-    else
-        this->advanceLabel();
+        // test for duplicate labels. If there is a duplicate, run function recursively.
+        currentKey = f->get_cycle_key(qPrintable(this->genNextLabel()));
+
+        if (node_label(currentKey) == "0")
+            return;
+        else
+            this->advanceLabel();
+    }
 }
 
-
+QString labels::getManualName()
+{
+    return QInputDialog::getText(nullptr, "Label name", "Enter label name:");
+}
 
 QString labels::node_label(GiNaC::ex name) // REMOVE
 {

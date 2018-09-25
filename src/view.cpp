@@ -222,3 +222,8 @@ void view::zoomOut()
     relativeScaleFactor *= factor;
     scale(factor, factor);
 }
+
+void view::setBackgroundColour(QColor colour)
+{
+    this->setBackgroundBrush(QBrush(colour, Qt::SolidPattern));
+}

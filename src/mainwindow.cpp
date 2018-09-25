@@ -33,6 +33,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statusBar->addWidget(statusCoordinates);
     ui->statusBar->addPermanentWidget(statusRelations);
 
+    // create dialogs
+    msgBox = new QMessageBox();
+    saveDialog = new QFileDialog();
+    settingDialog = new settingsDialog(this);
+    settingDialog->setModal(true);
+
     // set up new event
     connect(scene, &graphicsScene::newMouseLeftPress, this, &MainWindow::addPoint);
     connect(scene, &graphicsScene::newMouseRightPress, this, &MainWindow::onMouseSceneRightPress);
@@ -42,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->graphicsView, &view::highlightClosestCycle, this, &MainWindow::highlightClosestCycle);
     connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &MainWindow::onCustomContextMenu);
     connect(scene, &graphicsScene::unHighlightCycle, this, &MainWindow::unHighlightCycle);
+    connect(settingDialog, &settingsDialog::setBackgroundColour, ui->graphicsView, &view::setBackgroundColour);
 
     // initialize figure
     if (s.value("setFloatEvaluation").toBool())
@@ -60,11 +67,6 @@ MainWindow::MainWindow(QWidget *parent) :
     lblGen = new labels(&this->f);
     // gen first symbol
     nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
-
-    // create dialogs
-    msgBox = new QMessageBox();
-    saveDialog = new QFileDialog();
-    settingDialog = new settingsDialog();
 
 
     initTreeModel();
@@ -330,6 +332,9 @@ void MainWindow::addPoint(QPointF mousePos)
         double y = mousePos.y();
 
         // add cycle to the figure
+        if (!s.value("automaticLabels").toBool())
+            nextSymbol = symbol(qPrintable(lblGen->getManualName()));
+
         ex cycle = f.add_point(lst{x, y}, nextSymbol);
 
         struct cycleStyleData cycleData;
@@ -927,6 +932,9 @@ void MainWindow::on_actionCreate_Cycle_triggered()
 void MainWindow::createCycle(lst inputList)
 {
     ex cycle;
+
+    if (!s.value("automaticLabels").toBool())
+        nextSymbol = symbol(qPrintable(lblGen->getManualName()));
 
     // add cycle by referencing relation list
     if (inputList.nops() == 0) {
