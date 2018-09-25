@@ -48,7 +48,7 @@ void line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setPen(*pen);
 
     // draw shape
-    switch (s.value("drawingMetric").toInt()) {
+    switch (s.value("pointMetric").toInt()) {
         case drawingMetric::ELLIPTIC: {
             // draw line
             if (y == 0) // vertical line

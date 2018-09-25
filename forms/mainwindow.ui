@@ -98,6 +98,29 @@
      <addaction name="actionDefine_by_values"/>
      <addaction name="actionDefine_by_center_and_radius_squared"/>
     </widget>
+    <widget class="QMenu" name="menuEvaluation_Type">
+     <property name="title">
+      <string>Evaluation Type</string>
+     </property>
+     <addaction name="actionFloating"/>
+     <addaction name="actionExact"/>
+    </widget>
+    <widget class="QMenu" name="menuDrawing_Metric">
+     <property name="title">
+      <string>Point Metric</string>
+     </property>
+     <addaction name="actionEllipticPoint"/>
+     <addaction name="actionParabolicPoint"/>
+     <addaction name="actionHyperbolicPoint"/>
+    </widget>
+    <widget class="QMenu" name="menuCycle_Metric">
+     <property name="title">
+      <string>Cycle Metric</string>
+     </property>
+     <addaction name="actionEllipticCycle"/>
+     <addaction name="actionParabolicCycle"/>
+     <addaction name="actionHyperbolicCycle"/>
+    </widget>
     <addaction name="separator"/>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
@@ -105,6 +128,10 @@
     <addaction name="separator"/>
     <addaction name="actionCreate_Cycle"/>
     <addaction name="menuDefine_Cycle_2"/>
+    <addaction name="separator"/>
+    <addaction name="menuEvaluation_Type"/>
+    <addaction name="menuDrawing_Metric"/>
+    <addaction name="menuCycle_Metric"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -117,21 +144,6 @@
     <property name="title">
      <string>View</string>
     </property>
-    <widget class="QMenu" name="menuDrawing_metric">
-     <property name="title">
-      <string>Drawing metric</string>
-     </property>
-     <addaction name="actionElliptic"/>
-     <addaction name="actionParabolic"/>
-     <addaction name="actionHyperbolic"/>
-    </widget>
-    <widget class="QMenu" name="menuEvaluation_type">
-     <property name="title">
-      <string>Evaluation type</string>
-     </property>
-     <addaction name="actionFloat_evaluation"/>
-     <addaction name="actionExact_evaluation"/>
-    </widget>
     <addaction name="actionzoomIn"/>
     <addaction name="actionzoomOut"/>
     <addaction name="actionPan"/>
@@ -140,9 +152,6 @@
     <addaction name="actionDebug_bounding_rect"/>
     <addaction name="separator"/>
     <addaction name="actionFigure_Description"/>
-    <addaction name="menuEvaluation_type"/>
-    <addaction name="menuDrawing_metric"/>
-    <addaction name="separator"/>
     <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
@@ -387,7 +396,28 @@
     <string>Ctrl+,</string>
    </property>
   </action>
-  <action name="actionElliptic">
+  <action name="actionFigure_Description">
+   <property name="text">
+    <string>Figure Description...</string>
+   </property>
+  </action>
+  <action name="actionFloating">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Floating</string>
+   </property>
+  </action>
+  <action name="actionExact">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Exact</string>
+   </property>
+  </action>
+  <action name="actionEllipticPoint">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -395,7 +425,7 @@
     <string>Elliptic</string>
    </property>
   </action>
-  <action name="actionParabolic">
+  <action name="actionParabolicPoint">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -403,7 +433,7 @@
     <string>Parabolic</string>
    </property>
   </action>
-  <action name="actionHyperbolic">
+  <action name="actionHyperbolicPoint">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -411,25 +441,28 @@
     <string>Hyperbolic</string>
    </property>
   </action>
-  <action name="actionFloat_evaluation">
+  <action name="actionEllipticCycle">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Float evaluation</string>
+    <string>Elliptic</string>
    </property>
   </action>
-  <action name="actionExact_evaluation">
+  <action name="actionParabolicCycle">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Exact evaluation</string>
+    <string>Parabolic</string>
    </property>
   </action>
-  <action name="actionFigure_Description">
+  <action name="actionHyperbolicCycle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
-    <string>Figure Description...</string>
+    <string>Hyperbolic</string>
    </property>
   </action>
  </widget>

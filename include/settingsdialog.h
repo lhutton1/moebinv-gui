@@ -24,11 +24,6 @@ private slots:
     void getColourSelection();
     void update();
 
-
-    void on_floatingEval_clicked();
-
-    void on_exactEval_clicked();
-
 private:
     QSettings s;
     Ui::settingsDialog *ui;

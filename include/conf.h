@@ -16,9 +16,9 @@
  *      hyperbolic - ...
  */
 enum drawingMetric {
-    ELLIPTIC,
-    PARABOLIC,
-    HYPERBOLIC
+    ELLIPTIC = 1,
+    PARABOLIC = 0,
+    HYPERBOLIC = -1
 };
 
 /*!

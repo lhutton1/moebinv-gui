@@ -35,15 +35,6 @@ void settingsDialog::update()
     ui->figureDescriptionText->setText(s.value("figureDescription").toString());
     ui->figureDescriptionText->moveCursor(QTextCursor::End);
 
-    // get current eval type
-    switch(s.value("evaluationType").toInt()) {
-        case FLOATING:
-            ui->floatingEval->setChecked(true);
-            break;
-        case EXACT:
-            ui->exactEval->setChecked(true);
-            break;
-    }
 }
 
 void settingsDialog::showEvent(QShowEvent *event)
@@ -51,15 +42,4 @@ void settingsDialog::showEvent(QShowEvent *event)
     QWidget::showEvent(event);
 
     update();
-}
-
-
-void settingsDialog::on_floatingEval_clicked()
-{
-    s.setValue("evaluationType", FLOATING);
-}
-
-void settingsDialog::on_exactEval_clicked()
-{
-    s.setValue("evaluationType", EXACT);
 }

@@ -47,7 +47,7 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     painter->setBrush(*brush);
 
     // draw shape
-    switch (s.value("drawingMetric").toInt()) {
+    switch (s.value("pointMetric").toInt()) {
         case drawingMetric::ELLIPTIC: {
             if (BOUNDINGRECT_DEBUG)
                 painter->drawRect(this->boundingRect());

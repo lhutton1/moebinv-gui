@@ -41,7 +41,7 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->setPen(*pen);
 
     // draw shape based on drawing metric
-    switch (s.value("drawingMetric").toInt()) {
+    switch (s.value("pointMetric").toInt()) {
         case drawingMetric::ELLIPTIC: {
             QPointF point(0, 0);
 

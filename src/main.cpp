@@ -11,7 +11,12 @@ void setDefaultSettings()
     /*!
      * Sets the drawing metric.
      */
-    s.setValue("drawingMetric", ELLIPTIC);
+    s.setValue("pointMetric", ELLIPTIC);
+
+    /*!
+     * Sets the cycle metric.
+     */
+    s.setValue("cycleMetric", PARABOLIC);
 
     /*!
      *

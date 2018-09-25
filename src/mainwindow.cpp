@@ -68,18 +68,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     initTreeModel();
+    initialiseDefaultSettings();
 
     // remove menu from toolbars
     setContextMenuPolicy(Qt::NoContextMenu);
 
     // whether to add
     isAddPoint = true;
-
-    // update menu items
-    ui->actionLabels->setChecked(true);
-
-    if (s.value("floatEvaluation").toBool())
-        ui->actionFloat_evaluation->setChecked(true);
 
     update();
 }
@@ -989,6 +984,167 @@ void MainWindow::on_actionSettings_triggered()
 }
 
 
+void MainWindow::on_actionFloating_triggered(bool checked)
+{
+    if (checked) {
+        ui->actionExact->setChecked(false);
+        f.set_float_eval();
+    } else {
+        ui->actionFloating->setChecked(true);
+    }
+}
+
+void MainWindow::on_actionExact_triggered(bool checked)
+{
+    if (checked) {
+        ui->actionFloating->setChecked(false);
+        f.set_exact_eval();
+    } else {
+        ui->actionExact->setChecked(true);
+    }
+}
+
+void MainWindow::on_actionFigure_Description_triggered()
+{
+    if (f.info_read() != "") {
+        msgBox->setText("Figure description");
+        msgBox->setInformativeText(QString::fromStdString(f.info_read()));
+        msgBox->exec();
+    } else {
+        msgBox->information(nullptr, "Figure description", "There is no description to display");
+    }
+}
+
+void MainWindow::on_actionEllipticPoint_triggered(bool checked)
+{
+    if (checked) {
+        ui->actionParabolicPoint->setChecked(false);
+        ui->actionHyperbolicPoint->setChecked(false);
+        s.setValue("pointMetric", ELLIPTIC);
+        f.set_metric(ELLIPTIC, s.value("cycleMetric").toInt());
+
+        //update the view
+        ui->graphicsView->viewport()->update();
+    } else {
+        ui->actionEllipticPoint->setChecked(true);
+    }
+}
+
+void MainWindow::on_actionParabolicPoint_triggered(bool checked)
+{
+    if (checked) {
+        ui->actionEllipticPoint->setChecked(false);
+        ui->actionHyperbolicPoint->setChecked(false);
+        s.setValue("pointMetric", PARABOLIC);
+        f.set_metric(PARABOLIC, s.value("cycleMetric").toInt());
+
+        //update the view
+        ui->graphicsView->viewport()->update();
+    } else {
+        ui->actionParabolicPoint->setChecked(true);
+    }
+}
+
+void MainWindow::on_actionHyperbolicPoint_triggered(bool checked)
+{
+    if (checked) {
+        ui->actionEllipticPoint->setChecked(false);
+        ui->actionParabolicPoint->setChecked(false);
+        s.setValue("pointMetric", HYPERBOLIC);
+        f.set_metric(HYPERBOLIC, s.value("cycleMetric").toInt());
+
+        //update the view
+        ui->graphicsView->viewport()->update();
+    } else {
+        ui->actionHyperbolicPoint->setChecked(true);
+    }
+}
+
+void MainWindow::on_actionEllipticCycle_triggered(bool checked)
+{
+    if (checked) {
+        ui->actionParabolicCycle->setChecked(false);
+        ui->actionHyperbolicCycle->setChecked(false);
+        s.setValue("cycleMetric", ELLIPTIC);
+        f.set_metric(s.value("pointMetric").toInt(), ELLIPTIC);
+
+        //update the view
+        ui->graphicsView->viewport()->update();
+    } else {
+        ui->actionEllipticCycle->setChecked(true);
+    }
+}
+
+void MainWindow::on_actionParabolicCycle_triggered(bool checked)
+{
+    if (checked) {
+        ui->actionEllipticCycle->setChecked(false);
+        ui->actionHyperbolicCycle->setChecked(false);
+        s.setValue("cycleMetric", PARABOLIC);
+        f.set_metric(s.value("pointMetric").toInt(), PARABOLIC);
+
+        //update the view
+        ui->graphicsView->viewport()->update();
+    } else {
+        ui->actionParabolicCycle->setChecked(true);
+    }
+}
+
+void MainWindow::on_actionHyperbolicCycle_triggered(bool checked)
+{
+    if (checked) {
+        ui->actionParabolicCycle->setChecked(false);
+        ui->actionEllipticCycle->setChecked(false);
+        s.setValue("cycleMetric", HYPERBOLIC);
+        f.set_metric(s.value("pointMetric").toInt(), HYPERBOLIC);
+
+        //update the view
+        ui->graphicsView->viewport()->update();
+    } else {
+        ui->actionHyperbolicCycle->setChecked(true);
+    }
+}
+
+
+void MainWindow::initialiseDefaultSettings()
+{
+    // update ui items
+    ui->actionLabels->setChecked(true);
+
+    if (s.value("floatEvaluation").toBool())
+        ui->actionFloating->setChecked(true);
+
+    switch (s.value("pointMetric").toInt()) {
+        case ELLIPTIC:
+            ui->actionEllipticPoint->setChecked(true);
+            break;
+        case PARABOLIC:
+            ui->actionParabolicPoint->setChecked(true);
+            break;
+        case HYPERBOLIC:
+            ui->actionHyperbolicPoint->setChecked(true);
+            break;
+    }
+
+    switch (s.value("cycleMetric").toInt()) {
+        case ELLIPTIC:
+            ui->actionEllipticCycle->setChecked(true);
+            break;
+        case PARABOLIC:
+            ui->actionParabolicCycle->setChecked(true);
+            break;
+        case HYPERBOLIC:
+            ui->actionHyperbolicCycle->setChecked(true);
+            break;
+    }
+
+    //apply settings to the figure
+    f.set_metric(s.value("pointMetric").toInt(), s.value("cycleMetric").toInt());
+}
+
+
+
+
 // REMOVE...
 QString MainWindow::node_compact_string(GiNaC::ex name)
 {
@@ -1008,38 +1164,4 @@ QString MainWindow::node_label(GiNaC::ex name)
     string dr = drawing.str().c_str();
 
     return QString::fromStdString(dr);
-}
-
-
-void MainWindow::on_actionFloat_evaluation_toggled(bool checked)
-{
-    if (checked) {
-        ui->actionExact_evaluation->setChecked(false);
-        f.set_float_eval();
-    } else {
-        ui->actionExact_evaluation->setChecked(true);
-        f.set_exact_eval();
-    }
-}
-
-void MainWindow::on_actionExact_evaluation_toggled(bool checked)
-{
-    if (checked) {
-        ui->actionFloat_evaluation->setChecked(false);
-        f.set_exact_eval();
-    } else {
-        ui->actionFloat_evaluation->setChecked(true);
-        f.set_float_eval();
-    }
-}
-
-void MainWindow::on_actionFigure_Description_triggered()
-{
-    if (f.info_read() != "") {
-        msgBox->setText("Figure description");
-        msgBox->setInformativeText(QString::fromStdString(f.info_read()));
-        msgBox->exec();
-    } else {
-        msgBox->information(nullptr, "Figure description", "There is no description to display");
-    }
 }

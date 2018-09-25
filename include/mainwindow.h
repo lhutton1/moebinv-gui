@@ -60,6 +60,7 @@ public:
     bool setCycleAsy(const GiNaC::ex &new_cycle, const struct cycleStyleData &data);
     void buildToolBar();
     void createCycle(GiNaC::lst inputList = GiNaC::lst());
+    void initialiseDefaultSettings();
     ~MainWindow();
 
     bool toolAddCycle;
@@ -90,14 +91,16 @@ private slots:
     void on_actionDefine_by_center_and_radius_squared_triggered();
     void on_actionDefine_by_values_triggered();
     void on_actionDefine_cycle_triggered(int pageIndex = 0);
-    void on_actionFloat_evaluation_toggled(bool checked);
-    void on_actionExact_evaluation_toggled(bool checked);
+    void on_actionFloating_triggered(bool checked);
+    void on_actionExact_triggered(bool checked);
     void on_actionSettings_triggered();
-
-
-
-
     void on_actionFigure_Description_triggered();
+    void on_actionEllipticPoint_triggered(bool checked);
+    void on_actionParabolicPoint_triggered(bool checked);
+    void on_actionHyperbolicPoint_triggered(bool checked);
+    void on_actionEllipticCycle_triggered(bool checked);
+    void on_actionParabolicCycle_triggered(bool checked);
+    void on_actionHyperbolicCycle_triggered(bool checked);
 
 signals:
     void resetRelationalList();

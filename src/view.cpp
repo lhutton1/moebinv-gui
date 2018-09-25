@@ -14,6 +14,7 @@ view::view(QWidget *parent)
     this->scale(initialZoomFactor, -initialZoomFactor); // reflect the y-axis so coordinate system matches a standard graph
     this->setRenderHint(QPainter::Antialiasing);
     this->setParent(parent);
+    this->setViewportUpdateMode(FullViewportUpdate);
 
     this->relativeScaleFactor = 1;
     this->panningActive = false;
@@ -92,7 +93,6 @@ void view::wheelEvent(QWheelEvent * event)
 
     this->scale(factor, factor);
     this->setTransformationAnchor(anchor);
-    this->setViewportUpdateMode(FullViewportUpdate);
 }
 
 
