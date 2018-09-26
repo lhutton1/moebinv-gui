@@ -38,7 +38,7 @@ void settingsDialog::update()
     // get default colours
     setButtonColour(ui->pushButton, s.value("defaultGraphicsColour").value<QColor>());
     setButtonColour(ui->pushButton_2, s.value("graphicsHoverColour").value<QColor>());
-    setButtonColour(ui->pushButton_3, s.value("defaultGraphicsColour").value<QColor>());
+    setButtonColour(ui->pushButton_3, s.value("backgroundColour").value<QColor>());
 }
 
 void settingsDialog::showEvent(QShowEvent *event)
@@ -61,21 +61,21 @@ void settingsDialog::on_manualNaming_clicked(bool checked)
 
 void settingsDialog::on_pushButton_pressed()
 {
-    QColor colour = colourDialog->getColor();
+    QColor colour = colourDialog->getColor(s.value("defaultGraphicsColour").value<QColor>());
     setButtonColour(ui->pushButton, colour);
     s.setValue("defaultGraphicsColour", colour);
 }
 
 void settingsDialog::on_pushButton_2_pressed()
 {
-    QColor colour = colourDialog->getColor();
+    QColor colour = colourDialog->getColor(s.value("graphicsHoverColour").value<QColor>());
     setButtonColour(ui->pushButton_2, colour);
     s.setValue("graphicsHoverColour", colour);
 }
 
 void settingsDialog::on_pushButton_3_pressed()
 {
-    QColor colour = colourDialog->getColor();
+    QColor colour = colourDialog->getColor(s.value("backgroundColour").value<QColor>());
     setButtonColour(ui->pushButton_3, colour);
     s.setValue("backgroundColour", colour);
     setBackgroundColour(colour);

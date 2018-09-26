@@ -65,9 +65,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // create new labels object to create unique labels
     lblGen = new labels(&this->f);
-    // gen first symbol
     nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
-
+    unnamedSymbol = symbol("unnamed");
 
     initTreeModel();
     initialiseDefaultSettings();
@@ -345,7 +344,11 @@ void MainWindow::addPoint(QPointF mousePos)
 
         // generate next symbol
         lblGen->advanceLabel();
-        nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
+        if (lblGen->genNextLabel() == "unnamed")
+            nextSymbol = unnamedSymbol;
+        else
+            nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
+
 
         // refresh
         update();
@@ -916,7 +919,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
 
     // only real cycles
     if (s.value("realCycles").toBool()) {
-      relationList.append(lst{nextSymbol, REALS, only_reals(nextSymbol)});
+        relationList.append(lst{nextSymbol, REALS, only_reals(nextSymbol), lst{}});
     }
 
     createCycle();
@@ -942,8 +945,13 @@ void MainWindow::createCycle(lst inputList)
 
         try {
             //unpack relation list
-            for (auto item : relationList)
-                unpackedRelationList.append(item.op(2));
+            for (auto item : relationList) {
+                // if relation is from unnamed cycle
+                if (item.op(0).is_equal(unnamedSymbol))
+                    unpackedRelationList.append(refactorCycleRelation(item, nextSymbol));
+                else
+                    unpackedRelationList.append(item.op(2));
+            }
             cycle = f.add_cycle_rel(unpackedRelationList, nextSymbol);
         } catch (...) {
             msgBox->warning(0, "Cycle relation(s) invalid", "The cycle couldn't be created. Double check your relations and try again");
@@ -979,6 +987,62 @@ void MainWindow::createCycle(lst inputList)
 
     emit resetRelationalList();
     relationList.remove_all();
+}
+
+cycle_relation MainWindow::refactorCycleRelation(const ex &relationItem, const ex &newSymbol)
+{
+    qDebug() << node_label(newSymbol);
+    ex cycleSymbol = newSymbol;
+    GiNaC::ex relationType = relationItem.op(1);
+    GiNaC::ex parameters = relationItem.op(3);
+    cycle_relation relation;
+
+    switch (ex_to<numeric>(relationType).to_int()) {
+        case ORTHOGONAL:
+            relation = is_orthogonal(cycleSymbol, true);
+            break;
+        case FORTHOGONAL:
+            relation = is_f_orthogonal(cycleSymbol, true);
+            break;
+        case DIFFERENT:
+            relation = is_different(cycleSymbol, true);
+            break;
+        case ADIFFERENT:
+            relation = is_adifferent(cycleSymbol, true);
+            break;
+        case REALS:
+            relation = only_reals(cycleSymbol, true);
+            break;
+        case TANGENT:
+            relation = is_tangent(cycleSymbol, true);
+            break;
+        case TANGENT_I:
+            relation = is_tangent_i(cycleSymbol, true);
+            break;
+        case TANGENT_O:
+            relation = is_tangent_o(cycleSymbol, true);
+            break;
+        case STEINER_POWER:
+            relation = cycle_power(cycleSymbol, true, parameters.op(0));
+            break;
+        case CYCLE_ANGLE:
+            relation = make_angle(cycleSymbol, true, parameters.op(0));
+            break;
+        case CYCLE_CROSS_T_DISTANCE:
+            relation = cross_t_distance(cycleSymbol, true, parameters.op(0));
+            break;
+        case PRODUCT_SIGN:
+            relation = product_nonpositive(cycleSymbol, true, parameters.op(0));
+            break;
+        case CYCLE_MOBIUS:
+            relation = moebius_transform(cycleSymbol, true, parameters);
+            break;
+        case CYCLE_SL2:
+            relation = sl2_transform(cycleSymbol, true, parameters);
+            break;
+    }
+    qDebug() << node_label(relation);
+    return relation;
 }
 
 /*!

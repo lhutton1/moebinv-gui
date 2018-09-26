@@ -61,6 +61,7 @@ public:
     void buildToolBar();
     void createCycle(GiNaC::lst inputList = GiNaC::lst());
     void initialiseDefaultSettings();
+    MoebInv::cycle_relation refactorCycleRelation(const GiNaC::ex &relationItem, const GiNaC::ex &newSymbol);
     ~MainWindow();
 
     bool toolAddCycle;
@@ -132,8 +133,7 @@ private:
     QToolButton *thisItem;
 
     GiNaC::ex nextSymbol;
-
-
+    GiNaC::ex unnamedSymbol;
 
     QTimer *timer;
 

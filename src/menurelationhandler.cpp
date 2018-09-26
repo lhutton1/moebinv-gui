@@ -88,6 +88,11 @@ int menuRelAction::getRelType()
     return this->relType;
 }
 
+lst menuRelAction::getParams()
+{
+    return this->mostRecentParams;
+}
+
 
 /*!
  * \brief menuRelAction::getGroup Get the group the relation has been assigned to.
@@ -145,6 +150,8 @@ void menuRelAction::checkActionHandler()
 
 void menuRelAction::createCycleRelation(const lst &params)
 {
+    this->mostRecentParams = params;
+
     switch (relType) {
         case ORTHOGONAL:
             this->relation = is_orthogonal(cycle, true);

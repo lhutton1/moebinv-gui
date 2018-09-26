@@ -27,6 +27,7 @@ public:
     GiNaC::ex getCycle();
     int getRelType();
     GiNaC::lst getInputList();
+    GiNaC::lst getParams();
     menuRelActionGroup* getGroup();
     MoebInv::cycle_relation getRelation();
     void setRelation();
@@ -60,6 +61,7 @@ private:
     int relType;
     int inputType;
     MoebInv::cycle_relation relation;
+    GiNaC::lst mostRecentParams;
 
     QMessageBox *msgBox;
 };

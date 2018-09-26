@@ -134,7 +134,7 @@ void cycleContextMenu::amendRelationList()
     // check whether the cycle triggered needs adding or removing.
     if (actionTriggered->hasRelation()) {
         if (actionTriggered->addRelation->isChecked()) {
-            relationList->append(lst{actionTriggered->getCycle(), actionTriggered->getRelType(), actionTriggered->getRelation()});
+            relationList->append(lst{actionTriggered->getCycle(), actionTriggered->getRelType(), actionTriggered->getRelation(), actionTriggered->getParams()});
         } else {
             this->removeRelationFromList(actionTriggered);
         }
