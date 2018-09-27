@@ -39,6 +39,23 @@ void settingsDialog::update()
     setButtonColour(ui->pushButton, s.value("defaultGraphicsColour").value<QColor>());
     setButtonColour(ui->pushButton_2, s.value("graphicsHoverColour").value<QColor>());
     setButtonColour(ui->pushButton_3, s.value("backgroundColour").value<QColor>());
+
+    //set radio buttons
+    if (s.value("automaticLabels").toBool())
+        ui->automaticNaming->setChecked(true);
+    else
+        ui->manualNaming->setChecked(true);
+
+    if (s.value("automaticOnlyReals").toBool())
+        ui->onlyRealsTrue->setChecked(true);
+    else
+        ui->onlyRealsFalse->setChecked(false);
+
+    // set default directory
+    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
+
+    ui->defaultPathLineEdit->setText(defaultPath.absolutePath());
+    ui->defaultPathLineEdit->selectAll();
 }
 
 void settingsDialog::showEvent(QShowEvent *event)
@@ -84,4 +101,26 @@ void settingsDialog::on_pushButton_3_pressed()
 void settingsDialog::on_figureDescriptionText_textChanged()
 {
     s.setValue("figureDescription", ui->figureDescriptionText->toPlainText());
+}
+
+void settingsDialog::on_onlyRealsTrue_clicked(bool checked)
+{
+    if (checked)
+        s.setValue("automaticOnlyReals", true);
+
+    emit sceneInvalid();
+}
+
+void settingsDialog::on_onlyRealsFalse_clicked(bool checked)
+{
+    if (checked)
+        s.setValue("automaticOnlyReals", false);
+
+    emit sceneInvalid();
+}
+
+void settingsDialog::on_defaultPathLineEdit_textEdited(const QString &arg1)
+{
+    s.setValue("defaultSaveDirectory", QDir(ui->defaultPathLineEdit->text()).absolutePath());
+    emit saveDirectoryHasChanged();
 }

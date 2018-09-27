@@ -27,7 +27,7 @@ class cycleContextMenu : public QMenu
     Q_OBJECT
 
 public:
-    cycleContextMenu(MoebInv::figure *f, GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete = true);
+    cycleContextMenu(MoebInv::figure *f, GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete = true, bool isThis = false);
 
     GiNaC::ex getCycle();
     QList<menuRelAction *> getActions();
@@ -62,12 +62,13 @@ signals:
     void changesMadeToFigure();
 
 private:
-    QSettings *s;
+    QSettings s;
 
     MoebInv::figure *f;
     GiNaC::ex cycle;
     GiNaC::lst *relationList;
     bool isDelete;
+    bool isThis;
 
     QList<menuRelAction *> actions;
     QList<menuRelActionGroup *> groups;

@@ -80,6 +80,7 @@ private slots:
     void onCustomContextMenu(const QPoint &point);
     void unHighlightCycle();
     void changesMadeToFigure();
+    void saveDirectoryHasChanged();
 
     // ui slots
     void on_actionSave_triggered();
@@ -151,6 +152,7 @@ private:
 
     QDir saveDirectory;
     bool saved;
+    bool defaultDirectoryInUse;
 };
 
 #endif // MAINWINDOW_H

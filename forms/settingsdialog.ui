@@ -88,7 +88,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <widget class="QLineEdit" name="lineEdit"/>
+           <widget class="QLineEdit" name="defaultPathLineEdit"/>
           </item>
          </layout>
         </widget>
@@ -100,7 +100,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QRadioButton" name="radioButton">
+           <widget class="QRadioButton" name="onlyRealsTrue">
             <property name="text">
              <string>Enabled</string>
             </property>
@@ -110,7 +110,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioButton_2">
+           <widget class="QRadioButton" name="onlyRealsFalse">
             <property name="text">
              <string>Dissabled</string>
             </property>

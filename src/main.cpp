@@ -1,6 +1,7 @@
 #include <QApplication>
 #include "mainwindow.h"
 #include <QSettings>
+#include <QDebug>
 
 #include "conf.h"
 
@@ -139,7 +140,10 @@ void setDefaultSettings()
     /*!
      * The default save directory for .gar files.
      */
-    s.setValue("defaultSaveDirectory", QStandardPaths::DocumentsLocation);
+    QDir defaultPath = QDir(QStandardPaths::writableLocation(
+        static_cast<QStandardPaths::StandardLocation>(QStandardPaths::DocumentsLocation)));
+    qDebug() << defaultPath.absolutePath();
+    s.setValue("defaultSaveDirectory", defaultPath.absolutePath());
 
     /*!
      * Set whether the only relas relation is applied automatically to 'this'.

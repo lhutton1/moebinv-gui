@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->treeView, &QTreeView::customContextMenuRequested, this, &MainWindow::onCustomContextMenu);
     connect(scene, &graphicsScene::unHighlightCycle, this, &MainWindow::unHighlightCycle);
     connect(settingDialog, &settingsDialog::setBackgroundColour, ui->graphicsView, &view::setBackgroundColour);
+    connect(settingDialog, &settingsDialog::saveDirectoryHasChanged, this, &MainWindow::saveDirectoryHasChanged);
 
     // initialize figure
     if (s.value("setFloatEvaluation").toBool())
@@ -60,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
     menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
-    menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false);
+    menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false, true);
     buildToolBar();
 
     // create new labels object to create unique labels
@@ -76,9 +77,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // whether to add
     isAddPoint = true;
 
-    this->saveDirectory = QDir(QStandardPaths::writableLocation(
-        static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
+    this->saveDirectory = QDir(s.value("defaultSaveDirectory").toString());
     this->saved = true;
+    this->defaultDirectoryInUse = true;
 
     update();
 }
@@ -224,7 +225,7 @@ void MainWindow::addToTree(const ex &cycle, const QColor &colour)
 void MainWindow::initMainMenu() {
     menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
     menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
-    menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false);
+    menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false, true);
 
     connect(menus[0], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
     connect(menus[1], &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
@@ -284,6 +285,8 @@ void MainWindow::update()
     initMainMenu();
 
     ex keys = f.get_all_keys_sorted(REAL_LINE_GEN);
+
+    qDebug() << QDir(s.value("defaultSaveDirectory").toString());
 
     // for all items in the figure
     for (lst::const_iterator key =ex_to<lst>(keys).begin(); key != ex_to<lst>(keys).end(); ++key) {
@@ -398,8 +401,7 @@ void MainWindow::findCycleInTree(const GiNaC::ex &cycle)
  */
 void MainWindow::on_actionSave_triggered()
 {
-    QDir defaultPath = QDir(QStandardPaths::writableLocation(
-        static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
+    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
 
     if (s.value("figureName").toString() == "unnamed" || s.value("figureName").toString() == "."
         || defaultPath.absolutePath() == this->saveDirectory.absolutePath()) {
@@ -415,14 +417,14 @@ void MainWindow::on_actionSave_triggered()
 
     f.save(qPrintable(this->saveDirectory.absolutePath()), qPrintable(s.value("figureName").toString()));
     this->saved = true;
+    this->defaultDirectoryInUse = false;
     this->setWindowTitle(this->saveDirectory.dirName() + " - moebinv-gui");
 }
 
 
 void MainWindow::on_actionSave_As_triggered()
 {
-    QDir defaultPath = QDir(QStandardPaths::writableLocation(
-        static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
+    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
 
     QDir filePath = QDir(saveDialog->getSaveFileName(this, tr("Save Figure"), defaultPath.absolutePath(), tr("*.gar")));
 
@@ -433,6 +435,7 @@ void MainWindow::on_actionSave_As_triggered()
     s.setValue("figureName", filePath.dirName());
     f.save(qPrintable(this->saveDirectory.absolutePath()), qPrintable(s.value("figureName").toString()));
     this->saved = true;
+    this->defaultDirectoryInUse = false;
     this->setWindowTitle(this->saveDirectory.dirName() + " - moebinv-gui");
 }
 
@@ -451,8 +454,7 @@ void MainWindow::on_actionOpen_triggered()
     }
 
     QDir filePath;
-    QDir defaultPath = QDir(QStandardPaths::writableLocation(
-        static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
+    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
 
     filePath = QDir(saveDialog->getOpenFileName(this, tr("Open Figure"), defaultPath.absolutePath(), tr("*.gar")));
 
@@ -471,6 +473,7 @@ void MainWindow::on_actionOpen_triggered()
         s.setValue("figureName", filePath.dirName());
         this->setWindowTitle(fileName + " - moebinv-gui");
         this->saved = true;
+        this->defaultDirectoryInUse = false;
 
         // get figure metric
         s.setValue("pointMetric", ex_to<numeric>(ex_to<clifford>(f.get_point_metric()).get_metric(idx(0,2),idx(0,2))
@@ -484,6 +487,7 @@ void MainWindow::on_actionOpen_triggered()
         nextSymbol = lblGen->genNextSymbol();
 
         // Now update the scene
+        changesMadeToFigure();
         initialiseDefaultSettings();
         update();
     }
@@ -520,9 +524,12 @@ void MainWindow::on_actionNew_triggered()
             return;
     }
 
+    this->defaultDirectoryInUse = true;
     f = figure();
     lblGen = new labels(&this->f);
     nextSymbol = lblGen->genNextSymbol();
+
+    changesMadeToFigure();
     update();
 }
 
@@ -1342,15 +1349,20 @@ void MainWindow::on_actionDelete_cycle_triggered()
 
 void MainWindow::changesMadeToFigure()
 {
-    QDir defaultPath = QDir(QStandardPaths::writableLocation(
-            static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
+    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
 
-    if (this->saveDirectory.dirName() == defaultPath.dirName())
+    if (this->defaultDirectoryInUse)
         this->setWindowTitle("unnamed-figure* - moebinv-gui");
     else
         this->setWindowTitle(this->saveDirectory.dirName() + "* - moebinv-gui");
 
     this->saved = false;
+}
+
+
+void MainWindow::saveDirectoryHasChanged()
+{
+    this->saveDirectory = QDir(s.value("defaultSaveDirectory").toString());
 }
 
 

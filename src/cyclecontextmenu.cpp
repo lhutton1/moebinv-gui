@@ -32,12 +32,13 @@ using namespace MoebInv;
  * delete
  * -----------
  */
-cycleContextMenu::cycleContextMenu(figure *f, ex cycle, lst *relationList, bool isDelete)
+cycleContextMenu::cycleContextMenu(figure *f, ex cycle, lst *relationList, bool isDelete, bool isThis)
 {
     this->f = f;
     this->cycle = cycle;
     this->relationList = relationList;
     this->isDelete = isDelete;
+    this->isThis = isThis;
 
     this->colourDialog = new QColorDialog();
 
@@ -202,8 +203,14 @@ void cycleContextMenu::buildContextMenu()
 
     // build relation sub menu ------------------------------------------
     // first 5 relations are non-exclusive and don't require additional parameters.
-    for (int x = 0; x < 5; x++)
-        relationSubMenu->addAction(actions[x]->addRelation);
+    if (this->isThis) {
+        for (int x = 0; x < 5; x++)
+            relationSubMenu->addAction(actions[x]->addRelation);
+    } else {
+        for (int x = 0; x < 4; x++)
+            relationSubMenu->addAction(actions[x]->addRelation);
+    }
+
 
     relationSubMenu->addSeparator();
 
@@ -238,6 +245,9 @@ void cycleContextMenu::buildContextMenu()
  */
 void cycleContextMenu::buildActions()
 {
+    // only reals checked is determined by setting..
+    bool onlyRealsChecked = s.value("automaticOnlyReals").toBool();
+
     // tangent action group
     groups.append(new menuRelActionGroup(this));
 
@@ -246,7 +256,7 @@ void cycleContextMenu::buildActions()
     actions.append(new menuRelAction(this->f, this->cycle, relationList, "F-Orthogonal", NO_PARAMS, false, FORTHOGONAL));
     actions.append(new menuRelAction(this->f, this->cycle, relationList, "Different", NO_PARAMS, false, DIFFERENT));
     actions.append(new menuRelAction(this->f, this->cycle, relationList, "A-Different", NO_PARAMS, false, ADIFFERENT));
-    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Only Reals", NO_PARAMS, false, REALS));
+    actions.append(new menuRelAction(this->f, this->cycle, relationList, "Only Reals", NO_PARAMS, onlyRealsChecked, REALS));
     actions.append(new menuRelAction(this->f, this->cycle, relationList, "No Tangent", NO_PARAMS, true, NORELATION, groups[0]));
     actions.append(new menuRelAction(this->f, this->cycle, relationList, "Tangent Both", NO_PARAMS, false, TANGENT, groups[0]));
     actions.append(new menuRelAction(this->f, this->cycle, relationList, "Tangent Inner", NO_PARAMS, false, TANGENT_I, groups[0]));
