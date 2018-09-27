@@ -105,9 +105,14 @@ void setDefaultSettings()
     s.setValue("realCycles", true);
 
     /*!
+     * Set default the name of the figure.
+     */
+    s.setValue("figureName", "unnamed");
+
+    /*!
      * Set the default figure description.
      */
-    s.setValue("figureDescription", "Test");
+    s.setValue("figureDescription", "no description");
 
     /*!
      * Set automatic assignment of labels i.e. A, B, C, ...
@@ -118,6 +123,28 @@ void setDefaultSettings()
      * Set the default background colour
      */
     s.setValue("backgroundColour", QColor(255, 255, 255));
+
+    /*!
+     * The main windows position.
+     *
+     * A null value will mean that the OS uses its window manager to decide.
+     */
+    s.setValue("mainWindowPosition", 0);
+
+    /*!
+     * The main windows size.
+     */
+    s.setValue("mainWindowSize", 0);
+
+    /*!
+     * The default save directory for .gar files.
+     */
+    s.setValue("defaultSaveDirectory", QStandardPaths::DocumentsLocation);
+
+    /*!
+     * Set whether the only relas relation is applied automatically to 'this'.
+     */
+    s.setValue("automaticOnlyReals", true);
 }
 
 int main(int argc, char *argv[])

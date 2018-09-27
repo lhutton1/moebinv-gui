@@ -11,6 +11,7 @@ labels::labels(MoebInv::figure *f)
 {
     this->f = f;
     this->currentLetter = 1;
+    this->unnamedSymbol = GiNaC::symbol("unnamed");
 }
 
 
@@ -38,7 +39,24 @@ QString labels::genNextLabel()
     } else {
         lblString = "unnamed";
     }
+
     return lblString;
+}
+
+GiNaC::symbol labels::genNextSymbol(bool assignName)
+{
+    QString nextLabel = this->genNextLabel();
+
+    // check to make sure setting hasn't been changed and create symbol
+    if (!s.value("automaticLabels").toBool() && !assignName)
+        return GiNaC::ex_to<GiNaC::symbol>(this->unnamedSymbol);
+    else if (!s.value("automaticLabels").toBool() && assignName)
+        return GiNaC::symbol(qPrintable(this->getManualName()));
+    else if (s.value("automaticLabels").toBool() && nextLabel == "unnamed") {
+        this->advanceLabel();
+        return GiNaC::symbol(qPrintable(this->genNextLabel()));
+    } else
+        return GiNaC::symbol(qPrintable(this->genNextLabel()));
 }
 
 

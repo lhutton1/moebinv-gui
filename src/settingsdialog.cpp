@@ -80,3 +80,8 @@ void settingsDialog::on_pushButton_3_pressed()
     s.setValue("backgroundColour", colour);
     setBackgroundColour(colour);
 }
+
+void settingsDialog::on_figureDescriptionText_textChanged()
+{
+    s.setValue("figureDescription", ui->figureDescriptionText->toPlainText());
+}

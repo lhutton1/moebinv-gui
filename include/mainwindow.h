@@ -62,6 +62,7 @@ public:
     void createCycle(GiNaC::lst inputList = GiNaC::lst());
     void initialiseDefaultSettings();
     MoebInv::cycle_relation refactorCycleRelation(const GiNaC::ex &relationItem, const GiNaC::ex &newSymbol);
+    bool saveCheck();
     ~MainWindow();
 
     bool toolAddCycle;
@@ -78,6 +79,7 @@ private slots:
     void thisContextMenuUpdate();
     void onCustomContextMenu(const QPoint &point);
     void unHighlightCycle();
+    void changesMadeToFigure();
 
     // ui slots
     void on_actionSave_triggered();
@@ -102,6 +104,9 @@ private slots:
     void on_actionEllipticCycle_triggered(bool checked);
     void on_actionParabolicCycle_triggered(bool checked);
     void on_actionHyperbolicCycle_triggered(bool checked);
+    void on_actionQuit_triggered();
+    void on_actionDelete_cycle_triggered();
+    void on_actionSave_As_triggered();
 
 signals:
     void resetRelationalList();
@@ -143,6 +148,9 @@ private:
     QLabel *statusRelations;
 
     QMenu *defineCycleMenu;
+
+    QDir saveDirectory;
+    bool saved;
 };
 
 #endif // MAINWINDOW_H

@@ -21,9 +21,12 @@ class labels
 public:
     labels(MoebInv::figure *f);
     QString genNextLabel();
+    GiNaC::symbol genNextSymbol(bool assignName = false);
     void advanceLabel();
     QString node_label(GiNaC::ex name);
     QString getManualName();
+
+    GiNaC::ex unnamedSymbol;
 
 private:
     QSettings s;

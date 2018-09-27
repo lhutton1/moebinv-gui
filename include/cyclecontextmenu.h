@@ -59,6 +59,7 @@ signals:
     void weightSelected(double weight);
     void styleSelected(int style);
     void sceneInvalid();
+    void changesMadeToFigure();
 
 private:
     QSettings *s;

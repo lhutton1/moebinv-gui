@@ -86,6 +86,7 @@ public slots:
 signals:
     void findCycleInTree(GiNaC::ex cycle);
     void sceneInvalid();
+    void changesMadeToFigure();
 
 private:
     QSettings s;

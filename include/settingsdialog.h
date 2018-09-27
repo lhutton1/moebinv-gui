@@ -32,6 +32,8 @@ private slots:
 
     void on_pushButton_3_pressed();
 
+    void on_figureDescriptionText_textChanged();
+
 signals:
     void sceneInvalid();
     void setBackgroundColour(QColor colour);

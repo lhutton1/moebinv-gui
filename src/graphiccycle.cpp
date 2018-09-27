@@ -355,10 +355,10 @@ void graphicCycle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && this->itemIsHighlighted) {
         if (sceneX != event->scenePos().x() || sceneY != event->scenePos().y()) {
             // move the point in the figure.
-            //this->setFlag(ItemIsMovable, false);
             this->f->move_point(cycle, lst(event->scenePos().x(), event->scenePos().y()));
         }
         this->itemIsGrabbed = false;
+        emit changesMadeToFigure();
         emit sceneInvalid();
     }
 }

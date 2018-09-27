@@ -104,6 +104,7 @@ void cycleContextMenu::confirmDeleteCycle()
 
     if (confirmationMessageBox == QMessageBox::Yes) {
         f->remove_cycle_node(cycle);
+        emit changesMadeToFigure();
         emit sceneInvalid();
     }
 }

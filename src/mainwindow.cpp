@@ -65,8 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // create new labels object to create unique labels
     lblGen = new labels(&this->f);
-    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
-    unnamedSymbol = symbol("unnamed");
+    nextSymbol = lblGen->genNextSymbol();
 
     initTreeModel();
     initialiseDefaultSettings();
@@ -76,6 +75,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // whether to add
     isAddPoint = true;
+
+    this->saveDirectory = QDir(QStandardPaths::writableLocation(
+        static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
+    this->saved = true;
 
     update();
 }
@@ -294,13 +297,14 @@ void MainWindow::update()
 
         connect(menu, &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
         connect(menu, &cycleContextMenu::sceneInvalid, this, &MainWindow::sceneInvalid);
-
+        connect(menu, &cycleContextMenu::changesMadeToFigure, this, &MainWindow::changesMadeToFigure);
 
         struct cycleStyleData d = getCycleData(cycle);
 
         // add cycles to scene
         graphicCycle *c = new graphicCycle(&f, cycle, &ui->graphicsView->relativeScaleFactor, menu, d);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
+        connect(c, &graphicCycle::changesMadeToFigure, this, &MainWindow::changesMadeToFigure);
         // add to map
         cyclesMap[node_label(cycle)] = QPointer<graphicCycle>(c);
 
@@ -319,10 +323,10 @@ void MainWindow::update()
 
 
 /*!
- * \brief MainWindow::addCycle Add a cycle to the figure.
+ * \brief MainWindow::addPoint Add a point to the figure.
  * \param mousePos Coordinates of mouse on the scene.
  *
- * Adds a cycle to the figure then draws it on the scene.
+ * Adds a point to the figure then draws it on the scene.
  */
 void MainWindow::addPoint(QPointF mousePos)
 {
@@ -331,8 +335,7 @@ void MainWindow::addPoint(QPointF mousePos)
         double y = mousePos.y();
 
         // add cycle to the figure
-        if (!s.value("automaticLabels").toBool())
-            nextSymbol = symbol(qPrintable(lblGen->getManualName()));
+        nextSymbol = lblGen->genNextSymbol(true);
 
         ex cycle = f.add_point(lst{x, y}, nextSymbol);
 
@@ -344,13 +347,10 @@ void MainWindow::addPoint(QPointF mousePos)
 
         // generate next symbol
         lblGen->advanceLabel();
-        if (lblGen->genNextLabel() == "unnamed")
-            nextSymbol = unnamedSymbol;
-        else
-            nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
-
+        nextSymbol = lblGen->genNextSymbol();
 
         // refresh
+        changesMadeToFigure();
         update();
 
     }
@@ -398,10 +398,42 @@ void MainWindow::findCycleInTree(const GiNaC::ex &cycle)
  */
 void MainWindow::on_actionSave_triggered()
 {
-    QString fileName;
+    QDir defaultPath = QDir(QStandardPaths::writableLocation(
+        static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
 
-    fileName = saveDialog->getSaveFileName(this, tr("Save Figure"), QDir::homePath(), tr("*.gar"));
-    f.save(qPrintable(fileName));
+    if (s.value("figureName").toString() == "unnamed" || s.value("figureName").toString() == "."
+        || defaultPath.absolutePath() == this->saveDirectory.absolutePath()) {
+
+        QDir filePath = QDir(saveDialog->getSaveFileName(this, tr("Save Figure"), defaultPath.absolutePath(), tr("*.gar")));
+
+        if (filePath.path() == ".")
+            return;
+
+        this->saveDirectory = filePath;
+        s.setValue("figureName", filePath.dirName());
+    }
+
+    f.save(qPrintable(this->saveDirectory.absolutePath()), qPrintable(s.value("figureName").toString()));
+    this->saved = true;
+    this->setWindowTitle(this->saveDirectory.dirName() + " - moebinv-gui");
+}
+
+
+void MainWindow::on_actionSave_As_triggered()
+{
+    QDir defaultPath = QDir(QStandardPaths::writableLocation(
+        static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
+
+    QDir filePath = QDir(saveDialog->getSaveFileName(this, tr("Save Figure"), defaultPath.absolutePath(), tr("*.gar")));
+
+    if (filePath.path() == ".")
+        return;
+
+    this->saveDirectory = filePath;
+    s.setValue("figureName", filePath.dirName());
+    f.save(qPrintable(this->saveDirectory.absolutePath()), qPrintable(s.value("figureName").toString()));
+    this->saved = true;
+    this->setWindowTitle(this->saveDirectory.dirName() + " - moebinv-gui");
 }
 
 
@@ -412,24 +444,63 @@ void MainWindow::on_actionSave_triggered()
  */
 void MainWindow::on_actionOpen_triggered()
 {
-    QString fileName;
+    // check to make sure current file has been saved
+    if (!this->saved) {
+        if (!this->saveCheck())
+            return;
+    }
 
-    fileName = saveDialog->getOpenFileName(this, tr("Open Figure"), QDir::homePath(), tr("*.gar"));
+    QDir filePath;
+    QDir defaultPath = QDir(QStandardPaths::writableLocation(
+        static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
+
+    filePath = QDir(saveDialog->getOpenFileName(this, tr("Open Figure"), defaultPath.absolutePath(), tr("*.gar")));
+
+    if (filePath.path() == ".")
+        return;
+
+    QString fileName = filePath.dirName();
 
     if (!fileName.isEmpty() && !fileName.isNull()) {
         if (s.value("setFloatEvaluation").toBool())
-            f = figure(qPrintable(fileName)).set_float_eval();
+            f = figure(qPrintable(filePath.absolutePath()), qPrintable(fileName)).set_float_eval();
         else
-            f = figure(qPrintable(fileName));
+            f = figure(qPrintable(filePath.absolutePath()), qPrintable(fileName));
+
+        this->saveDirectory = filePath;
+        s.setValue("figureName", filePath.dirName());
+        this->setWindowTitle(fileName + " - moebinv-gui");
+        this->saved = true;
+
+        // get figure metric
+        s.setValue("pointMetric", ex_to<numeric>(ex_to<clifford>(f.get_point_metric()).get_metric(idx(0,2),idx(0,2))
+          *ex_to<clifford>(f.get_point_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int());
+
+        s.setValue("cycleMetric", ex_to<numeric>(ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(0,2),idx(0,2))
+          *ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int());
 
         // gen first symbol
         lblGen->advanceLabel();
-        nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
+        nextSymbol = lblGen->genNextSymbol();
 
         // Now update the scene
+        initialiseDefaultSettings();
         update();
     }
 }
+
+bool MainWindow::saveCheck()
+{
+    QMessageBox::StandardButton reply = QMessageBox::question(this, "Test", "The current figure is not saved. Are you sure you would like to continue?",
+        QMessageBox::Yes|QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        return true;
+    }
+
+    return false;
+}
+
 
 
 /*!
@@ -439,14 +510,20 @@ void MainWindow::on_actionOpen_triggered()
  */
 void MainWindow::on_actionNew_triggered()
 {
-    if (QMessageBox::Yes == QMessageBox(QMessageBox::Warning, "title",
-        "Are you sure you would like to create a new figure?", QMessageBox::Yes|QMessageBox::No).exec())
-    {
-        f = figure();
-        lblGen = new labels(&this->f);
-        nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
-        update();
+    if (!this->saved) {
+        if (!this->saveCheck())
+            return;
+    } else {
+        if (QMessageBox::No == QMessageBox(QMessageBox::Warning, "title",
+            "Are you sure you would like to create a new figure?", QMessageBox::Yes|QMessageBox::No).exec())
+
+            return;
     }
+
+    f = figure();
+    lblGen = new labels(&this->f);
+    nextSymbol = lblGen->genNextSymbol();
+    update();
 }
 
 
@@ -919,7 +996,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
 
     // only real cycles
     if (s.value("realCycles").toBool()) {
-        relationList.append(lst{nextSymbol, REALS, only_reals(nextSymbol), lst{}});
+        relationList.append(lst{lblGen->unnamedSymbol, REALS, only_reals(nextSymbol), lst{}});
     }
 
     createCycle();
@@ -936,8 +1013,7 @@ void MainWindow::createCycle(lst inputList)
 {
     ex cycle;
 
-    if (!s.value("automaticLabels").toBool())
-        nextSymbol = symbol(qPrintable(lblGen->getManualName()));
+    nextSymbol = lblGen->genNextSymbol(true);
 
     // add cycle by referencing relation list
     if (inputList.nops() == 0) {
@@ -947,7 +1023,7 @@ void MainWindow::createCycle(lst inputList)
             //unpack relation list
             for (auto item : relationList) {
                 // if relation is from unnamed cycle
-                if (item.op(0).is_equal(unnamedSymbol))
+                if (item.op(0).is_equal(lblGen->unnamedSymbol))
                     unpackedRelationList.append(refactorCycleRelation(item, nextSymbol));
                 else
                     unpackedRelationList.append(item.op(2));
@@ -982,13 +1058,24 @@ void MainWindow::createCycle(lst inputList)
 
     // creating cycle success
     lblGen->advanceLabel();
-    nextSymbol = symbol(qPrintable(lblGen->genNextLabel()));
+    nextSymbol = lblGen->genNextSymbol();
+    changesMadeToFigure();
     update();
 
     emit resetRelationalList();
     relationList.remove_all();
 }
 
+
+/*!
+ * \brief MainWindow::refactorCycleRelation refactor a relation.
+ * \param relationItem the relation to be changed.
+ * \param newSymbol the new cycle symbol to replace the old one.
+ * \return cycle_relation
+ *
+ * This function allows you to change the symbol a cycle_relation relation uses.
+ * This means the cycle can be changed after the original relation has been created.
+ */
 cycle_relation MainWindow::refactorCycleRelation(const ex &relationItem, const ex &newSymbol)
 {
     qDebug() << node_label(newSymbol);
@@ -1041,7 +1128,7 @@ cycle_relation MainWindow::refactorCycleRelation(const ex &relationItem, const e
             relation = sl2_transform(cycleSymbol, true, parameters);
             break;
     }
-    qDebug() << node_label(relation);
+
     return relation;
 }
 
@@ -1189,29 +1276,81 @@ void MainWindow::initialiseDefaultSettings()
     switch (s.value("pointMetric").toInt()) {
         case ELLIPTIC:
             ui->actionEllipticPoint->setChecked(true);
+            ui->actionParabolicPoint->setChecked(false);
+            ui->actionHyperbolicPoint->setChecked(false);
             break;
         case PARABOLIC:
             ui->actionParabolicPoint->setChecked(true);
+            ui->actionEllipticPoint->setChecked(false);
+            ui->actionHyperbolicPoint->setChecked(false);
             break;
         case HYPERBOLIC:
             ui->actionHyperbolicPoint->setChecked(true);
+            ui->actionParabolicPoint->setChecked(false);
+            ui->actionEllipticPoint->setChecked(false);
             break;
     }
 
     switch (s.value("cycleMetric").toInt()) {
         case ELLIPTIC:
             ui->actionEllipticCycle->setChecked(true);
+            ui->actionParabolicCycle->setChecked(false);
+            ui->actionHyperbolicCycle->setChecked(false);
             break;
         case PARABOLIC:
             ui->actionParabolicCycle->setChecked(true);
+            ui->actionParabolicCycle->setChecked(false);
+            ui->actionHyperbolicCycle->setChecked(false);
             break;
         case HYPERBOLIC:
             ui->actionHyperbolicCycle->setChecked(true);
+            ui->actionEllipticCycle->setChecked(false);
+            ui->actionParabolicCycle->setChecked(false);
             break;
     }
 
     //apply settings to the figure
     f.set_metric(s.value("pointMetric").toInt(), s.value("cycleMetric").toInt());
+}
+
+
+void MainWindow::on_actionQuit_triggered()
+{
+    // check to make sure current file has been saved
+    if (!this->saved) {
+        if (!this->saveCheck())
+            return;
+    }
+
+    QApplication::quit();
+}
+
+void MainWindow::on_actionDelete_cycle_triggered()
+{
+    QString inputCycleLabel = QInputDialog::getText(nullptr, "Delete cycle", "Cycle:");
+
+    try {
+        f.remove_cycle_node(f.get_cycle_key(qPrintable(inputCycleLabel)));
+    } catch (...) {
+        msgBox->warning(0, "Cycle label not found", "Cycle label not found - are you sure you entered it correctly?");
+        return;
+    }
+
+    changesMadeToFigure();
+    update();
+}
+
+void MainWindow::changesMadeToFigure()
+{
+    QDir defaultPath = QDir(QStandardPaths::writableLocation(
+            static_cast<QStandardPaths::StandardLocation>(s.value("defaultSaveDirectory").toInt())));
+
+    if (this->saveDirectory.dirName() == defaultPath.dirName())
+        this->setWindowTitle("unnamed-figure* - moebinv-gui");
+    else
+        this->setWindowTitle(this->saveDirectory.dirName() + "* - moebinv-gui");
+
+    this->saved = false;
 }
 
 
