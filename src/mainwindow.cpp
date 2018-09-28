@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // create new labels object to create unique labels
     lblGen = new labels(&this->f);
-    nextSymbol = lblGen->genNextSymbol();
+    nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
 
     initTreeModel();
     initialiseDefaultSettings();
@@ -286,8 +286,6 @@ void MainWindow::update()
 
     ex keys = f.get_all_keys_sorted(REAL_LINE_GEN);
 
-    qDebug() << QDir(s.value("defaultSaveDirectory").toString());
-
     // for all items in the figure
     for (lst::const_iterator key =ex_to<lst>(keys).begin(); key != ex_to<lst>(keys).end(); ++key) {
         // get cycle
@@ -350,7 +348,7 @@ void MainWindow::addPoint(QPointF mousePos)
 
         // generate next symbol
         lblGen->advanceLabel();
-        nextSymbol = lblGen->genNextSymbol();
+        nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
 
         // refresh
         changesMadeToFigure();
@@ -484,7 +482,7 @@ void MainWindow::on_actionOpen_triggered()
 
         // gen first symbol
         lblGen->advanceLabel();
-        nextSymbol = lblGen->genNextSymbol();
+        nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
 
         // Now update the scene
         changesMadeToFigure();
@@ -527,7 +525,7 @@ void MainWindow::on_actionNew_triggered()
     this->defaultDirectoryInUse = true;
     f = figure();
     lblGen = new labels(&this->f);
-    nextSymbol = lblGen->genNextSymbol();
+    nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
 
     changesMadeToFigure();
     update();
@@ -1020,7 +1018,7 @@ void MainWindow::createCycle(lst inputList)
 {
     ex cycle;
 
-    nextSymbol = lblGen->genNextSymbol(true);
+    nextSymbol = lblGen->genNextSymbol(this->nextSymbol, true);
 
     // add cycle by referencing relation list
     if (inputList.nops() == 0) {
@@ -1065,7 +1063,7 @@ void MainWindow::createCycle(lst inputList)
 
     // creating cycle success
     lblGen->advanceLabel();
-    nextSymbol = lblGen->genNextSymbol();
+    nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
     changesMadeToFigure();
     update();
 
@@ -1298,6 +1296,7 @@ void MainWindow::initialiseDefaultSettings()
             break;
     }
 
+    qDebug() << s.value("cycleMetric").toInt();
     switch (s.value("cycleMetric").toInt()) {
         case ELLIPTIC:
             ui->actionEllipticCycle->setChecked(true);
@@ -1306,7 +1305,7 @@ void MainWindow::initialiseDefaultSettings()
             break;
         case PARABOLIC:
             ui->actionParabolicCycle->setChecked(true);
-            ui->actionParabolicCycle->setChecked(false);
+            ui->actionEllipticCycle->setChecked(false);
             ui->actionHyperbolicCycle->setChecked(false);
             break;
         case HYPERBOLIC:

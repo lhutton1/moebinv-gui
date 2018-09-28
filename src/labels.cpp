@@ -43,20 +43,24 @@ QString labels::genNextLabel()
     return lblString;
 }
 
-GiNaC::symbol labels::genNextSymbol(bool assignName)
+GiNaC::symbol labels::genNextSymbol(GiNaC::ex nextSymbol, bool assignName)
 {
     QString nextLabel = this->genNextLabel();
 
-    // check to make sure setting hasn't been changed and create symbol
-    if (!s.value("automaticLabels").toBool() && !assignName)
+    // create the relevent symbol based on setting (manual/automatic) and
+    // current state of the program
+    if (!s.value("automaticLabels").toBool() && !assignName) {
         return GiNaC::ex_to<GiNaC::symbol>(this->unnamedSymbol);
-    else if (!s.value("automaticLabels").toBool() && assignName)
+    } else if (!s.value("automaticLabels").toBool() && assignName) {
         return GiNaC::symbol(qPrintable(this->getManualName()));
-    else if (s.value("automaticLabels").toBool() && nextLabel == "unnamed") {
+    } else if (s.value("automaticLabels").toBool() && nextLabel == "unnamed") {
         this->advanceLabel();
         return GiNaC::symbol(qPrintable(this->genNextLabel()));
-    } else
+    } else if (node_label(nextSymbol) == nextLabel) {
+        return GiNaC::ex_to<GiNaC::symbol>(nextSymbol);
+    } else {
         return GiNaC::symbol(qPrintable(this->genNextLabel()));
+    }
 }
 
 

@@ -86,9 +86,16 @@
          <property name="title">
           <string>Default save directory:</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QLineEdit" name="defaultPathLineEdit"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

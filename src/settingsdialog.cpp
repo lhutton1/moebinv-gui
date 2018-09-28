@@ -124,3 +124,13 @@ void settingsDialog::on_defaultPathLineEdit_textEdited(const QString &arg1)
     s.setValue("defaultSaveDirectory", QDir(ui->defaultPathLineEdit->text()).absolutePath());
     emit saveDirectoryHasChanged();
 }
+
+void settingsDialog::on_pushButton_4_clicked()
+{
+    QDir filePath = QDir(QFileDialog::getExistingDirectory(nullptr, "hello",  QDir(ui->defaultPathLineEdit->text()).absolutePath()));
+
+    if (filePath.absolutePath() != ".") {
+        ui->defaultPathLineEdit->setText(filePath.absolutePath());
+        ui->defaultPathLineEdit->selectAll();
+    }
+}

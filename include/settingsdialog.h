@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QColorDialog>
 #include <QStandardPaths>
+#include <QFileDialog>
 #include <QDir>
 
 #include "conf.h"
@@ -36,6 +37,8 @@ private slots:
     void on_onlyRealsFalse_clicked(bool checked);
 
     void on_defaultPathLineEdit_textEdited(const QString &arg1);
+
+    void on_pushButton_4_clicked();
 
 signals:
     void sceneInvalid();
