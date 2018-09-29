@@ -104,8 +104,10 @@ void cycleContextMenu::confirmDeleteCycle()
             QMessageBox::Yes|QMessageBox::No);
 
     if (confirmationMessageBox == QMessageBox::Yes) {
+        MoebInv::figure originalFigure = *this->f;
         f->remove_cycle_node(cycle);
-        emit changesMadeToFigure();
+        MoebInv::figure changedFigure = *this->f;
+        emit changesMadeToFigure(originalFigure, changedFigure);
         emit sceneInvalid();
     }
 }

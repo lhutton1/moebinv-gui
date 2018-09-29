@@ -56,7 +56,7 @@ GiNaC::symbol labels::genNextSymbol(GiNaC::ex nextSymbol, bool assignName)
     } else if (s.value("automaticLabels").toBool() && nextLabel == "unnamed") {
         this->advanceLabel();
         return GiNaC::symbol(qPrintable(this->genNextLabel()));
-    } else if (node_label(nextSymbol) == nextLabel) {
+    } else if (s.value("automaticLabels").toBool() && node_label(nextSymbol) == nextLabel) {
         return GiNaC::ex_to<GiNaC::symbol>(nextSymbol);
     } else {
         return GiNaC::symbol(qPrintable(this->genNextLabel()));

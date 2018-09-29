@@ -355,10 +355,12 @@ void graphicCycle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && this->itemIsHighlighted) {
         if (sceneX != event->scenePos().x() || sceneY != event->scenePos().y()) {
             // move the point in the figure.
+            MoebInv::figure originalFigure = *this->f;
             this->f->move_point(cycle, lst(event->scenePos().x(), event->scenePos().y()));
+            MoebInv::figure changedFigure = *this->f;
+            emit changesMadeToFigure(originalFigure, changedFigure);
         }
         this->itemIsGrabbed = false;
-        emit changesMadeToFigure();
         emit sceneInvalid();
     }
 }
@@ -402,11 +404,16 @@ bool graphicCycle::setCycleAsy(const ex &new_cycle, const struct cycleStyleData 
                 lineStyle + "+" +
                 lineWidth;
 
+    MoebInv::figure originalFigure = *this->f;
+
     try {
         f->set_asy_style(new_cycle, qPrintable(asyString));
     } catch (...) {
         return false;
     }
+
+    MoebInv::figure changedFigure = *this->f;
+    changesMadeToFigure(originalFigure, changedFigure);
 
     return true;
 }

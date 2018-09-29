@@ -38,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     saveDialog = new QFileDialog();
     settingDialog = new settingsDialog(this);
     settingDialog->setModal(true);
+    this->undoStack = new QUndoStack(this);
+    this->undoStack->setUndoLimit(s.value("undoLimit").toInt());
 
     // set up new event
     connect(scene, &graphicsScene::newMouseLeftPress, this, &MainWindow::addPoint);
@@ -50,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(scene, &graphicsScene::unHighlightCycle, this, &MainWindow::unHighlightCycle);
     connect(settingDialog, &settingsDialog::setBackgroundColour, ui->graphicsView, &view::setBackgroundColour);
     connect(settingDialog, &settingsDialog::saveDirectoryHasChanged, this, &MainWindow::saveDirectoryHasChanged);
+    connect(ui->actionUndo, &QAction::triggered, this->undoStack, &QUndoStack::undo);
+    connect(ui->actionRedo, &QAction::triggered, this->undoStack, &QUndoStack::redo);
 
     // initialize figure
     if (s.value("setFloatEvaluation").toBool())
@@ -331,12 +335,14 @@ void MainWindow::update()
  */
 void MainWindow::addPoint(QPointF mousePos)
 {
+    MoebInv::figure originalFigure = this->f;
+
     if (isAddPoint) {
         double x = mousePos.x();
         double y = mousePos.y();
 
         // add cycle to the figure
-        nextSymbol = lblGen->genNextSymbol(true);
+        nextSymbol = lblGen->genNextSymbol(this->nextSymbol, true);
 
         ex cycle = f.add_point(lst{x, y}, nextSymbol);
 
@@ -351,7 +357,7 @@ void MainWindow::addPoint(QPointF mousePos)
         nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
 
         // refresh
-        changesMadeToFigure();
+        changesMadeToFigure(originalFigure, this->f);
         update();
 
     }
@@ -445,6 +451,8 @@ void MainWindow::on_actionSave_As_triggered()
  */
 void MainWindow::on_actionOpen_triggered()
 {
+    MoebInv::figure originalFigure = this->f;
+
     // check to make sure current file has been saved
     if (!this->saved) {
         if (!this->saveCheck())
@@ -485,7 +493,7 @@ void MainWindow::on_actionOpen_triggered()
         nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
 
         // Now update the scene
-        changesMadeToFigure();
+        changesMadeToFigure(originalFigure, this->f);
         initialiseDefaultSettings();
         update();
     }
@@ -512,6 +520,8 @@ bool MainWindow::saveCheck()
  */
 void MainWindow::on_actionNew_triggered()
 {
+    MoebInv::figure originalFigure = this->f;
+
     if (!this->saved) {
         if (!this->saveCheck())
             return;
@@ -527,7 +537,7 @@ void MainWindow::on_actionNew_triggered()
     lblGen = new labels(&this->f);
     nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
 
-    changesMadeToFigure();
+    changesMadeToFigure(originalFigure, this->f);
     update();
 }
 
@@ -1016,6 +1026,7 @@ void MainWindow::on_actionCreate_Cycle_triggered()
  */
 void MainWindow::createCycle(lst inputList)
 {
+    MoebInv::figure originalFigure = this->f;
     ex cycle;
 
     nextSymbol = lblGen->genNextSymbol(this->nextSymbol, true);
@@ -1064,7 +1075,7 @@ void MainWindow::createCycle(lst inputList)
     // creating cycle success
     lblGen->advanceLabel();
     nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
-    changesMadeToFigure();
+    changesMadeToFigure(originalFigure, this->f);
     update();
 
     emit resetRelationalList();
@@ -1083,7 +1094,6 @@ void MainWindow::createCycle(lst inputList)
  */
 cycle_relation MainWindow::refactorCycleRelation(const ex &relationItem, const ex &newSymbol)
 {
-    qDebug() << node_label(newSymbol);
     ex cycleSymbol = newSymbol;
     GiNaC::ex relationType = relationItem.op(1);
     GiNaC::ex parameters = relationItem.op(3);
@@ -1296,7 +1306,6 @@ void MainWindow::initialiseDefaultSettings()
             break;
     }
 
-    qDebug() << s.value("cycleMetric").toInt();
     switch (s.value("cycleMetric").toInt()) {
         case ELLIPTIC:
             ui->actionEllipticCycle->setChecked(true);
@@ -1334,6 +1343,7 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_actionDelete_cycle_triggered()
 {
     QString inputCycleLabel = QInputDialog::getText(nullptr, "Delete cycle", "Cycle:");
+    MoebInv::figure originalFigure = this->f;
 
     try {
         f.remove_cycle_node(f.get_cycle_key(qPrintable(inputCycleLabel)));
@@ -1342,11 +1352,11 @@ void MainWindow::on_actionDelete_cycle_triggered()
         return;
     }
 
-    changesMadeToFigure();
+    changesMadeToFigure(originalFigure, this->f);
     update();
 }
 
-void MainWindow::changesMadeToFigure()
+void MainWindow::changesMadeToFigure(const MoebInv::figure &originalFigure, const MoebInv::figure &changedFigure)
 {
     QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
 
@@ -1356,12 +1366,23 @@ void MainWindow::changesMadeToFigure()
         this->setWindowTitle(this->saveDirectory.dirName() + "* - moebinv-gui");
 
     this->saved = false;
+
+    //push current figure onto the undo stack
+    figureUndoCommand *command = new figureUndoCommand(&this->f, originalFigure, changedFigure);
+    this->undoStack->push(command);
+    connect(command, &figureUndoCommand::sceneInvalid, this, &MainWindow::replaceFigure);
 }
 
 
 void MainWindow::saveDirectoryHasChanged()
 {
     this->saveDirectory = QDir(s.value("defaultSaveDirectory").toString());
+}
+
+void MainWindow::replaceFigure(const MoebInv::figure &replacementFigure)
+{
+    this->f = replacementFigure;
+    update();
 }
 
 

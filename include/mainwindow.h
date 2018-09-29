@@ -17,6 +17,7 @@
 #include <QTimer>
 #include <QLabel>
 #include <QRegularExpression>
+#include <QUndoStack>
 
 #include <figure.h>
 
@@ -28,6 +29,7 @@
 #include "treemodel.h"
 #include "definecycledialog.h"
 #include "settingsdialog.h"
+#include "figureundocommand.h"
 
 namespace Ui {
 class MainWindow;
@@ -79,8 +81,9 @@ private slots:
     void thisContextMenuUpdate();
     void onCustomContextMenu(const QPoint &point);
     void unHighlightCycle();
-    void changesMadeToFigure();
+    void changesMadeToFigure(const MoebInv::figure &originalFigure, const MoebInv::figure &changedFigure);
     void saveDirectoryHasChanged();
+    void replaceFigure(const MoebInv::figure &replacementFigure);
 
     // ui slots
     void on_actionSave_triggered();
@@ -153,6 +156,8 @@ private:
     QDir saveDirectory;
     bool saved;
     bool defaultDirectoryInUse;
+
+    QUndoStack *undoStack;
 };
 
 #endif // MAINWINDOW_H

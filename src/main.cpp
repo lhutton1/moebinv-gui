@@ -142,13 +142,17 @@ void setDefaultSettings()
      */
     QDir defaultPath = QDir(QStandardPaths::writableLocation(
         static_cast<QStandardPaths::StandardLocation>(QStandardPaths::DocumentsLocation)));
-    qDebug() << defaultPath.absolutePath();
     s.setValue("defaultSaveDirectory", defaultPath.absolutePath());
 
     /*!
      * Set whether the only relas relation is applied automatically to 'this'.
      */
     s.setValue("automaticOnlyReals", true);
+
+    /*!
+     *
+     */
+    s.setValue("undoLimit", 10);
 }
 
 int main(int argc, char *argv[])

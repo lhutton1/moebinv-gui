@@ -86,7 +86,7 @@ public slots:
 signals:
     void findCycleInTree(GiNaC::ex cycle);
     void sceneInvalid();
-    void changesMadeToFigure();
+    void changesMadeToFigure(const MoebInv::figure &originalFigure, const MoebInv::figure &changedFigure);
 
 private:
     QSettings s;

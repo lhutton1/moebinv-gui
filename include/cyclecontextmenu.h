@@ -59,7 +59,7 @@ signals:
     void weightSelected(double weight);
     void styleSelected(int style);
     void sceneInvalid();
-    void changesMadeToFigure();
+    void changesMadeToFigure(const MoebInv::figure &originalFigure, const MoebInv::figure &changedFigure);
 
 private:
     QSettings s;

@@ -44,7 +44,8 @@ SOURCES += \
         src/matrix4dialog.cpp \
         src/matrix8dialog.cpp \
         src/definecycledialog.cpp \
-        src/settingsdialog.cpp
+        src/settingsdialog.cpp \
+        src/figureundocommand.cpp
 
 HEADERS += \
         include/conf.h \
@@ -63,7 +64,8 @@ HEADERS += \
         include/matrix4dialog.h \
         include/matrix8dialog.h \
         include/definecycledialog.h \
-        include/settingsdialog.h
+        include/settingsdialog.h \
+        include/figureundocommand.h
 
 FORMS += \
         forms/mainwindow.ui \
