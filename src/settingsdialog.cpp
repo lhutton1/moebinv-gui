@@ -31,10 +31,6 @@ void settingsDialog::setButtonColour(QPushButton *buttonPushed, QColor colour)
 
 void settingsDialog::update()
 {
-    // get current figure description
-    ui->figureDescriptionText->setText(s.value("figureDescription").toString());
-    ui->figureDescriptionText->moveCursor(QTextCursor::End);
-
     // get default colours
     setButtonColour(ui->pushButton, s.value("defaultGraphicsColour").value<QColor>());
     setButtonColour(ui->pushButton_2, s.value("graphicsHoverColour").value<QColor>());
@@ -99,11 +95,6 @@ void settingsDialog::on_pushButton_3_pressed()
     setButtonColour(ui->pushButton_3, colour);
     s.setValue("backgroundColour", colour);
     setBackgroundColour(colour);
-}
-
-void settingsDialog::on_figureDescriptionText_textChanged()
-{
-    s.setValue("figureDescription", ui->figureDescriptionText->toPlainText());
 }
 
 void settingsDialog::on_onlyRealsTrue_clicked(bool checked)

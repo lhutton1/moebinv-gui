@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     saveDialog = new QFileDialog();
     settingDialog = new settingsDialog(this);
     settingDialog->setModal(true);
+    propDialog = new propertiesDialog(this);
     this->undoStack = new QUndoStack(this);
     this->undoStack->setUndoLimit(s.value("undoLimit").toInt());
 
@@ -1193,145 +1194,6 @@ void MainWindow::on_actionFigure_Description_triggered()
     }
 }
 
-void MainWindow::on_actionEllipticPoint_triggered(bool checked)
-{
-    if (checked) {
-        ui->actionParabolicPoint->setChecked(false);
-        ui->actionHyperbolicPoint->setChecked(false);
-        s.setValue("pointMetric", ELLIPTIC);
-        f.set_metric(ELLIPTIC, s.value("cycleMetric").toInt());
-
-        //update the view
-        ui->graphicsView->viewport()->update();
-    } else {
-        ui->actionEllipticPoint->setChecked(true);
-    }
-}
-
-void MainWindow::on_actionParabolicPoint_triggered(bool checked)
-{
-    if (checked) {
-        ui->actionEllipticPoint->setChecked(false);
-        ui->actionHyperbolicPoint->setChecked(false);
-        s.setValue("pointMetric", PARABOLIC);
-        f.set_metric(PARABOLIC, s.value("cycleMetric").toInt());
-
-        //update the view
-        ui->graphicsView->viewport()->update();
-    } else {
-        ui->actionParabolicPoint->setChecked(true);
-    }
-}
-
-void MainWindow::on_actionHyperbolicPoint_triggered(bool checked)
-{
-    if (checked) {
-        ui->actionEllipticPoint->setChecked(false);
-        ui->actionParabolicPoint->setChecked(false);
-        s.setValue("pointMetric", HYPERBOLIC);
-        f.set_metric(HYPERBOLIC, s.value("cycleMetric").toInt());
-
-        //update the view
-        ui->graphicsView->viewport()->update();
-    } else {
-        ui->actionHyperbolicPoint->setChecked(true);
-    }
-}
-
-void MainWindow::on_actionEllipticCycle_triggered(bool checked)
-{
-    if (checked) {
-        ui->actionParabolicCycle->setChecked(false);
-        ui->actionHyperbolicCycle->setChecked(false);
-        s.setValue("cycleMetric", ELLIPTIC);
-        f.set_metric(s.value("pointMetric").toInt(), ELLIPTIC);
-
-        //update the view
-        ui->graphicsView->viewport()->update();
-    } else {
-        ui->actionEllipticCycle->setChecked(true);
-    }
-}
-
-void MainWindow::on_actionParabolicCycle_triggered(bool checked)
-{
-    if (checked) {
-        ui->actionEllipticCycle->setChecked(false);
-        ui->actionHyperbolicCycle->setChecked(false);
-        s.setValue("cycleMetric", PARABOLIC);
-        f.set_metric(s.value("pointMetric").toInt(), PARABOLIC);
-
-        //update the view
-        ui->graphicsView->viewport()->update();
-    } else {
-        ui->actionParabolicCycle->setChecked(true);
-    }
-}
-
-void MainWindow::on_actionHyperbolicCycle_triggered(bool checked)
-{
-    if (checked) {
-        ui->actionParabolicCycle->setChecked(false);
-        ui->actionEllipticCycle->setChecked(false);
-        s.setValue("cycleMetric", HYPERBOLIC);
-        f.set_metric(s.value("pointMetric").toInt(), HYPERBOLIC);
-
-        //update the view
-        ui->graphicsView->viewport()->update();
-    } else {
-        ui->actionHyperbolicCycle->setChecked(true);
-    }
-}
-
-
-void MainWindow::initialiseDefaultSettings()
-{
-    // update ui items
-    ui->actionLabels->setChecked(true);
-
-    if (s.value("floatEvaluation").toBool())
-        ui->actionFloating->setChecked(true);
-
-    switch (s.value("pointMetric").toInt()) {
-        case ELLIPTIC:
-            ui->actionEllipticPoint->setChecked(true);
-            ui->actionParabolicPoint->setChecked(false);
-            ui->actionHyperbolicPoint->setChecked(false);
-            break;
-        case PARABOLIC:
-            ui->actionParabolicPoint->setChecked(true);
-            ui->actionEllipticPoint->setChecked(false);
-            ui->actionHyperbolicPoint->setChecked(false);
-            break;
-        case HYPERBOLIC:
-            ui->actionHyperbolicPoint->setChecked(true);
-            ui->actionParabolicPoint->setChecked(false);
-            ui->actionEllipticPoint->setChecked(false);
-            break;
-    }
-
-    switch (s.value("cycleMetric").toInt()) {
-        case ELLIPTIC:
-            ui->actionEllipticCycle->setChecked(true);
-            ui->actionParabolicCycle->setChecked(false);
-            ui->actionHyperbolicCycle->setChecked(false);
-            break;
-        case PARABOLIC:
-            ui->actionParabolicCycle->setChecked(true);
-            ui->actionEllipticCycle->setChecked(false);
-            ui->actionHyperbolicCycle->setChecked(false);
-            break;
-        case HYPERBOLIC:
-            ui->actionHyperbolicCycle->setChecked(true);
-            ui->actionEllipticCycle->setChecked(false);
-            ui->actionParabolicCycle->setChecked(false);
-            break;
-    }
-
-    //apply settings to the figure
-    f.set_metric(s.value("pointMetric").toInt(), s.value("cycleMetric").toInt());
-}
-
 
 void MainWindow::on_actionQuit_triggered()
 {
@@ -1400,6 +1262,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 }
 
 
+void MainWindow::on_actionProperties_triggered()
+{
+    propDialog->show();
+}
 
 
 // REMOVE...
@@ -1421,4 +1287,143 @@ QString MainWindow::node_label(GiNaC::ex name)
     string dr = drawing.str().c_str();
 
     return QString::fromStdString(dr);
+}
+
+
+
+void MainWindow::initialiseDefaultSettings()
+{
+    // update ui items
+    ui->actionLabels->setChecked(true);
+
+    if (s.value("floatEvaluation").toBool())
+        ui->actionFloating->setChecked(true);
+
+    QMenu *pointMenu = new QMenu();
+    QActionGroup *pointGroup = new QActionGroup(pointMenu);
+
+    QMenu *cycleMenu = new QMenu();
+    QActionGroup *cycleGroup = new QActionGroup(cycleMenu);
+
+    QMenu *evalTypeMenu = new QMenu();
+    QActionGroup *evalTypeGroup = new QActionGroup(evalTypeMenu);
+
+    ui->actionPointMetric->setMenu(pointMenu);
+    ui->actionCycleMetric->setMenu(cycleMenu);
+    ui->actionEvaluationType->setMenu(evalTypeMenu);
+
+    pointGroup->addAction(ui->actionEllipticPointMetric);
+    pointGroup->addAction(ui->actionParabolicPointMetric);
+    pointGroup->addAction(ui->actionHyperbolicPointMetric);
+    pointMenu->addActions(pointGroup->actions());
+
+    cycleGroup->addAction(ui->actionEllipticCycleMetric);
+    cycleGroup->addAction(ui->actionParabolicCycleMetric);
+    cycleGroup->addAction(ui->actionHyperbolicCycleMetric);
+    cycleMenu->addActions(cycleGroup->actions());
+
+    evalTypeGroup->addAction(ui->actionFloating);
+    evalTypeGroup->addAction(ui->actionExact);
+    evalTypeMenu->addActions(evalTypeGroup->actions());
+
+    //apply settings to the figure
+    f.set_metric(s.value("pointMetric").toInt(), s.value("cycleMetric").toInt());
+
+    switch (s.value("evaluationType").toInt()) {
+        case EXACT:
+            f.set_exact_eval();
+            break;
+        case FLOATING:
+            f.set_float_eval();
+            break;
+    }
+}
+
+
+void MainWindow::on_actionEllipticPointMetric_triggered()
+{
+    s.setValue("pointMetric", ELLIPTIC);
+    ui->graphicsView->viewport()->update();
+}
+
+void MainWindow::on_actionParabolicPointMetric_triggered()
+{
+    s.setValue("pointMetric", PARABOLIC);
+    ui->graphicsView->viewport()->update();
+}
+
+void MainWindow::on_actionHyperbolicPointMetric_triggered()
+{
+    s.setValue("pointMetric", HYPERBOLIC);
+    ui->graphicsView->viewport()->update();
+}
+
+void MainWindow::on_actionEllipticCycleMetric_triggered()
+{
+    s.setValue("cycleMetric", ELLIPTIC);
+    ui->graphicsView->viewport()->update();
+}
+
+void MainWindow::on_actionParabolicCycleMetric_triggered()
+{
+    s.setValue("cycleMetric", PARABOLIC);
+    ui->graphicsView->viewport()->update();
+}
+
+void MainWindow::on_actionHyperbolicCycleMetric_triggered()
+{
+    s.setValue("cycleMetric", HYPERBOLIC);
+    ui->graphicsView->viewport()->update();
+}
+
+void MainWindow::on_actionPointMetric_hovered()
+{
+    switch(s.value("pointMetric").toInt()) {
+        case ELLIPTIC:
+            ui->actionEllipticPointMetric->setChecked(true);
+            break;
+        case PARABOLIC:
+            ui->actionParabolicPointMetric->setChecked(true);
+            break;
+        case HYPERBOLIC:
+            ui->actionHyperbolicPointMetric->setChecked(true);
+            break;
+    }
+}
+
+void MainWindow::on_actionCycleMetric_hovered()
+{
+    switch(s.value("cycleMetric").toInt()) {
+        case ELLIPTIC:
+            ui->actionEllipticCycleMetric->setChecked(true);
+            break;
+        case PARABOLIC:
+            ui->actionParabolicCycleMetric->setChecked(true);
+            break;
+        case HYPERBOLIC:
+            ui->actionHyperbolicCycleMetric->setChecked(true);
+            break;
+    }
+}
+
+void MainWindow::on_actionEvaluationType_hovered()
+{
+    switch (s.value("evaluationType").toInt()) {
+        case EXACT:
+            ui->actionExact->setChecked(true);
+            break;
+        case FLOATING:
+            ui->actionFloating->setChecked(true);
+            break;
+    }
+}
+
+void MainWindow::on_actionFloating_triggered()
+{
+    s.setValue("evaluationType", FLOATING);
+}
+
+void MainWindow::on_actionExact_triggered()
+{
+    s.setValue("evaluationType", EXACT);
 }

@@ -17,7 +17,7 @@ void setDefaultSettings()
     /*!
      * Sets the cycle metric.
      */
-    s.setValue("cycleMetric", PARABOLIC);
+    s.setValue("cycleMetric", ELLIPTIC);
 
     /*!
      * Sets the figure evaluation type.

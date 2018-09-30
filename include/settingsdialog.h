@@ -32,14 +32,10 @@ private slots:
     void on_pushButton_pressed();
     void on_pushButton_2_pressed();
     void on_pushButton_3_pressed();
-    void on_figureDescriptionText_textChanged();
     void on_onlyRealsTrue_clicked(bool checked);
     void on_onlyRealsFalse_clicked(bool checked);
-
     void on_defaultPathLineEdit_textEdited(const QString &arg1);
-
     void on_pushButton_4_clicked();
-
     void on_spinBox_valueChanged(int arg1);
 
 signals:

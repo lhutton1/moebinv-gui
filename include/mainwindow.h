@@ -31,6 +31,7 @@
 #include "definecycledialog.h"
 #include "settingsdialog.h"
 #include "figureundocommand.h"
+#include "propertiesdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -67,6 +68,8 @@ public:
     MoebInv::cycle_relation refactorCycleRelation(const GiNaC::ex &relationItem, const GiNaC::ex &newSymbol);
     bool saveCheck();
     void keyPressEvent(QKeyEvent *event);
+    void updateFigureProperties();
+
     ~MainWindow();
 
     bool toolAddCycle;
@@ -104,15 +107,33 @@ private slots:
     void on_actionExact_triggered(bool checked);
     void on_actionSettings_triggered();
     void on_actionFigure_Description_triggered();
-    void on_actionEllipticPoint_triggered(bool checked);
-    void on_actionParabolicPoint_triggered(bool checked);
-    void on_actionHyperbolicPoint_triggered(bool checked);
-    void on_actionEllipticCycle_triggered(bool checked);
-    void on_actionParabolicCycle_triggered(bool checked);
-    void on_actionHyperbolicCycle_triggered(bool checked);
     void on_actionQuit_triggered();
     void on_actionDelete_cycle_triggered();
     void on_actionSave_As_triggered();
+
+    void on_actionProperties_triggered();
+
+    void on_actionEllipticPointMetric_triggered();
+
+    void on_actionParabolicPointMetric_triggered();
+
+    void on_actionHyperbolicPointMetric_triggered();
+
+    void on_actionEllipticCycleMetric_triggered();
+
+    void on_actionParabolicCycleMetric_triggered();
+
+    void on_actionHyperbolicCycleMetric_triggered();
+
+    void on_actionPointMetric_hovered();
+
+    void on_actionCycleMetric_hovered();
+
+    void on_actionEvaluationType_hovered();
+
+    void on_actionFloating_triggered();
+
+    void on_actionExact_triggered();
 
 signals:
     void resetRelationalList();
@@ -140,6 +161,7 @@ private:
     QMessageBox *msgBox;
     QFileDialog *saveDialog;
     settingsDialog *settingDialog;
+    propertiesDialog *propDialog;
 
     QToolButton *defineCycle;
     QToolButton *thisItem;

@@ -98,29 +98,6 @@
      <addaction name="actionDefine_by_values"/>
      <addaction name="actionDefine_by_center_and_radius_squared"/>
     </widget>
-    <widget class="QMenu" name="menuEvaluation_Type">
-     <property name="title">
-      <string>Evaluation Type</string>
-     </property>
-     <addaction name="actionFloating"/>
-     <addaction name="actionExact"/>
-    </widget>
-    <widget class="QMenu" name="menuDrawing_Metric">
-     <property name="title">
-      <string>Point Metric</string>
-     </property>
-     <addaction name="actionEllipticPoint"/>
-     <addaction name="actionParabolicPoint"/>
-     <addaction name="actionHyperbolicPoint"/>
-    </widget>
-    <widget class="QMenu" name="menuCycle_Metric">
-     <property name="title">
-      <string>Cycle Metric</string>
-     </property>
-     <addaction name="actionEllipticCycle"/>
-     <addaction name="actionParabolicCycle"/>
-     <addaction name="actionHyperbolicCycle"/>
-    </widget>
     <addaction name="separator"/>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
@@ -129,9 +106,11 @@
     <addaction name="actionCreate_Cycle"/>
     <addaction name="menuDefine_Cycle_2"/>
     <addaction name="separator"/>
-    <addaction name="menuEvaluation_Type"/>
-    <addaction name="menuDrawing_Metric"/>
-    <addaction name="menuCycle_Metric"/>
+    <addaction name="actionEvaluationType"/>
+    <addaction name="actionPointMetric"/>
+    <addaction name="actionCycleMetric"/>
+    <addaction name="separator"/>
+    <addaction name="actionProperties"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -424,70 +403,83 @@
     <string>Exact</string>
    </property>
   </action>
-  <action name="actionEllipticPoint">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Elliptic</string>
-   </property>
-  </action>
-  <action name="actionParabolicPoint">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Parabolic</string>
-   </property>
-  </action>
-  <action name="actionHyperbolicPoint">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Hyperbolic</string>
-   </property>
-  </action>
-  <action name="actionEllipticCycle">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Elliptic</string>
-   </property>
-  </action>
-  <action name="actionParabolicCycle">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Parabolic</string>
-   </property>
-  </action>
-  <action name="actionHyperbolicCycle">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Hyperbolic</string>
-   </property>
-  </action>
-  <action name="actionSettings_2">
-   <property name="text">
-    <string>Settings...</string>
-   </property>
-  </action>
-  <action name="actionTest">
-   <property name="text">
-    <string>Test</string>
-   </property>
-  </action>
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionProperties">
+   <property name="text">
+    <string>Properties</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionPointMetric">
+   <property name="text">
+    <string>Point Metric</string>
+   </property>
+  </action>
+  <action name="actionCycleMetric">
+   <property name="text">
+    <string>Cycle Metric</string>
+   </property>
+  </action>
+  <action name="actionEllipticPointMetric">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Elliptic</string>
+   </property>
+  </action>
+  <action name="actionParabolicPointMetric">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Parabolic</string>
+   </property>
+  </action>
+  <action name="actionHyperbolicPointMetric">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hyperbolic</string>
+   </property>
+  </action>
+  <action name="actionEllipticCycleMetric">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Elliptic</string>
+   </property>
+  </action>
+  <action name="actionParabolicCycleMetric">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Parabolic</string>
+   </property>
+  </action>
+  <action name="actionHyperbolicCycleMetric">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hyperbolic</string>
+   </property>
+  </action>
+  <action name="actionEvaluationType">
+   <property name="text">
+    <string>Evaluation Type</string>
    </property>
   </action>
  </widget>
