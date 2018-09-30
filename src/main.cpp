@@ -150,7 +150,7 @@ void setDefaultSettings()
     s.setValue("automaticOnlyReals", true);
 
     /*!
-     *
+     * Set the undo stack size limit.
      */
     s.setValue("undoLimit", 10);
 }

@@ -53,9 +53,12 @@ void settingsDialog::update()
 
     // set default directory
     QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
-
     ui->defaultPathLineEdit->setText(defaultPath.absolutePath());
     ui->defaultPathLineEdit->selectAll();
+
+    // get default stack undo size
+    int undoSize = s.value("undoLimit").toInt();
+    ui->spinBox->setValue(undoSize);
 }
 
 void settingsDialog::showEvent(QShowEvent *event)
@@ -133,4 +136,9 @@ void settingsDialog::on_pushButton_4_clicked()
         ui->defaultPathLineEdit->setText(filePath.absolutePath());
         ui->defaultPathLineEdit->selectAll();
     }
+}
+
+void settingsDialog::on_spinBox_valueChanged(int arg1)
+{
+    s.setValue("undoLimit", arg1);
 }

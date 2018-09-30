@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->installEventFilter(this);
+
     // fixes qt5.1 bug that causes dock to snap back to original size
     // https://bugreports.qt.io/browse/QTBUG-65592
     this->resizeDocks({ui->dockWidgetRight}, {200}, Qt::Horizontal);
@@ -310,6 +312,8 @@ void MainWindow::update()
         graphicCycle *c = new graphicCycle(&f, cycle, &ui->graphicsView->relativeScaleFactor, menu, d);
         connect(c, &graphicCycle::sceneInvalid, this, &MainWindow::sceneInvalid);
         connect(c, &graphicCycle::changesMadeToFigure, this, &MainWindow::changesMadeToFigure);
+        connect(this, &MainWindow::escPressed, c, &graphicCycle::cancelMovement);
+
         // add to map
         cyclesMap[node_label(cycle)] = QPointer<graphicCycle>(c);
 
@@ -613,7 +617,7 @@ ex MainWindow::shortestDistance(QPointF point, double dis)
     const ex K = f.get_all_keys(REAL_LINE_GEN);
     const ex E = f;
     double current_dis;
-    double increment=(0.5 * dis) / ui->graphicsView->relativeScaleFactor;
+    double increment=(0.5 * dis);
     ex P = lst{ex(x),ex(y)};
     ex selected_key;
 
@@ -1368,6 +1372,9 @@ void MainWindow::changesMadeToFigure(const MoebInv::figure &originalFigure, cons
     this->saved = false;
 
     //push current figure onto the undo stack
+    if (this->undoStack->count() == 0)
+        this->undoStack->setUndoLimit(s.value("undoLimit").toInt());
+
     figureUndoCommand *command = new figureUndoCommand(&this->f, originalFigure, changedFigure);
     this->undoStack->push(command);
     connect(command, &figureUndoCommand::sceneInvalid, this, &MainWindow::replaceFigure);
@@ -1383,6 +1390,13 @@ void MainWindow::replaceFigure(const MoebInv::figure &replacementFigure)
 {
     this->f = replacementFigure;
     update();
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Escape) {
+        emit escPressed();
+    }
 }
 
 

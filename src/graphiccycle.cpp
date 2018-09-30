@@ -44,6 +44,11 @@ graphicCycle::graphicCycle(figure *f, ex c, double *relativeScaleFactor, cycleCo
 
     // create the shape and add the necessary child graphicsItems.
     buildShape();
+
+    // set timer to detect when mouse stops
+    this->mouseTimeOut = new QTimer(this);
+    connect(mouseTimeOut, &QTimer::timeout, this, &graphicCycle::mouseStopped);
+    this->mouseTimeOut->start(s.value("mouseStopWait").toInt());
 }
 
 
@@ -338,8 +343,14 @@ void graphicCycle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void graphicCycle::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     if (!this->itemIsAbleToMove)
         return;
-    else
-        QGraphicsItem::mouseMoveEvent(event);
+
+    // Start a timer to be used to detect when the mouse has stopped moving
+    //if (!mouseTimeOut->isActive())
+    //    mouseTimeOut->start();
+
+    //mouseTimeOut->setInterval(s.value("mouseStopWait").toInt());
+    //qDebug() << "moving";
+    QGraphicsItem::mouseMoveEvent(event);
 }
 
 /*!
@@ -365,6 +376,25 @@ void graphicCycle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 
+
+void graphicCycle::mouseStopped()
+{
+    mouseTimeOut->stop();
+
+    if (this->itemIsGrabbed) {
+        QPointF relPoint = this->mapToScene(this->scenePos());
+        this->f->move_point(cycle, lst(relPoint.x(), relPoint.y()));
+        emit sceneInvalid();
+    }
+}
+
+
+void graphicCycle::cancelMovement()
+{
+    if (this->itemIsGrabbed) {
+        emit sceneInvalid();
+    }
+}
 
 // REMOVE....
 QString graphicCycle::node_label(GiNaC::ex name)

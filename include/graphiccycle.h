@@ -7,6 +7,8 @@
 #include <QGraphicsItem>
 #include <QGraphicsSceneContextMenuEvent>
 #include <QMessageBox>
+#include <QTimer>
+#include <QKeyEvent>
 
 #include <figure.h>
 
@@ -82,6 +84,8 @@ public slots:
     void setColour(QColor colour);
     void setLineWidth(double weight);
     void setLineStyle(int style);
+    void mouseStopped();
+    void cancelMovement();
 
 signals:
     void findCycleInTree(GiNaC::ex cycle);
@@ -107,6 +111,8 @@ private:
     struct cycleStyleData styleData;
     QBrush *brush;
     QPen *pen;
+
+    QTimer *mouseTimeOut;
 };
 
 #endif // GRAPHICCYCLE_H

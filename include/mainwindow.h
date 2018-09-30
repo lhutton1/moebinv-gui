@@ -18,6 +18,7 @@
 #include <QLabel>
 #include <QRegularExpression>
 #include <QUndoStack>
+#include <QKeyEvent>
 
 #include <figure.h>
 
@@ -65,6 +66,7 @@ public:
     void initialiseDefaultSettings();
     MoebInv::cycle_relation refactorCycleRelation(const GiNaC::ex &relationItem, const GiNaC::ex &newSymbol);
     bool saveCheck();
+    void keyPressEvent(QKeyEvent *event);
     ~MainWindow();
 
     bool toolAddCycle;
@@ -114,6 +116,7 @@ private slots:
 
 signals:
     void resetRelationalList();
+    void escPressed();
 
 private:
     QSettings s;
