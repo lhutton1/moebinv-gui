@@ -20,6 +20,7 @@ public:
     explicit defineCycleDialog(QWidget *parent = 0);
     void setTab(int index);
     GiNaC::lst getValues();
+    void loadValues(const GiNaC::lst &values);
     ~defineCycleDialog();
 
 private:

@@ -20,31 +20,44 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->installEventFilter(this);
-
     // fixes qt5.1 bug that causes dock to snap back to original size
     // https://bugreports.qt.io/browse/QTBUG-65592
     this->resizeDocks({ui->dockWidgetRight}, {200}, Qt::Horizontal);
+    this->setContextMenuPolicy(Qt::NoContextMenu);
 
+    // initialize objects
     this->scene = new graphicsScene();
     ui->graphicsView->setScene(scene);
 
-    //status bar
-    statusCoordinates = new QLabel();
-    statusRelations = new QLabel();
+    this->statusCoordinates = new QLabel();
+    this->statusRelations = new QLabel();
     ui->statusBar->addWidget(statusCoordinates);
     ui->statusBar->addPermanentWidget(statusRelations);
 
-    // create dialogs
-    msgBox = new QMessageBox();
-    saveDialog = new QFileDialog();
-    settingDialog = new settingsDialog(this);
-    settingDialog->setModal(true);
-    propDialog = new propertiesDialog(this);
+    this->msgBox = new QMessageBox();
+    this->saveDialog = new QFileDialog();
+    this->settingDialog = new settingsDialog(this);
+    this->settingDialog->setModal(true);
+    this->propDialog = new propertiesDialog(this);
+
     this->undoStack = new QUndoStack(this);
     this->undoStack->setUndoLimit(s.value("undoLimit").toInt());
 
-    // set up new event
+    this->menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
+    this->menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
+    this->menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false, true);
+    buildToolBar();
+
+    this->lblGen = new labels(&this->f);
+    this->nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
+
+    this->isAddPoint = true;
+
+    this->saveDirectory = QDir(s.value("defaultSaveDirectory").toString());
+    this->saved = true;
+    this->defaultDirectoryInUse = true;
+
+    // connect signals to slots
     connect(scene, &graphicsScene::newMouseLeftPress, this, &MainWindow::addPoint);
     connect(scene, &graphicsScene::newMouseRightPress, this, &MainWindow::onMouseSceneRightPress);
     connect(scene, &graphicsScene::newMouseHover, this, &MainWindow::onMouseSceneHover);
@@ -58,36 +71,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionUndo, &QAction::triggered, this->undoStack, &QUndoStack::undo);
     connect(ui->actionRedo, &QAction::triggered, this->undoStack, &QUndoStack::redo);
 
-    // initialize figure
-    if (s.value("setFloatEvaluation").toBool())
-        f = figure().set_float_eval();
-    else
-        f = figure();
-
-    f.info_write(qPrintable(s.value("figureDescription").toString()));
-
-    menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
-    menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
-    menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false, true);
-    buildToolBar();
-
-    // create new labels object to create unique labels
-    lblGen = new labels(&this->f);
-    nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
-
     initTreeModel();
     initialiseDefaultSettings();
-
-    // remove menu from toolbars
-    setContextMenuPolicy(Qt::NoContextMenu);
-
-    // whether to add
-    isAddPoint = true;
-
-    this->saveDirectory = QDir(s.value("defaultSaveDirectory").toString());
-    this->saved = true;
-    this->defaultDirectoryInUse = true;
-
     update();
 }
 
@@ -283,6 +268,7 @@ void MainWindow::on_actionPan_toggled(bool pan)
 void MainWindow::update()
 {
     cycleContextMenu *menu;
+    bool isGen0;
 
     // remove data
     scene->clear();
@@ -298,10 +284,17 @@ void MainWindow::update()
         // get cycle
         ex cycle = *key;
 
+        // check cycle generation
+        if (ex_to<numeric>(f.get_generation(cycle)).to_int() == 0)
+            isGen0 = true;
+        else
+            isGen0 = false;
+
+        // assign menu
         if (cycle.is_equal(f.get_real_line()))
             menu = menus[1];
         else
-            menu = new cycleContextMenu(&f, cycle, &relationList);
+            menu = new cycleContextMenu(&f, cycle, &relationList, true, false, isGen0);
 
         connect(menu, &cycleContextMenu::relationsHaveChanged, this, &MainWindow::buildRelationStatus);
         connect(menu, &cycleContextMenu::sceneInvalid, this, &MainWindow::sceneInvalid);
@@ -406,10 +399,15 @@ void MainWindow::findCycleInTree(const GiNaC::ex &cycle)
  * \brief MainWindow::on_actionSave_triggered
  *
  * Save figure in the current state. Called when the user selects 'save'
- * from the application menu.
+ * from the application menu. This save functions checks whether the figure
+ * has previously been saved before. If it hasn't then the function will act
+ * like 'save as' by making a file dialog pop up. If it has been saved before
+ * the figure is saved to the location it was previously saved to.
  */
 void MainWindow::on_actionSave_triggered()
 {
+    this->checkDescription();
+
     QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
 
     if (s.value("figureName").toString() == "unnamed" || s.value("figureName").toString() == "."
@@ -431,10 +429,16 @@ void MainWindow::on_actionSave_triggered()
 }
 
 
+/*!
+ * \brief MainWindow::on_actionSave_As_triggered
+ *
+ * 'Save as' saves the figure by forcing the user to select a location to save to.
+ */
 void MainWindow::on_actionSave_As_triggered()
 {
-    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
+    this->checkDescription();
 
+    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
     QDir filePath = QDir(saveDialog->getSaveFileName(this, tr("Save Figure"), defaultPath.absolutePath(), tr("*.gar")));
 
     if (filePath.path() == ".")
@@ -446,6 +450,31 @@ void MainWindow::on_actionSave_As_triggered()
     this->saved = true;
     this->defaultDirectoryInUse = false;
     this->setWindowTitle(this->saveDirectory.dirName() + " - moebinv-gui");
+}
+
+
+/*!
+ * \brief MainWindow::checkDescription
+ *
+ * Check that the the user has provided a description for the figure. If they haven't
+ * and they want to then they can enter a description to be saved with the figure.
+ */
+void MainWindow::checkDescription()
+{
+    // if figure doesn't have a description prompt user for one
+    if (s.value("figureDescription").toString() == "" || s.value("figureDescription").toString() == "no description") {
+        QMessageBox::StandardButton reply = QMessageBox::question(this, "Desctription", "Would you like to add a description to the figure?",
+            QMessageBox::Yes|QMessageBox::No);
+
+        if (reply == QMessageBox::Yes) {
+            QString description = QInputDialog::getText(nullptr, "Description", "Enter description:");
+
+            if (description == "")
+                description = "no description";
+
+            s.setValue("figureDescription", description);
+        }
+    }
 }
 
 
@@ -504,6 +533,14 @@ void MainWindow::on_actionOpen_triggered()
     }
 }
 
+
+/*!
+ * \brief MainWindow::saveCheck
+ * \return bool
+ *
+ * Check with the user whether they would like to save the figure if it us unsaved.
+ * Returns true if the user wants to save and false if not.
+ */
 bool MainWindow::saveCheck()
 {
     QMessageBox::StandardButton reply = QMessageBox::question(this, "Test", "The current figure is not saved. Are you sure you would like to continue?",
@@ -517,11 +554,11 @@ bool MainWindow::saveCheck()
 }
 
 
-
 /*!
  * \brief MainWindow::on_actionNew_triggered
  *
- * Create a new empty figure. Called when the user selects 'new' from the application menu.
+ * Create a new empty figure. Called when the user selects 'new' from the
+ * application menu.
  */
 void MainWindow::on_actionNew_triggered()
 {
@@ -538,11 +575,12 @@ void MainWindow::on_actionNew_triggered()
     }
 
     this->defaultDirectoryInUse = true;
-    f = figure();
-    lblGen = new labels(&this->f);
-    nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
+    this->f = figure();
+    this->lblGen = new labels(&this->f);
+    this->nextSymbol = lblGen->genNextSymbol(this->nextSymbol);
 
     changesMadeToFigure(originalFigure, this->f);
+    initialiseDefaultSettings();
     update();
 }
 
@@ -551,7 +589,8 @@ void MainWindow::on_actionNew_triggered()
  * \brief MainWindow::onCustomContextMenu
  * \param point Point at which the right click occured.
  *
- * Displays the context menu for the relevent cycle in the tree view.
+ * Displays the context menu for the relevent cycle in the tree view
+ * when right mouse button is clicked on.
  */
 void MainWindow::onCustomContextMenu(const QPoint &point)
 {
@@ -588,7 +627,8 @@ void MainWindow::onCustomContextMenu(const QPoint &point)
  * \brief MainWindow::on_actionLabels_toggled
  * \param labels
  *
- * Set labels as showing or hidden.
+ * Set labels as showing or hidden. If labels are hidden then they are not
+ * displayed in the graphical view.
  */
 void MainWindow::on_actionLabels_toggled(bool labels)
 {
@@ -597,7 +637,6 @@ void MainWindow::on_actionLabels_toggled(bool labels)
     else
         s.setValue("showLabels", false);
 
-    s.sync();
     update();
 }
 
@@ -680,8 +719,9 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 
 /*!
- * \brief MainWindow::onCalculateDockRatio calculates the percentage
- * ratio of the dock to the rest of the window.
+ * \brief MainWindow::onCalculateDockRatio
+ *
+ * Calculates the percentage ratio of the dock compared to the rest of the window.
  */
 void MainWindow::onCalculateDockRatio()
 {
@@ -715,14 +755,15 @@ void MainWindow::highlightClosestCycle(QPointF point)
         scene->setPointIsHighlighted(false);
     }
 
-    prevHoveredCycle = cycle;
+    this->prevHoveredCycle = cycle;
 }
 
 
 /*!
  * \brief MainWindow::unHighlightCycle
  *
- * Loop through all cycles and dissable their hovers.
+ * Loop through all cycles and dissable their hovers. This makes them go back to
+ * their base colour, which was set before applying the hover.
  */
 void MainWindow::unHighlightCycle() {
     for (auto cycle : cyclesMap) {
@@ -735,6 +776,7 @@ void MainWindow::unHighlightCycle() {
  * \brief MainWindow::buildRelationStatus
  *
  * Create the relation list displayed in the bottom right corner.
+ * Adds the currently selected relations to the list.
  */
 void MainWindow::buildRelationStatus()
 {
@@ -1027,7 +1069,9 @@ void MainWindow::on_actionCreate_Cycle_triggered()
  * \brief MainWindow::createCycle
  * \param inputList
  *
- * Creates a cycle to add to the figure.
+ * Creates a cycle to add to the figure. The cycle generated is based upon
+ * the number of inputs to the list. If the list is empty then a new cycle
+ * is created based on the relations that have been selected.
  */
 void MainWindow::createCycle(lst inputList)
 {
@@ -1075,6 +1119,7 @@ void MainWindow::createCycle(lst inputList)
     cycleData.colour = s.value("defaultGraphicsColour").value<QColor>();
     cycleData.lineStyle = s.value("defaultLineStyle").toDouble();
     cycleData.lineWidth = s.value("defaultLineWidth").toDouble();
+    cycleData.isDefault = true;
     setCycleAsy(cycle, cycleData);
 
     // creating cycle success
@@ -1155,7 +1200,7 @@ cycle_relation MainWindow::refactorCycleRelation(const ex &relationItem, const e
 /*!
  * \brief MainWindow::on_actionSettings_triggered
  *
- * Opens the settings menu.
+ * Displays the settings menu.
  */
 void MainWindow::on_actionSettings_triggered()
 {
@@ -1163,38 +1208,30 @@ void MainWindow::on_actionSettings_triggered()
 }
 
 
-void MainWindow::on_actionFloating_triggered(bool checked)
-{
-    if (checked) {
-        ui->actionExact->setChecked(false);
-        f.set_float_eval();
-    } else {
-        ui->actionFloating->setChecked(true);
-    }
-}
-
-void MainWindow::on_actionExact_triggered(bool checked)
-{
-    if (checked) {
-        ui->actionFloating->setChecked(false);
-        f.set_exact_eval();
-    } else {
-        ui->actionExact->setChecked(true);
-    }
-}
-
+/*!
+ * \brief MainWindow::on_actionFigure_Description_triggered
+ *
+ * Display the current figure description in a message box.
+ * If there is no description set then the message box will display
+ * how to set a description.
+ */
 void MainWindow::on_actionFigure_Description_triggered()
 {
-    if (f.info_read() != "") {
+    if (f.info_read() != "" && f.info_read() != "no description") {
         msgBox->setText("Figure description");
         msgBox->setInformativeText(QString::fromStdString(f.info_read()));
         msgBox->exec();
     } else {
-        msgBox->information(nullptr, "Figure description", "There is no description to display");
+        msgBox->information(nullptr, "Figure description", "There is no description to display. Please set one by going to edit > properties.");
     }
 }
 
 
+/*!
+ * \brief MainWindow::on_actionQuit_triggered
+ *
+ * Quit the application. Makes sure that the figure has been saved first.
+ */
 void MainWindow::on_actionQuit_triggered()
 {
     // check to make sure current file has been saved
@@ -1206,6 +1243,13 @@ void MainWindow::on_actionQuit_triggered()
     QApplication::quit();
 }
 
+
+/*!
+ * \brief MainWindow::on_actionDelete_cycle_triggered
+ *
+ * Delete a cycle by providing a the name of its label.
+ * If the label cannot be found an error message will be output.
+ */
 void MainWindow::on_actionDelete_cycle_triggered()
 {
     QString inputCycleLabel = QInputDialog::getText(nullptr, "Delete cycle", "Cycle:");
@@ -1218,10 +1262,21 @@ void MainWindow::on_actionDelete_cycle_triggered()
         return;
     }
 
+    // success
     changesMadeToFigure(originalFigure, this->f);
     update();
 }
 
+
+/*!
+ * \brief MainWindow::changesMadeToFigure
+ * \param originalFigure the figure before changes were made.
+ * \param changedFigure the figure after changes were made.
+ *
+ * Called when there are changes that have been made to a figure. The first part of this
+ * function ensures the title of the main window displays whether the current figure has
+ * been saved of not. The second part of the function adds the change to the undo stack.
+ */
 void MainWindow::changesMadeToFigure(const MoebInv::figure &originalFigure, const MoebInv::figure &changedFigure)
 {
     QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
@@ -1237,60 +1292,69 @@ void MainWindow::changesMadeToFigure(const MoebInv::figure &originalFigure, cons
     if (this->undoStack->count() == 0)
         this->undoStack->setUndoLimit(s.value("undoLimit").toInt());
 
-    figureUndoCommand *command = new figureUndoCommand(&this->f, originalFigure, changedFigure);
+    figureUndoCommand *command = new figureUndoCommand(originalFigure, changedFigure);
     this->undoStack->push(command);
     connect(command, &figureUndoCommand::sceneInvalid, this, &MainWindow::replaceFigure);
 }
 
 
+/*!
+ * \brief MainWindow::saveDirectoryHasChanged
+ *
+ * Called when the save directory needs updating. The save directory can be changed in the
+ * GUI through the settings dialog.
+ */
 void MainWindow::saveDirectoryHasChanged()
 {
     this->saveDirectory = QDir(s.value("defaultSaveDirectory").toString());
 }
 
+
+/*!
+ * \brief MainWindow::replaceFigure
+ * \param replacementFigure
+ *
+ * replace the figure with another figure. Used by the undo stack.
+ */
 void MainWindow::replaceFigure(const MoebInv::figure &replacementFigure)
 {
     this->f = replacementFigure;
     update();
 }
 
+
+/*!
+ * \brief MainWindow::keyPressEvent
+ * \param event
+ *
+ * Detects a key press event.
+ */
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+    // emit a signal when the escape key is pressed.
     if (event->key() == Qt::Key_Escape) {
         emit escPressed();
     }
 }
 
 
+/*!
+ * \brief MainWindow::on_actionProperties_triggered
+ *
+ * show the properties dialog.
+ */
 void MainWindow::on_actionProperties_triggered()
 {
     propDialog->show();
 }
 
 
-// REMOVE...
-QString MainWindow::node_compact_string(GiNaC::ex name)
-{
-    std::ostringstream drawing;
-    drawing << std::setprecision(s.value("floatPrecision").toInt());
-    ex_to<cycle_node>(f.get_cycle_node(name))
-        .do_print_double(GiNaC::print_dflt(drawing,0), 0);
-    string dr = drawing.str().c_str();
-
-    return QString::fromStdString(dr);
-}
-
-QString MainWindow::node_label(GiNaC::ex name)
-{
-    std::ostringstream drawing;
-    drawing << name;
-    string dr = drawing.str().c_str();
-
-    return QString::fromStdString(dr);
-}
-
-
-
+/*!
+ * \brief MainWindow::initialiseDefaultSettings
+ *
+ * Initialse any default settings by obtaining the information from
+ * values stored in settings.
+ */
 void MainWindow::initialiseDefaultSettings()
 {
     // update ui items
@@ -1337,45 +1401,89 @@ void MainWindow::initialiseDefaultSettings()
             f.set_float_eval();
             break;
     }
+
+    f.info_write(qPrintable(s.value("figureDescription").toString()));
 }
 
 
+/*!
+ * \brief MainWindow::on_actionEllipticPointMetric_triggered
+ *
+ * Triggered when the elliptic point metric is clicked.
+ */
 void MainWindow::on_actionEllipticPointMetric_triggered()
 {
     s.setValue("pointMetric", ELLIPTIC);
     ui->graphicsView->viewport()->update();
 }
 
+
+/*!
+ * \brief MainWindow::on_actionParabolicPointMetric_triggered
+ *
+ * Triggered when the parabolic point metric is clicked.
+ */
 void MainWindow::on_actionParabolicPointMetric_triggered()
 {
     s.setValue("pointMetric", PARABOLIC);
     ui->graphicsView->viewport()->update();
 }
 
+
+/*!
+ * \brief MainWindow::on_actionHyperbolicPointMetric_triggered
+ *
+ * Triggered when the hyperbolic point metric is clicked.
+ */
 void MainWindow::on_actionHyperbolicPointMetric_triggered()
 {
     s.setValue("pointMetric", HYPERBOLIC);
     ui->graphicsView->viewport()->update();
 }
 
+
+/*!
+ * \brief MainWindow::on_actionEllipticCycleMetric_triggered
+ *
+ * Triggered when the elliptic cycle metric is clicked.
+ */
 void MainWindow::on_actionEllipticCycleMetric_triggered()
 {
     s.setValue("cycleMetric", ELLIPTIC);
     ui->graphicsView->viewport()->update();
 }
 
+
+/*!
+ * \brief MainWindow::on_actionParabolicCycleMetric_triggered
+ *
+ * Triggered when the parabolic cycle metric is clicked.
+ */
 void MainWindow::on_actionParabolicCycleMetric_triggered()
 {
     s.setValue("cycleMetric", PARABOLIC);
     ui->graphicsView->viewport()->update();
 }
 
+
+/*!
+ * \brief MainWindow::on_actionHyperbolicCycleMetric_triggered
+ *
+ * Triggered when the hyperbolic cycle metric is clicked.
+ */
 void MainWindow::on_actionHyperbolicCycleMetric_triggered()
 {
     s.setValue("cycleMetric", HYPERBOLIC);
     ui->graphicsView->viewport()->update();
 }
 
+
+/*!
+ * \brief MainWindow::on_actionPointMetric_hovered
+ *
+ * Triggered before the point metric menu is opened. This allows the
+ * correct option in the menu to be displayed.
+ */
 void MainWindow::on_actionPointMetric_hovered()
 {
     switch(s.value("pointMetric").toInt()) {
@@ -1391,6 +1499,13 @@ void MainWindow::on_actionPointMetric_hovered()
     }
 }
 
+
+/*!
+ * \brief MainWindow::on_actionCycleMetric_hovered
+ *
+ * Triggered before the cycle metric menu is opened. This allows the
+ * correct option in the menu to be displayed.
+ */
 void MainWindow::on_actionCycleMetric_hovered()
 {
     switch(s.value("cycleMetric").toInt()) {
@@ -1406,6 +1521,13 @@ void MainWindow::on_actionCycleMetric_hovered()
     }
 }
 
+
+/*!
+ * \brief MainWindow::on_actionEvaluationType_hovered
+ *
+ * Triggered before the evaluation type menu is opened. This allows the
+ * correct option in the menu to be displayed.
+ */
 void MainWindow::on_actionEvaluationType_hovered()
 {
     switch (s.value("evaluationType").toInt()) {
@@ -1418,12 +1540,50 @@ void MainWindow::on_actionEvaluationType_hovered()
     }
 }
 
+
+/*!
+ * \brief MainWindow::on_actionFloating_triggered
+ *
+ * When triggered, set the evaluation type to floating.
+ */
 void MainWindow::on_actionFloating_triggered()
 {
     s.setValue("evaluationType", FLOATING);
 }
 
+
+/*!
+ * \brief MainWindow::on_actionExact_triggered
+ *
+ * When triggered, set the evaluation type to exact.
+ */
 void MainWindow::on_actionExact_triggered()
 {
     s.setValue("evaluationType", EXACT);
 }
+
+
+// REMOVE...
+QString MainWindow::node_compact_string(GiNaC::ex name)
+{
+    std::ostringstream drawing;
+    drawing << std::setprecision(s.value("floatPrecision").toInt());
+    ex_to<cycle_node>(f.get_cycle_node(name))
+        .do_print_double(GiNaC::print_dflt(drawing,0), 0);
+    string dr = drawing.str().c_str();
+
+    return QString::fromStdString(dr);
+}
+
+QString MainWindow::node_label(GiNaC::ex name)
+{
+    std::ostringstream drawing;
+    drawing << name;
+    string dr = drawing.str().c_str();
+
+    return QString::fromStdString(dr);
+}
+
+
+
+

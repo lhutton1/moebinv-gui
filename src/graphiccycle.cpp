@@ -25,6 +25,8 @@ graphicCycle::graphicCycle(figure *f, ex c, double *relativeScaleFactor, cycleCo
     this->itemIsAbleToMove = false;
     this->itemIsPoint = false;
 
+
+
     // create the brush and pen and assign settings
     brush = new QBrush(styleData.colour);
     pen = new QPen(styleData.colour);
@@ -104,6 +106,7 @@ bool graphicCycle::getItemIsGrabbed()
 void graphicCycle::setColour(QColor colour)
 {
     this->styleData.colour = colour;
+    this->styleData.isDefault = false;
     setCycleAsy(this->cycle, this->styleData);
     emit sceneInvalid();
 }
@@ -118,6 +121,7 @@ void graphicCycle::setColour(QColor colour)
 void graphicCycle::setLineWidth(double weight)
 {
     this->styleData.lineWidth = weight;
+    this->styleData.isDefault = false;
     setCycleAsy(this->cycle, this->styleData);
     emit sceneInvalid();
 }
@@ -132,6 +136,7 @@ void graphicCycle::setLineWidth(double weight)
 void graphicCycle::setLineStyle(int style)
 {
     this->styleData.lineStyle = style;
+    this->styleData.isDefault = false;
     setCycleAsy(this->cycle, this->styleData);
     emit sceneInvalid();
 }
@@ -340,6 +345,12 @@ void graphicCycle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 
+/*!
+ * \brief graphicCycle::mouseMoveEvent
+ * \param event
+ *
+ * Detect whether the mouse has been moved.
+ */
 void graphicCycle::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     if (!this->itemIsAbleToMove)
         return;
@@ -377,6 +388,12 @@ void graphicCycle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 
+/*!
+ * \brief graphicCycle::mouseStopped
+ *
+ * Timer slot triggered when the mouse has timed out. This is used to
+ * detect when the mouse has stopped moving on the scene.
+ */
 void graphicCycle::mouseStopped()
 {
     mouseTimeOut->stop();
@@ -389,6 +406,12 @@ void graphicCycle::mouseStopped()
 }
 
 
+/*!
+ * \brief graphicCycle::cancelMovement
+ *
+ * Cancels a movement when a generation 0 has been grabbed
+ * and is currently being moved.
+ */
 void graphicCycle::cancelMovement()
 {
     if (this->itemIsGrabbed) {
@@ -417,6 +440,8 @@ bool graphicCycle::setCycleAsy(const ex &new_cycle, const struct cycleStyleData 
     green = QString::number(data.colour.green() / 255.0);
     blue = QString::number(data.colour.blue() / 255.0);
     lineWidth = QString::number(data.lineWidth) + "pt";
+
+    qDebug() << data.isDefault;
 
     switch (data.lineStyle) {
         case SOLID:

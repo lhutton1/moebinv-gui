@@ -12,7 +12,7 @@ class figureUndoCommand : public QObject, public QUndoCommand
     Q_OBJECT
 
 public:
-    figureUndoCommand(MoebInv::figure *mainFigure, MoebInv::figure originalFigure,  MoebInv::figure changedFigure, QUndoCommand *parent = nullptr);
+    figureUndoCommand(MoebInv::figure originalFigure,  MoebInv::figure changedFigure, QUndoCommand *parent = nullptr);
     void undo();
     void redo();
     QString node_label(GiNaC::ex name);

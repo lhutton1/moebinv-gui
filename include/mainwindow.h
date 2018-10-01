@@ -69,6 +69,7 @@ public:
     bool saveCheck();
     void keyPressEvent(QKeyEvent *event);
     void updateFigureProperties();
+    void checkDescription();
 
     ~MainWindow();
 
@@ -103,36 +104,22 @@ private slots:
     void on_actionDefine_by_center_and_radius_squared_triggered();
     void on_actionDefine_by_values_triggered();
     void on_actionDefine_cycle_triggered(int pageIndex = 0);
-    void on_actionFloating_triggered(bool checked);
-    void on_actionExact_triggered(bool checked);
     void on_actionSettings_triggered();
     void on_actionFigure_Description_triggered();
     void on_actionQuit_triggered();
     void on_actionDelete_cycle_triggered();
     void on_actionSave_As_triggered();
-
     void on_actionProperties_triggered();
-
     void on_actionEllipticPointMetric_triggered();
-
     void on_actionParabolicPointMetric_triggered();
-
     void on_actionHyperbolicPointMetric_triggered();
-
     void on_actionEllipticCycleMetric_triggered();
-
     void on_actionParabolicCycleMetric_triggered();
-
     void on_actionHyperbolicCycleMetric_triggered();
-
     void on_actionPointMetric_hovered();
-
     void on_actionCycleMetric_hovered();
-
     void on_actionEvaluationType_hovered();
-
     void on_actionFloating_triggered();
-
     void on_actionExact_triggered();
 
 signals:

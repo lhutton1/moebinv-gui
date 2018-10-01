@@ -48,7 +48,6 @@ void circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
             if (BOUNDINGRECT_DEBUG)
                 painter->drawRect(this->boundingRect());
 
-            // draw circle
             if (radius < 0)
                 return;
 

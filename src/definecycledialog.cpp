@@ -31,6 +31,13 @@ defineCycleDialog::~defineCycleDialog()
     delete ui;
 }
 
+void defineCycleDialog::loadValues(const GiNaC::lst &values)
+{
+    for (int x = 0; x < 7; x++) {
+        this->lineEditList[x]->setText(QString(QString::number(GiNaC::ex_to<GiNaC::numeric>(values.op(x)).to_double())));
+    }
+}
+
 GiNaC::lst defineCycleDialog::getValues()
 {
     GiNaC::lst inputList;

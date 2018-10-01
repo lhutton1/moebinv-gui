@@ -74,6 +74,7 @@ enum asyLineStyle {
 };
 
 struct cycleStyleData {
+    bool isDefault;
     QColor colour;
     double lineWidth;
     int lineStyle;

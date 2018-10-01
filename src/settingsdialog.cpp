@@ -36,6 +36,10 @@ void settingsDialog::update()
     setButtonColour(ui->pushButton_2, s.value("graphicsHoverColour").value<QColor>());
     setButtonColour(ui->pushButton_3, s.value("backgroundColour").value<QColor>());
 
+    // get default styles
+    ui->comboBox->setCurrentIndex(s.value("defaultLineStyle").toInt());
+    ui->doubleSpinBox_2->setValue(s.value("defaultLineWidth").toDouble());
+
     //set radio buttons
     if (s.value("automaticLabels").toBool())
         ui->automaticNaming->setChecked(true);
@@ -132,4 +136,14 @@ void settingsDialog::on_pushButton_4_clicked()
 void settingsDialog::on_spinBox_valueChanged(int arg1)
 {
     s.setValue("undoLimit", arg1);
+}
+
+void settingsDialog::on_doubleSpinBox_2_valueChanged(double arg1)
+{
+    s.setValue("defaultLineWidth", arg1);
+}
+
+void settingsDialog::on_comboBox_currentIndexChanged(int index)
+{
+    s.setValue("defaultLineStyle", index);
 }

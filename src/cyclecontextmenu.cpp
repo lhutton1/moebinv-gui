@@ -27,20 +27,24 @@ using namespace MoebInv;
  * relations
  * with inputs
  * -----------
- * colour
+ * style
+ * -----------
+ * edit
  * -----------
  * delete
  * -----------
  */
-cycleContextMenu::cycleContextMenu(figure *f, ex cycle, lst *relationList, bool isDelete, bool isThis)
+cycleContextMenu::cycleContextMenu(figure *f, ex cycle, lst *relationList, bool isDelete, bool isThis, bool showEditMenu)
 {
     this->f = f;
     this->cycle = cycle;
     this->relationList = relationList;
     this->isDelete = isDelete;
     this->isThis = isThis;
+    this->showEditMenu = showEditMenu;
 
     this->colourDialog = new QColorDialog();
+    this->defineDialog = new defineCycleDialog();
 
     // build the context menu
     this->buildActions();
@@ -197,6 +201,12 @@ void cycleContextMenu::buildContextMenu()
     this->addAction(changeStyle);
     this->addAction(changeWeight);
 
+    // add edit action if needed
+    if (this->showEditMenu) {
+        this->addSeparator();
+        this->addAction(edit);
+    }
+
     // add delete action if needed
     if (this->isDelete) {
         this->addSeparator();
@@ -289,6 +299,12 @@ void cycleContextMenu::buildActions()
         deletePoint = new QAction("Delete");
         connect(deletePoint, &QAction::triggered, this, &cycleContextMenu::confirmDeleteCycle);
     }
+
+    //edit action
+    if (this->showEditMenu) {
+        edit = new QAction("Edit...");
+        connect(edit, &QAction::triggered, this, &cycleContextMenu::editPoint);
+    }
 }
 
 /*!
@@ -329,6 +345,43 @@ void cycleContextMenu::displayWeightDialog()
 {
     double weight = QInputDialog::getDouble(nullptr, "Select line weight", "Weight (pt):", 0, 0, 20);
     emit weightSelected(weight);
+}
+
+
+/*!
+ * \brief cycleContextMenu::editPoint
+ *
+ * Displays a dialog that allows you to edit a point of generation 0.
+ * This dialog lets you enter the values k, l, n, m or (x, y) and radius
+ * squared to edit a point.
+ */
+void cycleContextMenu::editPoint()
+{
+    // get current point values
+    lst values;
+    values.append(ex_to<cycle2D>(f->get_cycles(this->cycle).op(0)).get_k());
+    values.append(ex_to<cycle2D>(f->get_cycles(this->cycle).op(0)).get_l(0));
+    values.append(ex_to<cycle2D>(f->get_cycles(this->cycle).op(0)).get_l(1));
+    values.append(ex_to<cycle2D>(f->get_cycles(this->cycle).op(0)).get_m());
+    values.append(ex_to<cycle2D>(f->get_cycles(this->cycle).op(0)).center().op(0));
+    values.append(ex_to<cycle2D>(f->get_cycles(this->cycle).op(0)).center().op(1));
+    values.append(ex_to<cycle2D>(f->get_cycles(this->cycle).op(0)).radius_sq());
+
+    defineDialog->loadValues(values);
+    defineDialog->show();
+
+    // set new values
+    if (defineDialog->exec() == QDialog::Accepted) {
+        GiNaC::lst inputList = defineDialog->getValues();
+
+        if (inputList.nops() == 4) {
+            f->move_cycle(this->cycle, cycle_data(inputList[0], lst{inputList[1], inputList[2]}, inputList[3]));
+            emit sceneInvalid();
+        } else if (inputList.nops() == 3) {
+            f->move_cycle(this->cycle, cycle2D(lst{inputList[0], inputList[1]}, f->get_cycle_metric(), inputList[2]));
+            emit sceneInvalid();
+        }
+    }
 }
 
 

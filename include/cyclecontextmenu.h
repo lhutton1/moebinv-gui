@@ -10,10 +10,11 @@
 #include <QSettings>
 #include <QColorDialog>
 
-#include "figure.h"
-#include "conf.h"
+#include <figure.h>
 
+#include "conf.h"
 #include "menurelationhandler.h"
+#include "definecycledialog.h"
 
 /*!
  * \brief The cycleContextMenu class
@@ -27,7 +28,7 @@ class cycleContextMenu : public QMenu
     Q_OBJECT
 
 public:
-    cycleContextMenu(MoebInv::figure *f, GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete = true, bool isThis = false);
+    cycleContextMenu(MoebInv::figure *f, GiNaC::ex cycle, GiNaC::lst *relationList, bool isDelete = true, bool isThis = false, bool showEditMenu = false);
 
     GiNaC::ex getCycle();
     QList<menuRelAction *> getActions();
@@ -45,6 +46,7 @@ public:
     QPointer<QAction> changeStyle = nullptr;
     QPointer<QAction> changeWeight = nullptr;
     QPointer<QAction> deletePoint = nullptr;
+    QPointer<QAction> edit = nullptr;
 
 public slots:
     void confirmDeleteCycle();
@@ -52,6 +54,7 @@ public slots:
     void displayColourDialog();
     void displayStyleDialog();
     void displayWeightDialog();
+    void editPoint();
 
 signals:
     void relationsHaveChanged();
@@ -67,14 +70,17 @@ private:
     MoebInv::figure *f;
     GiNaC::ex cycle;
     GiNaC::lst *relationList;
+
     bool isDelete;
     bool isThis;
+    bool showEditMenu;
 
     QList<menuRelAction *> actions;
     QList<menuRelActionGroup *> groups;
-    QMessageBox::StandardButton confirmationMessageBox;
 
     QColorDialog *colourDialog;
+    defineCycleDialog *defineDialog;
+    QMessageBox::StandardButton confirmationMessageBox;
 };
 
 

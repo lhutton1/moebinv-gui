@@ -38,6 +38,10 @@ private slots:
     void on_pushButton_4_clicked();
     void on_spinBox_valueChanged(int arg1);
 
+    void on_doubleSpinBox_2_valueChanged(double arg1);
+
+    void on_comboBox_currentIndexChanged(int index);
+
 signals:
     void sceneInvalid();
     void setBackgroundColour(QColor colour);
