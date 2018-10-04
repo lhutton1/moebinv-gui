@@ -6,6 +6,7 @@
 #include <QActionGroup>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QMenu>
 #include <stdexcept>
 
 #include <figure.h>
@@ -35,16 +36,18 @@ public:
     QAction menuEntry();
     QAction checkMenuEntry();
     void actionHandler();
+    void cycleMetricActionHandler();
     void checkActionHandler();
     QString node_label(GiNaC::ex name);
-    void createCycleRelation(const GiNaC::lst &params);
+    void createCycleRelation(const GiNaC::lst &params, const bool &metric);
     QString checkCycleRelation(const GiNaC::ex &thisCycle, const GiNaC::ex &otherCycle);
 
     QAction *addRelation;
+    QAction *addCycleRelation;
     QAction *checkRelation;
 
 signals:
-    void handleRelation();
+    void handleRelation(const bool &metric);
 
 private:
     QSettings s;

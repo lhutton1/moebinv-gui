@@ -50,7 +50,7 @@ public:
 
 public slots:
     void confirmDeleteCycle();
-    void amendRelationList();
+    void amendRelationList(const bool &metric);
     void displayColourDialog();
     void displayStyleDialog();
     void displayWeightDialog();

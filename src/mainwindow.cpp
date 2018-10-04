@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->settingDialog = new settingsDialog(this);
     this->settingDialog->setModal(true);
     this->propDialog = new propertiesDialog(this);
+    this->applicationHelpDialog = new helpDialog(this);
 
     this->undoStack = new QUndoStack(this);
     this->undoStack->setUndoLimit(s.value("undoLimit").toInt());
@@ -70,6 +71,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(settingDialog, &settingsDialog::saveDirectoryHasChanged, this, &MainWindow::saveDirectoryHasChanged);
     connect(ui->actionUndo, &QAction::triggered, this->undoStack, &QUndoStack::undo);
     connect(ui->actionRedo, &QAction::triggered, this->undoStack, &QUndoStack::redo);
+    connect(ui->actionUser_Manual, &QAction::triggered, this->applicationHelpDialog, &helpDialog::show);
+    connect(ui->actionProperties, &QAction::triggered, this->propDialog, &propertiesDialog::show);
+    connect(ui->actionSettings, &QAction::triggered, this->settingDialog, &settingsDialog::show);
 
     initTreeModel();
     initialiseDefaultSettings();
@@ -422,6 +426,7 @@ void MainWindow::on_actionSave_triggered()
         s.setValue("figureName", filePath.dirName());
     }
 
+    f.info_write(qPrintable(s.value("figureDescription").toString()));
     f.save(qPrintable(this->saveDirectory.absolutePath()), qPrintable(s.value("figureName").toString()));
     this->saved = true;
     this->defaultDirectoryInUse = false;
@@ -446,6 +451,7 @@ void MainWindow::on_actionSave_As_triggered()
 
     this->saveDirectory = filePath;
     s.setValue("figureName", filePath.dirName());
+    f.info_write(qPrintable(s.value("figureDescription").toString()));
     f.save(qPrintable(this->saveDirectory.absolutePath()), qPrintable(s.value("figureName").toString()));
     this->saved = true;
     this->defaultDirectoryInUse = false;
@@ -1197,16 +1203,6 @@ cycle_relation MainWindow::refactorCycleRelation(const ex &relationItem, const e
     return relation;
 }
 
-/*!
- * \brief MainWindow::on_actionSettings_triggered
- *
- * Displays the settings menu.
- */
-void MainWindow::on_actionSettings_triggered()
-{
-    settingDialog->show();
-}
-
 
 /*!
  * \brief MainWindow::on_actionFigure_Description_triggered
@@ -1335,17 +1331,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Escape) {
         emit escPressed();
     }
-}
-
-
-/*!
- * \brief MainWindow::on_actionProperties_triggered
- *
- * show the properties dialog.
- */
-void MainWindow::on_actionProperties_triggered()
-{
-    propDialog->show();
 }
 
 

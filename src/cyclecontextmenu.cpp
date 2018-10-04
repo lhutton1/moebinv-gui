@@ -126,14 +126,15 @@ void cycleContextMenu::confirmDeleteCycle()
  * it hasn't. The relationsHaveChanged signal is emmitted to update the status bar text
  * at the bottom of the application.
  */
-void cycleContextMenu::amendRelationList()
+void cycleContextMenu::amendRelationList(const bool &metric)
 {
     menuRelAction *actionTriggered = qobject_cast<menuRelAction *>(sender());
 
     // remove all relations in the triggered cycles group, if it is in one and it is exclusive.
     if (actionTriggered->getGroup() != nullptr && actionTriggered->getGroup()->isExclusive()) {
         for (auto action : actionTriggered->getGroup()->getRelActions()) {
-            if (!action->addRelation->isChecked() && action->hasRelation()) {
+            if ((metric && !action->addRelation->isChecked() && action->hasRelation()) ||
+                    (!metric && !action->addCycleRelation->isChecked() && action->hasRelation())) {
                 this->removeRelationFromList(actionTriggered);
             }
         }
@@ -141,7 +142,8 @@ void cycleContextMenu::amendRelationList()
 
     // check whether the cycle triggered needs adding or removing.
     if (actionTriggered->hasRelation()) {
-        if (actionTriggered->addRelation->isChecked()) {
+        if ((metric && actionTriggered->addRelation->isChecked()) ||
+                (!metric && actionTriggered->addCycleRelation->isChecked())) {
             relationList->append(lst{actionTriggered->getCycle(), actionTriggered->getRelType(), actionTriggered->getRelation(), actionTriggered->getParams()});
         } else {
             this->removeRelationFromList(actionTriggered);
@@ -187,12 +189,14 @@ void cycleContextMenu::removeRelationFromList(menuRelAction *actionTriggered)
  */
 void cycleContextMenu::buildContextMenu()
 {
-    QMenu *relationSubMenu = new QMenu(QString("Add relation to ") + this->getTitleAction()->text());
+    QMenu *relationSubMenu = new QMenu(QString("Add point metric relation to ") + this->getTitleAction()->text());
+    QMenu *relationCycleSubMenu = new QMenu(QString("Add cycle metric relation to ") + this->getTitleAction()->text());
     QMenu *checkRelationSubMenu = new QMenu(QString("Check relation on ") + this->getTitleAction()->text());
 
     this->addAction(getTitleAction());
     this->addSeparator();
     this->addMenu(relationSubMenu);
+    this->addMenu(relationCycleSubMenu);
     this->addMenu(checkRelationSubMenu);
     this->addSeparator();
 
@@ -237,6 +241,29 @@ void cycleContextMenu::buildContextMenu()
     // the following relations need additional values.
     for (int x = 9; x < actions.length(); x++)
         relationSubMenu->addAction(actions[x]->addRelation);
+
+    // build relation cycle sub menu ---------------------------------------
+    if (this->isThis) {
+        for (int x = 0; x < 5; x++)
+            relationCycleSubMenu->addAction(actions[x]->addCycleRelation);
+    } else {
+        for (int x = 0; x < 4; x++)
+            relationCycleSubMenu->addAction(actions[x]->addCycleRelation);
+    }
+
+    relationCycleSubMenu->addSeparator();
+
+    // the next 4 actions are exclusive, so they are added to a group.
+    for (int x = 5; x < 9; x++) {
+        relationCycleSubMenu->addAction(actions[x]->addCycleRelation);
+        groups[0]->addRelAction(actions[x]);
+    }
+
+    relationCycleSubMenu->addSeparator();
+
+    // the following relations need additional values.
+    for (int x = 9; x < actions.length(); x++)
+        relationCycleSubMenu->addAction(actions[x]->addCycleRelation);
 
     // build check relation sub menu ---------------------------------------
     for (int x = 0; x < 5; x++)

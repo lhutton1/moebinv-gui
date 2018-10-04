@@ -25,8 +25,6 @@ graphicCycle::graphicCycle(figure *f, ex c, double *relativeScaleFactor, cycleCo
     this->itemIsAbleToMove = false;
     this->itemIsPoint = false;
 
-
-
     // create the brush and pen and assign settings
     brush = new QBrush(styleData.colour);
     pen = new QPen(styleData.colour);

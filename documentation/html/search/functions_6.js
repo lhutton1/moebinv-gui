@@ -1,5 +1,21 @@
 var searchData=
 [
-  ['labels',['labels',['../classlabels.html#aabee553ffee5eb33826c90bbda2dbc58',1,'labels']]],
-  ['line',['line',['../classline.html#aa3036c81d69da978e5ca41a0ad1b3f73',1,'line']]]
+  ['gennextlabel',['genNextLabel',['../classlabels.html#a70a7436dbef91e342fec4ec3130187e2',1,'labels']]],
+  ['getactions',['getActions',['../classcycle_context_menu.html#a4dd57e4522c46a70367b6b721f23bcc9',1,'cycleContextMenu']]],
+  ['getcontextmenu',['getContextMenu',['../classgraphic_cycle.html#a4e090d82ba2e37bee415c95630abe061',1,'graphicCycle']]],
+  ['getcurrenthighlightedcycle',['getCurrentHighlightedCycle',['../classview.html#aa0b6bfa057ab5c4d8f3bd60557622533',1,'view']]],
+  ['getcycle',['getCycle',['../classcycle_context_menu.html#a35b3868cdc32b97e7c4abc109ee13460',1,'cycleContextMenu']]],
+  ['getcycledata',['getCycleData',['../class_main_window.html#a3088b7addf938e91e77b741a9ae22a53',1,'MainWindow']]],
+  ['getcyclelabel',['getCycleLabel',['../classgraphic_cycle.html#ae55bb7487a8baac738b88e8c1bd0515e',1,'graphicCycle']]],
+  ['getgroup',['getGroup',['../classmenu_rel_action.html#aca0baeed9c6a266d677dae8dfb25d65b',1,'menuRelAction']]],
+  ['getitemisgrabbed',['getItemIsGrabbed',['../classgraphic_cycle.html#a10e61352945ca9b32b83e528e2fc6853',1,'graphicCycle']]],
+  ['getpanningenabled',['getPanningEnabled',['../classview.html#aea81f104e17ad13b12d66dabc82b2df0',1,'view']]],
+  ['getpointishighlighted',['getPointIsHighlighted',['../classgraphics_scene.html#ab84d166160c74279bae4f59c2ccac244',1,'graphicsScene']]],
+  ['getrelation',['getRelation',['../classmenu_rel_action.html#a34deae132c511b7e34af97585df9245c',1,'menuRelAction']]],
+  ['getrelativescalefactor',['getRelativeScaleFactor',['../classgraphic_cycle.html#a80b533c2477a08f98506202d94bad7bc',1,'graphicCycle']]],
+  ['getsizeratio',['getSizeRatio',['../classdock_widget.html#a2503861f92eb0ac30313dd713f398996',1,'dockWidget']]],
+  ['gettitleaction',['getTitleAction',['../classcycle_context_menu.html#a0e955d1a633d3585d11b7c193341a568',1,'cycleContextMenu']]],
+  ['getvalues',['getValues',['../classmatrix4dialog.html#a4826be428cb3f2d79905aee086cc296d',1,'matrix4dialog::getValues()'],['../classmatrix8dialog.html#a74736300c5b1a4aa0291016991c7e508',1,'matrix8dialog::getValues()']]],
+  ['graphiccycle',['graphicCycle',['../classgraphic_cycle.html#a89c2914fab32a0e10b2d53491535c173',1,'graphicCycle']]],
+  ['graphicsscene',['graphicsScene',['../classgraphics_scene.html#a630f565d827637e6f46f5ae2e786cd06',1,'graphicsScene']]]
 ];

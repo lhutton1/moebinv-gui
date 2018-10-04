@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['point',['point',['../classpoint.html',1,'']]]
+  ['helpbrowser',['helpBrowser',['../classhelp_browser.html',1,'']]],
+  ['helpdialog',['helpDialog',['../classhelp_dialog.html',1,'']]]
 ];

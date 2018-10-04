@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+  <namespace>org.doxygen.project</namespace>
+  <virtualFolder>doc</virtualFolder>
+  <filterSection>
+    <toc>
+      <section title="moebinv-gui" ref="index.html">
+        <section title="Classes" ref="annotated.html">
+          <section title="Class List" ref="annotated.html">
+            <section title="circle" ref="classcircle.html">
+              <section title="circle" ref="classcircle.html#abfd721dc65145023cf14739adacc81a8" />
+              <section title="boundingRect" ref="classcircle.html#ab9d2059829ac8f0420c7e711caeb61c7" />
+              <section title="paint" ref="classcircle.html#a2d9af8e86fb3605c736689a2e2566d26" />
+              <section title="shape" ref="classcircle.html#a198cbcea745bd311fe91c2a23def746c" />
+            </section>
+            <section title="cycleContextMenu" ref="classcycle_context_menu.html">
+              <section title="cycleContextMenu" ref="classcycle_context_menu.html#a0a948765494ab4b2ecf73c89123f7f14" />
+              <section title="amendRelationList" ref="classcycle_context_menu.html#a6a75f4ba6b3db319468db92fd0948a65" />
+              <section title="buildActions" ref="classcycle_context_menu.html#a2ada1b40956db90398503d184afdd5ee" />
+              <section title="buildContextMenu" ref="classcycle_context_menu.html#a155448ae220555423d26b055f50b6e49" />
+              <section title="changesMadeToFigure" ref="classcycle_context_menu.html#a6b92c1d84f101c8386d1152b680247ff" />
+              <section title="colourSelected" ref="classcycle_context_menu.html#acd8ba953b7b1edfac94b5ba4158217af" />
+              <section title="confirmDeleteCycle" ref="classcycle_context_menu.html#a844d59a74d643b19fd19eb1de11ea4e9" />
+              <section title="displayColourDialog" ref="classcycle_context_menu.html#abf4f98f97561d5acd104a6c0b2038e15" />
+              <section title="displayStyleDialog" ref="classcycle_context_menu.html#a094bbed14bab12e3b9ac3ae07140bdcb" />
+              <section title="displayWeightDialog" ref="classcycle_context_menu.html#ac720f89ffd13952e79dd77c1bb15c2aa" />
+              <section title="editPoint" ref="classcycle_context_menu.html#ae807f1cddefcdedf9f8c60473bd287df" />
+              <section title="getActions" ref="classcycle_context_menu.html#a4dd57e4522c46a70367b6b721f23bcc9" />
+              <section title="getCycle" ref="classcycle_context_menu.html#a35b3868cdc32b97e7c4abc109ee13460" />
+              <section title="getTitleAction" ref="classcycle_context_menu.html#a0e955d1a633d3585d11b7c193341a568" />
+              <section title="node_label" ref="classcycle_context_menu.html#a17d519c784fac28e39da31478b810ae9" />
+              <section title="relationsHaveChanged" ref="classcycle_context_menu.html#a42d360ffa2a047c3f43ded9fcec5982b" />
+              <section title="removeRelationFromList" ref="classcycle_context_menu.html#a83f3eb1ea5338154095a7bf1e2c77b01" />
+              <section title="sceneInvalid" ref="classcycle_context_menu.html#a0e28f14e9918aef074523854b5364c3e" />
+              <section title="setCycle" ref="classcycle_context_menu.html#adf29caf51604118b6ced6a02c5172252" />
+              <section title="styleSelected" ref="classcycle_context_menu.html#a31b1b2e1f6596697cdac2cf0cb66359e" />
+              <section title="weightSelected" ref="classcycle_context_menu.html#ac91d09b750dfeace9334b67649fbbda0" />
+              <section title="changeColour" ref="classcycle_context_menu.html#a1e2215915914b4c36463cbe5e667722d" />
+              <section title="changeStyle" ref="classcycle_context_menu.html#a61f2889cd624664ec0b4933def974a04" />
+              <section title="changeWeight" ref="classcycle_context_menu.html#a9798e2ec98b4e15af313112411cd8a24" />
+              <section title="deletePoint" ref="classcycle_context_menu.html#aa58c68008bb6ab0d70af517821b8a48f" />
+              <section title="edit" ref="classcycle_context_menu.html#a7c9b8d13930dc91c050e5b870f7dbfb8" />
+            </section>
+            <section title="cycleData" ref="structcycle_data.html">
+              <section title="brush" ref="structcycle_data.html#aea3d22bf8556ff483f19a00ffa646a13" />
+              <section title="c" ref="structcycle_data.html#a696c13341d3fee420edacff5630ff797" />
+              <section title="pen" ref="structcycle_data.html#a90e5dc6feb2c6486251d339394810d9b" />
+              <section title="radius" ref="structcycle_data.html#a815e7bc546bb425f638be27cb805315d" />
+              <section title="x" ref="structcycle_data.html#a5196a89f9438dfe6aeca79b20b1365dc" />
+              <section title="y" ref="structcycle_data.html#a943d9aa23035ec42edfaf4f2c6d57095" />
+            </section>
+            <section title="cycleStyleData" ref="structcycle_style_data.html">
+              <section title="colour" ref="structcycle_style_data.html#a77370c35742330617cccebfb0774edcd" />
+              <section title="isDefault" ref="structcycle_style_data.html#a2f0a7ba93c9cb8104399a0357f98507d" />
+              <section title="lineStyle" ref="structcycle_style_data.html#a3ff1e430f3bb40585365c496c1702f92" />
+              <section title="lineWidth" ref="structcycle_style_data.html#a65843c85926f1ae36e123789026bb09b" />
+            </section>
+            <section title="defineCycleDialog" ref="classdefine_cycle_dialog.html">
+              <section title="defineCycleDialog" ref="classdefine_cycle_dialog.html#a6f67cfc93b51c9407286019f5f005a22" />
+              <section title="~defineCycleDialog" ref="classdefine_cycle_dialog.html#a6a2301a879b4ba9fe5ea61050d8a3fac" />
+              <section title="getValues" ref="classdefine_cycle_dialog.html#aafd97025d92beedcac5c626aab88a6af" />
+              <section title="loadValues" ref="classdefine_cycle_dialog.html#a1725401652da06b5fbc0eef513e2b1d1" />
+              <section title="setTab" ref="classdefine_cycle_dialog.html#a1839a7fbd4d70faf3f7dbd281ab5d52b" />
+            </section>
+            <section title="dockWidget" ref="classdock_widget.html">
+              <section title="dockWidget" ref="classdock_widget.html#af65ba19ef794133fb2b365dedc5b9d64" />
+              <section title="calculateDockToWindowPercentage" ref="classdock_widget.html#a9204c64451a6cf19229c1d93b289f24e" />
+              <section title="getSizeRatio" ref="classdock_widget.html#a2503861f92eb0ac30313dd713f398996" />
+              <section title="recenterView" ref="classdock_widget.html#acc2d0ff853683454fab7e90e1c772540" />
+              <section title="resizeEvent" ref="classdock_widget.html#ae9cc3b91f10ee2af70fd74c6422848b6" />
+              <section title="setSizeRatio" ref="classdock_widget.html#a7f6a50274259d918d9a9068b8a94fe80" />
+            </section>
+            <section title="figureUndoCommand" ref="classfigure_undo_command.html">
+              <section title="figureUndoCommand" ref="classfigure_undo_command.html#af29d6f2ed7bcff9fdae44a83707d0d76" />
+              <section title="node_label" ref="classfigure_undo_command.html#a571773dcb5236289e16f0d444e9785e5" />
+              <section title="redo" ref="classfigure_undo_command.html#aec81e1bda86663871b7ff1cb6e8d5fda" />
+              <section title="sceneInvalid" ref="classfigure_undo_command.html#a0826ae627f25daaa23ba9ccdd7e8fda2" />
+              <section title="undo" ref="classfigure_undo_command.html#a9e733f81f847b07673f141bf13c5aace" />
+            </section>
+            <section title="graphicCycle" ref="classgraphic_cycle.html">
+              <section title="graphicCycle" ref="classgraphic_cycle.html#a89c2914fab32a0e10b2d53491535c173" />
+              <section title="addChild" ref="classgraphic_cycle.html#a44dc93e5f66707fd102c2acccbef076c" />
+              <section title="boundingRect" ref="classgraphic_cycle.html#a4db310e0fdbccffefc7404c47eb73607" />
+              <section title="buildShape" ref="classgraphic_cycle.html#ac3a007a95334380db1bcd9b8082cb36c" />
+              <section title="cancelMovement" ref="classgraphic_cycle.html#af79bfc4ed813bab595a2a721475a7199" />
+              <section title="changesMadeToFigure" ref="classgraphic_cycle.html#a04f2deb84f4a748e8bb9dba7a43eb653" />
+              <section title="findCycleInTree" ref="classgraphic_cycle.html#ae60f6c55734308b7811d0f5ff9116227" />
+              <section title="getContextMenu" ref="classgraphic_cycle.html#a4e090d82ba2e37bee415c95630abe061" />
+              <section title="getCycleLabel" ref="classgraphic_cycle.html#ae55bb7487a8baac738b88e8c1bd0515e" />
+              <section title="getItemIsGrabbed" ref="classgraphic_cycle.html#a10e61352945ca9b32b83e528e2fc6853" />
+              <section title="getRelativeScaleFactor" ref="classgraphic_cycle.html#a80b533c2477a08f98506202d94bad7bc" />
+              <section title="mouseMoveEvent" ref="classgraphic_cycle.html#aec6514c9578de68150bf2eea9b4e80c4" />
+              <section title="mousePressEvent" ref="classgraphic_cycle.html#af731c349d665b784291187ad4b0a71d9" />
+              <section title="mouseReleaseEvent" ref="classgraphic_cycle.html#a10c7318e9cf6d79e0aad3eec5c1d697a" />
+              <section title="mouseStopped" ref="classgraphic_cycle.html#a173e5e3dfb0dde41c8046a53086e02ab" />
+              <section title="node_label" ref="classgraphic_cycle.html#a51c0fcf1c2b413a20113c0b4e10194d9" />
+              <section title="paint" ref="classgraphic_cycle.html#a746393c5d92838147094dadee5c289f5" />
+              <section title="sceneInvalid" ref="classgraphic_cycle.html#aa36164d21bdd1b7cde5b26407f330d49" />
+              <section title="setColour" ref="classgraphic_cycle.html#a48965c220e8fad0181f1f793c17fb73c" />
+              <section title="setCycleAsy" ref="classgraphic_cycle.html#a58385898752cac06fb14fc527f908b8c" />
+              <section title="setHover" ref="classgraphic_cycle.html#a54708026fc7ea647f431263990872cdf" />
+              <section title="setLineStyle" ref="classgraphic_cycle.html#a96f1a1d6c958bfba3789a13c156f9795" />
+              <section title="setLineWidth" ref="classgraphic_cycle.html#aa02ce6a22ddb0ae859ab6dac49a0570a" />
+              <section title="stableMatrix" ref="classgraphic_cycle.html#a1c3a094ad53a3705019c24869340ed51" />
+              <section title="unsetHover" ref="classgraphic_cycle.html#a7d9d805ccc83dcf16623c969ad48b6a5" />
+            </section>
+            <section title="graphicsScene" ref="classgraphics_scene.html">
+              <section title="graphicsScene" ref="classgraphics_scene.html#a630f565d827637e6f46f5ae2e786cd06" />
+              <section title="getPointIsHighlighted" ref="classgraphics_scene.html#ab84d166160c74279bae4f59c2ccac244" />
+              <section title="mouseMoveEvent" ref="classgraphics_scene.html#a08bfd268527873e3bccaa52f34823058" />
+              <section title="mousePressEvent" ref="classgraphics_scene.html#a45ca641319ec6accb1574f52539e7517" />
+              <section title="newMouseHover" ref="classgraphics_scene.html#ad79f731b826d93f3c84d55f8d411666c" />
+              <section title="newMouseLeftPress" ref="classgraphics_scene.html#a370117524f759425873aa2dd710958c0" />
+              <section title="newMouseRightPress" ref="classgraphics_scene.html#a788bb2305e72c0deb7cd95a7e245b79a" />
+              <section title="setPointIsHighlighted" ref="classgraphics_scene.html#a96915f909391e379b8c6c880d1d3acc6" />
+              <section title="unHighlightCycle" ref="classgraphics_scene.html#ab5dc117c8417d256b4cb9a01cbcd9509" />
+            </section>
+            <section title="helpBrowser" ref="classhelp_browser.html">
+              <section title="helpBrowser" ref="classhelp_browser.html#a0c24d5dbf041a323695a9260c1f4d774" />
+              <section title="loadResource" ref="classhelp_browser.html#a92edbf57806761e03457bf941587c2a8" />
+              <section title="setHelpEngine" ref="classhelp_browser.html#a2ecdeeeeca618d3436adeec6d782f621" />
+            </section>
+            <section title="helpDialog" ref="classhelp_dialog.html">
+              <section title="helpDialog" ref="classhelp_dialog.html#a84aceebf9a77e5c6afc9842b212d0961" />
+              <section title="~helpDialog" ref="classhelp_dialog.html#a6a142b5a6de644ebbf26e84b27616940" />
+            </section>
+            <section title="labels" ref="classlabels.html">
+              <section title="labels" ref="classlabels.html#a736d8b54b76c622c6ff937cd2cbdd767" />
+              <section title="advanceLabel" ref="classlabels.html#a790344f0c86546b9b5fdda30dbe690a5" />
+              <section title="genNextLabel" ref="classlabels.html#a70a7436dbef91e342fec4ec3130187e2" />
+              <section title="genNextSymbol" ref="classlabels.html#aac459cce2911a18cf66175a6ccfb87f3" />
+              <section title="getManualName" ref="classlabels.html#a629e15f96a5f73b4bfdb9b18b9b98092" />
+              <section title="node_label" ref="classlabels.html#a87859b44a590675af2f05213e09e723e" />
+              <section title="unnamedSymbol" ref="classlabels.html#adec1585f4f5a3e449ce6e825717114af" />
+            </section>
+            <section title="line" ref="classline.html">
+              <section title="line" ref="classline.html#a38ef6d493f122a35237517bc79653821" />
+              <section title="boundingRect" ref="classline.html#aecbda133a991abe5bb4080416c226e2f" />
+              <section title="findLinePoints" ref="classline.html#a0638608cbb7231dc4a55ea795e367748" />
+              <section title="paint" ref="classline.html#a128cee38b49baa22b618165edc900e81" />
+            </section>
+            <section title="MainWindow" ref="class_main_window.html">
+              <section title="MainWindow" ref="class_main_window.html#a8b244be8b7b7db1b08de2a2acb9409db" />
+              <section title="~MainWindow" ref="class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7" />
+              <section title="addCycle" ref="class_main_window.html#a00432086a975b242f76384601785bfcb" />
+              <section title="addLineToTree" ref="class_main_window.html#ad322f29d75b06348ee43ce911a1cc36f" />
+              <section title="addToTree" ref="class_main_window.html#a816f983db7e31a8a3e8376538b44804f" />
+              <section title="buildToolBar" ref="class_main_window.html#a2e45b04e116068ed411c9738fbdc71ff" />
+              <section title="checkDescription" ref="class_main_window.html#a3e72a214988b3628c36ad4f3e41dc0af" />
+              <section title="createCycle" ref="class_main_window.html#abc46822a29b8c97fbe12e030b30444f7" />
+              <section title="escPressed" ref="class_main_window.html#a6ac7f96512bac8c7be3a554147858b46" />
+              <section title="getCycleData" ref="class_main_window.html#a3088b7addf938e91e77b741a9ae22a53" />
+              <section title="initialiseDefaultSettings" ref="class_main_window.html#a72e9fc361f05240f439fb17ff78a40cc" />
+              <section title="initMainMenu" ref="class_main_window.html#ae78352e402084a7c6518e97056070677" />
+              <section title="initTreeModel" ref="class_main_window.html#a3e45090789e16c49079857ab0617b239" />
+              <section title="keyPressEvent" ref="class_main_window.html#a9c4f542263838b9ecd06eae839a42a34" />
+              <section title="node_compact_string" ref="class_main_window.html#a824f237890279ea706b827422f47ae4a" />
+              <section title="node_label" ref="class_main_window.html#a989b1d1dcf93a3441027f4cd49bf28a5" />
+              <section title="refactorCycleRelation" ref="class_main_window.html#a9fe708c683a2dd952ccb72e04cf4a62d" />
+              <section title="resetRelationalList" ref="class_main_window.html#a46ebd786b1aeb0ef026f0a3f32dd9f3d" />
+              <section title="resizeEvent" ref="class_main_window.html#ae12f8f63791595567b6250f8bb002bda" />
+              <section title="saveCheck" ref="class_main_window.html#ae2defb68c51e884b7031693b20bdd556" />
+              <section title="setCycleAsy" ref="class_main_window.html#a633c8594fbb906b2e914a4b3bbf50d97" />
+              <section title="setDrawingMetric" ref="class_main_window.html#af7d2eb4ee3fb3cc4f0b83deffdb81ae8" />
+              <section title="shortestDistance" ref="class_main_window.html#a2431b3144405d8d0d3e8bd3523ad381b" />
+              <section title="update" ref="class_main_window.html#a128f71880d4b9683149023fc46fcc9f8" />
+              <section title="updateFigureProperties" ref="class_main_window.html#af99d72b486f296b0cd86f2f9021a6343" />
+              <section title="toolAddCycle" ref="class_main_window.html#ada1631bee647fb176facf5077da7f91c" />
+            </section>
+            <section title="matrix4dialog" ref="classmatrix4dialog.html">
+              <section title="matrix4dialog" ref="classmatrix4dialog.html#a5f97315156e47939f8811cce88d8e580" />
+              <section title="~matrix4dialog" ref="classmatrix4dialog.html#aebc069268fc2120b95dc75338b03cb68" />
+              <section title="getValues" ref="classmatrix4dialog.html#a4826be428cb3f2d79905aee086cc296d" />
+            </section>
+            <section title="matrix8dialog" ref="classmatrix8dialog.html">
+              <section title="matrix8dialog" ref="classmatrix8dialog.html#afcdbf5b7f9fcef31cbd030cd130d57f9" />
+              <section title="~matrix8dialog" ref="classmatrix8dialog.html#a2caefa9ac5a7cd24f3f7713f885fe792" />
+              <section title="getValues" ref="classmatrix8dialog.html#a74736300c5b1a4aa0291016991c7e508" />
+            </section>
+            <section title="menuRelAction" ref="classmenu_rel_action.html">
+              <section title="menuRelAction" ref="classmenu_rel_action.html#a2db14a6cd576e8cb645a0e1dcf584d4e" />
+              <section title="actionHandler" ref="classmenu_rel_action.html#a23b63e5bdb79e12f74bd1d33a53fb6e0" />
+              <section title="checkActionHandler" ref="classmenu_rel_action.html#a1535eb0d2ad06bd4d44f3de8761841b2" />
+              <section title="checkCycleRelation" ref="classmenu_rel_action.html#ab3a724c2d09de8a3d253210ec3a0e0d3" />
+              <section title="checkMenuEntry" ref="classmenu_rel_action.html#a9c40a2e1e1538829214a2a9e06896a99" />
+              <section title="createCycleRelation" ref="classmenu_rel_action.html#a458e0e91f6125a4d16c369d140000e77" />
+              <section title="getCycle" ref="classmenu_rel_action.html#acb80ac433c901f22dbddcff7445adf24" />
+              <section title="getGroup" ref="classmenu_rel_action.html#aca0baeed9c6a266d677dae8dfb25d65b" />
+              <section title="getInputList" ref="classmenu_rel_action.html#a8ec0134231f519695901fa4d750fab4a" />
+              <section title="getParams" ref="classmenu_rel_action.html#a8da5cc4f4063d4ea465d67b0aabc57e7" />
+              <section title="getRelation" ref="classmenu_rel_action.html#a34deae132c511b7e34af97585df9245c" />
+              <section title="getRelType" ref="classmenu_rel_action.html#a1092ced0a224fdb4c8f5a0b12548a120" />
+              <section title="handleRelation" ref="classmenu_rel_action.html#ab48d2afed38fa75b9d7908da3cf095dd" />
+              <section title="hasRelation" ref="classmenu_rel_action.html#a5e6339dbaf4cf0dc9543afdfc5b9e15a" />
+              <section title="menuEntry" ref="classmenu_rel_action.html#af3463f9fd28cf1ff44c672dedb89af95" />
+              <section title="node_label" ref="classmenu_rel_action.html#a157ae072f7e1622564ff68583bb73132" />
+              <section title="setRelation" ref="classmenu_rel_action.html#acba36fb50f54a72a4b253957f2f50f92" />
+              <section title="addRelation" ref="classmenu_rel_action.html#ad9c9c61008821fcef78633ed38b42f8c" />
+              <section title="checkRelation" ref="classmenu_rel_action.html#afa273b825fbdc2d887cc6a3ecfc62265" />
+            </section>
+            <section title="menuRelActionGroup" ref="classmenu_rel_action_group.html">
+              <section title="menuRelActionGroup" ref="classmenu_rel_action_group.html#ac43afaa3a021c3543d31e2401944938e" />
+              <section title="addRelAction" ref="classmenu_rel_action_group.html#a7b36eb218ae45fd971c1bfca5eb465c4" />
+              <section title="getRelActions" ref="classmenu_rel_action_group.html#ac050bdcde34d72fc17c4fed70d2bfa6c" />
+              <section title="handleRelation" ref="classmenu_rel_action_group.html#a35a2675819196b79afc8f0c3701b10ed" />
+            </section>
+            <section title="point" ref="classpoint.html">
+              <section title="point" ref="classpoint.html#a7284d568deda3fe4a7a81cf9faae05a3" />
+              <section title="boundingRect" ref="classpoint.html#a91a81fc826052833e19e9d39ef3849d9" />
+              <section title="paint" ref="classpoint.html#a3ab3bdc06b67f1004fdddc7a3f73835a" />
+            </section>
+            <section title="propertiesDialog" ref="classproperties_dialog.html">
+              <section title="propertiesDialog" ref="classproperties_dialog.html#a23e5c7a841b8f1bda7adcc7d99d4da67" />
+              <section title="~propertiesDialog" ref="classproperties_dialog.html#a488198c2be8ea54e6f367b2ae83cf4aa" />
+              <section title="showEvent" ref="classproperties_dialog.html#a41e3286b47651d4c757bb12d34660fe6" />
+              <section title="update" ref="classproperties_dialog.html#aff17b502153d16b8f19fe75bf1d06d73" />
+            </section>
+            <section title="settingsDialog" ref="classsettings_dialog.html">
+              <section title="settingsDialog" ref="classsettings_dialog.html#abe3d7f1c14fb45723918ae6bd0f999fa" />
+              <section title="~settingsDialog" ref="classsettings_dialog.html#acecc71f2981d88e6860dd95518421e51" />
+              <section title="saveDirectoryHasChanged" ref="classsettings_dialog.html#a2f3b6b8dc939f18ae86b54d8ef86da56" />
+              <section title="sceneInvalid" ref="classsettings_dialog.html#afc5e121ba37f12221754a9e76172a82f" />
+              <section title="setBackgroundColour" ref="classsettings_dialog.html#a4b484584139b25437d8cb7218cf78a3c" />
+              <section title="setButtonColour" ref="classsettings_dialog.html#a6f5b6ea59e6a2de876fee96f0a5501da" />
+              <section title="showEvent" ref="classsettings_dialog.html#a12dcaa04ce60f151ae7b77ce5ce2610d" />
+            </section>
+            <section title="treeModel" ref="classtree_model.html">
+              <section title="treeModel" ref="classtree_model.html#aacfea32c612071ff4495ce764b82d618" />
+              <section title="data" ref="classtree_model.html#add38ff680cd2a926d201c0760234419d" />
+            </section>
+            <section title="view" ref="classview.html">
+              <section title="view" ref="classview.html#a5b500c7ca4c4631a614445bcf8c06ed8" />
+              <section title="getCurrentHighlightedCycle" ref="classview.html#aa0b6bfa057ab5c4d8f3bd60557622533" />
+              <section title="getPanningEnabled" ref="classview.html#aea81f104e17ad13b12d66dabc82b2df0" />
+              <section title="highlightClosestCycle" ref="classview.html#ab0e83744c774f7cb76dbfc8ce12c4186" />
+              <section title="mouseMoveEvent" ref="classview.html#a165a6cba84a12fc10fbf4c6fee73df73" />
+              <section title="mousePressEvent" ref="classview.html#a7813d1b3e94e3c4db1ec0fa9143a1eca" />
+              <section title="mouseReleaseEvent" ref="classview.html#a57902641e912fe7549e04cc6a360d60c" />
+              <section title="mouseStopped" ref="classview.html#ab1d79ebdee961d5ec07ed11f461158a5" />
+              <section title="recenterView" ref="classview.html#a7fff213d7f38eeb2c8943609264fa518" />
+              <section title="setBackgroundColour" ref="classview.html#a3eedee38e4dfa3d2fa7f30f52c36438b" />
+              <section title="setCurrentHighlightedCycle" ref="classview.html#a69ba93a57967891ba91517b9fd50e369" />
+              <section title="setPanningEnabled" ref="classview.html#a78e6621aad0346c49fc9d9e0e4f268f5" />
+              <section title="wheelEvent" ref="classview.html#a7d18b10e6f370227079c552df12d4c02" />
+              <section title="zoomIn" ref="classview.html#af0f530013cb69c332de83d47d75a8fb0" />
+              <section title="zoomOut" ref="classview.html#a497e42c804c9937d94b373d53e163f1b" />
+              <section title="relativeScaleFactor" ref="classview.html#ae841c1e593aa326d706d2a52fe6275ba" />
+            </section>
+          </section>
+          <section title="Class Index" ref="classes.html" />
+          <section title="Class Hierarchy" ref="hierarchy.html">
+            <section title="cycleData" ref="structcycle_data.html" />
+            <section title="cycleStyleData" ref="structcycle_style_data.html" />
+            <section title="labels" ref="classlabels.html" />
+            <section title="QActionGroup">
+              <section title="menuRelActionGroup" ref="classmenu_rel_action_group.html" />
+            </section>
+            <section title="QDialog">
+              <section title="defineCycleDialog" ref="classdefine_cycle_dialog.html" />
+              <section title="helpDialog" ref="classhelp_dialog.html" />
+              <section title="matrix4dialog" ref="classmatrix4dialog.html" />
+              <section title="matrix8dialog" ref="classmatrix8dialog.html" />
+              <section title="propertiesDialog" ref="classproperties_dialog.html" />
+              <section title="settingsDialog" ref="classsettings_dialog.html" />
+            </section>
+            <section title="QDockWidget">
+              <section title="dockWidget" ref="classdock_widget.html" />
+            </section>
+            <section title="QGraphicsItem">
+              <section title="circle" ref="classcircle.html" />
+              <section title="graphicCycle" ref="classgraphic_cycle.html" />
+              <section title="line" ref="classline.html" />
+              <section title="point" ref="classpoint.html" />
+            </section>
+            <section title="QGraphicsScene">
+              <section title="graphicsScene" ref="classgraphics_scene.html" />
+            </section>
+            <section title="QGraphicsView">
+              <section title="view" ref="classview.html" />
+            </section>
+            <section title="QMainWindow">
+              <section title="MainWindow" ref="class_main_window.html" />
+            </section>
+            <section title="QMenu">
+              <section title="cycleContextMenu" ref="classcycle_context_menu.html" />
+            </section>
+            <section title="QObject">
+              <section title="circle" ref="classcircle.html" />
+              <section title="figureUndoCommand" ref="classfigure_undo_command.html" />
+              <section title="graphicCycle" ref="classgraphic_cycle.html" />
+              <section title="line" ref="classline.html" />
+              <section title="menuRelAction" ref="classmenu_rel_action.html" />
+              <section title="point" ref="classpoint.html" />
+            </section>
+            <section title="QStandardItemModel">
+              <section title="treeModel" ref="classtree_model.html" />
+            </section>
+            <section title="QTextBrowser">
+              <section title="helpBrowser" ref="classhelp_browser.html" />
+            </section>
+            <section title="QUndoCommand">
+              <section title="figureUndoCommand" ref="classfigure_undo_command.html" />
+            </section>
+          </section>
+          <section title="Class Members" ref="functions.html">
+            <section title="All" ref="functions.html" />
+            <section title="Functions" ref="functions_func.html" />
+          </section>
+        </section>
+        <section title="Files" ref="files.html">
+          <section title="File List" ref="files.html">
+            <section title="include" ref="dir_d44c64559bbebec7f509842c48db8b23.html">
+              <section title="circle.h" ref="circle_8h_source.html" />
+              <section title="conf.h" ref="conf_8h_source.html" />
+              <section title="cyclecontextmenu.h" ref="cyclecontextmenu_8h_source.html" />
+              <section title="definecycledialog.h" ref="definecycledialog_8h_source.html" />
+              <section title="dockwidget.h" ref="dockwidget_8h_source.html" />
+              <section title="figureundocommand.h" ref="figureundocommand_8h_source.html" />
+              <section title="graphiccycle.h" ref="graphiccycle_8h_source.html" />
+              <section title="helpdialog.h" ref="helpdialog_8h_source.html" />
+              <section title="labels.h" ref="labels_8h_source.html" />
+              <section title="line.h" ref="line_8h_source.html" />
+              <section title="mainwindow.h" ref="mainwindow_8h_source.html" />
+              <section title="matrix4dialog.h" ref="matrix4dialog_8h_source.html" />
+              <section title="matrix8dialog.h" ref="matrix8dialog_8h_source.html" />
+              <section title="menurelationhandler.h" ref="menurelationhandler_8h_source.html" />
+              <section title="point.h" ref="point_8h_source.html" />
+              <section title="propertiesdialog.h" ref="propertiesdialog_8h_source.html" />
+              <section title="scene.h" ref="scene_8h_source.html" />
+              <section title="settingsdialog.h" ref="settingsdialog_8h_source.html" />
+              <section title="treemodel.h" ref="treemodel_8h_source.html" />
+              <section title="view.h" ref="view_8h_source.html" />
+            </section>
+          </section>
+        </section>
+      </section>
+    </toc>
+    <keywords>
+      <keyword name="moebinv-gui" id="moebinv-gui" ref="md___users_lukehutton__one_drive_-__university_of__leeds__university__computer__science__internship_moebinv-gui__r_e_a_d_m_e.html" />
+      <keyword name="circle" id="circle" ref="classcircle.html" />
+      <keyword name="circle" id="circle::circle" ref="classcircle.html#abfd721dc65145023cf14739adacc81a8" />
+      <keyword name="paint" id="circle::paint" ref="classcircle.html#a2d9af8e86fb3605c736689a2e2566d26" />
+      <keyword name="boundingRect" id="circle::boundingRect" ref="classcircle.html#ab9d2059829ac8f0420c7e711caeb61c7" />
+      <keyword name="shape" id="circle::shape" ref="classcircle.html#a198cbcea745bd311fe91c2a23def746c" />
+      <keyword name="cycleContextMenu" id="cycleContextMenu" ref="classcycle_context_menu.html" />
+      <keyword name="confirmDeleteCycle" id="cycleContextMenu::confirmDeleteCycle" ref="classcycle_context_menu.html#a844d59a74d643b19fd19eb1de11ea4e9" />
+      <keyword name="amendRelationList" id="cycleContextMenu::amendRelationList" ref="classcycle_context_menu.html#a6a75f4ba6b3db319468db92fd0948a65" />
+      <keyword name="displayColourDialog" id="cycleContextMenu::displayColourDialog" ref="classcycle_context_menu.html#abf4f98f97561d5acd104a6c0b2038e15" />
+      <keyword name="displayStyleDialog" id="cycleContextMenu::displayStyleDialog" ref="classcycle_context_menu.html#a094bbed14bab12e3b9ac3ae07140bdcb" />
+      <keyword name="displayWeightDialog" id="cycleContextMenu::displayWeightDialog" ref="classcycle_context_menu.html#ac720f89ffd13952e79dd77c1bb15c2aa" />
+      <keyword name="editPoint" id="cycleContextMenu::editPoint" ref="classcycle_context_menu.html#ae807f1cddefcdedf9f8c60473bd287df" />
+      <keyword name="relationsHaveChanged" id="cycleContextMenu::relationsHaveChanged" ref="classcycle_context_menu.html#a42d360ffa2a047c3f43ded9fcec5982b" />
+      <keyword name="colourSelected" id="cycleContextMenu::colourSelected" ref="classcycle_context_menu.html#acd8ba953b7b1edfac94b5ba4158217af" />
+      <keyword name="weightSelected" id="cycleContextMenu::weightSelected" ref="classcycle_context_menu.html#ac91d09b750dfeace9334b67649fbbda0" />
+      <keyword name="styleSelected" id="cycleContextMenu::styleSelected" ref="classcycle_context_menu.html#a31b1b2e1f6596697cdac2cf0cb66359e" />
+      <keyword name="sceneInvalid" id="cycleContextMenu::sceneInvalid" ref="classcycle_context_menu.html#a0e28f14e9918aef074523854b5364c3e" />
+      <keyword name="changesMadeToFigure" id="cycleContextMenu::changesMadeToFigure" ref="classcycle_context_menu.html#a6b92c1d84f101c8386d1152b680247ff" />
+      <keyword name="cycleContextMenu" id="cycleContextMenu::cycleContextMenu" ref="classcycle_context_menu.html#a0a948765494ab4b2ecf73c89123f7f14" />
+      <keyword name="getCycle" id="cycleContextMenu::getCycle" ref="classcycle_context_menu.html#a35b3868cdc32b97e7c4abc109ee13460" />
+      <keyword name="getActions" id="cycleContextMenu::getActions" ref="classcycle_context_menu.html#a4dd57e4522c46a70367b6b721f23bcc9" />
+      <keyword name="getTitleAction" id="cycleContextMenu::getTitleAction" ref="classcycle_context_menu.html#a0e955d1a633d3585d11b7c193341a568" />
+      <keyword name="setCycle" id="cycleContextMenu::setCycle" ref="classcycle_context_menu.html#adf29caf51604118b6ced6a02c5172252" />
+      <keyword name="removeRelationFromList" id="cycleContextMenu::removeRelationFromList" ref="classcycle_context_menu.html#a83f3eb1ea5338154095a7bf1e2c77b01" />
+      <keyword name="buildContextMenu" id="cycleContextMenu::buildContextMenu" ref="classcycle_context_menu.html#a155448ae220555423d26b055f50b6e49" />
+      <keyword name="buildActions" id="cycleContextMenu::buildActions" ref="classcycle_context_menu.html#a2ada1b40956db90398503d184afdd5ee" />
+      <keyword name="node_label" id="cycleContextMenu::node_label" ref="classcycle_context_menu.html#a17d519c784fac28e39da31478b810ae9" />
+      <keyword name="changeColour" id="cycleContextMenu::changeColour" ref="classcycle_context_menu.html#a1e2215915914b4c36463cbe5e667722d" />
+      <keyword name="changeStyle" id="cycleContextMenu::changeStyle" ref="classcycle_context_menu.html#a61f2889cd624664ec0b4933def974a04" />
+      <keyword name="changeWeight" id="cycleContextMenu::changeWeight" ref="classcycle_context_menu.html#a9798e2ec98b4e15af313112411cd8a24" />
+      <keyword name="deletePoint" id="cycleContextMenu::deletePoint" ref="classcycle_context_menu.html#aa58c68008bb6ab0d70af517821b8a48f" />
+      <keyword name="edit" id="cycleContextMenu::edit" ref="classcycle_context_menu.html#a7c9b8d13930dc91c050e5b870f7dbfb8" />
+      <keyword name="cycleData" id="cycleData" ref="structcycle_data.html" />
+      <keyword name="x" id="cycleData::x" ref="structcycle_data.html#a5196a89f9438dfe6aeca79b20b1365dc" />
+      <keyword name="y" id="cycleData::y" ref="structcycle_data.html#a943d9aa23035ec42edfaf4f2c6d57095" />
+      <keyword name="c" id="cycleData::c" ref="structcycle_data.html#a696c13341d3fee420edacff5630ff797" />
+      <keyword name="radius" id="cycleData::radius" ref="structcycle_data.html#a815e7bc546bb425f638be27cb805315d" />
+      <keyword name="brush" id="cycleData::brush" ref="structcycle_data.html#aea3d22bf8556ff483f19a00ffa646a13" />
+      <keyword name="pen" id="cycleData::pen" ref="structcycle_data.html#a90e5dc6feb2c6486251d339394810d9b" />
+      <keyword name="cycleStyleData" id="cycleStyleData" ref="structcycle_style_data.html" />
+      <keyword name="isDefault" id="cycleStyleData::isDefault" ref="structcycle_style_data.html#a2f0a7ba93c9cb8104399a0357f98507d" />
+      <keyword name="colour" id="cycleStyleData::colour" ref="structcycle_style_data.html#a77370c35742330617cccebfb0774edcd" />
+      <keyword name="lineWidth" id="cycleStyleData::lineWidth" ref="structcycle_style_data.html#a65843c85926f1ae36e123789026bb09b" />
+      <keyword name="lineStyle" id="cycleStyleData::lineStyle" ref="structcycle_style_data.html#a3ff1e430f3bb40585365c496c1702f92" />
+      <keyword name="defineCycleDialog" id="defineCycleDialog" ref="classdefine_cycle_dialog.html" />
+      <keyword name="defineCycleDialog" id="defineCycleDialog::defineCycleDialog" ref="classdefine_cycle_dialog.html#a6f67cfc93b51c9407286019f5f005a22" />
+      <keyword name="setTab" id="defineCycleDialog::setTab" ref="classdefine_cycle_dialog.html#a1839a7fbd4d70faf3f7dbd281ab5d52b" />
+      <keyword name="getValues" id="defineCycleDialog::getValues" ref="classdefine_cycle_dialog.html#aafd97025d92beedcac5c626aab88a6af" />
+      <keyword name="loadValues" id="defineCycleDialog::loadValues" ref="classdefine_cycle_dialog.html#a1725401652da06b5fbc0eef513e2b1d1" />
+      <keyword name="dockWidget" id="dockWidget" ref="classdock_widget.html" />
+      <keyword name="recenterView" id="dockWidget::recenterView" ref="classdock_widget.html#acc2d0ff853683454fab7e90e1c772540" />
+      <keyword name="calculateDockToWindowPercentage" id="dockWidget::calculateDockToWindowPercentage" ref="classdock_widget.html#a9204c64451a6cf19229c1d93b289f24e" />
+      <keyword name="dockWidget" id="dockWidget::dockWidget" ref="classdock_widget.html#af65ba19ef794133fb2b365dedc5b9d64" />
+      <keyword name="resizeEvent" id="dockWidget::resizeEvent" ref="classdock_widget.html#ae9cc3b91f10ee2af70fd74c6422848b6" />
+      <keyword name="setSizeRatio" id="dockWidget::setSizeRatio" ref="classdock_widget.html#a7f6a50274259d918d9a9068b8a94fe80" />
+      <keyword name="getSizeRatio" id="dockWidget::getSizeRatio" ref="classdock_widget.html#a2503861f92eb0ac30313dd713f398996" />
+      <keyword name="figureUndoCommand" id="figureUndoCommand" ref="classfigure_undo_command.html" />
+      <keyword name="sceneInvalid" id="figureUndoCommand::sceneInvalid" ref="classfigure_undo_command.html#a0826ae627f25daaa23ba9ccdd7e8fda2" />
+      <keyword name="figureUndoCommand" id="figureUndoCommand::figureUndoCommand" ref="classfigure_undo_command.html#af29d6f2ed7bcff9fdae44a83707d0d76" />
+      <keyword name="undo" id="figureUndoCommand::undo" ref="classfigure_undo_command.html#a9e733f81f847b07673f141bf13c5aace" />
+      <keyword name="redo" id="figureUndoCommand::redo" ref="classfigure_undo_command.html#aec81e1bda86663871b7ff1cb6e8d5fda" />
+      <keyword name="node_label" id="figureUndoCommand::node_label" ref="classfigure_undo_command.html#a571773dcb5236289e16f0d444e9785e5" />
+      <keyword name="graphicCycle" id="graphicCycle" ref="classgraphic_cycle.html" />
+      <keyword name="setHover" id="graphicCycle::setHover" ref="classgraphic_cycle.html#a54708026fc7ea647f431263990872cdf" />
+      <keyword name="unsetHover" id="graphicCycle::unsetHover" ref="classgraphic_cycle.html#a7d9d805ccc83dcf16623c969ad48b6a5" />
+      <keyword name="setColour" id="graphicCycle::setColour" ref="classgraphic_cycle.html#a48965c220e8fad0181f1f793c17fb73c" />
+      <keyword name="setLineWidth" id="graphicCycle::setLineWidth" ref="classgraphic_cycle.html#aa02ce6a22ddb0ae859ab6dac49a0570a" />
+      <keyword name="setLineStyle" id="graphicCycle::setLineStyle" ref="classgraphic_cycle.html#a96f1a1d6c958bfba3789a13c156f9795" />
+      <keyword name="mouseStopped" id="graphicCycle::mouseStopped" ref="classgraphic_cycle.html#a173e5e3dfb0dde41c8046a53086e02ab" />
+      <keyword name="cancelMovement" id="graphicCycle::cancelMovement" ref="classgraphic_cycle.html#af79bfc4ed813bab595a2a721475a7199" />
+      <keyword name="findCycleInTree" id="graphicCycle::findCycleInTree" ref="classgraphic_cycle.html#ae60f6c55734308b7811d0f5ff9116227" />
+      <keyword name="sceneInvalid" id="graphicCycle::sceneInvalid" ref="classgraphic_cycle.html#aa36164d21bdd1b7cde5b26407f330d49" />
+      <keyword name="changesMadeToFigure" id="graphicCycle::changesMadeToFigure" ref="classgraphic_cycle.html#a04f2deb84f4a748e8bb9dba7a43eb653" />
+      <keyword name="graphicCycle" id="graphicCycle::graphicCycle" ref="classgraphic_cycle.html#a89c2914fab32a0e10b2d53491535c173" />
+      <keyword name="getCycleLabel" id="graphicCycle::getCycleLabel" ref="classgraphic_cycle.html#ae55bb7487a8baac738b88e8c1bd0515e" />
+      <keyword name="getRelativeScaleFactor" id="graphicCycle::getRelativeScaleFactor" ref="classgraphic_cycle.html#a80b533c2477a08f98506202d94bad7bc" />
+      <keyword name="getContextMenu" id="graphicCycle::getContextMenu" ref="classgraphic_cycle.html#a4e090d82ba2e37bee415c95630abe061" />
+      <keyword name="getItemIsGrabbed" id="graphicCycle::getItemIsGrabbed" ref="classgraphic_cycle.html#a10e61352945ca9b32b83e528e2fc6853" />
+      <keyword name="addChild" id="graphicCycle::addChild" ref="classgraphic_cycle.html#a44dc93e5f66707fd102c2acccbef076c" />
+      <keyword name="paint" id="graphicCycle::paint" ref="classgraphic_cycle.html#a746393c5d92838147094dadee5c289f5" />
+      <keyword name="boundingRect" id="graphicCycle::boundingRect" ref="classgraphic_cycle.html#a4db310e0fdbccffefc7404c47eb73607" />
+      <keyword name="mousePressEvent" id="graphicCycle::mousePressEvent" ref="classgraphic_cycle.html#af731c349d665b784291187ad4b0a71d9" />
+      <keyword name="mouseMoveEvent" id="graphicCycle::mouseMoveEvent" ref="classgraphic_cycle.html#aec6514c9578de68150bf2eea9b4e80c4" />
+      <keyword name="mouseReleaseEvent" id="graphicCycle::mouseReleaseEvent" ref="classgraphic_cycle.html#a10c7318e9cf6d79e0aad3eec5c1d697a" />
+      <keyword name="buildShape" id="graphicCycle::buildShape" ref="classgraphic_cycle.html#ac3a007a95334380db1bcd9b8082cb36c" />
+      <keyword name="stableMatrix" id="graphicCycle::stableMatrix" ref="classgraphic_cycle.html#a1c3a094ad53a3705019c24869340ed51" />
+      <keyword name="setCycleAsy" id="graphicCycle::setCycleAsy" ref="classgraphic_cycle.html#a58385898752cac06fb14fc527f908b8c" />
+      <keyword name="node_label" id="graphicCycle::node_label" ref="classgraphic_cycle.html#a51c0fcf1c2b413a20113c0b4e10194d9" />
+      <keyword name="graphicsScene" id="graphicsScene" ref="classgraphics_scene.html" />
+      <keyword name="newMouseLeftPress" id="graphicsScene::newMouseLeftPress" ref="classgraphics_scene.html#a370117524f759425873aa2dd710958c0" />
+      <keyword name="newMouseRightPress" id="graphicsScene::newMouseRightPress" ref="classgraphics_scene.html#a788bb2305e72c0deb7cd95a7e245b79a" />
+      <keyword name="newMouseHover" id="graphicsScene::newMouseHover" ref="classgraphics_scene.html#ad79f731b826d93f3c84d55f8d411666c" />
+      <keyword name="unHighlightCycle" id="graphicsScene::unHighlightCycle" ref="classgraphics_scene.html#ab5dc117c8417d256b4cb9a01cbcd9509" />
+      <keyword name="graphicsScene" id="graphicsScene::graphicsScene" ref="classgraphics_scene.html#a630f565d827637e6f46f5ae2e786cd06" />
+      <keyword name="getPointIsHighlighted" id="graphicsScene::getPointIsHighlighted" ref="classgraphics_scene.html#ab84d166160c74279bae4f59c2ccac244" />
+      <keyword name="setPointIsHighlighted" id="graphicsScene::setPointIsHighlighted" ref="classgraphics_scene.html#a96915f909391e379b8c6c880d1d3acc6" />
+      <keyword name="mousePressEvent" id="graphicsScene::mousePressEvent" ref="classgraphics_scene.html#a45ca641319ec6accb1574f52539e7517" />
+      <keyword name="mouseMoveEvent" id="graphicsScene::mouseMoveEvent" ref="classgraphics_scene.html#a08bfd268527873e3bccaa52f34823058" />
+      <keyword name="helpBrowser" id="helpBrowser" ref="classhelp_browser.html" />
+      <keyword name="helpBrowser" id="helpBrowser::helpBrowser" ref="classhelp_browser.html#a0c24d5dbf041a323695a9260c1f4d774" />
+      <keyword name="loadResource" id="helpBrowser::loadResource" ref="classhelp_browser.html#a92edbf57806761e03457bf941587c2a8" />
+      <keyword name="setHelpEngine" id="helpBrowser::setHelpEngine" ref="classhelp_browser.html#a2ecdeeeeca618d3436adeec6d782f621" />
+      <keyword name="helpDialog" id="helpDialog" ref="classhelp_dialog.html" />
+      <keyword name="helpDialog" id="helpDialog::helpDialog" ref="classhelp_dialog.html#a84aceebf9a77e5c6afc9842b212d0961" />
+      <keyword name="labels" id="labels" ref="classlabels.html" />
+      <keyword name="labels" id="labels::labels" ref="classlabels.html#a736d8b54b76c622c6ff937cd2cbdd767" />
+      <keyword name="genNextLabel" id="labels::genNextLabel" ref="classlabels.html#a70a7436dbef91e342fec4ec3130187e2" />
+      <keyword name="genNextSymbol" id="labels::genNextSymbol" ref="classlabels.html#aac459cce2911a18cf66175a6ccfb87f3" />
+      <keyword name="advanceLabel" id="labels::advanceLabel" ref="classlabels.html#a790344f0c86546b9b5fdda30dbe690a5" />
+      <keyword name="node_label" id="labels::node_label" ref="classlabels.html#a87859b44a590675af2f05213e09e723e" />
+      <keyword name="getManualName" id="labels::getManualName" ref="classlabels.html#a629e15f96a5f73b4bfdb9b18b9b98092" />
+      <keyword name="unnamedSymbol" id="labels::unnamedSymbol" ref="classlabels.html#adec1585f4f5a3e449ce6e825717114af" />
+      <keyword name="line" id="line" ref="classline.html" />
+      <keyword name="line" id="line::line" ref="classline.html#a38ef6d493f122a35237517bc79653821" />
+      <keyword name="paint" id="line::paint" ref="classline.html#a128cee38b49baa22b618165edc900e81" />
+      <keyword name="boundingRect" id="line::boundingRect" ref="classline.html#aecbda133a991abe5bb4080416c226e2f" />
+      <keyword name="findLinePoints" id="line::findLinePoints" ref="classline.html#a0638608cbb7231dc4a55ea795e367748" />
+      <keyword name="MainWindow" id="MainWindow" ref="class_main_window.html" />
+      <keyword name="resetRelationalList" id="MainWindow::resetRelationalList" ref="class_main_window.html#a46ebd786b1aeb0ef026f0a3f32dd9f3d" />
+      <keyword name="escPressed" id="MainWindow::escPressed" ref="class_main_window.html#a6ac7f96512bac8c7be3a554147858b46" />
+      <keyword name="MainWindow" id="MainWindow::MainWindow" ref="class_main_window.html#a8b244be8b7b7db1b08de2a2acb9409db" />
+      <keyword name="setDrawingMetric" id="MainWindow::setDrawingMetric" ref="class_main_window.html#af7d2eb4ee3fb3cc4f0b83deffdb81ae8" />
+      <keyword name="addToTree" id="MainWindow::addToTree" ref="class_main_window.html#a816f983db7e31a8a3e8376538b44804f" />
+      <keyword name="addLineToTree" id="MainWindow::addLineToTree" ref="class_main_window.html#ad322f29d75b06348ee43ce911a1cc36f" />
+      <keyword name="initTreeModel" id="MainWindow::initTreeModel" ref="class_main_window.html#a3e45090789e16c49079857ab0617b239" />
+      <keyword name="initMainMenu" id="MainWindow::initMainMenu" ref="class_main_window.html#ae78352e402084a7c6518e97056070677" />
+      <keyword name="addCycle" id="MainWindow::addCycle" ref="class_main_window.html#a00432086a975b242f76384601785bfcb" />
+      <keyword name="update" id="MainWindow::update" ref="class_main_window.html#a128f71880d4b9683149023fc46fcc9f8" />
+      <keyword name="node_compact_string" id="MainWindow::node_compact_string" ref="class_main_window.html#a824f237890279ea706b827422f47ae4a" />
+      <keyword name="node_label" id="MainWindow::node_label" ref="class_main_window.html#a989b1d1dcf93a3441027f4cd49bf28a5" />
+      <keyword name="shortestDistance" id="MainWindow::shortestDistance" ref="class_main_window.html#a2431b3144405d8d0d3e8bd3523ad381b" />
+      <keyword name="resizeEvent" id="MainWindow::resizeEvent" ref="class_main_window.html#ae12f8f63791595567b6250f8bb002bda" />
+      <keyword name="getCycleData" id="MainWindow::getCycleData" ref="class_main_window.html#a3088b7addf938e91e77b741a9ae22a53" />
+      <keyword name="setCycleAsy" id="MainWindow::setCycleAsy" ref="class_main_window.html#a633c8594fbb906b2e914a4b3bbf50d97" />
+      <keyword name="buildToolBar" id="MainWindow::buildToolBar" ref="class_main_window.html#a2e45b04e116068ed411c9738fbdc71ff" />
+      <keyword name="createCycle" id="MainWindow::createCycle" ref="class_main_window.html#abc46822a29b8c97fbe12e030b30444f7" />
+      <keyword name="initialiseDefaultSettings" id="MainWindow::initialiseDefaultSettings" ref="class_main_window.html#a72e9fc361f05240f439fb17ff78a40cc" />
+      <keyword name="refactorCycleRelation" id="MainWindow::refactorCycleRelation" ref="class_main_window.html#a9fe708c683a2dd952ccb72e04cf4a62d" />
+      <keyword name="saveCheck" id="MainWindow::saveCheck" ref="class_main_window.html#ae2defb68c51e884b7031693b20bdd556" />
+      <keyword name="keyPressEvent" id="MainWindow::keyPressEvent" ref="class_main_window.html#a9c4f542263838b9ecd06eae839a42a34" />
+      <keyword name="updateFigureProperties" id="MainWindow::updateFigureProperties" ref="class_main_window.html#af99d72b486f296b0cd86f2f9021a6343" />
+      <keyword name="checkDescription" id="MainWindow::checkDescription" ref="class_main_window.html#a3e72a214988b3628c36ad4f3e41dc0af" />
+      <keyword name="~MainWindow" id="MainWindow::~MainWindow" ref="class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7" />
+      <keyword name="toolAddCycle" id="MainWindow::toolAddCycle" ref="class_main_window.html#ada1631bee647fb176facf5077da7f91c" />
+      <keyword name="matrix4dialog" id="matrix4dialog" ref="classmatrix4dialog.html" />
+      <keyword name="matrix4dialog" id="matrix4dialog::matrix4dialog" ref="classmatrix4dialog.html#a5f97315156e47939f8811cce88d8e580" />
+      <keyword name="getValues" id="matrix4dialog::getValues" ref="classmatrix4dialog.html#a4826be428cb3f2d79905aee086cc296d" />
+      <keyword name="~matrix4dialog" id="matrix4dialog::~matrix4dialog" ref="classmatrix4dialog.html#aebc069268fc2120b95dc75338b03cb68" />
+      <keyword name="matrix8dialog" id="matrix8dialog" ref="classmatrix8dialog.html" />
+      <keyword name="matrix8dialog" id="matrix8dialog::matrix8dialog" ref="classmatrix8dialog.html#afcdbf5b7f9fcef31cbd030cd130d57f9" />
+      <keyword name="getValues" id="matrix8dialog::getValues" ref="classmatrix8dialog.html#a74736300c5b1a4aa0291016991c7e508" />
+      <keyword name="~matrix8dialog" id="matrix8dialog::~matrix8dialog" ref="classmatrix8dialog.html#a2caefa9ac5a7cd24f3f7713f885fe792" />
+      <keyword name="menuRelAction" id="menuRelAction" ref="classmenu_rel_action.html" />
+      <keyword name="handleRelation" id="menuRelAction::handleRelation" ref="classmenu_rel_action.html#ab48d2afed38fa75b9d7908da3cf095dd" />
+      <keyword name="menuRelAction" id="menuRelAction::menuRelAction" ref="classmenu_rel_action.html#a2db14a6cd576e8cb645a0e1dcf584d4e" />
+      <keyword name="getCycle" id="menuRelAction::getCycle" ref="classmenu_rel_action.html#acb80ac433c901f22dbddcff7445adf24" />
+      <keyword name="getRelType" id="menuRelAction::getRelType" ref="classmenu_rel_action.html#a1092ced0a224fdb4c8f5a0b12548a120" />
+      <keyword name="getInputList" id="menuRelAction::getInputList" ref="classmenu_rel_action.html#a8ec0134231f519695901fa4d750fab4a" />
+      <keyword name="getParams" id="menuRelAction::getParams" ref="classmenu_rel_action.html#a8da5cc4f4063d4ea465d67b0aabc57e7" />
+      <keyword name="getGroup" id="menuRelAction::getGroup" ref="classmenu_rel_action.html#aca0baeed9c6a266d677dae8dfb25d65b" />
+      <keyword name="getRelation" id="menuRelAction::getRelation" ref="classmenu_rel_action.html#a34deae132c511b7e34af97585df9245c" />
+      <keyword name="setRelation" id="menuRelAction::setRelation" ref="classmenu_rel_action.html#acba36fb50f54a72a4b253957f2f50f92" />
+      <keyword name="hasRelation" id="menuRelAction::hasRelation" ref="classmenu_rel_action.html#a5e6339dbaf4cf0dc9543afdfc5b9e15a" />
+      <keyword name="menuEntry" id="menuRelAction::menuEntry" ref="classmenu_rel_action.html#af3463f9fd28cf1ff44c672dedb89af95" />
+      <keyword name="checkMenuEntry" id="menuRelAction::checkMenuEntry" ref="classmenu_rel_action.html#a9c40a2e1e1538829214a2a9e06896a99" />
+      <keyword name="actionHandler" id="menuRelAction::actionHandler" ref="classmenu_rel_action.html#a23b63e5bdb79e12f74bd1d33a53fb6e0" />
+      <keyword name="checkActionHandler" id="menuRelAction::checkActionHandler" ref="classmenu_rel_action.html#a1535eb0d2ad06bd4d44f3de8761841b2" />
+      <keyword name="node_label" id="menuRelAction::node_label" ref="classmenu_rel_action.html#a157ae072f7e1622564ff68583bb73132" />
+      <keyword name="createCycleRelation" id="menuRelAction::createCycleRelation" ref="classmenu_rel_action.html#a458e0e91f6125a4d16c369d140000e77" />
+      <keyword name="checkCycleRelation" id="menuRelAction::checkCycleRelation" ref="classmenu_rel_action.html#ab3a724c2d09de8a3d253210ec3a0e0d3" />
+      <keyword name="addRelation" id="menuRelAction::addRelation" ref="classmenu_rel_action.html#ad9c9c61008821fcef78633ed38b42f8c" />
+      <keyword name="checkRelation" id="menuRelAction::checkRelation" ref="classmenu_rel_action.html#afa273b825fbdc2d887cc6a3ecfc62265" />
+      <keyword name="menuRelActionGroup" id="menuRelActionGroup" ref="classmenu_rel_action_group.html" />
+      <keyword name="handleRelation" id="menuRelActionGroup::handleRelation" ref="classmenu_rel_action_group.html#a35a2675819196b79afc8f0c3701b10ed" />
+      <keyword name="menuRelActionGroup" id="menuRelActionGroup::menuRelActionGroup" ref="classmenu_rel_action_group.html#ac43afaa3a021c3543d31e2401944938e" />
+      <keyword name="addRelAction" id="menuRelActionGroup::addRelAction" ref="classmenu_rel_action_group.html#a7b36eb218ae45fd971c1bfca5eb465c4" />
+      <keyword name="getRelActions" id="menuRelActionGroup::getRelActions" ref="classmenu_rel_action_group.html#ac050bdcde34d72fc17c4fed70d2bfa6c" />
+      <keyword name="point" id="point" ref="classpoint.html" />
+      <keyword name="point" id="point::point" ref="classpoint.html#a7284d568deda3fe4a7a81cf9faae05a3" />
+      <keyword name="paint" id="point::paint" ref="classpoint.html#a3ab3bdc06b67f1004fdddc7a3f73835a" />
+      <keyword name="boundingRect" id="point::boundingRect" ref="classpoint.html#a91a81fc826052833e19e9d39ef3849d9" />
+      <keyword name="propertiesDialog" id="propertiesDialog" ref="classproperties_dialog.html" />
+      <keyword name="propertiesDialog" id="propertiesDialog::propertiesDialog" ref="classproperties_dialog.html#a23e5c7a841b8f1bda7adcc7d99d4da67" />
+      <keyword name="showEvent" id="propertiesDialog::showEvent" ref="classproperties_dialog.html#a41e3286b47651d4c757bb12d34660fe6" />
+      <keyword name="update" id="propertiesDialog::update" ref="classproperties_dialog.html#aff17b502153d16b8f19fe75bf1d06d73" />
+      <keyword name="settingsDialog" id="settingsDialog" ref="classsettings_dialog.html" />
+      <keyword name="sceneInvalid" id="settingsDialog::sceneInvalid" ref="classsettings_dialog.html#afc5e121ba37f12221754a9e76172a82f" />
+      <keyword name="setBackgroundColour" id="settingsDialog::setBackgroundColour" ref="classsettings_dialog.html#a4b484584139b25437d8cb7218cf78a3c" />
+      <keyword name="saveDirectoryHasChanged" id="settingsDialog::saveDirectoryHasChanged" ref="classsettings_dialog.html#a2f3b6b8dc939f18ae86b54d8ef86da56" />
+      <keyword name="settingsDialog" id="settingsDialog::settingsDialog" ref="classsettings_dialog.html#abe3d7f1c14fb45723918ae6bd0f999fa" />
+      <keyword name="showEvent" id="settingsDialog::showEvent" ref="classsettings_dialog.html#a12dcaa04ce60f151ae7b77ce5ce2610d" />
+      <keyword name="setButtonColour" id="settingsDialog::setButtonColour" ref="classsettings_dialog.html#a6f5b6ea59e6a2de876fee96f0a5501da" />
+      <keyword name="treeModel" id="treeModel" ref="classtree_model.html" />
+      <keyword name="treeModel" id="treeModel::treeModel" ref="classtree_model.html#aacfea32c612071ff4495ce764b82d618" />
+      <keyword name="data" id="treeModel::data" ref="classtree_model.html#add38ff680cd2a926d201c0760234419d" />
+      <keyword name="view" id="view" ref="classview.html" />
+      <keyword name="recenterView" id="view::recenterView" ref="classview.html#a7fff213d7f38eeb2c8943609264fa518" />
+      <keyword name="mouseStopped" id="view::mouseStopped" ref="classview.html#ab1d79ebdee961d5ec07ed11f461158a5" />
+      <keyword name="setBackgroundColour" id="view::setBackgroundColour" ref="classview.html#a3eedee38e4dfa3d2fa7f30f52c36438b" />
+      <keyword name="highlightClosestCycle" id="view::highlightClosestCycle" ref="classview.html#ab0e83744c774f7cb76dbfc8ce12c4186" />
+      <keyword name="view" id="view::view" ref="classview.html#a5b500c7ca4c4631a614445bcf8c06ed8" />
+      <keyword name="getPanningEnabled" id="view::getPanningEnabled" ref="classview.html#aea81f104e17ad13b12d66dabc82b2df0" />
+      <keyword name="setPanningEnabled" id="view::setPanningEnabled" ref="classview.html#a78e6621aad0346c49fc9d9e0e4f268f5" />
+      <keyword name="getCurrentHighlightedCycle" id="view::getCurrentHighlightedCycle" ref="classview.html#aa0b6bfa057ab5c4d8f3bd60557622533" />
+      <keyword name="setCurrentHighlightedCycle" id="view::setCurrentHighlightedCycle" ref="classview.html#a69ba93a57967891ba91517b9fd50e369" />
+      <keyword name="wheelEvent" id="view::wheelEvent" ref="classview.html#a7d18b10e6f370227079c552df12d4c02" />
+      <keyword name="mousePressEvent" id="view::mousePressEvent" ref="classview.html#a7813d1b3e94e3c4db1ec0fa9143a1eca" />
+      <keyword name="mouseMoveEvent" id="view::mouseMoveEvent" ref="classview.html#a165a6cba84a12fc10fbf4c6fee73df73" />
+      <keyword name="mouseReleaseEvent" id="view::mouseReleaseEvent" ref="classview.html#a57902641e912fe7549e04cc6a360d60c" />
+      <keyword name="zoomIn" id="view::zoomIn" ref="classview.html#af0f530013cb69c332de83d47d75a8fb0" />
+      <keyword name="zoomOut" id="view::zoomOut" ref="classview.html#a497e42c804c9937d94b373d53e163f1b" />
+      <keyword name="relativeScaleFactor" id="view::relativeScaleFactor" ref="classview.html#ae841c1e593aa326d706d2a52fe6275ba" />
+    </keywords>
+    <files>
+      <file>tabs.css</file>
+      <file>tab_a.png</file>
+      <file>tab_b.png</file>
+      <file>tab_h.png</file>
+      <file>tab_s.png</file>
+      <file>nav_h.png</file>
+      <file>nav_f.png</file>
+      <file>bc_s.png</file>
+      <file>doxygen.png</file>
+      <file>closed.png</file>
+      <file>open.png</file>
+      <file>bdwn.png</file>
+      <file>sync_on.png</file>
+      <file>sync_off.png</file>
+      <file>doxygen.css</file>
+      <file>jquery.js</file>
+      <file>dynsections.js</file>
+      <file>search/search_l.png</file>
+      <file>search/search_m.png</file>
+      <file>search/search_r.png</file>
+      <file>search/close.png</file>
+      <file>search/mag_sel.png</file>
+      <file>search/search.css</file>
+      <file>search/search.js</file>
+      <file>circle_8h_source.html</file>
+      <file>conf_8h_source.html</file>
+      <file>cyclecontextmenu_8h_source.html</file>
+      <file>definecycledialog_8h_source.html</file>
+      <file>dockwidget_8h_source.html</file>
+      <file>figureundocommand_8h_source.html</file>
+      <file>graphiccycle_8h_source.html</file>
+      <file>helpdialog_8h_source.html</file>
+      <file>labels_8h_source.html</file>
+      <file>line_8h_source.html</file>
+      <file>mainwindow_8h_source.html</file>
+      <file>matrix4dialog_8h_source.html</file>
+      <file>matrix8dialog_8h_source.html</file>
+      <file>menurelationhandler_8h_source.html</file>
+      <file>point_8h_source.html</file>
+      <file>propertiesdialog_8h_source.html</file>
+      <file>scene_8h_source.html</file>
+      <file>settingsdialog_8h_source.html</file>
+      <file>treemodel_8h_source.html</file>
+      <file>view_8h_source.html</file>
+      <file>md___users_lukehutton__one_drive_-__university_of__leeds__university__computer__science__internship_moebinv-gui__r_e_a_d_m_e.html</file>
+      <file>classcircle.html</file>
+      <file>classcircle.png</file>
+      <file>classcircle-members.html</file>
+      <file>classcycle_context_menu.html</file>
+      <file>classcycle_context_menu.png</file>
+      <file>classcycle_context_menu-members.html</file>
+      <file>structcycle_data.html</file>
+      <file>structcycle_data-members.html</file>
+      <file>structcycle_style_data.html</file>
+      <file>structcycle_style_data-members.html</file>
+      <file>classdefine_cycle_dialog.html</file>
+      <file>classdefine_cycle_dialog.png</file>
+      <file>classdefine_cycle_dialog-members.html</file>
+      <file>classdock_widget.html</file>
+      <file>classdock_widget.png</file>
+      <file>classdock_widget-members.html</file>
+      <file>classfigure_undo_command.html</file>
+      <file>classfigure_undo_command.png</file>
+      <file>classfigure_undo_command-members.html</file>
+      <file>classgraphic_cycle.html</file>
+      <file>classgraphic_cycle.png</file>
+      <file>classgraphic_cycle-members.html</file>
+      <file>classgraphics_scene.html</file>
+      <file>classgraphics_scene.png</file>
+      <file>classgraphics_scene-members.html</file>
+      <file>classhelp_browser.html</file>
+      <file>classhelp_browser.png</file>
+      <file>classhelp_browser-members.html</file>
+      <file>classhelp_dialog.html</file>
+      <file>classhelp_dialog.png</file>
+      <file>classhelp_dialog-members.html</file>
+      <file>classlabels.html</file>
+      <file>classlabels-members.html</file>
+      <file>classline.html</file>
+      <file>classline.png</file>
+      <file>classline-members.html</file>
+      <file>class_main_window.html</file>
+      <file>class_main_window.png</file>
+      <file>class_main_window-members.html</file>
+      <file>classmatrix4dialog.html</file>
+      <file>classmatrix4dialog.png</file>
+      <file>classmatrix4dialog-members.html</file>
+      <file>classmatrix8dialog.html</file>
+      <file>classmatrix8dialog.png</file>
+      <file>classmatrix8dialog-members.html</file>
+      <file>classmenu_rel_action.html</file>
+      <file>classmenu_rel_action.png</file>
+      <file>classmenu_rel_action-members.html</file>
+      <file>classmenu_rel_action_group.html</file>
+      <file>classmenu_rel_action_group.png</file>
+      <file>classmenu_rel_action_group-members.html</file>
+      <file>classpoint.html</file>
+      <file>classpoint.png</file>
+      <file>classpoint-members.html</file>
+      <file>classproperties_dialog.html</file>
+      <file>classproperties_dialog.png</file>
+      <file>classproperties_dialog-members.html</file>
+      <file>classsettings_dialog.html</file>
+      <file>classsettings_dialog.png</file>
+      <file>classsettings_dialog-members.html</file>
+      <file>classtree_model.html</file>
+      <file>classtree_model.png</file>
+      <file>classtree_model-members.html</file>
+      <file>classview.html</file>
+      <file>classview.png</file>
+      <file>classview-members.html</file>
+      <file>dir_d44c64559bbebec7f509842c48db8b23.html</file>
+      <file>dir_68267d1309a1af8e8297ef4c3efbcdba.html</file>
+      <file>index.html</file>
+      <file>pages.html</file>
+      <file>annotated.html</file>
+      <file>classes.html</file>
+      <file>hierarchy.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func.html</file>
+      <file>files.html</file>
+    </files>
+  </filterSection>
+</QtHelpProject>

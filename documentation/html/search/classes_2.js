@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['labels',['labels',['../classlabels.html',1,'']]],
-  ['line',['line',['../classline.html',1,'']]]
+  ['figureundocommand',['figureUndoCommand',['../classfigure_undo_command.html',1,'']]]
 ];

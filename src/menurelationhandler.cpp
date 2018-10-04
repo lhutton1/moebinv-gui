@@ -41,6 +41,11 @@ menuRelAction::menuRelAction(MoebInv::figure *f, MoebInv::ex cycle, GiNaC::lst *
     this->addRelation->setChecked(checked);
     connect(this->addRelation, &QAction::triggered, this, &menuRelAction::actionHandler);
 
+    this->addCycleRelation = new QAction(actionTitle, this);
+    this->addCycleRelation->setCheckable(true);
+    this->addCycleRelation->setChecked(checked);
+    connect(this->addCycleRelation, &QAction::triggered, this, &menuRelAction::cycleMetricActionHandler);
+
     this->checkRelation = new QAction(actionTitle, this);
     this->checkRelation->setCheckable(false);
     connect(this->checkRelation, &QAction::triggered, this, &menuRelAction::checkActionHandler);
@@ -78,16 +83,30 @@ cycle_relation menuRelAction::getRelation()
 }
 
 
+/*!
+ * \brief menuRelAction::getCycle Get the cycle assigned to this relation.
+ * \return GiNaC::ex
+ */
 ex menuRelAction::getCycle()
 {
     return this->cycle;
 }
 
+
+/*!
+ * \brief menuRelAction::getRelType Get the relation type assigned to the relation.
+ * \return int
+ */
 int menuRelAction::getRelType()
 {
     return this->relType;
 }
 
+
+/*!
+ * \brief menuRelAction::getParams Get the parameters that have been provided to the relation.
+ * \return GiNaC::lst
+ */
 lst menuRelAction::getParams()
 {
     return this->mostRecentParams;
@@ -119,15 +138,46 @@ void menuRelAction::actionHandler()
             (this->inputType == MATRIX_4 && params.nops() != 4) ||
             (this->inputType == MATRIX_8 && params.nops() != 4)
     ) {
-        emit handleRelation();
+        emit handleRelation(true);
         return;
     }
 
     // build the required relation.
-    createCycleRelation(params);
-    emit handleRelation();
+    createCycleRelation(params, true);
+    emit handleRelation(true);
 }
 
+
+/*!
+ * \brief menuRelAction::cycleMetricActionHandler Action handler for the cycle metric relation.
+ *
+ * Checks to make sure the correct number of parameters have been provided.
+ * If so the relevent relation is built.
+ */
+void menuRelAction::cycleMetricActionHandler()
+{
+    const lst params = getInputList();
+
+    // check the correct number of parameters have been provided
+    if ((this->inputType == SINGLE_PARAM && params.nops() != 1) ||
+            (this->inputType == MATRIX_4 && params.nops() != 4) ||
+            (this->inputType == MATRIX_8 && params.nops() != 4)
+    ) {
+        emit handleRelation(false);
+        return;
+    }
+
+    // build the required relation.
+    createCycleRelation(params, false);
+    emit handleRelation(false);
+}
+
+
+/*!
+ * \brief menuRelAction::checkActionHandler Action handler to check the status of a
+ * relation on 2 cycles. First the user is prompted to enter another cycle key, then
+ * this function checks the status of this relation and outputs the result back to the user.
+ */
 void menuRelAction::checkActionHandler()
 {
     QString inputDialogValue = QInputDialog::getText(nullptr, "Input cycle label", "Cycle key:");
@@ -148,56 +198,69 @@ void menuRelAction::checkActionHandler()
     msgBoxInfo.exec();
 }
 
-void menuRelAction::createCycleRelation(const lst &params)
+
+/*!
+ * \brief menuRelAction::createCycleRelation creates the relevent relation based on the inputs.
+ * \param params GiNaC::lst of the parameter entered by the user.
+ * \param metric true = point metric relation, false = cycle metric relation
+ */
+void menuRelAction::createCycleRelation(const lst &params, const bool &metric)
 {
     this->mostRecentParams = params;
 
     switch (relType) {
         case ORTHOGONAL:
-            this->relation = is_orthogonal(cycle, true);
+            this->relation = is_orthogonal(cycle, metric);
             break;
         case FORTHOGONAL:
-            this->relation = is_f_orthogonal(cycle, true);
+            this->relation = is_f_orthogonal(cycle, metric);
             break;
         case DIFFERENT:
-            this->relation = is_different(cycle, true);
+            this->relation = is_different(cycle, metric);
             break;
         case ADIFFERENT:
-            this->relation = is_adifferent(cycle, true);
+            this->relation = is_adifferent(cycle, metric);
             break;
         case REALS:
-            this->relation = only_reals(cycle, true);
+            this->relation = only_reals(cycle, metric);
             break;
         case TANGENT:
-            this->relation = is_tangent(cycle, true);
+            this->relation = is_tangent(cycle, metric);
             break;
         case TANGENT_I:
-            this->relation = is_tangent_i(cycle, true);
+            this->relation = is_tangent_i(cycle, metric);
             break;
         case TANGENT_O:
-            this->relation = is_tangent_o(cycle, true);
+            this->relation = is_tangent_o(cycle, metric);
             break;
         case STEINER_POWER:
-            this->relation = cycle_power(cycle, true, params.op(0));
+            this->relation = cycle_power(cycle, metric, params.op(0));
             break;
         case CYCLE_ANGLE:
-            this->relation = make_angle(cycle, true, params.op(0));
+            this->relation = make_angle(cycle, metric, params.op(0));
             break;
         case CYCLE_CROSS_T_DISTANCE:
-            this->relation = cross_t_distance(cycle, true, params.op(0));
+            this->relation = cross_t_distance(cycle, metric, params.op(0));
             break;
         case PRODUCT_SIGN:
-            this->relation = product_nonpositive(cycle, true, params.op(0));
+            this->relation = product_nonpositive(cycle, metric, params.op(0));
             break;
         case CYCLE_MOBIUS:
-            this->relation = moebius_transform(cycle, true, params);
+            this->relation = moebius_transform(cycle, metric, params);
             break;
         case CYCLE_SL2:
-            this->relation = sl2_transform(cycle, true, params);
+            this->relation = sl2_transform(cycle, metric, params);
             break;
     }
 }
 
+
+/*!
+ * \brief menuRelAction::checkCycleRelation used to check a relation.
+ * \param thisCycle the cycle this relation belongs to.
+ * \param otherCycle the other cycle entered by the user.
+ * \return QString
+ */
 QString menuRelAction::checkCycleRelation(const ex &thisCycle, const ex &otherCycle)
 {
     QString output;
@@ -241,6 +304,12 @@ QString menuRelAction::checkCycleRelation(const ex &thisCycle, const ex &otherCy
     return output;
 }
 
+
+/*!
+ * \brief menuRelAction::getInputList gets a list of inputs based on the
+ * number of parameters required.
+ * \return GiNaC::lst
+ */
 lst menuRelAction::getInputList()
 {
     bool isInput = false;

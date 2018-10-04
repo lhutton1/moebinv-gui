@@ -82,6 +82,33 @@ $(function() {
 <li>GiNaC</li>
 <li>moebinv</li>
 </ul>
+<p class="">Installation on Mac:</p>
+<p class=""><b>1. Install Homebrew.</b></p>
+<p class="">Paste this into a terminal: <code>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></p>
+<p class="">You may need to agree to the installation of Xcode.</p>
+<p class=""><b>2. Make sure that your mac has a GCC version greater than 4.4.</b></p>
+<p class="">You can do this by typing <code>gcc --version</code></p>
+<p class="">If not excecute: `brew install <a href="https://raw.github.com/Homebrew/homebrew-dupes/master/gcc.rb">https://raw.github.com/Homebrew/homebrew-dupes/master/gcc.rb</a> rm -v /usr/bin/{cc,gcc,c++,g++} ln -sv /usr/local/bin/gcc-4.x /usr/bin/cc ln -sv /usr/local/bin/gcc-4.x /usr/bin/gcc ln -sv /usr/local/bin/c++-4.x /usr/bin/c++ ln -sv /usr/local/bin/g++-4.x /usr/bin/g++`</p>
+<p class=""><b>3. Install GiNaC and Cmake using homebrew:</b> <code>brew install ginac brew install cmake</code></p>
+<p class=""><b>4. Install MoebInv</b></p>
+<ul>
+<li>Download the latest version of MoebInv here: <a href="https://sourceforge.net/p/moebinv/">https://sourceforge.net/p/moebinv/</a></li>
+<li>Navigate to the src file in a terminal</li>
+<li>Type <code>make</code></li>
+<li>Make sure MoebInv-gui can find the library files by either:<ul>
+<li>Placing <code>figure.h</code> and <code>cycle.h</code> in <code>/usr/local/include</code> and placing <code>libfigure.so</code> and <code>libcycle.so</code> in <code>/usr/local/lib</code></li>
+<li>Or by placing the files in the lib folder in the downloaded moebinv-gui (not yet working).</li>
+</ul>
+</li>
+</ul>
+<p class=""><b>5. Install Qt using home brew:</b> <code>brew install qt</code></p>
+<p class=""><b>6. Install MoebInv-gui</b></p><ul>
+<li>clone the moebInv-gui repository from: <a href="https://github.com/lhutton1/moebinv-gui">https://github.com/lhutton1/moebinv-gui</a> by executing: <code>git clone <a href="https://github.com/lhutton1/moebinv-gui">https://github.com/lhutton1/moebinv-gui</a></code></li>
+<li>open a terminal in this directory or directly after executing the clone command execute <code>cd moebinv-gui</code></li>
+<li>build the make file by executing <code>qmake</code></li>
+<li>compile the application by executing <code>make</code></li>
+<li>run the application by execting <code>./moebinv-gui</code></li>
+</ul>
 <h2>Documentation</h2>
 <p class="">Documentation is available here: ??</p>
 <h2>Usage</h2>

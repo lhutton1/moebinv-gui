@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['gennextlabel',['genNextLabel',['../classlabels.html#a70a7436dbef91e342fec4ec3130187e2',1,'labels']]],
-  ['getlabel',['getLabel',['../classgraphic_cycle.html#a52f423bc245a9a89a7353d1a6736dfb7',1,'graphicCycle']]],
-  ['getparameters',['getParameters',['../classgraphic_cycle.html#ac589011ca82a6c2ab648ed4b9fb1632f',1,'graphicCycle::getParameters()'],['../classline.html#a6453a1483e1cf2ae4f565fd7f80516fc',1,'line::getParameters()']]],
-  ['graphiccycle',['graphicCycle',['../classgraphic_cycle.html#a3997b985511911703829cd0009917585',1,'graphicCycle']]],
-  ['graphicsscene',['graphicsScene',['../classgraphics_scene.html#a630f565d827637e6f46f5ae2e786cd06',1,'graphicsScene']]]
+  ['data',['data',['../classtree_model.html#add38ff680cd2a926d201c0760234419d',1,'treeModel']]],
+  ['displaycolourdialog',['displayColourDialog',['../classcycle_context_menu.html#abf4f98f97561d5acd104a6c0b2038e15',1,'cycleContextMenu']]],
+  ['displaystyledialog',['displayStyleDialog',['../classcycle_context_menu.html#a094bbed14bab12e3b9ac3ae07140bdcb',1,'cycleContextMenu']]],
+  ['displayweightdialog',['displayWeightDialog',['../classcycle_context_menu.html#ac720f89ffd13952e79dd77c1bb15c2aa',1,'cycleContextMenu']]],
+  ['dockwidget',['dockWidget',['../classdock_widget.html#af65ba19ef794133fb2b365dedc5b9d64',1,'dockWidget']]]
 ];

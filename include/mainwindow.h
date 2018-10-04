@@ -19,6 +19,7 @@
 #include <QRegularExpression>
 #include <QUndoStack>
 #include <QKeyEvent>
+#include <QHelpEngine>
 
 #include <figure.h>
 
@@ -32,6 +33,7 @@
 #include "settingsdialog.h"
 #include "figureundocommand.h"
 #include "propertiesdialog.h"
+#include "helpdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -104,12 +106,10 @@ private slots:
     void on_actionDefine_by_center_and_radius_squared_triggered();
     void on_actionDefine_by_values_triggered();
     void on_actionDefine_cycle_triggered(int pageIndex = 0);
-    void on_actionSettings_triggered();
     void on_actionFigure_Description_triggered();
     void on_actionQuit_triggered();
     void on_actionDelete_cycle_triggered();
     void on_actionSave_As_triggered();
-    void on_actionProperties_triggered();
     void on_actionEllipticPointMetric_triggered();
     void on_actionParabolicPointMetric_triggered();
     void on_actionHyperbolicPointMetric_triggered();
@@ -149,6 +149,7 @@ private:
     QFileDialog *saveDialog;
     settingsDialog *settingDialog;
     propertiesDialog *propDialog;
+    helpDialog *applicationHelpDialog;
 
     QToolButton *defineCycle;
     QToolButton *thisItem;

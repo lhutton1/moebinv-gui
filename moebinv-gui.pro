@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui help
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,6 +27,8 @@ DEPENDPATH += /usr/local/include $$PWD/include
 
 LIBS += -L/usr/local/lib/ -lcln -lginac -lcycle -lfigure
 
+RESOURCES +=
+
 SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
@@ -46,7 +48,8 @@ SOURCES += \
         src/definecycledialog.cpp \
         src/settingsdialog.cpp \
         src/figureundocommand.cpp \
-        src/propertiesdialog.cpp
+        src/propertiesdialog.cpp \
+        src/helpdialog.cpp
 
 HEADERS += \
         include/conf.h \
@@ -67,7 +70,8 @@ HEADERS += \
         include/definecycledialog.h \
         include/settingsdialog.h \
         include/figureundocommand.h \
-        include/propertiesdialog.h
+        include/propertiesdialog.h \
+        include/helpdialog.h
 
 FORMS += \
         forms/mainwindow.ui \
@@ -75,4 +79,5 @@ FORMS += \
         forms/matrix8dialog.ui \
         forms/definecycledialog.ui \
         forms/settingsdialog.ui \
-        forms/propertiesdialog.ui
+        forms/propertiesdialog.ui \
+        forms/helpdialog.ui

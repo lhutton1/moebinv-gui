@@ -22,7 +22,7 @@
      <property name="elideMode">
       <enum>Qt::ElideRight</enum>
      </property>
-     <widget class="QWidget" name="tabValues" native="true">
+     <widget class="QWidget" name="tabValues">
       <attribute name="title">
        <string>By Values</string>
       </attribute>

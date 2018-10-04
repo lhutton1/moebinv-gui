@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['graphiccycle',['graphicCycle',['../classgraphic_cycle.html',1,'']]],
-  ['graphicsscene',['graphicsScene',['../classgraphics_scene.html',1,'']]]
+  ['definecycledialog',['defineCycleDialog',['../classdefine_cycle_dialog.html',1,'']]],
+  ['dockwidget',['dockWidget',['../classdock_widget.html',1,'']]]
 ];

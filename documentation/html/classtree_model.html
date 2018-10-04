@@ -80,10 +80,61 @@ Inheritance diagram for treeModel:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad3539d2628250edeea80fe4ffe0a80fa"><td class="memItemLeft" align="right" valign="top"><a id="ad3539d2628250edeea80fe4ffe0a80fa"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>treeModel</b> (QObject *parent=0)</td></tr>
-<tr class="separator:ad3539d2628250edeea80fe4ffe0a80fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacfea32c612071ff4495ce764b82d618"><td class="memItemLeft" align="right" valign="top"><a id="aacfea32c612071ff4495ce764b82d618"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>treeModel</b> (QObject *parent=nullptr)</td></tr>
+<tr class="separator:aacfea32c612071ff4495ce764b82d618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add38ff680cd2a926d201c0760234419d"><td class="memItemLeft" align="right" valign="top">virtual QVariant&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtree_model.html#add38ff680cd2a926d201c0760234419d">data</a> (const QModelIndex &amp;index, int role) const</td></tr>
+<tr class="memdesc:add38ff680cd2a926d201c0760234419d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtree_model.html#add38ff680cd2a926d201c0760234419d" title="treeModel::data reimplements data() function to display colour. ">treeModel::data</a> reimplements <a class="el" href="classtree_model.html#add38ff680cd2a926d201c0760234419d" title="treeModel::data reimplements data() function to display colour. ">data()</a> function to display colour.  <a href="#add38ff680cd2a926d201c0760234419d">More...</a><br /></td></tr>
+<tr class="separator:add38ff680cd2a926d201c0760234419d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="add38ff680cd2a926d201c0760234419d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add38ff680cd2a926d201c0760234419d">&#9670;&nbsp;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVariant treeModel::data </td>
+          <td>(</td>
+          <td class="paramtype">const QModelIndex &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>role</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classtree_model.html#add38ff680cd2a926d201c0760234419d" title="treeModel::data reimplements data() function to display colour. ">treeModel::data</a> reimplements <a class="el" href="classtree_model.html#add38ff680cd2a926d201c0760234419d" title="treeModel::data reimplements data() function to display colour. ">data()</a> function to display colour. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>index of an item in the tree. </td></tr>
+    <tr><td class="paramname">role</td><td>display role. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>QVariant</dd></dl>
+<p>This function reimplements the <a class="el" href="classtree_model.html#add38ff680cd2a926d201c0760234419d" title="treeModel::data reimplements data() function to display colour. ">data()</a> function from QStandardItemModel so that it returns a square next to the label representing the colour the cycle is displayed in, in the graphics view. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/lukehutton/OneDrive - University of Leeds/University/Computer Science/Internship/moebinv-gui/include/<a class="el" href="treemodel_8h_source.html">treemodel.h</a></li>
 <li>/Users/lukehutton/OneDrive - University of Leeds/University/Computer Science/Internship/moebinv-gui/src/treemodel.cpp</li>
