@@ -27,7 +27,12 @@ DEPENDPATH += /usr/local/include $$PWD/include
 
 LIBS += -L/usr/local/lib/ -lcln -lginac -lcycle -lfigure
 
-RESOURCES +=
+# install the documentation files
+docs.path = $$OUT_PWD/moebinv-gui.app/Contents/documentation
+docs.files = documentation/*
+
+INSTALLS += docs
+###########
 
 SOURCES += \
         src/main.cpp \

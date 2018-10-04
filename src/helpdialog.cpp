@@ -8,8 +8,14 @@ helpDialog::helpDialog(QWidget *parent) :
     ui(new Ui::helpDialog)
 {
     ui->setupUi(this);
-    this->helpEngine = new QHelpEngine(
-                "/Users/lukehutton/OneDrive - University of Leeds/University/Computer Science/Internship/moebinv-gui/documentation/help.qhc");
+    //this->helpEngine = new QHelpEngine(
+     //           "/Users/lukehutton/OneDrive - University of Leeds/University/Computer Science/Internship/moebinv-gui/documentation/help.qhc");
+    QDir thisDir = QDir(QApplication::applicationDirPath());
+    thisDir.cdUp();
+    QString thisDirString = thisDir.absolutePath() + "/documentation/help.qhc";
+    qDebug() << thisDirString;
+
+    this->helpEngine = new QHelpEngine(thisDirString);
     this->helpEngine->setupData();
 
     ui->tabWidget->setMaximumWidth(300);
@@ -17,12 +23,9 @@ helpDialog::helpDialog(QWidget *parent) :
     ui->tabWidget->addTab(helpEngine->indexWidget(), "Index");
 
     ui->textBrowser->setHelpEngine(this->helpEngine);
-    qDebug() << QUrl("qthelp://org.doxygen.project/doc/index.html").path();
-    ui->textBrowser->setSource(QUrl("qthelp://org.doxygen.project/doc/index.html"));
 
-
-    //connect(helpEngine->contentWidget(), &QHelpContentWidget::linkActivated, ui->textBrowser, &helpBrowser::setSource);
-    //connect(helpEngine->indexWidget(), &QHelpIndexWidget::linkActivated, ui->textBrowser, &helpBrowser::setSource);
+    connect(helpEngine->contentWidget(), &QHelpContentWidget::linkActivated, ui->textBrowser, &helpBrowser::setSource);
+    connect(helpEngine->indexWidget(), &QHelpIndexWidget::linkActivated, ui->textBrowser, &helpBrowser::setSource);
 }
 
 helpDialog::~helpDialog()

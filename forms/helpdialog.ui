@@ -29,7 +29,7 @@
   <customwidget>
    <class>helpBrowser</class>
    <extends>QTextBrowser</extends>
-   <header>helpDialog.h</header>
+   <header>helpdialog.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

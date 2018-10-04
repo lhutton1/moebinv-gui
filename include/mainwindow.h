@@ -72,6 +72,7 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void updateFigureProperties();
     void checkDescription();
+    GiNaC::ex getMetricType(const int &metric);
 
     ~MainWindow();
 

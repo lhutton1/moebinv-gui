@@ -3,6 +3,7 @@
   <namespace>org.doxygen.project</namespace>
   <virtualFolder>doc</virtualFolder>
   <filterSection>
+    <filterAttribute>doxygen</filterAttribute>
     <toc>
       <section title="moebinv-gui" ref="index.html">
         <section title="Classes" ref="annotated.html">
@@ -15,7 +16,7 @@
             </section>
             <section title="cycleContextMenu" ref="classcycle_context_menu.html">
               <section title="cycleContextMenu" ref="classcycle_context_menu.html#a0a948765494ab4b2ecf73c89123f7f14" />
-              <section title="amendRelationList" ref="classcycle_context_menu.html#a6a75f4ba6b3db319468db92fd0948a65" />
+              <section title="amendRelationList" ref="classcycle_context_menu.html#ad6adc2b3c3ad2650190967f7d4efd088" />
               <section title="buildActions" ref="classcycle_context_menu.html#a2ada1b40956db90398503d184afdd5ee" />
               <section title="buildContextMenu" ref="classcycle_context_menu.html#a155448ae220555423d26b055f50b6e49" />
               <section title="changesMadeToFigure" ref="classcycle_context_menu.html#a6b92c1d84f101c8386d1152b680247ff" />
@@ -183,18 +184,20 @@
               <section title="checkActionHandler" ref="classmenu_rel_action.html#a1535eb0d2ad06bd4d44f3de8761841b2" />
               <section title="checkCycleRelation" ref="classmenu_rel_action.html#ab3a724c2d09de8a3d253210ec3a0e0d3" />
               <section title="checkMenuEntry" ref="classmenu_rel_action.html#a9c40a2e1e1538829214a2a9e06896a99" />
-              <section title="createCycleRelation" ref="classmenu_rel_action.html#a458e0e91f6125a4d16c369d140000e77" />
+              <section title="createCycleRelation" ref="classmenu_rel_action.html#a64a27674825379ba110fb2117a572ffe" />
+              <section title="cycleMetricActionHandler" ref="classmenu_rel_action.html#adbd43b99466f9ad2cde1934e1599ae4c" />
               <section title="getCycle" ref="classmenu_rel_action.html#acb80ac433c901f22dbddcff7445adf24" />
               <section title="getGroup" ref="classmenu_rel_action.html#aca0baeed9c6a266d677dae8dfb25d65b" />
               <section title="getInputList" ref="classmenu_rel_action.html#a8ec0134231f519695901fa4d750fab4a" />
               <section title="getParams" ref="classmenu_rel_action.html#a8da5cc4f4063d4ea465d67b0aabc57e7" />
               <section title="getRelation" ref="classmenu_rel_action.html#a34deae132c511b7e34af97585df9245c" />
               <section title="getRelType" ref="classmenu_rel_action.html#a1092ced0a224fdb4c8f5a0b12548a120" />
-              <section title="handleRelation" ref="classmenu_rel_action.html#ab48d2afed38fa75b9d7908da3cf095dd" />
+              <section title="handleRelation" ref="classmenu_rel_action.html#a7f2a2824476be1c8e185c3b6361ad62d" />
               <section title="hasRelation" ref="classmenu_rel_action.html#a5e6339dbaf4cf0dc9543afdfc5b9e15a" />
               <section title="menuEntry" ref="classmenu_rel_action.html#af3463f9fd28cf1ff44c672dedb89af95" />
               <section title="node_label" ref="classmenu_rel_action.html#a157ae072f7e1622564ff68583bb73132" />
               <section title="setRelation" ref="classmenu_rel_action.html#acba36fb50f54a72a4b253957f2f50f92" />
+              <section title="addCycleRelation" ref="classmenu_rel_action.html#ab78b5ed63bee30881b70110161670fb5" />
               <section title="addRelation" ref="classmenu_rel_action.html#ad9c9c61008821fcef78633ed38b42f8c" />
               <section title="checkRelation" ref="classmenu_rel_action.html#afa273b825fbdc2d887cc6a3ecfc62265" />
             </section>
@@ -344,7 +347,7 @@
       <keyword name="shape" id="circle::shape" ref="classcircle.html#a198cbcea745bd311fe91c2a23def746c" />
       <keyword name="cycleContextMenu" id="cycleContextMenu" ref="classcycle_context_menu.html" />
       <keyword name="confirmDeleteCycle" id="cycleContextMenu::confirmDeleteCycle" ref="classcycle_context_menu.html#a844d59a74d643b19fd19eb1de11ea4e9" />
-      <keyword name="amendRelationList" id="cycleContextMenu::amendRelationList" ref="classcycle_context_menu.html#a6a75f4ba6b3db319468db92fd0948a65" />
+      <keyword name="amendRelationList" id="cycleContextMenu::amendRelationList" ref="classcycle_context_menu.html#ad6adc2b3c3ad2650190967f7d4efd088" />
       <keyword name="displayColourDialog" id="cycleContextMenu::displayColourDialog" ref="classcycle_context_menu.html#abf4f98f97561d5acd104a6c0b2038e15" />
       <keyword name="displayStyleDialog" id="cycleContextMenu::displayStyleDialog" ref="classcycle_context_menu.html#a094bbed14bab12e3b9ac3ae07140bdcb" />
       <keyword name="displayWeightDialog" id="cycleContextMenu::displayWeightDialog" ref="classcycle_context_menu.html#ac720f89ffd13952e79dd77c1bb15c2aa" />
@@ -490,7 +493,7 @@
       <keyword name="getValues" id="matrix8dialog::getValues" ref="classmatrix8dialog.html#a74736300c5b1a4aa0291016991c7e508" />
       <keyword name="~matrix8dialog" id="matrix8dialog::~matrix8dialog" ref="classmatrix8dialog.html#a2caefa9ac5a7cd24f3f7713f885fe792" />
       <keyword name="menuRelAction" id="menuRelAction" ref="classmenu_rel_action.html" />
-      <keyword name="handleRelation" id="menuRelAction::handleRelation" ref="classmenu_rel_action.html#ab48d2afed38fa75b9d7908da3cf095dd" />
+      <keyword name="handleRelation" id="menuRelAction::handleRelation" ref="classmenu_rel_action.html#a7f2a2824476be1c8e185c3b6361ad62d" />
       <keyword name="menuRelAction" id="menuRelAction::menuRelAction" ref="classmenu_rel_action.html#a2db14a6cd576e8cb645a0e1dcf584d4e" />
       <keyword name="getCycle" id="menuRelAction::getCycle" ref="classmenu_rel_action.html#acb80ac433c901f22dbddcff7445adf24" />
       <keyword name="getRelType" id="menuRelAction::getRelType" ref="classmenu_rel_action.html#a1092ced0a224fdb4c8f5a0b12548a120" />
@@ -503,11 +506,13 @@
       <keyword name="menuEntry" id="menuRelAction::menuEntry" ref="classmenu_rel_action.html#af3463f9fd28cf1ff44c672dedb89af95" />
       <keyword name="checkMenuEntry" id="menuRelAction::checkMenuEntry" ref="classmenu_rel_action.html#a9c40a2e1e1538829214a2a9e06896a99" />
       <keyword name="actionHandler" id="menuRelAction::actionHandler" ref="classmenu_rel_action.html#a23b63e5bdb79e12f74bd1d33a53fb6e0" />
+      <keyword name="cycleMetricActionHandler" id="menuRelAction::cycleMetricActionHandler" ref="classmenu_rel_action.html#adbd43b99466f9ad2cde1934e1599ae4c" />
       <keyword name="checkActionHandler" id="menuRelAction::checkActionHandler" ref="classmenu_rel_action.html#a1535eb0d2ad06bd4d44f3de8761841b2" />
       <keyword name="node_label" id="menuRelAction::node_label" ref="classmenu_rel_action.html#a157ae072f7e1622564ff68583bb73132" />
-      <keyword name="createCycleRelation" id="menuRelAction::createCycleRelation" ref="classmenu_rel_action.html#a458e0e91f6125a4d16c369d140000e77" />
+      <keyword name="createCycleRelation" id="menuRelAction::createCycleRelation" ref="classmenu_rel_action.html#a64a27674825379ba110fb2117a572ffe" />
       <keyword name="checkCycleRelation" id="menuRelAction::checkCycleRelation" ref="classmenu_rel_action.html#ab3a724c2d09de8a3d253210ec3a0e0d3" />
       <keyword name="addRelation" id="menuRelAction::addRelation" ref="classmenu_rel_action.html#ad9c9c61008821fcef78633ed38b42f8c" />
+      <keyword name="addCycleRelation" id="menuRelAction::addCycleRelation" ref="classmenu_rel_action.html#ab78b5ed63bee30881b70110161670fb5" />
       <keyword name="checkRelation" id="menuRelAction::checkRelation" ref="classmenu_rel_action.html#afa273b825fbdc2d887cc6a3ecfc62265" />
       <keyword name="menuRelActionGroup" id="menuRelActionGroup" ref="classmenu_rel_action_group.html" />
       <keyword name="handleRelation" id="menuRelActionGroup::handleRelation" ref="classmenu_rel_action_group.html#a35a2675819196b79afc8f0c3701b10ed" />

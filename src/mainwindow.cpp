@@ -426,11 +426,26 @@ void MainWindow::on_actionSave_triggered()
         s.setValue("figureName", filePath.dirName());
     }
 
+    f.set_metric(getMetricType(s.value("pointMetric").toInt()), getMetricType(s.value("cycleMetric").toInt()));
     f.info_write(qPrintable(s.value("figureDescription").toString()));
     f.save(qPrintable(this->saveDirectory.absolutePath()), qPrintable(s.value("figureName").toString()));
     this->saved = true;
     this->defaultDirectoryInUse = false;
     this->setWindowTitle(this->saveDirectory.dirName() + " - moebinv-gui");
+}
+
+GiNaC::ex MainWindow::getMetricType(const int &metric) {
+    switch (metric) {
+        case ELLIPTIC:
+            return metric_e;
+            break;
+        case PARABOLIC:
+            return metric_p;
+            break;
+        case HYPERBOLIC:
+            return metric_h;
+            break;
+    }
 }
 
 
@@ -451,6 +466,7 @@ void MainWindow::on_actionSave_As_triggered()
 
     this->saveDirectory = filePath;
     s.setValue("figureName", filePath.dirName());
+    f.set_metric(getMetricType(s.value("pointMetric").toInt()), getMetricType(s.value("cycleMetric").toInt()));
     f.info_write(qPrintable(s.value("figureDescription").toString()));
     f.save(qPrintable(this->saveDirectory.absolutePath()), qPrintable(s.value("figureName").toString()));
     this->saved = true;
@@ -522,6 +538,7 @@ void MainWindow::on_actionOpen_triggered()
         this->defaultDirectoryInUse = false;
 
         // get figure metric
+
         s.setValue("pointMetric", ex_to<numeric>(ex_to<clifford>(f.get_point_metric()).get_metric(idx(0,2),idx(0,2))
           *ex_to<clifford>(f.get_point_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int());
 
@@ -1213,9 +1230,10 @@ cycle_relation MainWindow::refactorCycleRelation(const ex &relationItem, const e
  */
 void MainWindow::on_actionFigure_Description_triggered()
 {
-    if (f.info_read() != "" && f.info_read() != "no description") {
+    qDebug() << s.value("figureDesctiption").toString();
+    if (s.value("figureDescription").toString() != "" && s.value("figureDescription").toString() != "no description") {
         msgBox->setText("Figure description");
-        msgBox->setInformativeText(QString::fromStdString(f.info_read()));
+        msgBox->setInformativeText(s.value("figureDescription").toString());
         msgBox->exec();
     } else {
         msgBox->information(nullptr, "Figure description", "There is no description to display. Please set one by going to edit > properties.");
@@ -1376,7 +1394,9 @@ void MainWindow::initialiseDefaultSettings()
     evalTypeMenu->addActions(evalTypeGroup->actions());
 
     //apply settings to the figure
-    f.set_metric(s.value("pointMetric").toInt(), s.value("cycleMetric").toInt());
+    s.setValue("pointMetric", 1);
+    s.setValue("cycleMetric", 1);
+    f.set_metric(getMetricType(s.value("pointMetric").toInt()), getMetricType(s.value("cycleMetric").toInt()));
 
     switch (s.value("evaluationType").toInt()) {
         case EXACT:
