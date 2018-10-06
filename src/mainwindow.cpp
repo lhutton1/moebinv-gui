@@ -64,6 +64,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // tooltips
     ui->actionCreate_Cycle->setToolTip("Create a cycle by using the currently selected relations.");
+    ui->actionDefine_cycle->setToolTip("Define a cycle by providing values, helping to create an accurate cycle.");
+    ui->actionzoomIn->setToolTip("Zoom the view in by a factor of: " + s.value("zoomFactorAmount").toString());
+    ui->actionzoomOut->setToolTip("Zoom the view out by a factor of: " + s.value("zoomFactorAmount").toString());
+    ui->actionPan->setToolTip("Move the view around by grabbing it with the mouse");
 
     // connect signals to slots
     connect(scene, &graphicsScene::newMouseLeftPress, this, &MainWindow::addPoint);
@@ -1239,7 +1243,6 @@ cycle_relation MainWindow::refactorCycleRelation(const ex &relationItem, const e
  */
 void MainWindow::on_actionFigure_Description_triggered()
 {
-    qDebug() << s.value("figureDesctiption").toString();
     if (s.value("figureDescription").toString() != "" && s.value("figureDescription").toString() != "no description") {
         msgBox->setText("Figure description");
         msgBox->setInformativeText(s.value("figureDescription").toString());

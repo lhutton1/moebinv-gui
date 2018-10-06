@@ -353,12 +353,6 @@ void graphicCycle::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     if (!this->itemIsAbleToMove)
         return;
 
-    // Start a timer to be used to detect when the mouse has stopped moving
-    //if (!mouseTimeOut->isActive())
-    //    mouseTimeOut->start();
-
-    //mouseTimeOut->setInterval(s.value("mouseStopWait").toInt());
-    //qDebug() << "moving";
     QGraphicsItem::mouseMoveEvent(event);
 }
 
@@ -438,8 +432,6 @@ bool graphicCycle::setCycleAsy(const ex &new_cycle, const struct cycleStyleData 
     green = QString::number(data.colour.green() / 255.0);
     blue = QString::number(data.colour.blue() / 255.0);
     lineWidth = QString::number(data.lineWidth) + "pt";
-
-    qDebug() << data.isDefault;
 
     switch (data.lineStyle) {
         case SOLID:
