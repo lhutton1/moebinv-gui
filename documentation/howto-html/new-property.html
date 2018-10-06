@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <h1>How to add a new property</h1>
+
+    <p>
+      This document will explain how to create a new property in the property dialog accessible through edit/property.
+    </p>
+
+    <p>
+      First we need to add a new QGroupBox to the QScrollArea (this can be done through the property dialog constructor in propertiesdialog.cpp):
+    </p>
+
+    <div class="code-block">
+      QGroupBox *newGroupBox = new QGroupBox("New group box text"); <br />
+      QVBoxLayout *newLayout = new QVBoxLayout(); <br />
+      <br />
+      // creating a layout allows us to place widgets inside the groupbox <br />
+      newGroupBox->setLayout(newLayout); <br />
+      <br />
+      // 'verticalLayout_5' is the layout for the QScrollArea. It is named as such because the form was created using qt designer which allocates names to layouts automatically. <br />
+      ui->verticalLayout_5->addWidget(newGroupBox); <br />
+      <br />
+      // now we can add any widgets we want to the group box <br />
+      QRadioButton *radio1 = new QRadioButton("Radio 1"); <br />
+      newLayout->addWidget(radio1);
+    </div>
+
+    <p>
+      Next we need to define the behaviour for the widget we have just added. This can be done by taking a signal that the object produces and calling a slot.
+    </p>
+
+    <div class="code-block">
+      connect(radio1, &QRadioButton::triggered, this, &propertiesDialog::<i>some slot</i>);
+    </div>
+
+    <p>
+      This slot will include the code needed to produce the desired result. <br />
+      For example if we wanted to set the figures point metric to 'parabolic' when this radio button is triggered, the slot would look like so:
+    </p>
+
+    <div class="code-block">
+      connect(radio1, &QRadioButton::triggered, this, &propertiesDialog::radio1triggeredSlot); <br />
+      <br />
+      propertiesDialog::radio1triggeredSlot() { <br />
+        s.setValue('pointMetric', PARABOLIC); <br />
+      }
+    </div>
+  </body>
+</html>

@@ -1,0 +1,320 @@
+2017-mm-dd (v1.4) Vladimir V. Kisil  <kisilv@maths.leeds.ac.uk>
+
+	* collect() now accept Python list of object as the first argument
+
+2017-03-11 (v1.3) Vladimir V. Kisil  <kisilv@maths.leeds.ac.uk>
+
+	* removed compatibility with GiNaC before v1.6.0
+
+2016-08-11 (v1.2) Vladimir V. Kisil  <kisilv@maths.leeds.ac.uk>
+
+	* Fixed wrapper for idx objects
+	* Add wrappers for dbgprint() and dbgprinttree()
+
+2016-07-08 (v1.1) Vladimir V. Kisil  <kisilv@maths.leeds.ac.uk>
+
+	* Patched to work with the coming GiNaC 1.7.0.
+
+2016-07-01  Vladimir V. Kisil  <kisilv@maths.leeds.ac.uk>
+
+	* Cumulative patch which makes the code working with the current
+	  GiNaC 1.6.7.
+	* Code is realised as version 1.0.
+
+2006-08-13  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/map_function.cpp: map_function::~map_function(): Add missing virtual
+	  destructor.
+	* src/expairseq.cpp: Add missing copy constructors.
+	* src/exprseq.cpp, site-packages/ginac/__init__.py: Shift sqrt() impl to 
+	  pure Python.
+	* src/matrix.cpp: Elide unused code.
+	* bin/check_matricies.py: Fix testsuite.
+	* bin/exam_lsolve.py: Change testsuite to use new lsolve() interface.
+	* site-packages/ginac/__init__.py: lsolve(): Change interface to return a
+	  a mapping of variable, value pairs rather than a list of equations.
+	Support the copy module for deep copy operations.
+	* src/constant.cpp: Elide unused code.
+
+2006-08-11  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/basic.cpp: Fix support for Python iteration of sequences.
+
+2005-11-23  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* bin/exam_powerlaws.py: New tests.
+	* bin/exam_pseries.py: New tests.
+	* bin/checkall.py: Add powerlaws and pseries to the test suite.
+
+2005-10-16  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* ChangeLog: Fix some Scandinavian characters.
+
+2005-10-10  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* bin/exam_lsolve.py: (exam_lsolve2) Make this test pass with older
+	  and newer versions of GiNaC.
+
+2005-10-10  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* bin/checkall.py: Change the running order of the test suites.
+	* bin/exam_nomalization.py (exam_normal2): Fix the workaroung again.
+
+2005-10-04  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* bin/exam_lsolve.py: (exam_lsolve2) GiNaC::numeric(1) prints out 
+	  as '1.0' vice '1'
+	* bin/exam_normalization.py: (exam_normal2) Fix the workaround.
+	(hash_gt): Elide unused function.
+
+2005-10-03  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* bin/exam_normalization.py: (exam_normal2) work around ambiguous
+	normalization of expressions like pow(x - y, 2)
+
+2005-09-10  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/clifford.cpp: Changes for GiNaC 1.3.2
+	* bin/exam_normalization.py: Changes for GiNaC 1.3.2
+
+2005-07-15  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/clifford.cpp: New file.
+	(wrap_clifford): Expose class clifford and related utilities.
+	* src/tensor.cpp: Expose class tensor.
+	* src/pyginacmodule.cpp: add call to wrap_clifford().
+	* SConstruct: Add clifford.cpp to the list of source files.
+
+2005-07-11  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/numeric.cpp (numeric_from_py_object): New function.
+	(numeric_from_number::construct): Use the above to avoid
+	  code duplication.
+	* src/lst.cpp (exvector_from_py_list): Use the above to 
+	  convert python objects to GiNaC::numeric so that, for
+	  instance diag_matrix([1,2]) will work.
+	(lst_from_py_list): The same.
+
+2005-07-09  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/flags.cpp (wrap_info_flags): Expose expand_options.
+
+2005-07-03  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/symmetry.cpp (wrap_symmetry): Make ints implicitly convertible to
+	  symmetry objects so that calling, for instance, sy_anti(0,1) will
+	  work.
+	* src/basic.cpp (wrap_basic): Expose basic.symmetrize(), basic.antisymmetrize()
+	  and basic.symmetrize_cyclic().
+	* site-packages/ginac/__init__.py: ditto.
+
+2005-06-19  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/symmetry.cpp: New file.
+	(wrap_symmetry): Expose class symmetry and some related utilities.
+	* src/pyginacmodule.cpp: add call to wrap_symmetry().
+	* SConstruct: Add symmetry.cpp to the list of source files.
+
+2005-06-17  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/expairseq.cpp: Expose constructors of add and mul from lists.
+
+2005-06-15  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/lst.cpp (exvector_from_py_list): New function.
+	* include/pyginac.hpp: ditto.
+	* src/idx.cpp (wrap_idx): Expose more constructors and member functions
+	        of class indexed, expose class scalar_products.
+	* src/basic.cpp (wrap_basic): Expose basic.simplify_indexed().
+	* site-packaged/ginac/__init__.py: ditto.
+	* src/tensor.cpp: New file.
+	(wrap_tensor): Expose tensor creation utilities.
+	* src/pyginacmodule.cpp: add call to wrap_tensor().
+	* SConstruct: Add tensor.cpp to the list of source files.
+
+2005-06-15  Ondrej Certik  <ondrej.certik@gmail.com>
+	
+	* src/idx.cpp (wrap_idx): Expose class indexed.
+	* src/lst.cpp (exvector_to_python): New converter.
+
+2005-06-02  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/pyginacmodule.cpp: Expose the Euler and Catalan constants.
+	* src/exprseq.cpp (PYGINAC_WRAP_FUNCTION_2P): new macro.
+	(PYGINAC_WRAP_FUNCTION_3P): new macro.
+	(wrap_exprseq): wrap more initially defined functions.
+
+2005-05-31  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/series.cpp (wrap_series): Expose pseries.convert_to_poly();
+        	make pseries implicitly convertible to ex.
+		
+2005-05-11  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* bin/exam_polygcd.py: New regression tests ported from GiNaC.
+	* bin/checkall.py: Add exam_polygcd.py to the test suite.
+
+2005-05-08  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/symbol.cpp (wrap_symbol): Expose the default constructor. 
+
+2005-05-05  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* bin/exam_paranoia.py: New regression tests ported from GiNaC.
+	* bin/checkall.py: Add exam_paranoia.py to the test suite.
+
+2005-04-30  Matti Peltomaki  <ppv@fyslab.hut.fi>
+
+	* src/numeric.cpp (wrap_numeric): Expose iquo() and irem().
+
+2005-04-25  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* bin/exam_misc.py: New regression tests ported from GiNaC.
+	* bin/checkall.py: Add exam_misc.py to the test suite.
+	
+2005-04-19  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/normal.cpp: New file. 
+	(wrap_normal): New function: expose functions defined in GiNaC's ginac/normal.cpp
+	* src/pyginacmodule.cpp: Add call to wrap_normal()
+	* SConstruct: Add normal.cpp to the list of source files.
+
+2005-04-14  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* bin/exam_normalization.py: New regression tests ported from GiNaC.
+	* bin/checkall.py: Add exam_normalization.py to the test suite.
+	
+2005-03-30  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/basic.cpp: Expose basic.unit(), basic.content() and basic.primpart().
+
+2005-03-28  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/flags.cpp: Expose subs_options.
+	* src/basic.cpp: Expose the overloaded version of basic.subs() with options.
+
+2005-03-12  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* bin/checkall.py: New file.
+
+2005-03-09  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/wildcard.cpp: New file.
+	(wrap_wildcard): New function: expose the wildcard class, wild() and haswild().
+	* src/ncmul.cpp (wrap_ncmul): Exposing the wildcard class moved from here.
+	* src/pyginacmodule: Add call to wrap_wildcard()
+	* SConstruct: Add wildcard.cpp to the list of source files.
+
+2005-03-07  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/matrix.cpp (do_diag_matrix): New function.
+	(wrap_matrix): Expose diag_matrix(), unit_matrix(), and symbolix_matrix().
+	* bin/exam_matricies.py: New regression tests ported from GiNaC.
+
+2005-03-07  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/lst.cpp (lst_from_py_list): Change interface to avoid
+		unneeded dynamic allocations.
+	* site-packages/ginac/__init__.py: Expose free functions for many of the
+		member functions of gianc.basic, with docstrings.
+
+2005-02-06  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/basic.cpp (do_numer_denom): New function.
+	(do_numer): ditto.
+	(do_denom): ditto.
+	(wrap_basic): Expose basic.numer(), basic.denom(), and basic.numer_denom().
+
+2005-01-29  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/matrix.cpp (do_lsolve): Support more general sequence types.
+	(init_from_seq): ditto.
+	* src/lst.cpp (lst_from_py_list): Change signature to return a 
+		boost::shared_ptr<GiNaC::lst>.
+	* src/basic.cpp: Remove #ifdefs for PYGINAC_AVOID_EX; do so always.
+	* src/ex.cpp: ditto.
+
+2005-01-29  Matti Peltomäki  <ppv@fyslab.hut.fi>
+
+	* src/basic.cpp (do_mul): Properly handle noncommutative multiplication.
+	* bin/exam_lsolve.py: New regression tests.
+
+2005-01-24  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/numeric.cpp (wrap_numeric): Don't expose the immediately-evaluating
+		relational comparisons for ginac.numeric arguments.
+	* bin/regressions.py: New file.
+
+2005-01-16  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/exprseq.cpp (wrap_exprseq): Remove constructors that have no meaning
+		from Python (yet).
+	(PYGINAC_WRAP_FUNCTION): Only wrap the versions of functions that take a
+		GiNaC::ex argument to avoid accidental numerical evaluation.
+
+2005-01-13  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* include/pyginac.hpp (GINAC_VERSION_ATLEAST): New macro.
+	* src/basic.cpp (wrap_basic): Use GINAC_VERSION_ATLEAST() for version
+		testing
+	* src/integral.cpp: ditto
+	* src/ex.cpp: ditto
+	(wrap_ex): ditto
+
+2005-01-11  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/pyginacmodule.cpp (verify_abi_compatible): New function.
+
+2005-01-04  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/exprseq.cpp (wrap_exprseq): Wrap the Order function.
+	* src/series.cpp: Wrap GiNaC::pseries.
+	* bin/exam_diff.py: New tests.
+	* src/pyginacmodule.cpp (length): New function.
+	(supports_iteration): New function.
+	(extract_iterator): New function.
+	(initcginac): Wrap GiNaC::pseries.
+	* src/basic.cpp (parse_string): New function.
+	(do_find): rely on automatic conversion from GiNaC::lst to Python list.
+	(subs_lsts): Use length() to support more general sequence types.
+	(subs_lst): ditto.
+	* src/lst.cpp (lst_from_py_list): New function.
+
+2004-12-05  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/numeric.cpp (wrap_numeric): Simplify initialization of I.
+	(get_imaginary_number): deleted.
+	* src/constant.cpp (get_pi): deleted.
+	(wrap_constant): Simplify initialization of Pi
+	* src/pyginacmodule.cpp (initcginac): Simplify initialization of
+		Pi, I, and version.
+	(get_version): deleted.
+	* site-packages/ginac/__init__.py: Simplify initialization of Pi, I, and 
+		version.
+
+2004-11-21  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* bin/check_lsolve.py (check_inifcns_lsolve): Update usage of function.rhs
+	* site-packages/genex.py: Moved from bin/
+	* bin/genex.py: Moved to site-packages/
+	* src/matrix.cpp (wrap_matrix): Add docstring for matrix.charpoly()
+	(wrap_matrix): Add docstring and keyword args for matrix.solve()
+	* src/exprseq.cpp (wrap_exprseq): Move sqrt to exprseq.cpp
+	(wrap_exprseq): Wrap sqrt(ex).
+	* src/numeric.cpp (wrap_numeric): Move sqrt to exprseq.cpp
+
+2004-11-13  Jonathan Brandmeyer  <jbrandmeyer@earthlink.net>
+
+	* src/numeric.cpp (wrap_numeric): Tweak docstring.
+	(wrap_relational): Remove unneeded constructors.
+	* src/power.cpp (wrap_power): Remove unusable property setters.
+	* src/symbol.cpp (wrap_symbol): Restrict the type of the symbol domain
+		property.
+	* src/relational.cpp (wrap_relational): Use properties for lhs and rhs.
+	(wrap_relational): Use standard Python names for the relops enum.
+	(wrap_relational): Allow construction by keyword arguments.
+	* bin/check_matricies.py: Use Python's doctest.testmod module for testing.
+	* bin/check_numeric.py: Ditto.
+	* bin/check_inifcns.py: Ditto.
+	* bin/check_lsolve.py: Ditto.
+	(check_inifcns_lsolve): Fix solution verification to be more robust.

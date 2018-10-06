@@ -1,0 +1,114 @@
+\hypertarget{class_moeb_inv_1_1cycle2_d}{}\section{Moeb\+Inv\+:\+:cycle2D Class Reference}
+\label{class_moeb_inv_1_1cycle2_d}\index{Moeb\+Inv\+::cycle2D@{Moeb\+Inv\+::cycle2D}}
+Inheritance diagram for Moeb\+Inv\+:\+:cycle2D\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_moeb_inv_1_1cycle2_d}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a6d68a6e30401e78728f0b89ab1630921}\label{class_moeb_inv_1_1cycle2_d_a6d68a6e30401e78728f0b89ab1630921}} 
+{\bfseries cycle2D} (const ex \&k1, const ex \&l1, const ex \&m1, const ex \&metr=-\/unit\+\_\+matrix(2))
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_af9452b92d2c0e76f6e7d8f45b1ecd44d}\label{class_moeb_inv_1_1cycle2_d_af9452b92d2c0e76f6e7d8f45b1ecd44d}} 
+{\bfseries cycle2D} (const lst \&l, const ex \&metr=-\/unit\+\_\+matrix(2), const ex \&r\+\_\+squared=0, const ex \&e=0, const ex \&sign=unit\+\_\+matrix(2))
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_ad367447c0c69cb23a031ff6252867399}\label{class_moeb_inv_1_1cycle2_d_ad367447c0c69cb23a031ff6252867399}} 
+{\bfseries cycle2D} (const matrix \&M, const ex \&metr, const ex \&e=0, const ex \&sign=0)
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a18cf99dad3f906e4a759f5424ae12430}\label{class_moeb_inv_1_1cycle2_d_a18cf99dad3f906e4a759f5424ae12430}} 
+{\bfseries cycle2D} (const \mbox{\hyperlink{class_moeb_inv_1_1cycle}{cycle}} \&C, const ex \&metr=0)
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a657820f5e271de26192593a763624ce2}\label{class_moeb_inv_1_1cycle2_d_a657820f5e271de26192593a763624ce2}} 
+virtual ex {\bfseries hdet} (const ex \&e=0, const ex \&sign=(new tensdelta) -\/$>$setflag(status\+\_\+flags\+::dynallocated), const ex \&k\+\_\+norm=0) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_ab96a9e3b049ac9773c2331659e001b57}\label{class_moeb_inv_1_1cycle2_d_ab96a9e3b049ac9773c2331659e001b57}} 
+ex {\bfseries focus} (const ex \&e=diag\+\_\+matrix(lst\{-\/1, 1\}), bool return\+\_\+matrix=false) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a40015b98c8423a741470d4e0ea39f8ed}\label{class_moeb_inv_1_1cycle2_d_a40015b98c8423a741470d4e0ea39f8ed}} 
+ex {\bfseries focal\+\_\+length} () const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a6ad3dc95ef86904f04c652e88c6a2712}\label{class_moeb_inv_1_1cycle2_d_a6ad3dc95ef86904f04c652e88c6a2712}} 
+lst {\bfseries roots} (const ex \&y=0, bool first=true) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a006c6e8a216cee4e6fa1df8fff7f6f8e}\label{class_moeb_inv_1_1cycle2_d_a006c6e8a216cee4e6fa1df8fff7f6f8e}} 
+lst {\bfseries line\+\_\+intersect} (const ex \&a, const ex \&b) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a303f13dc4acb34bd4872d6152d46d8ea}\label{class_moeb_inv_1_1cycle2_d_a303f13dc4acb34bd4872d6152d46d8ea}} 
+void {\bfseries metapost\+\_\+draw} (ostream \&ost, const ex \&xmin=-\/5, const ex \&xmax=5, const ex \&ymin=-\/5, const ex \&ymax=5, const lst \&color=lst\{\}, const string more\+\_\+options=\char`\"{}\char`\"{}, bool with\+\_\+header=true, int points\+\_\+per\+\_\+arc=0, bool asymptote=false, const string picture=\char`\"{}\char`\"{}, bool only\+\_\+path=false, bool is\+\_\+continuation=false, const string imaginary\+\_\+options=\char`\"{}withcolor .\+9$\ast$green withpen pencircle scaled 4pt\char`\"{}) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_af6d5250d65c5b89c2ad26a3870260d52}\label{class_moeb_inv_1_1cycle2_d_af6d5250d65c5b89c2ad26a3870260d52}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries sl2\+\_\+similarity} (const ex \&M1, const ex \&M2, const ex \&e, const ex \&sign, bool not\+\_\+inverse=true, const ex \&sign\+\_\+inv=(new tensdelta) -\/$>$setflag(status\+\_\+flags\+::dynallocated)) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_ad53312cabcf0a9c4356cc766ddb301ab}\label{class_moeb_inv_1_1cycle2_d_ad53312cabcf0a9c4356cc766ddb301ab}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries sl2\+\_\+similarity} (const ex \&a1, const ex \&b1, const ex \&c1, const ex \&d1, const ex \&a2, const ex \&b2, const ex \&c2, const ex \&d2, const ex \&e=0, const ex \&sign=(new tensdelta) -\/$>$setflag(status\+\_\+flags\+::dynallocated), bool not\+\_\+inverse=true, const ex \&sign\+\_\+inv=(new tensdelta) -\/$>$setflag(status\+\_\+flags\+::dynallocated)) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a2af30738cf483468f03ac800c102c62a}\label{class_moeb_inv_1_1cycle2_d_a2af30738cf483468f03ac800c102c62a}} 
+void {\bfseries asy\+\_\+draw} (ostream \&ost, const string picture, const ex \&xmin=-\/5, const ex \&xmax=5, const ex \&ymin=-\/5, const ex \&ymax=5, const lst \&color=lst\{\}, const string more\+\_\+options=\char`\"{}\char`\"{}, bool with\+\_\+header=true, int points\+\_\+per\+\_\+arc=0, const string imaginary\+\_\+options=\char`\"{}rgb(0,.\+9,0)+4pt\char`\"{}) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a46c94eb343ee725668fc5eb53a04bd3d}\label{class_moeb_inv_1_1cycle2_d_a46c94eb343ee725668fc5eb53a04bd3d}} 
+void {\bfseries asy\+\_\+draw} (ostream \&ost=std\+::cout, const ex \&xmin=-\/5, const ex \&xmax=5, const ex \&ymin=-\/5, const ex \&ymax=5, const lst \&color=lst\{\}, const string more\+\_\+options=\char`\"{}\char`\"{}, bool with\+\_\+header=true, int points\+\_\+per\+\_\+arc=0, const string imaginary\+\_\+options=\char`\"{}rgb(0,.\+9,0)+4pt\char`\"{}) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a278dda55874cd3cf848f302ef6dafe0e}\label{class_moeb_inv_1_1cycle2_d_a278dda55874cd3cf848f302ef6dafe0e}} 
+void {\bfseries asy\+\_\+path} (ostream \&ost=std\+::cout, const ex \&xmin=-\/5, const ex \&xmax=5, const ex \&ymin=-\/5, const ex \&ymax=5, int points\+\_\+per\+\_\+arc=0, bool is\+\_\+continuation=false) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_ad0170765bc192ecab6c4b0036952afb1}\label{class_moeb_inv_1_1cycle2_d_ad0170765bc192ecab6c4b0036952afb1}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries subs} (const ex \&e, unsigned options=0) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a593692e6c3e39757b5df6d00984b53ba}\label{class_moeb_inv_1_1cycle2_d_a593692e6c3e39757b5df6d00984b53ba}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries normalize} (const ex \&k\+\_\+new=numeric(1), const ex \&e=0) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a73a45bda26754cd4dd62146d2a64cd3d}\label{class_moeb_inv_1_1cycle2_d_a73a45bda26754cd4dd62146d2a64cd3d}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries normalize\+\_\+det} (const ex \&e=0, const ex \&sign=(new tensdelta) -\/$>$setflag(status\+\_\+flags\+::dynallocated), const ex \&D=1, bool fix\+\_\+paravector=true) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a72dfb32e4fa2ef6a02a650575a5ae65b}\label{class_moeb_inv_1_1cycle2_d_a72dfb32e4fa2ef6a02a650575a5ae65b}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries normalize\+\_\+norm} (const ex \&e=0, const ex \&sign=(new tensdelta) -\/$>$setflag(status\+\_\+flags\+::dynallocated), const ex \&N=1, bool fix\+\_\+paravector=true) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a32780a0a370c0b6151648cb2efb3a24b}\label{class_moeb_inv_1_1cycle2_d_a32780a0a370c0b6151648cb2efb3a24b}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries sl2\+\_\+similarity} (const ex \&a, const ex \&b, const ex \&c, const ex \&d, const ex \&e=0, const ex \&sign=(new tensdelta) -\/$>$setflag(status\+\_\+flags\+::dynallocated), bool not\+\_\+inverse=true, const ex \&sign\+\_\+inv=(new tensdelta) -\/$>$setflag(status\+\_\+flags\+::dynallocated)) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a0bf048ab4e38bf5e97768e8b487133a7}\label{class_moeb_inv_1_1cycle2_d_a0bf048ab4e38bf5e97768e8b487133a7}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries sl2\+\_\+similarity} (const ex \&M) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_aa8f61f0344737af159983fc2f826296f}\label{class_moeb_inv_1_1cycle2_d_aa8f61f0344737af159983fc2f826296f}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries sl2\+\_\+similarity} (const ex \&M, const ex \&e) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a0f2e64f2a6242ad4ad70165311c00c52}\label{class_moeb_inv_1_1cycle2_d_a0f2e64f2a6242ad4ad70165311c00c52}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries sl2\+\_\+similarity} (const ex \&M, const ex \&e, const ex \&sign) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_aac7c5d4c1f9e566cfb310dda8c7bba10}\label{class_moeb_inv_1_1cycle2_d_aac7c5d4c1f9e566cfb310dda8c7bba10}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries sl2\+\_\+similarity} (const ex \&M, const ex \&e, const ex \&sign, bool not\+\_\+inverse, const ex \&sign\+\_\+inv=(new tensdelta) -\/$>$setflag(status\+\_\+flags\+::dynallocated)) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_abd85b44a39704e5459eab9620d5d6ec5}\label{class_moeb_inv_1_1cycle2_d_abd85b44a39704e5459eab9620d5d6ec5}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries normal} () const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a6f8a9b46040a85dd89ef41af946311c4}\label{class_moeb_inv_1_1cycle2_d_a6f8a9b46040a85dd89ef41af946311c4}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries expand} () const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_aa14f443442b57392d563119e52efc7c2}\label{class_moeb_inv_1_1cycle2_d_aa14f443442b57392d563119e52efc7c2}} 
+ex {\bfseries evalf} () const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_ac4210321a02f39f5bf1c04aee1d9142b}\label{class_moeb_inv_1_1cycle2_d_ac4210321a02f39f5bf1c04aee1d9142b}} 
+\mbox{\hyperlink{class_moeb_inv_1_1cycle2_d}{cycle2D}} {\bfseries subject\+\_\+to} (const ex \&condition, const ex \&vars=0) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a530eb35e47b47a497bbb301dd041c3a2}\label{class_moeb_inv_1_1cycle2_d_a530eb35e47b47a497bbb301dd041c3a2}} 
+void {\bfseries archive} (archive\+\_\+node \&n) const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a7d1da2385f403d7e7882ac244a37ae28}\label{class_moeb_inv_1_1cycle2_d_a7d1da2385f403d7e7882ac244a37ae28}} 
+void {\bfseries read\+\_\+archive} (const archive\+\_\+node \&n, lst \&sym\+\_\+lst)
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a35387bf646d1059bae865598759c6ce4}\label{class_moeb_inv_1_1cycle2_d_a35387bf646d1059bae865598759c6ce4}} 
+ex {\bfseries real\+\_\+part} () const
+\item 
+\mbox{\Hypertarget{class_moeb_inv_1_1cycle2_d_a78c4ec1b31bdb419fa8a23c225bba587}\label{class_moeb_inv_1_1cycle2_d_a78c4ec1b31bdb419fa8a23c225bba587}} 
+ex {\bfseries imag\+\_\+part} () const
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/lib/moebinv-\/3.\+2/include/cycle.\+h\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/lib/moebinv-\/3.\+2/src/cycle.\+cpp\end{DoxyCompactItemize}

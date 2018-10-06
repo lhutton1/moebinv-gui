@@ -1,0 +1,59 @@
+import os
+import sys
+# import ginac
+
+optimize_flags = ['-g']
+
+base = Environment( CCFLAGS=['-pipe'] + optimize_flags ,
+	LINKFLAGS=[''],
+	LIBS = ['boost_python', 'ginac', 'python2.7', 'cln', '":cginac.so"', 'cycle', 'figure'],
+	ENV = os.environ,
+	CPPPATH=['./include', '../include', './src', './site-packages', '/usr/include/python2.7', '/usr/local/include'],
+	LIBPATH=['./', './site-packages', './src', '../src', '/usr/local/lib'],
+	SHLIBPREFIX=['lib']
+	)
+
+if not '-g' in optimize_flags:
+	base.Append( LINKFLAGS='-s')
+	
+SetOption( "implicit_cache", 1)
+
+# Set the warning level
+base.Append( CCFLAGS=['-Wall', '-W', '-Wsign-compare', '-Wconversion',
+	'-std=c++11', '-Wdisabled-optimization', '-pedantic',
+	# For some reason, GiNaC::ex fails an Assignable test at a point of
+	# instantiating a std::vector< GiNaC::ex>
+	# '-D_GLIBCPP_CONCEPT_CHECKS',
+	
+	# Disable the unused parameter warnings that come from the Boost.Python
+	# headers.
+	'-Wno-unused-parameter'] )
+
+cbase = base.Clone()
+fbase = base.Clone()
+
+if "linux" in sys.platform:
+	cbase.Append( LINKFLAGS=['-Wl,--version-script=linux-symbols-ccycle.map',
+		'-Wl,-no-undefined'])
+	fbase.Append( LINKFLAGS=['-Wl,--version-script=linux-symbols-cfigure.map',
+		'-Wl,-no-undefined'])
+
+# Build the C++ extension module.
+pycycle = cbase.SharedLibrary( 
+	target="site-packages/ccycle",
+	source=[ 
+		 "src/pycycle.cpp",
+		 "src/ccycle.cpp",
+		],
+	SHLIBPREFIX="")
+
+pyfigure = fbase.SharedLibrary( 
+	target="site-packages/cfigure",
+	source=[ 
+		 "src/pyfigure.cpp",
+		 "src/cfigure.cpp",
+		],
+	SHLIBPREFIX="")
+
+Default(pycycle,pyfigure)
+

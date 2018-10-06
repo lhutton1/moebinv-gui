@@ -58,6 +58,13 @@ MainWindow::MainWindow(QWidget *parent) :
     this->saved = true;
     this->defaultDirectoryInUse = true;
 
+    // PLACE NEW MENU ITEMS HERE....
+    //
+    //
+
+    // tooltips
+    ui->actionCreate_Cycle->setToolTip("Create a cycle by using the currently selected relations.");
+
     // connect signals to slots
     connect(scene, &graphicsScene::newMouseLeftPress, this, &MainWindow::addPoint);
     connect(scene, &graphicsScene::newMouseRightPress, this, &MainWindow::onMouseSceneRightPress);
@@ -538,12 +545,14 @@ void MainWindow::on_actionOpen_triggered()
         this->defaultDirectoryInUse = false;
 
         // get figure metric
-
         s.setValue("pointMetric", ex_to<numeric>(ex_to<clifford>(f.get_point_metric()).get_metric(idx(0,2),idx(0,2))
           *ex_to<clifford>(f.get_point_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int());
 
         s.setValue("cycleMetric", ex_to<numeric>(ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(0,2),idx(0,2))
           *ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int());
+
+        // get figure description
+        s.setValue("figureDescription", QString::fromStdString(f.info_read()));
 
         // gen first symbol
         lblGen->advanceLabel();
@@ -1394,8 +1403,8 @@ void MainWindow::initialiseDefaultSettings()
     evalTypeMenu->addActions(evalTypeGroup->actions());
 
     //apply settings to the figure
-    s.setValue("pointMetric", 1);
-    s.setValue("cycleMetric", 1);
+    s.setValue("pointMetric", ELLIPTIC);
+    s.setValue("cycleMetric", ELLIPTIC);
     f.set_metric(getMetricType(s.value("pointMetric").toInt()), getMetricType(s.value("cycleMetric").toInt()));
 
     switch (s.value("evaluationType").toInt()) {

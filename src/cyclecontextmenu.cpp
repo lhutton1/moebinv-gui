@@ -134,8 +134,8 @@ void cycleContextMenu::amendRelationList(const bool &metric)
     if (actionTriggered->getGroup() != nullptr && actionTriggered->getGroup()->isExclusive()) {
         for (auto action : actionTriggered->getGroup()->getRelActions()) {
             if ((metric && !action->addRelation->isChecked() && action->hasRelation()) ||
-                    (!metric && !action->addCycleRelation->isChecked() && action->hasRelation())) {
-                this->removeRelationFromList(actionTriggered);
+                    !metric && !action->addCycleRelation->isChecked() && action->hasRelation()) {
+                this->removeRelationFromList(action);
             }
         }
     }
@@ -170,7 +170,7 @@ void cycleContextMenu::removeRelationFromList(menuRelAction *actionTriggered)
     // linear search through list to find item to remove
     for (int x = 0; x < relationList->nops(); x++) {
         if (node_label(relationList->op(x).op(0)) != node_label(actionTriggered->getCycle()) ||
-            relationList->op(x).op(1) != actionTriggered->getRelType())
+            ex_to<numeric>(relationList->op(x).op(1)).to_int() != actionTriggered->getRelType())
         {
             newRelationList.append(relationList->op(x));
         }
@@ -191,13 +191,15 @@ void cycleContextMenu::buildContextMenu()
 {
     QMenu *relationSubMenu = new QMenu(QString("Add point metric relation to ") + this->getTitleAction()->text());
     QMenu *relationCycleSubMenu = new QMenu(QString("Add cycle metric relation to ") + this->getTitleAction()->text());
-    QMenu *checkRelationSubMenu = new QMenu(QString("Check relation on ") + this->getTitleAction()->text());
+    QMenu *checkRelationSubMenu = new QMenu(QString("Check relation in point metric to ") + this->getTitleAction()->text());
+    QMenu *checkCycleRelationSubMenu = new QMenu(QString("Check relation in cycle metric to ") + this->getTitleAction()->text());
 
     this->addAction(getTitleAction());
     this->addSeparator();
     this->addMenu(relationSubMenu);
     this->addMenu(relationCycleSubMenu);
     this->addMenu(checkRelationSubMenu);
+    this->addMenu(checkCycleRelationSubMenu);
     this->addSeparator();
 
     // change colour preference
@@ -242,6 +244,7 @@ void cycleContextMenu::buildContextMenu()
     for (int x = 9; x < actions.length(); x++)
         relationSubMenu->addAction(actions[x]->addRelation);
 
+
     // build relation cycle sub menu ---------------------------------------
     if (this->isThis) {
         for (int x = 0; x < 5; x++)
@@ -274,6 +277,16 @@ void cycleContextMenu::buildContextMenu()
 
     for (int x = 9; x < 13; x++)
         checkRelationSubMenu->addAction(actions[x]->checkRelation);
+
+    // build check cycle relation sub menu --------------------------------
+    for (int x = 0; x < 5; x++)
+        checkCycleRelationSubMenu->addAction(actions[x]->checkCycleMetricRelation);
+
+    checkCycleRelationSubMenu->addAction(actions[6]->checkCycleMetricRelation);
+    checkCycleRelationSubMenu->addSeparator();
+
+    for (int x = 9; x < 13; x++)
+        checkCycleRelationSubMenu->addAction(actions[x]->checkCycleMetricRelation);
 
 }
 

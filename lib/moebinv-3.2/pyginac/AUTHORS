@@ -1,0 +1,14 @@
+Original Developers:
+Jonathan Brandmeyer
+Matti Peltomäki
+
+Current maintainer:
+Vladimir V. Kisil
+
+Patches have been submitted by:
+Ondrej Certik
+
+Others:
+All of the test programs in bin/ and most of the docstrings have been adapted,
+in whole or in part, from GiNaC, version 1.3.0.  See the GiNaC AUTHORS file 
+for their list of contributors.

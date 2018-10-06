@@ -22,10 +22,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += /usr/local/include $$PWD/include
-DEPENDPATH += /usr/local/include $$PWD/include
+INCLUDEPATH += /usr/local/include $$PWD/include $$PWD/lib/
+DEPENDPATH += /usr/local/include $$PWD/include $$PWD/lib/
 
-LIBS += -L/usr/local/lib/ -lcln -lginac -lcycle -lfigure
+LIBS += -L/usr/local/lib/ -L/$$PWD/lib/ -lcln -lginac -lcycle -lfigure
 
 # install the documentation files
 docs.path = $$OUT_PWD/moebinv-gui.app/Contents/documentation

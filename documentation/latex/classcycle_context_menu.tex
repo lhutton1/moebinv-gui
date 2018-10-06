@@ -54,12 +54,12 @@ void {\bfseries style\+Selected} (int style)
 void {\bfseries scene\+Invalid} ()
 \item 
 \mbox{\Hypertarget{classcycle_context_menu_a6b92c1d84f101c8386d1152b680247ff}\label{classcycle_context_menu_a6b92c1d84f101c8386d1152b680247ff}} 
-void {\bfseries changes\+Made\+To\+Figure} (const Moeb\+Inv\+::figure \&original\+Figure, const Moeb\+Inv\+::figure \&changed\+Figure)
+void {\bfseries changes\+Made\+To\+Figure} (const \mbox{\hyperlink{class_moeb_inv_1_1figure}{Moeb\+Inv\+::figure}} \&original\+Figure, const \mbox{\hyperlink{class_moeb_inv_1_1figure}{Moeb\+Inv\+::figure}} \&changed\+Figure)
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classcycle_context_menu_a0a948765494ab4b2ecf73c89123f7f14}{cycle\+Context\+Menu}} (Moeb\+Inv\+::figure $\ast$f, Gi\+Na\+C\+::ex cycle, Gi\+Na\+C\+::lst $\ast$relation\+List, bool is\+Delete=true, bool is\+This=false, bool show\+Edit\+Menu=false)
+\mbox{\hyperlink{classcycle_context_menu_a0a948765494ab4b2ecf73c89123f7f14}{cycle\+Context\+Menu}} (\mbox{\hyperlink{class_moeb_inv_1_1figure}{Moeb\+Inv\+::figure}} $\ast$f, Gi\+Na\+C\+::ex \mbox{\hyperlink{class_moeb_inv_1_1cycle}{cycle}}, Gi\+Na\+C\+::lst $\ast$relation\+List, bool is\+Delete=true, bool is\+This=false, bool show\+Edit\+Menu=false)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_a0a948765494ab4b2ecf73c89123f7f14}{cycle\+Context\+Menu\+::cycle\+Context\+Menu}} Context menu constructor \end{DoxyCompactList}\item 
 Gi\+Na\+C\+::ex \mbox{\hyperlink{classcycle_context_menu_a35b3868cdc32b97e7c4abc109ee13460}{get\+Cycle}} ()
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_a35b3868cdc32b97e7c4abc109ee13460}{cycle\+Context\+Menu\+::get\+Cycle}} get cycle related to the context menu. \end{DoxyCompactList}\item 
@@ -67,7 +67,7 @@ Q\+List$<$ \mbox{\hyperlink{classmenu_rel_action}{menu\+Rel\+Action}} $\ast$ $>$
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_a4dd57e4522c46a70367b6b721f23bcc9}{cycle\+Context\+Menu\+::get\+Actions}} get actions in the context menu. \end{DoxyCompactList}\item 
 Q\+Action $\ast$ \mbox{\hyperlink{classcycle_context_menu_a0e955d1a633d3585d11b7c193341a568}{get\+Title\+Action}} ()
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_a0e955d1a633d3585d11b7c193341a568}{cycle\+Context\+Menu\+::get\+Title\+Action}} get the action that will be used as the title of the context menu. This has been created due to the fact that cross compatability for \textquotesingle{}add\+Section()\textquotesingle{} isn\textquotesingle{}t well established. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classcycle_context_menu_adf29caf51604118b6ced6a02c5172252}{set\+Cycle}} (Gi\+Na\+C\+::ex cycle)
+void \mbox{\hyperlink{classcycle_context_menu_adf29caf51604118b6ced6a02c5172252}{set\+Cycle}} (Gi\+Na\+C\+::ex \mbox{\hyperlink{class_moeb_inv_1_1cycle}{cycle}})
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_adf29caf51604118b6ced6a02c5172252}{cycle\+Context\+Menu\+::set\+Cycle}} set the cycle that the context menu represents. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcycle_context_menu_a83f3eb1ea5338154095a7bf1e2c77b01}{remove\+Relation\+From\+List}} (\mbox{\hyperlink{classmenu_rel_action}{menu\+Rel\+Action}} $\ast$action\+Triggered)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_a83f3eb1ea5338154095a7bf1e2c77b01}{cycle\+Context\+Menu\+::remove\+Relation\+From\+List}} This function removes a relation from the list by creating a new list and adding every item except the item that needs to be removed. The \textquotesingle{}relation\+List\textquotesingle{} from \mbox{\hyperlink{class_main_window}{Main\+Window}} is then updated so that \textquotesingle{}relation\textquotesingle{} is no longer in the list. \end{DoxyCompactList}\item 
@@ -109,7 +109,7 @@ This class creates a context menu which is then used by each of the cycles creat
 \index{cycle\+Context\+Menu@{cycle\+Context\+Menu}!cycle\+Context\+Menu@{cycle\+Context\+Menu}}
 \index{cycle\+Context\+Menu@{cycle\+Context\+Menu}!cycle\+Context\+Menu@{cycle\+Context\+Menu}}
 \subsubsection{\texorpdfstring{cycle\+Context\+Menu()}{cycleContextMenu()}}
-{\footnotesize\ttfamily cycle\+Context\+Menu\+::cycle\+Context\+Menu (\begin{DoxyParamCaption}\item[{Moeb\+Inv\+::figure $\ast$}]{f,  }\item[{Gi\+Na\+C\+::ex}]{cycle,  }\item[{Gi\+Na\+C\+::lst $\ast$}]{relation\+List,  }\item[{bool}]{is\+Delete = {\ttfamily true},  }\item[{bool}]{is\+This = {\ttfamily false},  }\item[{bool}]{show\+Edit\+Menu = {\ttfamily false} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily cycle\+Context\+Menu\+::cycle\+Context\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_moeb_inv_1_1figure}{Moeb\+Inv\+::figure}} $\ast$}]{f,  }\item[{Gi\+Na\+C\+::ex}]{cycle,  }\item[{Gi\+Na\+C\+::lst $\ast$}]{relation\+List,  }\item[{bool}]{is\+Delete = {\ttfamily true},  }\item[{bool}]{is\+This = {\ttfamily false},  }\item[{bool}]{show\+Edit\+Menu = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
 
@@ -239,4 +239,5 @@ Q\+Action$\ast$ -\/ A pointer to the Q\+Action.
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 /\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/include/cyclecontextmenu.\+h\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/moebinv-\/gui-\/build/moc\+\_\+cyclecontextmenu.\+cpp\item 
 /\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/src/cyclecontextmenu.\+cpp\end{DoxyCompactItemize}

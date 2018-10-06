@@ -1,0 +1,1062 @@
+\hypertarget{classvis}{}\section{vis Class Reference}
+\label{classvis}\index{vis@{vis}}
+
+
+{\ttfamily \#include $<$vis.\+h$>$}
+
+Inheritance diagram for vis\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classvis}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classvis_a2338a54dfa9091ea6b050b814dc2b679}{set\+Col\+Slot}} (int col\+ID)
+\item 
+void \mbox{\hyperlink{classvis_ad217326086a9f0cfc1e35df9c7ccf9c0}{col\+Change\+Slot}} ()
+\item 
+void \mbox{\hyperlink{classvis_aa7568cc4804a9f945f54a4933ced67d0}{trans\+Slider\+Changed}} (int val)
+\item 
+void \mbox{\hyperlink{classvis_af2c43f4aaebe6ee5047e8eb9e9e8eedd}{trans\+Change\+Slot}} ()
+\item 
+void \mbox{\hyperlink{classvis_a192e67455047ca991fb29fbd4074c11d}{print\+Intersection\+Slot}} (int id)
+\item 
+void \mbox{\hyperlink{classvis_afd17774826a24e88c4f2eae14d85c7b4}{update\+Draw\+List}} ()
+\item 
+void \mbox{\hyperlink{classvis_af09e2926e8e8dfa0eca3d6b2f3946fdd}{print\+All\+Intersections}} ()
+\item 
+void \mbox{\hyperlink{classvis_aca0a94b8f2256122fc6e004a4d7de6e6}{draw\+All\+Intersections}} ()
+\item 
+void \mbox{\hyperlink{classvis_a09be90ab62dec1dcf2a72690d254acfb}{create\+Slide\+Dialog}} ()
+\item 
+void \mbox{\hyperlink{classvis_ae8441d597e876882029ee13b16aa4cc2}{set\+Slideshow}} ()
+\item 
+void \mbox{\hyperlink{classvis_aac05bc47936f37805e95dc251fd70035}{key\+Change}} (Q\+String key)
+\item 
+void \mbox{\hyperlink{classvis_a01552b5b750d2c56980b62dc1bc3dac9}{trans\+Change}} (Q\+String trans)
+\item 
+void \mbox{\hyperlink{classvis_aacae1519b8fc0799f9d3676bd35ab957}{group\+Change}} (Q\+String group)
+\item 
+void \mbox{\hyperlink{classvis_aa44c7eaf89bd4bc5dbcd75d4e2458ec7}{take\+Screenshot}} ()
+\item 
+int \mbox{\hyperlink{classvis_a2886cfbc9070b5622347b1c6c87dfe18}{file\+Loader}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classvis_a996ee5697c4a48f0c9ae5743449fc69d}{vis}} (Q\+Widget $\ast$parent)
+\begin{DoxyCompactList}\small\item\em class definition for 3d elliptic non-\/Euclidean visualisation tool. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{struct_point}{Point}} $>$ \mbox{\hyperlink{classvis_a9953ea49c09b9acec704d8175cb7865e}{make\+Sphere\+Points}} (int n\+Points)
+\item 
+vector$<$ \mbox{\hyperlink{struct_point}{Point}} $>$ \mbox{\hyperlink{classvis_a5648b70ed8383268114b338cf020c9d9}{make\+Cube\+Points}} ()
+\item 
+void \mbox{\hyperlink{classvis_a462f90942b36607561139dbcf4e6dabb}{draw\+Sphere}} (\mbox{\hyperlink{struct_point}{Point}} centre, double radius)
+\item 
+void \mbox{\hyperlink{classvis_a49b2f075d0ee40e1baced4f1d7bf9cb7}{set\+File\+Loaded}} (int file)
+\item 
+int \mbox{\hyperlink{classvis_adef138ed751afac0d06a8b6d7e206255}{set\+Data}} (char $\ast$obj\+Data)
+\item 
+void \mbox{\hyperlink{classvis_a3084a34dc367afa2d5d723e7e5a8fe47}{init\+Colours}} ()
+\item 
+int \mbox{\hyperlink{classvis_a89dba18d9f27f573ea2f30bfe4b3dc03}{val\+Present}} (string val, vector$<$ string $>$ list)
+\item 
+vector$<$ string $>$ \mbox{\hyperlink{classvis_a4802cc95e28174087be125f61a31ef60}{get\+Key\+List}} ()
+\item 
+vector$<$ \mbox{\hyperlink{structid_dist}{id\+Dist}} $>$ \mbox{\hyperlink{classvis_a6da50dd6a74fcba4055c2032b457c829}{merge\+Sort}} (vector$<$ \mbox{\hyperlink{structid_dist}{id\+Dist}} $>$)
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{classvis_a250353e36f42fd058d6b59692356d29a}{sphere\+Order}} ()
+\item 
+void \mbox{\hyperlink{classvis_a4c13659b0c56047739c82f04a3dd317c}{change\+Colour}} (int id, \mbox{\hyperlink{struct_r_g_b_a}{R\+G\+BA}} rgb)
+\item 
+void \mbox{\hyperlink{classvis_a430b507667b18e74b1a6f1b68377c1f8}{change\+Transparency}} (int id, double alpha)
+\item 
+void \mbox{\hyperlink{classvis_a8f646ff6bfeadb0ba8543377d46eb994}{calculate\+Intersection}} (int id, vector$<$ \mbox{\hyperlink{structid_over_vec_len}{id\+Over\+Vec\+Len}} $>$ inter)
+\item 
+int \mbox{\hyperlink{classvis_a0c4056a3b0c2526049078a8b454864f2}{intersects\+With}} (int id)
+\item 
+void \mbox{\hyperlink{classvis_a1b2fbed076352ace06cf7cbec8146be3}{draw\+Circle}} (\mbox{\hyperlink{structint_draw}{int\+Draw}} circ)
+\item 
+void \mbox{\hyperlink{classvis_aca1eb70cb49a572f7d34916aec3d95da}{draw\+Intersections}} ()
+\item 
+int \mbox{\hyperlink{classvis_a9d1f882814f73ee4e49dbeb7102b008c}{get\+Picked}} ()
+\item 
+void \mbox{\hyperlink{classvis_a279ffabf91a5426cbfafd520d19edd45}{draw\+Cube\+Face}} (int p\mbox{[}4\mbox{]})
+\item 
+void \mbox{\hyperlink{classvis_a86ece524e0bee2bf1c7741169f4d2ee9}{selection\+Cube}} (int id)
+\item 
+void \mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu}} ()
+\item 
+void \mbox{\hyperlink{classvis_addb1c0bca50661279c4ddaa441b54da5}{scroll}} (float delta)
+\item 
+void \mbox{\hyperlink{classvis_a43ad888fa6478686d0cd81daa849ffd8}{handle\+Intersection}} (int a, int b)
+\item 
+void \mbox{\hyperlink{classvis_a74dfdd319ae733d8ff96aa60bccd65b7}{stop\+Slideshow}} ()
+\item 
+void \mbox{\hyperlink{classvis_ad6c62a2b38cc7d1cd5c9c62ce7c37c0d}{wait\+Func}} (int s)
+\item 
+void \mbox{\hyperlink{classvis_a131dcf83ee61359b99624ea2538898a4}{create\+Slide}} ()
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{classvis_a2a60b45f440459d64a059a4e85b83957}{bring\+To\+Front}} (int, vector$<$ int $>$)
+\item 
+void \mbox{\hyperlink{classvis_a78b843a2656d5f9a9747cde2aa728f51}{create\+Text}} ()
+\item 
+void \mbox{\hyperlink{classvis_add33479c093e0128dc708bd766556ba9}{screen\+Text\+Select}} (int id)
+\item 
+void \mbox{\hyperlink{classvis_a14c9c1ba23785bc482c78c05c025ca84}{screen\+Text\+Intersect}} (\mbox{\hyperlink{structint_draw}{int\+Draw}} inter)
+\item 
+void \mbox{\hyperlink{classvis_a9d087bde79e6856772dc3a1f6f89294e}{print\+Intersections}} (int id)
+\item 
+void \mbox{\hyperlink{classvis_a1ba44b07a81d5d205011112ea58d1252}{reset\+Vis}} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classvis_aacc3b133f9fae3b66e1e13bfe789f314}{initialize\+GL}} ()
+\item 
+void \mbox{\hyperlink{classvis_af1b4cd445e1f1728eae264fcc6652ed7}{resize\+GL}} (int w, int h)
+\item 
+void \mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+GL}} ()
+\item 
+void \mbox{\hyperlink{classvis_afd39fa902cf24e1879d9c4139fb36385}{wheel\+Event}} (Q\+Wheel\+Event $\ast$event)
+\item 
+void \mbox{\hyperlink{classvis_a067c6621db4af8a2b34fe00a349b44db}{key\+Press\+Event}} (Q\+Key\+Event $\ast$event)
+\item 
+void \mbox{\hyperlink{classvis_aee3d8312e44262956a94ccc10b2469f7}{mouse\+Press\+Event}} (Q\+Mouse\+Event $\ast$event)
+\item 
+void \mbox{\hyperlink{classvis_a7c623384a8ab883c83256b988d7df536}{mouse\+Move\+Event}} (Q\+Mouse\+Event $\ast$event)
+\item 
+void \mbox{\hyperlink{classvis_a0c2adf27376ef0d784febfc572cd8729}{mouse\+Release\+Event}} (Q\+Mouse\+Event $\ast$event)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class defining a Qt Widget that is an interactive visualisation to manipulate elliptic non-\/Euclidean geometry. Handles mouse and keyboard input with the use of protected functions inherited from Q\+G\+L\+Widget. Data is passed to the visualisation from the program that instances it.
+
+Information needs to be specified in text files with the each line corresponding to the details of one object in the following format, x\+\_\+centre\+\_\+coordinate y\+\_\+centre\+\_\+coordinate z\+\_\+centre\+\_\+coordinate radius generation key in which the centre coordinates and radius are real numbers, generation is an integer and the key value is a string.
+
+Camera Controls \+: left click and drag rotates camera, right click and drag moves camera, scroll wheel or \char`\"{}-\/\char`\"{} and \char`\"{}+\char`\"{} keys zoom camera.
+
+Scrolling the scroll wheel while an object is selected enters \char`\"{}selection mode\char`\"{}. You may use this mode to scroll through all spheres on the screen and press the right mouse button to select an object. The escape key will exit scroll mode without selecting an object
+
+Pressing the escape key at any time will automatically deselect the currently selected object and clear the text printed on the screen.
+
+Right mouse button will spawn a context menu, where information about intersections can be output to the console or the intersections themselves can be drawn on screen for individual or all objects. Object\textquotesingle{}s colour or transparency properties can also be changed from this menu. Slideshow mode can be entered from here also, where users can display objects of a specified key value one at a time or in pairs. Slideshow mode may either transition to the next slide either when the space bar is pressed or after 10 seconds, depending on which option the user requests. Hitting the escape key while in keypress mode will exit slideshow mode. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classvis_a996ee5697c4a48f0c9ae5743449fc69d}\label{classvis_a996ee5697c4a48f0c9ae5743449fc69d}} 
+\index{vis@{vis}!vis@{vis}}
+\index{vis@{vis}!vis@{vis}}
+\subsubsection{\texorpdfstring{vis()}{vis()}}
+{\footnotesize\ttfamily vis\+::vis (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent }\end{DoxyParamCaption})}
+
+
+
+class definition for 3d elliptic non-\/Euclidean visualisation tool. 
+
+class constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & parent class, inherit from there\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Cameron Kumar 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 5/3/16 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+5 Mar 2016 Function definitions for the visualisation class defined within the \mbox{\hyperlink{vis_8h_source}{vis.\+h}} header file. All member function and slot code is defined here.\+class constructor
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & parent class, inherit from there \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classvis_a2a60b45f440459d64a059a4e85b83957}\label{classvis_a2a60b45f440459d64a059a4e85b83957}} 
+\index{vis@{vis}!bring\+To\+Front@{bring\+To\+Front}}
+\index{bring\+To\+Front@{bring\+To\+Front}!vis@{vis}}
+\subsubsection{\texorpdfstring{bring\+To\+Front()}{bringToFront()}}
+{\footnotesize\ttfamily vector$<$ int $>$ vis\+::bring\+To\+Front (\begin{DoxyParamCaption}\item[{int}]{val,  }\item[{vector$<$ int $>$}]{vec }\end{DoxyParamCaption})}
+
+moves specified value from current position in vector to the front of the specified vector. required when rendering a new frame in either slideshow or scroll mode, as the object we wish to highlight should be bought to front of render queue.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & specified value to be swapped to front \\
+\hline
+{\em vec} & vector for swap takes place in \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+reordered vector 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_a8f646ff6bfeadb0ba8543377d46eb994}\label{classvis_a8f646ff6bfeadb0ba8543377d46eb994}} 
+\index{vis@{vis}!calculate\+Intersection@{calculate\+Intersection}}
+\index{calculate\+Intersection@{calculate\+Intersection}!vis@{vis}}
+\subsubsection{\texorpdfstring{calculate\+Intersection()}{calculateIntersection()}}
+{\footnotesize\ttfamily void vis\+::calculate\+Intersection (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{vector$<$ \mbox{\hyperlink{structid_over_vec_len}{id\+Over\+Vec\+Len}} $>$}]{inter }\end{DoxyParamCaption})}
+
+calculates the centre, radius, and orthogonal vector for an intersection. stores details in global vector coi. this is carried out at initialization but the information in coi is later used to draw or print intersections.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_aacc3b133f9fae3b66e1e13bfe789f314}{initialize\+G\+L()}} 
+
+\mbox{\hyperlink{classvis_a9d087bde79e6856772dc3a1f6f89294e}{print\+Intersections()}} 
+
+\mbox{\hyperlink{classvis_aca1eb70cb49a572f7d34916aec3d95da}{draw\+Intersections()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & index of object to calculate intersections for \\
+\hline
+{\em inter} & list of intersecting objects \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a4c13659b0c56047739c82f04a3dd317c}\label{classvis_a4c13659b0c56047739c82f04a3dd317c}} 
+\index{vis@{vis}!change\+Colour@{change\+Colour}}
+\index{change\+Colour@{change\+Colour}!vis@{vis}}
+\subsubsection{\texorpdfstring{change\+Colour()}{changeColour()}}
+{\footnotesize\ttfamily void vis\+::change\+Colour (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{\mbox{\hyperlink{struct_r_g_b_a}{R\+G\+BA}}}]{rgb }\end{DoxyParamCaption})}
+
+changes the R\+GB colour of object with index id to the R\+GB value provided. used when an objects colour is changed from context menu options.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+
+\mbox{\hyperlink{classvis_ad217326086a9f0cfc1e35df9c7ccf9c0}{col\+Change\+Slot()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identifier of object whose colour we want to change \\
+\hline
+{\em rgb} & R\+GB colour we want the object to have \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a430b507667b18e74b1a6f1b68377c1f8}\label{classvis_a430b507667b18e74b1a6f1b68377c1f8}} 
+\index{vis@{vis}!change\+Transparency@{change\+Transparency}}
+\index{change\+Transparency@{change\+Transparency}!vis@{vis}}
+\subsubsection{\texorpdfstring{change\+Transparency()}{changeTransparency()}}
+{\footnotesize\ttfamily void vis\+::change\+Transparency (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{double}]{alpha }\end{DoxyParamCaption})}
+
+changes the transparency value of object to alpha value provided. used when an objects transparency is changed from context menu options.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+
+\mbox{\hyperlink{classvis_af2c43f4aaebe6ee5047e8eb9e9e8eedd}{trans\+Change\+Slot()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identifier of object whose transparency we want to change \\
+\hline
+{\em alpha} & alpha value we want to change object to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_ad217326086a9f0cfc1e35df9c7ccf9c0}\label{classvis_ad217326086a9f0cfc1e35df9c7ccf9c0}} 
+\index{vis@{vis}!col\+Change\+Slot@{col\+Change\+Slot}}
+\index{col\+Change\+Slot@{col\+Change\+Slot}!vis@{vis}}
+\subsubsection{\texorpdfstring{col\+Change\+Slot}{colChangeSlot}}
+{\footnotesize\ttfamily void vis\+::col\+Change\+Slot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot to control creation of the colour change dialog, spawned from context menu. colour updates as the value of the the combobox changes via set\+Col\+Slot function, the current colour is saved if user presses the confirm button, else the colour returns to its original value if the \char`\"{}x\char`\"{} button or esc key is pressed.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+
+\mbox{\hyperlink{classvis_a2338a54dfa9091ea6b050b814dc2b679}{set\+Col\+Slot()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a63af66f730f0f06f36d255bcc7a7a244}\label{classvis_a63af66f730f0f06f36d255bcc7a7a244}} 
+\index{vis@{vis}!create\+Context\+Menu@{create\+Context\+Menu}}
+\index{create\+Context\+Menu@{create\+Context\+Menu}!vis@{vis}}
+\subsubsection{\texorpdfstring{create\+Context\+Menu()}{createContextMenu()}}
+{\footnotesize\ttfamily void vis\+::create\+Context\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+creates the context menu when picking occurs. available options depend upon whether an object or the background is selected. handles signals depending what option is picked by the user and calls corresponding slot.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ad217326086a9f0cfc1e35df9c7ccf9c0}{col\+Change\+Slot()}} 
+
+\mbox{\hyperlink{classvis_af2c43f4aaebe6ee5047e8eb9e9e8eedd}{trans\+Change\+Slot()}} 
+
+\mbox{\hyperlink{classvis_a192e67455047ca991fb29fbd4074c11d}{print\+Intersection\+Slot()}} 
+
+\mbox{\hyperlink{classvis_afd17774826a24e88c4f2eae14d85c7b4}{update\+Draw\+List()}} 
+
+\mbox{\hyperlink{classvis_af09e2926e8e8dfa0eca3d6b2f3946fdd}{print\+All\+Intersections()}} 
+
+\mbox{\hyperlink{classvis_aca0a94b8f2256122fc6e004a4d7de6e6}{draw\+All\+Intersections()}} 
+
+\mbox{\hyperlink{classvis_a09be90ab62dec1dcf2a72690d254acfb}{create\+Slide\+Dialog()}} 
+
+\mbox{\hyperlink{classvis_aa44c7eaf89bd4bc5dbcd75d4e2458ec7}{take\+Screenshot()}}
+\end{DoxySeeAlso}
+creates the context menu when picking occurs. available options depend upon whether an object or the background is selected. handles signals depending what option is picked by the user and calls corresponding slot.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ad217326086a9f0cfc1e35df9c7ccf9c0}{col\+Change\+Slot()}} 
+
+\mbox{\hyperlink{classvis_af2c43f4aaebe6ee5047e8eb9e9e8eedd}{trans\+Change\+Slot()}} 
+
+\mbox{\hyperlink{classvis_a192e67455047ca991fb29fbd4074c11d}{print\+Intersection\+Slot()}} 
+
+\mbox{\hyperlink{classvis_afd17774826a24e88c4f2eae14d85c7b4}{update\+Draw\+List()}} 
+
+\mbox{\hyperlink{classvis_af09e2926e8e8dfa0eca3d6b2f3946fdd}{print\+All\+Intersections()}} 
+
+\mbox{\hyperlink{classvis_aca0a94b8f2256122fc6e004a4d7de6e6}{draw\+All\+Intersections()}} 
+
+\mbox{\hyperlink{classvis_a09be90ab62dec1dcf2a72690d254acfb}{create\+Slide\+Dialog()}} 
+
+\mbox{\hyperlink{classvis_aa44c7eaf89bd4bc5dbcd75d4e2458ec7}{take\+Screenshot()}} 
+
+\mbox{\hyperlink{classvis_a2886cfbc9070b5622347b1c6c87dfe18}{file\+Loader()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a131dcf83ee61359b99624ea2538898a4}\label{classvis_a131dcf83ee61359b99624ea2538898a4}} 
+\index{vis@{vis}!create\+Slide@{create\+Slide}}
+\index{create\+Slide@{create\+Slide}!vis@{vis}}
+\subsubsection{\texorpdfstring{create\+Slide()}{createSlide()}}
+{\footnotesize\ttfamily void vis\+::create\+Slide (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+sets up objects so the next slide may be rendered in slideshow mode. sets transparencies and draws intersections.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ae8441d597e876882029ee13b16aa4cc2}{set\+Slideshow()}} 
+
+\mbox{\hyperlink{classvis_a74dfdd319ae733d8ff96aa60bccd65b7}{stop\+Slideshow()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a09be90ab62dec1dcf2a72690d254acfb}\label{classvis_a09be90ab62dec1dcf2a72690d254acfb}} 
+\index{vis@{vis}!create\+Slide\+Dialog@{create\+Slide\+Dialog}}
+\index{create\+Slide\+Dialog@{create\+Slide\+Dialog}!vis@{vis}}
+\subsubsection{\texorpdfstring{create\+Slide\+Dialog}{createSlideDialog}}
+{\footnotesize\ttfamily void vis\+::create\+Slide\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that creates the dialog that gets user parameters for slideshow mode. employs a grid layout within a box layout containing 3 Q\+Labels and 3 comboboxes. the user confirms their parameters and starts slideshow mode by pressing the confirm button, which triggers the set\+Slideshow slot to initialize variables for slideshow mode. called from context menu.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+
+\mbox{\hyperlink{classvis_ae8441d597e876882029ee13b16aa4cc2}{set\+Slideshow()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a78b843a2656d5f9a9747cde2aa728f51}\label{classvis_a78b843a2656d5f9a9747cde2aa728f51}} 
+\index{vis@{vis}!create\+Text@{create\+Text}}
+\index{create\+Text@{create\+Text}!vis@{vis}}
+\subsubsection{\texorpdfstring{create\+Text()}{createText()}}
+{\footnotesize\ttfamily void vis\+::create\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+calculates the number of lines required and prints the contents of the screen\+Text vector to the bottom left of the opengl widget. required each time a new frame is drawn
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_aca0a94b8f2256122fc6e004a4d7de6e6}\label{classvis_aca0a94b8f2256122fc6e004a4d7de6e6}} 
+\index{vis@{vis}!draw\+All\+Intersections@{draw\+All\+Intersections}}
+\index{draw\+All\+Intersections@{draw\+All\+Intersections}!vis@{vis}}
+\subsubsection{\texorpdfstring{draw\+All\+Intersections}{drawAllIntersections}}
+{\footnotesize\ttfamily void vis\+::draw\+All\+Intersections (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that updates coi\+Draw vector to include all objects. however if all objects are currently drawn, clears coi\+Draw. called from context menu
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a1b2fbed076352ace06cf7cbec8146be3}\label{classvis_a1b2fbed076352ace06cf7cbec8146be3}} 
+\index{vis@{vis}!draw\+Circle@{draw\+Circle}}
+\index{draw\+Circle@{draw\+Circle}!vis@{vis}}
+\subsubsection{\texorpdfstring{draw\+Circle()}{drawCircle()}}
+{\footnotesize\ttfamily void vis\+::draw\+Circle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structint_draw}{int\+Draw}}}]{circ }\end{DoxyParamCaption})}
+
+draws a circle given a specified centre and radius. called from the function draw\+Intersections when a new frame is rendered.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+
+\mbox{\hyperlink{classvis_aca1eb70cb49a572f7d34916aec3d95da}{draw\+Intersections()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em cen} & centre of circle to draw \\
+\hline
+{\em rad} & radius of circle to draw \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a279ffabf91a5426cbfafd520d19edd45}\label{classvis_a279ffabf91a5426cbfafd520d19edd45}} 
+\index{vis@{vis}!draw\+Cube\+Face@{draw\+Cube\+Face}}
+\index{draw\+Cube\+Face@{draw\+Cube\+Face}!vis@{vis}}
+\subsubsection{\texorpdfstring{draw\+Cube\+Face()}{drawCubeFace()}}
+{\footnotesize\ttfamily void vis\+::draw\+Cube\+Face (\begin{DoxyParamCaption}\item[{int}]{p\mbox{[}4\mbox{]} }\end{DoxyParamCaption})}
+
+draws cube with side lengths 1 about the origin from points held in cube\+Points variable.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a86ece524e0bee2bf1c7741169f4d2ee9}{selection\+Cube()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em p} & array of int containing each point on cube face \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_aca1eb70cb49a572f7d34916aec3d95da}\label{classvis_aca1eb70cb49a572f7d34916aec3d95da}} 
+\index{vis@{vis}!draw\+Intersections@{draw\+Intersections}}
+\index{draw\+Intersections@{draw\+Intersections}!vis@{vis}}
+\subsubsection{\texorpdfstring{draw\+Intersections()}{drawIntersections()}}
+{\footnotesize\ttfamily void vis\+::draw\+Intersections (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+makes calls to draw the intersections saved in the global variable coi\+Draw when rendering each new frame.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a1b2fbed076352ace06cf7cbec8146be3}{draw\+Circle()}} 
+
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a462f90942b36607561139dbcf4e6dabb}\label{classvis_a462f90942b36607561139dbcf4e6dabb}} 
+\index{vis@{vis}!draw\+Sphere@{draw\+Sphere}}
+\index{draw\+Sphere@{draw\+Sphere}!vis@{vis}}
+\subsubsection{\texorpdfstring{draw\+Sphere()}{drawSphere()}}
+{\footnotesize\ttfamily void vis\+::draw\+Sphere (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_point}{Point}}}]{centre,  }\item[{double}]{radius }\end{DoxyParamCaption})}
+
+draws a sphere with specified centre and radius. used when spheres are rendered to a buffer.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em centre} & coordinate point of centre location \\
+\hline
+{\em radius} & radius of sphere \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a2886cfbc9070b5622347b1c6c87dfe18}\label{classvis_a2886cfbc9070b5622347b1c6c87dfe18}} 
+\index{vis@{vis}!file\+Loader@{file\+Loader}}
+\index{file\+Loader@{file\+Loader}!vis@{vis}}
+\subsubsection{\texorpdfstring{file\+Loader}{fileLoader}}
+{\footnotesize\ttfamily int vis\+::file\+Loader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that creates a file loader to load a new arrangement to the screen. file loader allows navigation through files to select a text file.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+0 if a file loaded succesfully, else 1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_a4802cc95e28174087be125f61a31ef60}\label{classvis_a4802cc95e28174087be125f61a31ef60}} 
+\index{vis@{vis}!get\+Key\+List@{get\+Key\+List}}
+\index{get\+Key\+List@{get\+Key\+List}!vis@{vis}}
+\subsubsection{\texorpdfstring{get\+Key\+List()}{getKeyList()}}
+{\footnotesize\ttfamily vector$<$ string $>$ vis\+::get\+Key\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+finds all unique key values for all objects in the visualisation. this takes place when the Open\+GL widget is initialized.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_aacc3b133f9fae3b66e1e13bfe789f314}{initialize\+G\+L()}} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+vector containing all unique key values 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_a9d1f882814f73ee4e49dbeb7102b008c}\label{classvis_a9d1f882814f73ee4e49dbeb7102b008c}} 
+\index{vis@{vis}!get\+Picked@{get\+Picked}}
+\index{get\+Picked@{get\+Picked}!vis@{vis}}
+\subsubsection{\texorpdfstring{get\+Picked()}{getPicked()}}
+{\footnotesize\ttfamily int vis\+::get\+Picked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+renders for picking using the colour hack. creates unique colour for each object then determines which object the user has picked depending on the colour of the pixel under the mouse. triggered by right click.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+
+\mbox{\hyperlink{classvis_a0c2adf27376ef0d784febfc572cd8729}{mouse\+Release\+Event()}} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+integer id of picked object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_aacae1519b8fc0799f9d3676bd35ab957}\label{classvis_aacae1519b8fc0799f9d3676bd35ab957}} 
+\index{vis@{vis}!group\+Change@{group\+Change}}
+\index{group\+Change@{group\+Change}!vis@{vis}}
+\subsubsection{\texorpdfstring{group\+Change}{groupChange}}
+{\footnotesize\ttfamily void vis\+::group\+Change (\begin{DoxyParamCaption}\item[{Q\+String}]{group }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that handles value changes in the group combo box within the slideshow mode dialog.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a09be90ab62dec1dcf2a72690d254acfb}{create\+Slide\+Dialog()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em group} & newly selected grouping parameter \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a43ad888fa6478686d0cd81daa849ffd8}\label{classvis_a43ad888fa6478686d0cd81daa849ffd8}} 
+\index{vis@{vis}!handle\+Intersection@{handle\+Intersection}}
+\index{handle\+Intersection@{handle\+Intersection}!vis@{vis}}
+\subsubsection{\texorpdfstring{handle\+Intersection()}{handleIntersection()}}
+{\footnotesize\ttfamily void vis\+::handle\+Intersection (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+function to print specific intersection between two objects and add interstion to draw list. used when a new slide is created in slideshow pair mode.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a131dcf83ee61359b99624ea2538898a4}{create\+Slide()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & index of first sphere \\
+\hline
+{\em b} & index of second sphere \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a3084a34dc367afa2d5d723e7e5a8fe47}\label{classvis_a3084a34dc367afa2d5d723e7e5a8fe47}} 
+\index{vis@{vis}!init\+Colours@{init\+Colours}}
+\index{init\+Colours@{init\+Colours}!vis@{vis}}
+\subsubsection{\texorpdfstring{init\+Colours()}{initColours()}}
+{\footnotesize\ttfamily void vis\+::init\+Colours (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+populate the colours vector with a selection of \mbox{\hyperlink{struct_r_g_b_a}{R\+G\+BA}} values and creates colour icons from png files to be used in colour selection. called when the Open\+GL widget is initialised by the program.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_aacc3b133f9fae3b66e1e13bfe789f314}{initialize\+G\+L()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_aacc3b133f9fae3b66e1e13bfe789f314}\label{classvis_aacc3b133f9fae3b66e1e13bfe789f314}} 
+\index{vis@{vis}!initialize\+GL@{initialize\+GL}}
+\index{initialize\+GL@{initialize\+GL}!vis@{vis}}
+\subsubsection{\texorpdfstring{initialize\+G\+L()}{initializeGL()}}
+{\footnotesize\ttfamily void vis\+::initialize\+GL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+protected function, required to define a Q\+G\+L\+Widget. initialises environment for Open\+GL rendering when instance called. determines which sphere geometry to use. initializes variables and flags. creates points for sphere and cube geometry. sets up camera and lighting. \mbox{\Hypertarget{classvis_a0c4056a3b0c2526049078a8b454864f2}\label{classvis_a0c4056a3b0c2526049078a8b454864f2}} 
+\index{vis@{vis}!intersects\+With@{intersects\+With}}
+\index{intersects\+With@{intersects\+With}!vis@{vis}}
+\subsubsection{\texorpdfstring{intersects\+With()}{intersectsWith()}}
+{\footnotesize\ttfamily int vis\+::intersects\+With (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+identifies which objects intersect specified object by comparing the sum of their radii with the distance between their centres. the number of intersections is returned to keep track of where each objects intersections appear in the vector. done as part of the intersections calculations when Open\+GL widget initialized.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_aacc3b133f9fae3b66e1e13bfe789f314}{initialize\+G\+L()}} 
+
+calculate\+Intersections() 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identifier of object we will calculate intersections for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of objects this object intersects with 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_aac05bc47936f37805e95dc251fd70035}\label{classvis_aac05bc47936f37805e95dc251fd70035}} 
+\index{vis@{vis}!key\+Change@{key\+Change}}
+\index{key\+Change@{key\+Change}!vis@{vis}}
+\subsubsection{\texorpdfstring{key\+Change}{keyChange}}
+{\footnotesize\ttfamily void vis\+::key\+Change (\begin{DoxyParamCaption}\item[{Q\+String}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that handles value changes in the key combo box within the slideshow mode dialog.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a09be90ab62dec1dcf2a72690d254acfb}{create\+Slide\+Dialog()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & newly selected string value of key \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a067c6621db4af8a2b34fe00a349b44db}\label{classvis_a067c6621db4af8a2b34fe00a349b44db}} 
+\index{vis@{vis}!key\+Press\+Event@{key\+Press\+Event}}
+\index{key\+Press\+Event@{key\+Press\+Event}!vis@{vis}}
+\subsubsection{\texorpdfstring{key\+Press\+Event()}{keyPressEvent()}}
+{\footnotesize\ttfamily void vis\+::key\+Press\+Event (\begin{DoxyParamCaption}\item[{Q\+Key\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+interaction handling for when a button on the keyboard is pressed, ~\newline
+used for camera zooming and scroll mode, moving between slides in slideshow mode, and exiting scroll and slideshow mode.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_addb1c0bca50661279c4ddaa441b54da5}{scroll()}} 
+
+\mbox{\hyperlink{classvis_a131dcf83ee61359b99624ea2538898a4}{create\+Slide()}} 
+
+\mbox{\hyperlink{classvis_a74dfdd319ae733d8ff96aa60bccd65b7}{stop\+Slideshow()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em event} & information about the key pressed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a5648b70ed8383268114b338cf020c9d9}\label{classvis_a5648b70ed8383268114b338cf020c9d9}} 
+\index{vis@{vis}!make\+Cube\+Points@{make\+Cube\+Points}}
+\index{make\+Cube\+Points@{make\+Cube\+Points}!vis@{vis}}
+\subsubsection{\texorpdfstring{make\+Cube\+Points()}{makeCubePoints()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_point}{Point}} $>$ vis\+::make\+Cube\+Points (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+create points of a cube about the origin with side length 1. cube points added front to back, top to bottom, left to right. this cube will be transformed and drawn about objects when they are selected by the user. the cube points are created when the Open\+GL widget is initialised by the program.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_aacc3b133f9fae3b66e1e13bfe789f314}{initialize\+G\+L()}} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+vector containing points of cube 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_a9953ea49c09b9acec704d8175cb7865e}\label{classvis_a9953ea49c09b9acec704d8175cb7865e}} 
+\index{vis@{vis}!make\+Sphere\+Points@{make\+Sphere\+Points}}
+\index{make\+Sphere\+Points@{make\+Sphere\+Points}!vis@{vis}}
+\subsubsection{\texorpdfstring{make\+Sphere\+Points()}{makeSpherePoints()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{struct_point}{Point}} $>$ vis\+::make\+Sphere\+Points (\begin{DoxyParamCaption}\item[{int}]{n\+Points }\end{DoxyParamCaption})}
+
+creates the points of a sphere object, centre at origin, radius 1. this template sphere can be copied and used to represent all spheres in our visualisation. The sphere points are created when the Open\+GL widget is initialised by the program.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_aacc3b133f9fae3b66e1e13bfe789f314}{initialize\+G\+L()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em n\+Points} & number of points per circle in the sphere \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of double triplets defining the point coords in 3d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_a6da50dd6a74fcba4055c2032b457c829}\label{classvis_a6da50dd6a74fcba4055c2032b457c829}} 
+\index{vis@{vis}!merge\+Sort@{merge\+Sort}}
+\index{merge\+Sort@{merge\+Sort}!vis@{vis}}
+\subsubsection{\texorpdfstring{merge\+Sort()}{mergeSort()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structid_dist}{id\+Dist}} $>$ vis\+::merge\+Sort (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{structid_dist}{id\+Dist}} $>$}]{vec }\end{DoxyParamCaption})}
+
+recursive function to be used for merge sorting of a vector. used to order spheres by distance from the screen as part of rendering a new frame.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+
+\mbox{\hyperlink{classvis_a250353e36f42fd058d6b59692356d29a}{sphere\+Order()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & vector to sort (structure of ints and doubles) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sorted vector (structure of ints and doubles) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_a7c623384a8ab883c83256b988d7df536}\label{classvis_a7c623384a8ab883c83256b988d7df536}} 
+\index{vis@{vis}!mouse\+Move\+Event@{mouse\+Move\+Event}}
+\index{mouse\+Move\+Event@{mouse\+Move\+Event}!vis@{vis}}
+\subsubsection{\texorpdfstring{mouse\+Move\+Event()}{mouseMoveEvent()}}
+{\footnotesize\ttfamily void vis\+::mouse\+Move\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+interaction handling for when mouse movements take place, used for camera translations and rotations.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & information about the mouse button press \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_aee3d8312e44262956a94ccc10b2469f7}\label{classvis_aee3d8312e44262956a94ccc10b2469f7}} 
+\index{vis@{vis}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!vis@{vis}}
+\subsubsection{\texorpdfstring{mouse\+Press\+Event()}{mousePressEvent()}}
+{\footnotesize\ttfamily void vis\+::mouse\+Press\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+interaction handling for when a button on the mouse is pressed, ~\newline
+stores the start position of the mouse for translations and rotations
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & information about the mouse button press \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a0c2adf27376ef0d784febfc572cd8729}\label{classvis_a0c2adf27376ef0d784febfc572cd8729}} 
+\index{vis@{vis}!mouse\+Release\+Event@{mouse\+Release\+Event}}
+\index{mouse\+Release\+Event@{mouse\+Release\+Event}!vis@{vis}}
+\subsubsection{\texorpdfstring{mouse\+Release\+Event()}{mouseReleaseEvent()}}
+{\footnotesize\ttfamily void vis\+::mouse\+Release\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+interaction handling for when mouse button released, used for picking
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a9d1f882814f73ee4e49dbeb7102b008c}{get\+Picked()}} 
+
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em event} & information about the mouse button released \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_ace835462bb98cad495e829c08e1a26ea}\label{classvis_ace835462bb98cad495e829c08e1a26ea}} 
+\index{vis@{vis}!paint\+GL@{paint\+GL}}
+\index{paint\+GL@{paint\+GL}!vis@{vis}}
+\subsubsection{\texorpdfstring{paint\+G\+L()}{paintGL()}}
+{\footnotesize\ttfamily void vis\+::paint\+GL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+draw a new frame. if standard rendering then a new frame is created based on the current variable settings of the program and swapped to front buffer. if picking render requested, objects rendered by get\+Picked function to determine what object the user has selected by drawing to the back buffer. \mbox{\Hypertarget{classvis_af09e2926e8e8dfa0eca3d6b2f3946fdd}\label{classvis_af09e2926e8e8dfa0eca3d6b2f3946fdd}} 
+\index{vis@{vis}!print\+All\+Intersections@{print\+All\+Intersections}}
+\index{print\+All\+Intersections@{print\+All\+Intersections}!vis@{vis}}
+\subsubsection{\texorpdfstring{print\+All\+Intersections}{printAllIntersections}}
+{\footnotesize\ttfamily void vis\+::print\+All\+Intersections (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that prints intersections for all objects to standard output. uses the print\+Intersections function to do so. called from context menu.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a9d087bde79e6856772dc3a1f6f89294e}{print\+Intersections()}} 
+
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a9d087bde79e6856772dc3a1f6f89294e}\label{classvis_a9d087bde79e6856772dc3a1f6f89294e}} 
+\index{vis@{vis}!print\+Intersections@{print\+Intersections}}
+\index{print\+Intersections@{print\+Intersections}!vis@{vis}}
+\subsubsection{\texorpdfstring{print\+Intersections()}{printIntersections()}}
+{\footnotesize\ttfamily void vis\+::print\+Intersections (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+prints intersections for currently selected object to standard output. called from context menu. also adds intersections details to screen\+Text vector. called when print options on context menu selected ~\newline
+ \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+
+\mbox{\hyperlink{classvis_a192e67455047ca991fb29fbd4074c11d}{print\+Intersection\+Slot()}} 
+
+\mbox{\hyperlink{classvis_af09e2926e8e8dfa0eca3d6b2f3946fdd}{print\+All\+Intersections()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & id of currently selected object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a192e67455047ca991fb29fbd4074c11d}\label{classvis_a192e67455047ca991fb29fbd4074c11d}} 
+\index{vis@{vis}!print\+Intersection\+Slot@{print\+Intersection\+Slot}}
+\index{print\+Intersection\+Slot@{print\+Intersection\+Slot}!vis@{vis}}
+\subsubsection{\texorpdfstring{print\+Intersection\+Slot}{printIntersectionSlot}}
+{\footnotesize\ttfamily void vis\+::print\+Intersection\+Slot (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that calls print\+Intersections function for selected object and redraws to screen. this slot is triggered by selection from the context menu.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+
+\mbox{\hyperlink{classvis_a9d087bde79e6856772dc3a1f6f89294e}{print\+Intersections()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & id of currently selected object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a1ba44b07a81d5d205011112ea58d1252}\label{classvis_a1ba44b07a81d5d205011112ea58d1252}} 
+\index{vis@{vis}!reset\+Vis@{reset\+Vis}}
+\index{reset\+Vis@{reset\+Vis}!vis@{vis}}
+\subsubsection{\texorpdfstring{reset\+Vis()}{resetVis()}}
+{\footnotesize\ttfamily void vis\+::reset\+Vis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+clears all vectors and resets all flags, sets up program to load a new arrangement. called from file loader when new file chosen
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a2886cfbc9070b5622347b1c6c87dfe18}{file\+Loader()}}
+\end{DoxySeeAlso}
+clears vectors not reset by initialize function, sets up program to load a new arrangement. called from file loader when new file chosen
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a2886cfbc9070b5622347b1c6c87dfe18}{file\+Loader()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_af1b4cd445e1f1728eae264fcc6652ed7}\label{classvis_af1b4cd445e1f1728eae264fcc6652ed7}} 
+\index{vis@{vis}!resize\+GL@{resize\+GL}}
+\index{resize\+GL@{resize\+GL}!vis@{vis}}
+\subsubsection{\texorpdfstring{resize\+G\+L()}{resizeGL()}}
+{\footnotesize\ttfamily void vis\+::resize\+GL (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+changes size of viewport when widget resized
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & the new width of the widget \\
+\hline
+{\em h} & the new height of the widget \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a14c9c1ba23785bc482c78c05c025ca84}\label{classvis_a14c9c1ba23785bc482c78c05c025ca84}} 
+\index{vis@{vis}!screen\+Text\+Intersect@{screen\+Text\+Intersect}}
+\index{screen\+Text\+Intersect@{screen\+Text\+Intersect}!vis@{vis}}
+\subsubsection{\texorpdfstring{screen\+Text\+Intersect()}{screenTextIntersect()}}
+{\footnotesize\ttfamily void vis\+::screen\+Text\+Intersect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structint_draw}{int\+Draw}}}]{inter }\end{DoxyParamCaption})}
+
+updates the screen\+Text vector by adding brief details of specified intersection to the vector as a string. required in pair slideshow mode and when intersections are printed.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a131dcf83ee61359b99624ea2538898a4}{create\+Slide()}} 
+
+\mbox{\hyperlink{classvis_a9d087bde79e6856772dc3a1f6f89294e}{print\+Intersections()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em inter} & information about the intersection whos details we wish to add to screen\+Text \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_add33479c093e0128dc708bd766556ba9}\label{classvis_add33479c093e0128dc708bd766556ba9}} 
+\index{vis@{vis}!screen\+Text\+Select@{screen\+Text\+Select}}
+\index{screen\+Text\+Select@{screen\+Text\+Select}!vis@{vis}}
+\subsubsection{\texorpdfstring{screen\+Text\+Select()}{screenTextSelect()}}
+{\footnotesize\ttfamily void vis\+::screen\+Text\+Select (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+updates the screen\+Text vector by replacing current contents with those of the the object with index specified. does this when an object is picked or scrolled to.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a9d1f882814f73ee4e49dbeb7102b008c}{get\+Picked()}} 
+
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+
+\mbox{\hyperlink{classvis_addb1c0bca50661279c4ddaa441b54da5}{scroll()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & index of object that screen\+Text vector to be updated for \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_addb1c0bca50661279c4ddaa441b54da5}\label{classvis_addb1c0bca50661279c4ddaa441b54da5}} 
+\index{vis@{vis}!scroll@{scroll}}
+\index{scroll@{scroll}!vis@{vis}}
+\subsubsection{\texorpdfstring{scroll()}{scroll()}}
+{\footnotesize\ttfamily void vis\+::scroll (\begin{DoxyParamCaption}\item[{float}]{delta }\end{DoxyParamCaption})}
+
+scroll mode command to move selection to next object. either moves one index value forwards if wheel scrolled up or one id value backwards if wheel scrolled down. also scrolls if \char`\"{}+\char`\"{} or \char`\"{}-\/\char`\"{} key pressed. changes transparency values accordingly.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_afd39fa902cf24e1879d9c4139fb36385}{wheel\+Event()}} 
+
+\mbox{\hyperlink{classvis_a067c6621db4af8a2b34fe00a349b44db}{key\+Press\+Event()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & the rotation amount of the scroll wheel \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a86ece524e0bee2bf1c7741169f4d2ee9}\label{classvis_a86ece524e0bee2bf1c7741169f4d2ee9}} 
+\index{vis@{vis}!selection\+Cube@{selection\+Cube}}
+\index{selection\+Cube@{selection\+Cube}!vis@{vis}}
+\subsubsection{\texorpdfstring{selection\+Cube()}{selectionCube()}}
+{\footnotesize\ttfamily void vis\+::selection\+Cube (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+renders a wireframe cube around currently selected object (if any) by drawing each face one at a time.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+
+\mbox{\hyperlink{classvis_a279ffabf91a5426cbfafd520d19edd45}{draw\+Cube\+Face()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & of sphere that cube should be drawn around \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_a2338a54dfa9091ea6b050b814dc2b679}\label{classvis_a2338a54dfa9091ea6b050b814dc2b679}} 
+\index{vis@{vis}!set\+Col\+Slot@{set\+Col\+Slot}}
+\index{set\+Col\+Slot@{set\+Col\+Slot}!vis@{vis}}
+\subsubsection{\texorpdfstring{set\+Col\+Slot}{setColSlot}}
+{\footnotesize\ttfamily void vis\+::set\+Col\+Slot (\begin{DoxyParamCaption}\item[{int}]{col\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot to set colour of selected object, called from colour dialog.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ad217326086a9f0cfc1e35df9c7ccf9c0}{col\+Change\+Slot()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em col\+ID} & index of object whos colour shall be changed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_adef138ed751afac0d06a8b6d7e206255}\label{classvis_adef138ed751afac0d06a8b6d7e206255}} 
+\index{vis@{vis}!set\+Data@{set\+Data}}
+\index{set\+Data@{set\+Data}!vis@{vis}}
+\subsubsection{\texorpdfstring{set\+Data()}{setData()}}
+{\footnotesize\ttfamily int vis\+::set\+Data (\begin{DoxyParamCaption}\item[{char $\ast$}]{obj\+Data }\end{DoxyParamCaption})}
+
+writes centre, radius, key and generation information from file to vectors. file specified as a command line argument. Sphere centre coordinates stored in obj\+Centre vector, radius data in obj\+Radius, and key and generation data in obj\+Gen\+Key. called by the program that instances this class.
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+Data} & file containing object raw data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns 1 if there is a major error, else 0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_a49b2f075d0ee40e1baced4f1d7bf9cb7}\label{classvis_a49b2f075d0ee40e1baced4f1d7bf9cb7}} 
+\index{vis@{vis}!set\+File\+Loaded@{set\+File\+Loaded}}
+\index{set\+File\+Loaded@{set\+File\+Loaded}!vis@{vis}}
+\subsubsection{\texorpdfstring{set\+File\+Loaded()}{setFileLoaded()}}
+{\footnotesize\ttfamily void vis\+::set\+File\+Loaded (\begin{DoxyParamCaption}\item[{int}]{file }\end{DoxyParamCaption})}
+
+sets the flag to indicate whether a file has been loaded to visualise or not. This determines what options appear on the context menu. Called at run time depending on whether a command line arg specified and called again when a new file is loaded.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & integer value for flag to be given \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_ae8441d597e876882029ee13b16aa4cc2}\label{classvis_ae8441d597e876882029ee13b16aa4cc2}} 
+\index{vis@{vis}!set\+Slideshow@{set\+Slideshow}}
+\index{set\+Slideshow@{set\+Slideshow}!vis@{vis}}
+\subsubsection{\texorpdfstring{set\+Slideshow}{setSlideshow}}
+{\footnotesize\ttfamily void vis\+::set\+Slideshow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that sets up program for slideshow mode by setting variables and flags required depending on user specified parameters. creates lists of which objects need to be highlighted for each slide and carries out entire slideshow if time transition selected.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a09be90ab62dec1dcf2a72690d254acfb}{create\+Slide\+Dialog()}} 
+
+\mbox{\hyperlink{classvis_a131dcf83ee61359b99624ea2538898a4}{create\+Slide()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a250353e36f42fd058d6b59692356d29a}\label{classvis_a250353e36f42fd058d6b59692356d29a}} 
+\index{vis@{vis}!sphere\+Order@{sphere\+Order}}
+\index{sphere\+Order@{sphere\+Order}!vis@{vis}}
+\subsubsection{\texorpdfstring{sphere\+Order()}{sphereOrder()}}
+{\footnotesize\ttfamily vector$<$ int $>$ vis\+::sphere\+Order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+orders the spheres based on opacity and which is closest to the camera. this is done to order the spheres so they may be drawn from furthest to nearest to provide the see-\/through effect when rendered. required to render each new frame.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ace835462bb98cad495e829c08e1a26ea}{paint\+G\+L()}} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+returns a vector of integers representing the order of object rendering. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_a74dfdd319ae733d8ff96aa60bccd65b7}\label{classvis_a74dfdd319ae733d8ff96aa60bccd65b7}} 
+\index{vis@{vis}!stop\+Slideshow@{stop\+Slideshow}}
+\index{stop\+Slideshow@{stop\+Slideshow}!vis@{vis}}
+\subsubsection{\texorpdfstring{stop\+Slideshow()}{stopSlideshow()}}
+{\footnotesize\ttfamily void vis\+::stop\+Slideshow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+resets all variables back to their original state when slideshow mode is finished and resets flags. this is either triggered by the timer on the last slide ending or cycling through all slides by keypress.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ae8441d597e876882029ee13b16aa4cc2}{set\+Slideshow()}} 
+
+\mbox{\hyperlink{classvis_a067c6621db4af8a2b34fe00a349b44db}{key\+Press\+Event()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_aa44c7eaf89bd4bc5dbcd75d4e2458ec7}\label{classvis_aa44c7eaf89bd4bc5dbcd75d4e2458ec7}} 
+\index{vis@{vis}!take\+Screenshot@{take\+Screenshot}}
+\index{take\+Screenshot@{take\+Screenshot}!vis@{vis}}
+\subsubsection{\texorpdfstring{take\+Screenshot}{takeScreenshot}}
+{\footnotesize\ttfamily void vis\+::take\+Screenshot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that takes a screenshot of the current frame and saves it as a png in the screenshots folder. the current date and time are used as a filename. called from context menu.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a01552b5b750d2c56980b62dc1bc3dac9}\label{classvis_a01552b5b750d2c56980b62dc1bc3dac9}} 
+\index{vis@{vis}!trans\+Change@{trans\+Change}}
+\index{trans\+Change@{trans\+Change}!vis@{vis}}
+\subsubsection{\texorpdfstring{trans\+Change}{transChange}}
+{\footnotesize\ttfamily void vis\+::trans\+Change (\begin{DoxyParamCaption}\item[{Q\+String}]{trans }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that handles value changes in the transition combo box within the slideshow mode dialog.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a09be90ab62dec1dcf2a72690d254acfb}{create\+Slide\+Dialog()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & newly selected transition parameter \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_af2c43f4aaebe6ee5047e8eb9e9e8eedd}\label{classvis_af2c43f4aaebe6ee5047e8eb9e9e8eedd}} 
+\index{vis@{vis}!trans\+Change\+Slot@{trans\+Change\+Slot}}
+\index{trans\+Change\+Slot@{trans\+Change\+Slot}!vis@{vis}}
+\subsubsection{\texorpdfstring{trans\+Change\+Slot}{transChangeSlot}}
+{\footnotesize\ttfamily void vis\+::trans\+Change\+Slot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot to control creation of the transparency change dialog, spawned from context menu. transparency of object changes as the slider does, the transparency value is reset if the dialog is exited by esc key or \char`\"{}x\char`\"{} button. user confirms transparency change by pressing confirm button.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+
+\mbox{\hyperlink{classvis_aa7568cc4804a9f945f54a4933ced67d0}{trans\+Slider\+Changed()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_aa7568cc4804a9f945f54a4933ced67d0}\label{classvis_aa7568cc4804a9f945f54a4933ced67d0}} 
+\index{vis@{vis}!trans\+Slider\+Changed@{trans\+Slider\+Changed}}
+\index{trans\+Slider\+Changed@{trans\+Slider\+Changed}!vis@{vis}}
+\subsubsection{\texorpdfstring{trans\+Slider\+Changed}{transSliderChanged}}
+{\footnotesize\ttfamily void vis\+::trans\+Slider\+Changed (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot to handle a change in the translider value, called from transparency dialog. changes the transparency of the object specified.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_af2c43f4aaebe6ee5047e8eb9e9e8eedd}{trans\+Change\+Slot()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & index of object whos transparency shall be changed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_afd17774826a24e88c4f2eae14d85c7b4}\label{classvis_afd17774826a24e88c4f2eae14d85c7b4}} 
+\index{vis@{vis}!update\+Draw\+List@{update\+Draw\+List}}
+\index{update\+Draw\+List@{update\+Draw\+List}!vis@{vis}}
+\subsubsection{\texorpdfstring{update\+Draw\+List}{updateDrawList}}
+{\footnotesize\ttfamily void vis\+::update\+Draw\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+slot that updates coi\+Draw vector depending on currently selected object. if object\textquotesingle{}s intersections already drawn then it removes them by clearing them from the coi vector, else it adds them to the vector. called from context menu.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a63af66f730f0f06f36d255bcc7a7a244}{create\+Context\+Menu()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classvis_a89dba18d9f27f573ea2f30bfe4b3dc03}\label{classvis_a89dba18d9f27f573ea2f30bfe4b3dc03}} 
+\index{vis@{vis}!val\+Present@{val\+Present}}
+\index{val\+Present@{val\+Present}!vis@{vis}}
+\subsubsection{\texorpdfstring{val\+Present()}{valPresent()}}
+{\footnotesize\ttfamily int vis\+::val\+Present (\begin{DoxyParamCaption}\item[{string}]{val,  }\item[{vector$<$ string $>$}]{list }\end{DoxyParamCaption})}
+
+determines whether a string is already present within a list or not. used when list of unique keys is being created
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_a4802cc95e28174087be125f61a31ef60}{get\+Key\+List()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & value to be searched for \\
+\hline
+{\em list} & list to be searched in \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if true, else 0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classvis_ad6c62a2b38cc7d1cd5c9c62ce7c37c0d}\label{classvis_ad6c62a2b38cc7d1cd5c9c62ce7c37c0d}} 
+\index{vis@{vis}!wait\+Func@{wait\+Func}}
+\index{wait\+Func@{wait\+Func}!vis@{vis}}
+\subsubsection{\texorpdfstring{wait\+Func()}{waitFunc()}}
+{\footnotesize\ttfamily void vis\+::wait\+Func (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})}
+
+function that makes the program wait for specified number of seconds through use of clock\+\_\+t variables and the get clock ticks function clock(). required for time transition slideshow mode.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_ae8441d597e876882029ee13b16aa4cc2}{set\+Slideshow()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em s} & number of seconds to wait \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classvis_afd39fa902cf24e1879d9c4139fb36385}\label{classvis_afd39fa902cf24e1879d9c4139fb36385}} 
+\index{vis@{vis}!wheel\+Event@{wheel\+Event}}
+\index{wheel\+Event@{wheel\+Event}!vis@{vis}}
+\subsubsection{\texorpdfstring{wheel\+Event()}{wheelEvent()}}
+{\footnotesize\ttfamily void vis\+::wheel\+Event (\begin{DoxyParamCaption}\item[{Q\+Wheel\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+interaction handling for the mouses\textquotesingle{}s scroll wheel, used for camera zoom and scroll mode.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classvis_addb1c0bca50661279c4ddaa441b54da5}{scroll()}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em event} & information about the mouse button click \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/lib/moebinv-\/3.\+2/cycle3\+D-\/visualiser/vis.\+h\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/lib/moebinv-\/3.\+2/cycle3\+D-\/visualiser/vis.\+cpp\end{DoxyCompactItemize}

@@ -5,10 +5,13 @@
             <file>
                 <input>html/index.qhp</input>
                 <output>html/index.qch</output>
+                <input>howto.qhp</input>
+                <output>howto.qch</output>
             </file>
         </generate>
         <register>
             <file>html/index.qch</file>
+            <file>howto.qch</file>
         </register>
     </docFiles>
 </QHelpCollectionProject>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+    <namespace>moebinv-gui.com.howto</namespace>
+    <virtualFolder>doc</virtualFolder>
+    <filterSection>
+        <filterAttribute>myapp</filterAttribute>
+        <toc>
+            <section title="How to's" ref="howto-html/index.html">
+                <section title="Add a new menu" ref="howto-html/new-menu.html"/>
+                <section title="Add a new relation to context menu" ref="howto-html/new-relation.html"/>
+                <section title="Add a new edit/property" ref="howto-html/new-property.html"/>
+                <section title="Add a new tool/setting" ref="howto-html/new-tool.html"/>
+                <section title="Add a new tooltip" ref="howto-html/new-tooltip.html"/>
+                <section title="Add a new or edit help section" ref="howto-html/new-help.html"/>
+            </section>
+        </toc>
+        <keywords>
+        </keywords>
+        <files>
+            <file>howto-html/styles.css</file>
+            <file>howto-html/index.html</file>
+            <file>howto-html/new-menu.html</file>
+            <file>howto-html/new-relation.html</file>
+            <file>howto-html/new-property.html</file>
+            <file>howto-html/new-tool.html</file>
+            <file>howto-html/new-tooltip.html</file>
+            <file>howto-html/new-help.html</file>
+        </files>
+    </filterSection>
+</QtHelpProject>

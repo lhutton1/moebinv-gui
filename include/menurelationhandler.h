@@ -38,13 +38,15 @@ public:
     void actionHandler();
     void cycleMetricActionHandler();
     void checkActionHandler();
+    void checkActionCycleHandler();
     QString node_label(GiNaC::ex name);
     void createCycleRelation(const GiNaC::lst &params, const bool &metric);
-    QString checkCycleRelation(const GiNaC::ex &thisCycle, const GiNaC::ex &otherCycle);
+    QString checkCycleRelation(const GiNaC::ex &thisCycle, const GiNaC::ex &otherCycle, const bool &metric);
 
     QAction *addRelation;
     QAction *addCycleRelation;
     QAction *checkRelation;
+    QAction *checkCycleMetricRelation;
 
 signals:
     void handleRelation(const bool &metric);

@@ -1,15 +1,10 @@
 var searchData=
 [
-  ['cancelmovement',['cancelMovement',['../classgraphic_cycle.html#af79bfc4ed813bab595a2a721475a7199',1,'graphicCycle']]],
-  ['checkactionhandler',['checkActionHandler',['../classmenu_rel_action.html#a1535eb0d2ad06bd4d44f3de8761841b2',1,'menuRelAction']]],
-  ['checkcyclerelation',['checkCycleRelation',['../classmenu_rel_action.html#ab3a724c2d09de8a3d253210ec3a0e0d3',1,'menuRelAction']]],
-  ['checkdescription',['checkDescription',['../class_main_window.html#a3e72a214988b3628c36ad4f3e41dc0af',1,'MainWindow']]],
-  ['circle',['circle',['../classcircle.html',1,'circle'],['../classcircle.html#abfd721dc65145023cf14739adacc81a8',1,'circle::circle()']]],
-  ['confirmdeletecycle',['confirmDeleteCycle',['../classcycle_context_menu.html#a844d59a74d643b19fd19eb1de11ea4e9',1,'cycleContextMenu']]],
-  ['createcycle',['createCycle',['../class_main_window.html#abc46822a29b8c97fbe12e030b30444f7',1,'MainWindow']]],
-  ['createcyclerelation',['createCycleRelation',['../classmenu_rel_action.html#a64a27674825379ba110fb2117a572ffe',1,'menuRelAction']]],
-  ['cyclecontextmenu',['cycleContextMenu',['../classcycle_context_menu.html',1,'cycleContextMenu'],['../classcycle_context_menu.html#a0a948765494ab4b2ecf73c89123f7f14',1,'cycleContextMenu::cycleContextMenu()']]],
-  ['cycledata',['cycleData',['../structcycle_data.html',1,'']]],
-  ['cyclemetricactionhandler',['cycleMetricActionHandler',['../classmenu_rel_action.html#adbd43b99466f9ad2cde1934e1599ae4c',1,'menuRelAction']]],
-  ['cyclestyledata',['cycleStyleData',['../structcycle_style_data.html',1,'']]]
+  ['b',['B',['../struct_r_g_b_a.html#ae475b21f687a620601047100d17d2f42',1,'RGBA']]],
+  ['boundingrect',['boundingRect',['../classcircle.html#ab9d2059829ac8f0420c7e711caeb61c7',1,'circle::boundingRect()'],['../classgraphic_cycle.html#a4db310e0fdbccffefc7404c47eb73607',1,'graphicCycle::boundingRect()'],['../classline.html#aecbda133a991abe5bb4080416c226e2f',1,'line::boundingRect()'],['../classpoint.html#a91a81fc826052833e19e9d39ef3849d9',1,'point::boundingRect()']]],
+  ['bringtofront',['bringToFront',['../classvis.html#a2a60b45f440459d64a059a4e85b83957',1,'vis']]],
+  ['buildactions',['buildActions',['../classcycle_context_menu.html#a2ada1b40956db90398503d184afdd5ee',1,'cycleContextMenu']]],
+  ['buildcontextmenu',['buildContextMenu',['../classcycle_context_menu.html#a155448ae220555423d26b055f50b6e49',1,'cycleContextMenu']]],
+  ['buildshape',['buildShape',['../classgraphic_cycle.html#ac3a007a95334380db1bcd9b8082cb36c',1,'graphicCycle']]],
+  ['buildtoolbar',['buildToolBar',['../class_main_window.html#a2e45b04e116068ed411c9738fbdc71ff',1,'MainWindow']]]
 ];

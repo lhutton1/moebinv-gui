@@ -1,0 +1,4 @@
+VERSION_0_0 {
+  global: initccycle;
+  local: *;
+};

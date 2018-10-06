@@ -1,0 +1,91 @@
+\hypertarget{classcircle}{}\section{circle Class Reference}
+\label{classcircle}\index{circle@{circle}}
+Inheritance diagram for circle\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcircle}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcircle_abfd721dc65145023cf14739adacc81a8}{circle}} (\mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} $\ast$parent, struct \mbox{\hyperlink{structcycle_data}{cycle\+Data}} data)
+\begin{DoxyCompactList}\small\item\em circle\+::line Create a new circle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcircle_a2d9af8e86fb3605c736689a2e2566d26}{paint}} (Q\+Painter $\ast$painter, const Q\+Style\+Option\+Graphics\+Item $\ast$option, Q\+Widget $\ast$widget)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcircle_a2d9af8e86fb3605c736689a2e2566d26}{circle\+::paint}} Paint the circle on the scene. \end{DoxyCompactList}\item 
+Q\+RectF \mbox{\hyperlink{classcircle_ab9d2059829ac8f0420c7e711caeb61c7}{bounding\+Rect}} () const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcircle_ab9d2059829ac8f0420c7e711caeb61c7}{circle\+::bounding\+Rect}} Define the bounding rect. \end{DoxyCompactList}\item 
+Q\+Painter\+Path \mbox{\hyperlink{classcircle_a198cbcea745bd311fe91c2a23def746c}{shape}} () const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcircle_a198cbcea745bd311fe91c2a23def746c}{circle\+::shape}} Define the clipping mask of the object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcircle_abfd721dc65145023cf14739adacc81a8}\label{classcircle_abfd721dc65145023cf14739adacc81a8}} 
+\index{circle@{circle}!circle@{circle}}
+\index{circle@{circle}!circle@{circle}}
+\subsubsection{\texorpdfstring{circle()}{circle()}}
+{\footnotesize\ttfamily circle\+::circle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} $\ast$}]{parent,  }\item[{struct \mbox{\hyperlink{structcycle_data}{cycle\+Data}}}]{data }\end{DoxyParamCaption})}
+
+
+
+circle\+::line Create a new circle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em struct} & \mbox{\hyperlink{structcycle_data}{cycle\+Data}} data Contains the data needed to draw the circle.\\
+\hline
+\end{DoxyParams}
+Construct a new line on the scene and assign it to the parent \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcircle_ab9d2059829ac8f0420c7e711caeb61c7}\label{classcircle_ab9d2059829ac8f0420c7e711caeb61c7}} 
+\index{circle@{circle}!bounding\+Rect@{bounding\+Rect}}
+\index{bounding\+Rect@{bounding\+Rect}!circle@{circle}}
+\subsubsection{\texorpdfstring{bounding\+Rect()}{boundingRect()}}
+{\footnotesize\ttfamily Q\+RectF circle\+::bounding\+Rect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+\mbox{\hyperlink{classcircle_ab9d2059829ac8f0420c7e711caeb61c7}{circle\+::bounding\+Rect}} Define the bounding rect. 
+
+\begin{DoxyReturn}{Returns}
+Q\+RectF
+\end{DoxyReturn}
+Define the box the object is drawn within on the scene. \mbox{\Hypertarget{classcircle_a2d9af8e86fb3605c736689a2e2566d26}\label{classcircle_a2d9af8e86fb3605c736689a2e2566d26}} 
+\index{circle@{circle}!paint@{paint}}
+\index{paint@{paint}!circle@{circle}}
+\subsubsection{\texorpdfstring{paint()}{paint()}}
+{\footnotesize\ttfamily void circle\+::paint (\begin{DoxyParamCaption}\item[{Q\+Painter $\ast$}]{painter,  }\item[{const Q\+Style\+Option\+Graphics\+Item $\ast$}]{option,  }\item[{Q\+Widget $\ast$}]{widget }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classcircle_a2d9af8e86fb3605c736689a2e2566d26}{circle\+::paint}} Paint the circle on the scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em painter} & Q\+Painter object. \\
+\hline
+{\em option} & \\
+\hline
+{\em widget} & This function paints the point on the scene given various parameters (such as x and y). The point is drawn differently dependent on the drawing metric in use. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcircle_a198cbcea745bd311fe91c2a23def746c}\label{classcircle_a198cbcea745bd311fe91c2a23def746c}} 
+\index{circle@{circle}!shape@{shape}}
+\index{shape@{shape}!circle@{circle}}
+\subsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily Q\+Painter\+Path circle\+::shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+\mbox{\hyperlink{classcircle_a198cbcea745bd311fe91c2a23def746c}{circle\+::shape}} Define the clipping mask of the object 
+
+\begin{DoxyReturn}{Returns}
+Q\+Painter\+Path
+\end{DoxyReturn}
+Defines the area in which the shape actually exists. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/include/circle.\+h\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/src/circle.\+cpp\end{DoxyCompactItemize}

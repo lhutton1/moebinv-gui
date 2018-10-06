@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <section id="new-menu">
+      <h1>
+        How to create a new menu
+      </h1>
+      <p>
+        To add a new menu to the menu bar, we first need to create a new menu. (If the menu is to be visible when the program is loaded this should be placed in the MainWindow constructor.)
+      </p>
+
+      <div class="code-block">
+        // PLACE NEW MENU ITEMS HERE....
+        <br />
+        QMenu *newMenu = new QMenu("<i>new menu text</i>", nullptr);
+        <br />
+        <br />
+        // now add the relevent ations to the new menu
+        <br />
+        QAction *newAction = new QAction("<i>new action text</i>", newMenu);
+        <br />
+        newMenu->addAction(newAction);
+        <br />
+        ...
+      </div>
+
+      <p>
+        Now we need to add the menu to the menu bar.
+      </p>
+
+      <div class="code-block">
+        ui->menuBar->addMenu(newMenu);
+      </div>
+
+      <p>
+        To run a function when a menu item is clicked we need to connect the actions triggered signal to a slot.
+      </p>
+
+      <div class="code-block">
+        connect(newAction, &QAction::triggered, this, &MainWindow::<i>slot name</i>);
+      </div>
+
+      <p>
+        For more information visit: <a href="http://doc.qt.io/qt-5/qtwidgets-mainwindows-menus-example.html">http://doc.qt.io/qt-5/qtwidgets-mainwindows-menus-example.html</a>
+      </p>
+
+    </section>
+  </body>
+</html>

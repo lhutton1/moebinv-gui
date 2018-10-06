@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <h1>How to add a tooltip to an element</h1>
+
+    <p>
+      For this example we will create a tooltip for the 'create cycle' tool bar button. First we need to go to the MainWindows constructor. Then the button needs to be identified, the create cycle button in this case is named 'actionCreate_Cycle'. Then we add a tool tip to the button like so:
+    </p>
+
+    <div class="code-block">
+      ui->actionCreate_Cycle->setToolTip("<i>Create a cycle by using the currently selected relations.</i>");
+    </div>
+
+    <p>
+      For all widgets the <i>QWidget::setToolTip()</i> function can be used to add a tool tip which becomes visible on hover.
+    </p>
+  </body>
+</html>

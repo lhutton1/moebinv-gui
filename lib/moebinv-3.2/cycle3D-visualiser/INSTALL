@@ -1,0 +1,25 @@
+		    INSTALLING THE VISUALISATION PROGRAM
+			
+Before any attempts to build the visualisation software, please ensure that you
+have a version of Qt installed that includes the QGLWidget and QSignalMapper
+classes (all versions above and including 4.0 have this functionality). A 
+version of OpenGL is also required to run the visualisation, as is a C++ 
+compiler.
+
+Once the program's files are in a directory, navigate to the "project" folder 
+containing the files "main.cpp", "vis.cpp" and "vis.h". Once in this directory,
+input the following commands into your console to generate a makefile and 
+create an executable:
+	$ qmake -project QT+=opengl
+	$ qmake
+	$ make
+	
+Once the make has completed, the executable file "project" should appear within 
+the directory. To run the visualisation from the console, you will need to 
+specify a formatted text file as a command line argument as follows
+	./project example.txt 
+where "example.txt" is replaced by the name of the file you wish to visualise.
+
+The example file "arrangement.txt" is included in the project directory.
+
+For information on how to use the software see usermanual.pdf.

@@ -1,0 +1,19 @@
+
+Sphere data needs to be passed to the program as a text (.txt) file by command line argument, with each line of the file containing all information for one sphere. The information on each line should be seperated by a single space and presented as follows:
+
+x y z radius generation key
+
+Where x, y, and z are the centre coordinates of the sphere. x, y, z and radius should be written as real numbers, generation as an integer and the key value as a string, for example:
+
+0.0 2.5 3.0 1.0 0 exa
+ 
+Camera Controls : left click and drag rotates the camera, right click and drag moves the camera, either scroll wheel or "-" and "+" keys zoom camera.
+ 
+Scrolling the scroll wheel while an object is selected enters "selection mode". You may use this mode to scroll through all spheres on the screen and press the right mouse button to select an object. The escape key will exit scroll mode without selecting an object.
+
+Pressing the escape at any time will deselect the currently selected object and clear the text printed on the screen.
+
+Right mouse button will spawn a context menu, where information about intersections can be output to the console or the intersections themselves can be drawn on screen for individual or all objects. Object's colour or transparency properties can also be changed from this menu. Slideshow mode can be accessed from here also, where users can display objects of a specified key value one at a time or in pairs. Slideshow mode may either transition to the next slide when the space bar is pressed or after 10 seconds, depending on which option the user requests. Hitting the escape key while in keypress mode will exit slideshow mode.
+
+For further help see the user manual.
+

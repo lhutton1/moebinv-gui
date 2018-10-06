@@ -49,6 +49,10 @@ menuRelAction::menuRelAction(MoebInv::figure *f, MoebInv::ex cycle, GiNaC::lst *
     this->checkRelation = new QAction(actionTitle, this);
     this->checkRelation->setCheckable(false);
     connect(this->checkRelation, &QAction::triggered, this, &menuRelAction::checkActionHandler);
+
+    this->checkCycleMetricRelation = new QAction(actionTitle, this);
+    this->checkCycleMetricRelation->setCheckable(false);
+    connect(this->checkCycleMetricRelation, &QAction::triggered, this, &menuRelAction::checkActionCycleHandler);
 }
 
 
@@ -190,7 +194,33 @@ void menuRelAction::checkActionHandler()
     }
 
     // find the relvent relation
-    QString relationCheck = checkCycleRelation(this->cycle, checkCycle);
+    QString relationCheck = checkCycleRelation(this->cycle, checkCycle, false);
+
+    QMessageBox msgBoxInfo;
+    msgBoxInfo.setInformativeText("Relation check returned: " + relationCheck);
+    msgBoxInfo.setStyleSheet("QLabel{min-width: 400px;}");
+    msgBoxInfo.exec();
+}
+
+
+/*!
+ * \brief menuRelAction::checkActionCycleHandler Action handler to check the status of a
+ * relation on 2 cycles. First the user is prompted to enter another cycle key, then
+ * this function checks the status of this relation and outputs the result back to the user.
+ */
+void menuRelAction::checkActionCycleHandler()
+{
+    QString inputDialogValue = QInputDialog::getText(nullptr, "Input cycle label", "Cycle key:");
+    ex checkCycle = f->get_cycle_key(qPrintable(inputDialogValue));
+
+    // check that key exists
+    if (node_label(checkCycle) == "0") {
+        this->msgBox->warning(0, "Key error", "The key entered does not exist.");
+        return;
+    }
+
+    // find the relvent relation
+    QString relationCheck = checkCycleRelation(this->cycle, checkCycle, true);
 
     QMessageBox msgBoxInfo;
     msgBoxInfo.setInformativeText("Relation check returned: " + relationCheck);
@@ -261,40 +291,40 @@ void menuRelAction::createCycleRelation(const lst &params, const bool &metric)
  * \param otherCycle the other cycle entered by the user.
  * \return QString
  */
-QString menuRelAction::checkCycleRelation(const ex &thisCycle, const ex &otherCycle)
+QString menuRelAction::checkCycleRelation(const ex &thisCycle, const ex &otherCycle, const bool &metric)
 {
     QString output;
 
     switch (relType) {
         case ORTHOGONAL:
-            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_orthogonal).evalf());
+            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_orthogonal, metric).evalf());
             break;
         case FORTHOGONAL:
-            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_f_orthogonal).evalf());
+            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_f_orthogonal, metric).evalf());
             break;
         case DIFFERENT:
-            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_different).evalf());
+            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_different, metric).evalf());
             break;
         case ADIFFERENT:
-            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_adifferent).evalf());
+            output = node_label(f->check_rel(thisCycle, otherCycle, cycle_adifferent, metric).evalf());
             break;
         case REALS:
-            output = node_label(f->check_rel(thisCycle, otherCycle, coefficients_are_real).evalf());
+            output = node_label(f->check_rel(thisCycle, otherCycle, coefficients_are_real, metric).evalf());
             break;
         case TANGENT:
-            output = node_label(f->check_rel(thisCycle, otherCycle, check_tangent).evalf());
+            output = node_label(f->check_rel(thisCycle, otherCycle, check_tangent, metric).evalf());
             break;
         case PRODUCT_SIGN:
-            output = node_label(f->check_rel(thisCycle, otherCycle, product_sign).evalf());
+            output = node_label(f->check_rel(thisCycle, otherCycle, product_sign, metric).evalf());
             break;
         case STEINER_POWER:
-            output = node_label(f->measure(thisCycle, otherCycle, power_is).evalf());
+            output = node_label(f->measure(thisCycle, otherCycle, power_is, metric).evalf());
             break;
         case CYCLE_ANGLE:
-            output = node_label(f->measure(thisCycle, otherCycle, angle_is).evalf());
+            output = node_label(f->measure(thisCycle, otherCycle, angle_is, metric).evalf());
             break;
         case CYCLE_CROSS_T_DISTANCE:
-            output = node_label(f->measure(thisCycle, otherCycle, sq_cross_t_distance_is).evalf());
+            output = node_label(f->measure(thisCycle, otherCycle, sq_cross_t_distance_is, metric).evalf());
             break;
         default:
             output = "The relation could not be found. Make sure the relation has been added to the menuRelAction::checkCycleRelation() function";
@@ -382,20 +412,37 @@ QString menuRelAction::node_label(ex name)
 // Action Group //
 //////////////////
 
+/*!
+ * \brief menuRelActionGroup::menuRelActionGroup
+ * \param parent
+ *
+ * Create a new relation group. Subclassed from QActionGroup
+ */
 menuRelActionGroup::menuRelActionGroup(QObject *parent) : QActionGroup(parent)
 {
 
 }
 
+/*!
+ * \brief menuRelActionGroup::getRelActions Get the actions that have been added to
+ * the group and return as a list of menuRelAction objects.
+ * \return QList<menuRelAction *>
+ */
 QList<menuRelAction *> menuRelActionGroup::getRelActions()
 {
     return this->actions;
 }
 
+
+/*!
+ * \brief menuRelActionGroup::addRelAction Add a new action to the group.
+ * \param action action to add to the group.
+ */
 void menuRelActionGroup::addRelAction(menuRelAction *action)
 {
     // add item to action list of types 'menuRelAction'
     this->actions.append(action);
     // now add to standard QActionGroup like normal
     this->addAction(action->addRelation);
+    this->addAction(action->addCycleRelation);
 }

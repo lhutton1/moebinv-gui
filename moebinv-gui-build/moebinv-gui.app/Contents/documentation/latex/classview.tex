@@ -1,0 +1,238 @@
+\hypertarget{classview}{}\section{view Class Reference}
+\label{classview}\index{view@{view}}
+Inheritance diagram for view\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classview}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classview_a7fff213d7f38eeb2c8943609264fa518}{recenter\+View}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_a7fff213d7f38eeb2c8943609264fa518}{view\+::recenter\+View}} Recenter the view \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classview_ab1d79ebdee961d5ec07ed11f461158a5}{mouse\+Stopped}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_ab1d79ebdee961d5ec07ed11f461158a5}{view\+::mouse\+Stopped}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classview_a3eedee38e4dfa3d2fa7f30f52c36438b}\label{classview_a3eedee38e4dfa3d2fa7f30f52c36438b}} 
+void {\bfseries set\+Background\+Colour} (Q\+Color colour)
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classview_ab0e83744c774f7cb76dbfc8ce12c4186}\label{classview_ab0e83744c774f7cb76dbfc8ce12c4186}} 
+void {\bfseries highlight\+Closest\+Cycle} (Q\+PointF \mbox{\hyperlink{classpoint}{point}})
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classview_a5b500c7ca4c4631a614445bcf8c06ed8}{view}} (Q\+Widget $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_a5b500c7ca4c4631a614445bcf8c06ed8}{view\+::view}} Construct a new view. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classview_aea81f104e17ad13b12d66dabc82b2df0}{get\+Panning\+Enabled}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_aea81f104e17ad13b12d66dabc82b2df0}{view\+::get\+Panning\+Enabled}} getter for panning enabled. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classview_a78e6621aad0346c49fc9d9e0e4f268f5}{set\+Panning\+Enabled}} (const bool \&value)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_a78e6621aad0346c49fc9d9e0e4f268f5}{view\+::set\+Panning\+Enabled}} setter for panning enabled. \end{DoxyCompactList}\item 
+Q\+Pointer$<$ \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} $>$ \mbox{\hyperlink{classview_aa0b6bfa057ab5c4d8f3bd60557622533}{get\+Current\+Highlighted\+Cycle}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_aa0b6bfa057ab5c4d8f3bd60557622533}{view\+::get\+Current\+Highlighted\+Cycle}} getter for current\+Highlighted\+Cycle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classview_a69ba93a57967891ba91517b9fd50e369}{set\+Current\+Highlighted\+Cycle}} (const Q\+Pointer$<$ \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} $>$ cycle)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_a69ba93a57967891ba91517b9fd50e369}{view\+::set\+Current\+Highlighted\+Cycle}} setter for currently highlighted cycle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classview_a7d18b10e6f370227079c552df12d4c02}{wheel\+Event}} (Q\+Wheel\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_a7d18b10e6f370227079c552df12d4c02}{view\+::wheel\+Event}} Implements zooming on scroll wheel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classview_a7813d1b3e94e3c4db1ec0fa9143a1eca}{mouse\+Press\+Event}} (Q\+Mouse\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_a7813d1b3e94e3c4db1ec0fa9143a1eca}{view\+::mouse\+Press\+Event}} handle panning on mouse press. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classview_a165a6cba84a12fc10fbf4c6fee73df73}{mouse\+Move\+Event}} (Q\+Mouse\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_a165a6cba84a12fc10fbf4c6fee73df73}{view\+::mouse\+Move\+Event}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classview_a57902641e912fe7549e04cc6a360d60c}{mouse\+Release\+Event}} (Q\+Mouse\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_a57902641e912fe7549e04cc6a360d60c}{view\+::mouse\+Release\+Event}} mouse release event on view. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classview_af0f530013cb69c332de83d47d75a8fb0}{zoom\+In}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_af0f530013cb69c332de83d47d75a8fb0}{view\+::zoom\+In}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classview_a497e42c804c9937d94b373d53e163f1b}{zoom\+Out}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classview_a497e42c804c9937d94b373d53e163f1b}{view\+::zoom\+Out}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classview_ae841c1e593aa326d706d2a52fe6275ba}\label{classview_ae841c1e593aa326d706d2a52fe6275ba}} 
+double {\bfseries relative\+Scale\+Factor}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classview_a5b500c7ca4c4631a614445bcf8c06ed8}\label{classview_a5b500c7ca4c4631a614445bcf8c06ed8}} 
+\index{view@{view}!view@{view}}
+\index{view@{view}!view@{view}}
+\subsubsection{\texorpdfstring{view()}{view()}}
+{\footnotesize\ttfamily view\+::view (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{classview_a5b500c7ca4c4631a614445bcf8c06ed8}{view\+::view}} Construct a new view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & parent object to the view.\\
+\hline
+\end{DoxyParams}
+Construct a new view applying any settings. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classview_aa0b6bfa057ab5c4d8f3bd60557622533}\label{classview_aa0b6bfa057ab5c4d8f3bd60557622533}} 
+\index{view@{view}!get\+Current\+Highlighted\+Cycle@{get\+Current\+Highlighted\+Cycle}}
+\index{get\+Current\+Highlighted\+Cycle@{get\+Current\+Highlighted\+Cycle}!view@{view}}
+\subsubsection{\texorpdfstring{get\+Current\+Highlighted\+Cycle()}{getCurrentHighlightedCycle()}}
+{\footnotesize\ttfamily Q\+Pointer$<$ \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} $>$ view\+::get\+Current\+Highlighted\+Cycle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_aa0b6bfa057ab5c4d8f3bd60557622533}{view\+::get\+Current\+Highlighted\+Cycle}} getter for current\+Highlighted\+Cycle. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classview_aea81f104e17ad13b12d66dabc82b2df0}\label{classview_aea81f104e17ad13b12d66dabc82b2df0}} 
+\index{view@{view}!get\+Panning\+Enabled@{get\+Panning\+Enabled}}
+\index{get\+Panning\+Enabled@{get\+Panning\+Enabled}!view@{view}}
+\subsubsection{\texorpdfstring{get\+Panning\+Enabled()}{getPanningEnabled()}}
+{\footnotesize\ttfamily bool view\+::get\+Panning\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_aea81f104e17ad13b12d66dabc82b2df0}{view\+::get\+Panning\+Enabled}} getter for panning enabled. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classview_a165a6cba84a12fc10fbf4c6fee73df73}\label{classview_a165a6cba84a12fc10fbf4c6fee73df73}} 
+\index{view@{view}!mouse\+Move\+Event@{mouse\+Move\+Event}}
+\index{mouse\+Move\+Event@{mouse\+Move\+Event}!view@{view}}
+\subsubsection{\texorpdfstring{mouse\+Move\+Event()}{mouseMoveEvent()}}
+{\footnotesize\ttfamily void view\+::mouse\+Move\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_a165a6cba84a12fc10fbf4c6fee73df73}{view\+::mouse\+Move\+Event}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & Reimplemented event that is triggered when the mouse moves on the view. This allows panning to take place along with detecting when the mouse has stopped. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classview_a7813d1b3e94e3c4db1ec0fa9143a1eca}\label{classview_a7813d1b3e94e3c4db1ec0fa9143a1eca}} 
+\index{view@{view}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!view@{view}}
+\subsubsection{\texorpdfstring{mouse\+Press\+Event()}{mousePressEvent()}}
+{\footnotesize\ttfamily void view\+::mouse\+Press\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_a7813d1b3e94e3c4db1ec0fa9143a1eca}{view\+::mouse\+Press\+Event}} handle panning on mouse press. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & mouse event.\\
+\hline
+\end{DoxyParams}
+Checks to see if the view needs panning on a mouse press. \mbox{\Hypertarget{classview_a57902641e912fe7549e04cc6a360d60c}\label{classview_a57902641e912fe7549e04cc6a360d60c}} 
+\index{view@{view}!mouse\+Release\+Event@{mouse\+Release\+Event}}
+\index{mouse\+Release\+Event@{mouse\+Release\+Event}!view@{view}}
+\subsubsection{\texorpdfstring{mouse\+Release\+Event()}{mouseReleaseEvent()}}
+{\footnotesize\ttfamily void view\+::mouse\+Release\+Event (\begin{DoxyParamCaption}\item[{Q\+Mouse\+Event $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_a57902641e912fe7549e04cc6a360d60c}{view\+::mouse\+Release\+Event}} mouse release event on view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & mouse event.\\
+\hline
+\end{DoxyParams}
+Triggered when the mouse is released from the view. This function reimplements the existing function adding panning to it. \mbox{\Hypertarget{classview_ab1d79ebdee961d5ec07ed11f461158a5}\label{classview_ab1d79ebdee961d5ec07ed11f461158a5}} 
+\index{view@{view}!mouse\+Stopped@{mouse\+Stopped}}
+\index{mouse\+Stopped@{mouse\+Stopped}!view@{view}}
+\subsubsection{\texorpdfstring{mouse\+Stopped}{mouseStopped}}
+{\footnotesize\ttfamily void view\+::mouse\+Stopped (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\mbox{\hyperlink{classview_ab1d79ebdee961d5ec07ed11f461158a5}{view\+::mouse\+Stopped}} 
+
+Slot that is triggered when the mouse has stopped moving. This slot then emits a signal to find the closest cycle to the current mouse position. \mbox{\Hypertarget{classview_a7fff213d7f38eeb2c8943609264fa518}\label{classview_a7fff213d7f38eeb2c8943609264fa518}} 
+\index{view@{view}!recenter\+View@{recenter\+View}}
+\index{recenter\+View@{recenter\+View}!view@{view}}
+\subsubsection{\texorpdfstring{recenter\+View}{recenterView}}
+{\footnotesize\ttfamily void view\+::recenter\+View (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\mbox{\hyperlink{classview_a7fff213d7f38eeb2c8943609264fa518}{view\+::recenter\+View}} Recenter the view 
+
+Recenter the view to the default point (0, 0). \mbox{\Hypertarget{classview_a69ba93a57967891ba91517b9fd50e369}\label{classview_a69ba93a57967891ba91517b9fd50e369}} 
+\index{view@{view}!set\+Current\+Highlighted\+Cycle@{set\+Current\+Highlighted\+Cycle}}
+\index{set\+Current\+Highlighted\+Cycle@{set\+Current\+Highlighted\+Cycle}!view@{view}}
+\subsubsection{\texorpdfstring{set\+Current\+Highlighted\+Cycle()}{setCurrentHighlightedCycle()}}
+{\footnotesize\ttfamily void view\+::set\+Current\+Highlighted\+Cycle (\begin{DoxyParamCaption}\item[{const Q\+Pointer$<$ \mbox{\hyperlink{classgraphic_cycle}{graphic\+Cycle}} $>$}]{cycle }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_a69ba93a57967891ba91517b9fd50e369}{view\+::set\+Current\+Highlighted\+Cycle}} setter for currently highlighted cycle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cycle} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classview_a78e6621aad0346c49fc9d9e0e4f268f5}\label{classview_a78e6621aad0346c49fc9d9e0e4f268f5}} 
+\index{view@{view}!set\+Panning\+Enabled@{set\+Panning\+Enabled}}
+\index{set\+Panning\+Enabled@{set\+Panning\+Enabled}!view@{view}}
+\subsubsection{\texorpdfstring{set\+Panning\+Enabled()}{setPanningEnabled()}}
+{\footnotesize\ttfamily void view\+::set\+Panning\+Enabled (\begin{DoxyParamCaption}\item[{const bool \&}]{value }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_a78e6621aad0346c49fc9d9e0e4f268f5}{view\+::set\+Panning\+Enabled}} setter for panning enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classview_a7d18b10e6f370227079c552df12d4c02}\label{classview_a7d18b10e6f370227079c552df12d4c02}} 
+\index{view@{view}!wheel\+Event@{wheel\+Event}}
+\index{wheel\+Event@{wheel\+Event}!view@{view}}
+\subsubsection{\texorpdfstring{wheel\+Event()}{wheelEvent()}}
+{\footnotesize\ttfamily void view\+::wheel\+Event (\begin{DoxyParamCaption}\item[{Q\+Wheel\+Event $\ast$}]{event }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_a7d18b10e6f370227079c552df12d4c02}{view\+::wheel\+Event}} Implements zooming on scroll wheel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & Mouse wheel event.\\
+\hline
+\end{DoxyParams}
+When the scroll wheel is used the view will either zoom in or out depending on the scroll wheel direction. \mbox{\Hypertarget{classview_af0f530013cb69c332de83d47d75a8fb0}\label{classview_af0f530013cb69c332de83d47d75a8fb0}} 
+\index{view@{view}!zoom\+In@{zoom\+In}}
+\index{zoom\+In@{zoom\+In}!view@{view}}
+\subsubsection{\texorpdfstring{zoom\+In()}{zoomIn()}}
+{\footnotesize\ttfamily void view\+::zoom\+In (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_af0f530013cb69c332de83d47d75a8fb0}{view\+::zoom\+In}} 
+
+Zoom in by a constant factor. \mbox{\Hypertarget{classview_a497e42c804c9937d94b373d53e163f1b}\label{classview_a497e42c804c9937d94b373d53e163f1b}} 
+\index{view@{view}!zoom\+Out@{zoom\+Out}}
+\index{zoom\+Out@{zoom\+Out}!view@{view}}
+\subsubsection{\texorpdfstring{zoom\+Out()}{zoomOut()}}
+{\footnotesize\ttfamily void view\+::zoom\+Out (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classview_a497e42c804c9937d94b373d53e163f1b}{view\+::zoom\+Out}} 
+
+Zoom out by a constant factor. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/include/view.\+h\item 
+/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/src/view.\+cpp\end{DoxyCompactItemize}

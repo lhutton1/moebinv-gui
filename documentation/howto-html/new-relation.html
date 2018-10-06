@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <h1>How to add a new relation</h1>
+
+    <p>
+      To add a new relation we need to add a new type to the relationType enum in conf.h
+    </p>
+
+    <div class="code-block">
+      enum relationType { <br />
+        NORELATION, <br />
+        ORTHOGONAL, <br />
+        FORTHOGONAL, <br />
+        DIFFERENT, <br />
+        ADIFFERENT, <br />
+        REALS, <br />
+        TANGENT, <br />
+        TANGENT_I, <br />
+        TANGENT_O, <br />
+        STEINER_POWER, <br />
+        CYCLE_ANGLE, <br />
+        CYCLE_CROSS_T_DISTANCE, <br />
+        PRODUCT_SIGN, <br />
+        CYCLE_MOBIUS, <br />
+        CYCLE_SL2, <br />
+        <i>new relation name</i><br />
+      };
+    </div>
+
+    <p>
+      Next we need to add the relation to the context menu class (we do this by adding to the function cycleContextMenu::buildActions()):
+    </p>
+
+    <div class="code-block">
+      actions.append(new menuRelAction(this->f, this->cycle, relationList, "Test relation...", NO_PARAMS, false, TEST_RELATION));
+    </div>
+
+    <p>
+      The first 3 parameters are manditory and should not be changed. The fourth parameter is the text that will be displayed in the gui. The fith parameter affects the behavour of the relation when it is clicked (NO_PARAMS means the relation will be added directly). The sixth paramter decided whether the relation is already selected (this should be false). The seventh parameter is the relation type which we added to the relationType enum earlier. This adds the relation to the 'actions' list but it still won't be displayed. To do this we need to add the relation to the QMenu (this is done by editing cycleContextMenu::buildContextMenu()):
+    </p>
+
+    <div class="code-block">
+      relationSubMenu->addAction(actions[<i>index of relation in the list</i>]->addRelation);
+    </div>
+
+    <p>
+      Where the relation is displayed depends on where the action is added. Currently the gui has 3 sub-menus for relations: <br />
+      'relationSubMenu' = the menu to select a point metric relation, <br />
+      'relationCycleSubMenu' = the menu to select a cycle metric relation, <br />
+      'checkRelationSubMenu' = the menu to check a relation between two cycles in the point metric <br />
+      'checkRelationCycleMenu' = the menu to check a relation between two cycles in the cycle metric <br />
+    </p>
+
+    <p>
+      Next we need to add the relation behaviour. This is done by adapting the menuRelAction class. Depending on the type of relation behaviour you previously added, the relation type will need adding to the createCycleRelation(...) or createCheckCycleRelation(...) functions (for this demonstration we'll adapt the createCycleRelation function):
+    </p>
+
+    <div class="code-block">
+      void menuRelAction::createCycleRelation(const lst &params, const bool &metric) <br />
+      { <br />
+          this->mostRecentParams = params; <br />
+          <br />
+          switch (relType) { <br />
+              case ORTHOGONAL: <br />
+                  this->relation = is_orthogonal(cycle, metric); <br />
+                  break; <br />
+              (...) <br />
+              case CYCLE_SL2: <br />
+                  this->relation = sl2_transform(cycle, metric, params); <br />
+                  break; <br />
+              case TEST_RELATION: <br />
+                  this->relation = <i>add the function which returns the relation here</i> <br />
+                  break; <br />
+          } <br />
+      } <br />
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,85 @@
+This application provides a G\+UI for the moebinv package.
+
+\subsection*{Table of Contents}
+
+
+\begin{DoxyItemize}
+\item \href{#introduction}{\tt Introduction}
+\item \href{#installation}{\tt Installation}
+\item \href{#documentation}{\tt Documentation}
+\item \href{#usage}{\tt Usage}
+\end{DoxyItemize}
+
+\subsection*{Introduction}
+
+The moebinv library allows for manipulations in non euclidean geometry. This application is a gui for use with the moebinv library.
+
+\subsection*{Installation}
+
+Prerequisites\+:
+\begin{DoxyItemize}
+\item C\+LN
+\item Gi\+NaC
+\item moebinv
+\end{DoxyItemize}
+
+Installation on Mac\+:
+
+{\bfseries 1. Install Homebrew.}
+
+Paste this into a terminal\+: {\ttfamily /usr/bin/ruby -\/e \char`\"{}\$(curl -\/fs\+S\+L https\+://raw.\+githubusercontent.\+com/\+Homebrew/install/master/install)\char`\"{}}
+
+You may need to agree to the installation of Xcode.
+
+{\bfseries 2. Make sure that your mac has a G\+CC version greater than 4.\+4.}
+
+You can do this by typing {\ttfamily gcc -\/-\/version}
+
+If not excecute\+: \`{}brew install \href{https://raw.github.com/Homebrew/homebrew-dupes/master/gcc.rb}{\tt https\+://raw.\+github.\+com/\+Homebrew/homebrew-\/dupes/master/gcc.\+rb} rm -\/v /usr/bin/\{cc,gcc,c++,g++\} ln -\/sv /usr/local/bin/gcc-\/4.\+x /usr/bin/cc ln -\/sv /usr/local/bin/gcc-\/4.\+x /usr/bin/gcc ln -\/sv /usr/local/bin/c++-\/4.\+x /usr/bin/c++ ln -\/sv /usr/local/bin/g++-\/4.\+x /usr/bin/g++\`{}
+
+{\bfseries 3. Install Gi\+NaC and Cmake using homebrew\+:} {\ttfamily brew install ginac brew install cmake}
+
+{\bfseries 4. Install Moeb\+Inv}
+
+
+\begin{DoxyItemize}
+\item Download the latest version of Moeb\+Inv here\+: \href{https://sourceforge.net/p/moebinv/}{\tt https\+://sourceforge.\+net/p/moebinv/}
+\item Navigate to the src file in a terminal
+\item Type {\ttfamily make}
+\item Make sure Moeb\+Inv-\/gui can find the library files by either\+:
+\begin{DoxyItemize}
+\item Placing {\ttfamily figure.\+h} and {\ttfamily cycle.\+h} in {\ttfamily /usr/local/include} and placing {\ttfamily libfigure.\+so} and {\ttfamily libcycle.\+so} in {\ttfamily /usr/local/lib}
+\item Or by placing the files in the lib folder in the downloaded moebinv-\/gui (not yet working).
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+{\bfseries 5. Install Qt using home brew\+:} {\ttfamily brew install qt}
+
+{\bfseries 6. Install Moeb\+Inv-\/gui}
+\begin{DoxyItemize}
+\item clone the moeb\+Inv-\/gui repository from\+: \href{https://github.com/lhutton1/moebinv-gui}{\tt https\+://github.\+com/lhutton1/moebinv-\/gui} by executing\+: {\ttfamily git clone \href{https://github.com/lhutton1/moebinv-gui}{\tt https\+://github.\+com/lhutton1/moebinv-\/gui}}
+\item open a terminal in this directory or directly after executing the clone command execute {\ttfamily cd moebinv-\/gui}
+\item build the make file by executing {\ttfamily qmake}
+\item compile the application by executing {\ttfamily make}
+\item run the application by execting {\ttfamily ./moebinv-\/gui}
+\end{DoxyItemize}
+
+\subsection*{Documentation}
+
+Documentation is available here\+: ??
+
+\subsection*{Usage}
+
+Replace the contents of {\ttfamily R\+E\+A\+D\+M\+E.\+md} with your project\textquotesingle{}s\+:
+
+
+\begin{DoxyItemize}
+\item Name
+\item Description
+\item Installation instructions
+\item Usage instructions
+\item Support instructions
+\item Contributing instructions
+\end{DoxyItemize}
+
+Feel free to remove any sections that aren\textquotesingle{}t applicable to your project. 

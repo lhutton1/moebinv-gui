@@ -1,0 +1,6 @@
+This version of PyGiNaC is maintained as a Git repository at SourceForge.
+You may get the Git file tree using the command
+
+git clone git://git.code.sf.net/p/moebinv/pyginac/code moebinv-pyginac-code
+
+Feel free to send your patches to the current maintainer.

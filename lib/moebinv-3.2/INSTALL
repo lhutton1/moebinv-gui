@@ -1,0 +1,16 @@
+I do not provide an installation script or instructions, here is just
+an indication.
+
+Change the directory to ./src/ and type "make", this shall produce two
+library files for you.
+
+Then change directory to ../examples and again type "make", this shall
+compile hello-cycle simple programme. Try if it would work for you.
+
+To use 3D visualiser follow instructions in file
+cycle3D-visualiser/INSTALL
+
+If you want to have Pyhon wrapper for the library, read
+pycycle/INSTALL
+
+I hope you will figure out the rest. 

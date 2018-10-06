@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['initialisedefaultsettings',['initialiseDefaultSettings',['../class_main_window.html#a72e9fc361f05240f439fb17ff78a40cc',1,'MainWindow']]],
-  ['initmainmenu',['initMainMenu',['../class_main_window.html#ae78352e402084a7c6518e97056070677',1,'MainWindow']]],
-  ['inittreemodel',['initTreeModel',['../class_main_window.html#a3e45090789e16c49079857ab0617b239',1,'MainWindow']]]
+  ['handleintersection',['handleIntersection',['../classvis.html#a43ad888fa6478686d0cd81daa849ffd8',1,'vis']]],
+  ['hasrelation',['hasRelation',['../classmenu_rel_action.html#a5e6339dbaf4cf0dc9543afdfc5b9e15a',1,'menuRelAction']]],
+  ['helpbrowser',['helpBrowser',['../classhelp_browser.html',1,'']]],
+  ['helpdialog',['helpDialog',['../class_ui_1_1help_dialog.html',1,'Ui::helpDialog'],['../classhelp_dialog.html',1,'helpDialog']]]
 ];

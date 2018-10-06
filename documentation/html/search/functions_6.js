@@ -10,9 +10,12 @@ var searchData=
   ['getgroup',['getGroup',['../classmenu_rel_action.html#aca0baeed9c6a266d677dae8dfb25d65b',1,'menuRelAction']]],
   ['getinputlist',['getInputList',['../classmenu_rel_action.html#a8ec0134231f519695901fa4d750fab4a',1,'menuRelAction']]],
   ['getitemisgrabbed',['getItemIsGrabbed',['../classgraphic_cycle.html#a10e61352945ca9b32b83e528e2fc6853',1,'graphicCycle']]],
+  ['getkeylist',['getKeyList',['../classvis.html#a4802cc95e28174087be125f61a31ef60',1,'vis']]],
   ['getpanningenabled',['getPanningEnabled',['../classview.html#aea81f104e17ad13b12d66dabc82b2df0',1,'view']]],
   ['getparams',['getParams',['../classmenu_rel_action.html#a8da5cc4f4063d4ea465d67b0aabc57e7',1,'menuRelAction']]],
+  ['getpicked',['getPicked',['../classvis.html#a9d1f882814f73ee4e49dbeb7102b008c',1,'vis']]],
   ['getpointishighlighted',['getPointIsHighlighted',['../classgraphics_scene.html#ab84d166160c74279bae4f59c2ccac244',1,'graphicsScene']]],
+  ['getrelactions',['getRelActions',['../classmenu_rel_action_group.html#ac050bdcde34d72fc17c4fed70d2bfa6c',1,'menuRelActionGroup']]],
   ['getrelation',['getRelation',['../classmenu_rel_action.html#a34deae132c511b7e34af97585df9245c',1,'menuRelAction']]],
   ['getrelativescalefactor',['getRelativeScaleFactor',['../classgraphic_cycle.html#a80b533c2477a08f98506202d94bad7bc',1,'graphicCycle']]],
   ['getreltype',['getRelType',['../classmenu_rel_action.html#a1092ced0a224fdb4c8f5a0b12548a120',1,'menuRelAction']]],
@@ -20,5 +23,6 @@ var searchData=
   ['gettitleaction',['getTitleAction',['../classcycle_context_menu.html#a0e955d1a633d3585d11b7c193341a568',1,'cycleContextMenu']]],
   ['getvalues',['getValues',['../classmatrix4dialog.html#a4826be428cb3f2d79905aee086cc296d',1,'matrix4dialog::getValues()'],['../classmatrix8dialog.html#a74736300c5b1a4aa0291016991c7e508',1,'matrix8dialog::getValues()']]],
   ['graphiccycle',['graphicCycle',['../classgraphic_cycle.html#a89c2914fab32a0e10b2d53491535c173',1,'graphicCycle']]],
-  ['graphicsscene',['graphicsScene',['../classgraphics_scene.html#a630f565d827637e6f46f5ae2e786cd06',1,'graphicsScene']]]
+  ['graphicsscene',['graphicsScene',['../classgraphics_scene.html#a630f565d827637e6f46f5ae2e786cd06',1,'graphicsScene']]],
+  ['groupchange',['groupChange',['../classvis.html#aacae1519b8fc0799f9d3676bd35ab957',1,'vis']]]
 ];
