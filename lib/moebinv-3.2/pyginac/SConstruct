@@ -23,7 +23,7 @@ EnsurePythonVersion( 2, 2)
 
 # Set the warning level
 base.Append( CCFLAGS=['-Wall', '-W', '-Wsign-compare', '-Wconversion',
-	'-std=c++11', '-Wdisabled-optimization', '-pedantic',
+	'-std=c++14', '-Wdisabled-optimization', '-pedantic',
 	# For some reason, GiNaC::ex fails an Assignable test at a point of
 	# instantiating a std::vector< GiNaC::ex>
 	# '-D_GLIBCPP_CONCEPT_CHECKS',

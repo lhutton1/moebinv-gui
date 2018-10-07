@@ -554,9 +554,30 @@ cycle (cycle::*matrix_similarity_matrix)(const ex &, const ex &, const ex &, boo
 		 "The class describes loci of points x in R^n definded by kx^2-2<l,x>+m=0",
 		 no_init)
 		//the following constructor is wrapped in a function below (outside the class) because of lst
+#if __cplusplus >= 201703L
+		.def(init<const lst &>())
+		.def(init<const lst &, const ex &>())
+		.def(init<const lst &, const ex &, const ex &>())
+		.def(init<const lst &, const ex &, const ex &, const ex &>())
+		.def(init<const lst &, const ex &, const ex &, const ex &, const ex &>())
+#else
 		.def(init<const lst &, optional<const ex &, const ex &, const ex &, const ex &> >())
+#endif
+	 
+#if __cplusplus >= 201703L
+		.def(init<const ex &, const ex &, const ex &>())
+		.def(init<const ex &, const ex &, const ex &, const ex &>())
+#else
 		.def(init<const ex &, const ex &, const ex &, optional<const ex &> >())
+#endif
+
+#if __cplusplus >= 201703L
+		.def(init<const matrix &, const ex &>())
+		.def(init<const matrix &, const ex &, const ex &>())
+		.def(init<const matrix &, const ex &, const ex &, const ex &>())
+#else
 		.def(init<const matrix &, const ex &, optional<const ex &, const ex &> >())
+#endif
 		.def("__init__", make_constructor(do_init_with_llist_cycle,  default_call_policies(),
 										  (boost::python::arg("k1"),boost::python::arg("bpl"),boost::python::arg("m1"),
 										   boost::python::arg("metr")= -(new tensdelta)->setflag(status_flags::dynallocated))), "Inititialise a cycle from list of parameters")
@@ -660,8 +681,21 @@ cycle (cycle::*matrix_similarity_matrix)(const ex &, const ex &, const ex &, boo
 		 "derived from cycle, here are only very few specific methods for two dimensions, notably for the visualisation added.",
 		 no_init)
 		//the following constructors are wrapped in functions below (outside the class) because of lst
+#if __cplusplus >= 201703L
+		.def(init<const ex &, const ex &, const ex &>())
+		.def(init<const ex &, const ex &, const ex &, const ex &>())
+#else
 		.def(init<const ex &, const ex &, const ex &, optional<const ex &> >())
+#endif
+#if __cplusplus >= 201703L
+		.def(init<const lst &>())
+		.def(init<const lst &, const ex &>())
+		.def(init<const lst &, const ex &, const ex &>())
+		.def(init<const lst &, const ex &, const ex &, const ex &>())
+		.def(init<const lst &, const ex &, const ex &, const ex &, const ex &>())
+#else
 		.def(init<const lst &, optional<const ex &, const ex &, const ex &, const ex &> >())
+#endif
 		.def(init<const cycle &>())
 
 		.def("__init__", make_constructor(do_init_with_llist_cycle2D,  default_call_policies(),

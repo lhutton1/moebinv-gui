@@ -3916,6 +3916,12 @@ const label_string default_label=label_pos;
 @ This is the outline of the code.
 <<figure.cpp>>=
 <<license>>
+#include <iostream>
+
+#if __cplusplus >= 201703L
+  #include <filesystem>
+#endif
+
 #include "figure.h"
 
 namespace MoebInv {
@@ -5121,7 +5127,9 @@ figure::figure(const ex & Mp, const ex & Mc) : inherited(), k(realsymbol("k")), 
 	<<set point metric in figure>>
 
 @ Below are various parameters which can define a metric in the same
-way as it used to create a [[cliffordunit]] object in \GiNaC.
+way as it used to create a [[cliffordunit]] object in \GiNaC. The
+point metric is indexed by the key of the real line and the cycle
+metric---by the key of the zero-radius cycle at infinity.
 <<set point metric in figure>>=
 if (is_a<clifford>(Mp)) {
 	point_metric = clifford_unit(varidx(real_line,
@@ -5178,7 +5186,12 @@ metric, entries [[Mp]] as the diagonal elements of the matrix.
 	<<set cycle metric in figure>>
 
 @ If a metric is not supplied or is zero then we clone the point space
-metric by the rule defined in equation~\eqref{eq:int-heaviside-function}.
+metric by the rule defined in
+equation~\eqref{eq:int-heaviside-function}. The cycle metric is
+indexed by the key of the zero-radius cycle at infinity. If the same
+index as for the point metric is used, then we have an issue with
+[[figure::read_archive()]]: for some mysterious reasons cycle metric
+is always a copy of the point metric.
 <<set cycle metric in figure>>=
 	if (Mc.is_zero()) {
 		ex D=get_dim();
@@ -5186,20 +5199,20 @@ metric by the rule defined in equation~\eqref{eq:int-heaviside-function}.
 			lst l0;
 			for(int i=0; i< ex_to<numeric>(D).to_int(); ++i)
 				l0.append(-jump_fnct(-ex_to<clifford>(point_metric).get_metric(idx(i,D),idx(i,D))));
-			cycle_metric = clifford_unit(varidx(real_line, D), indexed(diag_matrix(l0), sy_symm(),
+			cycle_metric = clifford_unit(varidx(infinity, D), indexed(diag_matrix(l0), sy_symm(),
 																	   varidx(symbol("ic"), D), varidx(symbol("jc"), D)));
 
 @ If dimensionality is not integer, then the point metric is copied.
 <<set cycle metric in figure>>=
 		} else
-			cycle_metric = clifford_unit(varidx(real_line, D), indexed(point_metric.op(0), sy_symm(),
+			cycle_metric = clifford_unit(varidx(infinity, D), indexed(point_metric.op(0), sy_symm(),
 																	   varidx(symbol("ic"), D), varidx(symbol("jc"), D)));
 
 @ If the metric is supplied, we repeat the same procedure to set-up
 the metric of the cycle space as was done for point space.
 <<set cycle metric in figure>>=
 	} else if (is_a<clifford>(Mc)) {
-		cycle_metric = clifford_unit(varidx(real_line,
+		cycle_metric = clifford_unit(varidx(infinity,
 											ex_to<idx>(ex_to<clifford>(Mc).get_metric().op(1)).get_dim()),
 									 ex_to<clifford>(Mc).get_metric());
 	} else if (is_a<matrix>(Mc)) {
@@ -5207,15 +5220,15 @@ the metric of the cycle space as was done for point space.
 			throw(std::invalid_argument("figure::figure(const ex &, const ex &):"
 										" only square matrices are admitted as cycle metric"));
 
-		cycle_metric = clifford_unit(varidx(real_line, get_dim()), indexed(Mc, sy_symm(), varidx(symbol("ic"),
+		cycle_metric = clifford_unit(varidx(infinity, get_dim()), indexed(Mc, sy_symm(), varidx(symbol("ic"),
 																								 get_dim()), varidx(symbol("jc"), get_dim())));
 
 @ Other types of metric.
 <<set cycle metric in figure>>=
 	} else if (is_a<indexed>(Mc)) {
-		cycle_metric = clifford_unit(varidx(real_line, ex_to<idx>(Mc.op(1)).get_dim()), Mc);
+		cycle_metric = clifford_unit(varidx(infinity, ex_to<idx>(Mc.op(1)).get_dim()), Mc);
 	} else if (is_a<lst>(Mc)) {
-		cycle_metric=clifford_unit(varidx(real_line, Mc.nops()), indexed(diag_matrix(ex_to<lst>(Mc)), sy_symm(),
+		cycle_metric=clifford_unit(varidx(infinity, Mc.nops()), indexed(diag_matrix(ex_to<lst>(Mc)), sy_symm(),
 							varidx(symbol("ic"), Mc.nops()), varidx(symbol("jc"), Mc.nops())));
 	}
 
@@ -5312,15 +5325,23 @@ figure::figure(const char* file_name, string fig_name) : inherited(), k(realsymb
 
 	ifs >> A;
 	*this=ex_to<figure>(A.unarchive_ex(lst{infinity, real_line}, fig_name));
+	string operation_name="read";
+	<<write raw archive printout>>
+}
 
+@ We use [[c++17]] features to process file names.
+<<write raw archive printout>>=        
+#if __cplusplus >= 201703L
 	if (FIGURE_DEBUG) {
-		fn="raw-read-"+fn;
-		ofstream out1(fn.c_str());
+		std::filesystem::path file_path=std::filesystem::path(fn.c_str()),
+			file_name=std::filesystem::path("raw-"+operation_name+"-");
+		file_name+=file_path.filename();
+		ofstream out1(file_path.replace_filename(file_name));
 		A.printraw(out1);
 		out1.close();
 		out1.flush();
 	}
-}
+#endif
 
 @ \texttt{.gar} is the standard extension for \GiNaC\ archive files.
 <<add gar extension>>=
@@ -5344,13 +5365,8 @@ void figure::save(const char* file_name, const char * fig_name) const
 	out << A;
 	out.flush();
 	out.close();
-	if (FIGURE_DEBUG) {
-		fn="raw-save-"+fn;
-		ofstream out1(fn.c_str());
-		A.printraw(out1);
-		out1.close();
-		out1.flush();
-	}
+	string operation_name="save";
+	<<write raw archive printout>>
 }
 
 @
@@ -6937,8 +6953,8 @@ void figure::archive(archive_node &an) const
 	inherited::archive(an);
 	an.add_ex("real_line", real_line);
 	an.add_ex("infinity", infinity);
-	an.add_ex("point_metric", ex_to<clifford>(point_metric));
-	an.add_ex("cycle_metric", ex_to<clifford>(cycle_metric));
+	an.add_ex("point_metric", point_metric);
+	an.add_ex("cycle_metric", cycle_metric);
 	an.add_bool("float_evaluation", float_evaluation);
 
 @ [[exhashmap]] class does not have an archiving facility, thus we store it as two correponding lists.
@@ -6953,16 +6969,15 @@ void figure::archive(archive_node &an) const
 	an.add_string("info_text", info_text);
 }
 
-@
+@ The respective un-archiving function. For some unclear reasons if both point
+and cycle metrics are indexed by the same symbol, then the cyle metric
+becomes a copy of the point one.
 <<figure class>>=
 void figure::read_archive(const archive_node &an, lst &sym_lst)
 {
 	inherited::read_archive(an, sym_lst);
-	ex e;
-	an.find_ex("point_metric", e, sym_lst);
-	point_metric=ex_to<clifford>(e);
-	an.find_ex("cycle_metric", e, sym_lst);
-	cycle_metric=ex_to<clifford>(e);
+	an.find_ex("point_metric",  point_metric, sym_lst);
+	an.find_ex("cycle_metric", cycle_metric, sym_lst);
 	lst all_sym=sym_lst;
 	ex keys, cnodes;
 	an.find_ex("real_line", real_line, sym_lst);

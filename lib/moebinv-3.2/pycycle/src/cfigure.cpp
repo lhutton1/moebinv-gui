@@ -223,7 +223,7 @@ do_move_cycle(figure & F, const ex & key, const cycle & C) {
 
 PyObject*
 do_get_cycle(figure & F, const ex & key, bool use_point_metric=true) {
-	lst	obj=ex_to<lst>(F.get_cycle(key,use_point_metric));
+	lst	obj=ex_to<lst>(F.get_cycles(key,use_point_metric));
 	boost::python::list ret;
 	GiNaC::lst::const_iterator i = obj.begin();
 	GiNaC::lst::const_iterator i_end = obj.end();
@@ -468,9 +468,18 @@ ex (figure::*subs1)(const exmap &, unsigned) const = &figure::subs;
 	  .add_property("infinity", &figure::get_infinity)
 	  .def("get_infinity", &figure::get_infinity)
 	  .def(init<>())
+#if __cplusplus >= 201703L
+	  .def(init<const ex &>())
+	  .def(init<const ex &, const ex &>())
+#else
 	  .def(init<const ex &, optional<const ex &> >())
+#endif
+#if __cplusplus >= 201703L
 	  .def(init<const char* >())
+	  .def(init<const char* , string >())
+#else
 	  .def(init<const char* , optional<string> >())
+#endif
 	  .def("__init__", make_constructor(do_init_with_llist_figure),"Inititialise a figure from a Python list of metric's diagonal elemets")
 	  .def("save", &figure::save, save_overloads("Save the figure into a file"))
 	  .def("subs", subs_lst, subs_lst_overloads("Make a substitution in the figure"))
@@ -510,7 +519,7 @@ ex (figure::*subs1)(const exmap &, unsigned) const = &figure::subs;
 	  .def("move_point", move_point0, "Move a point to new location")
 	  .def("move_cycle", do_move_cycle, "Change data of a cycle at zero-level")
 	  .def("remove_cycle_node", &figure::remove_cycle_node, "Remove a cycle described by a key")
-	  .def("get_cycle_label", &figure::get_cycle_label, "Return a key for the cycle described by a string")
+	  .def("get_cycle_key", &figure::get_cycle_key, "Return a key for the cycle described by a string")
 	  .def("get_cycle", do_get_cycle, do_get_cycle_overloads("Return the cycle node for a given key"))
 	  .def("get_real_line", &figure::get_real_line, "Return a key for the real line")
 	  .def("get_infinity", &figure::get_infinity, "Return a key for the infinity")
@@ -541,6 +550,9 @@ ex (figure::*subs1)(const exmap &, unsigned) const = &figure::subs;
 	  .def("unfreeze",&figure::unfreeze, "Allow cycle in nodes to be evaluated")
 	  .def("set_float_eval",&figure::set_float_eval, "Force float evaluation of cycles parameters")
 	  .def("set_exact_eval",&figure::set_exact_eval, "Use exact arithmetics for evaluation of cycles parameters")
+	  .def("info_write",&figure::info_write, "Write information on figure")
+	  .def("info_append",&figure::info_append, "Write information on figure")
+	  .def("info_read",&figure::info_read, "Write information on figure")
 ;
 
   class_<cycle_relation, bases<basic> >
@@ -575,6 +587,9 @@ ex (figure::*subs1)(const exmap &, unsigned) const = &figure::subs;
   def("figure_ask_debug_status", &figure_ask_debug_status, "Ask if debug output is on");
   def("show_asy_on", show_asy_on, "Switch on visualisation of Asymptote output");
   def("show_asy_off", show_asy_off, "Switch off visualisation of Asymptote output");
+  boost::python::scope().attr("metric_e") = metric_e; 
+  boost::python::scope().attr("metric_p") = metric_p; 
+  boost::python::scope().attr("metric_h") = metric_h; 
 
 } // !figure_wrap()
 

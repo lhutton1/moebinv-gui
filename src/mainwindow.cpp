@@ -549,11 +549,20 @@ void MainWindow::on_actionOpen_triggered()
         this->defaultDirectoryInUse = false;
 
         // get figure metric
+        qDebug() << ex_to<numeric>(ex_to<clifford>(f.get_point_metric()).get_metric(idx(0,2),idx(0,2))
+                                   *ex_to<clifford>(f.get_point_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int();
+
+        qDebug() << ex_to<numeric>(ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(0,2),idx(0,2))
+                                   *ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int();
+
         s.setValue("pointMetric", ex_to<numeric>(ex_to<clifford>(f.get_point_metric()).get_metric(idx(0,2),idx(0,2))
           *ex_to<clifford>(f.get_point_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int());
 
         s.setValue("cycleMetric", ex_to<numeric>(ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(0,2),idx(0,2))
           *ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int());
+
+        qDebug() << s.value("pointMetric").toInt();
+        qDebug() << s.value("cycleMetric").toInt();
 
         // get figure description
         s.setValue("figureDescription", QString::fromStdString(f.info_read()));
@@ -617,6 +626,12 @@ void MainWindow::on_actionNew_triggered()
 
     changesMadeToFigure(originalFigure, this->f);
     initialiseDefaultSettings();
+
+    // reset default figure settings
+    s.setValue("pointMetric", ELLIPTIC);
+    s.setValue("cycleMetric", ELLIPTIC);
+    s.setValue("figureDescription", "no description");
+
     update();
 }
 
@@ -1405,11 +1420,6 @@ void MainWindow::initialiseDefaultSettings()
     evalTypeGroup->addAction(ui->actionExact);
     evalTypeMenu->addActions(evalTypeGroup->actions());
 
-    //apply settings to the figure
-    s.setValue("pointMetric", ELLIPTIC);
-    s.setValue("cycleMetric", ELLIPTIC);
-    f.set_metric(getMetricType(s.value("pointMetric").toInt()), getMetricType(s.value("cycleMetric").toInt()));
-
     switch (s.value("evaluationType").toInt()) {
         case EXACT:
             f.set_exact_eval();
@@ -1418,8 +1428,6 @@ void MainWindow::initialiseDefaultSettings()
             f.set_float_eval();
             break;
     }
-
-    f.info_write(qPrintable(s.value("figureDescription").toString()));
 }
 
 

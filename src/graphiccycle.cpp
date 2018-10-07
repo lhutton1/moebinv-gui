@@ -350,7 +350,7 @@ void graphicCycle::mousePressEvent(QGraphicsSceneMouseEvent *event)
  * Detect whether the mouse has been moved.
  */
 void graphicCycle::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
-    if (!this->itemIsAbleToMove)
+    if (!this->itemIsGrabbed)
         return;
 
     QGraphicsItem::mouseMoveEvent(event);

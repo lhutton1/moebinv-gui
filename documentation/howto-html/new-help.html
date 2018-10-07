@@ -1,0 +1,140 @@
+<!DOCTYPE hmtl>
+<html>
+<head>
+  <link type="text/css" rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h1>
+    How to add/edit to the help documentation
+  </h1>
+
+  <h4>
+    How to edit existing documentation:
+  </h4>
+
+  <p>
+    Find the html file that needs editing, and edit the document accordingly. If you want to add a new code block create a new div and add the class 'code-block' to it.
+  </p>
+
+  <p>
+    run the qcollectiongenerator command to rebuild the documentation:
+  </p>
+
+  <div class="code-block">
+    qcollectiongenerator help.qhcp
+  </div>
+
+  <p>
+    Then make sure the documentation is placed in the build directory at /moebinv-gui.app/Contents/documentation/ or run:
+  </p>
+
+  <div class="code-block">
+    make install
+  </div>
+
+  <p>
+    to move the contents of documentation in the project directory to the build directory automatically.
+  </p>
+
+  <h4>
+    How to add a new 'how to':
+  </h4>
+
+  <p>
+    To add a new 'how to' start by creating a new .html file in the howto-html directory. Make sure to declare the doctype and link the styles.css style sheet. Then add the page to the 'howto.qhp' file:
+  </p>
+
+  <div class="code-block">
+    ...<br />
+    &lt;toc&gt;<br />
+        &lt;section title="How to's" ref="howto-html/index.html"&gt;<br />
+            &lt;section title="Add a new menu" ref="howto-html/new-menu.html"/&gt;<br />
+            ...<br />
+            &lt;section title="Add a new or edit help section" ref="howto-html/new-help.html"/&gt;<br />
+            &lt;section title="<i>new 'how to' page</i>" ref="howto-html/<i>path to how to file</i>"/&gt;<br />
+        &lt;/section&gt;<br />
+    &lt;/toc&gt;<br />
+    ...<br />
+    &lt;files&gt;<br />
+        &lt;file&gt;howto-html/styles.css&lt;/file&gt;<br />
+        ...<br />
+        &lt;file&gt;howto-html/new-help.html&lt;/file&gt;<br />
+        &lt;file&gt;<i>path to file</i>&lt;/file&gt;<br />
+    &lt;/files&gt;<br />
+    ...
+  </div>
+
+  <p>
+    Now re-compile the .qhp file using:
+  </p>
+
+  <div class="code-block">
+    qcollectiongenerator help.qhcp
+  </div>
+
+  <p>
+    Then make sure the documentation is placed in the build directory at /moebinv-gui.app/Contents/documentation/ or run:
+  </p>
+
+  <div class="code-block">
+    make install
+  </div>
+
+  <p>
+    Running the program now should display the new help file under the 'how to' section.
+  </p>
+
+  <h4>
+    How to add a new section:
+  </h4>
+
+  <p>
+    To add a new section to the help deocumentation we first need to create a new .qhp file along with a new directory for the section.
+  </p>
+
+  <p>
+    Then we need to create the individual pages for the section using html markup as described above. Each page should have its own file, making finding and editing it later easier.
+  </p>
+
+  <p>
+    Then these files need adding to the .qhc file. To create a new .qhc file, use the qt documentation, which describes the markup and what that mark up means. (<a href="http://doc.qt.io/archives/qt-4.8/qthelp-framework.html">http://doc.qt.io/archives/qt-4.8/qthelp-framework.html</a>)
+  </p>
+
+  <p>
+    After this has been created, it needs to be added to the collection file. This file consists of a collection of the .qhp files. The next block of code shows where the file needs to be inserted in the document. The first part compiles the .qhp file creating a .qch file. The next part adds the .qch file to the collection which can then be used to build a help collection.
+  </p>
+
+  <div class="code-block">
+    &lt;QHelpCollectionProject version="1.0"&gt;<br />
+        &lt;docFiles&gt;<br />
+            &lt;generate&gt;<br />
+                &lt;file&gt;<br />
+                    &lt;input&gt;<i>path to .qhp file</i>&lt;/input&gt;<br />
+                    &lt;output&gt;<i>output file (.qch)</i>&lt;/output&gt;<br />
+                &lt;/file&gt;<br />
+            &lt;/generate&gt;<br />
+            &lt;register&gt;<br />
+                &lt;file&gt;<i>path to .qch file</i>&lt;/file&gt;<br />
+            &lt;/register&gt;<br />
+        &lt;/docFiles&gt;<br />
+    &lt;/QHelpCollectionProject&gt;
+  </div>
+
+  <p>
+    run the qcollectiongenerator command to rebuild the documentation:
+  </p>
+
+  <div class="code-block">
+    qcollectiongenerator help.qhcp
+  </div>
+
+  <p>
+    Then make sure the documentation is placed in the build directory at /moebinv-gui.app/Contents/documentation/ or run:
+  </p>
+
+  <div class="code-block">
+    make install
+  </div>
+</body>
+</html>

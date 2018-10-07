@@ -28,6 +28,12 @@ namespace pyginac {
 namespace {
 
 GiNaC::ex
+do_get_metric(const GiNaC::ex & e, const GiNaC::ex & i,  const GiNaC::ex & j, bool symmetrised = true)
+{
+	return GiNaC::ex_to<GiNaC::clifford>(e).get_metric(i, j, symmetrised);
+}
+
+GiNaC::ex
 do_dirac_trace_list(const GiNaC::ex & e, boost::python::list rll, const GiNaC::ex & trONE = 4)
 {
   GiNaC::lst l;
@@ -98,6 +104,7 @@ clifford_moebius_map7_bpl(const GiNaC::ex & a, const GiNaC::ex & b, const GiNaC:
   return GiNaC::clifford_moebius_map(a, b, c, d, P, e, rl);
 }
 
+BOOST_PYTHON_FUNCTION_OVERLOADS(get_metric_overloads, do_get_metric, 3, 4)
 BOOST_PYTHON_FUNCTION_OVERLOADS(clifford_moebius_map4_overloads, clifford_moebius_map4, 3, 4)
 BOOST_PYTHON_FUNCTION_OVERLOADS(clifford_moebius_map4_bpl_overloads, clifford_moebius_map4_bpl, 3, 4)
 BOOST_PYTHON_FUNCTION_OVERLOADS(clifford_moebius_map7_overloads, clifford_moebius_map7, 6, 7)
@@ -137,9 +144,6 @@ wrap_clifford(void)
   using GiNaC::diracgammaL;
   using GiNaC::diracgammaR;
 
-  ex (clifford::*get_metric0)() const = &clifford::get_metric;
-  ex (clifford::*get_metric3)(const ex &, const ex &, bool) const = &clifford::get_metric;
-
   class_<clifford, bases<indexed, basic> >
     ("clifford",
      "This class holds an object representing an element of the Clifford"
@@ -154,8 +158,7 @@ wrap_clifford(void)
     .def(init<const ex &, const ex&, const ex &, unsigned char>())
     .def("get_representation_label", &clifford::get_representation_label)
     .def("same_metric", &clifford::same_metric)
-    .def("get_metric", get_metric0)
-    .def("get_metric", get_metric3)
+    .def("get_metric", do_get_metric, get_metric_overloads("Get metric of the clifford unit"))
     ;
 
   class_<diracone, bases<tensor, basic> >
