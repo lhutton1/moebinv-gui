@@ -31,6 +31,9 @@ private slots:
     void on_parabolicCycleButton_clicked(bool checked);
     void on_hyperbolicCycleButton_clicked(bool checked);
 
+signals:
+    void metricChanged();
+
 private:
     QSettings s;
     Ui::propertiesDialog *ui;

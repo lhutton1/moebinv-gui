@@ -43,6 +43,15 @@ QString labels::genNextLabel()
     return lblString;
 }
 
+
+/*!
+ * \brief labels::genNextSymbol generate the next symbol, the output of which is
+ * based on the current state of the labels setting (manual / automatic).
+ *
+ * \param nextSymbol the next automatic symbol in the list.
+ * \param assignName whether of not a name is waiting to be assigned.
+ * \return  GiNaC::symbol
+ */
 GiNaC::symbol labels::genNextSymbol(GiNaC::ex nextSymbol, bool assignName)
 {
     QString nextLabel = this->genNextLabel();
@@ -83,11 +92,20 @@ void labels::advanceLabel() {
     }
 }
 
+
+/*!
+ * \brief labels::getManualName get the user to input a name for the cycle manually
+ * by displaying a standard text dialog.
+ *
+ * \return QString.
+ */
 QString labels::getManualName()
 {
     return QInputDialog::getText(nullptr, "Label name", "Enter label name:");
 }
 
+
+// REMOVE...
 QString labels::node_label(GiNaC::ex name) // REMOVE
 {
     std::ostringstream drawing;

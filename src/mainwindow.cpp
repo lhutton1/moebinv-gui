@@ -85,6 +85,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionUser_Manual, &QAction::triggered, this->applicationHelpDialog, &helpDialog::show);
     connect(ui->actionProperties, &QAction::triggered, this->propDialog, &propertiesDialog::show);
     connect(ui->actionSettings, &QAction::triggered, this->settingDialog, &settingsDialog::show);
+    connect(this->propDialog, &propertiesDialog::metricChanged, this, &MainWindow::changeMetric);
 
     initTreeModel();
     initialiseDefaultSettings();
@@ -404,7 +405,6 @@ void MainWindow::findCycleInTree(const GiNaC::ex &cycle)
     );
 
     for (const auto &item : itemList) {
-        QStandardItem *parent = item->parent();
         ui->treeView->setCurrentIndex(item->index());
     }
 }
@@ -445,6 +445,12 @@ void MainWindow::on_actionSave_triggered()
     this->setWindowTitle(this->saveDirectory.dirName() + " - moebinv-gui");
 }
 
+
+/*!
+ * \brief MainWindow::getMetricType get the metric type as represented in moebinv.
+ * \param metric integer representic a metric type.
+ * \return GiNaC::ex
+ */
 GiNaC::ex MainWindow::getMetricType(const int &metric) {
     switch (metric) {
         case ELLIPTIC:
@@ -456,7 +462,11 @@ GiNaC::ex MainWindow::getMetricType(const int &metric) {
         case HYPERBOLIC:
             return metric_h;
             break;
+        default:
+            return ex();
+            break;
     }
+    return ex();
 }
 
 
@@ -549,20 +559,11 @@ void MainWindow::on_actionOpen_triggered()
         this->defaultDirectoryInUse = false;
 
         // get figure metric
-        qDebug() << ex_to<numeric>(ex_to<clifford>(f.get_point_metric()).get_metric(idx(0,2),idx(0,2))
-                                   *ex_to<clifford>(f.get_point_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int();
-
-        qDebug() << ex_to<numeric>(ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(0,2),idx(0,2))
-                                   *ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int();
-
         s.setValue("pointMetric", ex_to<numeric>(ex_to<clifford>(f.get_point_metric()).get_metric(idx(0,2),idx(0,2))
           *ex_to<clifford>(f.get_point_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int());
 
         s.setValue("cycleMetric", ex_to<numeric>(ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(0,2),idx(0,2))
           *ex_to<clifford>(f.get_cycle_metric()).get_metric(idx(1,2),idx(1,2)).eval()).to_int());
-
-        qDebug() << s.value("pointMetric").toInt();
-        qDebug() << s.value("cycleMetric").toInt();
 
         // get figure description
         s.setValue("figureDescription", QString::fromStdString(f.info_read()));
@@ -1439,6 +1440,7 @@ void MainWindow::initialiseDefaultSettings()
 void MainWindow::on_actionEllipticPointMetric_triggered()
 {
     s.setValue("pointMetric", ELLIPTIC);
+    changeMetric();
     ui->graphicsView->viewport()->update();
 }
 
@@ -1451,6 +1453,7 @@ void MainWindow::on_actionEllipticPointMetric_triggered()
 void MainWindow::on_actionParabolicPointMetric_triggered()
 {
     s.setValue("pointMetric", PARABOLIC);
+    changeMetric();
     ui->graphicsView->viewport()->update();
 }
 
@@ -1463,6 +1466,7 @@ void MainWindow::on_actionParabolicPointMetric_triggered()
 void MainWindow::on_actionHyperbolicPointMetric_triggered()
 {
     s.setValue("pointMetric", HYPERBOLIC);
+    changeMetric();
     ui->graphicsView->viewport()->update();
 }
 
@@ -1475,6 +1479,7 @@ void MainWindow::on_actionHyperbolicPointMetric_triggered()
 void MainWindow::on_actionEllipticCycleMetric_triggered()
 {
     s.setValue("cycleMetric", ELLIPTIC);
+    changeMetric();
     ui->graphicsView->viewport()->update();
 }
 
@@ -1487,6 +1492,7 @@ void MainWindow::on_actionEllipticCycleMetric_triggered()
 void MainWindow::on_actionParabolicCycleMetric_triggered()
 {
     s.setValue("cycleMetric", PARABOLIC);
+    changeMetric();
     ui->graphicsView->viewport()->update();
 }
 
@@ -1499,6 +1505,7 @@ void MainWindow::on_actionParabolicCycleMetric_triggered()
 void MainWindow::on_actionHyperbolicCycleMetric_triggered()
 {
     s.setValue("cycleMetric", HYPERBOLIC);
+    changeMetric();
     ui->graphicsView->viewport()->update();
 }
 
@@ -1588,6 +1595,19 @@ void MainWindow::on_actionExact_triggered()
 }
 
 
+/*!
+ * \brief MainWindow::changeMetric
+ *
+ * Set the metric on the figure once it has been changed in properties
+ * or the menu line.
+ */
+void MainWindow::changeMetric()
+{
+    f.set_metric(getMetricType(s.value("pointMetric").toInt()), getMetricType(s.value("cycleMetric").toInt()));
+    update();
+}
+
+
 // REMOVE...
 QString MainWindow::node_compact_string(GiNaC::ex name)
 {
@@ -1608,7 +1628,3 @@ QString MainWindow::node_label(GiNaC::ex name)
 
     return QString::fromStdString(dr);
 }
-
-
-
-

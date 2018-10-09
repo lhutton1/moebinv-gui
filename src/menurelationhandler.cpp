@@ -147,7 +147,7 @@ void menuRelAction::actionHandler()
     }
 
     // build the required relation.
-    createCycleRelation(params, true);
+    createCycleRelation(params, false);
     emit handleRelation(true);
 }
 
@@ -172,7 +172,7 @@ void menuRelAction::cycleMetricActionHandler()
     }
 
     // build the required relation.
-    createCycleRelation(params, false);
+    createCycleRelation(params, true);
     emit handleRelation(false);
 }
 

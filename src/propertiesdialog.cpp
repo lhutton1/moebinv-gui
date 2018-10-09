@@ -82,36 +82,48 @@ void propertiesDialog::on_exactButton_clicked(bool checked)
 
 void propertiesDialog::on_ellipticPointButton_clicked(bool checked)
 {
-    if (checked)
+    if (checked) {
         s.setValue("pointMetric", ELLIPTIC);
+        emit metricChanged();
+    }
 }
 
 void propertiesDialog::on_parabolicPointButton_clicked(bool checked)
 {
-    if (checked)
+    if (checked) {
         s.setValue("pointMetric", PARABOLIC);
+        emit metricChanged();
+    }
 }
 
 void propertiesDialog::on_hyperbolicPointButton_clicked(bool checked)
 {
-    if (checked)
+    if (checked) {
         s.setValue("pointMetric", HYPERBOLIC);
+        emit metricChanged();
+    }
 }
 
 void propertiesDialog::on_ellipticCycleButton_clicked(bool checked)
 {
-    if (checked)
+    if (checked) {
         s.setValue("cycleMetric", ELLIPTIC);
+        emit metricChanged();
+    }
 }
 
 void propertiesDialog::on_parabolicCycleButton_clicked(bool checked)
 {
-    if (checked)
+    if (checked) {
         s.setValue("cycleMetric", PARABOLIC);
+        emit metricChanged();
+    }
 }
 
 void propertiesDialog::on_hyperbolicCycleButton_clicked(bool checked)
 {
-    if (checked)
+    if (checked) {
         s.setValue("cycleMetric", HYPERBOLIC);
+        emit metricChanged();
+    }
 }

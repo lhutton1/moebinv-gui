@@ -93,6 +93,7 @@ private slots:
     void changesMadeToFigure(const MoebInv::figure &originalFigure, const MoebInv::figure &changedFigure);
     void saveDirectoryHasChanged();
     void replaceFigure(const MoebInv::figure &replacementFigure);
+    void changeMetric();
 
     // ui slots
     void on_actionSave_triggered();

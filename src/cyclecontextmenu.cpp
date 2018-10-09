@@ -194,12 +194,11 @@ void cycleContextMenu::buildContextMenu()
     QMenu *checkRelationSubMenu = new QMenu(QString("Check relation in point metric to ") + this->getTitleAction()->text());
     QMenu *checkCycleRelationSubMenu = new QMenu(QString("Check relation in cycle metric to ") + this->getTitleAction()->text());
 
-    this->addAction(getTitleAction());
+    this->addMenu(relationCycleSubMenu);
+    this->addMenu(checkCycleRelationSubMenu);
     this->addSeparator();
     this->addMenu(relationSubMenu);
-    this->addMenu(relationCycleSubMenu);
     this->addMenu(checkRelationSubMenu);
-    this->addMenu(checkCycleRelationSubMenu);
     this->addSeparator();
 
     // change colour preference
