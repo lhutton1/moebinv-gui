@@ -101,11 +101,6 @@ void setDefaultSettings()
     s.setValue("debugBoundingRect", false);
 
     /*!
-     * Set whether the gui displays only real cycles.
-     */
-    s.setValue("realCycles", true);
-
-    /*!
      * Set default the name of the figure.
      */
     s.setValue("figureName", "unnamed");
@@ -133,7 +128,7 @@ void setDefaultSettings()
     s.setValue("defaultSaveDirectory", defaultPath.absolutePath());
 
     /*!
-     * Set whether the only relas relation is applied automatically to 'this'.
+     * Set whether the only reals relation is applied automatically to 'this'.
      */
     s.setValue("automaticOnlyReals", true);
 

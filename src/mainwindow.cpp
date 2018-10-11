@@ -301,12 +301,10 @@ void MainWindow::update()
     cyclesMap.clear();
     initMainMenu();
 
-    ex keys = f.get_all_keys_sorted(REAL_LINE_GEN);
-
     // for all items in the figure
-    for (lst::const_iterator key =ex_to<lst>(keys).begin(); key != ex_to<lst>(keys).end(); ++key) {
+    for (auto key: f.get_all_keys_sorted(REAL_LINE_GEN)) {
         // get cycle
-        ex cycle = *key;
+        ex cycle = key;
 
         // check cycle generation
         if (ex_to<numeric>(f.get_generation(cycle)).to_int() == 0)
@@ -335,16 +333,21 @@ void MainWindow::update()
         // add to map
         cyclesMap[node_label(cycle)] = QPointer<graphicCycle>(c);
 
+        // add item to the scene
         scene->addItem(c);
 
         // add cycle to the tree
         addToTree(cycle, d.colour);
-
         connect(c, &graphicCycle::findCycleInTree, this, &MainWindow::findCycleInTree);
-
-        buildRelationStatus();
     }
 
+    // add the only reals cycle relation if automatic is selected, then build the relation status bar
+    if (s.value("automaticOnlyReals").toBool()) {
+        relationList.append(lst{nextSymbol, REALS, only_reals(nextSymbol), lst{}});
+    }
+    buildRelationStatus();
+
+    // add all items to the tree
     addToTree(f.get_infinity(), Qt::black);
 }
 
@@ -1117,9 +1120,9 @@ void MainWindow::on_actionCreate_Cycle_triggered()
     }
 
     // only real cycles
-    if (s.value("realCycles").toBool()) {
-        relationList.append(lst{lblGen->unnamedSymbol, REALS, only_reals(nextSymbol), lst{}});
-    }
+    //if (s.value("automaticOnlyReals").toBool()) {
+    //    relationList.append(lst{lblGen->unnamedSymbol, REALS, only_reals(nextSymbol), lst{}});
+    //}
 
     createCycle();
 }

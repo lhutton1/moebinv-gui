@@ -140,7 +140,7 @@ void cycleContextMenu::amendRelationList(const bool &metric)
         }
     }
 
-    // check whether the cycle triggered needs adding or removing.
+    // check whether the action triggered needs adding or removing.
     if (actionTriggered->hasRelation()) {
         if ((metric && actionTriggered->addRelation->isChecked()) ||
                 (!metric && actionTriggered->addCycleRelation->isChecked())) {
