@@ -126,18 +126,6 @@ void setDefaultSettings()
     s.setValue("backgroundColour", QColor(255, 255, 255));
 
     /*!
-     * The main windows position.
-     *
-     * A null value will mean that the OS uses its window manager to decide.
-     */
-    s.setValue("mainWindowPosition", 0);
-
-    /*!
-     * The main windows size.
-     */
-    s.setValue("mainWindowSize", 0);
-
-    /*!
      * The default save directory for .gar files.
      */
     QDir defaultPath = QDir(QStandardPaths::writableLocation(
@@ -164,7 +152,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("moebinv-gui");
     QCoreApplication::setOrganizationDomain("moebinv-gui.com");
     QCoreApplication::setApplicationName("moebinv-gui");
-
     setDefaultSettings();
 
     MainWindow w;

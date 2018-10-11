@@ -20,6 +20,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // when the window is created, return to the size that it was before closing
+    this->resize(s.value("mainwindow-size", QSize(1000, 600)).toSize());
+    this->move(s.value("mainwindow-pos", QPoint(200, 200)).toPoint());
+
     // fixes qt5.1 bug that causes dock to snap back to original size
     // https://bugreports.qt.io/browse/QTBUG-65592
     this->resizeDocks({ui->dockWidgetRight}, {200}, Qt::Horizontal);
@@ -98,6 +102,10 @@ MainWindow::MainWindow(QWidget *parent) :
  */
 MainWindow::~MainWindow()
 {
+    // save window position before destroying
+    s.setValue("mainwindow-size", this->size());
+    s.setValue("mainwindow-pos", this->pos());
+
     delete ui;
 }
 
