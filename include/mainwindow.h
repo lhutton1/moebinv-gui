@@ -94,6 +94,7 @@ private slots:
     void saveDirectoryHasChanged();
     void replaceFigure(const MoebInv::figure &replacementFigure);
     void changeMetric();
+    void treeViewClicked(const QModelIndex &index);
 
     // ui slots
     void on_actionSave_triggered();

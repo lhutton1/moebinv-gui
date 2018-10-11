@@ -90,6 +90,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionProperties, &QAction::triggered, this->propDialog, &propertiesDialog::show);
     connect(ui->actionSettings, &QAction::triggered, this->settingDialog, &settingsDialog::show);
     connect(this->propDialog, &propertiesDialog::metricChanged, this, &MainWindow::changeMetric);
+    connect(ui->treeView, &QTreeView::clicked, this, &MainWindow::treeViewClicked);
 
     initTreeModel();
     initialiseDefaultSettings();
@@ -684,6 +685,32 @@ void MainWindow::onCustomContextMenu(const QPoint &point)
             menus[1]->exec(ui->treeView->viewport()->mapToGlobal(point));
     }
 }
+
+
+/*!
+ * \brief MainWindow::treeViewClicked Called when the tree view is clicked.
+ * Highlights a cycle on the scene when its counterpart is clicked on the tree view.
+ *
+ * \param index index that was clicked in the tree view.
+ */
+void MainWindow::treeViewClicked(const QModelIndex &index)
+{
+    QStandardItem *item = model->itemFromIndex(index);
+
+    // make sure the place clicked on the tree view is an item.
+    if (item == nullptr)
+        return;
+
+    if (!item->parent() || !item->parent()->hasChildren())
+        return;
+
+    // get the cycle linked to the item and set its hover.
+    QString itemText = item->parent()->child(item->row())->text();
+    QPointer<graphicCycle> cycleClicked = cyclesMap[itemText];
+    scene->unHighlightCycle();
+    cycleClicked->setHover();
+}
+
 
 
 /*!
