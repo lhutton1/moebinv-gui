@@ -54,7 +54,8 @@ SOURCES += \
         src/settingsdialog.cpp \
         src/figureundocommand.cpp \
         src/propertiesdialog.cpp \
-        src/helpdialog.cpp
+        src/helpdialog.cpp \
+        src/cstyledialog.cpp
 
 HEADERS += \
         include/conf.h \
@@ -76,7 +77,8 @@ HEADERS += \
         include/settingsdialog.h \
         include/figureundocommand.h \
         include/propertiesdialog.h \
-        include/helpdialog.h
+        include/helpdialog.h \
+        include/cstyledialog.h
 
 FORMS += \
         forms/mainwindow.ui \
@@ -85,4 +87,5 @@ FORMS += \
         forms/definecycledialog.ui \
         forms/settingsdialog.ui \
         forms/propertiesdialog.ui \
-        forms/helpdialog.ui
+        forms/helpdialog.ui \
+        forms/cstyledialog.ui

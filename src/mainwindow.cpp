@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
     this->menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
-    this->menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, false, true);
+    this->menus[2] = new cycleContextMenu(&f, nextSymbol, &relationList, true);
     buildToolBar();
 
     this->lblGen = new labels(&this->f);

@@ -1,6 +1,11 @@
 #ifndef GRAPHICCYCLE_H
 #define GRAPHICCYCLE_H
 
+class point;
+class circle;
+class line;
+class cycleContextMenu;
+
 #include <QSettings>
 #include <QtMath>
 #include <QPainter>
@@ -77,6 +82,7 @@ public:
     QMatrix stableMatrix(const QMatrix &matrix, const QPointF &p);
     bool setCycleAsy(const GiNaC::ex &new_cycle, const struct cycleStyleData &data);
     QString node_label(GiNaC::ex name);
+    void setCycleStyle(const struct cycleStyleData &data);
 
 public slots:
     void setHover();

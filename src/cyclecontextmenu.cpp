@@ -42,9 +42,10 @@ cycleContextMenu::cycleContextMenu(figure *f, ex cycle, lst *relationList, bool 
     this->isDelete = isDelete;
     this->isThis = isThis;
     this->showEditMenu = showEditMenu;
-
-    this->colourDialog = new QColorDialog();
     this->defineDialog = new defineCycleDialog();
+    this->cycleStyleDialog = new cStyleDialog(this, &this->cycleData);
+
+    connect(this->cycleStyleDialog, &cStyleDialog::updateCycleData, this, &cycleContextMenu::updateCycleData);
 
     // build the context menu
     this->buildActions();
@@ -202,9 +203,7 @@ void cycleContextMenu::buildContextMenu()
     this->addSeparator();
 
     // change colour preference
-    this->addAction(changeColour);
-    this->addAction(changeStyle);
-    this->addAction(changeWeight);
+    this->addAction(cycleStyle);
 
     // add edit action if needed
     if (this->showEditMenu) {
@@ -323,67 +322,21 @@ void cycleContextMenu::buildActions()
     for (int x = 0; x < actions.length(); x++)
         connect(actions[x], &menuRelAction::handleRelation, this, &cycleContextMenu::amendRelationList);
 
-    // change colour action
-    changeColour = new QAction("Change Colour...", this);
-    changeStyle = new QAction("Change Style...", this);
-    changeWeight = new QAction("Change Width...", this);
+    //edit action
+    if (this->showEditMenu) {
+        edit = new QAction("Edit...");
+        connect(edit, &QAction::triggered, this, &cycleContextMenu::editPoint);
+    }
 
-    connect(changeColour, &QAction::triggered, this, &cycleContextMenu::displayColourDialog);
-    connect(colourDialog, &QColorDialog::colorSelected, this, &cycleContextMenu::colourSelected);
-    connect(changeStyle, &QAction::triggered, this, &cycleContextMenu::displayStyleDialog);
-    connect(changeWeight, &QAction::triggered, this, &cycleContextMenu::displayWeightDialog);
+    // cycle style dialog
+    this->cycleStyle = new QAction("Set cycle style...");
+    connect(this->cycleStyle, &QAction::triggered, this, &cycleContextMenu::showStyleDialog);
 
     // delete cycle action
     if (this->isDelete) {
         deletePoint = new QAction("Delete");
         connect(deletePoint, &QAction::triggered, this, &cycleContextMenu::confirmDeleteCycle);
     }
-
-    //edit action
-    if (this->showEditMenu) {
-        edit = new QAction("Edit...");
-        connect(edit, &QAction::triggered, this, &cycleContextMenu::editPoint);
-    }
-}
-
-/*!
- * \brief cycleContextMenu::displayColourDialog Displays the colour dialog so the
- * user can select a colour for the cycle.
- */
-void cycleContextMenu::displayColourDialog()
-{
-    colourDialog->show();
-}
-
-
-/*!
- * \brief cycleContextMenu::displayStyleDialog Display the style dialog so the
- * user can select a style for the cycle.
- */
-void cycleContextMenu::displayStyleDialog()
-{
-    QStringList items;
-    items << "Solid" << "Dotted" << "Dashed";
-    QString item = QInputDialog::getItem(nullptr, "Select line style", "Style:", items, 0, false);
-
-    if (item == "Solid") {
-       emit styleSelected(SOLID);
-    } else if (item == "Dotted") {
-       emit styleSelected(DOTTED);
-    } else if (item == "Dashed") {
-       emit styleSelected(DASHED);
-    }
-}
-
-
-/*!
- * \brief cycleContextMenu::displayWeightDialog Display the weight dialog so the
- * user can select a weight for the cycle.
- */
-void cycleContextMenu::displayWeightDialog()
-{
-    double weight = QInputDialog::getDouble(nullptr, "Select line weight", "Weight (pt):", 0, 0, 20);
-    emit weightSelected(weight);
 }
 
 
@@ -423,6 +376,24 @@ void cycleContextMenu::editPoint()
     }
 }
 
+void cycleContextMenu::showStyleDialog()
+{
+    if (cycleStyleDialog->exec() == QDialog::Accepted) {
+        struct cycleStyleData data;
+        data.isDefault = false;
+        data.colour = cycleStyleDialog->getColour();
+        data.lineStyle = cycleStyleDialog->getStyle();
+        data.lineWidth = cycleStyleDialog->getWeight();
+
+        emit cycleStyleChanged(data);
+    }
+}
+
+void cycleContextMenu::updateCycleData()
+{
+    this->cycleData = this->getCycleData(this->cycle);
+}
+
 
 //REMOVE.....
 QString cycleContextMenu::node_label(ex name)
@@ -432,5 +403,75 @@ QString cycleContextMenu::node_label(ex name)
     string dr = drawing.str().c_str();
 
     return QString::fromStdString(dr);
+}
+
+/*!
+ * \brief MainWindow::getCycleData get the cycles appearance data.
+ * \param cycle cycle to get data from
+ * \return struct cycleStyleData
+ *
+ * Get the cycle data stored as ASY. This function splits a string into 3 different
+ * components: colour, style and width.
+ */
+struct cycleStyleData cycleContextMenu::getCycleData(const ex &cycle)
+{
+    QString style;
+    QStringList styleList;
+    QString colour, lineWidth, lineStyle;
+    struct cycleStyleData data;
+
+    style = QString::fromStdString(f->get_asy_style(cycle));
+
+    // construct regular expressions to identify each element
+    QRegularExpression rgbRegex("^rgb\\((0|0\\.\\d+|1|1\\.0*|\\.\\d+),\\s*(0|0\\.\\d+|1|1\\.0*|\\.\\d+),\\s*(0|0\\.\\d+|1|1\\.0*|\\.\\d+)\\)$",
+        QRegularExpression::CaseInsensitiveOption);
+    QRegularExpression lineStyleRegex("^(solid|dotted|dashed)$",
+        QRegularExpression::CaseInsensitiveOption);
+    QRegularExpression lineWidthRegex("^(\\d+\\.?\\d*pt)$",
+        QRegularExpression::CaseInsensitiveOption);
+
+    styleList = style.split("+");
+
+    // assign strings
+    for (auto item : styleList) {
+        if (rgbRegex.match(item).hasMatch())
+            colour = item;
+        else if (lineStyleRegex.match(item).hasMatch())
+            lineStyle = item;
+        else if (lineWidthRegex.match(item).hasMatch())
+            lineWidth = item;
+    }
+
+    // check to make sure that each element string has been assigned
+    if (colour.isNull() || colour.isEmpty() ||
+        lineWidth.isNull() || lineWidth.isEmpty() ||
+        lineStyle.isNull() || lineStyle.isEmpty()) {
+
+        // set defaults
+        data.colour = s.value("defaultGraphicsColour").value<QColor>();
+        data.lineStyle = s.value("defaultLineStyle").toInt();
+        data.lineWidth = s.value("defaultLineWidth").toDouble();
+
+        return data;
+    }
+
+    // assign line style to data
+    if (lineStyle == "solid")
+        data.lineStyle = SOLID;
+    else if (lineStyle == "dotted")
+        data.lineStyle = DOTTED;
+    else if (lineStyle == "dashed")
+        data.lineStyle = DASHED;
+
+    // assign line width to data
+    lineWidth.chop(2);
+    data.lineWidth = lineWidth.toDouble();
+
+    // assign colour to data
+    colour.chop(1);
+    colour.remove(0, 4);
+    QStringList rgbList = colour.split(",");
+    data.colour = QColor(rgbList[0].toDouble() * 255, rgbList[1].toDouble() * 255, rgbList[2].toDouble() * 255);
+    return data;
 }
 

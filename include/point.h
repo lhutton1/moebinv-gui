@@ -8,10 +8,12 @@
 
 #include <figure.h>
 
-#include "graphiccycle.h"
+//#include "graphiccycle.h"
 #include "conf.h"
 
 class graphicCycle;
+
+#include "graphicCycle.h"
 
 class point : public QObject, public QGraphicsItem
 {

@@ -8,10 +8,10 @@
 
 #include <figure.h>
 
+class graphicCycle;
+
 #include "graphiccycle.h"
 #include "conf.h"
-
-class graphicCycle;
 
 class line : public QObject, public QGraphicsItem
 {

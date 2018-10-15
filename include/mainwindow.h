@@ -25,7 +25,6 @@
 
 #include "scene.h"
 #include "labels.h"
-#include "graphiccycle.h"
 #include "conf.h"
 #include "view.h"
 #include "treemodel.h"
@@ -34,6 +33,7 @@
 #include "figureundocommand.h"
 #include "propertiesdialog.h"
 #include "helpdialog.h"
+#include "graphiccycle.h"
 
 namespace Ui {
 class MainWindow;

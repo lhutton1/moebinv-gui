@@ -38,9 +38,7 @@ graphicCycle::graphicCycle(figure *f, ex c, double *relativeScaleFactor, cycleCo
     else if (styleData.lineStyle == DASHED)
         pen->setStyle(Qt::DashLine);
 
-    connect(menu, &cycleContextMenu::colourSelected, this, &graphicCycle::setColour); // REMOVE
-    connect(menu, &cycleContextMenu::weightSelected, this, &graphicCycle::setLineWidth);
-    connect(menu, &cycleContextMenu::styleSelected, this, &graphicCycle::setLineStyle);
+    connect(menu, &cycleContextMenu::cycleStyleChanged, this, &graphicCycle::setCycleStyle);
 
     // create the shape and add the necessary child graphicsItems.
     buildShape();
@@ -136,6 +134,12 @@ void graphicCycle::setLineStyle(int style)
     this->styleData.lineStyle = style;
     this->styleData.isDefault = false;
     setCycleAsy(this->cycle, this->styleData);
+    emit sceneInvalid();
+}
+
+void graphicCycle::setCycleStyle(const struct cycleStyleData &data)
+{
+    setCycleAsy(this->cycle, data);
     emit sceneInvalid();
 }
 

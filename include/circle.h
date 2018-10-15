@@ -1,6 +1,7 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
+class graphicCycle;
 #include <QSettings>
 #include <QGraphicsItem>
 #include <QPainter>
@@ -9,8 +10,6 @@
 
 #include "graphiccycle.h"
 #include "conf.h"
-
-class graphicCycle;
 
 class circle : public QObject, public QGraphicsItem
 {
