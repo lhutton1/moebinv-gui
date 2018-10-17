@@ -107,6 +107,9 @@ MainWindow::~MainWindow()
     s.setValue("mainwindow-size", this->size());
     s.setValue("mainwindow-pos", this->pos());
 
+    // flag to say that tools/settings have been saved
+    s.setValue("defaultsInitialised", true);
+
     delete ui;
 }
 
@@ -1146,11 +1149,6 @@ void MainWindow::on_actionCreate_Cycle_triggered()
         return;
     }
 
-    // only real cycles
-    //if (s.value("automaticOnlyReals").toBool()) {
-    //    relationList.append(lst{lblGen->unnamedSymbol, REALS, only_reals(nextSymbol), lst{}});
-    //}
-
     createCycle();
 }
 
@@ -1467,6 +1465,9 @@ void MainWindow::initialiseDefaultSettings()
             f.set_float_eval();
             break;
     }
+
+    // set scene background colour
+    ui->graphicsView->setBackgroundBrush(QBrush(s.value("backgroundColour").value<QColor>(), Qt::SolidPattern));
 }
 
 

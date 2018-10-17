@@ -49,7 +49,7 @@ void settingsDialog::update()
     if (s.value("automaticOnlyReals").toBool())
         ui->onlyRealsTrue->setChecked(true);
     else
-        ui->onlyRealsFalse->setChecked(false);
+        ui->onlyRealsFalse->setChecked(true);
 
     // set default directory
     QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
@@ -103,23 +103,19 @@ void settingsDialog::on_pushButton_3_pressed()
 
 void settingsDialog::on_onlyRealsTrue_clicked(bool checked)
 {
-    if (checked)
-        s.setValue("automaticOnlyReals", true);
-
+    s.setValue("automaticOnlyReals", true);
     emit sceneInvalid();
 }
 
 void settingsDialog::on_onlyRealsFalse_clicked(bool checked)
 {
-    if (checked)
-        s.setValue("automaticOnlyReals", false);
-
+    s.setValue("automaticOnlyReals", false);
     emit sceneInvalid();
 }
 
 void settingsDialog::on_defaultPathLineEdit_textEdited(const QString &arg1)
 {
-    s.setValue("defaultSaveDirectory", QDir(ui->defaultPathLineEdit->text()).absolutePath());
+    s.setValue("defaultSaveDirectory", QDir(arg1).absolutePath());
     emit saveDirectoryHasChanged();
 }
 
@@ -129,6 +125,7 @@ void settingsDialog::on_pushButton_4_clicked()
 
     if (filePath.absolutePath() != ".") {
         ui->defaultPathLineEdit->setText(filePath.absolutePath());
+        s.setValue("defaultSaveDirectory", filePath.absolutePath());
         ui->defaultPathLineEdit->selectAll();
     }
 }

@@ -40,11 +40,6 @@ void setDefaultSettings()
     s.setValue("pointSize", 3);
 
     /*!
-     * Sets the thickness of lines drawn in the scene.
-     */
-    s.setValue("defaultLineWidth", 2);
-
-    /*!
      * Sets the size of the scene before it expands.
      * NOTE: Increasing this by too large a factor could cause the application to run out of memory.
      */
@@ -54,26 +49,6 @@ void setDefaultSettings()
      * Adjust the accuracy which coordinates are displayed to.
      */
     s.setValue("floatingPointAccuracy", 3);
-
-    /*!
-     * Sets whether the application should use float evaluation or not.
-     */
-    s.setValue("floatEvaluation", true);
-
-    /*!
-     * Set the hover colour of the graphics on the scene.
-     */
-    s.setValue("graphicsHoverColour", QColor(255, 0, 0));
-
-    /*!
-     * Set the default colour of the graphics in the scene.
-     */
-    s.setValue("defaultGraphicsColour", QColor(0, 0, 0));
-
-    /*!
-     * Set the default line style.
-     */
-    s.setValue("defaultLineStyle", SOLID);
 
     /*!
      * Set the zoom factor. Between (0 and 1).
@@ -111,31 +86,59 @@ void setDefaultSettings()
     s.setValue("figureDescription", "no description");
 
     /*!
-     * Set automatic assignment of labels i.e. A, B, C, ...
+     * Sets whether the application should use float evaluation or not.
      */
-    s.setValue("automaticLabels", true);
+    s.setValue("floatEvaluation", true);
 
-    /*!
-     * Set the default background colour
-     */
-    s.setValue("backgroundColour", QColor(255, 255, 255));
 
-    /*!
-     * The default save directory for .gar files.
-     */
-    QDir defaultPath = QDir(QStandardPaths::writableLocation(
-        static_cast<QStandardPaths::StandardLocation>(QStandardPaths::DocumentsLocation)));
-    s.setValue("defaultSaveDirectory", defaultPath.absolutePath());
+    if (!s.contains("defaultsInitialised")) {
+        /*!
+         * Sets the thickness of lines drawn in the scene.
+         */
+        s.setValue("defaultLineWidth", 2);
 
-    /*!
-     * Set whether the only reals relation is applied automatically to 'this'.
-     */
-    s.setValue("automaticOnlyReals", true);
+        /*!
+         * Set the hover colour of the graphics on the scene.
+         */
+        s.setValue("graphicsHoverColour", QColor(255, 0, 0));
 
-    /*!
-     * Set the undo stack size limit.
-     */
-    s.setValue("undoLimit", 10);
+        /*!
+         * Set the default colour of the graphics in the scene.
+         */
+        s.setValue("defaultGraphicsColour", QColor(0, 0, 0));
+
+        /*!
+         * Set the default background colour
+         */
+        s.setValue("backgroundColour", QColor(255, 255, 255));
+
+        /*!
+         * The default save directory for .gar files.
+         */
+        QDir defaultPath = QDir(QStandardPaths::writableLocation(
+            static_cast<QStandardPaths::StandardLocation>(QStandardPaths::DocumentsLocation)));
+        s.setValue("defaultSaveDirectory", defaultPath.absolutePath());
+
+        /*!
+         * Set automatic assignment of labels i.e. A, B, C, ...
+         */
+        s.setValue("automaticLabels", true);
+
+        /*!
+         * Set whether the only reals relation is applied automatically to 'this'.
+         */
+        s.setValue("automaticOnlyReals", true);
+
+        /*!
+         * Set the undo stack size limit.
+         */
+        s.setValue("undoLimit", 10);
+
+        /*!
+         * Set the default line style.
+         */
+        s.setValue("defaultLineStyle", SOLID);
+    }
 }
 
 int main(int argc, char *argv[])
