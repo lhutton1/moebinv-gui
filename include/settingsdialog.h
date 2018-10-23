@@ -7,6 +7,7 @@
 #include <QStandardPaths>
 #include <QFileDialog>
 #include <QDir>
+#include <QAbstractButton>
 
 #include "conf.h"
 
@@ -22,6 +23,8 @@ public:
     explicit settingsDialog(QWidget *parent = 0);
     void showEvent(QShowEvent* event);
     void setButtonColour(QPushButton *buttonPushed, QColor colour);
+    void applySettings();
+    void loadValues();
     ~settingsDialog();
 
 private slots:
@@ -37,10 +40,9 @@ private slots:
     void on_defaultPathLineEdit_textEdited(const QString &arg1);
     void on_pushButton_4_clicked();
     void on_spinBox_valueChanged(int arg1);
-
     void on_doubleSpinBox_2_valueChanged(double arg1);
-
     void on_comboBox_currentIndexChanged(int index);
+    void on_buttonBox_clicked(QAbstractButton *button);
 
 signals:
     void sceneInvalid();
@@ -52,8 +54,8 @@ private:
     Ui::settingsDialog *ui;
 
     QColorDialog *colourDialog;
-
     QList<QPushButton *> colourSelectionButtons;
+    QMap<QString, QVariant> settingValues;
 };
 
 #endif // SETTINGSDIALOG_H

@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QSettings>
+#include <QAbstractButton>
+#include <QPushButton>
 
 #include "conf.h"
 
@@ -18,6 +20,8 @@ public:
     explicit propertiesDialog(QWidget *parent = 0);
     void showEvent(QShowEvent *event);
     void update();
+    void loadValues();
+    void applySettings();
     ~propertiesDialog();
 
 private slots:
@@ -30,6 +34,7 @@ private slots:
     void on_ellipticCycleButton_clicked(bool checked);
     void on_parabolicCycleButton_clicked(bool checked);
     void on_hyperbolicCycleButton_clicked(bool checked);
+    void on_buttonBox_clicked(QAbstractButton *button);
 
 signals:
     void metricChanged();
@@ -37,6 +42,8 @@ signals:
 private:
     QSettings s;
     Ui::propertiesDialog *ui;
+
+    QMap<QString, QVariant> settingValues;
 };
 
 #endif // PROPERTIESDIALOG_H
