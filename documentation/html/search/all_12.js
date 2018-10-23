@@ -19,7 +19,7 @@ var searchData=
   ['setpointishighlighted',['setPointIsHighlighted',['../classgraphics_scene.html#a96915f909391e379b8c6c880d1d3acc6',1,'graphicsScene']]],
   ['setsizeratio',['setSizeRatio',['../classdock_widget.html#a7f6a50274259d918d9a9068b8a94fe80',1,'dockWidget']]],
   ['setslideshow',['setSlideshow',['../classvis.html#ae8441d597e876882029ee13b16aa4cc2',1,'vis']]],
-  ['settingsdialog',['settingsDialog',['../classsettings_dialog.html',1,'settingsDialog'],['../class_ui_1_1settings_dialog.html',1,'Ui::settingsDialog']]],
+  ['settingsdialog',['settingsDialog',['../classsettings_dialog.html',1,'']]],
   ['shape',['shape',['../classcircle.html#a198cbcea745bd311fe91c2a23def746c',1,'circle']]],
   ['shortestdistance',['shortestDistance',['../class_main_window.html#a2431b3144405d8d0d3e8bd3523ad381b',1,'MainWindow']]],
   ['slideparam',['slideParam',['../structslide_param.html',1,'']]],

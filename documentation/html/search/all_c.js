@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['mainwindow',['MainWindow',['../class_ui_1_1_main_window.html',1,'Ui::MainWindow'],['../class_main_window.html',1,'MainWindow'],['../class_main_window.html#a8b244be8b7b7db1b08de2a2acb9409db',1,'MainWindow::MainWindow()']]],
+  ['mainwindow',['MainWindow',['../class_main_window.html',1,'MainWindow'],['../class_main_window.html#a8b244be8b7b7db1b08de2a2acb9409db',1,'MainWindow::MainWindow()']]],
   ['makecubepoints',['makeCubePoints',['../classvis.html#a5648b70ed8383268114b338cf020c9d9',1,'vis']]],
   ['makespherepoints',['makeSpherePoints',['../classvis.html#a9953ea49c09b9acec704d8175cb7865e',1,'vis']]],
   ['map_5ffunction_5fproxy',['map_function_proxy',['../structpyginac_1_1map__function__proxy.html',1,'pyginac']]],
-  ['matrix4dialog',['matrix4dialog',['../class_ui_1_1matrix4dialog.html',1,'Ui::matrix4dialog'],['../classmatrix4dialog.html',1,'matrix4dialog'],['../classmatrix4dialog.html#a5f97315156e47939f8811cce88d8e580',1,'matrix4dialog::matrix4dialog()']]],
-  ['matrix8dialog',['matrix8dialog',['../class_ui_1_1matrix8dialog.html',1,'Ui::matrix8dialog'],['../classmatrix8dialog.html',1,'matrix8dialog'],['../classmatrix8dialog.html#afcdbf5b7f9fcef31cbd030cd130d57f9',1,'matrix8dialog::matrix8dialog()']]],
+  ['matrix4dialog',['matrix4dialog',['../classmatrix4dialog.html',1,'matrix4dialog'],['../classmatrix4dialog.html#a5f97315156e47939f8811cce88d8e580',1,'matrix4dialog::matrix4dialog()']]],
+  ['matrix8dialog',['matrix8dialog',['../classmatrix8dialog.html',1,'matrix8dialog'],['../classmatrix8dialog.html#afcdbf5b7f9fcef31cbd030cd130d57f9',1,'matrix8dialog::matrix8dialog()']]],
   ['moebinv_2dgui',['moebinv-gui',['../md___users_lukehutton__one_drive_-__university_of__leeds__university__computer__science__internship_moebinv-gui__r_e_a_d_m_e.html',1,'']]],
   ['menurelaction',['menuRelAction',['../classmenu_rel_action.html',1,'menuRelAction'],['../classmenu_rel_action.html#a2db14a6cd576e8cb645a0e1dcf584d4e',1,'menuRelAction::menuRelAction()']]],
   ['menurelactiongroup',['menuRelActionGroup',['../classmenu_rel_action_group.html',1,'menuRelActionGroup'],['../classmenu_rel_action_group.html#ac43afaa3a021c3543d31e2401944938e',1,'menuRelActionGroup::menuRelActionGroup()']]],

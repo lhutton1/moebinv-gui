@@ -24,17 +24,14 @@ void \mbox{\hyperlink{classcycle_context_menu_a844d59a74d643b19fd19eb1de11ea4e9}
 \mbox{\Hypertarget{classcycle_context_menu_ad6adc2b3c3ad2650190967f7d4efd088}\label{classcycle_context_menu_ad6adc2b3c3ad2650190967f7d4efd088}} 
 void \mbox{\hyperlink{classcycle_context_menu_ad6adc2b3c3ad2650190967f7d4efd088}{amend\+Relation\+List}} (const bool \&metric)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_ad6adc2b3c3ad2650190967f7d4efd088}{cycle\+Context\+Menu\+::amend\+Relation\+List}} This slot corrects the relation list after a new relation has been selected. First the sender object is identified. If the sender action is in a group then the whole of the group is searched removing any relations that are not checked (since anyone of them could have been checked before). Then the relation is added to the relation list if it has been checked and removed if it hasn\textquotesingle{}t. The relations\+Have\+Changed signal is emmitted to update the status bar text at the bottom of the application. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcycle_context_menu_abf4f98f97561d5acd104a6c0b2038e15}\label{classcycle_context_menu_abf4f98f97561d5acd104a6c0b2038e15}} 
-void \mbox{\hyperlink{classcycle_context_menu_abf4f98f97561d5acd104a6c0b2038e15}{display\+Colour\+Dialog}} ()
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_abf4f98f97561d5acd104a6c0b2038e15}{cycle\+Context\+Menu\+::display\+Colour\+Dialog}} Displays the colour dialog so the user can select a colour for the cycle. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcycle_context_menu_a094bbed14bab12e3b9ac3ae07140bdcb}\label{classcycle_context_menu_a094bbed14bab12e3b9ac3ae07140bdcb}} 
-void \mbox{\hyperlink{classcycle_context_menu_a094bbed14bab12e3b9ac3ae07140bdcb}{display\+Style\+Dialog}} ()
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_a094bbed14bab12e3b9ac3ae07140bdcb}{cycle\+Context\+Menu\+::display\+Style\+Dialog}} Display the style dialog so the user can select a style for the cycle. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcycle_context_menu_ac720f89ffd13952e79dd77c1bb15c2aa}\label{classcycle_context_menu_ac720f89ffd13952e79dd77c1bb15c2aa}} 
-void \mbox{\hyperlink{classcycle_context_menu_ac720f89ffd13952e79dd77c1bb15c2aa}{display\+Weight\+Dialog}} ()
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_ac720f89ffd13952e79dd77c1bb15c2aa}{cycle\+Context\+Menu\+::display\+Weight\+Dialog}} Display the weight dialog so the user can select a weight for the cycle. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcycle_context_menu_ae807f1cddefcdedf9f8c60473bd287df}{edit\+Point}} ()
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_ae807f1cddefcdedf9f8c60473bd287df}{cycle\+Context\+Menu\+::edit\+Point}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_ae807f1cddefcdedf9f8c60473bd287df}{cycle\+Context\+Menu\+::edit\+Point}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcycle_context_menu_ae985f8d22bb60ae9dc406cb7276ec1a5}\label{classcycle_context_menu_ae985f8d22bb60ae9dc406cb7276ec1a5}} 
+void {\bfseries show\+Style\+Dialog} ()
+\item 
+\mbox{\Hypertarget{classcycle_context_menu_a7d75eefbcc183770b18c578336d354e1}\label{classcycle_context_menu_a7d75eefbcc183770b18c578336d354e1}} 
+void {\bfseries update\+Cycle\+Data} ()
+\end{DoxyCompactItemize}
 \subsection*{Signals}
 \begin{DoxyCompactItemize}
 \item 
@@ -49,6 +46,9 @@ void {\bfseries weight\+Selected} (double weight)
 \item 
 \mbox{\Hypertarget{classcycle_context_menu_a31b1b2e1f6596697cdac2cf0cb66359e}\label{classcycle_context_menu_a31b1b2e1f6596697cdac2cf0cb66359e}} 
 void {\bfseries style\+Selected} (int style)
+\item 
+\mbox{\Hypertarget{classcycle_context_menu_a2c39108d7f85f828d0af0ab4db999514}\label{classcycle_context_menu_a2c39108d7f85f828d0af0ab4db999514}} 
+void {\bfseries cycle\+Style\+Changed} (const struct \mbox{\hyperlink{structcycle_style_data}{cycle\+Style\+Data}} \&data)
 \item 
 \mbox{\Hypertarget{classcycle_context_menu_a0e28f14e9918aef074523854b5364c3e}\label{classcycle_context_menu_a0e28f14e9918aef074523854b5364c3e}} 
 void {\bfseries scene\+Invalid} ()
@@ -78,18 +78,14 @@ void \mbox{\hyperlink{classcycle_context_menu_a2ada1b40956db90398503d184afdd5ee}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcycle_context_menu_a2ada1b40956db90398503d184afdd5ee}{cycle\+Context\+Menu\+::build\+Actions}} initialize all the actions that will be displayed in the context menu and connect their trigger signals to slots. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcycle_context_menu_a17d519c784fac28e39da31478b810ae9}\label{classcycle_context_menu_a17d519c784fac28e39da31478b810ae9}} 
 Q\+String {\bfseries node\+\_\+label} (Gi\+Na\+C\+::ex name)
-\end{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcycle_style_data}{cycle\+Style\+Data}} \mbox{\hyperlink{classcycle_context_menu_ae9e820ae7baf504c5229592a0901a12c}{get\+Cycle\+Data}} (const Gi\+Na\+C\+::ex \&\mbox{\hyperlink{class_moeb_inv_1_1cycle}{cycle}})
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_main_window_a3088b7addf938e91e77b741a9ae22a53}{Main\+Window\+::get\+Cycle\+Data}} get the cycles appearance data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classcycle_context_menu_a1e2215915914b4c36463cbe5e667722d}\label{classcycle_context_menu_a1e2215915914b4c36463cbe5e667722d}} 
-Q\+Pointer$<$ Q\+Action $>$ {\bfseries change\+Colour} = nullptr
-\item 
-\mbox{\Hypertarget{classcycle_context_menu_a61f2889cd624664ec0b4933def974a04}\label{classcycle_context_menu_a61f2889cd624664ec0b4933def974a04}} 
-Q\+Pointer$<$ Q\+Action $>$ {\bfseries change\+Style} = nullptr
-\item 
-\mbox{\Hypertarget{classcycle_context_menu_a9798e2ec98b4e15af313112411cd8a24}\label{classcycle_context_menu_a9798e2ec98b4e15af313112411cd8a24}} 
-Q\+Pointer$<$ Q\+Action $>$ {\bfseries change\+Weight} = nullptr
+\mbox{\Hypertarget{classcycle_context_menu_a4b36e4536f222fdc21f02fd787782423}\label{classcycle_context_menu_a4b36e4536f222fdc21f02fd787782423}} 
+Q\+Pointer$<$ Q\+Action $>$ {\bfseries cycle\+Style} = nullptr
 \item 
 \mbox{\Hypertarget{classcycle_context_menu_aa58c68008bb6ab0d70af517821b8a48f}\label{classcycle_context_menu_aa58c68008bb6ab0d70af517821b8a48f}} 
 Q\+Pointer$<$ Q\+Action $>$ {\bfseries delete\+Point} = nullptr
@@ -191,7 +187,25 @@ Q\+List$<$menu\+Rel\+Action $\ast$$>$ list of \mbox{\hyperlink{classmenu_rel_act
 \begin{DoxyReturn}{Returns}
 Gi\+Na\+C\+::ex. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classcycle_context_menu_a0e955d1a633d3585d11b7c193341a568}\label{classcycle_context_menu_a0e955d1a633d3585d11b7c193341a568}} 
+\mbox{\Hypertarget{classcycle_context_menu_ae9e820ae7baf504c5229592a0901a12c}\label{classcycle_context_menu_ae9e820ae7baf504c5229592a0901a12c}} 
+\index{cycle\+Context\+Menu@{cycle\+Context\+Menu}!get\+Cycle\+Data@{get\+Cycle\+Data}}
+\index{get\+Cycle\+Data@{get\+Cycle\+Data}!cycle\+Context\+Menu@{cycle\+Context\+Menu}}
+\subsubsection{\texorpdfstring{get\+Cycle\+Data()}{getCycleData()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structcycle_style_data}{cycle\+Style\+Data}} cycle\+Context\+Menu\+::get\+Cycle\+Data (\begin{DoxyParamCaption}\item[{const Gi\+Na\+C\+::ex \&}]{cycle }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_main_window_a3088b7addf938e91e77b741a9ae22a53}{Main\+Window\+::get\+Cycle\+Data}} get the cycles appearance data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cycle} & cycle to get data from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+struct \mbox{\hyperlink{structcycle_style_data}{cycle\+Style\+Data}}
+\end{DoxyReturn}
+Get the cycle data stored as A\+SY. This function splits a string into 3 different components\+: colour, style and width. \mbox{\Hypertarget{classcycle_context_menu_a0e955d1a633d3585d11b7c193341a568}\label{classcycle_context_menu_a0e955d1a633d3585d11b7c193341a568}} 
 \index{cycle\+Context\+Menu@{cycle\+Context\+Menu}!get\+Title\+Action@{get\+Title\+Action}}
 \index{get\+Title\+Action@{get\+Title\+Action}!cycle\+Context\+Menu@{cycle\+Context\+Menu}}
 \subsubsection{\texorpdfstring{get\+Title\+Action()}{getTitleAction()}}
@@ -239,5 +253,4 @@ Q\+Action$\ast$ -\/ A pointer to the Q\+Action.
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 /\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/include/cyclecontextmenu.\+h\item 
-/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/moebinv-\/gui-\/build/moc\+\_\+cyclecontextmenu.\+cpp\item 
 /\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/src/cyclecontextmenu.\+cpp\end{DoxyCompactItemize}

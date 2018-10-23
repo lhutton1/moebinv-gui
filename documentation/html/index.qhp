@@ -320,20 +320,24 @@
                 <section title="numeric_from_number" ref="structpyginac_1_1numeric__from__number.html#a667b4d3919bd24908e5977816dfe39a5" />
               </section>
             </section>
-            <section title="Ui">
-              <section title="defineCycleDialog" ref="class_ui_1_1define_cycle_dialog.html" />
-              <section title="helpDialog" ref="class_ui_1_1help_dialog.html" />
-              <section title="MainWindow" ref="class_ui_1_1_main_window.html" />
-              <section title="matrix4dialog" ref="class_ui_1_1matrix4dialog.html" />
-              <section title="matrix8dialog" ref="class_ui_1_1matrix8dialog.html" />
-              <section title="propertiesDialog" ref="class_ui_1_1properties_dialog.html" />
-              <section title="settingsDialog" ref="class_ui_1_1settings_dialog.html" />
-            </section>
             <section title="circle" ref="classcircle.html">
               <section title="circle" ref="classcircle.html#abfd721dc65145023cf14739adacc81a8" />
               <section title="boundingRect" ref="classcircle.html#ab9d2059829ac8f0420c7e711caeb61c7" />
               <section title="paint" ref="classcircle.html#a2d9af8e86fb3605c736689a2e2566d26" />
               <section title="shape" ref="classcircle.html#a198cbcea745bd311fe91c2a23def746c" />
+            </section>
+            <section title="cStyleDialog" ref="classc_style_dialog.html">
+              <section title="cStyleDialog" ref="classc_style_dialog.html#a5807725382c046b8d7ce6d69d3b596e2" />
+              <section title="~cStyleDialog" ref="classc_style_dialog.html#a4da73a7a40a2149c41fe71e5e3e602b5" />
+              <section title="changeColour" ref="classc_style_dialog.html#af4fed4e11853816ab13e9b5ab8a1b6ed" />
+              <section title="changeStyle" ref="classc_style_dialog.html#a170f46411ba76d9ba3ef97030ed9e1d8" />
+              <section title="changeWeight" ref="classc_style_dialog.html#a6e4b38f987018310b1a02189fcbf6dfc" />
+              <section title="getColour" ref="classc_style_dialog.html#a6a48c4f7602f96dc42dfd53f5cae9a6a" />
+              <section title="getStyle" ref="classc_style_dialog.html#a87856188bacb34ce4c3d654bc91e3adb" />
+              <section title="getWeight" ref="classc_style_dialog.html#a6ba1b5aae4bfc925f832a85cb237e4af" />
+              <section title="setButtonColour" ref="classc_style_dialog.html#a69eb66937adf137641436896cd1c90d7" />
+              <section title="showEvent" ref="classc_style_dialog.html#aa74af6b1f34d43ce800e3ad343c11de7" />
+              <section title="updateCycleData" ref="classc_style_dialog.html#a7915871fc0bbb02989bbd17f9071baf9" />
             </section>
             <section title="cycleContextMenu" ref="classcycle_context_menu.html">
               <section title="cycleContextMenu" ref="classcycle_context_menu.html#a0a948765494ab4b2ecf73c89123f7f14" />
@@ -343,23 +347,22 @@
               <section title="changesMadeToFigure" ref="classcycle_context_menu.html#a6b92c1d84f101c8386d1152b680247ff" />
               <section title="colourSelected" ref="classcycle_context_menu.html#acd8ba953b7b1edfac94b5ba4158217af" />
               <section title="confirmDeleteCycle" ref="classcycle_context_menu.html#a844d59a74d643b19fd19eb1de11ea4e9" />
-              <section title="displayColourDialog" ref="classcycle_context_menu.html#abf4f98f97561d5acd104a6c0b2038e15" />
-              <section title="displayStyleDialog" ref="classcycle_context_menu.html#a094bbed14bab12e3b9ac3ae07140bdcb" />
-              <section title="displayWeightDialog" ref="classcycle_context_menu.html#ac720f89ffd13952e79dd77c1bb15c2aa" />
+              <section title="cycleStyleChanged" ref="classcycle_context_menu.html#a2c39108d7f85f828d0af0ab4db999514" />
               <section title="editPoint" ref="classcycle_context_menu.html#ae807f1cddefcdedf9f8c60473bd287df" />
               <section title="getActions" ref="classcycle_context_menu.html#a4dd57e4522c46a70367b6b721f23bcc9" />
               <section title="getCycle" ref="classcycle_context_menu.html#a35b3868cdc32b97e7c4abc109ee13460" />
+              <section title="getCycleData" ref="classcycle_context_menu.html#ae9e820ae7baf504c5229592a0901a12c" />
               <section title="getTitleAction" ref="classcycle_context_menu.html#a0e955d1a633d3585d11b7c193341a568" />
               <section title="node_label" ref="classcycle_context_menu.html#a17d519c784fac28e39da31478b810ae9" />
               <section title="relationsHaveChanged" ref="classcycle_context_menu.html#a42d360ffa2a047c3f43ded9fcec5982b" />
               <section title="removeRelationFromList" ref="classcycle_context_menu.html#a83f3eb1ea5338154095a7bf1e2c77b01" />
               <section title="sceneInvalid" ref="classcycle_context_menu.html#a0e28f14e9918aef074523854b5364c3e" />
               <section title="setCycle" ref="classcycle_context_menu.html#adf29caf51604118b6ced6a02c5172252" />
+              <section title="showStyleDialog" ref="classcycle_context_menu.html#ae985f8d22bb60ae9dc406cb7276ec1a5" />
               <section title="styleSelected" ref="classcycle_context_menu.html#a31b1b2e1f6596697cdac2cf0cb66359e" />
+              <section title="updateCycleData" ref="classcycle_context_menu.html#a7d75eefbcc183770b18c578336d354e1" />
               <section title="weightSelected" ref="classcycle_context_menu.html#ac91d09b750dfeace9334b67649fbbda0" />
-              <section title="changeColour" ref="classcycle_context_menu.html#a1e2215915914b4c36463cbe5e667722d" />
-              <section title="changeStyle" ref="classcycle_context_menu.html#a61f2889cd624664ec0b4933def974a04" />
-              <section title="changeWeight" ref="classcycle_context_menu.html#a9798e2ec98b4e15af313112411cd8a24" />
+              <section title="cycleStyle" ref="classcycle_context_menu.html#a4b36e4536f222fdc21f02fd787782423" />
               <section title="deletePoint" ref="classcycle_context_menu.html#aa58c68008bb6ab0d70af517821b8a48f" />
               <section title="edit" ref="classcycle_context_menu.html#a7c9b8d13930dc91c050e5b870f7dbfb8" />
             </section>
@@ -424,6 +427,7 @@
               <section title="sceneInvalid" ref="classgraphic_cycle.html#aa36164d21bdd1b7cde5b26407f330d49" />
               <section title="setColour" ref="classgraphic_cycle.html#a48965c220e8fad0181f1f793c17fb73c" />
               <section title="setCycleAsy" ref="classgraphic_cycle.html#a58385898752cac06fb14fc527f908b8c" />
+              <section title="setCycleStyle" ref="classgraphic_cycle.html#ae407700101f0bd9bfd45bfc382c30ecc" />
               <section title="setHover" ref="classgraphic_cycle.html#a54708026fc7ea647f431263990872cdf" />
               <section title="setLineStyle" ref="classgraphic_cycle.html#a96f1a1d6c958bfba3789a13c156f9795" />
               <section title="setLineWidth" ref="classgraphic_cycle.html#aa02ce6a22ddb0ae859ab6dac49a0570a" />
@@ -528,8 +532,9 @@
             <section title="menuRelAction" ref="classmenu_rel_action.html">
               <section title="menuRelAction" ref="classmenu_rel_action.html#a2db14a6cd576e8cb645a0e1dcf584d4e" />
               <section title="actionHandler" ref="classmenu_rel_action.html#a23b63e5bdb79e12f74bd1d33a53fb6e0" />
+              <section title="checkActionCycleHandler" ref="classmenu_rel_action.html#a8d79623cfe8711e62c6f4f28d8d4c33a" />
               <section title="checkActionHandler" ref="classmenu_rel_action.html#a1535eb0d2ad06bd4d44f3de8761841b2" />
-              <section title="checkCycleRelation" ref="classmenu_rel_action.html#ab3a724c2d09de8a3d253210ec3a0e0d3" />
+              <section title="checkCycleRelation" ref="classmenu_rel_action.html#aae6e2ce0d9d17c13d502984dda8a4a54" />
               <section title="checkMenuEntry" ref="classmenu_rel_action.html#a9c40a2e1e1538829214a2a9e06896a99" />
               <section title="createCycleRelation" ref="classmenu_rel_action.html#a64a27674825379ba110fb2117a572ffe" />
               <section title="cycleMetricActionHandler" ref="classmenu_rel_action.html#adbd43b99466f9ad2cde1934e1599ae4c" />
@@ -546,6 +551,7 @@
               <section title="setRelation" ref="classmenu_rel_action.html#acba36fb50f54a72a4b253957f2f50f92" />
               <section title="addCycleRelation" ref="classmenu_rel_action.html#ab78b5ed63bee30881b70110161670fb5" />
               <section title="addRelation" ref="classmenu_rel_action.html#ad9c9c61008821fcef78633ed38b42f8c" />
+              <section title="checkCycleMetricRelation" ref="classmenu_rel_action.html#a7937666c8189cb7597874642917e83ec" />
               <section title="checkRelation" ref="classmenu_rel_action.html#afa273b825fbdc2d887cc6a3ecfc62265" />
             </section>
             <section title="menuRelActionGroup" ref="classmenu_rel_action_group.html">
@@ -567,88 +573,11 @@
             <section title="propertiesDialog" ref="classproperties_dialog.html">
               <section title="propertiesDialog" ref="classproperties_dialog.html#a23e5c7a841b8f1bda7adcc7d99d4da67" />
               <section title="~propertiesDialog" ref="classproperties_dialog.html#a488198c2be8ea54e6f367b2ae83cf4aa" />
+              <section title="applySettings" ref="classproperties_dialog.html#ab8898b89cfa3b9a310b52fbd9003dbc2" />
+              <section title="loadValues" ref="classproperties_dialog.html#ab3bdbb660ecd5514aea005e0dd59ebb5" />
+              <section title="metricChanged" ref="classproperties_dialog.html#a68bf43407ab7513191021bed8f974846" />
               <section title="showEvent" ref="classproperties_dialog.html#a41e3286b47651d4c757bb12d34660fe6" />
               <section title="update" ref="classproperties_dialog.html#aff17b502153d16b8f19fe75bf1d06d73" />
-            </section>
-            <section title="qt_meta_stringdata_circle_t" ref="structqt__meta__stringdata__circle__t.html">
-              <section title="data" ref="structqt__meta__stringdata__circle__t.html#a7930d41cb3c0ef3a8124a1d41c10946f" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__circle__t.html#ad3010a59b3cd22c250828be7413a7157" />
-            </section>
-            <section title="qt_meta_stringdata_cycleContextMenu_t" ref="structqt__meta__stringdata__cycle_context_menu__t.html">
-              <section title="data" ref="structqt__meta__stringdata__cycle_context_menu__t.html#a5d7c8abf7959a17b83d045f9ad7b4c2a" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__cycle_context_menu__t.html#a51ea2171aa6b87941882cb7be4d61db8" />
-            </section>
-            <section title="qt_meta_stringdata_defineCycleDialog_t" ref="structqt__meta__stringdata__define_cycle_dialog__t.html">
-              <section title="data" ref="structqt__meta__stringdata__define_cycle_dialog__t.html#a5f5ff34ca5ca0e327d7051d2ce9d52d5" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__define_cycle_dialog__t.html#a6c71a93ad424fda6c7d2839ff9f1026f" />
-            </section>
-            <section title="qt_meta_stringdata_dockWidget_t" ref="structqt__meta__stringdata__dock_widget__t.html">
-              <section title="data" ref="structqt__meta__stringdata__dock_widget__t.html#a118c54d315eed59d78416e5e4145068d" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__dock_widget__t.html#a1b94e2371992a973536e35688d5f62ee" />
-            </section>
-            <section title="qt_meta_stringdata_figureUndoCommand_t" ref="structqt__meta__stringdata__figure_undo_command__t.html">
-              <section title="data" ref="structqt__meta__stringdata__figure_undo_command__t.html#ab65b436adbc0fe0249f9c76e107684a6" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__figure_undo_command__t.html#ad459b353f01ec3be0cc8e2aca335b6c2" />
-            </section>
-            <section title="qt_meta_stringdata_graphicCycle_t" ref="structqt__meta__stringdata__graphic_cycle__t.html">
-              <section title="data" ref="structqt__meta__stringdata__graphic_cycle__t.html#a7d6ccfa54b966f7d6d259bdf378b3c62" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__graphic_cycle__t.html#a2d7f26c529a28c5e40d5a0d1522668b0" />
-            </section>
-            <section title="qt_meta_stringdata_graphicsScene_t" ref="structqt__meta__stringdata__graphics_scene__t.html">
-              <section title="data" ref="structqt__meta__stringdata__graphics_scene__t.html#a9cc8896a17a0667e790b40b5111c70aa" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__graphics_scene__t.html#a192f9146e5f62ea8345ecbfbc9909e8b" />
-            </section>
-            <section title="qt_meta_stringdata_helpBrowser_t" ref="structqt__meta__stringdata__help_browser__t.html">
-              <section title="data" ref="structqt__meta__stringdata__help_browser__t.html#a3cd7902717b8d64da130c710bb6178a0" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__help_browser__t.html#a79c6e92bd6dcec160a129977b9e80f9f" />
-            </section>
-            <section title="qt_meta_stringdata_helpDialog_t" ref="structqt__meta__stringdata__help_dialog__t.html">
-              <section title="data" ref="structqt__meta__stringdata__help_dialog__t.html#a3e6a8b85a92334ef4a1f5ef5d4ff65d9" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__help_dialog__t.html#ae8fbd8a9b4ed0a5843c3fbd6410e0265" />
-            </section>
-            <section title="qt_meta_stringdata_line_t" ref="structqt__meta__stringdata__line__t.html">
-              <section title="data" ref="structqt__meta__stringdata__line__t.html#a376e9f05a08dbff18309be70ba87c807" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__line__t.html#aafcc21a193589e9460b20da78a228294" />
-            </section>
-            <section title="qt_meta_stringdata_MainWindow_t" ref="structqt__meta__stringdata___main_window__t.html">
-              <section title="data" ref="structqt__meta__stringdata___main_window__t.html#af3388f2daac6273573d6d972ed5fcf91" />
-              <section title="stringdata0" ref="structqt__meta__stringdata___main_window__t.html#ac30547ed7180a962035f829b57b4194f" />
-            </section>
-            <section title="qt_meta_stringdata_matrix4dialog_t" ref="structqt__meta__stringdata__matrix4dialog__t.html">
-              <section title="data" ref="structqt__meta__stringdata__matrix4dialog__t.html#a24c7d203a03bf49c7852e08c8583b12b" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__matrix4dialog__t.html#a5509d1e4a8dcb461cb64d3d4c6a0f14f" />
-            </section>
-            <section title="qt_meta_stringdata_matrix8dialog_t" ref="structqt__meta__stringdata__matrix8dialog__t.html">
-              <section title="data" ref="structqt__meta__stringdata__matrix8dialog__t.html#a9d7af3bd2bc8e32d83f86bc8f2f6fcd5" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__matrix8dialog__t.html#a830bc0f3c0e2785540c9fbcabea43849" />
-            </section>
-            <section title="qt_meta_stringdata_menuRelAction_t" ref="structqt__meta__stringdata__menu_rel_action__t.html">
-              <section title="data" ref="structqt__meta__stringdata__menu_rel_action__t.html#a7b40c8a52e37a5c28251d7e999eafeaa" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__menu_rel_action__t.html#aad12ee0e27fa96033425cf66079ba224" />
-            </section>
-            <section title="qt_meta_stringdata_menuRelActionGroup_t" ref="structqt__meta__stringdata__menu_rel_action_group__t.html">
-              <section title="data" ref="structqt__meta__stringdata__menu_rel_action_group__t.html#ae7569401cbdb8cde6886a1120ca52cff" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__menu_rel_action_group__t.html#a16e48c6d600da8cd939d1fab23ece3ab" />
-            </section>
-            <section title="qt_meta_stringdata_point_t" ref="structqt__meta__stringdata__point__t.html">
-              <section title="data" ref="structqt__meta__stringdata__point__t.html#a0967a3a4d1a2a917560b0e4a21b882a3" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__point__t.html#a42f42e4322b83cf3913e857c6fefb423" />
-            </section>
-            <section title="qt_meta_stringdata_propertiesDialog_t" ref="structqt__meta__stringdata__properties_dialog__t.html">
-              <section title="data" ref="structqt__meta__stringdata__properties_dialog__t.html#aa71dc9d1b968b4d464780a0866324358" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__properties_dialog__t.html#aac0560d60639d4b7df0e60e4289923b6" />
-            </section>
-            <section title="qt_meta_stringdata_settingsDialog_t" ref="structqt__meta__stringdata__settings_dialog__t.html">
-              <section title="data" ref="structqt__meta__stringdata__settings_dialog__t.html#a2830fa81d51263ec2a64b8cf3fbe0101" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__settings_dialog__t.html#a5cf061ac496efadfbdef1d23b1f22afd" />
-            </section>
-            <section title="qt_meta_stringdata_treeModel_t" ref="structqt__meta__stringdata__tree_model__t.html">
-              <section title="data" ref="structqt__meta__stringdata__tree_model__t.html#a7340fecee9939e4fbc0fd7267a1caa96" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__tree_model__t.html#adfbf1f4d9bf5384fd42318955a041366" />
-            </section>
-            <section title="qt_meta_stringdata_view_t" ref="structqt__meta__stringdata__view__t.html">
-              <section title="data" ref="structqt__meta__stringdata__view__t.html#a6e138f57139e1ca646beb55e66722aa8" />
-              <section title="stringdata0" ref="structqt__meta__stringdata__view__t.html#ab2d1bd5a5cf9dcc07b1cf2eee867b860" />
             </section>
             <section title="qt_meta_stringdata_vis_t" ref="structqt__meta__stringdata__vis__t.html">
               <section title="data" ref="structqt__meta__stringdata__vis__t.html#afc7b1b2d419c6171c8ee28aa4a3c6734" />
@@ -663,6 +592,8 @@
             <section title="settingsDialog" ref="classsettings_dialog.html">
               <section title="settingsDialog" ref="classsettings_dialog.html#abe3d7f1c14fb45723918ae6bd0f999fa" />
               <section title="~settingsDialog" ref="classsettings_dialog.html#acecc71f2981d88e6860dd95518421e51" />
+              <section title="applySettings" ref="classsettings_dialog.html#afca53b725fce559f74266bb39657da6b" />
+              <section title="loadValues" ref="classsettings_dialog.html#a982beae131fefc2788432b192ec343c7" />
               <section title="saveDirectoryHasChanged" ref="classsettings_dialog.html#a2f3b6b8dc939f18ae86b54d8ef86da56" />
               <section title="sceneInvalid" ref="classsettings_dialog.html#afc5e121ba37f12221754a9e76172a82f" />
               <section title="setBackgroundColour" ref="classsettings_dialog.html#a4b484584139b25437d8cb7218cf78a3c" />
@@ -677,223 +608,6 @@
             <section title="treeModel" ref="classtree_model.html">
               <section title="treeModel" ref="classtree_model.html#aacfea32c612071ff4495ce764b82d618" />
               <section title="data" ref="classtree_model.html#add38ff680cd2a926d201c0760234419d" />
-            </section>
-            <section title="Ui_defineCycleDialog" ref="class_ui__define_cycle_dialog.html">
-              <section title="retranslateUi" ref="class_ui__define_cycle_dialog.html#ab6b479d0332ab9a2e9ccc6ee3416bb97" />
-              <section title="setupUi" ref="class_ui__define_cycle_dialog.html#a023518fe6242d0a90494ecbb897dd9ac" />
-              <section title="buttonBox" ref="class_ui__define_cycle_dialog.html#ae1d3f2442bdfe35eccc053c09694f7f2" />
-              <section title="groupBox" ref="class_ui__define_cycle_dialog.html#ac6483121f806471d84de6ba86e61921b" />
-              <section title="horizontalLayout" ref="class_ui__define_cycle_dialog.html#a608df977a3a1c84586b3fb842bb171dc" />
-              <section title="horizontalLayout_2" ref="class_ui__define_cycle_dialog.html#a121d9b5a7a2d5cab23a6a05c08de003a" />
-              <section title="horizontalLayout_3" ref="class_ui__define_cycle_dialog.html#a098d7c18c9dd398ce64afe12be51543c" />
-              <section title="horizontalLayout_4" ref="class_ui__define_cycle_dialog.html#ad9f452c726da3b9705f58ede8cfdeb2d" />
-              <section title="horizontalLayout_5" ref="class_ui__define_cycle_dialog.html#a03c84f7955219dc3905bb5ca4f0af39e" />
-              <section title="horizontalLayout_6" ref="class_ui__define_cycle_dialog.html#a25296210e8cbc4a2eacc58d7420ac53c" />
-              <section title="horizontalLayout_7" ref="class_ui__define_cycle_dialog.html#a103cdf5b651b17a0716c66891b5a11df" />
-              <section title="horizontalSpacer" ref="class_ui__define_cycle_dialog.html#a127f945f6fb4d7a4b04e779f6430390d" />
-              <section title="horizontalSpacer_10" ref="class_ui__define_cycle_dialog.html#ab4de9ae4f5fb1e738c22bd8d2fbb8571" />
-              <section title="horizontalSpacer_11" ref="class_ui__define_cycle_dialog.html#a9eb7ed48f73134128d9c641db721d41f" />
-              <section title="horizontalSpacer_2" ref="class_ui__define_cycle_dialog.html#a33699becdc8a75f39ab46d514d4560fc" />
-              <section title="horizontalSpacer_3" ref="class_ui__define_cycle_dialog.html#a2441722611a27b6c3ac821ba7e82dfe3" />
-              <section title="horizontalSpacer_4" ref="class_ui__define_cycle_dialog.html#aa3688c0abd181e61e1fd13daece711b5" />
-              <section title="horizontalSpacer_5" ref="class_ui__define_cycle_dialog.html#a9aa938d116df1ce366a72d66d3f75840" />
-              <section title="horizontalSpacer_6" ref="class_ui__define_cycle_dialog.html#a55be67bb153a9a1dd8a2bcc30eb798a2" />
-              <section title="horizontalSpacer_7" ref="class_ui__define_cycle_dialog.html#abe517a13c8e5a613d534992abbbf85ce" />
-              <section title="horizontalSpacer_8" ref="class_ui__define_cycle_dialog.html#afbc4007ba8f3b553560ee3da5873120b" />
-              <section title="horizontalSpacer_9" ref="class_ui__define_cycle_dialog.html#a56c94e17b5226b6c00588a9085e4ee89" />
-              <section title="label" ref="class_ui__define_cycle_dialog.html#a5d9740251cf9b4070346923008408005" />
-              <section title="label_2" ref="class_ui__define_cycle_dialog.html#ad259fb66ce1b09bf92ad13d9e116b253" />
-              <section title="label_3" ref="class_ui__define_cycle_dialog.html#a9217f34088f20f107c710da69275d1ed" />
-              <section title="label_4" ref="class_ui__define_cycle_dialog.html#ab660392d534326c4ecab689ae041f37b" />
-              <section title="label_5" ref="class_ui__define_cycle_dialog.html#a6f26b71d4b3e5be6f5561d045125198c" />
-              <section title="label_6" ref="class_ui__define_cycle_dialog.html#a2ec5867b62c0e11abcbb50fa984c1f94" />
-              <section title="label_7" ref="class_ui__define_cycle_dialog.html#a7c005f2e7df6caa5e9b81ed1716c0382" />
-              <section title="lineEdit_1" ref="class_ui__define_cycle_dialog.html#aa5960dd55cf7ea412bab9d5e1929c3a9" />
-              <section title="lineEdit_2" ref="class_ui__define_cycle_dialog.html#a7fd0d74a07d9ddef9c7e02338e8fda67" />
-              <section title="lineEdit_3" ref="class_ui__define_cycle_dialog.html#add3cf25304b9c6a6c4bcb2ae20da67b3" />
-              <section title="lineEdit_4" ref="class_ui__define_cycle_dialog.html#aae21ab9ac566059dee36fa8a154d7f1a" />
-              <section title="lineEdit_5" ref="class_ui__define_cycle_dialog.html#a3d5520f021e4be628878c16356d867e4" />
-              <section title="lineEdit_6" ref="class_ui__define_cycle_dialog.html#aa19a105e0b9670c923be42cf953a55e0" />
-              <section title="lineEdit_7" ref="class_ui__define_cycle_dialog.html#ae3e3d1bd890adbe23502349a6b2fe90a" />
-              <section title="tabCenter" ref="class_ui__define_cycle_dialog.html#a912f00d8c89ac32ba3774fb8106420f3" />
-              <section title="tabValues" ref="class_ui__define_cycle_dialog.html#afe9cf82080d34f1bc821c7d3e2b1064d" />
-              <section title="tabWidget" ref="class_ui__define_cycle_dialog.html#a8341722258f5c60291744e1feb431bce" />
-              <section title="verticalLayout" ref="class_ui__define_cycle_dialog.html#a5e0d16d30bcb9ff54944ffc75d965b7d" />
-              <section title="verticalLayout_2" ref="class_ui__define_cycle_dialog.html#a2e44f950f76b27f972dfea6230d12713" />
-              <section title="verticalLayout_3" ref="class_ui__define_cycle_dialog.html#ac2a973c429b8357847bf4cda2a45c9ff" />
-              <section title="verticalLayout_4" ref="class_ui__define_cycle_dialog.html#a4406dcb26a55c866b3cfc269366d9294" />
-            </section>
-            <section title="Ui_helpDialog" ref="class_ui__help_dialog.html">
-              <section title="retranslateUi" ref="class_ui__help_dialog.html#a2f67a7a9b16bb22a264d312234c7e60d" />
-              <section title="setupUi" ref="class_ui__help_dialog.html#a4074ac03760c68b2a4d9ba5e9aa47f4b" />
-              <section title="horizontalLayout" ref="class_ui__help_dialog.html#a9a2ecc710af91e4b1e89a3d49e5a22c0" />
-              <section title="splitter" ref="class_ui__help_dialog.html#a72aa819f279809b1c253f46bd2cec5dc" />
-              <section title="tabWidget" ref="class_ui__help_dialog.html#a0c873833046066c8d4594e59905ad8d5" />
-              <section title="textBrowser" ref="class_ui__help_dialog.html#ac04b5a0ba104077649c97b8ab07afc65" />
-            </section>
-            <section title="Ui_MainWindow" ref="class_ui___main_window.html">
-              <section title="retranslateUi" ref="class_ui___main_window.html#a097dd160c3534a204904cb374412c618" />
-              <section title="setupUi" ref="class_ui___main_window.html#acf4a0872c4c77d8f43a2ec66ed849b58" />
-              <section title="actionAbout" ref="class_ui___main_window.html#abdf2b43167c2cd0d3405f90b8c30e934" />
-              <section title="actionConfiguration" ref="class_ui___main_window.html#aa2c71d96d12d8103436804c3fda3855d" />
-              <section title="actionCreate_Cycle" ref="class_ui___main_window.html#ab34717288693d70d787ff80f9ad3f633" />
-              <section title="actionCycleMetric" ref="class_ui___main_window.html#af6823cd17f39bc0f6b94a026476eefa1" />
-              <section title="actionDebug_bounding_rect" ref="class_ui___main_window.html#ab922a617328dd984d45d82e8aa460d13" />
-              <section title="actionDefine_by_center_and_radius_squared" ref="class_ui___main_window.html#a80f63d6b857721d1d102cd7ba5063878" />
-              <section title="actionDefine_by_values" ref="class_ui___main_window.html#a0b0a125bc543f541304b27a09559e72d" />
-              <section title="actionDefine_cycle" ref="class_ui___main_window.html#a1087883ccba9316d3703d696746101d3" />
-              <section title="actionDelete_cycle" ref="class_ui___main_window.html#acda444d81e28ab545b0834f0dc4ae647" />
-              <section title="actionEllipticCycleMetric" ref="class_ui___main_window.html#a5d74c24d7075548a7674541fe000b632" />
-              <section title="actionEllipticPointMetric" ref="class_ui___main_window.html#a58d0ba1b7beeed28ad5465133e240ab1" />
-              <section title="actionEvaluationType" ref="class_ui___main_window.html#a63ad0bb77d3a481c97a24033ef35ed36" />
-              <section title="actionExact" ref="class_ui___main_window.html#a034f279001e76e3be73ed5b4bd07c59a" />
-              <section title="actionFigure_Description" ref="class_ui___main_window.html#a4b11cbb0ac3c833f389276df427fc172" />
-              <section title="actionFloating" ref="class_ui___main_window.html#a8d48131a3b17a8b4c8a22b0b65b19494" />
-              <section title="actionHyperbolicCycleMetric" ref="class_ui___main_window.html#a7709b35d7e47bf8e8c73401cc66b33d5" />
-              <section title="actionHyperbolicPointMetric" ref="class_ui___main_window.html#a3e8849e6122bf0467b541bdbe5b570a2" />
-              <section title="actionLabels" ref="class_ui___main_window.html#a262b4df5530dbefe28c149fa86f140b2" />
-              <section title="actionNew" ref="class_ui___main_window.html#a9090620adfd867b72c5f445c83b8c0ec" />
-              <section title="actionOpen" ref="class_ui___main_window.html#a5772f39001f62b7f601aafe72caa10c0" />
-              <section title="actionPan" ref="class_ui___main_window.html#abfbd7004decc3b1240e9009b86c0500e" />
-              <section title="actionParabolicCycleMetric" ref="class_ui___main_window.html#a73235643255b09b0481df8b7f5206590" />
-              <section title="actionParabolicPointMetric" ref="class_ui___main_window.html#a5706347a779fae5ae488492ed8607e4a" />
-              <section title="actionPointMetric" ref="class_ui___main_window.html#a8b35f735472c004ad6b1ebd82bb2ed79" />
-              <section title="actionProperties" ref="class_ui___main_window.html#adc69c1d59f56327ab1e42fd985f66b49" />
-              <section title="actionQuit" ref="class_ui___main_window.html#a188c243f36a2dbc10e4e2a0ad94273b1" />
-              <section title="actionRedo" ref="class_ui___main_window.html#a92b45aedb3e89ab02aeed5c6a2e33520" />
-              <section title="actionSave" ref="class_ui___main_window.html#a6e14788227f1a0dbc8cf983514685f3b" />
-              <section title="actionSave_As" ref="class_ui___main_window.html#a1e11ac34a44aeff9d0f198e5f2537dab" />
-              <section title="actionSettings" ref="class_ui___main_window.html#a5b65436e6cc259d5586eb6e309b612e4" />
-              <section title="actionUndo" ref="class_ui___main_window.html#a175147fd65feca1da9052479372408bd" />
-              <section title="actionUser_Manual" ref="class_ui___main_window.html#a711ee49dc285749537d57e6756b1a0c3" />
-              <section title="actionzoomIn" ref="class_ui___main_window.html#a30a8a79f7c40582f655109ebe2dcfcff" />
-              <section title="actionzoomOut" ref="class_ui___main_window.html#a749319d9c2f86308f4559091acff6910" />
-              <section title="centralWidget" ref="class_ui___main_window.html#a30075506c2116c3ed4ff25e07ae75f81" />
-              <section title="dockWidgetContents" ref="class_ui___main_window.html#a765ded8236736213d556f6f91941808e" />
-              <section title="dockWidgetRight" ref="class_ui___main_window.html#a0b290047e65bbb51d10c15a73b264d84" />
-              <section title="graphicsView" ref="class_ui___main_window.html#a48cc360c9d7a73abfc5ab3cee1f61e3d" />
-              <section title="horizontalLayout" ref="class_ui___main_window.html#acd6fdc9ebacc4b25b834162380d75ce8" />
-              <section title="mainToolBar" ref="class_ui___main_window.html#a5172877001c8c7b4e0f6de50421867d1" />
-              <section title="menuBar" ref="class_ui___main_window.html#a2be1c24ec9adfca18e1dcc951931457f" />
-              <section title="menuDefine_Cycle_2" ref="class_ui___main_window.html#a5dbb06b88129fa03318293a5e9cd8ea7" />
-              <section title="menuEdit" ref="class_ui___main_window.html#aa2a8beb7420d9a6d513949dd5661090a" />
-              <section title="menuFile" ref="class_ui___main_window.html#a7ba84cb4cdd6a12dc83bf4e100bd8d80" />
-              <section title="menuHelp" ref="class_ui___main_window.html#ab95dbfbb0550206aeac76db36f491548" />
-              <section title="menuTools" ref="class_ui___main_window.html#a552c7b6d729252c2768c9a077679fef7" />
-              <section title="menuView" ref="class_ui___main_window.html#a9e7f2ce6c3d8a309109baed7d6890604" />
-              <section title="statusBar" ref="class_ui___main_window.html#a50fa481337604bcc8bf68de18ab16ecd" />
-              <section title="treeView" ref="class_ui___main_window.html#a2e917678fb1e644071b85bf38d97125e" />
-              <section title="verticalLayout" ref="class_ui___main_window.html#aecd96a04789fcfec3f98d80390ad8184" />
-              <section title="verticalLayout_2" ref="class_ui___main_window.html#a0c01bad60d9f422a1258e710635a2f65" />
-            </section>
-            <section title="Ui_matrix4dialog" ref="class_ui__matrix4dialog.html">
-              <section title="retranslateUi" ref="class_ui__matrix4dialog.html#a0140e00a8003ec0682fad02b5422c32c" />
-              <section title="setupUi" ref="class_ui__matrix4dialog.html#aef219b6ca55919d404217da65f6d9f84" />
-              <section title="buttonBox" ref="class_ui__matrix4dialog.html#ae643e32c20b920b6ab7339075a79bd9d" />
-              <section title="label" ref="class_ui__matrix4dialog.html#a251052fdd26c4f5d32480e10b296be69" />
-              <section title="label_2" ref="class_ui__matrix4dialog.html#af1865005bfda4019dcf37b95b5c6e0d7" />
-              <section title="label_3" ref="class_ui__matrix4dialog.html#a855424564cf682a5b813162db19932c7" />
-              <section title="label_4" ref="class_ui__matrix4dialog.html#aaccd6a9185cebcd9bafe533642500165" />
-              <section title="lineEdit_value1" ref="class_ui__matrix4dialog.html#af76878b0323618ee71de96e1ff096e88" />
-              <section title="lineEdit_value2" ref="class_ui__matrix4dialog.html#aa24b0549035d7da282a7a26c4076a08b" />
-              <section title="lineEdit_value3" ref="class_ui__matrix4dialog.html#ab323365f4524b26c3aa16ca9cc2375c3" />
-              <section title="lineEdit_value4" ref="class_ui__matrix4dialog.html#a0f6b83ac50476be0a50fe6581c58c9ec" />
-            </section>
-            <section title="Ui_matrix8dialog" ref="class_ui__matrix8dialog.html">
-              <section title="retranslateUi" ref="class_ui__matrix8dialog.html#a1e76584117237b2839700411c6b1d748" />
-              <section title="setupUi" ref="class_ui__matrix8dialog.html#a2b39e0a8327011911b0cd985a4d5697f" />
-              <section title="buttonBox" ref="class_ui__matrix8dialog.html#a05caf47b40e45d204c2bd9613a8d955a" />
-              <section title="label" ref="class_ui__matrix8dialog.html#ae19ba85fd7ddeb22e754a4eeb46aef24" />
-              <section title="label_2" ref="class_ui__matrix8dialog.html#a34ab1fde638ea494cab0b6e8b49e339f" />
-              <section title="label_3" ref="class_ui__matrix8dialog.html#abb97b8de24dd00e5f7d6ad36c7bc009c" />
-              <section title="label_4" ref="class_ui__matrix8dialog.html#a302027e9bca42c3d8709c82fa7249d9d" />
-              <section title="label_5" ref="class_ui__matrix8dialog.html#ac7c6fa572253de8781d51b59ded2893a" />
-              <section title="label_6" ref="class_ui__matrix8dialog.html#a3bde654266d91ad7ac339ddcda446cff" />
-              <section title="label_7" ref="class_ui__matrix8dialog.html#a56e4ea75bd746b2aefc18a48512a6612" />
-              <section title="label_8" ref="class_ui__matrix8dialog.html#ac6160d0d4e2382df77d0c61e168d271d" />
-              <section title="lineEdit_value1" ref="class_ui__matrix8dialog.html#a60c80910c009351097ddd66eb8e06253" />
-              <section title="lineEdit_value2" ref="class_ui__matrix8dialog.html#a73c18fd36dada64bae0c1dfdd4467699" />
-              <section title="lineEdit_value3" ref="class_ui__matrix8dialog.html#a5898b8f9962f3ff9a19c4a801177306c" />
-              <section title="lineEdit_value4" ref="class_ui__matrix8dialog.html#aef722cd4314ed9b4a9c91b5272138380" />
-              <section title="lineEdit_value5" ref="class_ui__matrix8dialog.html#a6b9d474e8b60af43933806b4c2fb7055" />
-              <section title="lineEdit_value6" ref="class_ui__matrix8dialog.html#af8ee00326ad344afc1fe571fcef389fd" />
-              <section title="lineEdit_value7" ref="class_ui__matrix8dialog.html#ab0d3ddc7637b2d04609af1aba005d22b" />
-              <section title="lineEdit_value8" ref="class_ui__matrix8dialog.html#aa1a34788df19af7cb4318cd55506013c" />
-            </section>
-            <section title="Ui_propertiesDialog" ref="class_ui__properties_dialog.html">
-              <section title="retranslateUi" ref="class_ui__properties_dialog.html#af4e86fdbed9259bb304605b4d414aecb" />
-              <section title="setupUi" ref="class_ui__properties_dialog.html#a595c0d40bd7ea44fd12cb3d08cf5a9fb" />
-              <section title="buttonBox" ref="class_ui__properties_dialog.html#a1ccb0e1a0369f5ef66245528379f05a5" />
-              <section title="ellipticCycleButton" ref="class_ui__properties_dialog.html#acc387e99d883c6337a06bf7c767a58c4" />
-              <section title="ellipticPointButton" ref="class_ui__properties_dialog.html#a9b2b3e033a44d84db89f5bf0c7977a3e" />
-              <section title="exactButton" ref="class_ui__properties_dialog.html#abd227707bd8310869b8fbe15d7ca9cfe" />
-              <section title="figureDescriptionText" ref="class_ui__properties_dialog.html#abdd6eabecff7576fc26e0fcce1ec5578" />
-              <section title="floatButton" ref="class_ui__properties_dialog.html#a524ae1db7433b72d6689e6afbac4aa52" />
-              <section title="groupBox" ref="class_ui__properties_dialog.html#aa4408a5d11640f91d67098cb57346179" />
-              <section title="groupBox_2" ref="class_ui__properties_dialog.html#ae8127b03eb0c346ac3c25227410326e1" />
-              <section title="groupBox_3" ref="class_ui__properties_dialog.html#a5a9872252c004e5c3665e0de8a331d06" />
-              <section title="groupBox_4" ref="class_ui__properties_dialog.html#a209e64b037cdee834e22e417a00b6d5c" />
-              <section title="horizontalLayout" ref="class_ui__properties_dialog.html#a8562fe5c8fd461c2fae10f6e00f856dc" />
-              <section title="horizontalLayout_2" ref="class_ui__properties_dialog.html#aba58a87c91131c941e91a80f6fe3f175" />
-              <section title="hyperbolicCycleButton" ref="class_ui__properties_dialog.html#aeb4b1f6b0ff897d31e89dbe8689e223c" />
-              <section title="hyperbolicPointButton" ref="class_ui__properties_dialog.html#ad4c33c681b44790fc4671f08d7b9fe2c" />
-              <section title="parabolicCycleButton" ref="class_ui__properties_dialog.html#aa6488e9cda300c6fb580ff1103e6a3e3" />
-              <section title="parabolicPointButton" ref="class_ui__properties_dialog.html#a86f31864696a9f676ad3fee8a0ef4ad6" />
-              <section title="verticalLayout" ref="class_ui__properties_dialog.html#a98255232cbf624a7b15788f3db8c5240" />
-              <section title="verticalLayout_2" ref="class_ui__properties_dialog.html#af0b5bd40650126b92f06aed5c9c5ad4e" />
-              <section title="verticalLayout_3" ref="class_ui__properties_dialog.html#a7c81843ddff27d18375e13cfed9bfac0" />
-              <section title="verticalLayout_4" ref="class_ui__properties_dialog.html#a73c069e1cd6743f2304c5a8ccf5b3de0" />
-              <section title="verticalSpacer" ref="class_ui__properties_dialog.html#a7ef037d1f46fe6b15d6bd06be637cbf0" />
-            </section>
-            <section title="Ui_settingsDialog" ref="class_ui__settings_dialog.html">
-              <section title="retranslateUi" ref="class_ui__settings_dialog.html#a41fc817d3b4a6103aee2ded4a8f5c273" />
-              <section title="setupUi" ref="class_ui__settings_dialog.html#af96d6b02d7d9762b18d968d8c8128f82" />
-              <section title="automaticNaming" ref="class_ui__settings_dialog.html#ab0faaf97c711d41d8919c92c3f268b1c" />
-              <section title="buttonBox" ref="class_ui__settings_dialog.html#a9fd9aea95caaf8c0f62efbb46711d137" />
-              <section title="comboBox" ref="class_ui__settings_dialog.html#af4beec48c7690a2c9b6d57904f87d0c5" />
-              <section title="defaultPathLineEdit" ref="class_ui__settings_dialog.html#ae202f250dd6da958d0920b4665d1917f" />
-              <section title="doubleSpinBox" ref="class_ui__settings_dialog.html#a3d632ee44f600bfda94dd22c8b865b2d" />
-              <section title="doubleSpinBox_2" ref="class_ui__settings_dialog.html#affdd0804285454c334853dd702f0f4c2" />
-              <section title="gridLayout" ref="class_ui__settings_dialog.html#a9cbb60155b2df0b006c2615493b136ee" />
-              <section title="gridLayout_2" ref="class_ui__settings_dialog.html#a8747cf83ce4127dab0cb1e7f7a1fd8d8" />
-              <section title="groupBox" ref="class_ui__settings_dialog.html#ad1d3781d92fe311f7b670e9c8f04ec6e" />
-              <section title="groupBox_2" ref="class_ui__settings_dialog.html#aeedea3eec08a9525afec84e0bb18c5e6" />
-              <section title="groupBox_3" ref="class_ui__settings_dialog.html#ab6039b08fe7033d8632ba959a1f9f458" />
-              <section title="groupBox_4" ref="class_ui__settings_dialog.html#a833c48e589e0b65f6314673f5f9e04a9" />
-              <section title="groupBox_6" ref="class_ui__settings_dialog.html#a3e8f7010593ce0a07d566c17dc5cd3e7" />
-              <section title="groupBox_7" ref="class_ui__settings_dialog.html#aea78afbe2f62103d25386617107ba544" />
-              <section title="groupBox_8" ref="class_ui__settings_dialog.html#a510fbc4798016d07406a498374867722" />
-              <section title="horizontalLayout" ref="class_ui__settings_dialog.html#a2433db810a7ae0d57857076825e096a0" />
-              <section title="horizontalLayout_2" ref="class_ui__settings_dialog.html#ad7c6cf95448da5fdbd25816a1b8cd631" />
-              <section title="horizontalLayout_3" ref="class_ui__settings_dialog.html#a029c3789c703085c4f6677e7925292d6" />
-              <section title="horizontalSpacer" ref="class_ui__settings_dialog.html#ad3cf5fe1bdd892adf122893d92d3be22" />
-              <section title="horizontalSpacer_2" ref="class_ui__settings_dialog.html#aeffd642eb2c046e6c0ea941846bdb988" />
-              <section title="horizontalSpacer_3" ref="class_ui__settings_dialog.html#a58c2390d2c0ead93a2b360e4b3059b8a" />
-              <section title="horizontalSpacer_4" ref="class_ui__settings_dialog.html#aa64ac7eca46c9267f8e454b072071a07" />
-              <section title="horizontalSpacer_5" ref="class_ui__settings_dialog.html#affd52a1b02f018dbeb5261a37f7aa9fb" />
-              <section title="label" ref="class_ui__settings_dialog.html#add772572c6b6d5eeecd754a913b931be" />
-              <section title="label_2" ref="class_ui__settings_dialog.html#ac591889922f52c0d47892ee9217d2fcd" />
-              <section title="label_3" ref="class_ui__settings_dialog.html#aeab6baefbf0bf0d9d3bd107130b80349" />
-              <section title="label_4" ref="class_ui__settings_dialog.html#a864626ed59d209e907310a99e6441420" />
-              <section title="label_5" ref="class_ui__settings_dialog.html#ab041c5c10a03d19c9cc5fe7d69012e8c" />
-              <section title="manualNaming" ref="class_ui__settings_dialog.html#adbfba48f832ee2f84b61c7f9d236197e" />
-              <section title="onlyRealsFalse" ref="class_ui__settings_dialog.html#a24ff462fecd5f6a6c8372779b20d5042" />
-              <section title="onlyRealsTrue" ref="class_ui__settings_dialog.html#a3954ad627be6db1470e4c958f4132526" />
-              <section title="pushButton" ref="class_ui__settings_dialog.html#ada86439f18c5657ac82583030dfd7604" />
-              <section title="pushButton_2" ref="class_ui__settings_dialog.html#abb80c05c318bdf7b89da56bdd02974c4" />
-              <section title="pushButton_3" ref="class_ui__settings_dialog.html#a441acb931c49542379e5f97e215c860e" />
-              <section title="pushButton_4" ref="class_ui__settings_dialog.html#a9bcd42185b37bce81ab51a787ae6493b" />
-              <section title="spinBox" ref="class_ui__settings_dialog.html#aa1039d8dae1b572300fa54f7c3e18646" />
-              <section title="tab" ref="class_ui__settings_dialog.html#acf10507cd54902c83445442e3e09b738" />
-              <section title="tab_2" ref="class_ui__settings_dialog.html#a64fe5c5093202932607b29e9af7c378b" />
-              <section title="tabWidget" ref="class_ui__settings_dialog.html#acc596f6a2cac5c3ecc2ce520a20c827a" />
-              <section title="verticalLayout" ref="class_ui__settings_dialog.html#ad02c41c8dcba75bcfe6a841fd87371fc" />
-              <section title="verticalLayout_2" ref="class_ui__settings_dialog.html#a3164e8026801dea9804a1354b78c38da" />
-              <section title="verticalLayout_3" ref="class_ui__settings_dialog.html#a5c11a50452e48905ceb877c0f143558a" />
-              <section title="verticalLayout_4" ref="class_ui__settings_dialog.html#a41905fe1434ea89cee3595f6c860b5a6" />
-              <section title="verticalLayout_6" ref="class_ui__settings_dialog.html#a4fe94889101443b99ba127a647d9fc43" />
-              <section title="verticalSpacer" ref="class_ui__settings_dialog.html#a7ef380f555a0a3e2e274000f6338c965" />
-              <section title="verticalSpacer_2" ref="class_ui__settings_dialog.html#a766fad3cfaf98dde8ae45ce9392e250a" />
             </section>
             <section title="view" ref="classview.html">
               <section title="view" ref="classview.html#a5b500c7ca4c4631a614445bcf8c06ed8" />
@@ -990,6 +704,7 @@
               <section title="menuRelActionGroup" ref="classmenu_rel_action_group.html" />
             </section>
             <section title="QDialog">
+              <section title="cStyleDialog" ref="classc_style_dialog.html" />
               <section title="defineCycleDialog" ref="classdefine_cycle_dialog.html" />
               <section title="helpDialog" ref="classhelp_dialog.html" />
               <section title="matrix4dialog" ref="classmatrix4dialog.html" />
@@ -1032,26 +747,6 @@
             <section title="QStandardItemModel">
               <section title="treeModel" ref="classtree_model.html" />
             </section>
-            <section title="qt_meta_stringdata_circle_t" ref="structqt__meta__stringdata__circle__t.html" />
-            <section title="qt_meta_stringdata_cycleContextMenu_t" ref="structqt__meta__stringdata__cycle_context_menu__t.html" />
-            <section title="qt_meta_stringdata_defineCycleDialog_t" ref="structqt__meta__stringdata__define_cycle_dialog__t.html" />
-            <section title="qt_meta_stringdata_dockWidget_t" ref="structqt__meta__stringdata__dock_widget__t.html" />
-            <section title="qt_meta_stringdata_figureUndoCommand_t" ref="structqt__meta__stringdata__figure_undo_command__t.html" />
-            <section title="qt_meta_stringdata_graphicCycle_t" ref="structqt__meta__stringdata__graphic_cycle__t.html" />
-            <section title="qt_meta_stringdata_graphicsScene_t" ref="structqt__meta__stringdata__graphics_scene__t.html" />
-            <section title="qt_meta_stringdata_helpBrowser_t" ref="structqt__meta__stringdata__help_browser__t.html" />
-            <section title="qt_meta_stringdata_helpDialog_t" ref="structqt__meta__stringdata__help_dialog__t.html" />
-            <section title="qt_meta_stringdata_line_t" ref="structqt__meta__stringdata__line__t.html" />
-            <section title="qt_meta_stringdata_MainWindow_t" ref="structqt__meta__stringdata___main_window__t.html" />
-            <section title="qt_meta_stringdata_matrix4dialog_t" ref="structqt__meta__stringdata__matrix4dialog__t.html" />
-            <section title="qt_meta_stringdata_matrix8dialog_t" ref="structqt__meta__stringdata__matrix8dialog__t.html" />
-            <section title="qt_meta_stringdata_menuRelAction_t" ref="structqt__meta__stringdata__menu_rel_action__t.html" />
-            <section title="qt_meta_stringdata_menuRelActionGroup_t" ref="structqt__meta__stringdata__menu_rel_action_group__t.html" />
-            <section title="qt_meta_stringdata_point_t" ref="structqt__meta__stringdata__point__t.html" />
-            <section title="qt_meta_stringdata_propertiesDialog_t" ref="structqt__meta__stringdata__properties_dialog__t.html" />
-            <section title="qt_meta_stringdata_settingsDialog_t" ref="structqt__meta__stringdata__settings_dialog__t.html" />
-            <section title="qt_meta_stringdata_treeModel_t" ref="structqt__meta__stringdata__tree_model__t.html" />
-            <section title="qt_meta_stringdata_view_t" ref="structqt__meta__stringdata__view__t.html" />
             <section title="qt_meta_stringdata_vis_t" ref="structqt__meta__stringdata__vis__t.html" />
             <section title="QTextBrowser">
               <section title="helpBrowser" ref="classhelp_browser.html" />
@@ -1061,27 +756,6 @@
             </section>
             <section title="RGBA" ref="struct_r_g_b_a.html" />
             <section title="slideParam" ref="structslide_param.html" />
-            <section title="Ui_defineCycleDialog" ref="class_ui__define_cycle_dialog.html">
-              <section title="Ui::defineCycleDialog" ref="class_ui_1_1define_cycle_dialog.html" />
-            </section>
-            <section title="Ui_helpDialog" ref="class_ui__help_dialog.html">
-              <section title="Ui::helpDialog" ref="class_ui_1_1help_dialog.html" />
-            </section>
-            <section title="Ui_MainWindow" ref="class_ui___main_window.html">
-              <section title="Ui::MainWindow" ref="class_ui_1_1_main_window.html" />
-            </section>
-            <section title="Ui_matrix4dialog" ref="class_ui__matrix4dialog.html">
-              <section title="Ui::matrix4dialog" ref="class_ui_1_1matrix4dialog.html" />
-            </section>
-            <section title="Ui_matrix8dialog" ref="class_ui__matrix8dialog.html">
-              <section title="Ui::matrix8dialog" ref="class_ui_1_1matrix8dialog.html" />
-            </section>
-            <section title="Ui_propertiesDialog" ref="class_ui__properties_dialog.html">
-              <section title="Ui::propertiesDialog" ref="class_ui_1_1properties_dialog.html" />
-            </section>
-            <section title="Ui_settingsDialog" ref="class_ui__settings_dialog.html">
-              <section title="Ui::settingsDialog" ref="class_ui_1_1settings_dialog.html" />
-            </section>
             <section title="basic">
               <section title="MoebInv::cycle" ref="class_moeb_inv_1_1cycle.html">
                 <section title="MoebInv::cycle2D" ref="class_moeb_inv_1_1cycle2_d.html" />
@@ -1105,6 +779,7 @@
             <section title="include" ref="dir_d44c64559bbebec7f509842c48db8b23.html">
               <section title="circle.h" ref="circle_8h_source.html" />
               <section title="conf.h" ref="conf_8h_source.html" />
+              <section title="cstyledialog.h" ref="cstyledialog_8h_source.html" />
               <section title="cyclecontextmenu.h" ref="cyclecontextmenu_8h_source.html" />
               <section title="definecycledialog.h" ref="definecycledialog_8h_source.html" />
               <section title="dockwidget.h" ref="dockwidget_8h_source.html" />
@@ -1127,7 +802,7 @@
             <section title="lib" ref="dir_97aefd0d527b934f1d99a682da8fe6a9.html">
               <section title="moebinv-3.2" ref="dir_a72f59a506d9141f849be7018d769618.html">
                 <section title="cycle3D-visualiser" ref="dir_2463ac8bb3081e849924046d25fbd39b.html">
-                  <section title="moc_predefs.h" ref="lib_2moebinv-3_82_2cycle3_d-visualiser_2moc__predefs_8h_source.html" />
+                  <section title="moc_predefs.h" ref="moc__predefs_8h_source.html" />
                   <section title="vis.h" ref="vis_8h_source.html" />
                 </section>
                 <section title="include" ref="dir_3c6f76ffcfb9ae2f3635da363af88ad2.html">
@@ -1141,16 +816,6 @@
                 </section>
               </section>
             </section>
-            <section title="moebinv-gui-build" ref="dir_2a59b0eac2f9fdc5cf40c07bff9eac26.html">
-              <section title="moc_predefs.h" ref="moebinv-gui-build_2moc__predefs_8h_source.html" />
-              <section title="ui_definecycledialog.h" ref="ui__definecycledialog_8h_source.html" />
-              <section title="ui_helpdialog.h" ref="ui__helpdialog_8h_source.html" />
-              <section title="ui_mainwindow.h" ref="ui__mainwindow_8h_source.html" />
-              <section title="ui_matrix4dialog.h" ref="ui__matrix4dialog_8h_source.html" />
-              <section title="ui_matrix8dialog.h" ref="ui__matrix8dialog_8h_source.html" />
-              <section title="ui_propertiesdialog.h" ref="ui__propertiesdialog_8h_source.html" />
-              <section title="ui_settingsdialog.h" ref="ui__settingsdialog_8h_source.html" />
-            </section>
           </section>
         </section>
       </section>
@@ -1163,17 +828,28 @@
       <keyword name="paint" id="circle::paint" ref="classcircle.html#a2d9af8e86fb3605c736689a2e2566d26" />
       <keyword name="boundingRect" id="circle::boundingRect" ref="classcircle.html#ab9d2059829ac8f0420c7e711caeb61c7" />
       <keyword name="shape" id="circle::shape" ref="classcircle.html#a198cbcea745bd311fe91c2a23def746c" />
+      <keyword name="cStyleDialog" id="cStyleDialog" ref="classc_style_dialog.html" />
+      <keyword name="changeColour" id="cStyleDialog::changeColour" ref="classc_style_dialog.html#af4fed4e11853816ab13e9b5ab8a1b6ed" />
+      <keyword name="changeStyle" id="cStyleDialog::changeStyle" ref="classc_style_dialog.html#a170f46411ba76d9ba3ef97030ed9e1d8" />
+      <keyword name="changeWeight" id="cStyleDialog::changeWeight" ref="classc_style_dialog.html#a6e4b38f987018310b1a02189fcbf6dfc" />
+      <keyword name="updateCycleData" id="cStyleDialog::updateCycleData" ref="classc_style_dialog.html#a7915871fc0bbb02989bbd17f9071baf9" />
+      <keyword name="cStyleDialog" id="cStyleDialog::cStyleDialog" ref="classc_style_dialog.html#a5807725382c046b8d7ce6d69d3b596e2" />
+      <keyword name="showEvent" id="cStyleDialog::showEvent" ref="classc_style_dialog.html#aa74af6b1f34d43ce800e3ad343c11de7" />
+      <keyword name="setButtonColour" id="cStyleDialog::setButtonColour" ref="classc_style_dialog.html#a69eb66937adf137641436896cd1c90d7" />
+      <keyword name="getColour" id="cStyleDialog::getColour" ref="classc_style_dialog.html#a6a48c4f7602f96dc42dfd53f5cae9a6a" />
+      <keyword name="getStyle" id="cStyleDialog::getStyle" ref="classc_style_dialog.html#a87856188bacb34ce4c3d654bc91e3adb" />
+      <keyword name="getWeight" id="cStyleDialog::getWeight" ref="classc_style_dialog.html#a6ba1b5aae4bfc925f832a85cb237e4af" />
       <keyword name="cycleContextMenu" id="cycleContextMenu" ref="classcycle_context_menu.html" />
       <keyword name="confirmDeleteCycle" id="cycleContextMenu::confirmDeleteCycle" ref="classcycle_context_menu.html#a844d59a74d643b19fd19eb1de11ea4e9" />
       <keyword name="amendRelationList" id="cycleContextMenu::amendRelationList" ref="classcycle_context_menu.html#ad6adc2b3c3ad2650190967f7d4efd088" />
-      <keyword name="displayColourDialog" id="cycleContextMenu::displayColourDialog" ref="classcycle_context_menu.html#abf4f98f97561d5acd104a6c0b2038e15" />
-      <keyword name="displayStyleDialog" id="cycleContextMenu::displayStyleDialog" ref="classcycle_context_menu.html#a094bbed14bab12e3b9ac3ae07140bdcb" />
-      <keyword name="displayWeightDialog" id="cycleContextMenu::displayWeightDialog" ref="classcycle_context_menu.html#ac720f89ffd13952e79dd77c1bb15c2aa" />
       <keyword name="editPoint" id="cycleContextMenu::editPoint" ref="classcycle_context_menu.html#ae807f1cddefcdedf9f8c60473bd287df" />
+      <keyword name="showStyleDialog" id="cycleContextMenu::showStyleDialog" ref="classcycle_context_menu.html#ae985f8d22bb60ae9dc406cb7276ec1a5" />
+      <keyword name="updateCycleData" id="cycleContextMenu::updateCycleData" ref="classcycle_context_menu.html#a7d75eefbcc183770b18c578336d354e1" />
       <keyword name="relationsHaveChanged" id="cycleContextMenu::relationsHaveChanged" ref="classcycle_context_menu.html#a42d360ffa2a047c3f43ded9fcec5982b" />
       <keyword name="colourSelected" id="cycleContextMenu::colourSelected" ref="classcycle_context_menu.html#acd8ba953b7b1edfac94b5ba4158217af" />
       <keyword name="weightSelected" id="cycleContextMenu::weightSelected" ref="classcycle_context_menu.html#ac91d09b750dfeace9334b67649fbbda0" />
       <keyword name="styleSelected" id="cycleContextMenu::styleSelected" ref="classcycle_context_menu.html#a31b1b2e1f6596697cdac2cf0cb66359e" />
+      <keyword name="cycleStyleChanged" id="cycleContextMenu::cycleStyleChanged" ref="classcycle_context_menu.html#a2c39108d7f85f828d0af0ab4db999514" />
       <keyword name="sceneInvalid" id="cycleContextMenu::sceneInvalid" ref="classcycle_context_menu.html#a0e28f14e9918aef074523854b5364c3e" />
       <keyword name="changesMadeToFigure" id="cycleContextMenu::changesMadeToFigure" ref="classcycle_context_menu.html#a6b92c1d84f101c8386d1152b680247ff" />
       <keyword name="cycleContextMenu" id="cycleContextMenu::cycleContextMenu" ref="classcycle_context_menu.html#a0a948765494ab4b2ecf73c89123f7f14" />
@@ -1185,9 +861,8 @@
       <keyword name="buildContextMenu" id="cycleContextMenu::buildContextMenu" ref="classcycle_context_menu.html#a155448ae220555423d26b055f50b6e49" />
       <keyword name="buildActions" id="cycleContextMenu::buildActions" ref="classcycle_context_menu.html#a2ada1b40956db90398503d184afdd5ee" />
       <keyword name="node_label" id="cycleContextMenu::node_label" ref="classcycle_context_menu.html#a17d519c784fac28e39da31478b810ae9" />
-      <keyword name="changeColour" id="cycleContextMenu::changeColour" ref="classcycle_context_menu.html#a1e2215915914b4c36463cbe5e667722d" />
-      <keyword name="changeStyle" id="cycleContextMenu::changeStyle" ref="classcycle_context_menu.html#a61f2889cd624664ec0b4933def974a04" />
-      <keyword name="changeWeight" id="cycleContextMenu::changeWeight" ref="classcycle_context_menu.html#a9798e2ec98b4e15af313112411cd8a24" />
+      <keyword name="getCycleData" id="cycleContextMenu::getCycleData" ref="classcycle_context_menu.html#ae9e820ae7baf504c5229592a0901a12c" />
+      <keyword name="cycleStyle" id="cycleContextMenu::cycleStyle" ref="classcycle_context_menu.html#a4b36e4536f222fdc21f02fd787782423" />
       <keyword name="deletePoint" id="cycleContextMenu::deletePoint" ref="classcycle_context_menu.html#aa58c68008bb6ab0d70af517821b8a48f" />
       <keyword name="edit" id="cycleContextMenu::edit" ref="classcycle_context_menu.html#a7c9b8d13930dc91c050e5b870f7dbfb8" />
       <keyword name="cycleData" id="cycleData" ref="structcycle_data.html" />
@@ -1249,6 +924,7 @@
       <keyword name="stableMatrix" id="graphicCycle::stableMatrix" ref="classgraphic_cycle.html#a1c3a094ad53a3705019c24869340ed51" />
       <keyword name="setCycleAsy" id="graphicCycle::setCycleAsy" ref="classgraphic_cycle.html#a58385898752cac06fb14fc527f908b8c" />
       <keyword name="node_label" id="graphicCycle::node_label" ref="classgraphic_cycle.html#a51c0fcf1c2b413a20113c0b4e10194d9" />
+      <keyword name="setCycleStyle" id="graphicCycle::setCycleStyle" ref="classgraphic_cycle.html#ae407700101f0bd9bfd45bfc382c30ecc" />
       <keyword name="graphicsScene" id="graphicsScene" ref="classgraphics_scene.html" />
       <keyword name="newMouseLeftPress" id="graphicsScene::newMouseLeftPress" ref="classgraphics_scene.html#a370117524f759425873aa2dd710958c0" />
       <keyword name="newMouseRightPress" id="graphicsScene::newMouseRightPress" ref="classgraphics_scene.html#a788bb2305e72c0deb7cd95a7e245b79a" />
@@ -1347,12 +1023,14 @@
       <keyword name="actionHandler" id="menuRelAction::actionHandler" ref="classmenu_rel_action.html#a23b63e5bdb79e12f74bd1d33a53fb6e0" />
       <keyword name="cycleMetricActionHandler" id="menuRelAction::cycleMetricActionHandler" ref="classmenu_rel_action.html#adbd43b99466f9ad2cde1934e1599ae4c" />
       <keyword name="checkActionHandler" id="menuRelAction::checkActionHandler" ref="classmenu_rel_action.html#a1535eb0d2ad06bd4d44f3de8761841b2" />
+      <keyword name="checkActionCycleHandler" id="menuRelAction::checkActionCycleHandler" ref="classmenu_rel_action.html#a8d79623cfe8711e62c6f4f28d8d4c33a" />
       <keyword name="node_label" id="menuRelAction::node_label" ref="classmenu_rel_action.html#a157ae072f7e1622564ff68583bb73132" />
       <keyword name="createCycleRelation" id="menuRelAction::createCycleRelation" ref="classmenu_rel_action.html#a64a27674825379ba110fb2117a572ffe" />
-      <keyword name="checkCycleRelation" id="menuRelAction::checkCycleRelation" ref="classmenu_rel_action.html#ab3a724c2d09de8a3d253210ec3a0e0d3" />
+      <keyword name="checkCycleRelation" id="menuRelAction::checkCycleRelation" ref="classmenu_rel_action.html#aae6e2ce0d9d17c13d502984dda8a4a54" />
       <keyword name="addRelation" id="menuRelAction::addRelation" ref="classmenu_rel_action.html#ad9c9c61008821fcef78633ed38b42f8c" />
       <keyword name="addCycleRelation" id="menuRelAction::addCycleRelation" ref="classmenu_rel_action.html#ab78b5ed63bee30881b70110161670fb5" />
       <keyword name="checkRelation" id="menuRelAction::checkRelation" ref="classmenu_rel_action.html#afa273b825fbdc2d887cc6a3ecfc62265" />
+      <keyword name="checkCycleMetricRelation" id="menuRelAction::checkCycleMetricRelation" ref="classmenu_rel_action.html#a7937666c8189cb7597874642917e83ec" />
       <keyword name="menuRelActionGroup" id="menuRelActionGroup" ref="classmenu_rel_action_group.html" />
       <keyword name="handleRelation" id="menuRelActionGroup::handleRelation" ref="classmenu_rel_action_group.html#a35a2675819196b79afc8f0c3701b10ed" />
       <keyword name="menuRelActionGroup" id="menuRelActionGroup::menuRelActionGroup" ref="classmenu_rel_action_group.html#ac43afaa3a021c3543d31e2401944938e" />
@@ -1367,69 +1045,12 @@
       <keyword name="y" id="Point::y" ref="struct_point.html#afa38be143ae800e6ad69ce8ed4df62d8" />
       <keyword name="z" id="Point::z" ref="struct_point.html#a05ba3b1dfcb19430582ae953cbbfbded" />
       <keyword name="propertiesDialog" id="propertiesDialog" ref="classproperties_dialog.html" />
+      <keyword name="metricChanged" id="propertiesDialog::metricChanged" ref="classproperties_dialog.html#a68bf43407ab7513191021bed8f974846" />
       <keyword name="propertiesDialog" id="propertiesDialog::propertiesDialog" ref="classproperties_dialog.html#a23e5c7a841b8f1bda7adcc7d99d4da67" />
       <keyword name="showEvent" id="propertiesDialog::showEvent" ref="classproperties_dialog.html#a41e3286b47651d4c757bb12d34660fe6" />
       <keyword name="update" id="propertiesDialog::update" ref="classproperties_dialog.html#aff17b502153d16b8f19fe75bf1d06d73" />
-      <keyword name="qt_meta_stringdata_circle_t" id="qt_meta_stringdata_circle_t" ref="structqt__meta__stringdata__circle__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_circle_t::data" ref="structqt__meta__stringdata__circle__t.html#a7930d41cb3c0ef3a8124a1d41c10946f" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_circle_t::stringdata0" ref="structqt__meta__stringdata__circle__t.html#ad3010a59b3cd22c250828be7413a7157" />
-      <keyword name="qt_meta_stringdata_cycleContextMenu_t" id="qt_meta_stringdata_cycleContextMenu_t" ref="structqt__meta__stringdata__cycle_context_menu__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_cycleContextMenu_t::data" ref="structqt__meta__stringdata__cycle_context_menu__t.html#a5d7c8abf7959a17b83d045f9ad7b4c2a" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_cycleContextMenu_t::stringdata0" ref="structqt__meta__stringdata__cycle_context_menu__t.html#a51ea2171aa6b87941882cb7be4d61db8" />
-      <keyword name="qt_meta_stringdata_defineCycleDialog_t" id="qt_meta_stringdata_defineCycleDialog_t" ref="structqt__meta__stringdata__define_cycle_dialog__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_defineCycleDialog_t::data" ref="structqt__meta__stringdata__define_cycle_dialog__t.html#a5f5ff34ca5ca0e327d7051d2ce9d52d5" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_defineCycleDialog_t::stringdata0" ref="structqt__meta__stringdata__define_cycle_dialog__t.html#a6c71a93ad424fda6c7d2839ff9f1026f" />
-      <keyword name="qt_meta_stringdata_dockWidget_t" id="qt_meta_stringdata_dockWidget_t" ref="structqt__meta__stringdata__dock_widget__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_dockWidget_t::data" ref="structqt__meta__stringdata__dock_widget__t.html#a118c54d315eed59d78416e5e4145068d" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_dockWidget_t::stringdata0" ref="structqt__meta__stringdata__dock_widget__t.html#a1b94e2371992a973536e35688d5f62ee" />
-      <keyword name="qt_meta_stringdata_figureUndoCommand_t" id="qt_meta_stringdata_figureUndoCommand_t" ref="structqt__meta__stringdata__figure_undo_command__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_figureUndoCommand_t::data" ref="structqt__meta__stringdata__figure_undo_command__t.html#ab65b436adbc0fe0249f9c76e107684a6" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_figureUndoCommand_t::stringdata0" ref="structqt__meta__stringdata__figure_undo_command__t.html#ad459b353f01ec3be0cc8e2aca335b6c2" />
-      <keyword name="qt_meta_stringdata_graphicCycle_t" id="qt_meta_stringdata_graphicCycle_t" ref="structqt__meta__stringdata__graphic_cycle__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_graphicCycle_t::data" ref="structqt__meta__stringdata__graphic_cycle__t.html#a7d6ccfa54b966f7d6d259bdf378b3c62" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_graphicCycle_t::stringdata0" ref="structqt__meta__stringdata__graphic_cycle__t.html#a2d7f26c529a28c5e40d5a0d1522668b0" />
-      <keyword name="qt_meta_stringdata_graphicsScene_t" id="qt_meta_stringdata_graphicsScene_t" ref="structqt__meta__stringdata__graphics_scene__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_graphicsScene_t::data" ref="structqt__meta__stringdata__graphics_scene__t.html#a9cc8896a17a0667e790b40b5111c70aa" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_graphicsScene_t::stringdata0" ref="structqt__meta__stringdata__graphics_scene__t.html#a192f9146e5f62ea8345ecbfbc9909e8b" />
-      <keyword name="qt_meta_stringdata_helpBrowser_t" id="qt_meta_stringdata_helpBrowser_t" ref="structqt__meta__stringdata__help_browser__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_helpBrowser_t::data" ref="structqt__meta__stringdata__help_browser__t.html#a3cd7902717b8d64da130c710bb6178a0" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_helpBrowser_t::stringdata0" ref="structqt__meta__stringdata__help_browser__t.html#a79c6e92bd6dcec160a129977b9e80f9f" />
-      <keyword name="qt_meta_stringdata_helpDialog_t" id="qt_meta_stringdata_helpDialog_t" ref="structqt__meta__stringdata__help_dialog__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_helpDialog_t::data" ref="structqt__meta__stringdata__help_dialog__t.html#a3e6a8b85a92334ef4a1f5ef5d4ff65d9" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_helpDialog_t::stringdata0" ref="structqt__meta__stringdata__help_dialog__t.html#ae8fbd8a9b4ed0a5843c3fbd6410e0265" />
-      <keyword name="qt_meta_stringdata_line_t" id="qt_meta_stringdata_line_t" ref="structqt__meta__stringdata__line__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_line_t::data" ref="structqt__meta__stringdata__line__t.html#a376e9f05a08dbff18309be70ba87c807" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_line_t::stringdata0" ref="structqt__meta__stringdata__line__t.html#aafcc21a193589e9460b20da78a228294" />
-      <keyword name="qt_meta_stringdata_MainWindow_t" id="qt_meta_stringdata_MainWindow_t" ref="structqt__meta__stringdata___main_window__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_MainWindow_t::data" ref="structqt__meta__stringdata___main_window__t.html#af3388f2daac6273573d6d972ed5fcf91" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_MainWindow_t::stringdata0" ref="structqt__meta__stringdata___main_window__t.html#ac30547ed7180a962035f829b57b4194f" />
-      <keyword name="qt_meta_stringdata_matrix4dialog_t" id="qt_meta_stringdata_matrix4dialog_t" ref="structqt__meta__stringdata__matrix4dialog__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_matrix4dialog_t::data" ref="structqt__meta__stringdata__matrix4dialog__t.html#a24c7d203a03bf49c7852e08c8583b12b" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_matrix4dialog_t::stringdata0" ref="structqt__meta__stringdata__matrix4dialog__t.html#a5509d1e4a8dcb461cb64d3d4c6a0f14f" />
-      <keyword name="qt_meta_stringdata_matrix8dialog_t" id="qt_meta_stringdata_matrix8dialog_t" ref="structqt__meta__stringdata__matrix8dialog__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_matrix8dialog_t::data" ref="structqt__meta__stringdata__matrix8dialog__t.html#a9d7af3bd2bc8e32d83f86bc8f2f6fcd5" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_matrix8dialog_t::stringdata0" ref="structqt__meta__stringdata__matrix8dialog__t.html#a830bc0f3c0e2785540c9fbcabea43849" />
-      <keyword name="qt_meta_stringdata_menuRelAction_t" id="qt_meta_stringdata_menuRelAction_t" ref="structqt__meta__stringdata__menu_rel_action__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_menuRelAction_t::data" ref="structqt__meta__stringdata__menu_rel_action__t.html#a7b40c8a52e37a5c28251d7e999eafeaa" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_menuRelAction_t::stringdata0" ref="structqt__meta__stringdata__menu_rel_action__t.html#aad12ee0e27fa96033425cf66079ba224" />
-      <keyword name="qt_meta_stringdata_menuRelActionGroup_t" id="qt_meta_stringdata_menuRelActionGroup_t" ref="structqt__meta__stringdata__menu_rel_action_group__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_menuRelActionGroup_t::data" ref="structqt__meta__stringdata__menu_rel_action_group__t.html#ae7569401cbdb8cde6886a1120ca52cff" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_menuRelActionGroup_t::stringdata0" ref="structqt__meta__stringdata__menu_rel_action_group__t.html#a16e48c6d600da8cd939d1fab23ece3ab" />
-      <keyword name="qt_meta_stringdata_point_t" id="qt_meta_stringdata_point_t" ref="structqt__meta__stringdata__point__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_point_t::data" ref="structqt__meta__stringdata__point__t.html#a0967a3a4d1a2a917560b0e4a21b882a3" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_point_t::stringdata0" ref="structqt__meta__stringdata__point__t.html#a42f42e4322b83cf3913e857c6fefb423" />
-      <keyword name="qt_meta_stringdata_propertiesDialog_t" id="qt_meta_stringdata_propertiesDialog_t" ref="structqt__meta__stringdata__properties_dialog__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_propertiesDialog_t::data" ref="structqt__meta__stringdata__properties_dialog__t.html#aa71dc9d1b968b4d464780a0866324358" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_propertiesDialog_t::stringdata0" ref="structqt__meta__stringdata__properties_dialog__t.html#aac0560d60639d4b7df0e60e4289923b6" />
-      <keyword name="qt_meta_stringdata_settingsDialog_t" id="qt_meta_stringdata_settingsDialog_t" ref="structqt__meta__stringdata__settings_dialog__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_settingsDialog_t::data" ref="structqt__meta__stringdata__settings_dialog__t.html#a2830fa81d51263ec2a64b8cf3fbe0101" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_settingsDialog_t::stringdata0" ref="structqt__meta__stringdata__settings_dialog__t.html#a5cf061ac496efadfbdef1d23b1f22afd" />
-      <keyword name="qt_meta_stringdata_treeModel_t" id="qt_meta_stringdata_treeModel_t" ref="structqt__meta__stringdata__tree_model__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_treeModel_t::data" ref="structqt__meta__stringdata__tree_model__t.html#a7340fecee9939e4fbc0fd7267a1caa96" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_treeModel_t::stringdata0" ref="structqt__meta__stringdata__tree_model__t.html#adfbf1f4d9bf5384fd42318955a041366" />
-      <keyword name="qt_meta_stringdata_view_t" id="qt_meta_stringdata_view_t" ref="structqt__meta__stringdata__view__t.html" />
-      <keyword name="data" id="qt_meta_stringdata_view_t::data" ref="structqt__meta__stringdata__view__t.html#a6e138f57139e1ca646beb55e66722aa8" />
-      <keyword name="stringdata0" id="qt_meta_stringdata_view_t::stringdata0" ref="structqt__meta__stringdata__view__t.html#ab2d1bd5a5cf9dcc07b1cf2eee867b860" />
+      <keyword name="loadValues" id="propertiesDialog::loadValues" ref="classproperties_dialog.html#ab3bdbb660ecd5514aea005e0dd59ebb5" />
+      <keyword name="applySettings" id="propertiesDialog::applySettings" ref="classproperties_dialog.html#ab8898b89cfa3b9a310b52fbd9003dbc2" />
       <keyword name="qt_meta_stringdata_vis_t" id="qt_meta_stringdata_vis_t" ref="structqt__meta__stringdata__vis__t.html" />
       <keyword name="data" id="qt_meta_stringdata_vis_t::data" ref="structqt__meta__stringdata__vis__t.html#afc7b1b2d419c6171c8ee28aa4a3c6734" />
       <keyword name="stringdata0" id="qt_meta_stringdata_vis_t::stringdata0" ref="structqt__meta__stringdata__vis__t.html#a9cfb4fa554a9f2369e7ca87729f4e76e" />
@@ -1445,6 +1066,8 @@
       <keyword name="settingsDialog" id="settingsDialog::settingsDialog" ref="classsettings_dialog.html#abe3d7f1c14fb45723918ae6bd0f999fa" />
       <keyword name="showEvent" id="settingsDialog::showEvent" ref="classsettings_dialog.html#a12dcaa04ce60f151ae7b77ce5ce2610d" />
       <keyword name="setButtonColour" id="settingsDialog::setButtonColour" ref="classsettings_dialog.html#a6f5b6ea59e6a2de876fee96f0a5501da" />
+      <keyword name="applySettings" id="settingsDialog::applySettings" ref="classsettings_dialog.html#afca53b725fce559f74266bb39657da6b" />
+      <keyword name="loadValues" id="settingsDialog::loadValues" ref="classsettings_dialog.html#a982beae131fefc2788432b192ec343c7" />
       <keyword name="slideParam" id="slideParam" ref="structslide_param.html" />
       <keyword name="key" id="slideParam::key" ref="structslide_param.html#aff2f7e9ee5cf79eff9bb1dcb72cec41e" />
       <keyword name="trans" id="slideParam::trans" ref="structslide_param.html#a573b67ecfcd670121b0fa2f7317ab2d6" />
@@ -1452,216 +1075,6 @@
       <keyword name="treeModel" id="treeModel" ref="classtree_model.html" />
       <keyword name="treeModel" id="treeModel::treeModel" ref="classtree_model.html#aacfea32c612071ff4495ce764b82d618" />
       <keyword name="data" id="treeModel::data" ref="classtree_model.html#add38ff680cd2a926d201c0760234419d" />
-      <keyword name="Ui_defineCycleDialog" id="Ui_defineCycleDialog" ref="class_ui__define_cycle_dialog.html" />
-      <keyword name="setupUi" id="Ui_defineCycleDialog::setupUi" ref="class_ui__define_cycle_dialog.html#a023518fe6242d0a90494ecbb897dd9ac" />
-      <keyword name="retranslateUi" id="Ui_defineCycleDialog::retranslateUi" ref="class_ui__define_cycle_dialog.html#ab6b479d0332ab9a2e9ccc6ee3416bb97" />
-      <keyword name="verticalLayout_3" id="Ui_defineCycleDialog::verticalLayout_3" ref="class_ui__define_cycle_dialog.html#ac2a973c429b8357847bf4cda2a45c9ff" />
-      <keyword name="tabWidget" id="Ui_defineCycleDialog::tabWidget" ref="class_ui__define_cycle_dialog.html#a8341722258f5c60291744e1feb431bce" />
-      <keyword name="tabValues" id="Ui_defineCycleDialog::tabValues" ref="class_ui__define_cycle_dialog.html#afe9cf82080d34f1bc821c7d3e2b1064d" />
-      <keyword name="verticalLayout_2" id="Ui_defineCycleDialog::verticalLayout_2" ref="class_ui__define_cycle_dialog.html#a2e44f950f76b27f972dfea6230d12713" />
-      <keyword name="horizontalLayout" id="Ui_defineCycleDialog::horizontalLayout" ref="class_ui__define_cycle_dialog.html#a608df977a3a1c84586b3fb842bb171dc" />
-      <keyword name="horizontalSpacer_3" id="Ui_defineCycleDialog::horizontalSpacer_3" ref="class_ui__define_cycle_dialog.html#a2441722611a27b6c3ac821ba7e82dfe3" />
-      <keyword name="label_3" id="Ui_defineCycleDialog::label_3" ref="class_ui__define_cycle_dialog.html#a9217f34088f20f107c710da69275d1ed" />
-      <keyword name="lineEdit_1" id="Ui_defineCycleDialog::lineEdit_1" ref="class_ui__define_cycle_dialog.html#aa5960dd55cf7ea412bab9d5e1929c3a9" />
-      <keyword name="horizontalSpacer_4" id="Ui_defineCycleDialog::horizontalSpacer_4" ref="class_ui__define_cycle_dialog.html#aa3688c0abd181e61e1fd13daece711b5" />
-      <keyword name="horizontalLayout_2" id="Ui_defineCycleDialog::horizontalLayout_2" ref="class_ui__define_cycle_dialog.html#a121d9b5a7a2d5cab23a6a05c08de003a" />
-      <keyword name="horizontalSpacer" id="Ui_defineCycleDialog::horizontalSpacer" ref="class_ui__define_cycle_dialog.html#a127f945f6fb4d7a4b04e779f6430390d" />
-      <keyword name="label" id="Ui_defineCycleDialog::label" ref="class_ui__define_cycle_dialog.html#a5d9740251cf9b4070346923008408005" />
-      <keyword name="lineEdit_2" id="Ui_defineCycleDialog::lineEdit_2" ref="class_ui__define_cycle_dialog.html#a7fd0d74a07d9ddef9c7e02338e8fda67" />
-      <keyword name="horizontalSpacer_2" id="Ui_defineCycleDialog::horizontalSpacer_2" ref="class_ui__define_cycle_dialog.html#a33699becdc8a75f39ab46d514d4560fc" />
-      <keyword name="horizontalLayout_3" id="Ui_defineCycleDialog::horizontalLayout_3" ref="class_ui__define_cycle_dialog.html#a098d7c18c9dd398ce64afe12be51543c" />
-      <keyword name="horizontalSpacer_5" id="Ui_defineCycleDialog::horizontalSpacer_5" ref="class_ui__define_cycle_dialog.html#a9aa938d116df1ce366a72d66d3f75840" />
-      <keyword name="label_2" id="Ui_defineCycleDialog::label_2" ref="class_ui__define_cycle_dialog.html#ad259fb66ce1b09bf92ad13d9e116b253" />
-      <keyword name="lineEdit_3" id="Ui_defineCycleDialog::lineEdit_3" ref="class_ui__define_cycle_dialog.html#add3cf25304b9c6a6c4bcb2ae20da67b3" />
-      <keyword name="horizontalSpacer_6" id="Ui_defineCycleDialog::horizontalSpacer_6" ref="class_ui__define_cycle_dialog.html#a55be67bb153a9a1dd8a2bcc30eb798a2" />
-      <keyword name="horizontalLayout_4" id="Ui_defineCycleDialog::horizontalLayout_4" ref="class_ui__define_cycle_dialog.html#ad9f452c726da3b9705f58ede8cfdeb2d" />
-      <keyword name="horizontalSpacer_7" id="Ui_defineCycleDialog::horizontalSpacer_7" ref="class_ui__define_cycle_dialog.html#abe517a13c8e5a613d534992abbbf85ce" />
-      <keyword name="label_4" id="Ui_defineCycleDialog::label_4" ref="class_ui__define_cycle_dialog.html#ab660392d534326c4ecab689ae041f37b" />
-      <keyword name="lineEdit_4" id="Ui_defineCycleDialog::lineEdit_4" ref="class_ui__define_cycle_dialog.html#aae21ab9ac566059dee36fa8a154d7f1a" />
-      <keyword name="horizontalSpacer_8" id="Ui_defineCycleDialog::horizontalSpacer_8" ref="class_ui__define_cycle_dialog.html#afbc4007ba8f3b553560ee3da5873120b" />
-      <keyword name="tabCenter" id="Ui_defineCycleDialog::tabCenter" ref="class_ui__define_cycle_dialog.html#a912f00d8c89ac32ba3774fb8106420f3" />
-      <keyword name="verticalLayout" id="Ui_defineCycleDialog::verticalLayout" ref="class_ui__define_cycle_dialog.html#a5e0d16d30bcb9ff54944ffc75d965b7d" />
-      <keyword name="groupBox" id="Ui_defineCycleDialog::groupBox" ref="class_ui__define_cycle_dialog.html#ac6483121f806471d84de6ba86e61921b" />
-      <keyword name="verticalLayout_4" id="Ui_defineCycleDialog::verticalLayout_4" ref="class_ui__define_cycle_dialog.html#a4406dcb26a55c866b3cfc269366d9294" />
-      <keyword name="horizontalLayout_6" id="Ui_defineCycleDialog::horizontalLayout_6" ref="class_ui__define_cycle_dialog.html#a25296210e8cbc4a2eacc58d7420ac53c" />
-      <keyword name="label_6" id="Ui_defineCycleDialog::label_6" ref="class_ui__define_cycle_dialog.html#a2ec5867b62c0e11abcbb50fa984c1f94" />
-      <keyword name="lineEdit_5" id="Ui_defineCycleDialog::lineEdit_5" ref="class_ui__define_cycle_dialog.html#a3d5520f021e4be628878c16356d867e4" />
-      <keyword name="horizontalSpacer_11" id="Ui_defineCycleDialog::horizontalSpacer_11" ref="class_ui__define_cycle_dialog.html#a9eb7ed48f73134128d9c641db721d41f" />
-      <keyword name="horizontalLayout_5" id="Ui_defineCycleDialog::horizontalLayout_5" ref="class_ui__define_cycle_dialog.html#a03c84f7955219dc3905bb5ca4f0af39e" />
-      <keyword name="label_5" id="Ui_defineCycleDialog::label_5" ref="class_ui__define_cycle_dialog.html#a6f26b71d4b3e5be6f5561d045125198c" />
-      <keyword name="lineEdit_6" id="Ui_defineCycleDialog::lineEdit_6" ref="class_ui__define_cycle_dialog.html#aa19a105e0b9670c923be42cf953a55e0" />
-      <keyword name="horizontalSpacer_10" id="Ui_defineCycleDialog::horizontalSpacer_10" ref="class_ui__define_cycle_dialog.html#ab4de9ae4f5fb1e738c22bd8d2fbb8571" />
-      <keyword name="horizontalLayout_7" id="Ui_defineCycleDialog::horizontalLayout_7" ref="class_ui__define_cycle_dialog.html#a103cdf5b651b17a0716c66891b5a11df" />
-      <keyword name="label_7" id="Ui_defineCycleDialog::label_7" ref="class_ui__define_cycle_dialog.html#a7c005f2e7df6caa5e9b81ed1716c0382" />
-      <keyword name="lineEdit_7" id="Ui_defineCycleDialog::lineEdit_7" ref="class_ui__define_cycle_dialog.html#ae3e3d1bd890adbe23502349a6b2fe90a" />
-      <keyword name="horizontalSpacer_9" id="Ui_defineCycleDialog::horizontalSpacer_9" ref="class_ui__define_cycle_dialog.html#a56c94e17b5226b6c00588a9085e4ee89" />
-      <keyword name="buttonBox" id="Ui_defineCycleDialog::buttonBox" ref="class_ui__define_cycle_dialog.html#ae1d3f2442bdfe35eccc053c09694f7f2" />
-      <keyword name="Ui_helpDialog" id="Ui_helpDialog" ref="class_ui__help_dialog.html" />
-      <keyword name="setupUi" id="Ui_helpDialog::setupUi" ref="class_ui__help_dialog.html#a4074ac03760c68b2a4d9ba5e9aa47f4b" />
-      <keyword name="retranslateUi" id="Ui_helpDialog::retranslateUi" ref="class_ui__help_dialog.html#a2f67a7a9b16bb22a264d312234c7e60d" />
-      <keyword name="horizontalLayout" id="Ui_helpDialog::horizontalLayout" ref="class_ui__help_dialog.html#a9a2ecc710af91e4b1e89a3d49e5a22c0" />
-      <keyword name="splitter" id="Ui_helpDialog::splitter" ref="class_ui__help_dialog.html#a72aa819f279809b1c253f46bd2cec5dc" />
-      <keyword name="tabWidget" id="Ui_helpDialog::tabWidget" ref="class_ui__help_dialog.html#a0c873833046066c8d4594e59905ad8d5" />
-      <keyword name="textBrowser" id="Ui_helpDialog::textBrowser" ref="class_ui__help_dialog.html#ac04b5a0ba104077649c97b8ab07afc65" />
-      <keyword name="Ui_MainWindow" id="Ui_MainWindow" ref="class_ui___main_window.html" />
-      <keyword name="setupUi" id="Ui_MainWindow::setupUi" ref="class_ui___main_window.html#acf4a0872c4c77d8f43a2ec66ed849b58" />
-      <keyword name="retranslateUi" id="Ui_MainWindow::retranslateUi" ref="class_ui___main_window.html#a097dd160c3534a204904cb374412c618" />
-      <keyword name="actionNew" id="Ui_MainWindow::actionNew" ref="class_ui___main_window.html#a9090620adfd867b72c5f445c83b8c0ec" />
-      <keyword name="actionSave" id="Ui_MainWindow::actionSave" ref="class_ui___main_window.html#a6e14788227f1a0dbc8cf983514685f3b" />
-      <keyword name="actionOpen" id="Ui_MainWindow::actionOpen" ref="class_ui___main_window.html#a5772f39001f62b7f601aafe72caa10c0" />
-      <keyword name="actionConfiguration" id="Ui_MainWindow::actionConfiguration" ref="class_ui___main_window.html#aa2c71d96d12d8103436804c3fda3855d" />
-      <keyword name="actionUser_Manual" id="Ui_MainWindow::actionUser_Manual" ref="class_ui___main_window.html#a711ee49dc285749537d57e6756b1a0c3" />
-      <keyword name="actionAbout" id="Ui_MainWindow::actionAbout" ref="class_ui___main_window.html#abdf2b43167c2cd0d3405f90b8c30e934" />
-      <keyword name="actionCreate_Cycle" id="Ui_MainWindow::actionCreate_Cycle" ref="class_ui___main_window.html#ab34717288693d70d787ff80f9ad3f633" />
-      <keyword name="actionPan" id="Ui_MainWindow::actionPan" ref="class_ui___main_window.html#abfbd7004decc3b1240e9009b86c0500e" />
-      <keyword name="actionLabels" id="Ui_MainWindow::actionLabels" ref="class_ui___main_window.html#a262b4df5530dbefe28c149fa86f140b2" />
-      <keyword name="actionzoomIn" id="Ui_MainWindow::actionzoomIn" ref="class_ui___main_window.html#a30a8a79f7c40582f655109ebe2dcfcff" />
-      <keyword name="actionzoomOut" id="Ui_MainWindow::actionzoomOut" ref="class_ui___main_window.html#a749319d9c2f86308f4559091acff6910" />
-      <keyword name="actionDebug_bounding_rect" id="Ui_MainWindow::actionDebug_bounding_rect" ref="class_ui___main_window.html#ab922a617328dd984d45d82e8aa460d13" />
-      <keyword name="actionDefine_by_center_and_radius_squared" id="Ui_MainWindow::actionDefine_by_center_and_radius_squared" ref="class_ui___main_window.html#a80f63d6b857721d1d102cd7ba5063878" />
-      <keyword name="actionDefine_by_values" id="Ui_MainWindow::actionDefine_by_values" ref="class_ui___main_window.html#a0b0a125bc543f541304b27a09559e72d" />
-      <keyword name="actionDefine_cycle" id="Ui_MainWindow::actionDefine_cycle" ref="class_ui___main_window.html#a1087883ccba9316d3703d696746101d3" />
-      <keyword name="actionSave_As" id="Ui_MainWindow::actionSave_As" ref="class_ui___main_window.html#a1e11ac34a44aeff9d0f198e5f2537dab" />
-      <keyword name="actionUndo" id="Ui_MainWindow::actionUndo" ref="class_ui___main_window.html#a175147fd65feca1da9052479372408bd" />
-      <keyword name="actionRedo" id="Ui_MainWindow::actionRedo" ref="class_ui___main_window.html#a92b45aedb3e89ab02aeed5c6a2e33520" />
-      <keyword name="actionDelete_cycle" id="Ui_MainWindow::actionDelete_cycle" ref="class_ui___main_window.html#acda444d81e28ab545b0834f0dc4ae647" />
-      <keyword name="actionSettings" id="Ui_MainWindow::actionSettings" ref="class_ui___main_window.html#a5b65436e6cc259d5586eb6e309b612e4" />
-      <keyword name="actionFigure_Description" id="Ui_MainWindow::actionFigure_Description" ref="class_ui___main_window.html#a4b11cbb0ac3c833f389276df427fc172" />
-      <keyword name="actionFloating" id="Ui_MainWindow::actionFloating" ref="class_ui___main_window.html#a8d48131a3b17a8b4c8a22b0b65b19494" />
-      <keyword name="actionExact" id="Ui_MainWindow::actionExact" ref="class_ui___main_window.html#a034f279001e76e3be73ed5b4bd07c59a" />
-      <keyword name="actionQuit" id="Ui_MainWindow::actionQuit" ref="class_ui___main_window.html#a188c243f36a2dbc10e4e2a0ad94273b1" />
-      <keyword name="actionProperties" id="Ui_MainWindow::actionProperties" ref="class_ui___main_window.html#adc69c1d59f56327ab1e42fd985f66b49" />
-      <keyword name="actionPointMetric" id="Ui_MainWindow::actionPointMetric" ref="class_ui___main_window.html#a8b35f735472c004ad6b1ebd82bb2ed79" />
-      <keyword name="actionCycleMetric" id="Ui_MainWindow::actionCycleMetric" ref="class_ui___main_window.html#af6823cd17f39bc0f6b94a026476eefa1" />
-      <keyword name="actionEllipticPointMetric" id="Ui_MainWindow::actionEllipticPointMetric" ref="class_ui___main_window.html#a58d0ba1b7beeed28ad5465133e240ab1" />
-      <keyword name="actionParabolicPointMetric" id="Ui_MainWindow::actionParabolicPointMetric" ref="class_ui___main_window.html#a5706347a779fae5ae488492ed8607e4a" />
-      <keyword name="actionHyperbolicPointMetric" id="Ui_MainWindow::actionHyperbolicPointMetric" ref="class_ui___main_window.html#a3e8849e6122bf0467b541bdbe5b570a2" />
-      <keyword name="actionEllipticCycleMetric" id="Ui_MainWindow::actionEllipticCycleMetric" ref="class_ui___main_window.html#a5d74c24d7075548a7674541fe000b632" />
-      <keyword name="actionParabolicCycleMetric" id="Ui_MainWindow::actionParabolicCycleMetric" ref="class_ui___main_window.html#a73235643255b09b0481df8b7f5206590" />
-      <keyword name="actionHyperbolicCycleMetric" id="Ui_MainWindow::actionHyperbolicCycleMetric" ref="class_ui___main_window.html#a7709b35d7e47bf8e8c73401cc66b33d5" />
-      <keyword name="actionEvaluationType" id="Ui_MainWindow::actionEvaluationType" ref="class_ui___main_window.html#a63ad0bb77d3a481c97a24033ef35ed36" />
-      <keyword name="centralWidget" id="Ui_MainWindow::centralWidget" ref="class_ui___main_window.html#a30075506c2116c3ed4ff25e07ae75f81" />
-      <keyword name="horizontalLayout" id="Ui_MainWindow::horizontalLayout" ref="class_ui___main_window.html#acd6fdc9ebacc4b25b834162380d75ce8" />
-      <keyword name="graphicsView" id="Ui_MainWindow::graphicsView" ref="class_ui___main_window.html#a48cc360c9d7a73abfc5ab3cee1f61e3d" />
-      <keyword name="menuBar" id="Ui_MainWindow::menuBar" ref="class_ui___main_window.html#a2be1c24ec9adfca18e1dcc951931457f" />
-      <keyword name="menuFile" id="Ui_MainWindow::menuFile" ref="class_ui___main_window.html#a7ba84cb4cdd6a12dc83bf4e100bd8d80" />
-      <keyword name="menuEdit" id="Ui_MainWindow::menuEdit" ref="class_ui___main_window.html#aa2a8beb7420d9a6d513949dd5661090a" />
-      <keyword name="menuDefine_Cycle_2" id="Ui_MainWindow::menuDefine_Cycle_2" ref="class_ui___main_window.html#a5dbb06b88129fa03318293a5e9cd8ea7" />
-      <keyword name="menuHelp" id="Ui_MainWindow::menuHelp" ref="class_ui___main_window.html#ab95dbfbb0550206aeac76db36f491548" />
-      <keyword name="menuView" id="Ui_MainWindow::menuView" ref="class_ui___main_window.html#a9e7f2ce6c3d8a309109baed7d6890604" />
-      <keyword name="menuTools" id="Ui_MainWindow::menuTools" ref="class_ui___main_window.html#a552c7b6d729252c2768c9a077679fef7" />
-      <keyword name="mainToolBar" id="Ui_MainWindow::mainToolBar" ref="class_ui___main_window.html#a5172877001c8c7b4e0f6de50421867d1" />
-      <keyword name="statusBar" id="Ui_MainWindow::statusBar" ref="class_ui___main_window.html#a50fa481337604bcc8bf68de18ab16ecd" />
-      <keyword name="dockWidgetRight" id="Ui_MainWindow::dockWidgetRight" ref="class_ui___main_window.html#a0b290047e65bbb51d10c15a73b264d84" />
-      <keyword name="dockWidgetContents" id="Ui_MainWindow::dockWidgetContents" ref="class_ui___main_window.html#a765ded8236736213d556f6f91941808e" />
-      <keyword name="verticalLayout_2" id="Ui_MainWindow::verticalLayout_2" ref="class_ui___main_window.html#a0c01bad60d9f422a1258e710635a2f65" />
-      <keyword name="verticalLayout" id="Ui_MainWindow::verticalLayout" ref="class_ui___main_window.html#aecd96a04789fcfec3f98d80390ad8184" />
-      <keyword name="treeView" id="Ui_MainWindow::treeView" ref="class_ui___main_window.html#a2e917678fb1e644071b85bf38d97125e" />
-      <keyword name="Ui_matrix4dialog" id="Ui_matrix4dialog" ref="class_ui__matrix4dialog.html" />
-      <keyword name="setupUi" id="Ui_matrix4dialog::setupUi" ref="class_ui__matrix4dialog.html#aef219b6ca55919d404217da65f6d9f84" />
-      <keyword name="retranslateUi" id="Ui_matrix4dialog::retranslateUi" ref="class_ui__matrix4dialog.html#a0140e00a8003ec0682fad02b5422c32c" />
-      <keyword name="buttonBox" id="Ui_matrix4dialog::buttonBox" ref="class_ui__matrix4dialog.html#ae643e32c20b920b6ab7339075a79bd9d" />
-      <keyword name="lineEdit_value2" id="Ui_matrix4dialog::lineEdit_value2" ref="class_ui__matrix4dialog.html#aa24b0549035d7da282a7a26c4076a08b" />
-      <keyword name="lineEdit_value4" id="Ui_matrix4dialog::lineEdit_value4" ref="class_ui__matrix4dialog.html#a0f6b83ac50476be0a50fe6581c58c9ec" />
-      <keyword name="lineEdit_value1" id="Ui_matrix4dialog::lineEdit_value1" ref="class_ui__matrix4dialog.html#af76878b0323618ee71de96e1ff096e88" />
-      <keyword name="lineEdit_value3" id="Ui_matrix4dialog::lineEdit_value3" ref="class_ui__matrix4dialog.html#ab323365f4524b26c3aa16ca9cc2375c3" />
-      <keyword name="label" id="Ui_matrix4dialog::label" ref="class_ui__matrix4dialog.html#a251052fdd26c4f5d32480e10b296be69" />
-      <keyword name="label_2" id="Ui_matrix4dialog::label_2" ref="class_ui__matrix4dialog.html#af1865005bfda4019dcf37b95b5c6e0d7" />
-      <keyword name="label_3" id="Ui_matrix4dialog::label_3" ref="class_ui__matrix4dialog.html#a855424564cf682a5b813162db19932c7" />
-      <keyword name="label_4" id="Ui_matrix4dialog::label_4" ref="class_ui__matrix4dialog.html#aaccd6a9185cebcd9bafe533642500165" />
-      <keyword name="Ui_matrix8dialog" id="Ui_matrix8dialog" ref="class_ui__matrix8dialog.html" />
-      <keyword name="setupUi" id="Ui_matrix8dialog::setupUi" ref="class_ui__matrix8dialog.html#a2b39e0a8327011911b0cd985a4d5697f" />
-      <keyword name="retranslateUi" id="Ui_matrix8dialog::retranslateUi" ref="class_ui__matrix8dialog.html#a1e76584117237b2839700411c6b1d748" />
-      <keyword name="buttonBox" id="Ui_matrix8dialog::buttonBox" ref="class_ui__matrix8dialog.html#a05caf47b40e45d204c2bd9613a8d955a" />
-      <keyword name="lineEdit_value2" id="Ui_matrix8dialog::lineEdit_value2" ref="class_ui__matrix8dialog.html#a73c18fd36dada64bae0c1dfdd4467699" />
-      <keyword name="label_2" id="Ui_matrix8dialog::label_2" ref="class_ui__matrix8dialog.html#a34ab1fde638ea494cab0b6e8b49e339f" />
-      <keyword name="lineEdit_value3" id="Ui_matrix8dialog::lineEdit_value3" ref="class_ui__matrix8dialog.html#a5898b8f9962f3ff9a19c4a801177306c" />
-      <keyword name="label" id="Ui_matrix8dialog::label" ref="class_ui__matrix8dialog.html#ae19ba85fd7ddeb22e754a4eeb46aef24" />
-      <keyword name="label_4" id="Ui_matrix8dialog::label_4" ref="class_ui__matrix8dialog.html#a302027e9bca42c3d8709c82fa7249d9d" />
-      <keyword name="lineEdit_value4" id="Ui_matrix8dialog::lineEdit_value4" ref="class_ui__matrix8dialog.html#aef722cd4314ed9b4a9c91b5272138380" />
-      <keyword name="label_3" id="Ui_matrix8dialog::label_3" ref="class_ui__matrix8dialog.html#abb97b8de24dd00e5f7d6ad36c7bc009c" />
-      <keyword name="lineEdit_value1" id="Ui_matrix8dialog::lineEdit_value1" ref="class_ui__matrix8dialog.html#a60c80910c009351097ddd66eb8e06253" />
-      <keyword name="label_5" id="Ui_matrix8dialog::label_5" ref="class_ui__matrix8dialog.html#ac7c6fa572253de8781d51b59ded2893a" />
-      <keyword name="lineEdit_value8" id="Ui_matrix8dialog::lineEdit_value8" ref="class_ui__matrix8dialog.html#aa1a34788df19af7cb4318cd55506013c" />
-      <keyword name="lineEdit_value7" id="Ui_matrix8dialog::lineEdit_value7" ref="class_ui__matrix8dialog.html#ab0d3ddc7637b2d04609af1aba005d22b" />
-      <keyword name="lineEdit_value5" id="Ui_matrix8dialog::lineEdit_value5" ref="class_ui__matrix8dialog.html#a6b9d474e8b60af43933806b4c2fb7055" />
-      <keyword name="label_6" id="Ui_matrix8dialog::label_6" ref="class_ui__matrix8dialog.html#a3bde654266d91ad7ac339ddcda446cff" />
-      <keyword name="label_7" id="Ui_matrix8dialog::label_7" ref="class_ui__matrix8dialog.html#a56e4ea75bd746b2aefc18a48512a6612" />
-      <keyword name="label_8" id="Ui_matrix8dialog::label_8" ref="class_ui__matrix8dialog.html#ac6160d0d4e2382df77d0c61e168d271d" />
-      <keyword name="lineEdit_value6" id="Ui_matrix8dialog::lineEdit_value6" ref="class_ui__matrix8dialog.html#af8ee00326ad344afc1fe571fcef389fd" />
-      <keyword name="Ui_propertiesDialog" id="Ui_propertiesDialog" ref="class_ui__properties_dialog.html" />
-      <keyword name="setupUi" id="Ui_propertiesDialog::setupUi" ref="class_ui__properties_dialog.html#a595c0d40bd7ea44fd12cb3d08cf5a9fb" />
-      <keyword name="retranslateUi" id="Ui_propertiesDialog::retranslateUi" ref="class_ui__properties_dialog.html#af4e86fdbed9259bb304605b4d414aecb" />
-      <keyword name="verticalLayout" id="Ui_propertiesDialog::verticalLayout" ref="class_ui__properties_dialog.html#a98255232cbf624a7b15788f3db8c5240" />
-      <keyword name="groupBox" id="Ui_propertiesDialog::groupBox" ref="class_ui__properties_dialog.html#aa4408a5d11640f91d67098cb57346179" />
-      <keyword name="verticalLayout_2" id="Ui_propertiesDialog::verticalLayout_2" ref="class_ui__properties_dialog.html#af0b5bd40650126b92f06aed5c9c5ad4e" />
-      <keyword name="figureDescriptionText" id="Ui_propertiesDialog::figureDescriptionText" ref="class_ui__properties_dialog.html#abdd6eabecff7576fc26e0fcce1ec5578" />
-      <keyword name="groupBox_4" id="Ui_propertiesDialog::groupBox_4" ref="class_ui__properties_dialog.html#a209e64b037cdee834e22e417a00b6d5c" />
-      <keyword name="horizontalLayout_2" id="Ui_propertiesDialog::horizontalLayout_2" ref="class_ui__properties_dialog.html#aba58a87c91131c941e91a80f6fe3f175" />
-      <keyword name="floatButton" id="Ui_propertiesDialog::floatButton" ref="class_ui__properties_dialog.html#a524ae1db7433b72d6689e6afbac4aa52" />
-      <keyword name="exactButton" id="Ui_propertiesDialog::exactButton" ref="class_ui__properties_dialog.html#abd227707bd8310869b8fbe15d7ca9cfe" />
-      <keyword name="horizontalLayout" id="Ui_propertiesDialog::horizontalLayout" ref="class_ui__properties_dialog.html#a8562fe5c8fd461c2fae10f6e00f856dc" />
-      <keyword name="groupBox_2" id="Ui_propertiesDialog::groupBox_2" ref="class_ui__properties_dialog.html#ae8127b03eb0c346ac3c25227410326e1" />
-      <keyword name="verticalLayout_3" id="Ui_propertiesDialog::verticalLayout_3" ref="class_ui__properties_dialog.html#a7c81843ddff27d18375e13cfed9bfac0" />
-      <keyword name="ellipticPointButton" id="Ui_propertiesDialog::ellipticPointButton" ref="class_ui__properties_dialog.html#a9b2b3e033a44d84db89f5bf0c7977a3e" />
-      <keyword name="parabolicPointButton" id="Ui_propertiesDialog::parabolicPointButton" ref="class_ui__properties_dialog.html#a86f31864696a9f676ad3fee8a0ef4ad6" />
-      <keyword name="hyperbolicPointButton" id="Ui_propertiesDialog::hyperbolicPointButton" ref="class_ui__properties_dialog.html#ad4c33c681b44790fc4671f08d7b9fe2c" />
-      <keyword name="groupBox_3" id="Ui_propertiesDialog::groupBox_3" ref="class_ui__properties_dialog.html#a5a9872252c004e5c3665e0de8a331d06" />
-      <keyword name="verticalLayout_4" id="Ui_propertiesDialog::verticalLayout_4" ref="class_ui__properties_dialog.html#a73c069e1cd6743f2304c5a8ccf5b3de0" />
-      <keyword name="ellipticCycleButton" id="Ui_propertiesDialog::ellipticCycleButton" ref="class_ui__properties_dialog.html#acc387e99d883c6337a06bf7c767a58c4" />
-      <keyword name="parabolicCycleButton" id="Ui_propertiesDialog::parabolicCycleButton" ref="class_ui__properties_dialog.html#aa6488e9cda300c6fb580ff1103e6a3e3" />
-      <keyword name="hyperbolicCycleButton" id="Ui_propertiesDialog::hyperbolicCycleButton" ref="class_ui__properties_dialog.html#aeb4b1f6b0ff897d31e89dbe8689e223c" />
-      <keyword name="verticalSpacer" id="Ui_propertiesDialog::verticalSpacer" ref="class_ui__properties_dialog.html#a7ef037d1f46fe6b15d6bd06be637cbf0" />
-      <keyword name="buttonBox" id="Ui_propertiesDialog::buttonBox" ref="class_ui__properties_dialog.html#a1ccb0e1a0369f5ef66245528379f05a5" />
-      <keyword name="Ui_settingsDialog" id="Ui_settingsDialog" ref="class_ui__settings_dialog.html" />
-      <keyword name="setupUi" id="Ui_settingsDialog::setupUi" ref="class_ui__settings_dialog.html#af96d6b02d7d9762b18d968d8c8128f82" />
-      <keyword name="retranslateUi" id="Ui_settingsDialog::retranslateUi" ref="class_ui__settings_dialog.html#a41fc817d3b4a6103aee2ded4a8f5c273" />
-      <keyword name="verticalLayout_4" id="Ui_settingsDialog::verticalLayout_4" ref="class_ui__settings_dialog.html#a41905fe1434ea89cee3595f6c860b5a6" />
-      <keyword name="tabWidget" id="Ui_settingsDialog::tabWidget" ref="class_ui__settings_dialog.html#acc596f6a2cac5c3ecc2ce520a20c827a" />
-      <keyword name="tab" id="Ui_settingsDialog::tab" ref="class_ui__settings_dialog.html#acf10507cd54902c83445442e3e09b738" />
-      <keyword name="verticalLayout_2" id="Ui_settingsDialog::verticalLayout_2" ref="class_ui__settings_dialog.html#a3164e8026801dea9804a1354b78c38da" />
-      <keyword name="groupBox" id="Ui_settingsDialog::groupBox" ref="class_ui__settings_dialog.html#ad1d3781d92fe311f7b670e9c8f04ec6e" />
-      <keyword name="horizontalLayout" id="Ui_settingsDialog::horizontalLayout" ref="class_ui__settings_dialog.html#a2433db810a7ae0d57857076825e096a0" />
-      <keyword name="automaticNaming" id="Ui_settingsDialog::automaticNaming" ref="class_ui__settings_dialog.html#ab0faaf97c711d41d8919c92c3f268b1c" />
-      <keyword name="manualNaming" id="Ui_settingsDialog::manualNaming" ref="class_ui__settings_dialog.html#adbfba48f832ee2f84b61c7f9d236197e" />
-      <keyword name="groupBox_2" id="Ui_settingsDialog::groupBox_2" ref="class_ui__settings_dialog.html#aeedea3eec08a9525afec84e0bb18c5e6" />
-      <keyword name="verticalLayout_3" id="Ui_settingsDialog::verticalLayout_3" ref="class_ui__settings_dialog.html#a5c11a50452e48905ceb877c0f143558a" />
-      <keyword name="doubleSpinBox" id="Ui_settingsDialog::doubleSpinBox" ref="class_ui__settings_dialog.html#a3d632ee44f600bfda94dd22c8b865b2d" />
-      <keyword name="groupBox_6" id="Ui_settingsDialog::groupBox_6" ref="class_ui__settings_dialog.html#a3e8f7010593ce0a07d566c17dc5cd3e7" />
-      <keyword name="horizontalLayout_3" id="Ui_settingsDialog::horizontalLayout_3" ref="class_ui__settings_dialog.html#a029c3789c703085c4f6677e7925292d6" />
-      <keyword name="defaultPathLineEdit" id="Ui_settingsDialog::defaultPathLineEdit" ref="class_ui__settings_dialog.html#ae202f250dd6da958d0920b4665d1917f" />
-      <keyword name="pushButton_4" id="Ui_settingsDialog::pushButton_4" ref="class_ui__settings_dialog.html#a9bcd42185b37bce81ab51a787ae6493b" />
-      <keyword name="groupBox_7" id="Ui_settingsDialog::groupBox_7" ref="class_ui__settings_dialog.html#aea78afbe2f62103d25386617107ba544" />
-      <keyword name="horizontalLayout_2" id="Ui_settingsDialog::horizontalLayout_2" ref="class_ui__settings_dialog.html#ad7c6cf95448da5fdbd25816a1b8cd631" />
-      <keyword name="onlyRealsTrue" id="Ui_settingsDialog::onlyRealsTrue" ref="class_ui__settings_dialog.html#a3954ad627be6db1470e4c958f4132526" />
-      <keyword name="onlyRealsFalse" id="Ui_settingsDialog::onlyRealsFalse" ref="class_ui__settings_dialog.html#a24ff462fecd5f6a6c8372779b20d5042" />
-      <keyword name="groupBox_8" id="Ui_settingsDialog::groupBox_8" ref="class_ui__settings_dialog.html#a510fbc4798016d07406a498374867722" />
-      <keyword name="verticalLayout_6" id="Ui_settingsDialog::verticalLayout_6" ref="class_ui__settings_dialog.html#a4fe94889101443b99ba127a647d9fc43" />
-      <keyword name="spinBox" id="Ui_settingsDialog::spinBox" ref="class_ui__settings_dialog.html#aa1039d8dae1b572300fa54f7c3e18646" />
-      <keyword name="verticalSpacer" id="Ui_settingsDialog::verticalSpacer" ref="class_ui__settings_dialog.html#a7ef380f555a0a3e2e274000f6338c965" />
-      <keyword name="tab_2" id="Ui_settingsDialog::tab_2" ref="class_ui__settings_dialog.html#a64fe5c5093202932607b29e9af7c378b" />
-      <keyword name="verticalLayout" id="Ui_settingsDialog::verticalLayout" ref="class_ui__settings_dialog.html#ad02c41c8dcba75bcfe6a841fd87371fc" />
-      <keyword name="groupBox_3" id="Ui_settingsDialog::groupBox_3" ref="class_ui__settings_dialog.html#ab6039b08fe7033d8632ba959a1f9f458" />
-      <keyword name="gridLayout" id="Ui_settingsDialog::gridLayout" ref="class_ui__settings_dialog.html#a9cbb60155b2df0b006c2615493b136ee" />
-      <keyword name="label" id="Ui_settingsDialog::label" ref="class_ui__settings_dialog.html#add772572c6b6d5eeecd754a913b931be" />
-      <keyword name="horizontalSpacer" id="Ui_settingsDialog::horizontalSpacer" ref="class_ui__settings_dialog.html#ad3cf5fe1bdd892adf122893d92d3be22" />
-      <keyword name="pushButton_2" id="Ui_settingsDialog::pushButton_2" ref="class_ui__settings_dialog.html#abb80c05c318bdf7b89da56bdd02974c4" />
-      <keyword name="horizontalSpacer_2" id="Ui_settingsDialog::horizontalSpacer_2" ref="class_ui__settings_dialog.html#aeffd642eb2c046e6c0ea941846bdb988" />
-      <keyword name="label_2" id="Ui_settingsDialog::label_2" ref="class_ui__settings_dialog.html#ac591889922f52c0d47892ee9217d2fcd" />
-      <keyword name="label_3" id="Ui_settingsDialog::label_3" ref="class_ui__settings_dialog.html#aeab6baefbf0bf0d9d3bd107130b80349" />
-      <keyword name="pushButton" id="Ui_settingsDialog::pushButton" ref="class_ui__settings_dialog.html#ada86439f18c5657ac82583030dfd7604" />
-      <keyword name="pushButton_3" id="Ui_settingsDialog::pushButton_3" ref="class_ui__settings_dialog.html#a441acb931c49542379e5f97e215c860e" />
-      <keyword name="horizontalSpacer_3" id="Ui_settingsDialog::horizontalSpacer_3" ref="class_ui__settings_dialog.html#a58c2390d2c0ead93a2b360e4b3059b8a" />
-      <keyword name="groupBox_4" id="Ui_settingsDialog::groupBox_4" ref="class_ui__settings_dialog.html#a833c48e589e0b65f6314673f5f9e04a9" />
-      <keyword name="gridLayout_2" id="Ui_settingsDialog::gridLayout_2" ref="class_ui__settings_dialog.html#a8747cf83ce4127dab0cb1e7f7a1fd8d8" />
-      <keyword name="label_4" id="Ui_settingsDialog::label_4" ref="class_ui__settings_dialog.html#a864626ed59d209e907310a99e6441420" />
-      <keyword name="horizontalSpacer_4" id="Ui_settingsDialog::horizontalSpacer_4" ref="class_ui__settings_dialog.html#aa64ac7eca46c9267f8e454b072071a07" />
-      <keyword name="comboBox" id="Ui_settingsDialog::comboBox" ref="class_ui__settings_dialog.html#af4beec48c7690a2c9b6d57904f87d0c5" />
-      <keyword name="label_5" id="Ui_settingsDialog::label_5" ref="class_ui__settings_dialog.html#ab041c5c10a03d19c9cc5fe7d69012e8c" />
-      <keyword name="doubleSpinBox_2" id="Ui_settingsDialog::doubleSpinBox_2" ref="class_ui__settings_dialog.html#affdd0804285454c334853dd702f0f4c2" />
-      <keyword name="horizontalSpacer_5" id="Ui_settingsDialog::horizontalSpacer_5" ref="class_ui__settings_dialog.html#affd52a1b02f018dbeb5261a37f7aa9fb" />
-      <keyword name="verticalSpacer_2" id="Ui_settingsDialog::verticalSpacer_2" ref="class_ui__settings_dialog.html#a766fad3cfaf98dde8ae45ce9392e250a" />
-      <keyword name="buttonBox" id="Ui_settingsDialog::buttonBox" ref="class_ui__settings_dialog.html#a9fd9aea95caaf8c0f62efbb46711d137" />
       <keyword name="view" id="view" ref="classview.html" />
       <keyword name="recenterView" id="view::recenterView" ref="classview.html#a7fff213d7f38eeb2c8943609264fa518" />
       <keyword name="mouseStopped" id="view::mouseStopped" ref="classview.html#ab1d79ebdee961d5ec07ed11f461158a5" />
@@ -2088,216 +1501,6 @@
       <keyword name="convertible" id="pyginac::numeric_from_number::convertible" ref="structpyginac_1_1numeric__from__number.html#aa13765d6a3a07e59242b8389fc7dbcab" />
       <keyword name="construct" id="pyginac::numeric_from_number::construct" ref="structpyginac_1_1numeric__from__number.html#a64dbc1aa68695a8d660b02a554d626bd" />
       <keyword name="regressions_linebr" id="regressions_linebr" ref="namespaceregressions__linebr.html" />
-      <keyword name="Ui::defineCycleDialog" id="Ui::defineCycleDialog" ref="class_ui_1_1define_cycle_dialog.html" />
-      <keyword name="setupUi" id="Ui_defineCycleDialog::setupUi" ref="class_ui__define_cycle_dialog.html#a023518fe6242d0a90494ecbb897dd9ac" />
-      <keyword name="retranslateUi" id="Ui_defineCycleDialog::retranslateUi" ref="class_ui__define_cycle_dialog.html#ab6b479d0332ab9a2e9ccc6ee3416bb97" />
-      <keyword name="verticalLayout_3" id="Ui_defineCycleDialog::verticalLayout_3" ref="class_ui__define_cycle_dialog.html#ac2a973c429b8357847bf4cda2a45c9ff" />
-      <keyword name="tabWidget" id="Ui_defineCycleDialog::tabWidget" ref="class_ui__define_cycle_dialog.html#a8341722258f5c60291744e1feb431bce" />
-      <keyword name="tabValues" id="Ui_defineCycleDialog::tabValues" ref="class_ui__define_cycle_dialog.html#afe9cf82080d34f1bc821c7d3e2b1064d" />
-      <keyword name="verticalLayout_2" id="Ui_defineCycleDialog::verticalLayout_2" ref="class_ui__define_cycle_dialog.html#a2e44f950f76b27f972dfea6230d12713" />
-      <keyword name="horizontalLayout" id="Ui_defineCycleDialog::horizontalLayout" ref="class_ui__define_cycle_dialog.html#a608df977a3a1c84586b3fb842bb171dc" />
-      <keyword name="horizontalSpacer_3" id="Ui_defineCycleDialog::horizontalSpacer_3" ref="class_ui__define_cycle_dialog.html#a2441722611a27b6c3ac821ba7e82dfe3" />
-      <keyword name="label_3" id="Ui_defineCycleDialog::label_3" ref="class_ui__define_cycle_dialog.html#a9217f34088f20f107c710da69275d1ed" />
-      <keyword name="lineEdit_1" id="Ui_defineCycleDialog::lineEdit_1" ref="class_ui__define_cycle_dialog.html#aa5960dd55cf7ea412bab9d5e1929c3a9" />
-      <keyword name="horizontalSpacer_4" id="Ui_defineCycleDialog::horizontalSpacer_4" ref="class_ui__define_cycle_dialog.html#aa3688c0abd181e61e1fd13daece711b5" />
-      <keyword name="horizontalLayout_2" id="Ui_defineCycleDialog::horizontalLayout_2" ref="class_ui__define_cycle_dialog.html#a121d9b5a7a2d5cab23a6a05c08de003a" />
-      <keyword name="horizontalSpacer" id="Ui_defineCycleDialog::horizontalSpacer" ref="class_ui__define_cycle_dialog.html#a127f945f6fb4d7a4b04e779f6430390d" />
-      <keyword name="label" id="Ui_defineCycleDialog::label" ref="class_ui__define_cycle_dialog.html#a5d9740251cf9b4070346923008408005" />
-      <keyword name="lineEdit_2" id="Ui_defineCycleDialog::lineEdit_2" ref="class_ui__define_cycle_dialog.html#a7fd0d74a07d9ddef9c7e02338e8fda67" />
-      <keyword name="horizontalSpacer_2" id="Ui_defineCycleDialog::horizontalSpacer_2" ref="class_ui__define_cycle_dialog.html#a33699becdc8a75f39ab46d514d4560fc" />
-      <keyword name="horizontalLayout_3" id="Ui_defineCycleDialog::horizontalLayout_3" ref="class_ui__define_cycle_dialog.html#a098d7c18c9dd398ce64afe12be51543c" />
-      <keyword name="horizontalSpacer_5" id="Ui_defineCycleDialog::horizontalSpacer_5" ref="class_ui__define_cycle_dialog.html#a9aa938d116df1ce366a72d66d3f75840" />
-      <keyword name="label_2" id="Ui_defineCycleDialog::label_2" ref="class_ui__define_cycle_dialog.html#ad259fb66ce1b09bf92ad13d9e116b253" />
-      <keyword name="lineEdit_3" id="Ui_defineCycleDialog::lineEdit_3" ref="class_ui__define_cycle_dialog.html#add3cf25304b9c6a6c4bcb2ae20da67b3" />
-      <keyword name="horizontalSpacer_6" id="Ui_defineCycleDialog::horizontalSpacer_6" ref="class_ui__define_cycle_dialog.html#a55be67bb153a9a1dd8a2bcc30eb798a2" />
-      <keyword name="horizontalLayout_4" id="Ui_defineCycleDialog::horizontalLayout_4" ref="class_ui__define_cycle_dialog.html#ad9f452c726da3b9705f58ede8cfdeb2d" />
-      <keyword name="horizontalSpacer_7" id="Ui_defineCycleDialog::horizontalSpacer_7" ref="class_ui__define_cycle_dialog.html#abe517a13c8e5a613d534992abbbf85ce" />
-      <keyword name="label_4" id="Ui_defineCycleDialog::label_4" ref="class_ui__define_cycle_dialog.html#ab660392d534326c4ecab689ae041f37b" />
-      <keyword name="lineEdit_4" id="Ui_defineCycleDialog::lineEdit_4" ref="class_ui__define_cycle_dialog.html#aae21ab9ac566059dee36fa8a154d7f1a" />
-      <keyword name="horizontalSpacer_8" id="Ui_defineCycleDialog::horizontalSpacer_8" ref="class_ui__define_cycle_dialog.html#afbc4007ba8f3b553560ee3da5873120b" />
-      <keyword name="tabCenter" id="Ui_defineCycleDialog::tabCenter" ref="class_ui__define_cycle_dialog.html#a912f00d8c89ac32ba3774fb8106420f3" />
-      <keyword name="verticalLayout" id="Ui_defineCycleDialog::verticalLayout" ref="class_ui__define_cycle_dialog.html#a5e0d16d30bcb9ff54944ffc75d965b7d" />
-      <keyword name="groupBox" id="Ui_defineCycleDialog::groupBox" ref="class_ui__define_cycle_dialog.html#ac6483121f806471d84de6ba86e61921b" />
-      <keyword name="verticalLayout_4" id="Ui_defineCycleDialog::verticalLayout_4" ref="class_ui__define_cycle_dialog.html#a4406dcb26a55c866b3cfc269366d9294" />
-      <keyword name="horizontalLayout_6" id="Ui_defineCycleDialog::horizontalLayout_6" ref="class_ui__define_cycle_dialog.html#a25296210e8cbc4a2eacc58d7420ac53c" />
-      <keyword name="label_6" id="Ui_defineCycleDialog::label_6" ref="class_ui__define_cycle_dialog.html#a2ec5867b62c0e11abcbb50fa984c1f94" />
-      <keyword name="lineEdit_5" id="Ui_defineCycleDialog::lineEdit_5" ref="class_ui__define_cycle_dialog.html#a3d5520f021e4be628878c16356d867e4" />
-      <keyword name="horizontalSpacer_11" id="Ui_defineCycleDialog::horizontalSpacer_11" ref="class_ui__define_cycle_dialog.html#a9eb7ed48f73134128d9c641db721d41f" />
-      <keyword name="horizontalLayout_5" id="Ui_defineCycleDialog::horizontalLayout_5" ref="class_ui__define_cycle_dialog.html#a03c84f7955219dc3905bb5ca4f0af39e" />
-      <keyword name="label_5" id="Ui_defineCycleDialog::label_5" ref="class_ui__define_cycle_dialog.html#a6f26b71d4b3e5be6f5561d045125198c" />
-      <keyword name="lineEdit_6" id="Ui_defineCycleDialog::lineEdit_6" ref="class_ui__define_cycle_dialog.html#aa19a105e0b9670c923be42cf953a55e0" />
-      <keyword name="horizontalSpacer_10" id="Ui_defineCycleDialog::horizontalSpacer_10" ref="class_ui__define_cycle_dialog.html#ab4de9ae4f5fb1e738c22bd8d2fbb8571" />
-      <keyword name="horizontalLayout_7" id="Ui_defineCycleDialog::horizontalLayout_7" ref="class_ui__define_cycle_dialog.html#a103cdf5b651b17a0716c66891b5a11df" />
-      <keyword name="label_7" id="Ui_defineCycleDialog::label_7" ref="class_ui__define_cycle_dialog.html#a7c005f2e7df6caa5e9b81ed1716c0382" />
-      <keyword name="lineEdit_7" id="Ui_defineCycleDialog::lineEdit_7" ref="class_ui__define_cycle_dialog.html#ae3e3d1bd890adbe23502349a6b2fe90a" />
-      <keyword name="horizontalSpacer_9" id="Ui_defineCycleDialog::horizontalSpacer_9" ref="class_ui__define_cycle_dialog.html#a56c94e17b5226b6c00588a9085e4ee89" />
-      <keyword name="buttonBox" id="Ui_defineCycleDialog::buttonBox" ref="class_ui__define_cycle_dialog.html#ae1d3f2442bdfe35eccc053c09694f7f2" />
-      <keyword name="Ui::helpDialog" id="Ui::helpDialog" ref="class_ui_1_1help_dialog.html" />
-      <keyword name="setupUi" id="Ui_helpDialog::setupUi" ref="class_ui__help_dialog.html#a4074ac03760c68b2a4d9ba5e9aa47f4b" />
-      <keyword name="retranslateUi" id="Ui_helpDialog::retranslateUi" ref="class_ui__help_dialog.html#a2f67a7a9b16bb22a264d312234c7e60d" />
-      <keyword name="horizontalLayout" id="Ui_helpDialog::horizontalLayout" ref="class_ui__help_dialog.html#a9a2ecc710af91e4b1e89a3d49e5a22c0" />
-      <keyword name="splitter" id="Ui_helpDialog::splitter" ref="class_ui__help_dialog.html#a72aa819f279809b1c253f46bd2cec5dc" />
-      <keyword name="tabWidget" id="Ui_helpDialog::tabWidget" ref="class_ui__help_dialog.html#a0c873833046066c8d4594e59905ad8d5" />
-      <keyword name="textBrowser" id="Ui_helpDialog::textBrowser" ref="class_ui__help_dialog.html#ac04b5a0ba104077649c97b8ab07afc65" />
-      <keyword name="Ui::MainWindow" id="Ui::MainWindow" ref="class_ui_1_1_main_window.html" />
-      <keyword name="setupUi" id="Ui_MainWindow::setupUi" ref="class_ui___main_window.html#acf4a0872c4c77d8f43a2ec66ed849b58" />
-      <keyword name="retranslateUi" id="Ui_MainWindow::retranslateUi" ref="class_ui___main_window.html#a097dd160c3534a204904cb374412c618" />
-      <keyword name="actionNew" id="Ui_MainWindow::actionNew" ref="class_ui___main_window.html#a9090620adfd867b72c5f445c83b8c0ec" />
-      <keyword name="actionSave" id="Ui_MainWindow::actionSave" ref="class_ui___main_window.html#a6e14788227f1a0dbc8cf983514685f3b" />
-      <keyword name="actionOpen" id="Ui_MainWindow::actionOpen" ref="class_ui___main_window.html#a5772f39001f62b7f601aafe72caa10c0" />
-      <keyword name="actionConfiguration" id="Ui_MainWindow::actionConfiguration" ref="class_ui___main_window.html#aa2c71d96d12d8103436804c3fda3855d" />
-      <keyword name="actionUser_Manual" id="Ui_MainWindow::actionUser_Manual" ref="class_ui___main_window.html#a711ee49dc285749537d57e6756b1a0c3" />
-      <keyword name="actionAbout" id="Ui_MainWindow::actionAbout" ref="class_ui___main_window.html#abdf2b43167c2cd0d3405f90b8c30e934" />
-      <keyword name="actionCreate_Cycle" id="Ui_MainWindow::actionCreate_Cycle" ref="class_ui___main_window.html#ab34717288693d70d787ff80f9ad3f633" />
-      <keyword name="actionPan" id="Ui_MainWindow::actionPan" ref="class_ui___main_window.html#abfbd7004decc3b1240e9009b86c0500e" />
-      <keyword name="actionLabels" id="Ui_MainWindow::actionLabels" ref="class_ui___main_window.html#a262b4df5530dbefe28c149fa86f140b2" />
-      <keyword name="actionzoomIn" id="Ui_MainWindow::actionzoomIn" ref="class_ui___main_window.html#a30a8a79f7c40582f655109ebe2dcfcff" />
-      <keyword name="actionzoomOut" id="Ui_MainWindow::actionzoomOut" ref="class_ui___main_window.html#a749319d9c2f86308f4559091acff6910" />
-      <keyword name="actionDebug_bounding_rect" id="Ui_MainWindow::actionDebug_bounding_rect" ref="class_ui___main_window.html#ab922a617328dd984d45d82e8aa460d13" />
-      <keyword name="actionDefine_by_center_and_radius_squared" id="Ui_MainWindow::actionDefine_by_center_and_radius_squared" ref="class_ui___main_window.html#a80f63d6b857721d1d102cd7ba5063878" />
-      <keyword name="actionDefine_by_values" id="Ui_MainWindow::actionDefine_by_values" ref="class_ui___main_window.html#a0b0a125bc543f541304b27a09559e72d" />
-      <keyword name="actionDefine_cycle" id="Ui_MainWindow::actionDefine_cycle" ref="class_ui___main_window.html#a1087883ccba9316d3703d696746101d3" />
-      <keyword name="actionSave_As" id="Ui_MainWindow::actionSave_As" ref="class_ui___main_window.html#a1e11ac34a44aeff9d0f198e5f2537dab" />
-      <keyword name="actionUndo" id="Ui_MainWindow::actionUndo" ref="class_ui___main_window.html#a175147fd65feca1da9052479372408bd" />
-      <keyword name="actionRedo" id="Ui_MainWindow::actionRedo" ref="class_ui___main_window.html#a92b45aedb3e89ab02aeed5c6a2e33520" />
-      <keyword name="actionDelete_cycle" id="Ui_MainWindow::actionDelete_cycle" ref="class_ui___main_window.html#acda444d81e28ab545b0834f0dc4ae647" />
-      <keyword name="actionSettings" id="Ui_MainWindow::actionSettings" ref="class_ui___main_window.html#a5b65436e6cc259d5586eb6e309b612e4" />
-      <keyword name="actionFigure_Description" id="Ui_MainWindow::actionFigure_Description" ref="class_ui___main_window.html#a4b11cbb0ac3c833f389276df427fc172" />
-      <keyword name="actionFloating" id="Ui_MainWindow::actionFloating" ref="class_ui___main_window.html#a8d48131a3b17a8b4c8a22b0b65b19494" />
-      <keyword name="actionExact" id="Ui_MainWindow::actionExact" ref="class_ui___main_window.html#a034f279001e76e3be73ed5b4bd07c59a" />
-      <keyword name="actionQuit" id="Ui_MainWindow::actionQuit" ref="class_ui___main_window.html#a188c243f36a2dbc10e4e2a0ad94273b1" />
-      <keyword name="actionProperties" id="Ui_MainWindow::actionProperties" ref="class_ui___main_window.html#adc69c1d59f56327ab1e42fd985f66b49" />
-      <keyword name="actionPointMetric" id="Ui_MainWindow::actionPointMetric" ref="class_ui___main_window.html#a8b35f735472c004ad6b1ebd82bb2ed79" />
-      <keyword name="actionCycleMetric" id="Ui_MainWindow::actionCycleMetric" ref="class_ui___main_window.html#af6823cd17f39bc0f6b94a026476eefa1" />
-      <keyword name="actionEllipticPointMetric" id="Ui_MainWindow::actionEllipticPointMetric" ref="class_ui___main_window.html#a58d0ba1b7beeed28ad5465133e240ab1" />
-      <keyword name="actionParabolicPointMetric" id="Ui_MainWindow::actionParabolicPointMetric" ref="class_ui___main_window.html#a5706347a779fae5ae488492ed8607e4a" />
-      <keyword name="actionHyperbolicPointMetric" id="Ui_MainWindow::actionHyperbolicPointMetric" ref="class_ui___main_window.html#a3e8849e6122bf0467b541bdbe5b570a2" />
-      <keyword name="actionEllipticCycleMetric" id="Ui_MainWindow::actionEllipticCycleMetric" ref="class_ui___main_window.html#a5d74c24d7075548a7674541fe000b632" />
-      <keyword name="actionParabolicCycleMetric" id="Ui_MainWindow::actionParabolicCycleMetric" ref="class_ui___main_window.html#a73235643255b09b0481df8b7f5206590" />
-      <keyword name="actionHyperbolicCycleMetric" id="Ui_MainWindow::actionHyperbolicCycleMetric" ref="class_ui___main_window.html#a7709b35d7e47bf8e8c73401cc66b33d5" />
-      <keyword name="actionEvaluationType" id="Ui_MainWindow::actionEvaluationType" ref="class_ui___main_window.html#a63ad0bb77d3a481c97a24033ef35ed36" />
-      <keyword name="centralWidget" id="Ui_MainWindow::centralWidget" ref="class_ui___main_window.html#a30075506c2116c3ed4ff25e07ae75f81" />
-      <keyword name="horizontalLayout" id="Ui_MainWindow::horizontalLayout" ref="class_ui___main_window.html#acd6fdc9ebacc4b25b834162380d75ce8" />
-      <keyword name="graphicsView" id="Ui_MainWindow::graphicsView" ref="class_ui___main_window.html#a48cc360c9d7a73abfc5ab3cee1f61e3d" />
-      <keyword name="menuBar" id="Ui_MainWindow::menuBar" ref="class_ui___main_window.html#a2be1c24ec9adfca18e1dcc951931457f" />
-      <keyword name="menuFile" id="Ui_MainWindow::menuFile" ref="class_ui___main_window.html#a7ba84cb4cdd6a12dc83bf4e100bd8d80" />
-      <keyword name="menuEdit" id="Ui_MainWindow::menuEdit" ref="class_ui___main_window.html#aa2a8beb7420d9a6d513949dd5661090a" />
-      <keyword name="menuDefine_Cycle_2" id="Ui_MainWindow::menuDefine_Cycle_2" ref="class_ui___main_window.html#a5dbb06b88129fa03318293a5e9cd8ea7" />
-      <keyword name="menuHelp" id="Ui_MainWindow::menuHelp" ref="class_ui___main_window.html#ab95dbfbb0550206aeac76db36f491548" />
-      <keyword name="menuView" id="Ui_MainWindow::menuView" ref="class_ui___main_window.html#a9e7f2ce6c3d8a309109baed7d6890604" />
-      <keyword name="menuTools" id="Ui_MainWindow::menuTools" ref="class_ui___main_window.html#a552c7b6d729252c2768c9a077679fef7" />
-      <keyword name="mainToolBar" id="Ui_MainWindow::mainToolBar" ref="class_ui___main_window.html#a5172877001c8c7b4e0f6de50421867d1" />
-      <keyword name="statusBar" id="Ui_MainWindow::statusBar" ref="class_ui___main_window.html#a50fa481337604bcc8bf68de18ab16ecd" />
-      <keyword name="dockWidgetRight" id="Ui_MainWindow::dockWidgetRight" ref="class_ui___main_window.html#a0b290047e65bbb51d10c15a73b264d84" />
-      <keyword name="dockWidgetContents" id="Ui_MainWindow::dockWidgetContents" ref="class_ui___main_window.html#a765ded8236736213d556f6f91941808e" />
-      <keyword name="verticalLayout_2" id="Ui_MainWindow::verticalLayout_2" ref="class_ui___main_window.html#a0c01bad60d9f422a1258e710635a2f65" />
-      <keyword name="verticalLayout" id="Ui_MainWindow::verticalLayout" ref="class_ui___main_window.html#aecd96a04789fcfec3f98d80390ad8184" />
-      <keyword name="treeView" id="Ui_MainWindow::treeView" ref="class_ui___main_window.html#a2e917678fb1e644071b85bf38d97125e" />
-      <keyword name="Ui::matrix4dialog" id="Ui::matrix4dialog" ref="class_ui_1_1matrix4dialog.html" />
-      <keyword name="setupUi" id="Ui_matrix4dialog::setupUi" ref="class_ui__matrix4dialog.html#aef219b6ca55919d404217da65f6d9f84" />
-      <keyword name="retranslateUi" id="Ui_matrix4dialog::retranslateUi" ref="class_ui__matrix4dialog.html#a0140e00a8003ec0682fad02b5422c32c" />
-      <keyword name="buttonBox" id="Ui_matrix4dialog::buttonBox" ref="class_ui__matrix4dialog.html#ae643e32c20b920b6ab7339075a79bd9d" />
-      <keyword name="lineEdit_value2" id="Ui_matrix4dialog::lineEdit_value2" ref="class_ui__matrix4dialog.html#aa24b0549035d7da282a7a26c4076a08b" />
-      <keyword name="lineEdit_value4" id="Ui_matrix4dialog::lineEdit_value4" ref="class_ui__matrix4dialog.html#a0f6b83ac50476be0a50fe6581c58c9ec" />
-      <keyword name="lineEdit_value1" id="Ui_matrix4dialog::lineEdit_value1" ref="class_ui__matrix4dialog.html#af76878b0323618ee71de96e1ff096e88" />
-      <keyword name="lineEdit_value3" id="Ui_matrix4dialog::lineEdit_value3" ref="class_ui__matrix4dialog.html#ab323365f4524b26c3aa16ca9cc2375c3" />
-      <keyword name="label" id="Ui_matrix4dialog::label" ref="class_ui__matrix4dialog.html#a251052fdd26c4f5d32480e10b296be69" />
-      <keyword name="label_2" id="Ui_matrix4dialog::label_2" ref="class_ui__matrix4dialog.html#af1865005bfda4019dcf37b95b5c6e0d7" />
-      <keyword name="label_3" id="Ui_matrix4dialog::label_3" ref="class_ui__matrix4dialog.html#a855424564cf682a5b813162db19932c7" />
-      <keyword name="label_4" id="Ui_matrix4dialog::label_4" ref="class_ui__matrix4dialog.html#aaccd6a9185cebcd9bafe533642500165" />
-      <keyword name="Ui::matrix8dialog" id="Ui::matrix8dialog" ref="class_ui_1_1matrix8dialog.html" />
-      <keyword name="setupUi" id="Ui_matrix8dialog::setupUi" ref="class_ui__matrix8dialog.html#a2b39e0a8327011911b0cd985a4d5697f" />
-      <keyword name="retranslateUi" id="Ui_matrix8dialog::retranslateUi" ref="class_ui__matrix8dialog.html#a1e76584117237b2839700411c6b1d748" />
-      <keyword name="buttonBox" id="Ui_matrix8dialog::buttonBox" ref="class_ui__matrix8dialog.html#a05caf47b40e45d204c2bd9613a8d955a" />
-      <keyword name="lineEdit_value2" id="Ui_matrix8dialog::lineEdit_value2" ref="class_ui__matrix8dialog.html#a73c18fd36dada64bae0c1dfdd4467699" />
-      <keyword name="label_2" id="Ui_matrix8dialog::label_2" ref="class_ui__matrix8dialog.html#a34ab1fde638ea494cab0b6e8b49e339f" />
-      <keyword name="lineEdit_value3" id="Ui_matrix8dialog::lineEdit_value3" ref="class_ui__matrix8dialog.html#a5898b8f9962f3ff9a19c4a801177306c" />
-      <keyword name="label" id="Ui_matrix8dialog::label" ref="class_ui__matrix8dialog.html#ae19ba85fd7ddeb22e754a4eeb46aef24" />
-      <keyword name="label_4" id="Ui_matrix8dialog::label_4" ref="class_ui__matrix8dialog.html#a302027e9bca42c3d8709c82fa7249d9d" />
-      <keyword name="lineEdit_value4" id="Ui_matrix8dialog::lineEdit_value4" ref="class_ui__matrix8dialog.html#aef722cd4314ed9b4a9c91b5272138380" />
-      <keyword name="label_3" id="Ui_matrix8dialog::label_3" ref="class_ui__matrix8dialog.html#abb97b8de24dd00e5f7d6ad36c7bc009c" />
-      <keyword name="lineEdit_value1" id="Ui_matrix8dialog::lineEdit_value1" ref="class_ui__matrix8dialog.html#a60c80910c009351097ddd66eb8e06253" />
-      <keyword name="label_5" id="Ui_matrix8dialog::label_5" ref="class_ui__matrix8dialog.html#ac7c6fa572253de8781d51b59ded2893a" />
-      <keyword name="lineEdit_value8" id="Ui_matrix8dialog::lineEdit_value8" ref="class_ui__matrix8dialog.html#aa1a34788df19af7cb4318cd55506013c" />
-      <keyword name="lineEdit_value7" id="Ui_matrix8dialog::lineEdit_value7" ref="class_ui__matrix8dialog.html#ab0d3ddc7637b2d04609af1aba005d22b" />
-      <keyword name="lineEdit_value5" id="Ui_matrix8dialog::lineEdit_value5" ref="class_ui__matrix8dialog.html#a6b9d474e8b60af43933806b4c2fb7055" />
-      <keyword name="label_6" id="Ui_matrix8dialog::label_6" ref="class_ui__matrix8dialog.html#a3bde654266d91ad7ac339ddcda446cff" />
-      <keyword name="label_7" id="Ui_matrix8dialog::label_7" ref="class_ui__matrix8dialog.html#a56e4ea75bd746b2aefc18a48512a6612" />
-      <keyword name="label_8" id="Ui_matrix8dialog::label_8" ref="class_ui__matrix8dialog.html#ac6160d0d4e2382df77d0c61e168d271d" />
-      <keyword name="lineEdit_value6" id="Ui_matrix8dialog::lineEdit_value6" ref="class_ui__matrix8dialog.html#af8ee00326ad344afc1fe571fcef389fd" />
-      <keyword name="Ui::propertiesDialog" id="Ui::propertiesDialog" ref="class_ui_1_1properties_dialog.html" />
-      <keyword name="setupUi" id="Ui_propertiesDialog::setupUi" ref="class_ui__properties_dialog.html#a595c0d40bd7ea44fd12cb3d08cf5a9fb" />
-      <keyword name="retranslateUi" id="Ui_propertiesDialog::retranslateUi" ref="class_ui__properties_dialog.html#af4e86fdbed9259bb304605b4d414aecb" />
-      <keyword name="verticalLayout" id="Ui_propertiesDialog::verticalLayout" ref="class_ui__properties_dialog.html#a98255232cbf624a7b15788f3db8c5240" />
-      <keyword name="groupBox" id="Ui_propertiesDialog::groupBox" ref="class_ui__properties_dialog.html#aa4408a5d11640f91d67098cb57346179" />
-      <keyword name="verticalLayout_2" id="Ui_propertiesDialog::verticalLayout_2" ref="class_ui__properties_dialog.html#af0b5bd40650126b92f06aed5c9c5ad4e" />
-      <keyword name="figureDescriptionText" id="Ui_propertiesDialog::figureDescriptionText" ref="class_ui__properties_dialog.html#abdd6eabecff7576fc26e0fcce1ec5578" />
-      <keyword name="groupBox_4" id="Ui_propertiesDialog::groupBox_4" ref="class_ui__properties_dialog.html#a209e64b037cdee834e22e417a00b6d5c" />
-      <keyword name="horizontalLayout_2" id="Ui_propertiesDialog::horizontalLayout_2" ref="class_ui__properties_dialog.html#aba58a87c91131c941e91a80f6fe3f175" />
-      <keyword name="floatButton" id="Ui_propertiesDialog::floatButton" ref="class_ui__properties_dialog.html#a524ae1db7433b72d6689e6afbac4aa52" />
-      <keyword name="exactButton" id="Ui_propertiesDialog::exactButton" ref="class_ui__properties_dialog.html#abd227707bd8310869b8fbe15d7ca9cfe" />
-      <keyword name="horizontalLayout" id="Ui_propertiesDialog::horizontalLayout" ref="class_ui__properties_dialog.html#a8562fe5c8fd461c2fae10f6e00f856dc" />
-      <keyword name="groupBox_2" id="Ui_propertiesDialog::groupBox_2" ref="class_ui__properties_dialog.html#ae8127b03eb0c346ac3c25227410326e1" />
-      <keyword name="verticalLayout_3" id="Ui_propertiesDialog::verticalLayout_3" ref="class_ui__properties_dialog.html#a7c81843ddff27d18375e13cfed9bfac0" />
-      <keyword name="ellipticPointButton" id="Ui_propertiesDialog::ellipticPointButton" ref="class_ui__properties_dialog.html#a9b2b3e033a44d84db89f5bf0c7977a3e" />
-      <keyword name="parabolicPointButton" id="Ui_propertiesDialog::parabolicPointButton" ref="class_ui__properties_dialog.html#a86f31864696a9f676ad3fee8a0ef4ad6" />
-      <keyword name="hyperbolicPointButton" id="Ui_propertiesDialog::hyperbolicPointButton" ref="class_ui__properties_dialog.html#ad4c33c681b44790fc4671f08d7b9fe2c" />
-      <keyword name="groupBox_3" id="Ui_propertiesDialog::groupBox_3" ref="class_ui__properties_dialog.html#a5a9872252c004e5c3665e0de8a331d06" />
-      <keyword name="verticalLayout_4" id="Ui_propertiesDialog::verticalLayout_4" ref="class_ui__properties_dialog.html#a73c069e1cd6743f2304c5a8ccf5b3de0" />
-      <keyword name="ellipticCycleButton" id="Ui_propertiesDialog::ellipticCycleButton" ref="class_ui__properties_dialog.html#acc387e99d883c6337a06bf7c767a58c4" />
-      <keyword name="parabolicCycleButton" id="Ui_propertiesDialog::parabolicCycleButton" ref="class_ui__properties_dialog.html#aa6488e9cda300c6fb580ff1103e6a3e3" />
-      <keyword name="hyperbolicCycleButton" id="Ui_propertiesDialog::hyperbolicCycleButton" ref="class_ui__properties_dialog.html#aeb4b1f6b0ff897d31e89dbe8689e223c" />
-      <keyword name="verticalSpacer" id="Ui_propertiesDialog::verticalSpacer" ref="class_ui__properties_dialog.html#a7ef037d1f46fe6b15d6bd06be637cbf0" />
-      <keyword name="buttonBox" id="Ui_propertiesDialog::buttonBox" ref="class_ui__properties_dialog.html#a1ccb0e1a0369f5ef66245528379f05a5" />
-      <keyword name="Ui::settingsDialog" id="Ui::settingsDialog" ref="class_ui_1_1settings_dialog.html" />
-      <keyword name="setupUi" id="Ui_settingsDialog::setupUi" ref="class_ui__settings_dialog.html#af96d6b02d7d9762b18d968d8c8128f82" />
-      <keyword name="retranslateUi" id="Ui_settingsDialog::retranslateUi" ref="class_ui__settings_dialog.html#a41fc817d3b4a6103aee2ded4a8f5c273" />
-      <keyword name="verticalLayout_4" id="Ui_settingsDialog::verticalLayout_4" ref="class_ui__settings_dialog.html#a41905fe1434ea89cee3595f6c860b5a6" />
-      <keyword name="tabWidget" id="Ui_settingsDialog::tabWidget" ref="class_ui__settings_dialog.html#acc596f6a2cac5c3ecc2ce520a20c827a" />
-      <keyword name="tab" id="Ui_settingsDialog::tab" ref="class_ui__settings_dialog.html#acf10507cd54902c83445442e3e09b738" />
-      <keyword name="verticalLayout_2" id="Ui_settingsDialog::verticalLayout_2" ref="class_ui__settings_dialog.html#a3164e8026801dea9804a1354b78c38da" />
-      <keyword name="groupBox" id="Ui_settingsDialog::groupBox" ref="class_ui__settings_dialog.html#ad1d3781d92fe311f7b670e9c8f04ec6e" />
-      <keyword name="horizontalLayout" id="Ui_settingsDialog::horizontalLayout" ref="class_ui__settings_dialog.html#a2433db810a7ae0d57857076825e096a0" />
-      <keyword name="automaticNaming" id="Ui_settingsDialog::automaticNaming" ref="class_ui__settings_dialog.html#ab0faaf97c711d41d8919c92c3f268b1c" />
-      <keyword name="manualNaming" id="Ui_settingsDialog::manualNaming" ref="class_ui__settings_dialog.html#adbfba48f832ee2f84b61c7f9d236197e" />
-      <keyword name="groupBox_2" id="Ui_settingsDialog::groupBox_2" ref="class_ui__settings_dialog.html#aeedea3eec08a9525afec84e0bb18c5e6" />
-      <keyword name="verticalLayout_3" id="Ui_settingsDialog::verticalLayout_3" ref="class_ui__settings_dialog.html#a5c11a50452e48905ceb877c0f143558a" />
-      <keyword name="doubleSpinBox" id="Ui_settingsDialog::doubleSpinBox" ref="class_ui__settings_dialog.html#a3d632ee44f600bfda94dd22c8b865b2d" />
-      <keyword name="groupBox_6" id="Ui_settingsDialog::groupBox_6" ref="class_ui__settings_dialog.html#a3e8f7010593ce0a07d566c17dc5cd3e7" />
-      <keyword name="horizontalLayout_3" id="Ui_settingsDialog::horizontalLayout_3" ref="class_ui__settings_dialog.html#a029c3789c703085c4f6677e7925292d6" />
-      <keyword name="defaultPathLineEdit" id="Ui_settingsDialog::defaultPathLineEdit" ref="class_ui__settings_dialog.html#ae202f250dd6da958d0920b4665d1917f" />
-      <keyword name="pushButton_4" id="Ui_settingsDialog::pushButton_4" ref="class_ui__settings_dialog.html#a9bcd42185b37bce81ab51a787ae6493b" />
-      <keyword name="groupBox_7" id="Ui_settingsDialog::groupBox_7" ref="class_ui__settings_dialog.html#aea78afbe2f62103d25386617107ba544" />
-      <keyword name="horizontalLayout_2" id="Ui_settingsDialog::horizontalLayout_2" ref="class_ui__settings_dialog.html#ad7c6cf95448da5fdbd25816a1b8cd631" />
-      <keyword name="onlyRealsTrue" id="Ui_settingsDialog::onlyRealsTrue" ref="class_ui__settings_dialog.html#a3954ad627be6db1470e4c958f4132526" />
-      <keyword name="onlyRealsFalse" id="Ui_settingsDialog::onlyRealsFalse" ref="class_ui__settings_dialog.html#a24ff462fecd5f6a6c8372779b20d5042" />
-      <keyword name="groupBox_8" id="Ui_settingsDialog::groupBox_8" ref="class_ui__settings_dialog.html#a510fbc4798016d07406a498374867722" />
-      <keyword name="verticalLayout_6" id="Ui_settingsDialog::verticalLayout_6" ref="class_ui__settings_dialog.html#a4fe94889101443b99ba127a647d9fc43" />
-      <keyword name="spinBox" id="Ui_settingsDialog::spinBox" ref="class_ui__settings_dialog.html#aa1039d8dae1b572300fa54f7c3e18646" />
-      <keyword name="verticalSpacer" id="Ui_settingsDialog::verticalSpacer" ref="class_ui__settings_dialog.html#a7ef380f555a0a3e2e274000f6338c965" />
-      <keyword name="tab_2" id="Ui_settingsDialog::tab_2" ref="class_ui__settings_dialog.html#a64fe5c5093202932607b29e9af7c378b" />
-      <keyword name="verticalLayout" id="Ui_settingsDialog::verticalLayout" ref="class_ui__settings_dialog.html#ad02c41c8dcba75bcfe6a841fd87371fc" />
-      <keyword name="groupBox_3" id="Ui_settingsDialog::groupBox_3" ref="class_ui__settings_dialog.html#ab6039b08fe7033d8632ba959a1f9f458" />
-      <keyword name="gridLayout" id="Ui_settingsDialog::gridLayout" ref="class_ui__settings_dialog.html#a9cbb60155b2df0b006c2615493b136ee" />
-      <keyword name="label" id="Ui_settingsDialog::label" ref="class_ui__settings_dialog.html#add772572c6b6d5eeecd754a913b931be" />
-      <keyword name="horizontalSpacer" id="Ui_settingsDialog::horizontalSpacer" ref="class_ui__settings_dialog.html#ad3cf5fe1bdd892adf122893d92d3be22" />
-      <keyword name="pushButton_2" id="Ui_settingsDialog::pushButton_2" ref="class_ui__settings_dialog.html#abb80c05c318bdf7b89da56bdd02974c4" />
-      <keyword name="horizontalSpacer_2" id="Ui_settingsDialog::horizontalSpacer_2" ref="class_ui__settings_dialog.html#aeffd642eb2c046e6c0ea941846bdb988" />
-      <keyword name="label_2" id="Ui_settingsDialog::label_2" ref="class_ui__settings_dialog.html#ac591889922f52c0d47892ee9217d2fcd" />
-      <keyword name="label_3" id="Ui_settingsDialog::label_3" ref="class_ui__settings_dialog.html#aeab6baefbf0bf0d9d3bd107130b80349" />
-      <keyword name="pushButton" id="Ui_settingsDialog::pushButton" ref="class_ui__settings_dialog.html#ada86439f18c5657ac82583030dfd7604" />
-      <keyword name="pushButton_3" id="Ui_settingsDialog::pushButton_3" ref="class_ui__settings_dialog.html#a441acb931c49542379e5f97e215c860e" />
-      <keyword name="horizontalSpacer_3" id="Ui_settingsDialog::horizontalSpacer_3" ref="class_ui__settings_dialog.html#a58c2390d2c0ead93a2b360e4b3059b8a" />
-      <keyword name="groupBox_4" id="Ui_settingsDialog::groupBox_4" ref="class_ui__settings_dialog.html#a833c48e589e0b65f6314673f5f9e04a9" />
-      <keyword name="gridLayout_2" id="Ui_settingsDialog::gridLayout_2" ref="class_ui__settings_dialog.html#a8747cf83ce4127dab0cb1e7f7a1fd8d8" />
-      <keyword name="label_4" id="Ui_settingsDialog::label_4" ref="class_ui__settings_dialog.html#a864626ed59d209e907310a99e6441420" />
-      <keyword name="horizontalSpacer_4" id="Ui_settingsDialog::horizontalSpacer_4" ref="class_ui__settings_dialog.html#aa64ac7eca46c9267f8e454b072071a07" />
-      <keyword name="comboBox" id="Ui_settingsDialog::comboBox" ref="class_ui__settings_dialog.html#af4beec48c7690a2c9b6d57904f87d0c5" />
-      <keyword name="label_5" id="Ui_settingsDialog::label_5" ref="class_ui__settings_dialog.html#ab041c5c10a03d19c9cc5fe7d69012e8c" />
-      <keyword name="doubleSpinBox_2" id="Ui_settingsDialog::doubleSpinBox_2" ref="class_ui__settings_dialog.html#affdd0804285454c334853dd702f0f4c2" />
-      <keyword name="horizontalSpacer_5" id="Ui_settingsDialog::horizontalSpacer_5" ref="class_ui__settings_dialog.html#affd52a1b02f018dbeb5261a37f7aa9fb" />
-      <keyword name="verticalSpacer_2" id="Ui_settingsDialog::verticalSpacer_2" ref="class_ui__settings_dialog.html#a766fad3cfaf98dde8ae45ce9392e250a" />
-      <keyword name="buttonBox" id="Ui_settingsDialog::buttonBox" ref="class_ui__settings_dialog.html#a9fd9aea95caaf8c0f62efbb46711d137" />
     </keywords>
     <files>
       <file>tabs.css</file>
@@ -2326,6 +1529,7 @@
       <file>search/search.js</file>
       <file>circle_8h_source.html</file>
       <file>conf_8h_source.html</file>
+      <file>cstyledialog_8h_source.html</file>
       <file>cyclecontextmenu_8h_source.html</file>
       <file>definecycledialog_8h_source.html</file>
       <file>dockwidget_8h_source.html</file>
@@ -2344,24 +1548,19 @@
       <file>settingsdialog_8h_source.html</file>
       <file>treemodel_8h_source.html</file>
       <file>view_8h_source.html</file>
-      <file>lib_2moebinv-3_82_2cycle3_d-visualiser_2moc__predefs_8h_source.html</file>
-      <file>moebinv-gui-build_2moc__predefs_8h_source.html</file>
+      <file>moc__predefs_8h_source.html</file>
       <file>vis_8h_source.html</file>
       <file>cycle_8h_source.html</file>
       <file>figure_8h_source.html</file>
       <file>pyginac_8hpp_source.html</file>
-      <file>ui__definecycledialog_8h_source.html</file>
-      <file>ui__helpdialog_8h_source.html</file>
-      <file>ui__mainwindow_8h_source.html</file>
-      <file>ui__matrix4dialog_8h_source.html</file>
-      <file>ui__matrix8dialog_8h_source.html</file>
-      <file>ui__propertiesdialog_8h_source.html</file>
-      <file>ui__settingsdialog_8h_source.html</file>
       <file>md___users_lukehutton__one_drive_-__university_of__leeds__university__computer__science__internsf43a36b333143b868ce38c598bf85d75.html</file>
       <file>md___users_lukehutton__one_drive_-__university_of__leeds__university__computer__science__internship_moebinv-gui__r_e_a_d_m_e.html</file>
       <file>classcircle.html</file>
       <file>classcircle.png</file>
       <file>classcircle-members.html</file>
+      <file>classc_style_dialog.html</file>
+      <file>classc_style_dialog.png</file>
+      <file>classc_style_dialog-members.html</file>
       <file>classcycle_context_menu.html</file>
       <file>classcycle_context_menu.png</file>
       <file>classcycle_context_menu-members.html</file>
@@ -2428,46 +1627,6 @@
       <file>classproperties_dialog.html</file>
       <file>classproperties_dialog.png</file>
       <file>classproperties_dialog-members.html</file>
-      <file>structqt__meta__stringdata__circle__t.html</file>
-      <file>structqt__meta__stringdata__circle__t-members.html</file>
-      <file>structqt__meta__stringdata__cycle_context_menu__t.html</file>
-      <file>structqt__meta__stringdata__cycle_context_menu__t-members.html</file>
-      <file>structqt__meta__stringdata__define_cycle_dialog__t.html</file>
-      <file>structqt__meta__stringdata__define_cycle_dialog__t-members.html</file>
-      <file>structqt__meta__stringdata__dock_widget__t.html</file>
-      <file>structqt__meta__stringdata__dock_widget__t-members.html</file>
-      <file>structqt__meta__stringdata__figure_undo_command__t.html</file>
-      <file>structqt__meta__stringdata__figure_undo_command__t-members.html</file>
-      <file>structqt__meta__stringdata__graphic_cycle__t.html</file>
-      <file>structqt__meta__stringdata__graphic_cycle__t-members.html</file>
-      <file>structqt__meta__stringdata__graphics_scene__t.html</file>
-      <file>structqt__meta__stringdata__graphics_scene__t-members.html</file>
-      <file>structqt__meta__stringdata__help_browser__t.html</file>
-      <file>structqt__meta__stringdata__help_browser__t-members.html</file>
-      <file>structqt__meta__stringdata__help_dialog__t.html</file>
-      <file>structqt__meta__stringdata__help_dialog__t-members.html</file>
-      <file>structqt__meta__stringdata__line__t.html</file>
-      <file>structqt__meta__stringdata__line__t-members.html</file>
-      <file>structqt__meta__stringdata___main_window__t.html</file>
-      <file>structqt__meta__stringdata___main_window__t-members.html</file>
-      <file>structqt__meta__stringdata__matrix4dialog__t.html</file>
-      <file>structqt__meta__stringdata__matrix4dialog__t-members.html</file>
-      <file>structqt__meta__stringdata__matrix8dialog__t.html</file>
-      <file>structqt__meta__stringdata__matrix8dialog__t-members.html</file>
-      <file>structqt__meta__stringdata__menu_rel_action__t.html</file>
-      <file>structqt__meta__stringdata__menu_rel_action__t-members.html</file>
-      <file>structqt__meta__stringdata__menu_rel_action_group__t.html</file>
-      <file>structqt__meta__stringdata__menu_rel_action_group__t-members.html</file>
-      <file>structqt__meta__stringdata__point__t.html</file>
-      <file>structqt__meta__stringdata__point__t-members.html</file>
-      <file>structqt__meta__stringdata__properties_dialog__t.html</file>
-      <file>structqt__meta__stringdata__properties_dialog__t-members.html</file>
-      <file>structqt__meta__stringdata__settings_dialog__t.html</file>
-      <file>structqt__meta__stringdata__settings_dialog__t-members.html</file>
-      <file>structqt__meta__stringdata__tree_model__t.html</file>
-      <file>structqt__meta__stringdata__tree_model__t-members.html</file>
-      <file>structqt__meta__stringdata__view__t.html</file>
-      <file>structqt__meta__stringdata__view__t-members.html</file>
       <file>structqt__meta__stringdata__vis__t.html</file>
       <file>structqt__meta__stringdata__vis__t-members.html</file>
       <file>struct_r_g_b_a.html</file>
@@ -2480,27 +1639,6 @@
       <file>classtree_model.html</file>
       <file>classtree_model.png</file>
       <file>classtree_model-members.html</file>
-      <file>class_ui__define_cycle_dialog.html</file>
-      <file>class_ui__define_cycle_dialog.png</file>
-      <file>class_ui__define_cycle_dialog-members.html</file>
-      <file>class_ui__help_dialog.html</file>
-      <file>class_ui__help_dialog.png</file>
-      <file>class_ui__help_dialog-members.html</file>
-      <file>class_ui___main_window.html</file>
-      <file>class_ui___main_window.png</file>
-      <file>class_ui___main_window-members.html</file>
-      <file>class_ui__matrix4dialog.html</file>
-      <file>class_ui__matrix4dialog.png</file>
-      <file>class_ui__matrix4dialog-members.html</file>
-      <file>class_ui__matrix8dialog.html</file>
-      <file>class_ui__matrix8dialog.png</file>
-      <file>class_ui__matrix8dialog-members.html</file>
-      <file>class_ui__properties_dialog.html</file>
-      <file>class_ui__properties_dialog.png</file>
-      <file>class_ui__properties_dialog-members.html</file>
-      <file>class_ui__settings_dialog.html</file>
-      <file>class_ui__settings_dialog.png</file>
-      <file>class_ui__settings_dialog-members.html</file>
       <file>classview.html</file>
       <file>classview.png</file>
       <file>classview-members.html</file>
@@ -2537,45 +1675,23 @@
       <file>structpyginac_1_1numeric__from__number.html</file>
       <file>structpyginac_1_1numeric__from__number-members.html</file>
       <file>namespaceregressions__linebr.html</file>
-      <file>class_ui_1_1define_cycle_dialog.html</file>
-      <file>class_ui_1_1define_cycle_dialog.png</file>
-      <file>class_ui_1_1define_cycle_dialog-members.html</file>
-      <file>class_ui_1_1help_dialog.html</file>
-      <file>class_ui_1_1help_dialog.png</file>
-      <file>class_ui_1_1help_dialog-members.html</file>
-      <file>class_ui_1_1_main_window.html</file>
-      <file>class_ui_1_1_main_window.png</file>
-      <file>class_ui_1_1_main_window-members.html</file>
-      <file>class_ui_1_1matrix4dialog.html</file>
-      <file>class_ui_1_1matrix4dialog.png</file>
-      <file>class_ui_1_1matrix4dialog-members.html</file>
-      <file>class_ui_1_1matrix8dialog.html</file>
-      <file>class_ui_1_1matrix8dialog.png</file>
-      <file>class_ui_1_1matrix8dialog-members.html</file>
-      <file>class_ui_1_1properties_dialog.html</file>
-      <file>class_ui_1_1properties_dialog.png</file>
-      <file>class_ui_1_1properties_dialog-members.html</file>
-      <file>class_ui_1_1settings_dialog.html</file>
-      <file>class_ui_1_1settings_dialog.png</file>
-      <file>class_ui_1_1settings_dialog-members.html</file>
       <file>dir_e627d49552c9c1cd456249ea895cef8d.html</file>
       <file>dir_2463ac8bb3081e849924046d25fbd39b.html</file>
       <file>dir_f03147b9c369e04ab348131f83c8700e.html</file>
       <file>dir_76c275e01e3181153dfe23c1c6f98250.html</file>
       <file>dir_70eebf94ce83cc3bdcc1e416ff86957c.html</file>
-      <file>dir_3c6f76ffcfb9ae2f3635da363af88ad2.html</file>
       <file>dir_d44c64559bbebec7f509842c48db8b23.html</file>
       <file>dir_e67a2da4e509f13ea55227fa5ebbd611.html</file>
+      <file>dir_3c6f76ffcfb9ae2f3635da363af88ad2.html</file>
       <file>dir_97aefd0d527b934f1d99a682da8fe6a9.html</file>
       <file>dir_a72f59a506d9141f849be7018d769618.html</file>
-      <file>dir_2a59b0eac2f9fdc5cf40c07bff9eac26.html</file>
       <file>dir_e74c6c8293ef6cb3969cf1101cdd89b0.html</file>
       <file>dir_e9f85230522c8ece0c38daa71867690c.html</file>
       <file>dir_1835e75ede0aca4b4d2d66f51e1788b3.html</file>
-      <file>dir_939b9b4367e92064170912e6526a2b10.html</file>
-      <file>dir_4e7fd0767426c601025a898d6983b70c.html</file>
       <file>dir_06f3874107ed98dcded2aea42efaf234.html</file>
+      <file>dir_4e7fd0767426c601025a898d6983b70c.html</file>
       <file>dir_68267d1309a1af8e8297ef4c3efbcdba.html</file>
+      <file>dir_939b9b4367e92064170912e6526a2b10.html</file>
       <file>index.html</file>
       <file>pages.html</file>
       <file>namespaces.html</file>

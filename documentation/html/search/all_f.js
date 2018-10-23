@@ -7,5 +7,5 @@ var searchData=
   ['printallintersections',['printAllIntersections',['../classvis.html#af09e2926e8e8dfa0eca3d6b2f3946fdd',1,'vis']]],
   ['printintersections',['printIntersections',['../classvis.html#a9d087bde79e6856772dc3a1f6f89294e',1,'vis']]],
   ['printintersectionslot',['printIntersectionSlot',['../classvis.html#a192e67455047ca991fb29fbd4074c11d',1,'vis']]],
-  ['propertiesdialog',['propertiesDialog',['../classproperties_dialog.html',1,'propertiesDialog'],['../class_ui_1_1properties_dialog.html',1,'Ui::propertiesDialog']]]
+  ['propertiesdialog',['propertiesDialog',['../classproperties_dialog.html',1,'']]]
 ];

@@ -47,13 +47,16 @@ void \mbox{\hyperlink{classmenu_rel_action_adbd43b99466f9ad2cde1934e1599ae4c}{cy
 \mbox{\Hypertarget{classmenu_rel_action_a1535eb0d2ad06bd4d44f3de8761841b2}\label{classmenu_rel_action_a1535eb0d2ad06bd4d44f3de8761841b2}} 
 void \mbox{\hyperlink{classmenu_rel_action_a1535eb0d2ad06bd4d44f3de8761841b2}{check\+Action\+Handler}} ()
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classmenu_rel_action_a1535eb0d2ad06bd4d44f3de8761841b2}{menu\+Rel\+Action\+::check\+Action\+Handler}} Action handler to check the status of a relation on 2 cycles. First the user is prompted to enter another cycle key, then this function checks the status of this relation and outputs the result back to the user. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmenu_rel_action_a8d79623cfe8711e62c6f4f28d8d4c33a}\label{classmenu_rel_action_a8d79623cfe8711e62c6f4f28d8d4c33a}} 
+void \mbox{\hyperlink{classmenu_rel_action_a8d79623cfe8711e62c6f4f28d8d4c33a}{check\+Action\+Cycle\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classmenu_rel_action_a8d79623cfe8711e62c6f4f28d8d4c33a}{menu\+Rel\+Action\+::check\+Action\+Cycle\+Handler}} Action handler to check the status of a relation on 2 cycles. First the user is prompted to enter another cycle key, then this function checks the status of this relation and outputs the result back to the user. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classmenu_rel_action_a157ae072f7e1622564ff68583bb73132}\label{classmenu_rel_action_a157ae072f7e1622564ff68583bb73132}} 
 Q\+String {\bfseries node\+\_\+label} (Gi\+Na\+C\+::ex name)
 \item 
 void \mbox{\hyperlink{classmenu_rel_action_a64a27674825379ba110fb2117a572ffe}{create\+Cycle\+Relation}} (const Gi\+Na\+C\+::lst \&params, const bool \&metric)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classmenu_rel_action_a64a27674825379ba110fb2117a572ffe}{menu\+Rel\+Action\+::create\+Cycle\+Relation}} creates the relevent relation based on the inputs. \end{DoxyCompactList}\item 
-Q\+String \mbox{\hyperlink{classmenu_rel_action_ab3a724c2d09de8a3d253210ec3a0e0d3}{check\+Cycle\+Relation}} (const Gi\+Na\+C\+::ex \&this\+Cycle, const Gi\+Na\+C\+::ex \&other\+Cycle)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classmenu_rel_action_ab3a724c2d09de8a3d253210ec3a0e0d3}{menu\+Rel\+Action\+::check\+Cycle\+Relation}} used to check a relation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+Q\+String \mbox{\hyperlink{classmenu_rel_action_aae6e2ce0d9d17c13d502984dda8a4a54}{check\+Cycle\+Relation}} (const Gi\+Na\+C\+::ex \&this\+Cycle, const Gi\+Na\+C\+::ex \&other\+Cycle, const bool \&metric)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classmenu_rel_action_aae6e2ce0d9d17c13d502984dda8a4a54}{menu\+Rel\+Action\+::check\+Cycle\+Relation}} used to check a relation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -65,6 +68,9 @@ Q\+Action $\ast$ {\bfseries add\+Cycle\+Relation}
 \item 
 \mbox{\Hypertarget{classmenu_rel_action_afa273b825fbdc2d887cc6a3ecfc62265}\label{classmenu_rel_action_afa273b825fbdc2d887cc6a3ecfc62265}} 
 Q\+Action $\ast$ {\bfseries check\+Relation}
+\item 
+\mbox{\Hypertarget{classmenu_rel_action_a7937666c8189cb7597874642917e83ec}\label{classmenu_rel_action_a7937666c8189cb7597874642917e83ec}} 
+Q\+Action $\ast$ {\bfseries check\+Cycle\+Metric\+Relation}
 \end{DoxyCompactItemize}
 
 
@@ -109,15 +115,15 @@ Create a new relation Q\+Action to be added to the context menu.
 
 \mbox{\hyperlink{classmenu_rel_action_a23b63e5bdb79e12f74bd1d33a53fb6e0}{menu\+Rel\+Action\+::action\+Handler}} Handles the action. 
 
-Checks to make sure the correct number of parameters have been provided. If so the relevent relation is built. \mbox{\Hypertarget{classmenu_rel_action_ab3a724c2d09de8a3d253210ec3a0e0d3}\label{classmenu_rel_action_ab3a724c2d09de8a3d253210ec3a0e0d3}} 
+Checks to make sure the correct number of parameters have been provided. If so the relevent relation is built. \mbox{\Hypertarget{classmenu_rel_action_aae6e2ce0d9d17c13d502984dda8a4a54}\label{classmenu_rel_action_aae6e2ce0d9d17c13d502984dda8a4a54}} 
 \index{menu\+Rel\+Action@{menu\+Rel\+Action}!check\+Cycle\+Relation@{check\+Cycle\+Relation}}
 \index{check\+Cycle\+Relation@{check\+Cycle\+Relation}!menu\+Rel\+Action@{menu\+Rel\+Action}}
 \subsubsection{\texorpdfstring{check\+Cycle\+Relation()}{checkCycleRelation()}}
-{\footnotesize\ttfamily Q\+String menu\+Rel\+Action\+::check\+Cycle\+Relation (\begin{DoxyParamCaption}\item[{const Gi\+Na\+C\+::ex \&}]{this\+Cycle,  }\item[{const Gi\+Na\+C\+::ex \&}]{other\+Cycle }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Q\+String menu\+Rel\+Action\+::check\+Cycle\+Relation (\begin{DoxyParamCaption}\item[{const Gi\+Na\+C\+::ex \&}]{this\+Cycle,  }\item[{const Gi\+Na\+C\+::ex \&}]{other\+Cycle,  }\item[{const bool \&}]{metric }\end{DoxyParamCaption})}
 
 
 
-\mbox{\hyperlink{classmenu_rel_action_ab3a724c2d09de8a3d253210ec3a0e0d3}{menu\+Rel\+Action\+::check\+Cycle\+Relation}} used to check a relation. 
+\mbox{\hyperlink{classmenu_rel_action_aae6e2ce0d9d17c13d502984dda8a4a54}{menu\+Rel\+Action\+::check\+Cycle\+Relation}} used to check a relation. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -252,5 +258,4 @@ bool
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 /\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/include/menurelationhandler.\+h\item 
-/\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/moebinv-\/gui-\/build/moc\+\_\+menurelationhandler.\+cpp\item 
 /\+Users/lukehutton/\+One\+Drive -\/ University of Leeds/\+University/\+Computer Science/\+Internship/moebinv-\/gui/src/menurelationhandler.\+cpp\end{DoxyCompactItemize}
