@@ -62,4 +62,9 @@ __6. Install MoebInv-gui__
   - open a terminal in this directory or directly after executing the clone command execute `cd moebinv-gui`
   - build the make file by executing `qmake`
   - compile the application by executing `make`
+  - install the documentation by running `make install`
   - run the application by execting `./moebinv-gui`
+
+  or
+
+  - run the .sh script `mac-install.sh`
