@@ -6,8 +6,6 @@ This application provides a GUI for the moebinv package.
 
 - [Introduction](#introduction)
 - [Installation](#installation)
-- [Documentation](#documentation)
-- [Usage](#usage)
 
 ## Introduction
 
@@ -65,20 +63,3 @@ __6. Install MoebInv-gui__
   - build the make file by executing `qmake`
   - compile the application by executing `make`
   - run the application by execting `./moebinv-gui`
-
-## Documentation
-
-Documentation is available here: ??
-
-## Usage
-
-Replace the contents of `README.md` with your project's:
-
-- Name
-- Description
-- Installation instructions
-- Usage instructions
-- Support instructions
-- Contributing instructions
-
-Feel free to remove any sections that aren't applicable to your project.
