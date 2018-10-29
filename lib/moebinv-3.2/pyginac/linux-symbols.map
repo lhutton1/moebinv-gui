@@ -1,8 +1,0 @@
-VERSION_0_0 {
-  global:
-	initcginac;
-	length;
-	lst_from_py_list;
-  local:
-	checked_getitem;
-};
