@@ -51,7 +51,7 @@ __4. Install MoebInv__
 
   - Make sure MoebInv-gui can find the library files by either:
     - Placing `figure.h` and `cycle.h` in `/usr/local/include` and placing `libfigure.so` and `libcycle.so` in `/usr/local/lib`
-    - Or by placing the files in the lib folder in the downloaded moebinv-gui (not yet working).
+    - Or by placing the files in the lib folder in the downloaded moebinv-gui.
 
 __5. Install Qt using home brew:__
   `brew install qt`
