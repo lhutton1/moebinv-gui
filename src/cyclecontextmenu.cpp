@@ -296,7 +296,7 @@ void cycleContextMenu::buildContextMenu()
 void cycleContextMenu::buildActions()
 {
     // only reals checked is determined by setting..
-    bool onlyRealsChecked = s.value("automaticOnlyReals").toBool();
+    bool onlyRealsChecked = s.value("session/automaticOnlyReals").toBool();
 
     // tangent action group
     groups.append(new menuRelActionGroup(this));
@@ -448,9 +448,9 @@ struct cycleStyleData cycleContextMenu::getCycleData(const ex &cycle)
         lineStyle.isNull() || lineStyle.isEmpty()) {
 
         // set defaults
-        data.colour = s.value("defaultGraphicsColour").value<QColor>();
-        data.lineStyle = s.value("defaultLineStyle").toInt();
-        data.lineWidth = s.value("defaultLineWidth").toDouble();
+        data.colour = s.value("session/defaultGraphicsColour").value<QColor>();
+        data.lineStyle = s.value("session/defaultLineStyle").toInt();
+        data.lineWidth = s.value("session/defaultLineWidth").toDouble();
 
         return data;
     }

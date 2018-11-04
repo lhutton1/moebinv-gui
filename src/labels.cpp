@@ -26,7 +26,7 @@ QString labels::genNextLabel()
     QString lblString;
     int letterNumber;
 
-    if (s.value("automaticLabels").toBool()) {
+    if (s.value("session/automaticLabels").toBool()) {
         letterNumber = currentLetter;
         lblString = "";
 
@@ -58,14 +58,14 @@ GiNaC::symbol labels::genNextSymbol(GiNaC::ex nextSymbol, bool assignName)
 
     // create the relevent symbol based on setting (manual/automatic) and
     // current state of the program
-    if (!s.value("automaticLabels").toBool() && !assignName) {
+    if (!s.value("session/automaticLabels").toBool() && !assignName) {
         return GiNaC::ex_to<GiNaC::symbol>(this->unnamedSymbol);
-    } else if (!s.value("automaticLabels").toBool() && assignName) {
+    } else if (!s.value("session/automaticLabels").toBool() && assignName) {
         return GiNaC::symbol(qPrintable(this->getManualName()));
-    } else if (s.value("automaticLabels").toBool() && nextLabel == "unnamed") {
+    } else if (s.value("session/automaticLabels").toBool() && nextLabel == "unnamed") {
         this->advanceLabel();
         return GiNaC::symbol(qPrintable(this->genNextLabel()));
-    } else if (s.value("automaticLabels").toBool() && node_label(nextSymbol) == nextLabel) {
+    } else if (s.value("session/automaticLabels").toBool() && node_label(nextSymbol) == nextLabel) {
         return GiNaC::ex_to<GiNaC::symbol>(nextSymbol);
     } else {
         return GiNaC::symbol(qPrintable(this->genNextLabel()));
@@ -79,7 +79,7 @@ GiNaC::symbol labels::genNextSymbol(GiNaC::ex nextSymbol, bool assignName)
 void labels::advanceLabel() {
     GiNaC::ex currentKey;
 
-    if (s.value("automaticLabels").toBool()) {
+    if (s.value("session/automaticLabels").toBool()) {
         currentLetter += 1;
 
         // test for duplicate labels. If there is a duplicate, run function recursively.

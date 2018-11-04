@@ -24,6 +24,7 @@ public:
     void showEvent(QShowEvent* event);
     void setButtonColour(QPushButton *buttonPushed, QColor colour);
     void applySettings();
+    void saveSettings();
     void loadValues();
     ~settingsDialog();
 

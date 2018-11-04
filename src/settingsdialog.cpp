@@ -23,15 +23,15 @@ settingsDialog::~settingsDialog()
  */
 void settingsDialog::loadValues()
 {
-    settingValues.insert("automaticLabels", s.value("automaticLabels"));
-    settingValues.insert("defaultSaveDirectory", s.value("defaultSaveDirectory"));
-    settingValues.insert("automaticOnlyReals", s.value("automaticOnlyReals"));
-    settingValues.insert("undoLimit", s.value("undoLimit"));
-    settingValues.insert("defaultGraphicsColour", s.value("defaultGraphicsColour"));
-    settingValues.insert("graphicsHoverColour", s.value("graphicsHoverColour"));
-    settingValues.insert("backgroundColour", s.value("backgroundColour"));
-    settingValues.insert("defualtLineStyle", s.value("defaultLineStyle"));
-    settingValues.insert("defaultLineWidth", s.value("defaultLineWidth"));
+    settingValues.insert("automaticLabels", s.value("session/automaticLabels"));
+    settingValues.insert("defaultSaveDirectory", s.value("session/defaultSaveDirectory"));
+    settingValues.insert("automaticOnlyReals", s.value("session/automaticOnlyReals"));
+    settingValues.insert("undoLimit", s.value("session/undoLimit"));
+    settingValues.insert("defaultGraphicsColour", s.value("session/defaultGraphicsColour"));
+    settingValues.insert("graphicsHoverColour", s.value("session/graphicsHoverColour"));
+    settingValues.insert("backgroundColour", s.value("session/backgroundColour"));
+    settingValues.insert("defualtLineStyle", s.value("session/defaultLineStyle"));
+    settingValues.insert("defaultLineWidth", s.value("session/defaultLineWidth"));
 }
 
 void settingsDialog::setButtonColour(QPushButton *buttonPushed, QColor colour)
@@ -49,98 +49,90 @@ void settingsDialog::setButtonColour(QPushButton *buttonPushed, QColor colour)
 void settingsDialog::update()
 {
     // get default colours
-    setButtonColour(ui->pushButton, s.value("defaultGraphicsColour").value<QColor>());
-    setButtonColour(ui->pushButton_2, s.value("graphicsHoverColour").value<QColor>());
-    setButtonColour(ui->pushButton_3, s.value("backgroundColour").value<QColor>());
+    setButtonColour(ui->pushButton, settingValues["defaultGraphicsColour"].value<QColor>());
+    setButtonColour(ui->pushButton_2, settingValues["graphicsHoverColour"].value<QColor>());
+    setButtonColour(ui->pushButton_3, settingValues["backgroundColour"].value<QColor>());
 
     // get default styles
-    ui->comboBox->setCurrentIndex(s.value("defaultLineStyle").toInt());
-    ui->doubleSpinBox_2->setValue(s.value("defaultLineWidth").toDouble());
+    ui->comboBox->setCurrentIndex(settingValues["defaultLineStyle"].toInt());
+    ui->doubleSpinBox_2->setValue(settingValues["defaultLineWidth"].toDouble());
 
     //set radio buttons
-    if (s.value("automaticLabels").toBool())
+    if (settingValues["automaticLabels"].toBool())
         ui->automaticNaming->setChecked(true);
     else
         ui->manualNaming->setChecked(true);
 
-    if (s.value("automaticOnlyReals").toBool())
+    if (settingValues["automaticOnlyReals"].toBool())
         ui->onlyRealsTrue->setChecked(true);
     else
         ui->onlyRealsFalse->setChecked(true);
 
     // set default directory
-    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
+    QDir defaultPath = QDir(settingValues["defaultSaveDirectory"].toString());
     ui->defaultPathLineEdit->setText(defaultPath.absolutePath());
     ui->defaultPathLineEdit->selectAll();
 
     // get default stack undo size
-    int undoSize = s.value("undoLimit").toInt();
+    int undoSize = settingValues["undoLimit"].toInt();
     ui->spinBox->setValue(undoSize);
 }
 
 void settingsDialog::showEvent(QShowEvent *event)
 {
     QWidget::showEvent(event);
+    loadValues();
     update();
 }
 
 void settingsDialog::on_automaticNaming_clicked(bool checked)
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
     settingValues["automaticLabels"] = true;
 }
 
 void settingsDialog::on_manualNaming_clicked(bool checked)
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
     settingValues["automaticLabels"] = false;
 }
 
 void settingsDialog::on_pushButton_pressed()
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
-    QColor colour = colourDialog->getColor(s.value("defaultGraphicsColour").value<QColor>());
+    QColor colour = colourDialog->getColor(settingValues["defaultGraphicsColour"].value<QColor>());
     setButtonColour(ui->pushButton, colour);
     settingValues["defaultGraphicsColour"] = colour;
 }
 
 void settingsDialog::on_pushButton_2_pressed()
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
-    QColor colour = colourDialog->getColor(s.value("graphicsHoverColour").value<QColor>());
+    QColor colour = colourDialog->getColor(settingValues["graphicsHoverColour"].value<QColor>());
     setButtonColour(ui->pushButton_2, colour);
     settingValues["graphicsHoverColour"] = colour;
 }
 
 void settingsDialog::on_pushButton_3_pressed()
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
-    QColor colour = colourDialog->getColor(s.value("backgroundColour").value<QColor>());
+    QColor colour = colourDialog->getColor(settingValues["backgroundColour"].value<QColor>());
     setButtonColour(ui->pushButton_3, colour);
     settingValues["backgroundColour"] = colour;
 }
 
 void settingsDialog::on_onlyRealsTrue_clicked(bool checked)
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
     settingValues["automaticOnlyReals"] = true;
 }
 
 void settingsDialog::on_onlyRealsFalse_clicked(bool checked)
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
     settingValues["automaticOnlyReals"] = false;
 }
 
 void settingsDialog::on_defaultPathLineEdit_textEdited(const QString &arg1)
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
-    s.setValue("defaultSaveDirectory", QDir(arg1).absolutePath());
+    settingValues["defaultSaveDirectory"] = QDir(arg1).absolutePath();
 }
 
 void settingsDialog::on_pushButton_4_clicked()
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
     QDir filePath = QDir(QFileDialog::getExistingDirectory(nullptr, "hello",  QDir(ui->defaultPathLineEdit->text()).absolutePath()));
 
     if (filePath.absolutePath() != ".") {
@@ -152,19 +144,16 @@ void settingsDialog::on_pushButton_4_clicked()
 
 void settingsDialog::on_spinBox_valueChanged(int arg1)
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
     settingValues["undoLimit"] = arg1;
 }
 
 void settingsDialog::on_doubleSpinBox_2_valueChanged(double arg1)
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
     settingValues["defaultLineWidth"] = arg1;
 }
 
 void settingsDialog::on_comboBox_currentIndexChanged(int index)
 {
-    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
     settingValues["defaultLineStyle"] = index;
 }
 
@@ -172,61 +161,26 @@ void settingsDialog::on_buttonBox_clicked(QAbstractButton *button)
 {
     if(button== ui->buttonBox->button(QDialogButtonBox::RestoreDefaults) ){
         // Change the values here if you need to change the default value of each of the settings
-        /*!
-         * Sets the thickness of lines drawn in the scene.
-         */
-        s.setValue("defaultLineWidth", 2);
+        settingValues["defaultLineWidth"] = 2;
+        settingValues["graphicsHoverColour"] = QColor(255, 0, 0);
+        settingValues["defaultGraphicsColour"] = QColor(0, 0, 0);
+        settingValues["backgroundColour"] = QColor(255, 255, 255);
 
-        /*!
-         * Set the hover colour of the graphics on the scene.
-         */
-        s.setValue("graphicsHoverColour", QColor(255, 0, 0));
-
-        /*!
-         * Set the default colour of the graphics in the scene.
-         */
-        s.setValue("defaultGraphicsColour", QColor(0, 0, 0));
-
-        /*!
-         * Set the default background colour
-         */
-        s.setValue("backgroundColour", QColor(255, 255, 255));
-
-        /*!
-         * The default save directory for .gar files.
-         */
         QDir defaultPath = QDir(QStandardPaths::writableLocation(
             static_cast<QStandardPaths::StandardLocation>(QStandardPaths::DocumentsLocation)));
-        s.setValue("defaultSaveDirectory", defaultPath.absolutePath());
-
-        /*!
-         * Set automatic assignment of labels i.e. A, B, C, ...
-         */
-        s.setValue("automaticLabels", true);
-
-        /*!
-         * Set whether the only reals relation is applied automatically to 'this'.
-         */
-        s.setValue("automaticOnlyReals", true);
-
-        /*!
-         * Set the undo stack size limit.
-         */
-        s.setValue("undoLimit", 10);
-
-        /*!
-         * Set the default line style.
-         */
-        s.setValue("defaultLineStyle", SOLID);
+        settingValues["defaultSaveDirectory"] = defaultPath.absolutePath();
+        settingValues["automaticLabels"] = true;
+        settingValues["automaticOnlyReals"] = true;
+        settingValues["undoLimit"] = 10;
+        settingValues["defaultLineStyle"] = SOLID;
 
         // update the dialog to display the default settings
         update();
-        ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
     } else if (button== ui->buttonBox->button(QDialogButtonBox::Apply)) {
         applySettings();
-        ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
+        this->close();
     } else if (button== ui->buttonBox->button(QDialogButtonBox::Ok)) {
-        applySettings();
+        saveSettings();
         this->close();
     } else if (button== ui->buttonBox->button(QDialogButtonBox::Cancel)) {
         this->close();
@@ -237,11 +191,21 @@ void settingsDialog::applySettings()
 {
     // assign setting values to settings
     for (auto setting : settingValues.keys()) {
-        s.setValue(setting, settingValues[setting]);
+        s.setValue("session/" + setting, settingValues[setting]);
     }
 
     // apply all the settings
-    setBackgroundColour(s.value("backgroundColour").value<QColor>());
+    setBackgroundColour(s.value("session/backgroundColour").value<QColor>());
     emit saveDirectoryHasChanged();
     emit sceneInvalid();
+}
+
+void settingsDialog::saveSettings()
+{
+    applySettings();
+
+    // save the settings for next time
+    for (auto setting : settingValues.keys()) {
+        s.setValue(setting, settingValues[setting]);
+    }
 }

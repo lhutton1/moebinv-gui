@@ -10,9 +10,9 @@ cStyleDialog::cStyleDialog(QWidget *parent, struct cycleStyleData *cycleData) :
     ui->setupUi(this);
     this->colourDialog = new QColorDialog();
 
-    this->colour = s.value("defaultGraphicsColour").value<QColor>();
-    this->style = s.value("defaultLineStyle").toInt();
-    this->weight = s.value("defaultLineWidth").toDouble();
+    this->colour = s.value("session/defaultGraphicsColour").value<QColor>();
+    this->style = s.value("session/defaultLineStyle").toInt();
+    this->weight = s.value("session/defaultLineWidth").toDouble();
     this->cycleDataPtr = cycleData;
 }
 

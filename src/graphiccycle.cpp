@@ -299,8 +299,8 @@ void graphicCycle::buildShape()
 void graphicCycle::setHover()
 {
     // set the colour of both the pen and brush, then update the item.
-    brush->setColor(s.value("graphicsHoverColour").value<QColor>());
-    pen->setColor(s.value("graphicsHoverColour").value<QColor>());
+    brush->setColor(s.value("session/graphicsHoverColour").value<QColor>());
+    pen->setColor(s.value("session/graphicsHoverColour").value<QColor>());
     this->itemIsHighlighted = true;
     this->update();
 

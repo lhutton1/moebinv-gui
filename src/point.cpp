@@ -57,10 +57,10 @@ void point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
             // draw point
             painter->drawEllipse(
-                0 - POINT_SIZE / 2,
-                0 - POINT_SIZE / 2,
-                POINT_SIZE,
-                POINT_SIZE
+                int(0 - POINT_SIZE / 2),
+                int(0 - POINT_SIZE / 2),
+                int(POINT_SIZE),
+                int(POINT_SIZE)
             );
 
             // add label to side

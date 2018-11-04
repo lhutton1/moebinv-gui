@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->applicationHelpDialog = new helpDialog(this);
 
     this->undoStack = new QUndoStack(this);
-    this->undoStack->setUndoLimit(s.value("undoLimit").toInt());
+    this->undoStack->setUndoLimit(s.value("session/undoLimit").toInt());
 
     this->menus[0] = new cycleContextMenu(&f, f.get_infinity(), &relationList, false);
     this->menus[1] = new cycleContextMenu(&f, f.get_real_line(), &relationList, false);
@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->isAddPoint = true;
 
-    this->saveDirectory = QDir(s.value("defaultSaveDirectory").toString());
+    this->saveDirectory = QDir(s.value("session/defaultSaveDirectory").toString());
     this->saved = true;
     this->defaultDirectoryInUse = true;
 
@@ -346,7 +346,7 @@ void MainWindow::update()
     }
 
     // add the only reals cycle relation if automatic is selected, then build the relation status bar
-    if (s.value("automaticOnlyReals").toBool()) {
+    if (s.value("session/automaticOnlyReals").toBool()) {
         relationList.append(lst{nextSymbol, REALS, only_reals(nextSymbol), lst{}});
     }
     buildRelationStatus();
@@ -376,9 +376,9 @@ void MainWindow::addPoint(QPointF mousePos)
         ex cycle = f.add_point(lst{x, y}, nextSymbol);
 
         struct cycleStyleData cycleData;
-        cycleData.colour = s.value("defaultGraphicsColour").value<QColor>();
-        cycleData.lineStyle = s.value("defaultLineStyle").toDouble();
-        cycleData.lineWidth = s.value("defaultLineWidth").toDouble();
+        cycleData.colour = s.value("session/defaultGraphicsColour").value<QColor>();
+        cycleData.lineStyle = s.value("session/defaultLineStyle").toDouble();
+        cycleData.lineWidth = s.value("session/defaultLineWidth").toDouble();
         setCycleAsy(cycle, cycleData);
 
         // generate next symbol
@@ -438,7 +438,7 @@ void MainWindow::on_actionSave_triggered()
 {
     this->checkDescription();
 
-    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
+    QDir defaultPath = QDir(s.value("session/defaultSaveDirectory").toString());
 
     if (s.value("figureName").toString() == "unnamed" || s.value("figureName").toString() == "."
         || defaultPath.absolutePath() == this->saveDirectory.absolutePath()) {
@@ -494,7 +494,7 @@ void MainWindow::on_actionSave_As_triggered()
 {
     this->checkDescription();
 
-    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
+    QDir defaultPath = QDir(s.value("session/defaultSaveDirectory").toString());
     QDir filePath = QDir(saveDialog->getSaveFileName(this, tr("Save Figure"), defaultPath.absolutePath(), tr("*.gar")));
 
     if (filePath.path() == ".")
@@ -552,7 +552,7 @@ void MainWindow::on_actionOpen_triggered()
     }
 
     QDir filePath;
-    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
+    QDir defaultPath = QDir(s.value("session/defaultSaveDirectory").toString());
 
     filePath = QDir(saveDialog->getOpenFileName(this, tr("Open Figure"), defaultPath.absolutePath(), tr("*.gar")));
 
@@ -969,9 +969,9 @@ struct cycleStyleData MainWindow::getCycleData(const ex &cycle)
         lineStyle.isNull() || lineStyle.isEmpty()) {
 
         // set defaults
-        data.colour = s.value("defaultGraphicsColour").value<QColor>();
-        data.lineStyle = s.value("defaultLineStyle").toInt();
-        data.lineWidth = s.value("defaultLineWidth").toDouble();
+        data.colour = s.value("session/defaultGraphicsColour").value<QColor>();
+        data.lineStyle = s.value("session/defaultLineStyle").toInt();
+        data.lineWidth = s.value("session/defaultLineWidth").toDouble();
 
         return data;
     }
@@ -1204,9 +1204,9 @@ void MainWindow::createCycle(lst inputList)
 
     // add default styling to the cycle
     struct cycleStyleData cycleData;
-    cycleData.colour = s.value("defaultGraphicsColour").value<QColor>();
-    cycleData.lineStyle = s.value("defaultLineStyle").toDouble();
-    cycleData.lineWidth = s.value("defaultLineWidth").toDouble();
+    cycleData.colour = s.value("session/defaultGraphicsColour").value<QColor>();
+    cycleData.lineStyle = s.value("session/defaultLineStyle").toDouble();
+    cycleData.lineWidth = s.value("session/defaultLineWidth").toDouble();
     cycleData.isDefault = true;
     setCycleAsy(cycle, cycleData);
 
@@ -1357,7 +1357,7 @@ void MainWindow::on_actionDelete_cycle_triggered()
  */
 void MainWindow::changesMadeToFigure(const MoebInv::figure &originalFigure, const MoebInv::figure &changedFigure)
 {
-    QDir defaultPath = QDir(s.value("defaultSaveDirectory").toString());
+    QDir defaultPath = QDir(s.value("session/defaultSaveDirectory").toString());
 
     if (this->defaultDirectoryInUse)
         this->setWindowTitle("unnamed-figure* - moebinv-gui");
@@ -1368,7 +1368,7 @@ void MainWindow::changesMadeToFigure(const MoebInv::figure &originalFigure, cons
 
     //push current figure onto the undo stack
     if (this->undoStack->count() == 0)
-        this->undoStack->setUndoLimit(s.value("undoLimit").toInt());
+        this->undoStack->setUndoLimit(s.value("session/undoLimit").toInt());
 
     figureUndoCommand *command = new figureUndoCommand(originalFigure, changedFigure);
     this->undoStack->push(command);
@@ -1384,7 +1384,7 @@ void MainWindow::changesMadeToFigure(const MoebInv::figure &originalFigure, cons
  */
 void MainWindow::saveDirectoryHasChanged()
 {
-    this->saveDirectory = QDir(s.value("defaultSaveDirectory").toString());
+    this->saveDirectory = QDir(s.value("session/defaultSaveDirectory").toString());
 }
 
 
@@ -1467,7 +1467,7 @@ void MainWindow::initialiseDefaultSettings()
     }
 
     // set scene background colour
-    ui->graphicsView->setBackgroundBrush(QBrush(s.value("backgroundColour").value<QColor>(), Qt::SolidPattern));
+    ui->graphicsView->setBackgroundBrush(QBrush(s.value("session/backgroundColour").value<QColor>(), Qt::SolidPattern));
 }
 
 
