@@ -2,6 +2,8 @@
 
 This application provides a GUI for the moebinv package.
 
+The full package of this application along with moebinv can be found at: https://sourceforge.net/projects/moebinv/
+
 ## Table of Contents
 
 - [Introduction](#introduction)
