@@ -1,8 +1,8 @@
 # moebinv-gui
 
-This application provides a GUI for the moebinv package.
+This QT application provides a GUI for the moebinv package.
 
-The full package of this application along with moebinv can be found at: https://sourceforge.net/projects/moebinv/
+__Note:__ Further development has made on this project. For the most recent up-to-date application, along with moebinv itself: https://sourceforge.net/projects/moebinv/
 
 ## Table of Contents
 
