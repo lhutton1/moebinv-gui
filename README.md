@@ -4,11 +4,6 @@ This QT application provides a GUI for the moebinv package.
 
 __Note:__ Further development has made on this project. For the most recent up-to-date application, along with moebinv itself: http://moebinv.sourceforge.net/
 
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Installation](#installation)
-
 ## Introduction
 
 The moebinv library allows for manipulations in non euclidean geometry. This application is a gui for use with the moebinv library.
