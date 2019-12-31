@@ -2,7 +2,7 @@
 
 This QT application provides a GUI for the moebinv package.
 
-__Note:__ Further development has made on this project. For the most recent up-to-date application, along with moebinv itself: https://sourceforge.net/projects/moebinv/
+__Note:__ Further development has made on this project. For the most recent up-to-date application, along with moebinv itself: http://moebinv.sourceforge.net/
 
 ## Table of Contents
 
